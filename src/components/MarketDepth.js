@@ -32,9 +32,9 @@ class MarketDepth extends Component {
 
         if (stopTime !== 0) { console.time("Getting data from socket time took"); }
 
-        const socketChanell = this.props.currentPair.id;
+        console.log("order_created_" + socket);
+        this.socket.on("order_created_" + socket, (bid) => {
 
-        socket.on("order_created_" + socketChanell, (bid) => {
             // console.log('stock: ' + typeof(bid) ,bid);
             const {marketDepth} = this.state;
             const {buy, sell} = marketDepth;
@@ -60,16 +60,34 @@ class MarketDepth extends Component {
             setTimeout( () => {
                 // console.log("closing");
                 console.timeEnd("Getting data from socket time took");
-                socket.close();
+                this.socket.close();
             }, stopTime );
         }
     }
 
     componentDidMount() {
-        this.getDataFromSocket(this.socket, 500*1000);
+        // this.getDataFromSocket(this.socket, 0);
+        console.log(" props = ", this.props.currentPair,this.props,);
+        this.getDataFromSocket(this.props.currentPair.id, 0);
     }
     componentWillUnmount() {
         this.socket.close();
+    }
+
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.currentPair.id !== this.props.currentPair.id) {
+            console.log("componentWillReceiveProps", nextProps);
+            const {marketDepth} = this.state;
+            this.setState({marketDepth: {
+                    ...marketDepth,
+                    buy: [],
+                    sell: [],
+                }}
+                ,() => {
+                    this.getDataFromSocket(nextProps.currentPair.id, 0);
+                }
+                );
+        }
     }
 
     render() {
