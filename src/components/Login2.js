@@ -42,9 +42,7 @@ class Login2 extends Component {
         return (
             <div>
                 <Header/>
-                <div style={{clear: "both"}}>
-                    <h1 className="sign">SIGN IN TO YOUR ACCOUNT</h1>
-                </div>
+                ¡¡¡¡¡
                 <div className="featureBanner form1col">
                     <div className="formWrapper">
                         <h2 className="standard">You have 2 factor authentication enabled.<br/>Please Enter Your Google

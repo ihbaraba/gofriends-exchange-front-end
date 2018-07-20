@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 import {BrowserRouter as Router, Route, Switch, Redirect} from 'react-router-dom';
+import { Provider } from 'react-redux'
+import configureStore from './store/configureStore'
 import WelcomePage from './components/WelcomePage';
 import Login from './components/Login';
 import Registration from './components/Registration';
@@ -20,13 +22,19 @@ import Balances from './components/Balances';
 import Orders from './components/Orders';
 import LoginHistory from './components/LoginHistory';
 
+const store = configureStore();
+
 class App extends Component {
+
+
     render() {
         return (
+            <Provider store={store}>
             <Router>
                 <div className="App">
                     <Switch>
-                        <Route exact path="/" component={WelcomePage}/>
+                        {/*<Route exact path="/" component={WelcomePage}/>*/}
+                        <Route exact path="/" component={ExchangePage}/>
                         <Route path="/exchange" component={ExchangePage}/>
                         <Route path="/margintrading" component={MarginTrading}/>
                         <Route path="/lending" component={Lending}/>
@@ -48,6 +56,7 @@ class App extends Component {
                     </Switch>
                 </div>
             </Router>
+            </Provider>
         );
     }
 }

@@ -1,0 +1,1 @@
+export { default as getCoinsList } from './getCoinsList';

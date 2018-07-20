@@ -185,6 +185,21 @@ input, select, textarea {
     font-weight: 300;
 }
 
+.centerArea {
+    display: flex;
+    margin: 1rem;
+}
+
+.rightSide {
+    flex: 1 0 50rem;
+}
+
+.stakan {
+    background: rgba(0,0,20,0.53);
+    /*flex: 1 0 80rem;*/
+    height: 30rem;
+}
+
 .side {
     float: right;
     margin: 15px;
@@ -452,3 +467,47 @@ body.twofactor .column1 {
     border-right: 1px solid #d3e7d9;
     border-top: 1px solid #d3e7d9;
 }
+
+.currencysPairs {
+    margin-bottom: 0.5rem;
+    border: 4px  #EEE;
+    background:  #EFEFEF;
+}
+
+
+.marketDepth {
+    display: flex;
+    height: 30rem;
+    background:  #FEFEFE;
+}
+
+.marketDepthColumns {
+    flex: 1 1 30rem;
+    margin: 1rem;
+}
+
+.ant-table td { white-space: nowrap; }
+
+.rowClassName {
+    color: darkblue;
+    font-size: 0.8rem;
+    /*height: 0.2rem;*/
+}
+
+.pairBarActive {
+    background: #DDD;
+}
+.pairBar {
+    background: #EFEFEF;
+    margin-bottom: 0.25rem;
+    padding-left: 0.25rem;
+    cursor: pointer;
+}
+.pairBar:hover {
+    background: #FFF;
+}
+
+tbody tr:nth-child(odd){
+    background-color: #EEEEFE;
+}
+
