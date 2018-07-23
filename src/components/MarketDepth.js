@@ -32,7 +32,7 @@ class MarketDepth extends Component {
 
         if (stopTime !== 0) { console.time("Getting data from socket time took"); }
 
-        console.log("order_created_" + socket);
+        // console.log("order_created_" + socket);
         this.socket.on("order_created_" + socket, (bid) => {
 
             // console.log('stock: ' + typeof(bid) ,bid);
@@ -66,8 +66,7 @@ class MarketDepth extends Component {
     }
 
     componentDidMount() {
-        // this.getDataFromSocket(this.socket, 0);
-        console.log(" props = ", this.props.currentPair,this.props,);
+        // console.log(" props = ", this.props.currentPair,this.props,);
         this.getDataFromSocket(this.props.currentPair.id, 0);
     }
     componentWillUnmount() {
@@ -76,7 +75,7 @@ class MarketDepth extends Component {
 
     componentWillReceiveProps(nextProps) {
         if (nextProps.currentPair.id !== this.props.currentPair.id) {
-            console.log("componentWillReceiveProps", nextProps);
+            // console.log("componentWillReceiveProps", nextProps);
             const {marketDepth} = this.state;
             this.setState({marketDepth: {
                     ...marketDepth,
@@ -93,7 +92,7 @@ class MarketDepth extends Component {
     render() {
         const {marketDepth: {buy, sell}} = this.state;
         // const {marketDepth} = this.state;
-        console.log("render marketDepth props = ", this.props.currentPair,this.state,);
+        // console.log("render marketDepth props = ", this.props.currentPair,this.state,);
 
         const { currentPair } = this.props;
 

@@ -15,9 +15,8 @@ function parseData(parse) {
 
 const parseDate = timeParse("%Y-%m-%d");
 
-export function getData() {
-    // const promiseMSFT = fetch("//rrag.github.io/react-stockcharts/data/MSFT.tsv")
-    const promiseMSFT = fetch("//gofriends.ru/api/v1/quotations/1")
+export function getData(endPoint = 1) {
+    const promiseMSFT = fetch(`//gofriends.ru/api/v1/quotations/${endPoint}`)
         .then(response => response.json())
         .then(data => {data.reduce((data, item) => {
                 data.push(parseData(parseDate)(item));

@@ -27,12 +27,15 @@ class ExchangePage extends Component {
     }
 
     setCurentCoinsPair2State = (pair) => {
-        console.log(pair);
-        this.setState({ currentPair: pair})
+        // console.log(pair);
+        this.setState({
+            currentPair: pair,
+            pair: pair,
+        })
     }
 
     render() {
-        console.log(this.state);
+        // console.log(this.state);
         return (
             <div>
                 <Header2/>
@@ -42,7 +45,7 @@ class ExchangePage extends Component {
 
                 <div className="centerArea">
                     <div className="rightSide">
-                        <Graphic/>
+                        <Graphic endPoint={this.state.pair.id}/>
                         <MarketDepth currentPair={this.state.currentPair}/>
 
                     </div>
