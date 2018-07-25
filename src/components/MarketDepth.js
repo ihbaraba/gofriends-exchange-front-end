@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {Table} from 'antd';
 import DepthChart from './Graphic/Depth'
@@ -28,9 +28,11 @@ class MarketDepth extends Component {
     }
 
     getDataFromSocket(socket, stopTime = 0) {
-            // console.log('state: ', this.state);
+        // console.log('state: ', this.state);
 
-        if (stopTime !== 0) { console.time("Getting data from socket time took"); }
+        if (stopTime !== 0) {
+            console.time("Getting data from socket time took");
+        }
 
         // console.log("order_created_" + socket);
         this.socket.on("order_created_" + socket, (bid) => {
@@ -50,14 +52,20 @@ class MarketDepth extends Component {
             const {buy, sell} = marketDepth;
             // console.log(marketDepth, buy, sell);
 
-            if (bid.type === "sell") { sell.unshift(line); }
-            if (bid.type === "buy") { buy.unshift(line); }
+            if (bid.type === "sell") {
+                sell.unshift(line);
+            }
+            if (bid.type === "buy") {
+                buy.unshift(line);
+            }
 
-            this.setState({marketDepth: {
+            this.setState({
+                marketDepth: {
                     ...marketDepth,
                     buy,
                     sell,
-                }});
+                }
+            });
         });
 
         this.socket.on("order_updated_" + socket, (bid) => {
@@ -65,8 +73,8 @@ class MarketDepth extends Component {
             const {marketDepth} = this.state;
             const {buy, sell} = marketDepth;
 
-            const resOfSearchInBuy = buy.findIndex( item => item.id === bid.id );
-            const resOfSearchInSell = sell.findIndex( item => item.id === bid.id );
+            const resOfSearchInBuy = buy.findIndex(item => item.id === bid.id);
+            const resOfSearchInSell = sell.findIndex(item => item.id === bid.id);
 
             const flagBuy = (resOfSearchInBuy !== -1);
             const flagSell = (resOfSearchInSell !== -1);
@@ -74,12 +82,12 @@ class MarketDepth extends Component {
             // console.log(resOfSearchInBuy, resOfSearchInSell, bid.id, bid);
 
             if (flagSell && !bid.completed) {
-                const foundElement =  sell[resOfSearchInSell];
-                sell[resOfSearchInSell] = {...foundElement, amount: foundElement["amount"] - bid.amount }
+                const foundElement = sell[resOfSearchInSell];
+                sell[resOfSearchInSell] = {...foundElement, amount: foundElement["amount"] - bid.amount}
             }
             if (flagBuy && !bid.completed) {
-                const foundElement =  buy[resOfSearchInBuy];
-                sell[resOfSearchInBuy] = {...foundElement, amount: foundElement["amount"] - bid.amount }
+                const foundElement = buy[resOfSearchInBuy];
+                sell[resOfSearchInBuy] = {...foundElement, amount: foundElement["amount"] - bid.amount}
             }
 
             const filtredBuy = (flagBuy && bid.completed) ? buy.splice(resOfSearchInBuy, 1) : buy; // remove element
@@ -90,18 +98,20 @@ class MarketDepth extends Component {
             // if ( differenceSell !== 0) {console.log('!! differenceSell=', differenceSell);}
             // if ( differenceBuy !== 0) {console.log('!! differenceBuy=', differenceBuy);}
 
-            this.setState({marketDepth: {
+            this.setState({
+                marketDepth: {
                     buy: filtredSell,
                     sell: filtredBuy,
-                }});
+                }
+            });
         });
 
         if (stopTime !== 0) {
-            setTimeout( () => {
+            setTimeout(() => {
                 // console.log("closing");
                 console.timeEnd("Getting data from socket time took");
                 this.socket.close();
-            }, stopTime );
+            }, stopTime);
         }
     }
 
@@ -112,18 +122,19 @@ class MarketDepth extends Component {
         const buyDepth = await getMarcketDpthData({type: "buy", book: id});
         const sellDepth = await getMarcketDpthData({type: "sell", book: id});
         // console.log(buyDepth.filter( item => !item.completed), sellDepth.filter( item => !item.completed));
-        await this.setState({marketDepth:
+        await this.setState({
+                marketDepth:
                     {
-                        buy: buyDepth.filter( item => !item.completed), //save not completed bids only
-                        sell: sellDepth.filter( item => !item.completed),
+                        buy: buyDepth.filter(item => !item.completed), //save not completed bids only
+                        sell: sellDepth.filter(item => !item.completed),
                     }
-                    }
+            }
             // , ()=> { console.log(this.state) }
         );
     }
 
     async componentDidMount() {
-        const {currentPair: {id =1}} = this.props;
+        const {currentPair: {id = 1}} = this.props;
         await this.getInitialPairDataFromServer(id);
         // console.log("componentDidMount", this.state);
         this.getDataFromSocket(id, 0);
@@ -136,7 +147,7 @@ class MarketDepth extends Component {
     async componentWillReceiveProps(nextProps) {
         if (nextProps.currentPair.id !== this.props.currentPair.id) {
             // console.log("componentWillReceiveProps", nextProps);
-            const {currentPair: {id =1}} = nextProps;
+            const {currentPair: {id = 1}} = nextProps;
             await this.getInitialPairDataFromServer(id);
             this.getDataFromSocket(nextProps.currentPair.id, 0);
         }
@@ -147,7 +158,7 @@ class MarketDepth extends Component {
         // const {marketDepth} = this.state;
         // console.log("render marketDepth props = ", this.props.currentPair,this.state,);
 
-        const { currentPair } = this.props;
+        const {currentPair} = this.props;
 
         const columns = [{
             title: 'Price',
@@ -172,18 +183,21 @@ class MarketDepth extends Component {
         }];
 
         return (
-                <div className="marketDepth">
+            <div className="marketDepth">
+                <div className="marketDepthTables">
                     <div className="marketDepthColumns">
                         <h5>BUY ORDERS</h5>
-                        <Table columns={columns} dataSource={buy} bordered={false}  pagination={false} scroll={{ y: 240 }}  size="small"  rowClassName="custom__tr"/>
+                        <Table columns={columns} dataSource={buy} bordered={false} pagination={false} scroll={{y: 240}}
+                               size="small" rowClassName="custom__tr"/>
                     </div>
                     <div className="marketDepthColumns">
                         <h5>SELL ORDERS</h5>
-                        <Table columns={columns} dataSource={sell} bordered={true} pagination={false} scroll={{ y: 240 }}  size="small"  rowClassName="rowClassName"/>
+                        <Table columns={columns} dataSource={sell} bordered={false} pagination={false} scroll={{y: 240}}
+                               size="small" rowClassName="custom__tr"/>
                     </div>
-                    <div className="marketDepthChart">
-                        <DepthChart buy={this.state.buy} sell={this.state.sell}/>
-                    </div>
+                </div>
+                <div className="marketDepthChart">
+                    <DepthChart buy={this.state.buy} sell={this.state.sell}/>
                 </div>
             </div>
         )
@@ -191,7 +205,7 @@ class MarketDepth extends Component {
 }
 
 MarketDepth.defaultProps = {
-    currentPair:  {
+    currentPair: {
         id: 1,
         first: "BTC",
         second: "ETH",
