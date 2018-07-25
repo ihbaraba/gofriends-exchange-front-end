@@ -52,7 +52,12 @@ class DepthChart extends React.Component {
             margin,
             width,
             ratio,
+            sell,
+            buy,
         } = this.props;
+
+        console.log("sell =", sell, " buy =", buy);
+
 
         const parseDate = timeParse("%Y-%m-%d");
         // const parseDate = timeFormat("%m-%d-%Y");
