@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types'
-import {bindActionCreators} from 'redux'
-import {connect} from 'react-redux'
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
 // import * as ExchangeActions from '../actions/ExchangeActions'
 import {changePair} from '../actions/ExchangeActions'
 import Header2 from './Header2';
@@ -133,7 +133,9 @@ class ExchangePage extends Component {
                                     </div>
                                 </div>
                             </div>
+
                         </div>
+
                     </div>
                 </div>
 

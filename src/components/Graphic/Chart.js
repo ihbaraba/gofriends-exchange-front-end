@@ -45,6 +45,8 @@ class OHLCChartWithElderImpulseIndicator extends React.Component {
 
         const changeCalculator = change();
 
+        // console.log("Chart rendering", this.props.data);
+
         const ema12 = ema()
             .id(1)
             .options({windowSize: 12})

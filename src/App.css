@@ -502,6 +502,7 @@ body.twofactor .column1 {
 
 .marketDepth {
     display: flex;
+    flex-wrap: wrap;
     height: 30rem;
     background: #FEFEFE;
     flex: 1 0 auto;
@@ -523,6 +524,14 @@ body.twofactor .column1 {
     font-size: 14px;
 }
 
+.marketDepthChart{
+    flex-grow: 1;
+    /*flex-basis: 0;*/
+    width: 100%;
+    height: 15rem;
+}
+
+.ant-table td { white-space: nowrap; }
 
 
 .ant-table td {
