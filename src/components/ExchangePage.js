@@ -7,6 +7,7 @@ import {changePair} from '../actions/ExchangeActions'
 import Header2 from './Header2';
 // import Footer from './Footer';
 import Graphic from './Graphic/Graphic'
+import DepthChart from './Graphic/Depth'
 import MarketDepth from './MarketDepth'
 import '../App.css';
 import CoinsList from "./CoinsList";
@@ -47,7 +48,7 @@ class ExchangePage extends Component {
                     <div className="rightSide">
                         <Graphic endPoint={this.state.pair.id}/>
                         <MarketDepth currentPair={this.state.currentPair}/>
-
+                        <DepthChart endPoint={this.state.pair.id}/>
                     </div>
 
                     <div className="side">

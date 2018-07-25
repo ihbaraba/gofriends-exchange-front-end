@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Table } from 'antd';
+import {Table} from 'antd';
+import {getMarcketDpthData} from "./../utils"
 import io from 'socket.io-client';
 
 import 'antd/lib/table/style/css';
+
 
 class MarketDepth extends Component {
 
@@ -13,6 +15,7 @@ class MarketDepth extends Component {
         this.socket = io("http://gofriends.ru:3001");
 
         this.getDataFromSocket = this.getDataFromSocket.bind(this);
+        this.getInitialPairDataFromServer = this.getInitialPairDataFromServer.bind(this);
 
         this.state = {
             socket: "undefined",
@@ -29,15 +32,17 @@ class MarketDepth extends Component {
     }
 
     getDataFromSocket(socket, stopTime = 0) {
+            console.log('state: ', this.state);
 
         if (stopTime !== 0) { console.time("Getting data from socket time took"); }
 
-        // console.log("order_created_" + socket);
         this.socket.on("order_created_" + socket, (bid) => {
 
             // console.log('stock: ' + typeof(bid) ,bid);
             const {marketDepth} = this.state;
             const {buy, sell} = marketDepth;
+            // console.log(marketDepth, buy, sell);
+
             const line = {
                 amount: bid.amount,
                 price: bid.price,
@@ -46,13 +51,53 @@ class MarketDepth extends Component {
                 key: bid.id,
             };
 
-            if (bid.type === "sell") { sell.push(line); }
-            if (bid.type === "buy") { buy.push(line); }
+            if (bid.type === "sell") { sell.unshift(line); }
+            if (bid.type === "buy") { buy.unshift(line); }
 
             this.setState({marketDepth: {
                     ...marketDepth,
                     buy,
                     sell,
+                }});
+        });
+
+        this.socket.on("order_updated_" + socket, (bid) => {
+
+            // console.log('order_updated_'+ socket ,bid);
+            const {marketDepth} = this.state;
+            const {buy, sell} = marketDepth;
+            // console.log(marketDepth, buy, sell);
+
+            const resOfSearchInBuy = buy.findIndex( item => item.id === bid.id );
+            const resOfSearchInSell = sell.findIndex( item => item.id === bid.id );
+
+            const flagBuy = (resOfSearchInBuy !== -1);
+            const flagSel = (resOfSearchInSell !== -1);
+
+
+            console.log(resOfSearchInBuy, resOfSearchInSell,  bid);
+
+
+
+            const filtredSell = (flagBuy && bid.completed) ? sell.splice(resOfSearchInBuy, 1) : sell; // remove element
+            const filtredBuy = (flagSel && bid.completed) ? buy.splice(resOfSearchInSell, 1) : buy;
+
+
+            // const filtredSell = sell.filter( item => item.id !== bid.id );
+            // const filtredBuy = buy.filter( item => item.id !== bid.id );
+
+            const differenceSell = sell.length - filtredSell.length;
+            const differenceBuy = buy.length - filtredBuy.length;
+            if ( differenceSell !== 0) {console.log('!! differenceSell=', differenceSell);}
+            if ( differenceBuy !== 0) {console.log('!! differenceBuy=', differenceBuy);}
+
+            // console.log(resOfSearchInBuy, resOfSearchInSell, filtredSell, filtredBuy, bid.id);
+
+
+            this.setState({marketDepth: {
+                    ...marketDepth,
+                    buy: filtredSell,
+                    sell: filtredBuy,
                 }});
         });
 
@@ -65,27 +110,34 @@ class MarketDepth extends Component {
         }
     }
 
-    componentDidMount() {
-        // console.log(" props = ", this.props.currentPair,this.props,);
-        this.getDataFromSocket(this.props.currentPair.id, 0);
+    async getInitialPairDataFromServer(id) {
+        // console.log(this.props, id);
+
+        await this.setState({marketDepth: {buy: [], sell: []}});
+
+        const buyDepth = await getMarcketDpthData({type: "buy", book: id});
+        const sellDepth = await getMarcketDpthData({type: "sell", book: id});
+        await this.setState({marketDepth: {buy: buyDepth, sell: sellDepth}}
+            , ()=> { console.log(this.state) }
+        );
     }
+
+    async componentDidMount() {
+        const {currentPair: {id =1}} = this.props;
+        await this.getInitialPairDataFromServer(id);
+        this.getDataFromSocket(id, 0);
+    }
+
     componentWillUnmount() {
         this.socket.close();
     }
 
-    componentWillReceiveProps(nextProps) {
+    async componentWillReceiveProps(nextProps) {
         if (nextProps.currentPair.id !== this.props.currentPair.id) {
-            // console.log("componentWillReceiveProps", nextProps);
-            const {marketDepth} = this.state;
-            this.setState({marketDepth: {
-                    ...marketDepth,
-                    buy: [],
-                    sell: [],
-                }}
-                ,() => {
-                    this.getDataFromSocket(nextProps.currentPair.id, 0);
-                }
-                );
+            console.log("componentWillReceiveProps", nextProps);
+            const {currentPair: {id =1}} = nextProps;
+            await this.getInitialPairDataFromServer(id);
+            this.getDataFromSocket(nextProps.currentPair.id, 0);
         }
     }
 
@@ -120,11 +172,10 @@ class MarketDepth extends Component {
 
         return (
             <div>
-                {/*<h3>Market Depth</h3>*/}
                 <div className="marketDepth">
                     <div className="marketDepthColumns">
                         <h5>BUY ORDERS</h5>
-                        <Table columns={columns} dataSource={buy} bordered={true}  pagination={false} scroll={{ y: 240 }}  size="small"  rowClassName="rowClassName"/>
+                        <Table columns={columns} dataSource={buy} bordered={true}  pagination={false} scroll={{ y: 240 }}  size="small"  rowClassName="rowClassName, Test"/>
                     </div>
                     <div className="marketDepthColumns">
                         <h5>SELL ORDERS</h5>
