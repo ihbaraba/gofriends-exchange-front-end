@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types'
-import { bindActionCreators } from 'redux'
-import { connect } from 'react-redux'
+import {bindActionCreators} from 'redux'
+import {connect} from 'react-redux'
 // import * as ExchangeActions from '../actions/ExchangeActions'
 import {changePair} from '../actions/ExchangeActions'
 import Header2 from './Header2';
@@ -39,28 +39,33 @@ class ExchangePage extends Component {
         return (
             <div>
                 <Header2/>
-                <div style={{clear: "both"}}>
-                    <h1 className="sign">Exchange</h1>
-                </div>
+                <div className="wrapper-all">
 
-                <div className="centerArea">
-                    <div className="rightSide">
-                        <Graphic endPoint={this.state.pair.id}/>
-                        <MarketDepth currentPair={this.state.currentPair}/>
-
+                    <div className="padding" style={{clear: "both"}}>
+                        <h1 className="sign h1">Ethereum exchange</h1>
+                        <p className="small-text">
+                            ETH / BTC
+                        </p>
                     </div>
 
-                    <div className="side">
-                        <CoinsList setCurentCoinsPair2State={this.setCurentCoinsPair2State}/>
+                    <div className="centerArea">
+                        <div className="rightSide">
+                            <Graphic endPoint={this.state.pair.id}/>
+                        </div>
+                        <div className="side">
+                            <CoinsList setCurentCoinsPair2State={this.setCurentCoinsPair2State}/>
+                        </div>
+                    </div>
 
+                    <div className="centerArea-second">
+                        <MarketDepth currentPair={this.state.currentPair}/>
                         <div className="box notices">
                             <div className="head">
-                                <div className="name">Notices</div>
+                                <div className="name h1">Notices</div>
                                 <div className="social">
                                     <a href="#"><i className="fa fa-twitter-square"></i></a>
                                 </div>
                             </div>
-
                             <div className="data" id="noticesBoard">
                                 <div className="msg">
                                     <div className="info">We understand that there are some concerns about our process
@@ -128,15 +133,16 @@ class ExchangePage extends Component {
                                     </div>
                                 </div>
                             </div>
-
                         </div>
-
                     </div>
                 </div>
+
+
             </div>
         )
     }
 }
+
 ExchangePage.propTypes = {
     dispatch: PropTypes.func.isRequired
 }
@@ -150,10 +156,13 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
     return {
         actions: bindActionCreators(changePair, dispatch),
-        dispatch: (action)=>{action(); console.log("test dispatch")},
+        dispatch: (action) => {
+            action();
+            console.log("test dispatch")
+        },
         changePair: () => {
             changePair();
-    }
+        }
     }
 }
 

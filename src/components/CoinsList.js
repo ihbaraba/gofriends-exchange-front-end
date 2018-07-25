@@ -70,6 +70,11 @@ class CoinsList extends React.Component {
         return (
             <div>
                 <div className="card-container, currencysPairs">
+                    <div className="card-container-head">
+                        <p className="h1">
+                            Markets
+                        </p>
+                    </div>
                     <Tabs type="card" >
                         { this.state.coins && this.currenciesTabs(this.state.coins) }
                     </Tabs>

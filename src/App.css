@@ -1,3 +1,11 @@
+* {
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
 
 .header .tabs {
     float: left;
@@ -107,10 +115,13 @@ button.signUpButton {
 }
 
 .sign {
-    text-align: center;
-    padding: 10px;
+    text-align: left;
+    /*padding: 10px;*/
 }
-
+.small-text{
+    color:#8fa9ce;
+    font-size: 16px;
+}
 .form2col .formWrapper > div {
     display: table-cell;
 }
@@ -187,31 +198,43 @@ input, select, textarea {
 
 .centerArea {
     display: flex;
-    margin: 1rem;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+.centerArea-second{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-start;
 }
 
 .rightSide {
-    flex: 1 0 50rem;
+    /*flex: 1 0 auto;*/
+    /*width: 70%;*/
+    flex: 1 0 auto;
+    margin-right: 1rem;
 }
 
 .stakan {
-    background: rgba(0,0,20,0.53);
+    background: rgba(0, 0, 20, 0.53);
     /*flex: 1 0 80rem;*/
     height: 30rem;
 }
 
 .side {
-    float: right;
-    margin: 15px;
-    width: 370px;
-    min-width: 1px;
-    flex: 0 0 370px;
+    /*float: right;*/
+    /*margin: 15px;*/
+    /*min-width: 1px;*/
+    flex: 0 0 500px;
+    /*width: 30%;*/
+
 }
 
 .side .box {
     width: 100%;
     float: left;
-    border: 1px solid #b3d5d6;
     margin-bottom: 15px;
 }
 
@@ -225,22 +248,21 @@ input, select, textarea {
     position: relative;
     height: 40px;
     width: 100%;
-    background-color: #b3d5d6;
-    border-bottom: 1px solid #0b7076;
+    background-color: #05101e;
+    /*border-bottom: 1px solid #0b7076;*/
     font-size: 22px;
     line-height: 40px;
 }
 
 .side .box .head .name {
     float: left;
-    margin: 0 10px;
-    color: #3a4449;
-    text-transform: uppercase;
+    /*margin: 0 10px;*/
 }
 
 .notices {
     font-size: 12px;
     line-height: 16px;
+    padding: 18px;
 }
 
 .side .box .head .social {
@@ -251,22 +273,23 @@ input, select, textarea {
 
 .notices .msg {
     float: left;
-    border-bottom: 1px solid #c6d5dc;
+    /*border-bottom: 1px solid #c6d5dc;*/
     width: 100%;
-    background: #f9fbfb;
+    margin-bottom: 22px;
+    /*background: #f9fbfb;*/
 }
 
 .notices .msg .info {
     float: left;
-    padding: 10px 10px 5px;
+    padding: 10px 0 5px;
 }
 
 .notices .msg .by {
     float: left;
     clear: left;
-    font-size: 9px;
-    color: #42565c;
-    padding: 0 10px 10px;
+    font-size: 14px;
+    color: #ffffff;
+    padding: 10px 0 10px 0;
 }
 
 .section-form {
@@ -365,6 +388,7 @@ body.twofactor .column1 {
     border: none;
     padding: 40px 0 60px 0;
 }
+
 .featureBanner {
     margin-top: 30px;
     padding: 48px 0 48px 0;
@@ -403,6 +427,7 @@ body.twofactor .column1 {
     justify-content: space-between;
     -webkit-justify-content: space-between;
 }
+
 .col {
     width: 32%;
     margin: 15px 0 10px 0;
@@ -433,7 +458,7 @@ body.twofactor .column1 {
     text-align: center;
 }
 
-.notfound{
+.notfound {
     text-align: center;
     color: red;
     font-size: large;
@@ -458,6 +483,7 @@ body.twofactor .column1 {
     padding: 2px 4px 1px 4px;
     border-right: 1px solid #f6fbf6;
 }
+
 .orderBook tr:nth-child(odd) {
     background-color: #ffffff;
 }
@@ -470,23 +496,38 @@ body.twofactor .column1 {
 
 .currencysPairs {
     margin-bottom: 0.5rem;
-    border: 4px  #EEE;
-    background:  #EFEFEF;
+    border: 4px #EEE;
+    background: #05101e;
 }
-
 
 .marketDepth {
     display: flex;
     height: 30rem;
-    background:  #FEFEFE;
+    background: #FEFEFE;
+    flex: 1 0 auto;
+    margin-right: 1rem;
 }
 
 .marketDepthColumns {
-    flex: 1 1 30rem;
-    margin: 1rem;
+    margin: 0 0.5rem 0 0.5rem;
+    flex: 1 1 auto;
 }
 
-.ant-table td { white-space: nowrap; }
+.notices {
+    background-color: #05101e;
+    flex: 0 0 500px;
+}
+
+.notices .msg .info {
+    color: #738aa8;
+    font-size: 14px;
+}
+
+
+
+.ant-table td {
+    white-space: nowrap;
+}
 
 .rowClassName {
     color: darkblue;
@@ -497,17 +538,193 @@ body.twofactor .column1 {
 .pairBarActive {
     background: #DDD;
 }
+
 .pairBar {
     background: #EFEFEF;
     margin-bottom: 0.25rem;
     padding-left: 0.25rem;
     cursor: pointer;
 }
+
 .pairBar:hover {
     background: #FFF;
 }
 
-tbody tr:nth-child(odd){
+tbody tr:nth-child(odd) {
     background-color: #EEEEFE;
 }
 
+.custom__tr {
+    background-color: #0d1d36;
+}
+
+.custom__tr td, .custom__tr td * {
+    color: #ffffff;
+    font-size: 14px;
+}
+
+body {
+    background-image: url('./img/bg.png') !important;
+}
+
+.wrapper-all{
+    padding: 0 1rem;
+}
+.padding{
+    padding: 0 1rem;
+}
+.custom__tr:nth-child(odd) {
+    background: #05101e;
+}
+
+body .ant-table-small > .ant-table-content > .ant-table-header > table > .ant-table-thead > tr > th, .ant-table-small > .ant-table-content > .ant-table-body > table > .ant-table-thead > tr > th, .ant-table-small > .ant-table-content > .ant-table-scroll > .ant-table-header > table > .ant-table-thead > tr > th, .ant-table-small > .ant-table-content > .ant-table-scroll > .ant-table-body > table > .ant-table-thead > tr > th, .ant-table-small > .ant-table-content > .ant-table-fixed-left > .ant-table-header > table > .ant-table-thead > tr > th, .ant-table-small > .ant-table-content > .ant-table-fixed-right > .ant-table-header > table > .ant-table-thead > tr > th, .ant-table-small > .ant-table-content > .ant-table-fixed-left > .ant-table-body-outer > .ant-table-body-inner > table > .ant-table-thead > tr > th, .ant-table-small > .ant-table-content > .ant-table-fixed-right > .ant-table-body-outer > .ant-table-body-inner > table > .ant-table-thead > tr > th {
+    background: #0d1d36 !important;
+    color: #ffffff;
+    text-align: center;
+}
+
+body .ant-table-placeholder {
+    background: #05101e;
+    color: #ffffff;
+}
+
+body tr, td, th {
+    border: none !important;
+    border-radius: 0px !important;
+}
+
+body .ant-table-thead > tr.ant-table-row-hover > td, body .ant-table-tbody > tr.ant-table-row-hover > td, body .ant-table-thead > tr:hover > td, body .ant-table-tbody > tr:hover > td {
+    background: #223c65;
+}
+
+body h1, body h2, body h3, body h4, body h5, body h6 {
+    color: #ffffff;
+}
+
+.h1 {
+    color: #ffffff;
+    font-size: 36px;
+    margin-bottom: 0px;
+}
+
+body h5 {
+    font-size: 30px;
+    padding: 15px 20px;
+    margin-bottom: 0px;
+    background: #05101e;
+}
+
+
+.marketDepth {
+    background: transparent;
+}
+
+body .ant-table {
+    border: none;
+}
+
+body .ant-table-thead td {
+    border-radius: 0px;
+}
+
+body .ant-table-small > .ant-table-content > .ant-table-header > table > .ant-table-thead > tr > th, body .ant-table-small > .ant-table-content > .ant-table-body > table > .ant-table-thead > tr > th, body .ant-table-small > .ant-table-content > .ant-table-scroll > .ant-table-header > table > .ant-table-thead > tr > th, body .ant-table-small > .ant-table-content > .ant-table-scroll > .ant-table-body > table > .ant-table-thead > tr > th, body .ant-table-small > .ant-table-content > .ant-table-fixed-left > .ant-table-header > table > .ant-table-thead > tr > th, body .ant-table-small > .ant-table-content > .ant-table-fixed-right > .ant-table-header > table > .ant-table-thead > tr > th, body .ant-table-small > .ant-table-content > .ant-table-fixed-left > .ant-table-body-outer > .ant-table-body-inner > table > .ant-table-thead > tr > th, body .ant-table-small > .ant-table-content > .ant-table-fixed-right > .ant-table-body-outer > .ant-table-body-inner > table > .ant-table-thead > tr > th, body .ant-table-small > .ant-table-content > .ant-table-header > table > .ant-table-tbody > tr > td, body .ant-table-small > .ant-table-content > .ant-table-body > table > .ant-table-tbody > tr > td, body .ant-table-small > .ant-table-content > .ant-table-scroll > .ant-table-header > table > .ant-table-tbody > tr > td, body .ant-table-small > .ant-table-content > .ant-table-scroll > .ant-table-body > table > .ant-table-tbody > tr > td, body .ant-table-small > .ant-table-content > .ant-table-fixed-left > .ant-table-header > table > .ant-table-tbody > tr > td, body .ant-table-small > .ant-table-content > .ant-table-fixed-right > .ant-table-header > table > .ant-table-tbody > tr > td, body .ant-table-small > .ant-table-content > .ant-table-fixed-left > .ant-table-body-outer > .ant-table-body-inner > table > .ant-table-tbody > tr > td, body body .ant-table-small > .ant-table-content > .ant-table-fixed-right > .ant-table-body-outer > .ant-table-body-inner > table > .ant-table-tbody > tr > td {
+    padding: 14px 8px;
+}
+
+.card-container-head {
+    padding: 18px;
+}
+
+body .ant-tabs.ant-tabs-card > .ant-tabs-bar .ant-tabs-tab {
+    background: #0d1d36;
+    color: #374f72;
+    border-radius: 6px;
+    border-color: transparent;
+}
+
+body .ant-tabs.ant-tabs-card > .ant-tabs-bar .ant-tabs-tab-active {
+    background: #00b29c;
+    color: #ffffff;
+}
+
+body .ant-tabs-bar {
+    border-bottom: none;
+    margin-bottom: 10px;
+}
+
+body .ant-tabs-bar {
+    padding: 0 10px;
+}
+
+.pairBar {
+    padding: 10px 4px;
+    background: #05101e;
+    color: #ffffff;
+    font-size: 14px;
+}
+
+.pairBar:nth-child(odd) {
+    background: #0d1d36;
+}
+
+.pairBar:hover {
+    background: #223c65;
+}
+
+
+
+.ant-table-small > .ant-table-content .ant-table-header {
+    background: #05101e;
+}
+
+.notices .head {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+/*1800*/
+
+@media (max-width: 1800px) and (max-device-width: 1800px) {
+    .side {
+        flex-basis: 380px;
+    }
+    .notices{
+        flex-basis: 380px;
+    }
+}
+
+@media (max-width: 1680px) and (max-device-width: 1680px) {
+
+    body .ant-table-small > .ant-table-content > .ant-table-header > table > .ant-table-thead > tr > th, body .ant-table-small > .ant-table-content > .ant-table-body > table > .ant-table-thead > tr > th, body .ant-table-small > .ant-table-content > .ant-table-scroll > .ant-table-header > table > .ant-table-thead > tr > th, body .ant-table-small > .ant-table-content > .ant-table-scroll > .ant-table-body > table > .ant-table-thead > tr > th, body .ant-table-small > .ant-table-content > .ant-table-fixed-left > .ant-table-header > table > .ant-table-thead > tr > th, body .ant-table-small > .ant-table-content > .ant-table-fixed-right > .ant-table-header > table > .ant-table-thead > tr > th, body .ant-table-small > .ant-table-content > .ant-table-fixed-left > .ant-table-body-outer > .ant-table-body-inner > table > .ant-table-thead > tr > th, body .ant-table-small > .ant-table-content > .ant-table-fixed-right > .ant-table-body-outer > .ant-table-body-inner > table > .ant-table-thead > tr > th, body .ant-table-small > .ant-table-content > .ant-table-header > table > .ant-table-tbody > tr > td, body .ant-table-small > .ant-table-content > .ant-table-body > table > .ant-table-tbody > tr > td, body .ant-table-small > .ant-table-content > .ant-table-scroll > .ant-table-header > table > .ant-table-tbody > tr > td, body .ant-table-small > .ant-table-content > .ant-table-scroll > .ant-table-body > table > .ant-table-tbody > tr > td, body .ant-table-small > .ant-table-content > .ant-table-fixed-left > .ant-table-header > table > .ant-table-tbody > tr > td, body .ant-table-small > .ant-table-content > .ant-table-fixed-right > .ant-table-header > table > .ant-table-tbody > tr > td, body .ant-table-small > .ant-table-content > .ant-table-fixed-left > .ant-table-body-outer > .ant-table-body-inner > table > .ant-table-tbody > tr > td, body body .ant-table-small > .ant-table-content > .ant-table-fixed-right > .ant-table-body-outer > .ant-table-body-inner > table > .ant-table-tbody > tr > td {
+        padding: 14px 2px;
+        font-size: 12px;
+        text-align: center;
+    }
+
+
+    .marketDepthColumns {
+        flex: 0 1;
+    }
+
+    /*.rightSide {*/
+        /*flex: 1 1;*/
+    /*}*/
+}
+
+/*@media (max-width: 1400px) and (max-device-width: 1400px) {*/
+
+    /*.rightSide {*/
+        /*-ms-flex: 1 1;*/
+        /*flex: 1 1;*/
+        /*flex-basis: 100%;*/
+        /*order: 2;*/
+    /*}*/
+
+    /*.side {*/
+        /*order: 1;*/
+    /*}*/
+
+/*}*/

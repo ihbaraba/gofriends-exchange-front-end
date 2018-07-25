@@ -119,19 +119,16 @@ class MarketDepth extends Component {
         }];
 
         return (
-            <div>
-                {/*<h3>Market Depth</h3>*/}
                 <div className="marketDepth">
                     <div className="marketDepthColumns">
                         <h5>BUY ORDERS</h5>
-                        <Table columns={columns} dataSource={buy} bordered={true}  pagination={false} scroll={{ y: 240 }}  size="small"  rowClassName="rowClassName"/>
+                        <Table columns={columns} dataSource={buy} bordered={false}  pagination={false} scroll={{ y: 240 }}  size="small"  rowClassName="custom__tr"/>
                     </div>
                     <div className="marketDepthColumns">
                         <h5>SELL ORDERS</h5>
-                        <Table columns={columns} dataSource={sell} bordered={true} pagination={false} scroll={{ y: 240 }}  size="small"  rowClassName="rowClassName"/>
+                        <Table columns={columns} dataSource={sell} bordered={false} pagination={false} scroll={{ y: 240 }}  size="small"  rowClassName="custom__tr"/>
                     </div>
                 </div>
-            </div>
         )
     }
 }
