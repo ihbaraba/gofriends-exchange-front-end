@@ -1,17 +1,12 @@
-export default async function sendOrder ({rout, pairId = 1, balanceId = 0, type, price, amount}) {
-    // console.log("sendOrder", rout);
+export default async function sendOrder ({rout, pairId = 1, balanceId = 1, type, price, amount}) {
+    // console.log("sendOrder", rout, pairId, balanceId, type, price, amount);
 
-    // const promiseData = fetch(`${rout}`)
-    //     .then(response => response.json());
-    // return promiseData
         const rawResponse = await fetch(`${rout}`, {
             method: 'POST',
             headers: {
-                'Accept': 'application/json',
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(
-                {
+            body: JSON.stringify({
                     "pairId": pairId,
                     "balanceId": balanceId,
                     "type": type,
@@ -23,5 +18,5 @@ export default async function sendOrder ({rout, pairId = 1, balanceId = 0, type,
         });
         const content = await rawResponse.json();
 
-        console.log("sendOrder:", content);
+        // console.log("sendOrder:", content);
 }
