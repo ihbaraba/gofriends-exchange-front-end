@@ -118,10 +118,12 @@ button.signUpButton {
     text-align: left;
     /*padding: 10px;*/
 }
-.small-text{
-    color:#8fa9ce;
+
+.small-text {
+    color: #8fa9ce;
     font-size: 16px;
 }
+
 .form2col .formWrapper > div {
     display: table-cell;
 }
@@ -203,7 +205,7 @@ input, select, textarea {
     align-items: flex-end;
 }
 
-.centerArea-second{
+.centerArea-second {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
@@ -212,7 +214,7 @@ input, select, textarea {
 
 .rightSide {
     /*flex: 1 0 auto;*/
-    /*width: 70%;*/
+    width: 70%;
     flex: 1 0 auto;
     margin-right: 1rem;
 }
@@ -228,7 +230,7 @@ input, select, textarea {
     /*margin: 15px;*/
     /*min-width: 1px;*/
     flex: 0 0 500px;
-    /*width: 30%;*/
+    width: 30%;
 
 }
 
@@ -549,8 +551,9 @@ body.twofactor .column1 {
     /*height: 15rem;*/
 }
 
-.ant-table td { white-space: nowrap; }
-
+.ant-table td {
+    white-space: nowrap;
+}
 
 .ant-table td {
     white-space: nowrap;
@@ -600,6 +603,7 @@ body {
 .padding{
     padding: 0 1rem;
 }
+
 .custom__tr:nth-child(odd) {
     background: #05101e;
 }
@@ -698,6 +702,8 @@ body .ant-tabs-bar {
     background: #223c65;
 }
 
+
+
 .ant-table-small > .ant-table-content .ant-table-header {
     background: #05101e;
 }
@@ -709,7 +715,7 @@ body .ant-tabs-bar {
     align-items: center;
 }
 
-.marketDepthTables{
+.marketDepthTables {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
@@ -729,13 +735,15 @@ body .ant-tabs-bar {
     padding: 1rem;
 }
 
+
 /*1800*/
 
 @media (max-width: 1800px) and (max-device-width: 1800px) {
     .side {
         flex-basis: 380px;
     }
-    .notices{
+
+    .notices {
         flex-basis: 380px;
     }
 }
@@ -747,29 +755,38 @@ body .ant-tabs-bar {
         font-size: 12px;
         text-align: center;
     }
-
-
-    .marketDepthColumns {
-        flex: 0 1;
-    }
-
-
-    /*.rightSide {*/
-        /*flex: 1 1;*/
-    /*}*/
 }
 
-/*@media (max-width: 1400px) and (max-device-width: 1400px) {*/
+@media (max-width: 1450px) and (max-device-width: 1450px) {
 
-    /*.rightSide {*/
-        /*-ms-flex: 1 1;*/
-        /*flex: 1 1;*/
-        /*flex-basis: 100%;*/
-        /*order: 2;*/
-    /*}*/
+    .marketDepth {
+        width: 100%;
+    }
 
-    /*.side {*/
-        /*order: 1;*/
-    /*}*/
+    .notices {
+        width: 100%;
+        margin-left: auto;
+        margin-top: 100px;
+    }
+
+    .rightSide{
+        width: 80%;
+        order: 2;
+    }
+    .side{
+        width: 100%;
+        order: 1;
+        margin-left: auto;
+    }
+}
+
+@media (max-width: 1050px) and (max-device-width: 1050px) {
+    body .ant-table-small > .ant-table-content > .ant-table-header > table > .ant-table-thead > tr > th, body .ant-table-small > .ant-table-content > .ant-table-body > table > .ant-table-thead > tr > th, body .ant-table-small > .ant-table-content > .ant-table-scroll > .ant-table-header > table > .ant-table-thead > tr > th, body .ant-table-small > .ant-table-content > .ant-table-scroll > .ant-table-body > table > .ant-table-thead > tr > th, body .ant-table-small > .ant-table-content > .ant-table-fixed-left > .ant-table-header > table > .ant-table-thead > tr > th, body .ant-table-small > .ant-table-content > .ant-table-fixed-right > .ant-table-header > table > .ant-table-thead > tr > th, body .ant-table-small > .ant-table-content > .ant-table-fixed-left > .ant-table-body-outer > .ant-table-body-inner > table > .ant-table-thead > tr > th, body .ant-table-small > .ant-table-content > .ant-table-fixed-right > .ant-table-body-outer > .ant-table-body-inner > table > .ant-table-thead > tr > th, body .ant-table-small > .ant-table-content > .ant-table-header > table > .ant-table-tbody > tr > td, body .ant-table-small > .ant-table-content > .ant-table-body > table > .ant-table-tbody > tr > td, body .ant-table-small > .ant-table-content > .ant-table-scroll > .ant-table-header > table > .ant-table-tbody > tr > td, body .ant-table-small > .ant-table-content > .ant-table-scroll > .ant-table-body > table > .ant-table-tbody > tr > td, body .ant-table-small > .ant-table-content > .ant-table-fixed-left > .ant-table-header > table > .ant-table-tbody > tr > td, body .ant-table-small > .ant-table-content > .ant-table-fixed-right > .ant-table-header > table > .ant-table-tbody > tr > td, body .ant-table-small > .ant-table-content > .ant-table-fixed-left > .ant-table-body-outer > .ant-table-body-inner > table > .ant-table-tbody > tr > td, body body .ant-table-small > .ant-table-content > .ant-table-fixed-right > .ant-table-body-outer > .ant-table-body-inner > table > .ant-table-tbody > tr > td {
+        padding: 14px 1px;
+        font-size: 10px;
+        text-align: center;
+    }
+
+}
 
 /*}*/
