@@ -5,6 +5,9 @@ import { connect } from 'react-redux'
 // import * as ExchangeActions from '../actions/ExchangeActions'
 import {changePair} from '../actions/ExchangeActions'
 import Header2 from './Header2';
+
+import Footer from './Footer';
+
 import Orders from './Orders';
 import Graphic from './Graphic/Graphic'
 import MarketDepth from './MarketDepth'
@@ -50,6 +53,7 @@ class ExchangePage extends Component {
         return (
             <div>
                 <Header2/>
+
                 <div className="wrapper-all">
 
                     <div className="padding" style={{clear: "both"}}>
@@ -74,7 +78,7 @@ class ExchangePage extends Component {
                             <div className="head">
                                 <div className="name h1">Notices</div>
                                 <div className="social">
-                                    <a href="#"><i className="fa fa-twitter-square"></i></a>
+                                    <a href="#" className="twitter-icon"></a>
                                 </div>
                             </div>
                             <div className="data" id="noticesBoard">
@@ -149,7 +153,7 @@ class ExchangePage extends Component {
 
                     </div>
                 </div>
-
+                <Footer/>
 
             </div>
         )
