@@ -525,6 +525,11 @@ body.twofactor .column1 {
     flex: 1 1 auto;
     width: 50%;
 }
+.ordersBlock {
+    margin: 0 0.5rem 0 0.5rem;
+    flex: 1 0 30rem;
+    width: 50%;
+}
 
 .notices {
     background-color: #05101e;
@@ -705,6 +710,13 @@ body .ant-tabs-bar {
 }
 
 .marketDepthTables{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 100%;
+    margin-bottom: 40px;
+}
+.ordersTables{
     display: flex;
     justify-content: space-between;
     align-items: flex-start;

@@ -100,15 +100,15 @@ class Orders extends Component {
         // console.log(first, second, price, total, loanRate);
         return (
             <div className="orders">
-                <div className="marketDepthTables">
-                    <div className="marketDepthColumns">
+                <div className="ordersTables">
+                    <div className="ordersBlock">
                         <span>Buy{`${first}`}</span>
                         {this.InputsFrame({first, second, price, loanRate, firePostToServer, type : "buy"})}
                     </div>
-                    <div className="marketDepthColumns">
+                    <div className="ordersBlock">
                         <span>Limits</span>
                     </div>
-                    <div className="marketDepthColumns">
+                    <div className="ordersBlock">
                         <span>Sell</span>
                         {this.InputsFrame({first, second, price, loanRate, firePostToServer, type : "sell"})}
                     </div>
