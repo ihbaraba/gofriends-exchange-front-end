@@ -5,7 +5,7 @@ import DepthChart from './Graphic/Depth'
 import {getMarcketDpthData} from "./../utils"
 import io from 'socket.io-client';
 
-import 'antd/lib/table/style/css';
+// import 'antd/lib/table/style/css';
 
 
 class MarketDepth extends Component {

@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {Input, Button } from 'antd';
 import io from 'socket.io-client';
 
-import 'antd/lib/input/style/css';
+// import 'antd/lib/input/style/css';
 
 
 import '../App.css';
@@ -83,11 +83,23 @@ class Orders extends Component {
         };
         // console.log(this.state.price,this.state.amount, this.state.total);
         return (
-            <div style={{width: "30 rem",}}>
-                <span>Price:</span><Input {...optionsPrice} />
-                <span>Amount:</span><Input {...optionsAmount}/>
-                <span>Loan Rate:</span> <Input  {...optionsLoanRate}/>
-                <span>Total:</span><Input {...optionsTotal}/>
+            <div className="fullHeight" style={{width: "30 rem",}}>
+                <div className="orders__item">
+                    <span>Price:</span>
+                    <Input {...optionsPrice} />
+                </div>
+                <div className="orders__item">
+                    <span>Amount:</span>
+                    <Input {...optionsAmount}/>
+                </div>
+                <div className="orders__item">
+                    <span>Loan Rate:</span>
+                    <Input  {...optionsLoanRate}/>
+                </div>
+                <div className="orders__item orders__item-total">
+                    <span>Total:</span>
+                    <Input {...optionsTotal}/>
+                </div>
                 <Button type="primary" ghost onClick={() => { onBidButtonClick({type})} }>Bid!</Button>
             </div>
         )
@@ -102,15 +114,20 @@ class Orders extends Component {
             <div className="orders">
                 <div className="ordersTables">
                     <div className="ordersBlock">
-                        <span>Buy{`${first}`}</span>
+                        <span className="h5">Buy{`${first}`}</span>
+                        <hr className="ordersHr"/>
                         {this.InputsFrame({first, second, price, loanRate, firePostToServer, type : "buy"})}
                     </div>
                     <div className="ordersBlock">
-                        <span>Limits</span>
+                        <span className="h5">Limits</span>
+                        <hr className="ordersHr"/>
                     </div>
                     <div className="ordersBlock">
-                        <span>Sell</span>
+                        <span className="h5">Sell</span>
+                        <hr className="ordersHr"/>
                         {this.InputsFrame({first, second, price, loanRate, firePostToServer, type : "sell"})}
+
+
                     </div>
                 </div>
             </div>

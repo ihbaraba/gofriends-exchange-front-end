@@ -65,12 +65,11 @@ class ExchangePage extends Component {
                             <CoinsList setCurentCoinsPair2State={this.setCurentCoinsPair2State}/>
                         </div>
                     </div>
-                    <div className="centerArea">
-                        <Orders {...this.state.pair} price={52} amount={1} loanRate={2} firePostToServer={this.firePostToServer}/>
-                    </div>
-
                     <div className="centerArea-second"  >
-                        <MarketDepth currentPair={this.state.currentPair}/>
+                        <div className="main-content">
+                            <MarketDepth currentPair={this.state.currentPair}/>
+                            <Orders {...this.state.pair} price={52} amount={1} loanRate={2} firePostToServer={this.firePostToServer}/>
+                        </div>
                         <div className="box notices">
                             <div className="head">
                                 <div className="name h1">Notices</div>
