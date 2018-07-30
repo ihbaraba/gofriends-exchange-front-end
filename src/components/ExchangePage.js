@@ -5,14 +5,14 @@ import { connect } from 'react-redux'
 // import * as ExchangeActions from '../actions/ExchangeActions'
 import {changePair} from '../actions/ExchangeActions'
 import Header2 from './Header2';
-// import Footer from './Footer';
+import Orders from './Orders';
 import Graphic from './Graphic/Graphic'
 import MarketDepth from './MarketDepth'
 import '../App.css';
 import CoinsList from "./CoinsList";
 // import ExchangePageLogic from './Logics/ExchangePageLogic';
 import initialState from "./../store/initialState";
-import io from "socket.io-client";
+import {sendOrder} from "./../utils"
 
 class ExchangePage extends Component {
 
@@ -20,32 +20,41 @@ class ExchangePage extends Component {
         super();
 
         this.setCurentCoinsPair2State = this.setCurentCoinsPair2State.bind(this);
+        this.firePostToServer = this.firePostToServer.bind(this);
 
         this.state = {
             ...initialState
         };
     }
 
+    firePostToServer = ({price, amount, loanRate, type}) => {
+      console.log("firePostToServer", price, amount, loanRate);
+      sendOrder({
+          rout: "http://gofriends.ru:3000/api/v1/orders",
+          pairId: this.state.pair.id,
+          type,
+          price, amount,
+      })
+    };
+
     setCurentCoinsPair2State = (pair) => {
-        // console.log(pair);
         this.setState({
             currentPair: pair,
             pair: pair,
         })
-    }
+    };
 
     render() {
-        // console.log(this.state);
+        console.log(this.state);
+        const {pair: { first, second } } = this.state;
         return (
             <div>
                 <Header2/>
                 <div className="wrapper-all">
 
                     <div className="padding" style={{clear: "both"}}>
-                        <h1 className="sign h1">Ethereum exchange</h1>
-                        <p className="small-text">
-                            ETH / BTC
-                        </p>
+                        <h1 className="sign h1">{`${first} exchange on ${second}`} </h1>
+                        <p className="small-text">{`${first} / ${second}`}</p>
                     </div>
 
                     <div className="centerArea">
@@ -56,8 +65,11 @@ class ExchangePage extends Component {
                             <CoinsList setCurentCoinsPair2State={this.setCurentCoinsPair2State}/>
                         </div>
                     </div>
+                    <div className="centerArea">
+                        <Orders {...this.state.pair} price={52} amount={1} loanRate={2} firePostToServer={this.firePostToServer}/>
+                    </div>
 
-                    <div className="centerArea-second">
+                    <div className="centerArea-second"  >
                         <MarketDepth currentPair={this.state.currentPair}/>
                         <div className="box notices">
                             <div className="head">

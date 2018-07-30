@@ -509,6 +509,16 @@ body.twofactor .column1 {
     margin-right: 1rem;
     width: 70%;
 }
+.orders {
+    display: flex;
+    flex-wrap: wrap;
+    height: 30rem;
+    background: #05101e;
+    flex: 1 0 auto;
+    margin-right: 1rem;
+    width: 70%;
+    color: #FEFEFE;
+}
 
 .marketDepthColumns {
     margin: 0 0.5rem 0 0.5rem;
@@ -683,8 +693,6 @@ body .ant-tabs-bar {
     background: #223c65;
 }
 
-
-
 .ant-table-small > .ant-table-content .ant-table-header {
     background: #05101e;
 }
@@ -703,6 +711,12 @@ body .ant-tabs-bar {
     width: 100%;
     margin-bottom: 40px;
 }
+
+.orders {
+    flex: 0 1 100%;
+    padding: 1rem;
+}
+
 /*1800*/
 
 @media (max-width: 1800px) and (max-device-width: 1800px) {
@@ -726,6 +740,7 @@ body .ant-tabs-bar {
     .marketDepthColumns {
         flex: 0 1;
     }
+
 
     /*.rightSide {*/
         /*flex: 1 1;*/

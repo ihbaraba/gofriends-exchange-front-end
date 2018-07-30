@@ -33,9 +33,24 @@ class MarketDepth extends Component {
         if (stopTime !== 0) {
             console.time("Getting data from socket time took");
         }
+        // socket.on('connect_error', (error) => {
+        //     console.error("Socket connection to server is fail", error);
+        //     alert("Socket connection to server is fail", error);
+        // });
+        // socket.on('connect_failed', (error) => {
+        //     console.error("Socket connection to server error", error);
+        //     alert("Socket connection to server error", error);
+        // });
+        // socket.on('disconnect', (reason) => {
+        //     if (reason === 'io server disconnect') {
+        //         // the disconnection was initiated by the server, you need to reconnect manually
+        //         socket.connect();
+        //     }
+        //     // else the socket will automatically try to reconnect
+        // });
 
-        // console.log("order_created_" + socket);
         this.socket.on("order_created_" + socket, (bid) => {
+        // console.log("order_created_", bid);
 
             if (bid.completed) return;
 
@@ -119,6 +134,8 @@ class MarketDepth extends Component {
 
         await this.setState({marketDepth: {buy: [], sell: []}});
 
+        // console.log("making getMarcketDpthData", {type: "buy", book: id});
+
         const buyDepth = await getMarcketDpthData({type: "buy", book: id});
         const sellDepth = await getMarcketDpthData({type: "sell", book: id});
         // console.log(buyDepth.filter( item => !item.completed), sellDepth.filter( item => !item.completed));
@@ -155,6 +172,7 @@ class MarketDepth extends Component {
 
     render() {
         const {marketDepth: {buy, sell}} = this.state;
+        const readyForDrawing = buy.length > 0 && sell.length > 0;
         // const {marketDepth} = this.state;
         // console.log("render marketDepth props = ", this.props.currentPair,this.state,);
 
@@ -197,7 +215,7 @@ class MarketDepth extends Component {
                     </div>
                 </div>
                 <div className="marketDepthChart">
-                    <DepthChart buy={this.state.buy} sell={this.state.sell}/>
+                    { readyForDrawing && <DepthChart buy={buy} sell={sell} height={200}/> }
                 </div>
             </div>
         )

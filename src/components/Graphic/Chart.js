@@ -36,9 +36,10 @@ const macdAppearance = {
         signal: "#00F300",
     },
     fill: {
-        divergence: "#4682B4"
+        divergence: "#4982BF"
     },
 };
+const axisColor = "#EEEEEE";
 
 class OHLCChartWithElderImpulseIndicator extends React.Component {
     render() {
@@ -103,8 +104,8 @@ class OHLCChartWithElderImpulseIndicator extends React.Component {
                        yExtents={d => [d.high, d.low]}
                        padding={{top: 10, bottom: 10}}
                 >
-                    <XAxis axisAt="bottom" orient="bottom" showTicks={false} outerTickSize={0}/>
-                    <YAxis axisAt="right" orient="right" ticks={2}/>
+                    <XAxis axisAt="bottom" orient="bottom" showTicks={false} tickStroke={axisColor} outerTickSize={0} stroke={axisColor}/>
+                    <YAxis axisAt="right" orient="right" ticks={2} tickStroke={axisColor} />
 
                     <MouseCoordinateY
                         at="right"
@@ -112,8 +113,6 @@ class OHLCChartWithElderImpulseIndicator extends React.Component {
                         displayFormat={format(".2f")}/>
 
                     <LineSeries yAccessor={ema12.accessor()} stroke={ema12.stroke()}/>
-
-                    {/*<OHLCSeries stroke={d => elderImpulseCalculator.stroke()[d.elderImpulse]}/>*/}
 
                     <EdgeIndicator itemType="last" orient="right" edgeAt="right"
                                    yAccessor={d => d.close} fill={d => d.close > d.open ? "#6BA583" : "#FF0000"}/>
@@ -137,7 +136,7 @@ class OHLCChartWithElderImpulseIndicator extends React.Component {
                        yExtents={d => d.volume}
                        origin={(w, h) => [0, h - 300]}
                 >
-                    <YAxis axisAt="left" orient="left" ticks={5} tickFormat={format(".2s")}/>
+                    <YAxis axisAt="left" orient="left" ticks={5} tickFormat={format(".2s")} tickStroke={axisColor}/>
 
                     <MouseCoordinateY
                         at="left"
@@ -152,8 +151,8 @@ class OHLCChartWithElderImpulseIndicator extends React.Component {
                        yExtents={macdCalculator.accessor()}
                        origin={(w, h) => [0, h - 150]} padding={{top: 10, bottom: 10}}
                 >
-                    <XAxis axisAt="bottom" orient="bottom"/>
-                    <YAxis axisAt="right" orient="right" ticks={2}/>
+                    <XAxis axisAt="bottom" orient="bottom" showTicks={true} tickStroke={axisColor} outerTickSize={0} stroke={axisColor}/>
+                    <YAxis axisAt="right" orient="right" ticks={2} tickStroke={axisColor}/>
 
                     <MouseCoordinateX
                         at="bottom"
@@ -173,7 +172,7 @@ class OHLCChartWithElderImpulseIndicator extends React.Component {
                         appearance={macdAppearance}
                     />
                 </Chart>
-                <CrossHairCursor />
+                <CrossHairCursor stroke={axisColor}/>
             </ChartCanvas>
         );
     }
