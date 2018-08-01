@@ -6,7 +6,7 @@ import {changePair} from '../actions/ExchangeActions'
 
 import {getCoinsList} from "./../utils"
 import {Tabs} from "antd";
-import 'antd/lib/tabs/style/css';
+// import 'antd/lib/tabs/style/css';
 
 
 const TabPane = Tabs.TabPane;

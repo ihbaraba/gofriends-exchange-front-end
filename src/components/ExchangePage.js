@@ -5,6 +5,9 @@ import { connect } from 'react-redux'
 // import * as ExchangeActions from '../actions/ExchangeActions'
 import {changePair} from '../actions/ExchangeActions'
 import Header2 from './Header2';
+
+import Footer from './Footer';
+
 import Orders from './Orders';
 import Graphic from './Graphic/Graphic'
 import MarketDepth from './MarketDepth'
@@ -50,6 +53,7 @@ class ExchangePage extends Component {
         return (
             <div>
                 <Header2/>
+
                 <div className="wrapper-all">
 
                     <div className="padding" style={{clear: "both"}}>
@@ -65,17 +69,16 @@ class ExchangePage extends Component {
                             <CoinsList setCurentCoinsPair2State={this.setCurentCoinsPair2State}/>
                         </div>
                     </div>
-                    <div className="centerArea">
-                        <Orders {...this.state.pair} price={52} amount={1} loanRate={2} firePostToServer={this.firePostToServer}/>
-                    </div>
-
                     <div className="centerArea-second"  >
-                        <MarketDepth currentPair={this.state.currentPair}/>
+                        <div className="main-content">
+                            <MarketDepth currentPair={this.state.currentPair}/>
+                            <Orders {...this.state.pair} price={52} amount={1} loanRate={2} firePostToServer={this.firePostToServer}/>
+                        </div>
                         <div className="box notices">
                             <div className="head">
                                 <div className="name h1">Notices</div>
                                 <div className="social">
-                                    <a href="#"><i className="fa fa-twitter-square"></i></a>
+                                    <a href="#" className="twitter-icon"></a>
                                 </div>
                             </div>
                             <div className="data" id="noticesBoard">
@@ -150,7 +153,7 @@ class ExchangePage extends Component {
 
                     </div>
                 </div>
-
+                <Footer/>
 
             </div>
         )
