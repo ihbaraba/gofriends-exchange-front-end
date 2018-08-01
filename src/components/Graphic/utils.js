@@ -13,15 +13,24 @@ function parseData(parse) {
     };
 }
 
-const parseDate = timeParse("%Y-%m-%d");
+// const parseDate = timeParse("%Y-%m-%d");
+const parseDate = timeParse("%Y-%m-%dT%H:%M:%S.%LZ");
 
-export function getData(endPoint = 1) {
-    const promiseMSFT = fetch(`//gofriends.ru/api/v1/quotations/${endPoint}`)
+export function getData({pairId = 1, APIURL = `//gofriends.ru/api/v1/quotations`, dateFrom, dateTo, take = 10000, interval = "5min", appendFake = "true"}) {
+    // const promiseMSFT = fetch(`//gofriends.ru/api/v1/quotations/${endPoint}`)
+
+// console.log('http://gofriends.ru:3000/api/v1/timeframes?pairId=1&dateFrom=2018-01-04&dateTo=2018-07-29&take=100&interval=1hr&appendFake=true');
+console.log(`${APIURL}?pairId=${pairId}&dateFrom=${dateFrom}&dateTo=${dateTo}&take=${take}&interval=${interval}&appendFake=${appendFake}`);
+        // const promiseMSFT = fetch("http://gofriends.ru:3000/api/v1/timeframes?pairId=1&dateFrom=2018-01-04&dateTo=2018-07-29&take=100&interval=1hr&appendFake=true")
+        const promiseMSFT = fetch(`${APIURL}?pairId=${pairId}&dateFrom=${dateFrom}&dateTo=${dateTo}&take=${take}&interval=${interval}&appendFake=${appendFake}`)
         .then(response => response.json())
         .then(data => {data.reduce((data, item) => {
                 data.push(parseData(parseDate)(item));
                 return data
             }, []);
+
+        // console.log(data);
+
         return data
         } );
 

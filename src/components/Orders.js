@@ -29,9 +29,9 @@ class Orders extends Component {
             style: { width: '15rem' },
             value: this.state.price,
             onChange: (e) => {
-                const price = e.target.value;
+                const price = +e.target.value;
                 const total = price * this.state.amount;
-                console.log(e.target.value, total);
+                console.log(price, typeof(price), total);
                 this.setState({
                         price,
                         total,
@@ -43,7 +43,7 @@ class Orders extends Component {
             style: { width: '15rem' },
             value: this.state.amount,
             onChange: (e) => {
-                const amount = e.target.value;
+                const amount = +e.target.value;
                 const total =  this.state.price * amount;
                 console.log(e.target.value, total);
                 this.setState({
@@ -57,7 +57,7 @@ class Orders extends Component {
             style: { width: '15rem' },
             value: this.state.loanRate,
             onChange: (e) => {
-                const val = e.target.value;
+                const val = +e.target.value;
                 console.log(e.target.value, e.target, e);
                 this.setState({loanRate: val});
             }
@@ -67,7 +67,7 @@ class Orders extends Component {
             style: { width: '15rem' },
             value: this.state.total,
             onChange: (e) => {
-                const total = e.target.value;
+                const total = +e.target.value;
                 console.log(e.target.value, e.target, e);
                 const price = total / this.state.amount;
                 this.setState({total, price});

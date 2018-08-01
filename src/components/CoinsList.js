@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import {changePair} from '../actions/ExchangeActions'
+import {PAIRS} from '../constants/APIURLS'
 
 import {getCoinsList} from "./../utils"
 import {Tabs} from "antd";
@@ -20,7 +21,7 @@ class CoinsList extends React.Component {
         // this.currenciesTabs = this.currenciesTabs.bind(this);
 }
     async componentDidMount() {
-        const data = await getCoinsList("http://gofriends.ru/api/v1/pairs/");
+        const data = await getCoinsList(PAIRS);
         // console.log(data);
         const pairs = data.map( item => ({id: item.id, first: item.baseCurrency.code, second: item.quoteCurrency.code}));
         // console.log(pairs);

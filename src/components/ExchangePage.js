@@ -1,9 +1,8 @@
 import React, {Component} from 'react';
-import PropTypes from 'prop-types'
-import { bindActionCreators } from 'redux'
-import { connect } from 'react-redux'
-// import * as ExchangeActions from '../actions/ExchangeActions'
-import {changePair} from '../actions/ExchangeActions'
+import PropTypes from 'prop-types';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import {changePair} from '../actions/ExchangeActions';
 import Header2 from './Header2';
 
 import Footer from './Footer';
@@ -13,16 +12,20 @@ import Graphic from './Graphic/Graphic'
 import MarketDepth from './MarketDepth'
 import '../App.css';
 import CoinsList from "./CoinsList";
-// import ExchangePageLogic from './Logics/ExchangePageLogic';
 import initialState from "./../store/initialState";
-import {sendOrder} from "./../utils"
+import {sendOrder} from "./../utils";
+import { Radio } from "antd";
+// import * as ExchangeActions from '../actions/ExchangeActions'
+// import ExchangePageLogic from './Logics/ExchangePageLogic';
+import "antd/lib/radio/style/css";
 
 class ExchangePage extends Component {
 
     constructor() {
         super();
 
-        this.setCurentCoinsPair2State = this.setCurentCoinsPair2State.bind(this);
+        this.setCurrentCoinsPair2State = this.setCurrentCoinsPair2State.bind(this);
+        this.handleTimeFrameChange = this.handleTimeFrameChange.bind(this);
         this.firePostToServer = this.firePostToServer.bind(this);
 
         this.state = {
@@ -40,33 +43,57 @@ class ExchangePage extends Component {
       })
     };
 
-    setCurentCoinsPair2State = (pair) => {
+    setCurrentCoinsPair2State = (pair) => {
         this.setState({
             currentPair: pair,
             pair: pair,
         })
     };
+    handleTimeFrameChange = (e) => {
+        const interval = e.target.value;
+        this.setState({interval});
+    };
 
     render() {
-        console.log(this.state);
-        const {pair: { first, second } } = this.state;
+        // console.log(this.state);
+        const {pair: { first, second, id }, interval, appendFake, } = this.state;
         return (
             <div>
                 <Header2/>
 
                 <div className="wrapper-all">
 
-                    <div className="padding" style={{clear: "both"}}>
-                        <h1 className="sign h1">{`${first} exchange on ${second}`} </h1>
-                        <p className="small-text">{`${first} / ${second}`}</p>
+                    <div style={{display: "flex", alignItems: "center", justifyContent: "center"}}>
+                        <div className="padding" style={{flex: "1 0", clear: "both"}}>
+                            <h1 className="sign h1">{`${first} exchange on ${second}`} </h1>
+                            <p className="small-text">{`${first} / ${second}`}</p>
+                        </div>
+                        <div style={{flex: "1 0 20rem"}}>
+                            <Radio.Group value={interval} onChange={this.handleTimeFrameChange}>
+                                <Radio.Button value="5min" >5-min</Radio.Button>
+                                <Radio.Button value="15min" >15-min</Radio.Button>
+                                <Radio.Button value="30min" >30-min</Radio.Button>
+                                <Radio.Button value="1hr" >1-hr</Radio.Button>
+                                <Radio.Button value="2hr" >2-hr</Radio.Button>
+                                <Radio.Button value="4hr" >4-hr</Radio.Button>
+                                <Radio.Button value="1day" >1-day</Radio.Button>
+                            </Radio.Group>
+                        </div>
                     </div>
 
                     <div className="centerArea">
                         <div className="rightSide">
-                            <Graphic endPoint={this.state.pair.id}/>
+                            <Graphic
+                                pairId={id}
+                                dateFrom={"2018-01-01"}
+                                dateTo={"2018-07-31"}
+                                take={1000}
+                                interval={interval}
+                                appendFake={appendFake}
+                            />
                         </div>
                         <div className="side">
-                            <CoinsList setCurentCoinsPair2State={this.setCurentCoinsPair2State}/>
+                            <CoinsList setCurentCoinsPair2State={this.setCurrentCoinsPair2State}/>
                         </div>
                     </div>
                     <div className="centerArea-second"  >
