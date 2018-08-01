@@ -68,17 +68,6 @@ class ExchangePage extends Component {
                             <h1 className="sign h1">{`${first} exchange on ${second}`} </h1>
                             <p className="small-text">{`${first} / ${second}`}</p>
                         </div>
-                        <div style={{flex: "1 0 20rem"}}>
-                            <Radio.Group value={interval} onChange={this.handleTimeFrameChange}>
-                                <Radio.Button value="5min" >5-min</Radio.Button>
-                                <Radio.Button value="15min" >15-min</Radio.Button>
-                                <Radio.Button value="30min" >30-min</Radio.Button>
-                                <Radio.Button value="1hr" >1-hr</Radio.Button>
-                                <Radio.Button value="2hr" >2-hr</Radio.Button>
-                                <Radio.Button value="4hr" >4-hr</Radio.Button>
-                                <Radio.Button value="1day" >1-day</Radio.Button>
-                            </Radio.Group>
-                        </div>
                     </div>
 
                     <div className="centerArea">
@@ -91,6 +80,17 @@ class ExchangePage extends Component {
                                 interval={interval}
                                 appendFake={appendFake}
                             />
+                            <div className="candlesticks">
+                                <Radio.Group value={interval} onChange={this.handleTimeFrameChange}>
+                                    <Radio.Button value="5min" >5-min</Radio.Button>
+                                    <Radio.Button value="15min" >15-min</Radio.Button>
+                                    <Radio.Button value="30min" >30-min</Radio.Button>
+                                    <Radio.Button value="1hr" >1-hr</Radio.Button>
+                                    <Radio.Button value="2hr" >2-hr</Radio.Button>
+                                    <Radio.Button value="4hr" >4-hr</Radio.Button>
+                                    <Radio.Button value="1day" >1-day</Radio.Button>
+                                </Radio.Group>
+                            </div>
                         </div>
                         <div className="side">
                             <CoinsList setCurentCoinsPair2State={this.setCurrentCoinsPair2State}/>
