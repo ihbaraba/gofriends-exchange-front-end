@@ -65,7 +65,7 @@ class ExchangePage extends Component {
 
                     <div style={{display: "flex", alignItems: "center", justifyContent: "center"}}>
                         <div className="padding" style={{flex: "1 0", clear: "both"}}>
-                            <h1 className="sign h1">{`${first} exchange on ${second}`} </h1>
+                            <h1 className="h1">{`${first} exchange on ${second}`} </h1>
                             <p className="small-text">{`${first} / ${second}`}</p>
                         </div>
                     </div>
