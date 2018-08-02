@@ -4,8 +4,7 @@
     <list default="true" id="1e4a1018-d054-48e3-b750-a34c269c93ec" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change beforePath="$PROJECT_DIR$/src/App.css" afterPath="$PROJECT_DIR$/src/App.css" />
-      <change beforePath="$PROJECT_DIR$/src/components/ExchangePage.js" afterPath="$PROJECT_DIR$/src/components/ExchangePage.js" />
-      <change beforePath="$PROJECT_DIR$/src/components/TwoFactorAuth.js" afterPath="$PROJECT_DIR$/src/components/TwoFactorAuth.js" />
+      <change beforePath="$PROJECT_DIR$/src/components/Login.js" afterPath="$PROJECT_DIR$/src/components/Login.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -32,54 +31,32 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Header2.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/components/Header2.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="75">
-              <caret line="5" column="6" lean-forward="false" selection-start-line="5" selection-start-column="6" selection-end-line="5" selection-end-column="6" />
-              <folding>
-                <element signature="e#0#26#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Footer.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/components/Footer.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="450">
-              <caret line="33" column="38" lean-forward="false" selection-start-line="33" selection-start-column="38" selection-end-line="33" selection-end-column="38" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="App.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/App.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="11">
-              <caret line="23" column="0" lean-forward="false" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
-              <folding>
-                <element signature="e#0#39#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="App.css" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/App.css">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="169">
-              <caret line="1662" column="23" lean-forward="true" selection-start-line="1662" selection-start-column="23" selection-end-line="1662" selection-end-column="23" />
+              <caret line="972" column="17" lean-forward="false" selection-start-line="972" selection-start-column="17" selection-end-line="972" selection-end-column="17" />
               <folding>
-                <element signature="e#41774#41929#0" expanded="false" />
-                <element signature="e#41931#44085#0" expanded="false" />
-                <element signature="e#44087#44517#0" expanded="false" />
-                <element signature="e#44519#44684#0" expanded="false" />
-                <element signature="e#44686#46840#0" expanded="false" />
-                <element signature="e#46842#49631#0" expanded="false" />
-                <element signature="e#49633#51731#0" expanded="false" />
-                <element signature="e#51733#52152#0" expanded="false" />
+                <element signature="e#42332#42487#0" expanded="false" />
+                <element signature="e#42489#44643#0" expanded="false" />
+                <element signature="e#44645#45075#0" expanded="false" />
+                <element signature="e#45077#45242#0" expanded="false" />
+                <element signature="e#45244#47398#0" expanded="false" />
+                <element signature="e#47400#50189#0" expanded="false" />
+                <element signature="e#50191#52289#0" expanded="false" />
+                <element signature="e#52291#52710#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Login.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/components/Login.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="294">
+              <caret line="110" column="74" lean-forward="false" selection-start-line="110" selection-start-column="68" selection-end-line="110" selection-end-column="74" />
+              <folding>
+                <element signature="e#0#39#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -151,13 +128,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>sty</find>
-      <find>polo</find>
-      <find>onC</find>
-      <find>onCl</find>
-      <find>err</find>
-      <find>canva</find>
-      <find>fitWidth</find>
       <find>tsv</find>
       <find>chart</find>
       <find>marketDepth</find>
@@ -181,6 +151,13 @@
       <find>710</find>
       <find>hr</find>
       <find>input</find>
+      <find>column2</find>
+      <find>h5</find>
+      <find>standard</find>
+      <find>placeholder</find>
+      <find>text-align: center</find>
+      <find>.center</find>
+      <find>.text</find>
     </findStrings>
     <replaceStrings>
       <replace>{axisColor}</replace>
@@ -205,7 +182,6 @@
         <option value="$PROJECT_DIR$/src/components/Activate.js" />
         <option value="$PROJECT_DIR$/src/components/WelcomePage.js" />
         <option value="$PROJECT_DIR$/src/components/NotFound.js" />
-        <option value="$PROJECT_DIR$/src/components/Login.js" />
         <option value="$PROJECT_DIR$/src/components/ChangePassword.js" />
         <option value="$PROJECT_DIR$/src/components/Login2.js" />
         <option value="$PROJECT_DIR$/src/components/Balances.js" />
@@ -241,6 +217,7 @@
         <option value="$PROJECT_DIR$/src/components/Footer.js" />
         <option value="$PROJECT_DIR$/src/components/ExchangePage.js" />
         <option value="$PROJECT_DIR$/src/components/TwoFactorAuth.js" />
+        <option value="$PROJECT_DIR$/src/components/Login.js" />
         <option value="$PROJECT_DIR$/src/App.css" />
       </list>
     </option>
@@ -465,11 +442,18 @@
       <option name="project" value="LOCAL" />
       <updated>1533123735756</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="some presets for TwoFactorAuth page">
+      <created>1533128509869</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1533128509869</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="287097000" />
+    <option name="totallyTimeSpent" value="292746000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
@@ -550,25 +534,16 @@
     <MESSAGE value="Merge branch 'master' of https://bitbucket.org/nazariimazur/gofriends-exchange-front-end" />
     <MESSAGE value="added block with 3 columns (by eth, stop limit and sell eth).&#10;new styles without antd lib.&#10;refactored html for styles" />
     <MESSAGE value="styles for candlesticks(radio group week month day)" />
-    <option name="LAST_COMMIT_MESSAGE" value="styles for candlesticks(radio group week month day)" />
+    <MESSAGE value="some presets for TwoFactorAuth page" />
+    <option name="LAST_COMMIT_MESSAGE" value="some presets for TwoFactorAuth page" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="7" />
+      <option name="time" value="8" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/components/Graphic/Graphic.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" column="25" lean-forward="false" selection-start-line="4" selection-start-column="25" selection-end-line="4" selection-end-column="25" />
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/MarketDepth.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="60">
@@ -592,14 +567,14 @@
         <state relative-caret-position="206">
           <caret line="1804" column="38" lean-forward="false" selection-start-line="1804" selection-start-column="38" selection-end-line="1804" selection-end-column="38" />
           <folding>
-            <element signature="e#41774#41929#0" expanded="false" />
-            <element signature="e#41931#44085#0" expanded="false" />
-            <element signature="e#44087#44517#0" expanded="false" />
-            <element signature="e#44519#44684#0" expanded="false" />
-            <element signature="e#44686#46840#0" expanded="false" />
-            <element signature="e#46842#49631#0" expanded="false" />
-            <element signature="e#49633#51731#0" expanded="false" />
-            <element signature="e#51733#52152#0" expanded="false" />
+            <element signature="e#42332#42487#0" expanded="false" />
+            <element signature="e#42489#44643#0" expanded="false" />
+            <element signature="e#44645#45075#0" expanded="false" />
+            <element signature="e#45077#45242#0" expanded="false" />
+            <element signature="e#45244#47398#0" expanded="false" />
+            <element signature="e#47400#50189#0" expanded="false" />
+            <element signature="e#50191#52289#0" expanded="false" />
+            <element signature="e#52291#52710#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -915,14 +890,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/ExchangePage.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="233">
-          <caret line="67" column="43" lean-forward="false" selection-start-line="67" selection-start-column="43" selection-end-line="67" selection-end-column="43" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/TwoFactorAuth.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="140">
@@ -931,19 +898,37 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/ExchangePage.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="233">
+          <caret line="67" column="43" lean-forward="false" selection-start-line="67" selection-start-column="43" selection-end-line="67" selection-end-column="43" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/Login.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="294">
+          <caret line="110" column="74" lean-forward="false" selection-start-line="110" selection-start-column="68" selection-end-line="110" selection-end-column="74" />
+          <folding>
+            <element signature="e#0#39#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/App.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="169">
-          <caret line="1662" column="23" lean-forward="true" selection-start-line="1662" selection-start-column="23" selection-end-line="1662" selection-end-column="23" />
+          <caret line="972" column="17" lean-forward="false" selection-start-line="972" selection-start-column="17" selection-end-line="972" selection-end-column="17" />
           <folding>
-            <element signature="e#41774#41929#0" expanded="false" />
-            <element signature="e#41931#44085#0" expanded="false" />
-            <element signature="e#44087#44517#0" expanded="false" />
-            <element signature="e#44519#44684#0" expanded="false" />
-            <element signature="e#44686#46840#0" expanded="false" />
-            <element signature="e#46842#49631#0" expanded="false" />
-            <element signature="e#49633#51731#0" expanded="false" />
-            <element signature="e#51733#52152#0" expanded="false" />
+            <element signature="e#42332#42487#0" expanded="false" />
+            <element signature="e#42489#44643#0" expanded="false" />
+            <element signature="e#44645#45075#0" expanded="false" />
+            <element signature="e#45077#45242#0" expanded="false" />
+            <element signature="e#45244#47398#0" expanded="false" />
+            <element signature="e#47400#50189#0" expanded="false" />
+            <element signature="e#50191#52289#0" expanded="false" />
+            <element signature="e#52291#52710#0" expanded="false" />
           </folding>
         </state>
       </provider>
