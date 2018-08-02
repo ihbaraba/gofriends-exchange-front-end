@@ -85,7 +85,7 @@ class ExchangePage extends Component {
                         <div className="rightSide">
                             <Graphic
                                 pairId={id}
-                                dateFrom={"2018-01-01"}
+                                dateFrom={"2018-07-24"}
                                 dateTo={"2018-07-31"}
                                 take={1000}
                                 interval={interval}
