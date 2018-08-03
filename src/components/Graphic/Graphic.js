@@ -1,6 +1,6 @@
 import React from 'react';
 import Chart from './UpdatebleChart';
-import {getData} from "./utils"
+import {getData, getDataFromSocket} from "./utils"
 import {TIMEFRAMES} from "./../../constants/APIURLS.js"
 
 
@@ -17,6 +17,10 @@ class Graphic extends React.Component {
             this.simulationDuration
         );
         this.newDiapazone = this.newDiapazone.bind(this);
+        this.intervalInMiliseconds = this.intervalInMiliseconds.bind(this);
+        this.updatedLastCandleFromSocket = this.updatedLastCandleFromSocket.bind(this);
+        this.saveTheLastCandleAndCreateNewOne = this.saveTheLastCandleAndCreateNewOne.bind(this);
+        // this.updatedDateFromSocket = this.updatedDateFromSocket.bind(this);
     }
 
     componentDidMount() {
@@ -32,8 +36,8 @@ class Graphic extends React.Component {
         };
         // console.log("options = ", options);
         getData(options).then(data => {
-            // this.setState({data}, this.appendRandomData())
-            this.setState({data})
+            this.setState({data}, this.appendRealtimeLoadedData())
+            // this.setState({data})
         })
     }
     componentWillUnmount() {
@@ -81,33 +85,117 @@ class Graphic extends React.Component {
             }
     }
 
-    /* Just to simulate getting data from the server */
+    intervalInMiliseconds = (interval, period) => {
+        const MsInMin = 60 * 1000;
+        switch (interval) {
+            case "5min" : {return Math.ceil(period * 5 * MsInMin) }
+            case "15min" : {return Math.ceil(period * 15 * MsInMin) }
+            case "30min" : {return Math.ceil(period * 30 * MsInMin) }
+            case "1hr" : {return Math.ceil(period * 60 * MsInMin) }
+            case "2hr" : {return Math.ceil(period * 120 * MsInMin) }
+            case "4hr" : {return Math.ceil(period * 240 * MsInMin) }
+            case "1day" : {return Math.ceil(period * 1440 * MsInMin)}
+            default : return MsInMin
+        }
+    };
+
+    updatedLastCandleFromSocket(bid) {
+        const { data } = this.state;
+        const lastBar = data[data.length - 1];
+        data[data.length - 1] = {...data[data.length - 1], ...bid};
+        // console.log("last ", data.length, data[data.length - 1], " data =", data);
+
+        this.setState({data}
+            // , () => { console.log(lastBar,"updatedLastCandleFromSocket ", bid, data[data.length - 1] ); }
+        );
+    }
+
+    saveTheLastCandleAndCreateNewOne(bid) {
+        /* fixing the last candle */
+        const { data } = this.state;
+        const { interval, } = this.props;
+
+        data[data.length - 1] = {...data[data.length - 1], ...bid};
+
+        /* open a new candle witch will be updated by this.updatedLastCandleFromSocket function */
+        setInterval(() => {
+            const newFrame = { ...bid, date: d3.timeMinute.offset(bid.date, 5)};
+            data.push(newFrame);
+
+            this.setState({data}
+                , () => {
+                    // console.log(lastBar,"saveTheLastCandleAndCreateNewOne ", bid, data[data.length - 1] );
+                    // console.log(interval, this.intervalInMiliseconds(interval, 1), "setInterval ", bid.date);
+                }
+            );
+        },  this.intervalInMiliseconds(interval, 1));
+
+    }
+
+    // updatedDateFromSocket(bid) {
+    //     const { pairId = 1, interval, } = this.props;
+    //     const { data } = this.state;
+    //     const lastBar = data[data.length - 1];
+    //     let dataPoint;
+    //     // debugger;
+    //     data[data.length - 1] = {...data[data.length - 1], ...bid};
+    //     console.log("last ", data.length, data[data.length - 1], " data =", data);
+    //
+    //     this.setState({data}
+    //         , () => { console.log(lastBar,"setted state updatedDateFromSocket ", bid, data[data.length - 1] ); }
+    //     );
+    //
+    //     this.intervalId = setInterval(() => {
+    //
+    //         console.log("updatedDateFromSocket ", bid);
+    //
+    //
+    //         if (this.dataIndex < data.length) {
+    //             const newBar = data[this.dataIndex];
+    //             dataPoint = {
+    //                 ...newBar
+    //             };
+    //             this.dataIndex++;
+    //         } else {
+    //             const newBar = data[0];
+    //             dataPoint = {
+    //                 ...newBar
+    //             };
+    //             this.dataIndex = 0;
+    //         }
+    //         dataPoint.date = d3.timeDay.offset(lastBar.date, 1);
+    //         data.push(dataPoint);
+    //         this.setState({ data }
+    //         , () => { console.log("setted state updatedDateFromSocket ", bid); }
+    //             );
+    //         if (new Date() > this.simulationEnd) {
+    //             clearInterval(this.intervalId);
+    //         }
+    //     },
+    //         this.intervalInMiliseconds(interval, 1)
+    //         // intervalInMiliseconds(500, 1)
+    //     );
+    // }
+
+    /* Getting data from the server */
+    appendRealtimeLoadedData = () => {
     /* append as new candles */
-    appendRandomData = () => {
-        this.intervalId = setInterval(() => {
-            const { data } = this.state;
-            const lastBar = data[data.length - 1];
-            let dataPoint;
-            if (this.dataIndex < data.length) {
-                const newBar = data[this.dataIndex];
-                dataPoint = {
-                    ...newBar
-                };
-                this.dataIndex++;
-            } else {
-                const newBar = data[0];
-                dataPoint = {
-                    ...newBar
-                };
-                this.dataIndex = 0;
-            }
-            dataPoint.date = d3.timeDay.offset(lastBar.date, 1);
-            data.push(dataPoint);
-            this.setState({ data });
-            if (new Date() > this.simulationEnd) {
-                clearInterval(this.intervalId);
-            }
-        }, this.simulationInterval);
+        getDataFromSocket({
+            point: "timeframe_saved_",
+            id: this.props.pairId,
+            stopTime: 0,
+            callback: this.saveTheLastCandleAndCreateNewOne,
+            // callback: this.updatedDateFromSocket,
+        });
+        /* just updating last candle */
+        getDataFromSocket({
+            point: "timeframe_updated_",
+            id: this.props.pairId,
+            stopTime: 0,
+            callback: this.updatedLastCandleFromSocket,
+            // callback: this.updatedDateFromSocket,
+        });
+
     };
 
 

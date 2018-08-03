@@ -1,4 +1,5 @@
 import {timeParse} from "d3-time-format";
+import io from 'socket.io-client';
 
 function parseData(parse) {
     return function (d) {
@@ -32,4 +33,106 @@ export function getData({pairId = 1, APIURL = `//gofriends.ru/api/v1/quotations`
         } );
 
     return promiseMSFT;
+}
+
+export function getDataFromSocket({point, id, stopTime = 0, callback}) {
+    // console.log('state: ', this.state);
+    const socket = io("http://gofriends.ru:3001");
+
+    if (stopTime !== 0) {
+        console.time("Getting data from socket time took");
+    }
+
+    // socket.on('connect_error', (error) => {
+    //     console.error("Socket connection to server is fail", error);
+    //     alert("Socket connection to server is fail", error);
+    // });
+    // socket.on('connect_failed', (error) => {
+    //     console.error("Socket connection to server error", error);
+    //     alert("Socket connection to server error", error);
+    // });
+    // socket.on('disconnect', (reason) => {
+    //     if (reason === 'io server disconnect') {
+    //         // the disconnection was initiated by the server, you need to reconnect manually
+    //         socket.connect();
+    //     }
+    //     // else the socket will automatically try to reconnect
+    // });
+
+    socket.on(point + id, (bid) => {
+        // console.log(point + id, bid);
+        callback(bid);
+        //
+        // if (bid.completed) return;
+        //
+        // const line = {
+        //     amount: bid.amount,
+        //     price: bid.price,
+        //     Sum: bid.amount * bid.price,
+        //     quoteCurrency: bid.amount * bid.price,
+        //     key: bid.id,
+        //     completed: bid.completed
+        // };
+        //
+        // const {marketDepth} = this.state;
+        // const {buy, sell} = marketDepth;
+        // // console.log(marketDepth, buy, sell);
+        //
+        // if (bid.type === "sell") {
+        //     sell.unshift(line);
+        // }
+        // if (bid.type === "buy") {
+        //     buy.unshift(line);
+        // }
+        //
+        // this.setState({
+        //     marketDepth: {
+        //         ...marketDepth,
+        //         buy,
+        //         sell,
+        //     }
+        // });
+    });
+
+    // socket.on(point + id, (bid) => {
+    //     callback(bid);
+        //
+        // const {marketDepth} = this.state;
+        // const {buy, sell} = marketDepth;
+        //
+        // const resOfSearchInBuy = buy.findIndex(item => item.id === bid.id);
+        // const resOfSearchInSell = sell.findIndex(item => item.id === bid.id);
+        //
+        // const flagBuy = (resOfSearchInBuy !== -1);
+        // const flagSell = (resOfSearchInSell !== -1);
+        //
+        // console.log(point + id, bid.id, bid);
+        //
+        // if (flagSell && !bid.completed) {
+        //     const foundElement = sell[resOfSearchInSell];
+        //     sell[resOfSearchInSell] = {...foundElement, amount: foundElement["amount"] - bid.amount}
+        // }
+        // if (flagBuy && !bid.completed) {
+        //     const foundElement = buy[resOfSearchInBuy];
+        //     sell[resOfSearchInBuy] = {...foundElement, amount: foundElement["amount"] - bid.amount}
+        // }
+        //
+        // const filtredBuy = (flagBuy && bid.completed) ? buy.splice(resOfSearchInBuy, 1) : buy; // remove element
+        // const filtredSell = (flagSell && bid.completed) ? sell.splice(resOfSearchInSell, 1) : sell;
+        //
+        // this.setState({
+        //     marketDepth: {
+        //         buy: filtredSell,
+        //         sell: filtredBuy,
+        //     }
+        // });
+    // });
+
+    if (stopTime !== 0) {
+        setTimeout(() => {
+            // console.log("closing");
+            console.timeEnd("Getting data from socket time took");
+            socket.close();
+        }, stopTime);
+    }
 }

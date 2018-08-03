@@ -110,7 +110,8 @@ class OHLCChartWithElderImpulseIndicator extends React.Component {
                     <MouseCoordinateY
                         at="right"
                         orient="right"
-                        displayFormat={format(".2f")}/>
+                        displayFormat={format(".2f")}
+                    />
 
                     <LineSeries yAccessor={ema12.accessor()} stroke={ema12.stroke()}/>
 

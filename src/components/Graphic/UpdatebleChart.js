@@ -47,6 +47,7 @@ const macdAppearance = {
         divergence: "#4682B4"
     }
 };
+const axisColor = "#EEEEEE";
 
 class CandleStickChartPanToLoadMore extends React.Component {
     constructor(props) {
@@ -99,12 +100,15 @@ class CandleStickChartPanToLoadMore extends React.Component {
         ]);
         /* SERVER - START */
         // const dataToCalculate = inputData.slice(-LENGTH_TO_SHOW - maxWindowSize);
+        // const dataToCalculate = inputData.slice( - maxWindowSize);
         const dataToCalculate = inputData;
 
         const calculatedData = ema26(
             ema12(macdCalculator(smaVolume50(dataToCalculate)))
         );
-        const indexCalculator = discontinuousTimeScaleProviderBuilder().indexCalculator();
+        const indexCalculator = discontinuousTimeScaleProviderBuilder()
+            // .initialIndex(initialIndex)
+            .indexCalculator();
 
         const { index } = indexCalculator(calculatedData);
 
@@ -296,7 +300,9 @@ class CandleStickChartPanToLoadMore extends React.Component {
                         showTicks={false}
                         outerTickSize={0}
                     />
-                    <YAxis axisAt="right" orient="right" ticks={5} />
+                    {/*<YAxis axisAt="right" orient="right" ticks={5} />*/}
+                    <XAxis axisAt="bottom" orient="bottom" showTicks={false} tickStroke={axisColor} outerTickSize={0} stroke={axisColor}/>
+                    <YAxis axisAt="right" orient="right" ticks={2} tickStroke={axisColor} />
 
                     <MouseCoordinateY
                         at="right"
@@ -381,19 +387,17 @@ class CandleStickChartPanToLoadMore extends React.Component {
                     origin={(w, h) => [0, h - 150]}
                     padding={{ top: 10, bottom: 10 }}
                 >
-                    <XAxis axisAt="bottom" orient="bottom" />
-                    <YAxis axisAt="right" orient="right" ticks={2} />
+                    <XAxis axisAt="bottom" orient="bottom" showTicks={true} tickStroke={axisColor} outerTickSize={0} stroke={axisColor}/>
+                    <YAxis axisAt="right" orient="right" ticks={2} tickStroke={axisColor}/>
 
                     <MouseCoordinateX
                         at="bottom"
                         orient="bottom"
-                        displayFormat={timeFormat("%Y-%m-%d")}
-                    />
+                        displayFormat={timeFormat("%Y-%m-%d")}/>
                     <MouseCoordinateY
                         at="right"
                         orient="right"
-                        displayFormat={format(".2f")}
-                    />
+                        displayFormat={format(".2f")}/>
 
                     <MACDSeries yAccessor={d => d.macd} {...macdAppearance} />
                     <MACDTooltip
@@ -403,7 +407,7 @@ class CandleStickChartPanToLoadMore extends React.Component {
                         appearance={macdAppearance}
                     />
                 </Chart>
-                <CrossHairCursor />
+                <CrossHairCursor stroke={axisColor}/>
             </ChartCanvas>
         );
     }
