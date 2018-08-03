@@ -61,7 +61,7 @@ class Login extends Component {
             <div>
                 <Header/>
                 <div style={{clear: "both"}}>
-                    <h1 className="sign">SIGN IN TO YOUR ACCOUNT</h1>
+                    <h1 className="sign">Sign in to you account</h1>
                 </div>
                 <div className="featureBanner form2col">
                     <div className="formWrapper">
@@ -76,13 +76,11 @@ class Login extends Component {
                             <form onSubmit={this.handleSubmit}>
                                 <fieldset className="aboveCaptcha">
                                     <div>
-                                        <label>
-                                            Email:
-                                        </label>
                                         <input
                                             className="userPassInput"
                                             type="email"
                                             name="username"
+                                            placeholder="Email"
                                             id="username"
                                             value={this.state.email}
                                             onChange={this.handleEmail}
@@ -90,27 +88,27 @@ class Login extends Component {
                                         />
                                     </div>
                                     <div>
-                                        <label>
-                                            Password:
-                                        </label>
                                         <input
                                             className="userPassInput"
                                             type="password"
                                             name="password"
                                             id="password"
+                                            placeholder="Password"
                                             value={this.state.password}
                                             onChange={this.handlePassword}
                                             required
                                         />
                                     </div>
                                 </fieldset>
-                                <button className="signUpButton" type="submit" name="login">
+                                <br/>
+
+                                <button className="ant-btn fixed-width-btn" type="submit" name="login">
                                     Sign in
                                 </button>
                             </form>
 
                             {/*<a href="/resetPassword" className="standard forgot">Forgot your password?</a>*/}
-                            <NavLink to="/resetPassword" className="forgot">Forgot your password</NavLink>
+                            <NavLink to="/resetPassword" className="forgot colored-link">Forgot your password</NavLink>
                         </div>
 
                         <div className="column2">
@@ -118,7 +116,7 @@ class Login extends Component {
                             <p>Create one to start trading on the world's most active digital asset exchange.</p>
                             <NavLink to="/signup">
                                 <button
-                                    className="signUpButton"
+                                    className="ant-btn fixed-width-btn"
                                     type="submit"
                                     name="createAccount">
                                     Create Your Account

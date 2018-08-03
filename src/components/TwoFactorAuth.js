@@ -23,7 +23,7 @@ class ExchangePage extends Component {
             .then(response => {
                 console.log(response.data.qrPath);
                 this.setState({
-                    imgSrc:  `http://gofriends.ru${response.data.qrPath}`,
+                    imgSrc: `http://gofriends.ru${response.data.qrPath}`,
                     base32: response.data.secret.base32
                 });
             }).catch(error => {
@@ -77,25 +77,32 @@ class ExchangePage extends Component {
             <div>
                 <Header/>
                 <div style={{clear: "both"}}>
-                    <h1 className="sign">TWO-FACTOR AUTHENTICATION</h1>
+                    <h1 className="sign">Two-factor authentication (2FA) is disabled</h1>
                 </div>
 
                 <div className="featureBanner form2col">
                     <div className="formWrapper">
 
                         <div className="column1">
-
-                            <h2>Two Factor Authentication</h2>
-                            <p>For extra account security, we strongly recommend you enable two-factor authentication
-                                (2FA).
+                            <p className="colored-text">Two Factor Authentication Disabled<br/>
+                                For extra account security, we strongly recommend you enable two-factor authentication
+                                (2FA). GoFriends uses Google Authenticator for 2FA.
                             </p>
+                            <br/>
+                            <br/>
+                            <a className="colored-link" href="#">
+                                What is 2FA and why do I need it?
+                            </a>
+                            <a className="colored-link" href="#">
+                                How do I to set up 2FA?
+                            </a>
+                            <br/>
+                            <br/>
                             {/*<p><a href="https://poloniex.freshdesk.com/support/articles/1000225337">What is 2FA and why*/}
                             {/*do I need it?</a><br><a*/}
                             {/*href="https://poloniex.freshdesk.com/support/articles/1000225338">How do I to set up*/}
                             {/*2FA?</a></p>*/}
 
-
-                            <hr/>
                             <form onSubmit={this.handleSubmit}>
                                 <table>
                                     <tbody>
@@ -127,14 +134,15 @@ class ExchangePage extends Component {
 
                                     <tr>
                                         <td colspan="2">
-                                            <p><strong>Before turning on 2FA, write down and put it in a safe
-                                                place.</strong> If your
+                                            <p className="colored-text"><p className="bold-text">Before turning on 2FA, write down and put it in a safe
+                                                place.</p> If your
                                                 phone gets lost, stolen, or erased, you will need this key to get
                                                 back into your account!</p>
-                                            <p>
+                                            <p className="colored-text">
                                                 <input
                                                     type="checkbox"
                                                     name="terms"
+                                                    id="approve"
                                                     required
                                                 /> I have backed up my
                                                 16-digit key
@@ -148,7 +156,7 @@ class ExchangePage extends Component {
                                     <tr>
                                         <td></td>
                                         <td>
-                                            <button className="signUpButton small" type="submit"
+                                            <button className="transparent-button" type="submit"
                                                     name="login">
                                                 Enable 2FA
                                             </button>
@@ -163,17 +171,19 @@ class ExchangePage extends Component {
                         <div className="column2">
 
                             <br/>
+                            <div id="qrCode">
+                                <img src={this.state.imgSrc} alt="qrcode"/>
+                            </div>
                             <strong>16-Digit Key:
                                 <span className="valueNegative">
                                     {this.state.base32}
                                 </span>
                             </strong>
+                            <a className="colored-link" href="#">
+                                Print a backup of your recovery key.
+                            </a>
                             <br/>
-                            <br/>
-                            <div id="qrCode" >
-                                <img src={this.state.imgSrc} alt="qrcode"/>
-                            </div>
-                            <p>NOTE: This code changes each time you enable 2FA. If you disable 2FA
+                            <p className="colored-text">NOTE: This code changes each time you enable 2FA. If you disable 2FA
                                 this code will no longer be valid.
                             </p>
                         </div>
