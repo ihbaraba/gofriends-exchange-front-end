@@ -1,9 +1,7 @@
 import React from 'react';
 import Chart from './UpdatebleChart';
-// import Chart from './Chart';
 import {getData} from "./utils"
 import {TIMEFRAMES} from "./../../constants/APIURLS.js"
-import {timeParse} from "d3-time-format";
 
 
 import * as d3 from "d3";
@@ -113,60 +111,43 @@ class Graphic extends React.Component {
     };
 
 
-     newDiapazone({rowsToDownload, start, end,}){
-
-        const interval2Min = interval => {
+     async newDiapazone({rowsToDownload, start, end, data, callback}){
+        const intervalInDays = (interval, period) => {
             switch (interval) {
-                case "5min" : {return 5}
-                case "15min" : {return 15}
-                case "30min" : {return 30}
-                case "1hr" : {return 60}
-                case "2hr" : {return 120}
-                case "4hr" : {return 240}
-                case "1day" : {return 24 * 60}
+                case "5min" : {return Math.ceil(period * 5 / 60 / 24) }
+                case "15min" : {return Math.ceil(period * 15 / 60 / 24) }
+                case "30min" : {return Math.ceil(period * 30 / 60 / 24) }
+                case "1hr" : {return Math.ceil(period * 60 / 60 / 24) }
+                case "2hr" : {return Math.ceil(period * 120 / 60 / 24) }
+                case "4hr" : {return Math.ceil(period * 240 / 60 / 24) }
+                case "1day" : {return Math.ceil(period * 1)}
                 default : return 1
             }
         };
-        // return new Promise(response => response);
-        return  new Promise(() => {
-        // return  async () => {
+        return  new Promise((resolve) => {
+            const format = d3.timeFormat("%Y-%m-%d");
             const { pairId = 1, dateFrom, dateTo, take, interval, appendFake } = this.props;
-            const { data } = this.state;
-            const lastBar = data[data.length - 1];
+            const lastBar = data[Math.min(Math.abs(start), data.length-1)];
+            const offsetData = d3.timeDay.offset(lastBar.date, (-1) * intervalInDays(interval, rowsToDownload) ) ;
 
-            const offsetData = d3.timeMinute.offset(lastBar.date, (-1) * rowsToDownload * interval2Min(interval) ) ;
-
-            // const format = d3.time.format("%Y-%m-%dT%H:%M:%S.%LZ");
-            const format = timeParse("%Y-%m-%dT%H:%M:%S.%LZ");
-            // const stringOffset = format(new Date(offset)); // returns a string
-            // const stringOffset = format(offsetData); // returns a string
-            const stringOffset = offsetData; // returns a string
-
-            console.log("rows to download", rowsToDownload, start, end, interval, dateFrom, dateTo);
-            // console.log(lastBar, "Offset to",offsetData, stringOffset);
-            console.log(lastBar.date, offsetData);
+            // console.log(format(lastBar.date), "Offset to",offsetData, stringOffset, " on days", intervalInDays(interval, rowsToDownload));
+            const stringOffset = format(offsetData); // returns a string
 
             const options = {
                 pairId: pairId,
                 APIURL: TIMEFRAMES,
                 dateFrom: stringOffset,
-                dateTo: dateFrom,
+                dateTo: format(lastBar.date),
                 take,
                 interval,
                 appendFake
             };
-            getData(options).then(data => {
-                console.log(data);
-                // this.setState({data}
-                //     , ()=> { console.log("Chart data updated. new Id=", nextEndPoint)}
-                // )
-                return data
+            return getData(options).then(data => {
+                callback(data);
+                // return data
             });
-            console.log("end of newDiapazone functionality");
         });
-        // };
-
-}
+    }
 
     render() {
         if (this.state == null) {

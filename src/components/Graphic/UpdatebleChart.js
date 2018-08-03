@@ -29,7 +29,7 @@ import {
 } from "react-stockcharts/lib/tooltip";
 import { ema, sma, macd } from "react-stockcharts/lib/indicator";
 import { fitWidth } from "react-stockcharts/lib/helper";
-import { last } from "react-stockcharts/lib/utils";
+import { head, last } from "react-stockcharts/lib/utils";
 
 function getMaxUndefined(calculators) {
     return calculators
@@ -98,16 +98,18 @@ class CandleStickChartPanToLoadMore extends React.Component {
             smaVolume50
         ]);
         /* SERVER - START */
-        const dataToCalculate = inputData.slice(-LENGTH_TO_SHOW - maxWindowSize);
+        // const dataToCalculate = inputData.slice(-LENGTH_TO_SHOW - maxWindowSize);
+        const dataToCalculate = inputData;
 
         const calculatedData = ema26(
             ema12(macdCalculator(smaVolume50(dataToCalculate)))
         );
         const indexCalculator = discontinuousTimeScaleProviderBuilder().indexCalculator();
 
-        // console.log(inputData.length, dataToCalculate.length, maxWindowSize)
         const { index } = indexCalculator(calculatedData);
+
         /* SERVER - END */
+        // console.log(inputData.length, dataToCalculate.length, maxWindowSize, index);
 
         const xScaleProvider = discontinuousTimeScaleProviderBuilder().withIndex(
             index
@@ -117,10 +119,11 @@ class CandleStickChartPanToLoadMore extends React.Component {
             xScale,
             xAccessor,
             displayXAccessor
-        } = xScaleProvider(calculatedData.slice(-LENGTH_TO_SHOW));
+        } = xScaleProvider(calculatedData);
+        // } = xScaleProvider(calculatedData.slice(-LENGTH_TO_SHOW));
 
         // console.log(head(linearData), last(linearData))
-        // console.log(linearData.length)
+        // console.log(linearData.length);
 
         this.state = {
             ema26,
@@ -157,9 +160,8 @@ class CandleStickChartPanToLoadMore extends React.Component {
             smaVolume50
         ]);
         /* SERVER - START */
-        const dataToCalculate = newData.slice(
-            -this.canvas.fullData.length - maxWindowSize
-        );
+        // const dataToCalculate = newData.slice(-this.canvas.fullData.length - maxWindowSize);
+        const dataToCalculate = newData;
 
         const calculatedData = ema26(
             ema12(macdCalculator(smaVolume50(dataToCalculate)))
@@ -180,7 +182,8 @@ class CandleStickChartPanToLoadMore extends React.Component {
             xScale,
             xAccessor,
             displayXAccessor
-        } = xScaleProvider(calculatedData.slice(-this.canvas.fullData.length));
+        } = xScaleProvider(calculatedData);
+        // } = xScaleProvider(calculatedData.slice(-this.canvas.fullData.length));
 
         // console.log(head(linearData), last(linearData))
         // console.log(linearData.length)
@@ -211,61 +214,46 @@ class CandleStickChartPanToLoadMore extends React.Component {
         } = this.state;
         const { data: inputData, newDiapazone } = this.props;
 
-        if (inputData.length === prevData.length) return;
-
         const rowsToDownload = end - Math.ceil(start);
 
+        await newDiapazone({
+            rowsToDownload, start: Math.ceil(start), end, data: this.state.data,
+            callback: (newData) => {
 
-        const maxWindowSize = getMaxUndefined([
-            ema26,
-            ema12,
-            macdCalculator,
-            smaVolume50
-        ]);
+                const dataToCalculate = inputData.concat(newData);
 
-        /* SERVER - START */
-        const dataToCalculate = inputData.slice(
-            -rowsToDownload - maxWindowSize - prevData.length,
-            -prevData.length
-        );
+                const calculatedData = ema26(
+                    ema12(macdCalculator(smaVolume50(dataToCalculate)))
+                );
+                const indexCalculator = discontinuousTimeScaleProviderBuilder()
+                    .initialIndex(Math.ceil(start))
+                    .indexCalculator();
+                const { index } = indexCalculator(
+                    calculatedData.slice(-rowsToDownload).concat(prevData)
+                );
 
-        const newData = await newDiapazone({rowsToDownload, start: Math.ceil(start), end,});
-        console.log(newData);
+                const xScaleProvider = discontinuousTimeScaleProviderBuilder()
+                    .initialIndex(Math.ceil(start))
+                    .withIndex(index);
 
-        const calculatedData = ema26(
-            ema12(macdCalculator(smaVolume50(dataToCalculate)))
-        );
-        const indexCalculator = discontinuousTimeScaleProviderBuilder()
-            .initialIndex(Math.ceil(start))
-            .indexCalculator();
-        const { index } = indexCalculator(
-            calculatedData.slice(-rowsToDownload).concat(prevData)
-        );
-        /* SERVER - END */
+                const {
+                    data: linearData,
+                    xScale,
+                    xAccessor,
+                    displayXAccessor
+                } = xScaleProvider(calculatedData.slice(-rowsToDownload).concat(prevData));
 
-        const xScaleProvider = discontinuousTimeScaleProviderBuilder()
-            .initialIndex(Math.ceil(start))
-            .withIndex(index);
-
-        const {
-            data: linearData,
-            xScale,
-            xAccessor,
-            displayXAccessor
-        } = xScaleProvider(calculatedData.slice(-rowsToDownload).concat(prevData));
-
-        // console.log(linearData.length)
-        setTimeout(() => {
-            // simulate a lag for ajax
-            this.setState({
-                data: linearData,
-                xScale,
-                xAccessor,
-                displayXAccessor,
-                initialIndex: Math.ceil(start)
-            });
-        }, 300);
+                    this.setState({
+                        data: linearData,
+                        xScale,
+                        xAccessor,
+                        displayXAccessor,
+                        initialIndex: Math.ceil(start)
+                    });
+            }
+        });
     }
+
     render() {
         const { type, width, ratio } = this.props;
         const {
@@ -420,10 +408,6 @@ class CandleStickChartPanToLoadMore extends React.Component {
         );
     }
 }
-
-/*
-
-*/
 
 CandleStickChartPanToLoadMore.propTypes = {
     data: PropTypes.array.isRequired,
