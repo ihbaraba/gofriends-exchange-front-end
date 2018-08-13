@@ -3,6 +3,9 @@ import Header from './Header';
 import Footer from './Footer';
 import NavLink from './NavLink';
 import API from './api';
+import {connect} from "react-redux";
+import {simpleAction} from "../actions/simpleAction";
+import {login_request} from "../actions/UserActions";
 // import '../App.css';
 
 class Login extends Component {
@@ -29,6 +32,9 @@ class Login extends Component {
     };
 
     handleSubmit = (event) => {
+        console.log("handleSubmit this.props=", this.props);
+        this.props.login_request({request: "sent"});
+
         event.preventDefault();
         const user = {
             email: this.state.email,
@@ -131,5 +137,15 @@ class Login extends Component {
         )
     }
 }
+const mapStateToProps = state => ({
+    ...state
+});
 
-export default Login;
+const mapDispatchToProps = dispatch => ({
+    login_request: () => dispatch(login_request()),
+    simpleAction: () => dispatch(simpleAction())
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);
+
+// export default Login;

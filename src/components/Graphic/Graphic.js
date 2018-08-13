@@ -34,9 +34,11 @@ class Graphic extends React.Component {
             interval,
             appendFake
         };
-        // console.log("options = ", options);
+        console.log("options = ", options);
         getData(options).then(data => {
-            this.setState({data}, this.appendRealtimeLoadedData())
+            this.setState({data}
+            , this.appendRealtimeLoadedData()
+            )
             // this.setState({data})
         })
     }
@@ -58,6 +60,8 @@ class Graphic extends React.Component {
                 interval: nextInterval,
                 appendFake,
             };
+            console.log("options = ", options);
+
             getData(options).then(data => {
                 this.setState({data}
                 // , ()=> { console.log("Chart data updated. new Id=", nextEndPoint)}
@@ -132,51 +136,6 @@ class Graphic extends React.Component {
 
     }
 
-    // updatedDateFromSocket(bid) {
-    //     const { pairId = 1, interval, } = this.props;
-    //     const { data } = this.state;
-    //     const lastBar = data[data.length - 1];
-    //     let dataPoint;
-    //     // debugger;
-    //     data[data.length - 1] = {...data[data.length - 1], ...bid};
-    //     console.log("last ", data.length, data[data.length - 1], " data =", data);
-    //
-    //     this.setState({data}
-    //         , () => { console.log(lastBar,"setted state updatedDateFromSocket ", bid, data[data.length - 1] ); }
-    //     );
-    //
-    //     this.intervalId = setInterval(() => {
-    //
-    //         console.log("updatedDateFromSocket ", bid);
-    //
-    //
-    //         if (this.dataIndex < data.length) {
-    //             const newBar = data[this.dataIndex];
-    //             dataPoint = {
-    //                 ...newBar
-    //             };
-    //             this.dataIndex++;
-    //         } else {
-    //             const newBar = data[0];
-    //             dataPoint = {
-    //                 ...newBar
-    //             };
-    //             this.dataIndex = 0;
-    //         }
-    //         dataPoint.date = d3.timeDay.offset(lastBar.date, 1);
-    //         data.push(dataPoint);
-    //         this.setState({ data }
-    //         , () => { console.log("setted state updatedDateFromSocket ", bid); }
-    //             );
-    //         if (new Date() > this.simulationEnd) {
-    //             clearInterval(this.intervalId);
-    //         }
-    //     },
-    //         this.intervalInMiliseconds(interval, 1)
-    //         // intervalInMiliseconds(500, 1)
-    //     );
-    // }
-
     /* Getting data from the server */
     appendRealtimeLoadedData = () => {
     /* append as new candles */
@@ -185,19 +144,15 @@ class Graphic extends React.Component {
             id: this.props.pairId,
             stopTime: 0,
             callback: this.saveTheLastCandleAndCreateNewOne,
-            // callback: this.updatedDateFromSocket,
         });
         /* just updating last candle */
-        getDataFromSocket({
-            point: "timeframe_updated_",
-            id: this.props.pairId,
-            stopTime: 0,
-            callback: this.updatedLastCandleFromSocket,
-            // callback: this.updatedDateFromSocket,
-        });
-
+        // getDataFromSocket({
+        //     point: "timeframe_updated_",
+        //     id: this.props.pairId,
+        //     stopTime: 0,
+        //     callback: this.updatedLastCandleFromSocket,
+        // });
     };
-
 
      async newDiapazone({rowsToDownload, start, end, data, callback}){
         const intervalInDays = (interval, period) => {
@@ -230,6 +185,8 @@ class Graphic extends React.Component {
                 interval,
                 appendFake
             };
+            console.log("options = ", options);
+
             return getData(options).then(data => {
                 callback(data);
                 // return data
@@ -241,6 +198,7 @@ class Graphic extends React.Component {
         if (this.state == null) {
             return <div>Loading...</div>
         }
+        console.log("Graphics props", this.props);
         return (
             <Chart type="hybrid" data={this.state.data} newDiapazone={this.newDiapazone}/>
         )

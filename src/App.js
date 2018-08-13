@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import {BrowserRouter as Router, Route, Switch, Redirect} from 'react-router-dom';
-import { Provider } from 'react-redux'
-import configureStore from './store/configureStore'
+import { connect } from 'react-redux'
+// import { Provider } from 'react-redux'
+// import configureStore from './store/configureStore'
 import WelcomePage from './components/WelcomePage';
 import Login from './components/Login';
 import Registration from './components/Registration';
@@ -21,15 +22,16 @@ import ChangePassword from './components/ChangePassword';
 import Balances from './components/Balances';
 import Orders from './components/Orders';
 import LoginHistory from './components/LoginHistory';
+// import {changePair} from "./actions/ExchangeActions";
+import {simpleAction} from "./actions/simpleAction";
+// import {bindActionCreators} from "redux/index";
 
-const store = configureStore();
+// const store = configureStore();
 
 class App extends Component {
-
-
     render() {
+            {/*<Provider store={store}>*/}
         return (
-            <Provider store={store}>
             <Router>
                 <div className="App">
                     <Switch>
@@ -56,9 +58,26 @@ class App extends Component {
                     </Switch>
                 </div>
             </Router>
-            </Provider>
         );
+            // </Provider>
     }
 }
+//
+// const mapStateToProps = state => ({
+//         ...state
+//     });
+//
+// const mapDispatchToProps = dispatch => ({
+//     simpleAction: () => dispatch(simpleAction())
+//         // actions: bindActionCreators(changePair, dispatch),
+//         // dispatch: (action) => {
+//         //     console.log("test dispatch")
+//             // action();
+//         // },
+//         // changePair: () => {
+//         //     changePair();
+//         // }
+// });
 
+// export default connect(mapStateToProps, mapDispatchToProps)(App);
 export default App;

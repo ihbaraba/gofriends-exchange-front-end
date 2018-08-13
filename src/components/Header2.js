@@ -45,7 +45,7 @@ const Header2 = () => {
                         </span>
                     </li>
                     <li className="desktopNav hideAlert active">
-                        <NavLink to="/profile">
+                        <NavLink to="/signup">
                         <span className="title topLevel">
                             <i className="fa fa-user"></i>
                             <i className="fa fa-caret-down dim"></i>

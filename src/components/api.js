@@ -1,5 +1,6 @@
 import axios from 'axios';
+import {current_server} from "./../constants/APIURLS.js"
 
 export default axios.create({
-    baseURL: `http://gofriends.ru`
+    baseURL: current_server
 });

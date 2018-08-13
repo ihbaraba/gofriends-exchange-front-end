@@ -205,6 +205,7 @@ class CandleStickChartPanToLoadMore extends React.Component {
         });
     };
     componentWillReceiveProps(nextProps) {
+        console.log("===nextProps.data===", nextProps.data);
         this.append(nextProps.data);
     }
     async handleDownloadMore(start, end) {
@@ -270,7 +271,10 @@ class CandleStickChartPanToLoadMore extends React.Component {
             xAccessor,
             displayXAccessor
         } = this.state;
-
+/*
+Zoom and Pan description
+http://rrag.github.io/react-stockcharts/documentation.html#/zoom_and_pan
+*/
         return (
             <ChartCanvas
                 ratio={ratio}
@@ -287,6 +291,8 @@ class CandleStickChartPanToLoadMore extends React.Component {
                 ref={node => {
                     this.saveCanvas(node);
                 }}
+                zoomEvent={false}
+                clamp={false}
             >
                 <Chart
                     id={1}

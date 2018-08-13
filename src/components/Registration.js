@@ -4,10 +4,15 @@ import Footer from './Footer';
 import '../App.css';
 // import '../styles/style.css';
 import API from './api';
+import {getData, sendRequest} from "./Graphic/utils";
+import {REGISTER, COUNTRIES, ORDERS} from "../constants/APIURLS";
 
 class Registration extends Component {
     constructor(props) {
         super(props);
+
+        this.handleChangeCountry = this.handleChangeCountry.bind(this);
+        this.handleUserName = this.handleUserName.bind(this);
 
         this.state = {
             options: [{
@@ -15,47 +20,56 @@ class Registration extends Component {
                 value: ''
             }
             ],
+            countries: [],
+            countryId: 1,
+            country: "select country",
+            userName: '',
             email: '',
             password: '',
             confirmPassword: '',
             value: ''
-        }
-        ;
+        };
     }
 
     componentDidMount() {
         this.loadCountries();
-
     }
 
     loadCountries = () => {
-        const url = '/api/countries';
-        API.get(url)
-            .then(response => {
-                    this.setState({
-                        options: response.data
-                    })
-                }
+
+        const options = {
+            APIURL: COUNTRIES,
+        };
+        getData(options).then(countries => {
+            const countries2state = countries.reduce((countries, item) => ({...countries, [item.name]: item}), {});
+            // console.log("countries2state=", countries2state, Object.keys(countries2state));
+            this.setState({countries: countries2state}
+            // , ()=> { console.log("countries=", countries)}
             )
-        ;
-    };
-
-    // onChange = (e) => {
-    //     let state = this.state;
-    //     state[e.target.name] = e.target.value;
-    //
-    //     this.setState(state);
-    // }
-
-    handleChange = (event) => {
-        this.setState({
-            value: event.target.value
         });
     };
 
+    handleChangeCountry = (e) => {
+        const { countries } = this.state;
+        // console.log("onChange country", e.target.value, countries[e.target.value]["id"]);
+        let state = this.state;
+        state["country"] = e.target.value;
+        state["countryId"] = countries[e.target.value]["id"];
+        this.setState(state
+            // , ()=> { console.log("onChange country", this.state); }
+            );
+    };
+
     handleEmail = (event) => {
+        console.log(event.target.value);
         this.setState({
             email: event.target.value
+        });
+    };
+
+    handleUserName = (event) => {
+        this.setState({
+            userName: event.target.value
         });
     };
 
@@ -73,22 +87,16 @@ class Registration extends Component {
 
     handleSubmit = (event) => {
         event.preventDefault();
-        // console.log(this.state.value);
-        const user = {
-            email: this.state.email,
-            password: this.state.password,
-            country_code: this.state.value
-        };
-
-        API.post(`/api/auth/sign_up`, user )
-            .then(response => {
-                localStorage.setItem('token', response.data.token);
-                console.log(response);
-                window.location = "/activate"
-            })
-            .catch(error => {
-                alert(error.response.data.errors)
-            });
+        // console.log(this.state);
+        sendRequest({
+            rout: REGISTER,
+            options: {
+                "email": this.state.email,
+                "username": this.state.userName,
+                "password": this.state.password,
+                "countryId": this.state.countryId,
+            }
+        })
     };
 
     validateForm = () => {
@@ -99,10 +107,8 @@ class Registration extends Component {
         );
     };
 
-
     render() {
-        const {options, value} = this.state;
-
+        const {countries: options, country} = this.state;
         return (
             <div>
                 <Header/>
@@ -119,12 +125,23 @@ class Registration extends Component {
                                 <form onSubmit={this.handleSubmit}>
                                     <fieldset className="aboveCaptcha">
                                         <div>
+                                            <label>User name</label>
+                                            <input
+                                                className="userPassInput"
+                                                type="userName"
+                                                name="username"
+                                                value={this.state.userName}
+                                                onChange={this.handleUserName}
+                                                id="userNAme"
+                                                required/>
+                                        </div>
+                                        <div style={{marginBottom: "2rem",}}>
                                             <label>Country:</label>
-                                            <select onChange={this.handleChange} value={value}>
-                                                <option value="" disabled>Select Country</option>
-                                                {options.map(item => (
-                                                    <option key={item.code} value={item.code}>
-                                                        {item.value}
+                                            <select key={country} onChange={this.handleChangeCountry} value={country} style={{color: "#222",}}>
+                                                <option value={country} >{country}</option>
+                                                {Object.keys(options).map(item => (
+                                                    <option key={options[item]["code"]} value={options[item]["name"]} code={item.code} id={options[item]["id"]}>
+                                                        {options[item]["name"]}
                                                     </option>
                                                 ))}
                                             </select>
@@ -134,14 +151,14 @@ class Registration extends Component {
                                             <input
                                                 className="userPassInput"
                                                 type="email"
-                                                name="username"
+                                                name="email"
                                                 value={this.state.email}
                                                 onChange={this.handleEmail}
                                                 id="email"
                                                 required/>
                                         </div>
-                                        <div><
-                                            label>Password:</label>
+                                        <div>
+                                            <label>Password:</label>
                                             <input
                                                 className="userPassInput"
                                                 type="password"

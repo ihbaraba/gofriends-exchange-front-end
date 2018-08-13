@@ -1,5 +1,5 @@
 import React from 'react';
-import initialState from "./../../store/initialState";
+import initialState from "../../store/initialState";
 
 
 const translateProps = (props) => {

@@ -12,12 +12,14 @@ import Graphic from './Graphic/Graphic'
 import MarketDepth from './MarketDepth'
 import '../App.css';
 import CoinsList from "./CoinsList";
-import initialState from "./../store/initialState";
+import initialState from "../store/initialState";
 import {sendOrder} from "./../utils";
 import { Radio } from "antd";
 // import * as ExchangeActions from '../actions/ExchangeActions'
 // import ExchangePageLogic from './Logics/ExchangePageLogic';
 import "antd/lib/radio/style/css";
+import {ORDERS} from "./../constants/APIURLS.js"
+
 
 class ExchangePage extends Component {
 
@@ -36,7 +38,7 @@ class ExchangePage extends Component {
     firePostToServer = ({price, amount, loanRate, type}) => {
       console.log("firePostToServer", price, amount, loanRate);
       sendOrder({
-          rout: "http://gofriends.ru:3000/api/v1/orders",
+          rout: ORDERS,
           pairId: this.state.pair.id,
           type,
           price, amount,
@@ -55,7 +57,7 @@ class ExchangePage extends Component {
     };
 
     render() {
-        // console.log(this.state);
+        console.log(this.state);
         const {pair: { first, second, id }, interval, appendFake, } = this.state;
         return (
             <div>
@@ -93,13 +95,13 @@ class ExchangePage extends Component {
                             </div>
                         </div>
                         <div className="side">
-                            <CoinsList setCurentCoinsPair2State={this.setCurrentCoinsPair2State}/>
+                            {/*<CoinsList setCurentCoinsPair2State={this.setCurrentCoinsPair2State}/>*/}
                         </div>
                     </div>
                     <div className="centerArea-second"  >
                         <div className="main-content">
-                            <MarketDepth currentPair={this.state.currentPair}/>
-                            <Orders {...this.state.pair} price={52} amount={1} loanRate={2} firePostToServer={this.firePostToServer}/>
+                            {/*<MarketDepth currentPair={this.state.currentPair}/>*/}
+                            {/*<Orders {...this.state.pair} price={52} amount={1} loanRate={2} firePostToServer={this.firePostToServer}/>*/}
                         </div>
                         <div className="box notices">
                             <div className="head">
@@ -187,27 +189,28 @@ class ExchangePage extends Component {
     }
 }
 
-ExchangePage.propTypes = {
-    dispatch: PropTypes.func.isRequired
-}
+// ExchangePage.propTypes = {
+//     dispatch: PropTypes.func.isRequired
+// }
 
-function mapStateToProps(state) {
-    return {
-        state
-    }
-}
+// function mapStateToProps(state) {
+//     return {
+//         state
+//     }
+// }
+//
+// function mapDispatchToProps(dispatch) {
+//     return {
+//         actions: bindActionCreators(changePair, dispatch),
+//         dispatch: (action) => {
+//             action();
+//             console.log("test dispatch")
+//         },
+//         changePair: () => {
+//             changePair();
+//         }
+//     }
+// }
 
-function mapDispatchToProps(dispatch) {
-    return {
-        actions: bindActionCreators(changePair, dispatch),
-        dispatch: (action) => {
-            action();
-            console.log("test dispatch")
-        },
-        changePair: () => {
-            changePair();
-        }
-    }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(ExchangePage)
+// export default connect(mapStateToProps, mapDispatchToProps)(ExchangePage)
+export default ExchangePage

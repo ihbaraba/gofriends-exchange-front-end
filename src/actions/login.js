@@ -1,3 +1,19 @@
+import {
+    LOGIN_REQUEST,
+    LOGIN_FAIL,
+    LOGIN_SUCCESS,
+    LOGOUT_SUCCESS
+} from '../constants'
+
+export const loginAction = () => dispatch => {
+    dispatch({
+        type: LOGIN_REQUEST,
+        payload: {
+                authenticated: true
+            }
+    })
+}
+
 //
 // const LOGIN = 'LOGIN';
 // const LOGOUT = 'LOGOUT';

@@ -7,17 +7,16 @@ import {
     LOGOUT_SUCCESS
 } from '../constants'
 
-export function login(payload) {
-    // TODO
-    return {
-        type: LOGIN_REQUEST
-    }
-}
-
 export function logout() {
     return {
         type: LOGOUT_SUCCESS
     }
 }
-
+export const login_request = () =>  dispatch => {
+    console.log("login_request this.props", this.props);
+    dispatch({
+        type: 'LOGIN_REQUEST',
+        payload: 'result_of_login_request'
+    })
+};
 /* eslint-enable no-unused-vars */

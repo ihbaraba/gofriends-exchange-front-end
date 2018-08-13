@@ -4,6 +4,8 @@ import {Table} from 'antd';
 import DepthChart from './Graphic/Depth'
 import {getMarcketDpthData} from "./../utils"
 import io from 'socket.io-client';
+import {SOCKET_SOURCE, QUOTATIONS} from "./../constants/APIURLS.js"
+
 
 // import 'antd/lib/table/style/css';
 
@@ -13,7 +15,8 @@ class MarketDepth extends Component {
     constructor() {
         super();
 
-        this.socket = io("http://gofriends.ru:3001");
+        // this.socket = io("http://gofriends.ru:3001");
+        this.socket = io(SOCKET_SOURCE);
 
         this.getDataFromSocket = this.getDataFromSocket.bind(this);
         this.getInitialPairDataFromServer = this.getInitialPairDataFromServer.bind(this);

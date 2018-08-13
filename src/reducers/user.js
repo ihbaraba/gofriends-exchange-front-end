@@ -6,13 +6,18 @@ import {
 } from '../constants/index'
 
 
-export default function userstate(state = {}, action) {
+export default function userState(state = {}, action) {
+    // console.log("userState Reducer ==> ", action.type, state);
 
     switch (action.type) {
 
         case LOGIN_REQUEST:
             // TODO
-            return state
+            return {
+                ...state,
+                // user: {...state.user, request: "sent"},
+                request: "sent",
+            };
 
         case LOGIN_SUCCESS:
             // TODO
