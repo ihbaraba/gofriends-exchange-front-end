@@ -64,7 +64,7 @@ export function getDataFromSocket({point, id, stopTime = 0, callback}) {
 
 
 export async function sendRequest ({rout, options}) {
-    console.log("sendRequest", rout, JSON.stringify(options));
+    // console.log("sendRequest", rout, JSON.stringify(options));
 
     const rawResponse = await fetch(`${rout}`, {
         method: 'POST',
@@ -74,7 +74,8 @@ export async function sendRequest ({rout, options}) {
         },
         body: JSON.stringify(options)
     });
-    const content = await rawResponse.json();
+    // const content = await rawResponse.json();
+    // console.log("content =", content);
 
-    console.log("content =", content);
+    return rawResponse.json();
 }

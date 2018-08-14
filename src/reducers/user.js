@@ -5,9 +5,7 @@ import {
     LOGOUT_SUCCESS
 } from '../constants/index'
 
-
 export default function userState(state = {}, action) {
-    // console.log("userState Reducer ==> ", action.type, state);
 
     switch (action.type) {
 
@@ -20,16 +18,19 @@ export default function userState(state = {}, action) {
             };
 
         case LOGIN_SUCCESS:
-            // TODO
-            return state
+            // console.log("userState Reducer ==> ", action, state);
+            return {
+                ...state,
+                token: action.payload.token,
+            };
 
         case LOGIN_FAIL:
             // TODO
-            return state
+            return state;
 
         case LOGOUT_SUCCESS:
             // TODO
-            return state
+            return state;
 
         default:
             return state

@@ -3,14 +3,13 @@ according to API description
 http://gofriends.ru:3000/docs/#/Quotations/get_quotations__pairId_
 */
 
-
 const XHR_PORT = "3000";
 const SOCKET_PORT = "3001";
-const PRODACT_SERVER = "http://gofriends.ru";
+const PRODACT_SERVER = "http://demo.gofriends.ru";
 const DEV_SERVER = "http://142.93.81.111";
 
+// export const current_server = PRODACT_SERVER;
 export const current_server = DEV_SERVER;
-
 
 /*
 get data for the chart
@@ -34,5 +33,7 @@ export const SOCKET_SOURCE = `${current_server}:${SOCKET_PORT}`;
 export const COUNTRIES = `${current_server}:${XHR_PORT}/api/v1/countries`;
 
 export const REGISTER = `${current_server}:${XHR_PORT}/api/v1/auth/register`;
+
+export const LOGIN = `${current_server}:${XHR_PORT}/api/v1/auth/login`;
 
 

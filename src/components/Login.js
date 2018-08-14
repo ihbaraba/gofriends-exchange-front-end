@@ -4,8 +4,10 @@ import Footer from './Footer';
 import NavLink from './NavLink';
 import API from './api';
 import {connect} from "react-redux";
-import {simpleAction} from "../actions/simpleAction";
-import {login_request} from "../actions/UserActions";
+// import {simpleAction} from "../actions/simpleAction";
+import {login_success} from "../actions/UserActions";
+import {LOGIN} from "../constants/APIURLS";
+import {sendRequest} from "./Graphic/utils";
 // import '../App.css';
 
 class Login extends Component {
@@ -15,7 +17,9 @@ class Login extends Component {
         this.state = {
             email: '',
             password: '',
-            error:''
+            error:'',
+            totpCode:'',
+            showTotpCodeInput: false,
         };
     }
 
@@ -31,38 +35,85 @@ class Login extends Component {
         });
     };
 
-    handleSubmit = (event) => {
-        console.log("handleSubmit this.props=", this.props);
-        this.props.login_request({request: "sent"});
+    handleTotpCode = (event) => {
+        this.setState({
+            totpCode: event.target.value
+        });
+    };
 
+    handleSubmit = async (event) => {
+        console.log("handleSubmit this.props=", this.props);
         event.preventDefault();
         const user = {
             email: this.state.email,
-            password: this.state.password
+            password: this.state.password,
+            totpCode: this.state.totpCode,
         };
-        API.post(`/api/auth/sign_in`, user)
-            .then(response => {
-                // console.log(response);
-                if (response.data.two_fa_enabled) {
-                    localStorage.setItem('two_fa_enabled', response.data.two_fa_enabled);
-                    window.location = "/login2"
-                }
-                else {
-                    localStorage.setItem('token', response.data.token);
-                    // console.log(response);
-                    window.location = "/2fa"
-                }
+        const content = await sendRequest({
+            rout: LOGIN,
+            options: { ...user }
+        });
 
-            })
-            .catch(error => {
-                this.setState({
-                    error: error.response.data.message
-                });
-            });
+        const { usrMsg, errorCode } = content;
+
+        if (typeof usrMsg !== "undefined") {
+
+            console.log(errorCode, usrMsg, typeof errorCode, " showTotpCodeInput=", this.state.showTotpCodeInput);
+
+            switch (errorCode) {
+                case 0 : // bad email
+                case 1 :
+                case 2 :
+                case 3 : alert(usrMsg);//bad password
+                    break;
+                case 4 : {
+                    if (!this.state.showTotpCodeInput) // bad toptCode
+                        {this.setState( //show input for toptCode
+                            {showTotpCodeInput: true},
+                            () => {
+                                setTimeout( () => { this.setState({showTotpCodeInput: false}) }, 5 * 60 * 100) //hide input for toptCode
+                            })}
+                    else
+                        { alert(usrMsg) }
+                }
+                    break;
+                default :
+
+            }
+
+
+        }
+        else
+        {
+            console.log("Login content =", content);
+            this.props.login_success({token: content.token});
+            // localStorage.setItem('token', content.token);
+            // window.location = "/2fa";
+        }
+        // API.post(`/api/auth/sign_in`, user)
+        //     .then(response => {
+        //         // console.log(response);
+        //         if (response.data.two_fa_enabled) {
+        //             localStorage.setItem('two_fa_enabled', response.data.two_fa_enabled);
+        //             window.location = "/login2"
+        //         }
+        //         else {
+        //             localStorage.setItem('token', response.data.token);
+        //             // console.log(response);
+        //             window.location = "/2fa"
+        //         }
+        //
+        //     })
+        //     .catch(error => {
+        //         this.setState({
+        //             error: error.response.data.message
+        //         });
+        //     });
     };
 
 
     render() {
+        const {showTotpCodeInput} = this.state;
         return (
             <div>
                 <Header/>
@@ -81,6 +132,7 @@ class Login extends Component {
 
                             <form onSubmit={this.handleSubmit}>
                                 <fieldset className="aboveCaptcha">
+                                    { (!showTotpCodeInput) && <div>
                                     <div>
                                         <input
                                             className="userPassInput"
@@ -105,6 +157,19 @@ class Login extends Component {
                                             required
                                         />
                                     </div>
+                                    </div>}
+                                    { (showTotpCodeInput) && <div>
+                                        <input
+                                            className="userPassInput"
+                                            type="totpCode"
+                                            name="totpCode"
+                                            id="totpCode"
+                                            placeholder="TotpCode"
+                                            value={this.state.totpCode}
+                                            onChange={this.handleTotpCode}
+                                            required
+                                        />
+                                    </div>}
                                 </fieldset>
                                 <br/>
 
@@ -142,8 +207,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-    login_request: () => dispatch(login_request()),
-    simpleAction: () => dispatch(simpleAction())
+    login_success: (token) => dispatch(login_success(token)),
+    // simpleAction: () => dispatch(simpleAction())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);

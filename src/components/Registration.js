@@ -27,7 +27,9 @@ class Registration extends Component {
             email: '',
             password: '',
             confirmPassword: '',
-            value: ''
+            value: '',
+            showQRCode: false,
+            QRImage: '',
         };
     }
 
@@ -61,7 +63,6 @@ class Registration extends Component {
     };
 
     handleEmail = (event) => {
-        console.log(event.target.value);
         this.setState({
             email: event.target.value
         });
@@ -85,10 +86,10 @@ class Registration extends Component {
         });
     };
 
-    handleSubmit = (event) => {
+    handleSubmit = async (event) => {
         event.preventDefault();
         // console.log(this.state);
-        sendRequest({
+        const responce = await sendRequest({
             rout: REGISTER,
             options: {
                 "email": this.state.email,
@@ -96,7 +97,38 @@ class Registration extends Component {
                 "password": this.state.password,
                 "countryId": this.state.countryId,
             }
-        })
+        });
+        const { usrMsg, errorCode } = responce;
+
+        if (typeof usrMsg !== "undefined") {
+
+            console.log(errorCode, usrMsg);
+
+            switch (errorCode) {
+                case "0" :
+                case "1" :
+                case "2" :
+                case "3" :
+                case "4" :
+                case "5" : alert(usrMsg);
+                    break;
+                default :
+            }
+            }
+        else
+            {
+                console.log("Registration responce =", responce);
+                const QRImage = responce.qr;
+                this.setState( //show input for QRCode
+                    {
+                        showQRCode: true,
+                        QRImage
+                    },
+                    () => {
+                        setTimeout( () => { this.setState({showQRCode: false}) }, 5 * 60 * 1000) //hide input for toptCode
+                    }
+                )
+            }
     };
 
     validateForm = () => {
@@ -108,7 +140,7 @@ class Registration extends Component {
     };
 
     render() {
-        const {countries: options, country} = this.state;
+        const {countries: options, country, showQRCode, QRImage} = this.state;
         return (
             <div>
                 <Header/>
@@ -121,6 +153,7 @@ class Registration extends Component {
                                     is confirmed, you'll need to complete your profile and verify your identity before
                                     you can begin trading.</p>
                             </div>
+                            { (!showQRCode) &&
                             <div className="column1">
                                 <form onSubmit={this.handleSubmit}>
                                     <fieldset className="aboveCaptcha">
@@ -195,6 +228,14 @@ class Registration extends Component {
                                     </button>
                                 </form>
                             </div>
+                                }
+                            { showQRCode &&
+                                <div className="column1">
+                                    <p>Thank you for registration. <strong>Please scan this QR-code by Google Authenticator application of your smartphone.</strong> </p>
+                                    <img src={QRImage} alt="Please scan it" />
+                                    <p>After that, please, move on SIGN IN Page for enter in to your account.</p>
+                                </div>
+                            }
                             <div className="column2">
                                 <p>The email address you provide will become your GoFriends Exchange ID and will be used for all
                                     future communications, including account recovery. <strong>Protect your email
@@ -205,8 +246,6 @@ class Registration extends Component {
                                 <p>NEVER use a password for an exchange that you use ANYWHERE else, especially for the
                                     email address you sign up with.</p>
                             </div>
-
-
                         </div>
 
                     </div>

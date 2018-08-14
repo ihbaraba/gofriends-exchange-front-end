@@ -32,7 +32,7 @@ class ExchangePage extends Component {
     };
 
     componentDidMount() {
-        this.getCode();
+        // this.getCode();
     };
 
     handleEmail = (event) => {
@@ -133,12 +133,12 @@ class ExchangePage extends Component {
 
 
                                     <tr>
-                                        <td colspan="2">
-                                            <p className="colored-text"><p className="bold-text">Before turning on 2FA, write down and put it in a safe
+                                        <td colSpan="2">
+                                            <div className="colored-text"><p className="bold-text">Before turning on 2FA, write down and put it in a safe
                                                 place.</p> If your
                                                 phone gets lost, stolen, or erased, you will need this key to get
-                                                back into your account!</p>
-                                            <p className="colored-text">
+                                                back into your account!</div>
+                                            <div className="colored-text">
                                                 <input
                                                     type="checkbox"
                                                     name="terms"
@@ -146,7 +146,7 @@ class ExchangePage extends Component {
                                                     required
                                                 /> I have backed up my
                                                 16-digit key
-                                            </p>
+                                            </div>
                                         </td>
                                     </tr>
                                     <input type="hidden" name="enabling" value="1"/>

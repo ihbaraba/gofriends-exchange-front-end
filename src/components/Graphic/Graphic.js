@@ -198,7 +198,7 @@ class Graphic extends React.Component {
         if (this.state == null) {
             return <div>Loading...</div>
         }
-        console.log("Graphics props", this.props);
+        // console.log("Graphics props", this.props);
         return (
             <Chart type="hybrid" data={this.state.data} newDiapazone={this.newDiapazone}/>
         )

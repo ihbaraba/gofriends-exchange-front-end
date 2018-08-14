@@ -95,13 +95,13 @@ class ExchangePage extends Component {
                             </div>
                         </div>
                         <div className="side">
-                            {<CoinsList setCurentCoinsPair2State={this.setCurrentCoinsPair2State}/>}
+                            <CoinsList setCurentCoinsPair2State={this.setCurrentCoinsPair2State}/>
                         </div>
                     </div>
                     <div className="centerArea-second"  >
                         <div className="main-content">
-                            {<MarketDepth currentPair={this.state.currentPair}/>}
-                            {<Orders {...this.state.pair} price={52} amount={1} loanRate={2} firePostToServer={this.firePostToServer}/>}
+                            <MarketDepth currentPair={this.state.currentPair}/>
+                            <Orders {...this.state.pair} price={52} amount={1} loanRate={2} firePostToServer={this.firePostToServer}/>
                         </div>
                         <div className="box notices">
                             <div className="head">
