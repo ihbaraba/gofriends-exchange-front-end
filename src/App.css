@@ -872,6 +872,7 @@ li {
     justify-content: flex-start;
     align-items: center;
     padding: 30px 64px;
+    flex-wrap:wrap;
 }
 
 .header .tabs a {
@@ -1031,7 +1032,7 @@ input, select, textarea {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    align-items: flex-end;
+    /*align-items: flex-end;*/
 }
 
 .centerArea-second {
@@ -1497,7 +1498,7 @@ hr.ordersHr {
 }
 
 /*tbody tr:nth-child(odd) {*/
-    /*background-color: #EEEEFE;*/
+/*background-color: #EEEEFE;*/
 /*}*/
 
 .custom__tr {
@@ -1796,7 +1797,7 @@ input{
 
 @media (max-width: 1800px) and (max-device-width: 1800px) {
     .side {
-        flex-basis: 380px;
+        flex-basis: 340px;
     }
 
     .notices {
@@ -1829,13 +1830,13 @@ input{
     }
 
     .rightSide {
-        width: 80%;
-        order: 2;
+        width: 70%;
+        order: 1;
     }
 
     .side {
         width: 100%;
-        order: 1;
+        order: 2;
         margin-left: auto;
     }
 }
@@ -1915,6 +1916,74 @@ input{
     body .ant-table-small > .ant-table-content > .ant-table-header > table > .ant-table-thead > tr > th, body .ant-table-small > .ant-table-content > .ant-table-body > table > .ant-table-thead > tr > th, body .ant-table-small > .ant-table-content > .ant-table-scroll > .ant-table-header > table > .ant-table-thead > tr > th, body .ant-table-small > .ant-table-content > .ant-table-scroll > .ant-table-body > table > .ant-table-thead > tr > th, body .ant-table-small > .ant-table-content > .ant-table-fixed-left > .ant-table-header > table > .ant-table-thead > tr > th, body .ant-table-small > .ant-table-content > .ant-table-fixed-right > .ant-table-header > table > .ant-table-thead > tr > th, body .ant-table-small > .ant-table-content > .ant-table-fixed-left > .ant-table-body-outer > .ant-table-body-inner > table > .ant-table-thead > tr > th, body .ant-table-small > .ant-table-content > .ant-table-fixed-right > .ant-table-body-outer > .ant-table-body-inner > table > .ant-table-thead > tr > th, body .ant-table-small > .ant-table-content > .ant-table-header > table > .ant-table-tbody > tr > td, body .ant-table-small > .ant-table-content > .ant-table-body > table > .ant-table-tbody > tr > td, body .ant-table-small > .ant-table-content > .ant-table-scroll > .ant-table-header > table > .ant-table-tbody > tr > td, body .ant-table-small > .ant-table-content > .ant-table-scroll > .ant-table-body > table > .ant-table-tbody > tr > td, body .ant-table-small > .ant-table-content > .ant-table-fixed-left > .ant-table-header > table > .ant-table-tbody > tr > td, body .ant-table-small > .ant-table-content > .ant-table-fixed-right > .ant-table-header > table > .ant-table-tbody > tr > td, body .ant-table-small > .ant-table-content > .ant-table-fixed-left > .ant-table-body-outer > .ant-table-body-inner > table > .ant-table-tbody > tr > td, body body .ant-table-small > .ant-table-content > .ant-table-fixed-right > .ant-table-body-outer > .ant-table-body-inner > table > .ant-table-tbody > tr > td {
         font-size: 12px;
     }
+    .h1 {
+        font-size:30px;
+    }
+
+    .header {
+        padding: 10px;
+        text-align: left;
+    }
+
+    .header .tabs.right {
+        margin-top: 10px;
+    }
+
+    .form2col .formWrapper > div {
+        display: block;
+    }
+
+    .formHelp p {
+        width: 100%;
+        text-align: center;
+        width: 350px;
+        padding: 0 30px;
+    }
+
+    .form2col .column1 {
+        width: 100%;
+        text-align: center;
+        padding: 0 20px;
+    }
+    .form2col .column2 {
+        width: 100%;
+        text-align: center;
+        padding: 0 20px;
+    }
+
+
+    .footer-container {
+        width:100%
+    }
+
+    .footer .links  {
+        display: flex;
+        flex-direction: column;
+        font-size: 40px;
+    }
+
+    .footer .links .group h3 {
+        font-size: 25px;
+    }
+
+    .footer .meta .group {
+        width: 100%;
+    }
+
+    .footer .meta {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .footer-info {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+    }
+
+
+
 
 }
 
@@ -1939,6 +2008,47 @@ input{
 
     body .ant-tabs.ant-tabs-card > .ant-tabs-bar .ant-tabs-tab {
         padding: 14px;
+    }
+
+    .form2col .column1 {
+        width: 100%;
+        text-align: center;
+        justify-content: center;
+    }
+    .form2col .column2 {
+        width: 100%;
+        text-align: center;
+        padding: 0 20px;
+    }
+
+    .footer-container {
+        width:100%
+    }
+
+    .footer .links  {
+        display: flex;
+        flex-direction: column;
+        font-size: 40px;
+    }
+
+    .footer .links .group h3 {
+        font-size: 25px;
+    }
+
+    .footer .meta .group {
+        width: 100%;
+    }
+
+    .footer .meta {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .footer-info {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
     }
 }
 

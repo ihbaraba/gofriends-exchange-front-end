@@ -73,7 +73,7 @@ class Login extends Component {
                     <div className="formWrapper">
 
 
-                        <div className="column1">
+                        <div className="column1" >
                             <h3 className="standard">Sign In</h3>
                             <p className="formError">
                                 {this.state.error}
