@@ -170,7 +170,7 @@ class Registration extends Component {
                                         </div>
                                         <div style={{marginBottom: "2rem",}}>
                                             <label>Country:</label>
-                                            <select key={country} onChange={this.handleChangeCountry} value={country} style={{color: "#222",}}>
+                                            <select key={country} onChange={this.handleChangeCountry} value={country} style={{color: "#fff", border:0,}}>
                                                 <option value={country} >{country}</option>
                                                 {Object.keys(options).map(item => (
                                                     <option key={options[item]["code"]} value={options[item]["name"]} code={item.code} id={options[item]["id"]}>
@@ -214,6 +214,12 @@ class Registration extends Component {
                                         </div>
                                     </fieldset>
 
+                                    <p >
+                                        <img src="../img/captcha.png" alt="" />
+                                    </p>
+
+
+
                                     <p>
                                         <input type="checkbox" name="terms" required/> I agree to the
                                         <a href="/terms"
@@ -221,6 +227,8 @@ class Registration extends Component {
                                             Terms of Use
                                         </a>.
                                     </p>
+
+
 
                                     <button className="signUpButton" type="submit" name="createAccount"
                                             disabled={!this.validateForm}>
@@ -237,14 +245,16 @@ class Registration extends Component {
                                 </div>
                             }
                             <div className="column2">
-                                <p>The email address you provide will become your GoFriends Exchange ID and will be used for all
-                                    future communications, including account recovery. <strong>Protect your email
-                                        account like you would your GoFriends account.</strong> Sign-ups using throwaway
-                                    email addresses will be rejected.</p>
-                                <p>Your password must be at least 8 characters long, but it is HIGHLY recommended that
-                                    you choose a random, alphanumeric password of at least 32 characters.</p>
-                                <p>NEVER use a password for an exchange that you use ANYWHERE else, especially for the
-                                    email address you sign up with.</p>
+                                <div className="rightColumn">
+                                    <p>The email address you provide will become your GoFriends Exchange ID and will be used for all
+                                        future communications, including account recovery. <strong>Protect your email
+                                            account like you would your GoFriends account.</strong> Sign-ups using throwaway
+                                        email addresses will be rejected.</p>
+                                    <p>Your password must be at least 8 characters long, but it is HIGHLY recommended that
+                                        you choose a random, alphanumeric password of at least 32 characters.</p>
+                                    <p>NEVER use a password for an exchange that you use ANYWHERE else, especially for the
+                                        email address you sign up with.</p>
+                                </div>
                             </div>
                         </div>
 

@@ -24,7 +24,7 @@ class Header extends Component {
 
 
                             <li className="message">
-                                <span className="title"><NavLink to="/login">Sign in</NavLink> or <NavLink to="/signup">Create an Account</NavLink></span>
+                                <span className="title"><NavLink className="header-sign"  to="/login">Sign in</NavLink>  <NavLink className="header-create" to="/signup">Create an Account</NavLink></span>
                             </li>
 
 
