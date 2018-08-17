@@ -36,7 +36,7 @@ class App extends Component {
                 <div className="App">
                     <Switch>
                         {/*<Route exact path="/" component={WelcomePage}/>*/}
-                        <Route exact path="/" component={ExchangePage}/>
+                        <Route exact path="/" component={Registration}/>
                         <Route path="/exchange" component={ExchangePage}/>
                         <Route path="/margintrading" component={MarginTrading}/>
                         <Route path="/lending" component={Lending}/>

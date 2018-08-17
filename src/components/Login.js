@@ -19,6 +19,7 @@ class Login extends Component {
             password: '',
             error:'',
             totpCode:'',
+            qr: '',
             showTotpCodeInput: false,
         };
     }
@@ -49,6 +50,8 @@ class Login extends Component {
             password: this.state.password,
             totpCode: this.state.totpCode,
         };
+        console.log("handleSubmit options=", user);
+
         const content = await sendRequest({
             rout: LOGIN,
             options: { ...user }
@@ -69,48 +72,30 @@ class Login extends Component {
                 case 4 : {
                     if (!this.state.showTotpCodeInput) // bad toptCode
                         {this.setState( //show input for toptCode
-                            {showTotpCodeInput: true},
-                            () => {
-                                setTimeout( () => { this.setState({showTotpCodeInput: false}) }, 5 * 60 * 100) //hide input for toptCode
-                            })}
+                            {showTotpCodeInput: true}
+                            // ,() => {
+                            //     setTimeout( () => { this.setState({showTotpCodeInput: false}) }, 5 * 60 * 100) //hide input for toptCode
+                            // }
+                            )}
                     else
                         { alert(usrMsg) }
                 }
                     break;
                 default :
-
             }
-
-
         }
         else
         {
-            console.log("Login content =", content);
+            // console.log("Login content =", content);
             this.props.login_success({token: content.token});
-            // localStorage.setItem('token', content.token);
-            // window.location = "/2fa";
-        }
-        // API.post(`/api/auth/sign_in`, user)
-        //     .then(response => {
-        //         // console.log(response);
-        //         if (response.data.two_fa_enabled) {
-        //             localStorage.setItem('two_fa_enabled', response.data.two_fa_enabled);
-        //             window.location = "/login2"
-        //         }
-        //         else {
-        //             localStorage.setItem('token', response.data.token);
-        //             // console.log(response);
-        //             window.location = "/2fa"
-        //         }
-        //
-        //     })
-        //     .catch(error => {
-        //         this.setState({
-        //             error: error.response.data.message
-        //         });
-        //     });
-    };
+            this.props.history.push(`/exchange`);
 
+            // localStorage.setItem('token', content.token);
+            // window.location = "/exchange"
+            // window.history.pushState({}, null, '/exchange');
+            // window.dispatchEvent(new CustomEvent('location-changed'));
+        }
+    };
 
     render() {
         const {showTotpCodeInput} = this.state;
@@ -159,6 +144,8 @@ class Login extends Component {
                                     </div>
                                     </div>}
                                     { (showTotpCodeInput) && <div>
+                                        <h4>You have 2 factor authentication enabled.<br/>Please Enter Your Google
+                                            Authenticator Six-Digit Code</h4>
                                         <input
                                             className="userPassInput"
                                             type="totpCode"
@@ -178,7 +165,6 @@ class Login extends Component {
                                 </button>
                             </form>
 
-                            {/*<a href="/resetPassword" className="standard forgot">Forgot your password?</a>*/}
                             <NavLink to="/resetPassword" className="forgot colored-link">Forgot your password</NavLink>
                         </div>
 
@@ -208,9 +194,6 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
     login_success: (token) => dispatch(login_success(token)),
-    // simpleAction: () => dispatch(simpleAction())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);
-
-// export default Login;

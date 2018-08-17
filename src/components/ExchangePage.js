@@ -19,6 +19,8 @@ import { Radio } from "antd";
 // import ExchangePageLogic from './Logics/ExchangePageLogic';
 import "antd/lib/radio/style/css";
 import {ORDERS} from "./../constants/APIURLS.js"
+import {login_success} from "../actions/UserActions";
+import {chart_timing} from "../actions/ChartActions";
 
 
 class ExchangePage extends Component {
@@ -29,7 +31,6 @@ class ExchangePage extends Component {
         this.setCurrentCoinsPair2State = this.setCurrentCoinsPair2State.bind(this);
         this.handleTimeFrameChange = this.handleTimeFrameChange.bind(this);
         this.firePostToServer = this.firePostToServer.bind(this);
-
         this.state = {
             ...initialState
         };
@@ -53,17 +54,26 @@ class ExchangePage extends Component {
     };
     handleTimeFrameChange = (e) => {
         const interval = e.target.value;
+        // console.log("chart_timing interval =", interval );
+        this.props.chart_timing(interval);
         this.setState({interval});
     };
 
     render() {
-        console.log(this.state);
+        const { user: {token} } = this.props;
+        // console.log("token =", token, this.props, "this.state ==>", this.state);
+        // const isAuthorised = (token !== ""); // ? true : false
+        const isAuthorised = true; // ? true : false
         const {pair: { first, second, id }, interval, appendFake, } = this.state;
         return (
             <div>
                 <Header2/>
-
-                <div className="wrapper-all">
+                { (!isAuthorised) &&
+                    <div className="wrapper-all">
+                        <h3><bold>You have not been authorized. Please go to the authorization page.</bold></h3>
+                    </div>}
+                { isAuthorised &&
+                        <div className="wrapper-all">
 
                     <div style={{display: "flex", alignItems: "center", justifyContent: "center"}}>
                         <div className="padding" style={{flex: "1 0", clear: "both"}}>
@@ -182,35 +192,26 @@ class ExchangePage extends Component {
 
                     </div>
                 </div>
+                }
                 <Footer/>
 
             </div>
         )
     }
 }
+// export default ExchangePage
 
-// ExchangePage.propTypes = {
-//     dispatch: PropTypes.func.isRequired
-// }
+const mapStateToProps = state => ({
+    ...state
+});
 
-// function mapStateToProps(state) {
-//     return {
-//         state
-//     }
-// }
-//
-// function mapDispatchToProps(dispatch) {
-//     return {
-//         actions: bindActionCreators(changePair, dispatch),
-//         dispatch: (action) => {
-//             action();
-//             console.log("test dispatch")
-//         },
-//         changePair: () => {
-//             changePair();
-//         }
-//     }
-// }
+const mapDispatchToProps = dispatch => ({
+    login_success: (token) => dispatch(login_success(token)),
+    chart_timing: (timing) => dispatch(chart_timing(timing)),
+    // simpleAction: () => dispatch(simpleAction())
+});
 
-// export default connect(mapStateToProps, mapDispatchToProps)(ExchangePage)
-export default ExchangePage
+export default connect(mapStateToProps, mapDispatchToProps)(ExchangePage);
+
+
+

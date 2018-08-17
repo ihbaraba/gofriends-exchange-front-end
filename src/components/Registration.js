@@ -1,11 +1,14 @@
 import React, {Component} from 'react';
 import Header from './Header';
 import Footer from './Footer';
-import '../App.css';
-// import '../styles/style.css';
-import API from './api';
+import NavLink from './NavLink';
+import {connect} from "react-redux";
+
 import {getData, sendRequest} from "./Graphic/utils";
-import {REGISTER, COUNTRIES, ORDERS} from "../constants/APIURLS";
+import {REGISTER, COUNTRIES, LOGIN} from "../constants/APIURLS";
+import {login_success} from "../actions/UserActions";
+
+import '../App.css';
 
 class Registration extends Component {
     constructor(props) {
@@ -13,6 +16,7 @@ class Registration extends Component {
 
         this.handleChangeCountry = this.handleChangeCountry.bind(this);
         this.handleUserName = this.handleUserName.bind(this);
+        this.validateForm = this.validateForm.bind(this);
 
         this.state = {
             options: [{
@@ -29,7 +33,9 @@ class Registration extends Component {
             confirmPassword: '',
             value: '',
             showQRCode: false,
-            QRImage: '',
+            // QRImage: '',
+            totpCode:'',
+            qr: '',
         };
     }
 
@@ -38,7 +44,6 @@ class Registration extends Component {
     }
 
     loadCountries = () => {
-
         const options = {
             APIURL: COUNTRIES,
         };
@@ -57,9 +62,7 @@ class Registration extends Component {
         let state = this.state;
         state["country"] = e.target.value;
         state["countryId"] = countries[e.target.value]["id"];
-        this.setState(state
-            // , ()=> { console.log("onChange country", this.state); }
-            );
+        this.setState(state);
     };
 
     handleEmail = (event) => {
@@ -86,9 +89,15 @@ class Registration extends Component {
         });
     };
 
-    handleSubmit = async (event) => {
+    handleTotpCode = (event) => {
+        this.setState({
+            totpCode: event.target.value
+        });
+    };
+
+    handlerRegistrationSubmit = async (event) => {
         event.preventDefault();
-        // console.log(this.state);
+
         const responce = await sendRequest({
             rout: REGISTER,
             options: {
@@ -105,12 +114,12 @@ class Registration extends Component {
             console.log(errorCode, usrMsg);
 
             switch (errorCode) {
-                case "0" :
-                case "1" :
-                case "2" :
-                case "3" :
-                case "4" :
-                case "5" : alert(usrMsg);
+                case 0 :
+                case 1 :
+                case 2 :
+                case 3 :
+                case 4 :
+                case 5 : alert(usrMsg);
                     break;
                 default :
             }
@@ -125,22 +134,65 @@ class Registration extends Component {
                         QRImage
                     },
                     () => {
+                        // this.props.history.push(`/login`);
                         setTimeout( () => { this.setState({showQRCode: false}) }, 5 * 60 * 1000) //hide input for toptCode
                     }
                 )
             }
     };
 
+    handleSignInSubmit = async (event) => {
+        console.log("handleSubmit this.props=", this.props);
+        event.preventDefault();
+        const user = {
+            email: this.state.email,
+            password: this.state.password,
+            totpCode: this.state.totpCode,
+        };
+        const content = await sendRequest({
+            rout: LOGIN,
+            options: { ...user }
+        });
+
+        const { usrMsg, errorCode } = content;
+
+        if (typeof usrMsg !== "undefined") {
+
+            switch (errorCode) {
+                case 0 : // bad email
+                case 1 :
+                case 2 :
+                case 3 : alert(usrMsg);//bad password
+                    break;
+                case 4 : {
+                    if (!this.state.showTotpCodeInput) // bad toptCode
+                    {this.setState( //show input for toptCode
+                        {showTotpCodeInput: true})}
+                    else
+                    { alert(usrMsg) }
+                }
+                    break;
+                default :
+            }
+        }
+        else
+        {
+            this.props.login_success({token: content.token});
+            this.props.history.push(`/exchange`);
+        }
+    };
+
     validateForm = () => {
         return (
-            this.state.email.length > 0 &&
-            this.state.password.length > 0 &&
-            this.state.password === this.state.confirmPassword
+                this.state.email.length > 0 &&
+                this.state.password.length > 0 &&
+                this.state.password === this.state.confirmPassword
         );
     };
 
     render() {
         const {countries: options, country, showQRCode, QRImage} = this.state;
+        const regFormVAlid = this.validateForm();
         return (
             <div>
                 <Header/>
@@ -155,7 +207,7 @@ class Registration extends Component {
                             </div>
                             { (!showQRCode) &&
                             <div className="column1">
-                                <form onSubmit={this.handleSubmit}>
+                                <form onSubmit={this.handlerRegistrationSubmit}>
                                     <fieldset className="aboveCaptcha">
                                         <div>
                                             <label>User name</label>
@@ -170,7 +222,7 @@ class Registration extends Component {
                                         </div>
                                         <div style={{marginBottom: "2rem",}}>
                                             <label>Country:</label>
-                                            <select key={country} onChange={this.handleChangeCountry} value={country} style={{color: "#fff", border:0,}}>
+                                            <select key={country} onChange={this.handleChangeCountry} value={country} style={{color: "#222",}}>
                                                 <option value={country} >{country}</option>
                                                 {Object.keys(options).map(item => (
                                                     <option key={options[item]["code"]} value={options[item]["name"]} code={item.code} id={options[item]["id"]}>
@@ -214,12 +266,6 @@ class Registration extends Component {
                                         </div>
                                     </fieldset>
 
-                                    <p >
-                                        <img src="../img/captcha.png" alt="" />
-                                    </p>
-
-
-
                                     <p>
                                         <input type="checkbox" name="terms" required/> I agree to the
                                         <a href="/terms"
@@ -227,8 +273,6 @@ class Registration extends Component {
                                             Terms of Use
                                         </a>.
                                     </p>
-
-
 
                                     <button className="signUpButton" type="submit" name="createAccount"
                                             disabled={!this.validateForm}>
@@ -239,25 +283,39 @@ class Registration extends Component {
                                 }
                             { showQRCode &&
                                 <div className="column1">
-                                    <p>Thank you for registration. <strong>Please scan this QR-code by Google Authenticator application of your smartphone.</strong> </p>
-                                    <img src={QRImage} alt="Please scan it" />
-                                    <p>After that, please, move on SIGN IN Page for enter in to your account.</p>
+                                    <form onSubmit={this.handleSignInSubmit}>
+                                        <fieldset className="aboveCaptcha">
+                                            <p>Thank you for registration. </p>
+                                            <p><strong>We have 2 factor authentication enabled.</strong> </p>
+                                            <p><strong>Please scan this QR-code by Google Authenticator application of your smartphone.</strong> </p>
+                                            <img src={QRImage} alt="Please scan it" />
+                                            <p><strong>Enter Your Google Authenticator Six-Digit Code.</strong> </p>
+                                            <input
+                                                className="userPassInput"
+                                                type="totpCode"
+                                                name="totpCode"
+                                                id="totpCode"
+                                                placeholder="TotpCode"
+                                                value={this.state.totpCode}
+                                                onChange={this.handleTotpCode}
+                                                required
+                                            />
+                                            <button className="ant-btn fixed-width-btn" type="submit" name="login">Sign in</button>
+                                        </fieldset>
+                                    </form>
                                 </div>
                             }
                             <div className="column2">
-                                <div className="rightColumn">
-                                    <p>The email address you provide will become your GoFriends Exchange ID and will be used for all
-                                        future communications, including account recovery. <strong>Protect your email
-                                            account like you would your GoFriends account.</strong> Sign-ups using throwaway
-                                        email addresses will be rejected.</p>
-                                    <p>Your password must be at least 8 characters long, but it is HIGHLY recommended that
-                                        you choose a random, alphanumeric password of at least 32 characters.</p>
-                                    <p>NEVER use a password for an exchange that you use ANYWHERE else, especially for the
-                                        email address you sign up with.</p>
-                                </div>
+                                <p>The email address you provide will become your GoFriends Exchange ID and will be used for all
+                                    future communications, including account recovery. <strong>Protect your email
+                                        account like you would your GoFriends account.</strong> Sign-ups using throwaway
+                                    email addresses will be rejected.</p>
+                                <p>Your password must be at least 8 characters long, but it is HIGHLY recommended that
+                                    you choose a random, alphanumeric password of at least 32 characters.</p>
+                                <p>NEVER use a password for an exchange that you use ANYWHERE else, especially for the
+                                    email address you sign up with.</p>
                             </div>
                         </div>
-
                     </div>
                 </div>
                 <Footer/>
@@ -265,5 +323,12 @@ class Registration extends Component {
         )
     }
 }
+const mapStateToProps = state => ({
+    ...state
+});
 
-export default Registration;
+const mapDispatchToProps = dispatch => ({
+    login_success: (token) => dispatch(login_success(token)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Registration);

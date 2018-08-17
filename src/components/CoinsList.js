@@ -22,7 +22,7 @@ class CoinsList extends React.Component {
 }
     async componentDidMount() {
         const data = await getCoinsList(PAIRS);
-        // console.log(data);
+        console.log("PAIRS ", data);
         const pairs = data.map( item => ({id: item.id, first: item.baseCurrency.code, second: item.quoteCurrency.code}));
         // console.log(pairs);
         const coins = [... new Set( data.map( item => item.baseCurrency.code ))];

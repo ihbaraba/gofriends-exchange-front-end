@@ -14,7 +14,7 @@ class Header extends Component {
                     </div>
                     <div className="tabs">
                         <ul>
-                            {/*<li><NavLink to="/exchange">Exchange</NavLink></li>*/}
+                            <li><NavLink to="/exchange">Exchange</NavLink></li>
                             {/*<li><NavLink to="/marginTrading">Margin Trading</NavLink></li>*/}
                             {/*<li><NavLink to="/lending">Lending</NavLink></li>*/}
                         </ul>
