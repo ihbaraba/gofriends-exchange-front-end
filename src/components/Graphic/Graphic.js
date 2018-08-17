@@ -1,8 +1,9 @@
 import React from 'react';
-import Chart from './UpdatebleChart';
-import {getData, getDataFromSocket} from "./utils"
-import {TIMEFRAMES} from "./../../constants/APIURLS.js"
+import {connect} from "react-redux";
 
+import Chart from './UpdatebleChart';
+import {getData, getDataFromSocket, coinapiHystoricalData} from "./utils"
+import {TIMEFRAMES} from "./../../constants/APIURLS.js"
 
 import * as d3 from "d3";
 
@@ -24,7 +25,9 @@ class Graphic extends React.Component {
     }
 
     componentDidMount() {
-        const { pairId = 1, dateFrom, dateTo, take, interval, appendFake } = this.props;
+        const { pairId = 1, dateFrom, dateTo, take, interval, appendFake
+            , pair: { baseCurrency, quoteCurrency},
+        } = this.props;
         const options = {
             pairId: pairId,
             APIURL: TIMEFRAMES,
@@ -34,13 +37,24 @@ class Graphic extends React.Component {
             interval,
             appendFake
         };
-        console.log("options = ", options);
         getData(options).then(data => {
             this.setState({data}
-            , this.appendRealtimeLoadedData()
+            // , this.appendRealtimeLoadedData()
             )
-            // this.setState({data})
-        })
+        });
+
+        // coinapiHystoricalData({
+        //     APIURL: TIMEFRAMES,
+        //     fsym: baseCurrency,
+        //     tsym: quoteCurrency,
+        //     limit: 500,
+        // })
+        //     .then(data => {
+        //         console.log("coinapiHystoricalData ==>", data);
+        //         this.setState({data}
+        //             , this.appendRealtimeLoadedData()
+        //     )
+        // });
     }
     componentWillUnmount() {
         clearInterval(this.intervalId);
@@ -167,13 +181,17 @@ class Graphic extends React.Component {
                 default : return 1
             }
         };
-        return  new Promise((resolve) => {
+         console.log("START =", start, "END = ", end, data.length, data);
+        return new Promise(() => {
             const format = d3.timeFormat("%Y-%m-%d");
             const { pairId = 1, dateFrom, dateTo, take, interval, appendFake } = this.props;
-            const lastBar = data[Math.min(Math.abs(start), data.length-1)];
+            // const lastBarIndex = Math.min(Math.abs(end), data.length-1);
+            const lastBarIndex = 0;
+            const lastBar = data[lastBarIndex];
+            // const lastBar = data[Math.min(Math.abs(start), data.length-1)];
             const offsetData = d3.timeDay.offset(lastBar.date, (-1) * intervalInDays(interval, rowsToDownload) ) ;
 
-            // console.log(format(lastBar.date), "Offset to",offsetData, stringOffset, " on days", intervalInDays(interval, rowsToDownload));
+            console.log("From, ", format(lastBar.date), "lastBarIndex = ", lastBarIndex, "Offset to",offsetData, " on days", intervalInDays(interval, rowsToDownload));
             const stringOffset = format(offsetData); // returns a string
 
             const options = {
@@ -204,6 +222,12 @@ class Graphic extends React.Component {
         )
     }
 }
+const mapStateToProps = state => ({
+    ...state
+});
 
-export default Graphic;
+const mapDispatchToProps = dispatch => ({
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Graphic);
 

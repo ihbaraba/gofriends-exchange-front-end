@@ -3,6 +3,7 @@ import { timeFormat } from "d3-time-format";
 
 import React from "react";
 import PropTypes from "prop-types";
+import {connect} from "react-redux";
 
 import { ChartCanvas, Chart } from "react-stockcharts";
 import {
@@ -30,6 +31,9 @@ import {
 import { ema, sma, macd } from "react-stockcharts/lib/indicator";
 import { fitWidth } from "react-stockcharts/lib/helper";
 import { head, last } from "react-stockcharts/lib/utils";
+import {chart_range} from "../../actions/ChartActions";
+// import {login_success} from "../actions/UserActions";
+
 
 function getMaxUndefined(calculators) {
     return calculators
@@ -189,7 +193,7 @@ class CandleStickChartPanToLoadMore extends React.Component {
         } = xScaleProvider(calculatedData);
         // } = xScaleProvider(calculatedData.slice(-this.canvas.fullData.length));
 
-        // console.log(head(linearData), last(linearData))
+        console.log(head(linearData), last(linearData))
         // console.log(linearData.length)
 
         this.setState({
@@ -205,7 +209,7 @@ class CandleStickChartPanToLoadMore extends React.Component {
         });
     };
     componentWillReceiveProps(nextProps) {
-        console.log("===nextProps.data===", nextProps.data);
+        // console.log("===nextProps.data===", nextProps.data);
         this.append(nextProps.data);
     }
     async handleDownloadMore(start, end) {
@@ -224,7 +228,8 @@ class CandleStickChartPanToLoadMore extends React.Component {
         await newDiapazone({
             rowsToDownload, start: Math.ceil(start), end, data: this.state.data,
             callback: (newData) => {
-
+// console.log(newData);
+this.props.chart_range({ start: Math.ceil(start), end});
                 const dataToCalculate = inputData.concat(newData);
 
                 const calculatedData = ema26(
@@ -432,4 +437,13 @@ CandleStickChartPanToLoadMore.defaultProps = {
 
 CandleStickChartPanToLoadMore = fitWidth(CandleStickChartPanToLoadMore);
 
-export default CandleStickChartPanToLoadMore;
+const mapStateToProps = state => ({
+    ...state
+});
+
+const mapDispatchToProps = dispatch => ({
+    chart_range: (newRange) => { dispatch(chart_range(newRange)); } //set "dateFrom" and "dateTo"
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(CandleStickChartPanToLoadMore);
+

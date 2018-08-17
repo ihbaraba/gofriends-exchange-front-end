@@ -1,7 +1,11 @@
 const initialState = {
     // chart: {
-        interval: "1hr",
-        appendFake: "true",
+    interval: "1hr",
+    chart_range: {
+                start: "",
+                end: "",
+        },
+    appendFake: "false",
     // },
     // exchange:  {
     pair:  {
@@ -13,8 +17,8 @@ const initialState = {
         quoteCurrency: "ETH",
     },
     user: {
-        email: "qqwwee@gmail.com",
-        username: "qqwwee",
+        email: "john.doe@gmail.com",
+        username: "John",
         countryId: 1,
         password: "1",
         token: "",

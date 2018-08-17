@@ -3,6 +3,7 @@ import Header from './Header';
 import Footer from './Footer';
 import API from './api';
 import '../App.css';
+import ExchangePage from "./ExchangePage";
 
 
 class Login2 extends Component {
@@ -29,8 +30,7 @@ class Login2 extends Component {
         API.post(url, user)
             .then(response => {
                 console.log(response);
-                window.location = "/profile"
-
+                this.props.history.push(`/ExchangePage`);
             })
             .catch(error => {
                 console.log(error.response.data.errors)
@@ -42,11 +42,10 @@ class Login2 extends Component {
         return (
             <div>
                 <Header/>
-                ¡¡¡¡¡
                 <div className="featureBanner form1col">
                     <div className="formWrapper">
-                        <h2 className="standard">You have 2 factor authentication enabled.<br/>Please Enter Your Google
-                            Authenticator Six-Digit Code</h2>
+                        <h5 className="standard">You have 2 factor authentication enabled.<br/>Please Enter Your Google
+                            Authenticator Six-Digit Code</h5>
                         <p className="formError">
                         </p>
                         <form onSubmit={this.handleSubmit}>
