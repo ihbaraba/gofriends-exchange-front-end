@@ -961,9 +961,15 @@ button.signUpButton {
     border-radius: 100px;
     width: 230px;
     font-weight: 600;
-
     cursor: pointer;
 }
+
+button.signUpButton:hover {
+    -webkit-box-shadow: 0 0 10px 0 #02a383;
+    box-shadow: 0 0 10px 0 #02a383;
+}
+
+
 
 .sign {
     text-align: center;
@@ -1841,8 +1847,6 @@ input{
 
 .header-create:hover {
     color: #00b29c;
-    -webkit-box-shadow: 0 0 17px 0 #02a383;
-    box-shadow: 0 0 17px 0 #02a383;
 }
 
 
