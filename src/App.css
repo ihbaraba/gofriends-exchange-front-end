@@ -965,8 +965,7 @@ button.signUpButton {
 }
 
 button.signUpButton:hover {
-    -webkit-box-shadow: 0 0 10px 0 #02a383;
-    box-shadow: 0 0 10px 0 #02a383;
+     box-shadow: 0 0 10px 0 #02a383;
 }
 
 
