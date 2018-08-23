@@ -4,18 +4,18 @@ http://gofriends.ru:3000/docs/#/Quotations/get_quotations__pairId_
 */
 
 const SERVERS = {
-    PRODUCT: {
-        XHR: "https://demo.gofriends.pro",
-        SOCKET: "https://demo.gofriends.pro/ws",
-    },
-    DEV: {
-        XHR: "http://142.93.81.111:3000",
-        SOCKET: "http://142.93.81.111:3001",
-    },
-};
+        PRODUCT: {
+            XHR: "https://demo.gofriends.pro",
+            SOCKET: "wss://demo.gofriends.pro/",
+        },
+        DEV: {
+            XHR: "http://142.93.81.111:3000",
+            SOCKET: "http://142.93.81.111:3001",
+        },
+    };
 
 
-export const current_server = SERVERS.PRODUCT;
+export const current_server = SERVERS.DEV;
 
 
 /**************************
@@ -48,6 +48,8 @@ get currencies pairs
 No parameters
 * */
 export const PAIRS = `${current_server.XHR}/api/v1/pairs/`;
+
+export const MARKETS = `${current_server.XHR}/api/v1/markets/`;
 
 export const ORDERS = `${current_server.XHR}/api/v1/orders`;
 

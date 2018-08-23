@@ -206,6 +206,7 @@ class Graphic extends React.Component {
             console.log("options = ", options);
 
             return getData(options).then(data => {
+                console.log("getData data ====> ", data);
                 callback(data);
                 // return data
             });

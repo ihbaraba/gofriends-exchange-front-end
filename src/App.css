@@ -1600,6 +1600,7 @@ body .ant-tabs.ant-tabs-card > .ant-tabs-bar .ant-tabs-tab {
     display: inline-block;
     padding: 14px 22px;
     margin: 0 2px;
+    cursor: pointer;
 }
 
 body .ant-tabs.ant-tabs-card > .ant-tabs-bar .ant-tabs-tab-active {
@@ -1632,6 +1633,13 @@ body .ant-tabs-bar {
 }
 
 .ant-table-small > .ant-table-content .ant-table-header {
+    background: #05101e;
+}
+
+.ant-table-thead > tr > th {
+    background: #05101e;
+}
+.ant-table-thead > tr > th.ant-table-column-sort {
     background: #05101e;
 }
 

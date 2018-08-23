@@ -152,7 +152,8 @@ class CandleStickChartPanToLoadMore extends React.Component {
         this.canvas = node;
     };
     append = newData => {
-        const { data: inputData } = newData;
+        console.log("newData =====> ", newData,  head(newData), last(newData));
+        // const { data: inputData } = newData;
         const {
             ema26,
             ema12,
@@ -193,9 +194,9 @@ class CandleStickChartPanToLoadMore extends React.Component {
         } = xScaleProvider(calculatedData);
         // } = xScaleProvider(calculatedData.slice(-this.canvas.fullData.length));
 
-        console.log(head(linearData), last(linearData))
+        console.log("nmainData = ", this.state.data,  head(this.state.data), last(this.state.data));
+        console.log("newData = ", linearData.length, head(linearData), last(linearData));
         // console.log(linearData.length)
-
         this.setState({
             ema26,
             ema12,

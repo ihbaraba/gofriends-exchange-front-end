@@ -3,11 +3,11 @@ import PropTypes from 'prop-types'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import {changePair} from '../actions/ExchangeActions'
-import {PAIRS} from '../constants/APIURLS'
+import {PAIRS, MARKETS} from '../constants/APIURLS'
 
 import {getCoinsList} from "./../utils"
-import {Tabs} from "antd";
-// import 'antd/lib/tabs/style/css';
+import {Tabs, Table} from "antd";
+// import 'antd/lib/table/style/css';
 
 
 const TabPane = Tabs.TabPane;
@@ -22,11 +22,24 @@ class CoinsList extends React.Component {
 }
     async componentDidMount() {
         const data = await getCoinsList(PAIRS);
-        console.log("PAIRS ", data);
-        const pairs = data.map( item => ({id: item.id, first: item.baseCurrency.code, second: item.quoteCurrency.code}));
+        const markets_pairs = await getCoinsList(MARKETS);
+        const pairs = data.map( (item, idx) => ({
+            id: item.id,
+            first: item.baseCurrency.code,
+            baseCurrency: item.baseCurrency.code,
+            baseCurrencyName: item.baseCurrency.name,
+            second: item.quoteCurrency.code,
+            quoteCurrency: item.quoteCurrency.code,
+            quoteCurrencyName: item.quoteCurrency.name,
+
+            change: markets_pairs[idx]["change"],
+            price: markets_pairs[idx]["price"],
+            volumeBase: markets_pairs[idx]["volumeBase"],
+            volumeQuote: markets_pairs[idx]["volumeQuote"],
+        }));
         // console.log(pairs);
         const coins = [... new Set( data.map( item => item.baseCurrency.code ))];
-        // console.log("Coins", coins );
+        // console.log("PAIRS ", pairs, coins, markets_pairs, data);
         this.setState({data, coins, pairs});
     }
 
@@ -35,9 +48,9 @@ class CoinsList extends React.Component {
     );
 
     tabsCallback(key) {
-        // console.log(key.target.id, this.state.pairs);
+        // console.log(key, key.id, this.state.pairs);
         const pairs = this.state.pairs;
-        const newCurrent = pairs.find( item => item.id === +key.target.id  );
+        const newCurrent = pairs.find( item => item.id === +key.id  );
         this.props.setCurentCoinsPair2State(newCurrent);
     }
 
@@ -45,17 +58,49 @@ class CoinsList extends React.Component {
         const pairs = this.state.pairs;
         // console.log(items, pairs);
 
-        // return ( items.any )
+        const columns = [{
+            title: 'Coin',
+            dataIndex: 'coin',
+        }, {
+            title: 'Price',
+            dataIndex: 'price',
+            defaultSortOrder: 'descend',
+            sorter: (a, b) => a.price - b.price,
+        }, {
+            title: 'Volume',
+            dataIndex: 'volume',
+            defaultSortOrder: 'descend',
+            sorter: (a, b) => a.volume - b.volume,
+        }, {
+            title: 'Change',
+            dataIndex: 'change',
+            defaultSortOrder: 'descend',
+            sorter: (a, b) => a.change - b.change,
+        }, {
+            title: 'Name',
+            dataIndex: 'name',
+        }];
 
         return (items.map(
-        (item, idx) => <TabPane tab={item} key={idx}>
-             {[...pairs.filter( pair => pair.first === item )]
-            .map((item, idx) => {
-                // console.log(item);
-                return (<div key={idx} onClick={this.tabsCallback} className="pairBar" id={item.id}>{item.first} / {item.second}</div>)})}
-
-        </TabPane>
-    ))
+            (item, idx) => <TabPane tab={item} key={idx}>
+                <Table
+                    columns={columns}
+                    pagination={false}
+                    onRowClick={this.tabsCallback}
+                    dataSource={
+                         [...pairs.filter( pair => pair.first === item )]
+                            .map(item => ({
+                                    coin: item.quoteCurrency,
+                                    price: item.price,
+                                    volume: item["volumeBase"].toFixed(3),
+                                    change: item["change"].toFixed(2),
+                                    name: item.quoteCurrencyName,
+                                    id: item.id
+                                }))
+                    }
+                />
+            </TabPane>
+        ))
     };
 
     render() {
