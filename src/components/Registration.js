@@ -88,7 +88,7 @@ class Registration extends Component {
             confirmPassword: event.target.value
         });
     };
-    
+
     handleTotpCode = (event) => {
         this.setState({
             totpCode: event.target.value
@@ -273,7 +273,11 @@ class Registration extends Component {
                                             Terms of Use
                                         </a>.
                                     </p>
-                                    <button className="signUpButton" type="submit" name="createAccount" disabled={!regFormVAlid} style={{opacity: regFormVAlid ? "1" : "0.33"}}>Register</button>
+
+                                    <button className="signUpButton" type="submit" name="createAccount"
+                                            disabled={!this.validateForm}>
+                                        Register
+                                    </button>
                                 </form>
                             </div>
                                 }
