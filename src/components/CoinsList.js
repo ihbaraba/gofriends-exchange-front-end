@@ -61,28 +61,33 @@ class CoinsList extends React.Component {
         const columns = [{
             title: 'Coin',
             dataIndex: 'coin',
+            className: 'coinRawItems',
         }, {
             title: 'Price',
             dataIndex: 'price',
             defaultSortOrder: 'descend',
             sorter: (a, b) => a.price - b.price,
+            className: 'coinRawItems',
         }, {
             title: 'Volume',
             dataIndex: 'volume',
             defaultSortOrder: 'descend',
             sorter: (a, b) => a.volume - b.volume,
+            className: 'coinRawItems',
         }, {
             title: 'Change',
             dataIndex: 'change',
             defaultSortOrder: 'descend',
             sorter: (a, b) => a.change - b.change,
+            className: 'coinRawItems',
         }, {
             title: 'Name',
             dataIndex: 'name',
+            className: 'coinRawItems',
         }];
 
         return (items.map(
-            (item, idx) => <TabPane tab={item} key={idx}>
+            (item, idx) => <TabPane tab={item} key={idx} className="coinsPairs">
                 <Table
                     columns={columns}
                     pagination={false}
@@ -95,8 +100,9 @@ class CoinsList extends React.Component {
                                     volume: item["volumeBase"].toFixed(3),
                                     change: item["change"].toFixed(2),
                                     name: item.quoteCurrencyName,
-                                    id: item.id
-                                }))
+                                    id: item.id,
+                                    key: `key_${item.id}`,
+                            }))
                     }
                 />
             </TabPane>
@@ -106,8 +112,6 @@ class CoinsList extends React.Component {
     render() {
         // console.log(this.state);
         // const { dispatch, changePair } = this.props
-        // changePair({test: 'test'});
-        // dispatch({test: 'test'});
 
         if (this.state == null) {
             return <div>Loading...</div>

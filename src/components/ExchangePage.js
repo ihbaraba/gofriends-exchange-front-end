@@ -36,13 +36,15 @@ class ExchangePage extends Component {
         };
     }
 
-    firePostToServer = ({price, amount, loanRate, type}) => {
-      console.log("firePostToServer", price, amount, loanRate);
+    // firePostToServer = ({price, amount, loanRate, stop, limit, type}) => {
+    firePostToServer = (bidProps) => {
+
+      // console.log("firePostToServer", this.state.pair.id, bidProps);
       sendOrder({
           rout: ORDERS,
           pairId: this.state.pair.id,
-          type,
-          price, amount,
+          balanceId: this.state.pair.id,
+          ...bidProps
       })
     };
 

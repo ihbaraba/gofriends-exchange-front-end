@@ -30,7 +30,6 @@ span, p, div{
 
 
 /*  ++++++++++++++++=================== antd styles for table ++++++++++++++++===================*/
-
 .ant-table-wrapper {
     zoom: 1;
 }
@@ -150,6 +149,11 @@ span, p, div{
 .ant-table-thead > tr:hover > td,
 .ant-table-tbody > tr:hover > td {
     background: #e6f7ff;
+}
+
+.coinsPairs .ant-table-tbody > tr.ant-table-row-hover > td,
+.coinsPairs .ant-table-tbody > tr:hover > td {
+    cursor: pointer;
 }
 
 .ant-table-thead > tr:hover {
@@ -609,7 +613,6 @@ tr.ant-table-expanded-row:hover {
     overflow: hidden;
     -webkit-transition: -webkit-box-shadow 0.3s ease;
     transition: -webkit-box-shadow 0.3s ease;
-    transition: box-shadow 0.3s ease;
     transition: box-shadow 0.3s ease, -webkit-box-shadow 0.3s ease;
     border-radius: 0;
 }
@@ -1411,8 +1414,9 @@ body.twofactor .column1 {
 }
 
 .orders__item-total {
-    margin-top: 30px;
     margin-bottom: 30px;
+    padding-top: 15px;
+    border-top: #888aaa 2px solid;
 }
 
 .orders__item .ant-input-group-addon {

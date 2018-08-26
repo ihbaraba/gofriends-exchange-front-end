@@ -4,7 +4,7 @@ import {Table} from 'antd';
 import DepthChart from './Graphic/Depth'
 import {getMarcketDpthData} from "./../utils"
 import io from 'socket.io-client';
-import {SOCKET_SOURCE, QUOTATIONS} from "./../constants/APIURLS.js"
+import {SOCKET_SOURCE, QUOTATIONS, ORDERS} from "./../constants/APIURLS.js"
 
 
 // import 'antd/lib/table/style/css';
@@ -36,21 +36,6 @@ class MarketDepth extends Component {
         if (stopTime !== 0) {
             console.time("Getting data from socket time took");
         }
-        // socket.on('connect_error', (error) => {
-        //     console.error("Socket connection to server is fail", error);
-        //     alert("Socket connection to server is fail", error);
-        // });
-        // socket.on('connect_failed', (error) => {
-        //     console.error("Socket connection to server error", error);
-        //     alert("Socket connection to server error", error);
-        // });
-        // socket.on('disconnect', (reason) => {
-        //     if (reason === 'io server disconnect') {
-        //         // the disconnection was initiated by the server, you need to reconnect manually
-        //         socket.connect();
-        //     }
-        //     // else the socket will automatically try to reconnect
-        // });
 
         this.socket.on("order_created_" + socket, (bid) => {
         // console.log("order_created_", bid);
@@ -137,10 +122,10 @@ class MarketDepth extends Component {
 
         await this.setState({marketDepth: {buy: [], sell: []}});
 
-        // console.log("making getMarcketDpthData", {type: "buy", book: id});
+        console.log("making getMarcketDpthData", {type: "buy", book: id});
 
-        const buyDepth = await getMarcketDpthData({type: "buy", book: id});
-        const sellDepth = await getMarcketDpthData({type: "sell", book: id});
+        const buyDepth = await getMarcketDpthData({rout: ORDERS, type: "buy", book: id});
+        const sellDepth = await getMarcketDpthData({rout: ORDERS, type: "sell", book: id});
         // console.log(buyDepth.filter( item => !item.completed), sellDepth.filter( item => !item.completed));
         await this.setState({
                 marketDepth:
