@@ -3,21 +3,20 @@ import request from  'superagent' ;
  // export default async function sendRequestsendOrder ({rout, pairId = 1, balanceId = 1, type, price, amount, stop, limit}) {
  export default async function sendRequestsendOrder (bidProps) {
  //    const {rout, ...restProps} = bidProps;
-    const {rout, ...restProps} = bidProps;
+    const {rout, token, ...restProps} = bidProps;
     const {pairId = 1, balanceId = 1, type, price, amount, stop, limit} = restProps
-          // console.log("sendOrder", rout, restProps);
+          console.log("sendOrder", rout, restProps, token);
 
           request
               .post(rout)
               .set('Accept', 'application/json')
               .set('Content-Type', 'application/json')
+              .set('Authorization', token)
               .send(
                   {
                         "pairId": pairId,
-                         "balanceId": balanceId,
-                        // "type": type,
-                       // "amount": amount,
-                      // "price": price,
+                      "balanceId": balanceId,
+                      token,
                       ...restProps
                           }
               )

@@ -1,10 +1,13 @@
 import React, {Component} from 'react';
+import { connect } from 'react-redux';
 import {Input, Button } from 'antd';
 import io from 'socket.io-client';
 
 // import 'antd/lib/input/style/css';
 
 import '../App.css';
+import {chart_timing} from "../actions/ChartActions";
+import {login_success} from "../actions/UserActions";
 
 class Orders extends Component {
     constructor(props) {
@@ -17,7 +20,7 @@ class Orders extends Component {
             sellPrice: this.props.price,//price of the fist coin of the pair
             buyPrice: this.props.price,//price of the fist coin of the pair
             limit: this.props.price,
-            stop: this.props.price,
+            stopStop: this.props.price,
             price: this.props.price,//price of the fist coin of the pair
             first: this.props.first,//name of the fist coin of the pair
             second: this.props.second,//name of the 2nd coin of the pair
@@ -86,6 +89,7 @@ class Orders extends Component {
         const onBidButtonClick = ({type}) => {
             // console.log("onBidButtonClick", type);
             firePostToServer({
+                token: this.props.token,
                 price: this.state[`${type}Price`],
                 amount: this.state[`${type}Amount`],
                 loanRate: this.state.loanRate,
@@ -97,7 +101,7 @@ class Orders extends Component {
         return (
             <div className="fullHeight" style={{width: "30 rem",}}>
                <div className="orders__item">
-                        <span>"Price:"</span>
+                        <span>Price:</span>
                         <Input {...optionsPrice} />
                     </div>
                 <div className="orders__item">
@@ -133,26 +137,26 @@ class Orders extends Component {
         const optionsAmount = {
             addonAfter: second,
             style: { width: '15rem' },
-            value: this.state[`${type}Amount`],
+            value: this.state[`stopAmount`],
             onChange: (e) => {
                 const amount = +e.target.value;
-                const total =  this.state.stopPrice * amount;
+                const total =  this.state.stopStop * amount;
                 // console.log(amount, total);
                 this.setState({
-                    [`${type}Amount`]: amount,
-                    [`${type}Total`]: total,
+                    [`stopAmount`]: amount,
+                    [`stopTotal`]: total,
                 });
             }
         };
         const optionsStop = {
             addonAfter: second,
             style: { width: '15rem' },
-            value: this.state[`${type}Stop`],
+            value: this.state[`stopStop`],
             onChange: (e) => {
                 const stop = +e.target.value;
                 // const total =  this.state[`${type}Price`] * amount;
                 this.setState({
-                    [`${type}Stop`]: stop,
+                    [`stopStop`]: stop,
                     // [`${type}Total`]: total,
                 });
             }
@@ -160,22 +164,23 @@ class Orders extends Component {
         const optionsTotal = {
             addonAfter: first,
             style: { width: '15rem' },
-            value: this.state[`${type}Total`],
+            value: this.state[`stopTotal`],
             onChange: (e) => {
                 const total = +e.target.value;
-                const price = total / this.state[`${type}Amount`];
+                const price = total / this.state[`stopAmount`];
                 this.setState({
-                    [`${type}Price`]: price,
-                    [`${type}Total`]: total,
+                    [`stopStop`]: price,
+                    [`stopTotal`]: total,
                 });
             }
         };
         const onBidButtonClick = ({type}) => {
             // console.log(type, this.state.stop,this.state.limit, this.state.stopAmount);
             firePostToServer({
-                stop: this.state[`stop`],
-                limit: this.state[`limit`],
-                amount: this.state[`stopAmount`],
+                token: this.props.token,
+                stop: this.state.stopStop,
+                limit: this.state.limit,
+                amount: this.state.stopAmount,
                 type,
             });
         };
@@ -197,14 +202,14 @@ class Orders extends Component {
                     <span>Total:</span>
                     <Input {...optionsTotal}/>
                 </div>
-                <Button type="primary" ghost onClick={() => { onBidButtonClick({type: "buy"})} }>Buy</Button>
-                <Button type="primary" ghost onClick={() => { onBidButtonClick({type: "sell"})} }>Sell</Button>
+                <Button type="primary" ghost onClick={() => { onBidButtonClick({type: "buy"})} } className="">Buy</Button>
+                <Button type="primary" ghost onClick={() => { onBidButtonClick({type: "sell"})} } className="">Sell</Button>
             </div>
         )
     };
 
     render() {
-        // console.log( this.state);
+        console.log( this.props.token );
         const {first, second, price, loanRate, firePostToServer} = this.props;
         const {sellPrice, buyPrice, stopPrice, total} = this.state;
         // console.log(first, second, price, total, loanRate);
@@ -227,7 +232,6 @@ class Orders extends Component {
                         <hr className="ordersHr"/>
                         {this.InputsFrame({first, second, price: sellPrice, loanRate, firePostToServer, type : "sell"})}
 
-
                     </div>
                 </div>
             </div>
@@ -235,4 +239,11 @@ class Orders extends Component {
     }
 }
 
-export default Orders;
+const mapStateToProps = state => ({
+    token: state.user.token,
+});
+
+const mapDispatchToProps = dispatch => ({
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Orders);

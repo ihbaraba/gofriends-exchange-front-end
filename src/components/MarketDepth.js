@@ -15,11 +15,11 @@ class MarketDepth extends Component {
     constructor() {
         super();
 
-        // this.socket = io("http://gofriends.ru:3001");
         this.socket = io(SOCKET_SOURCE);
 
         this.getDataFromSocket = this.getDataFromSocket.bind(this);
         this.getInitialPairDataFromServer = this.getInitialPairDataFromServer.bind(this);
+        this.calculateSum = this.calculateSum.bind(this);
 
         this.state = {
             socket: "undefined",
@@ -28,6 +28,26 @@ class MarketDepth extends Component {
                 sell: [],
             },
         };
+    }
+
+    calculateSum(bids) {
+
+        const calculated = bids.map( bid => {
+            const price = +bid["price"];
+            const amount = +bid["amount"];
+
+                // console.log("amount = ", amount, typeof amount);
+                // console.log("amount.toFixed(5) = ", amount.toFixed(5) );
+            return ({
+                ...bid,
+                price: +price.toFixed(5),
+                amount: +amount.toFixed(5),
+                Sum: +(bid.amount * bid.price).toFixed(5),
+                quoteCurrency: +(bid.amount * bid.price).toFixed(5),
+        })
+        });
+        // console.log(calculated );
+        return calculated
     }
 
     getDataFromSocket(socket, stopTime = 0) {
@@ -41,32 +61,35 @@ class MarketDepth extends Component {
         // console.log("order_created_", bid);
 
             if (bid.completed) return;
-
-            const line = {
-                amount: bid.amount,
-                price: bid.price,
-                Sum: bid.amount * bid.price,
-                quoteCurrency: bid.amount * bid.price,
-                key: bid.id,
-                completed: bid.completed
-            };
+            // console.log(bid);
+            //
+            // const line = {
+            //     amount: bid.amount,
+            //     price: bid.price,
+            //     Sum: bid.amount * bid.price,
+            //     quoteCurrency: bid.amount * bid.price,
+            //     key: bid.id,
+            //     completed: bid.completed
+            // };
 
             const {marketDepth} = this.state;
             const {buy, sell} = marketDepth;
             // console.log(marketDepth, buy, sell);
 
             if (bid.type === "sell") {
-                sell.unshift(line);
+                // sell.unshift(line);
+                sell.unshift(bid);
             }
             if (bid.type === "buy") {
-                buy.unshift(line);
+                // buy.unshift(line);
+                buy.unshift(bid);
             }
 
             this.setState({
                 marketDepth: {
                     ...marketDepth,
-                    buy,
-                    sell,
+                    buy: this.calculateSum(buy),
+                    sell: this.calculateSum(sell),
                 }
             });
         });
@@ -82,8 +105,6 @@ class MarketDepth extends Component {
             const flagBuy = (resOfSearchInBuy !== -1);
             const flagSell = (resOfSearchInSell !== -1);
 
-            // console.log(resOfSearchInBuy, resOfSearchInSell, bid.id, bid);
-
             if (flagSell && !bid.completed) {
                 const foundElement = sell[resOfSearchInSell];
                 sell[resOfSearchInSell] = {...foundElement, amount: foundElement["amount"] - bid.amount}
@@ -92,9 +113,14 @@ class MarketDepth extends Component {
                 const foundElement = buy[resOfSearchInBuy];
                 sell[resOfSearchInBuy] = {...foundElement, amount: foundElement["amount"] - bid.amount}
             }
+// debugger;
+            // const filtredBuy = (flagBuy && bid.completed) ? buy.splice(resOfSearchInBuy, 1) : buy; // remove element
+            // const filtredSell = (flagSell && bid.completed) ? sell.splice(resOfSearchInSell, 1) : sell;
+            // console.log("order_updated_", bid, "  filtredBuy =", filtredBuy, "filtredSell =", filtredSell);
+            if (flagBuy && bid.completed) {buy.splice(resOfSearchInBuy, 1)} ; // remove element
+            if (flagSell && bid.completed) {sell.splice(resOfSearchInSell, 1)} ; // remove element
 
-            const filtredBuy = (flagBuy && bid.completed) ? buy.splice(resOfSearchInBuy, 1) : buy; // remove element
-            const filtredSell = (flagSell && bid.completed) ? sell.splice(resOfSearchInSell, 1) : sell;
+            console.log("order_updated_", bid, "  buy =", buy, "sell =", sell);
 
             // const differenceSell = sell.length - filtredSell.length;
             // const differenceBuy = buy.length - filtredBuy.length;
@@ -103,8 +129,10 @@ class MarketDepth extends Component {
 
             this.setState({
                 marketDepth: {
-                    buy: filtredSell,
-                    sell: filtredBuy,
+                    // sell: filtredSell,
+                    // buy: filtredBuy,
+                    buy: this.calculateSum(buy),
+                    sell: this.calculateSum(sell),
                 }
             });
         });
@@ -122,16 +150,17 @@ class MarketDepth extends Component {
 
         await this.setState({marketDepth: {buy: [], sell: []}});
 
-        console.log("making getMarcketDpthData", {type: "buy", book: id});
-
+        // console.log("making getMarcketDpthData", {type: "buy", book: id});
+        console.log(this.state);
         const buyDepth = await getMarcketDpthData({rout: ORDERS, type: "buy", book: id});
         const sellDepth = await getMarcketDpthData({rout: ORDERS, type: "sell", book: id});
-        // console.log(buyDepth.filter( item => !item.completed), sellDepth.filter( item => !item.completed));
+        // console.log(buyDepth.filter( item => (!item.completed || !item.stop ) ), buyDepth);
         await this.setState({
                 marketDepth:
                     {
-                        buy: buyDepth.filter(item => !item.completed), //save not completed bids only
-                        sell: sellDepth.filter(item => !item.completed),
+                        buy: this.calculateSum(buyDepth.filter(item => !item.completed)), //save not completed bids only
+                        // buy: buyDepth.filter(item => !item.completed).map(item => {console.log(item); return item.toFixed(3)} ),
+                        sell: this.calculateSum(sellDepth.filter(item => !item.completed)),
                     }
             }
             // , ()=> { console.log(this.state) }
@@ -188,6 +217,11 @@ class MarketDepth extends Component {
             width: 150,
         }];
 
+        const buy4DepthChart = buy.filter(item => (!item.completed && !item.stop && !item.limit ));
+        const sell4DepthChart = sell.filter(item => (!item.completed && !item.stop && !item.limit ));
+        // console.log( buy, buy4DepthChart);
+        console.log( buy4DepthChart, sell4DepthChart);
+
         return (
             <div className="marketDepth">
                 <div className="marketDepthTables">
@@ -203,7 +237,7 @@ class MarketDepth extends Component {
                     </div>
                 </div>
                 <div className="marketDepthChart">
-                    { readyForDrawing && <DepthChart buy={buy} sell={sell} height={200}/> }
+                    { readyForDrawing && <DepthChart buy={buy4DepthChart} sell={sell4DepthChart} height={200}/> }
                 </div>
             </div>
         )

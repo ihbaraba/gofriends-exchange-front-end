@@ -69,6 +69,7 @@ class Login extends Component {
                 case 2 :
                 case 3 : alert(usrMsg);//bad password
                     break;
+                case 5 :
                 case 4 : {
                     if (!this.state.showTotpCodeInput) // bad toptCode
                         {this.setState( //show input for toptCode
@@ -81,6 +82,7 @@ class Login extends Component {
                         { alert(usrMsg) }
                 }
                     break;
+
                 default :
             }
         }

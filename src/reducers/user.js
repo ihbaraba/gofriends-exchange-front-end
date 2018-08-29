@@ -19,6 +19,7 @@ export default function userState(state = {}, action) {
 
         case LOGIN_SUCCESS:
             // console.log("userState Reducer ==> ", action, state);
+            localStorage.setItem('exchange_token', action.payload.token);
             return {
                 ...state,
                 token: action.payload.token,

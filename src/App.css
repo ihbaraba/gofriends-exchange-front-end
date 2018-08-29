@@ -1546,10 +1546,12 @@ hr.ordersHr {
 .custom__tr td, .custom__tr td * {
     color: #ffffff;
     font-size: 14px;
+    align-content: center;
 }
 
 body {
-    background-image: url('./img/bg.png') !important;
+    /*background-image: url('./img/bg.png') !important;*/
+    background-color: #3b3052 !important;
 }
 
 .wrapper-all {

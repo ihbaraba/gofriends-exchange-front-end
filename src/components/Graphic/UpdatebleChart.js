@@ -152,7 +152,7 @@ class CandleStickChartPanToLoadMore extends React.Component {
         this.canvas = node;
     };
     append = newData => {
-        console.log("newData =====> ", newData,  head(newData), last(newData));
+        // console.log("newData =====> ", newData,  head(newData), last(newData));
         // const { data: inputData } = newData;
         const {
             ema26,
@@ -194,8 +194,8 @@ class CandleStickChartPanToLoadMore extends React.Component {
         } = xScaleProvider(calculatedData);
         // } = xScaleProvider(calculatedData.slice(-this.canvas.fullData.length));
 
-        console.log("nmainData = ", this.state.data,  head(this.state.data), last(this.state.data));
-        console.log("newData = ", linearData.length, head(linearData), last(linearData));
+        // console.log("nmainData = ", this.state.data,  head(this.state.data), last(this.state.data));
+        // console.log("newData = ", linearData.length, head(linearData), last(linearData));
         // console.log(linearData.length)
         this.setState({
             ema26,
@@ -210,7 +210,10 @@ class CandleStickChartPanToLoadMore extends React.Component {
         });
     };
     componentWillReceiveProps(nextProps) {
-        // console.log("===nextProps.data===", nextProps.data);
+        // console.log("===nextProps.data===", nextProps.data, nextProps);
+        /****************************************************************
+         nextProps.data - is not right data - it is just initial diapason
+         ***************************************************************/
         this.append(nextProps.data);
     }
     async handleDownloadMore(start, end) {
@@ -229,9 +232,12 @@ class CandleStickChartPanToLoadMore extends React.Component {
         await newDiapazone({
             rowsToDownload, start: Math.ceil(start), end, data: this.state.data,
             callback: (newData) => {
-// console.log(newData);
-this.props.chart_range({ start: Math.ceil(start), end});
-                const dataToCalculate = inputData.concat(newData);
+                this.props.chart_range({ start: Math.ceil(start), end}); //save to redux store
+
+
+                // const dataToCalculate = inputData.concat(newData);
+                const dataToCalculate = [...newData, ...inputData];
+
 
                 const calculatedData = ema26(
                     ema12(macdCalculator(smaVolume50(dataToCalculate)))
@@ -240,9 +246,10 @@ this.props.chart_range({ start: Math.ceil(start), end});
                     .initialIndex(Math.ceil(start))
                     .indexCalculator();
                 const { index } = indexCalculator(
-                    calculatedData.slice(-rowsToDownload).concat(prevData)
+                    calculatedData
+                    // calculatedData.slice(-rowsToDownload).concat(prevData)
                 );
-
+                console.log(index, " |||| right data dataToCalculate =", dataToCalculate);
                 const xScaleProvider = discontinuousTimeScaleProviderBuilder()
                     .initialIndex(Math.ceil(start))
                     .withIndex(index);
@@ -252,7 +259,8 @@ this.props.chart_range({ start: Math.ceil(start), end});
                     xScale,
                     xAccessor,
                     displayXAccessor
-                } = xScaleProvider(calculatedData.slice(-rowsToDownload).concat(prevData));
+                } = xScaleProvider(calculatedData);
+                // } = xScaleProvider(calculatedData.slice(-rowsToDownload).concat(prevData));
 
                     this.setState({
                         data: linearData,
@@ -281,6 +289,7 @@ this.props.chart_range({ start: Math.ceil(start), end});
 Zoom and Pan description
 http://rrag.github.io/react-stockcharts/documentation.html#/zoom_and_pan
 */
+// console.log("render data =", data);
         return (
             <ChartCanvas
                 ratio={ratio}

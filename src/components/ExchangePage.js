@@ -62,10 +62,11 @@ class ExchangePage extends Component {
     };
 
     render() {
-        const { user: {token} } = this.props;
-        // console.log("token =", token, this.props, "this.state ==>", this.state);
-        // const isAuthorised = (token !== ""); // ? true : false
-        const isAuthorised = true; // ? true : false
+        const { user: {token} } = this.props; //read from redux state
+        // const token = localStorage.getItem("exchange_token");
+        console.log("token =", token, "this.state ==>", this.state);
+        const isAuthorised = (token !== "") && (token !== null); // ? true : false
+        // const isAuthorised = true; // ? true : false
         const {pair: { first, second, id }, interval, appendFake, } = this.state;
         return (
             <div>
@@ -92,7 +93,7 @@ class ExchangePage extends Component {
                                 dateTo={"2018-07-31"}
                                 take={1000}
                                 interval={interval}
-                                appendFake={appendFake}
+                                appendFake={"false"}
                             />
                             <div className="candlesticks">
                                 <Radio.Group value={interval} onChange={this.handleTimeFrameChange}>
@@ -201,7 +202,6 @@ class ExchangePage extends Component {
         )
     }
 }
-// export default ExchangePage
 
 const mapStateToProps = state => ({
     ...state

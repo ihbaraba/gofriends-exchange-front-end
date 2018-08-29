@@ -21,7 +21,7 @@ const initialState = {
         username: "John",
         countryId: 1,
         password: "1",
-        token: "",
+        token: localStorage.getItem("exchange_token"),
     },
 };
 
