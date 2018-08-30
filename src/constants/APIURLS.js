@@ -53,6 +53,8 @@ export const MARKETS = `${current_server.XHR}/api/v1/markets/`;
 
 export const ORDERS = `${current_server.XHR}/api/v1/orders`;
 
+export const USERINFO = `${current_server.XHR}/api/v1/users/me`;
+
 export const SOCKET_SOURCE = `${current_server.SOCKET}`;
 
 export const COUNTRIES = `${current_server.XHR}/api/v1/countries`;
@@ -60,5 +62,6 @@ export const COUNTRIES = `${current_server.XHR}/api/v1/countries`;
 export const REGISTER = `${current_server.XHR}/api/v1/auth/register`;
 
 export const LOGIN = `${current_server.XHR}/api/v1/auth/login`;
+
 
 

@@ -38,7 +38,7 @@ class Orders extends Component {
 
     InputsFrame = ({first, second, loanRate, firePostToServer, type}) => {
         const optionsPrice = {
-            addonAfter: first,
+            addonAfter: second,
             style: { width: '15rem' },
             value: this.state[`${type}Price`],
             onChange: (e) => {
@@ -51,12 +51,12 @@ class Orders extends Component {
             }
         };
         const optionsAmount = {
-            addonAfter: second,
+            addonAfter: first,
             style: { width: '15rem' },
             value: this.state[`${type}Amount`],
             onChange: (e) => {
                 const amount = +e.target.value;
-                const total =  this.state.stopPrice * amount;
+                const total = this.state[`${type}Price`] * amount;
                 // console.log(amount, total);
                 this.setState({
                     [`${type}Amount`]: amount,
@@ -74,7 +74,7 @@ class Orders extends Component {
             }
         };
         const optionsTotal = {
-            addonAfter: first,
+            addonAfter: second,
             style: { width: '15rem' },
             value: this.state[`${type}Total`],
             onChange: (e) => {
@@ -122,7 +122,7 @@ class Orders extends Component {
     };
     StopLimitFrame = ({first, second, loanRate, firePostToServer, type}) => {
         const optionsLimit = {
-            addonAfter: first,
+            addonAfter: second,
             style: { width: '15rem' },
             value: this.state.limit,
             onChange: (e) => {
@@ -135,7 +135,7 @@ class Orders extends Component {
             }
         };
         const optionsAmount = {
-            addonAfter: second,
+            addonAfter: first,
             style: { width: '15rem' },
             value: this.state[`stopAmount`],
             onChange: (e) => {
@@ -162,7 +162,7 @@ class Orders extends Component {
             }
         };
         const optionsTotal = {
-            addonAfter: first,
+            addonAfter: second,
             style: { width: '15rem' },
             value: this.state[`stopTotal`],
             onChange: (e) => {
@@ -209,7 +209,7 @@ class Orders extends Component {
     };
 
     render() {
-        console.log( this.props.token );
+        // console.log( this.props.token );
         const {first, second, price, loanRate, firePostToServer} = this.props;
         const {sellPrice, buyPrice, stopPrice, total} = this.state;
         // console.log(first, second, price, total, loanRate);
@@ -217,7 +217,7 @@ class Orders extends Component {
             <div className="orders">
                 <div className="ordersTables">
                     <div className="ordersBlock">
-                        <span className="h5">Buy{`${first}`}</span>
+                        <span className="h5">Buy {`${first}`}</span>
                         <hr className="ordersHr"/>
                         {this.InputsFrame({first, second, price: buyPrice, loanRate, firePostToServer, type : "buy"})}
                     </div>
@@ -228,7 +228,7 @@ class Orders extends Component {
 
                     </div>
                     <div className="ordersBlock">
-                        <span className="h5">Sell</span>
+                        <span className="h5">Sell {`${first}`}</span>
                         <hr className="ordersHr"/>
                         {this.InputsFrame({first, second, price: sellPrice, loanRate, firePostToServer, type : "sell"})}
 

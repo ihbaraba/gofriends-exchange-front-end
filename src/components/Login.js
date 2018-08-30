@@ -6,8 +6,9 @@ import API from './api';
 import {connect} from "react-redux";
 // import {simpleAction} from "../actions/simpleAction";
 import {login_success} from "../actions/UserActions";
-import {LOGIN} from "../constants/APIURLS";
+import {LOGIN, USERINFO} from "../constants/APIURLS";
 import {sendRequest} from "./Graphic/utils";
+import {getUserInfo} from "../utils";
 // import '../App.css';
 
 class Login extends Component {
@@ -90,12 +91,8 @@ class Login extends Component {
         {
             // console.log("Login content =", content);
             this.props.login_success({token: content.token});
-            this.props.history.push(`/exchange`);
 
-            // localStorage.setItem('token', content.token);
-            // window.location = "/exchange"
-            // window.history.pushState({}, null, '/exchange');
-            // window.dispatchEvent(new CustomEvent('location-changed'));
+            this.props.history.push(`/exchange`);
         }
     };
 

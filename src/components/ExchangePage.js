@@ -12,14 +12,15 @@ import Graphic from './Graphic/Graphic'
 import MarketDepth from './MarketDepth'
 import '../App.css';
 import CoinsList from "./CoinsList";
+import UserInfo from "./UserInfo";
 import initialState from "../store/initialState";
-import {sendOrder} from "./../utils";
+import {sendOrder, getUserInfo} from "./../utils";
 import { Radio } from "antd";
 // import * as ExchangeActions from '../actions/ExchangeActions'
 // import ExchangePageLogic from './Logics/ExchangePageLogic';
 import "antd/lib/radio/style/css";
-import {ORDERS} from "./../constants/APIURLS.js"
-import {login_success} from "../actions/UserActions";
+import {ORDERS, USERINFO} from "./../constants/APIURLS.js"
+import {login_success, save_user_info, save_user_orders} from "../actions/UserActions";
 import {chart_timing} from "../actions/ChartActions";
 
 
@@ -32,20 +33,41 @@ class ExchangePage extends Component {
         this.handleTimeFrameChange = this.handleTimeFrameChange.bind(this);
         this.firePostToServer = this.firePostToServer.bind(this);
         this.state = {
-            ...initialState
+            ...initialState,
+            isAuthorised: false,
         };
     }
 
-    // firePostToServer = ({price, amount, loanRate, stop, limit, type}) => {
-    firePostToServer = (bidProps) => {
+    async componentDidMount() {
+        /**
+         * Read token -  check if the current session is authorized
+         * then request user data
+         * and save it into redux store
+         **/
+        const { user: {token} } = this.props; //read from redux state
+        console.log("token =", token, "this.state ==>", this.state);
+        const isAuthorised = (token !== "") && (token !== null); // ? true : false
+        // const isAuthorised = true; // ? true : false
+        this.setState({isAuthorised, token});
+        if (isAuthorised) {
+            // this.props.login_success({token});
+            const userInfo = await getUserInfo({rout: USERINFO, token});
+            // console.log("userInfo", userInfo.body);
+            const {body} = userInfo;
+            this.props.save_user_info(body);
+        }
+    }
 
+    async firePostToServer (bidProps) {
       // console.log("firePostToServer", this.state.pair.id, bidProps);
-      sendOrder({
+      const responce = await sendOrder({
           rout: ORDERS,
           pairId: this.state.pair.id,
           balanceId: this.state.pair.id,
           ...bidProps
-      })
+      });
+      // console.log(responce);
+        this.props.save_user_orders(responce.id);
     };
 
     setCurrentCoinsPair2State = (pair) => {
@@ -62,12 +84,8 @@ class ExchangePage extends Component {
     };
 
     render() {
-        const { user: {token} } = this.props; //read from redux state
-        // const token = localStorage.getItem("exchange_token");
-        console.log("token =", token, "this.state ==>", this.state);
-        const isAuthorised = (token !== "") && (token !== null); // ? true : false
-        // const isAuthorised = true; // ? true : false
-        const {pair: { first, second, id }, interval, appendFake, } = this.state;
+        const {pair: { first, second, id }, interval, appendFake, isAuthorised, token, user } = this.state;
+        // console.log("isAuthorised =",isAuthorised);
         return (
             <div>
                 <Header2/>
@@ -111,8 +129,9 @@ class ExchangePage extends Component {
                             <CoinsList setCurentCoinsPair2State={this.setCurrentCoinsPair2State}/>
                         </div>
                     </div>
-                    <div className="centerArea-second"  >
+                    <div className="centerArea-second">
                         <div className="main-content">
+                            <UserInfo short />
                             <MarketDepth currentPair={this.state.currentPair}/>
                             <Orders {...this.state.pair} price={52} amount={1} loanRate={2} firePostToServer={this.firePostToServer}/>
                         </div>
@@ -210,7 +229,8 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
     login_success: (token) => dispatch(login_success(token)),
     chart_timing: (timing) => dispatch(chart_timing(timing)),
-    // simpleAction: () => dispatch(simpleAction())
+    save_user_info: (info) => dispatch(save_user_info(info)),
+    save_user_orders: (order) => dispatch(save_user_orders(order)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ExchangePage);

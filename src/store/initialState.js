@@ -18,10 +18,11 @@ const initialState = {
     },
     user: {
         email: "john.doe@gmail.com",
-        username: "John",
+        username: "Unauthorized",
         countryId: 1,
         password: "1",
         token: localStorage.getItem("exchange_token"),
+        orders: new Set(),
     },
 };
 

@@ -222,7 +222,7 @@ class Registration extends Component {
                                         </div>
                                         <div style={{marginBottom: "2rem",}}>
                                             <label>Country:</label>
-                                            <select key={country} onChange={this.handleChangeCountry} value={country} style={{color: "#222",}}>
+                                            <select key={country} onChange={this.handleChangeCountry} value={country} style={{color: "#eef",}}>
                                                 <option value={country} >{country}</option>
                                                 {Object.keys(options).map(item => (
                                                     <option key={options[item]["code"]} value={options[item]["name"]} code={item.code} id={options[item]["id"]}>
@@ -285,11 +285,13 @@ class Registration extends Component {
                                 <div className="column1">
                                     <form onSubmit={this.handleSignInSubmit}>
                                         <fieldset className="aboveCaptcha">
-                                            <p>Thank you for registration. </p>
-                                            <p><strong>We have 2 factor authentication enabled.</strong> </p>
-                                            <p><strong>Please scan this QR-code by Google Authenticator application of your smartphone.</strong> </p>
+                                            <p><strong>Thank you for registration. </strong></p>
+                                            <p>You can move directly to <a href="/exchange">trading page</a> or  </p>
+                                            <p>if you need to make your account more secure,  </p>
+                                            <p>we can offer you to use 2 factor authentication. </p>
+                                            <p>To do this, please scan this QR-code by Google Authenticator application of your smartphone. </p>
                                             <img src={QRImage} alt="Please scan it" />
-                                            <p><strong>Enter Your Google Authenticator Six-Digit Code.</strong> </p>
+                                            <p>and enter Your Google Authenticator Six-Digit Code. </p>
                                             <input
                                                 className="userPassInput"
                                                 type="totpCode"

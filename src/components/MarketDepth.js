@@ -1,13 +1,15 @@
 import React, {Component} from 'react';
+import { connect } from 'react-redux'
 import PropTypes from 'prop-types';
 import {Table} from 'antd';
 import DepthChart from './Graphic/Depth'
 import {getMarcketDpthData} from "./../utils"
 import io from 'socket.io-client';
 import {SOCKET_SOURCE, QUOTATIONS, ORDERS} from "./../constants/APIURLS.js"
-
-
-// import 'antd/lib/table/style/css';
+import {save_user_info} from "../actions/UserActions";
+import {chart_timing} from "../actions/ChartActions";
+import {USERINFO} from "../constants/APIURLS";
+import {getUserInfo} from "../utils";
 
 
 class MarketDepth extends Component {
@@ -36,8 +38,6 @@ class MarketDepth extends Component {
             const price = +bid["price"];
             const amount = +bid["amount"];
 
-                // console.log("amount = ", amount, typeof amount);
-                // console.log("amount.toFixed(5) = ", amount.toFixed(5) );
             return ({
                 ...bid,
                 price: +price.toFixed(5),
@@ -45,8 +45,8 @@ class MarketDepth extends Component {
                 Sum: +(bid.amount * bid.price).toFixed(5),
                 quoteCurrency: +(bid.amount * bid.price).toFixed(5),
         })
-        });
-        // console.log(calculated );
+
+        })
         return calculated
     }
 
@@ -57,31 +57,20 @@ class MarketDepth extends Component {
             console.time("Getting data from socket time took");
         }
 
+        const { orders } = this.props;
+
         this.socket.on("order_created_" + socket, (bid) => {
-        // console.log("order_created_", bid);
 
             if (bid.completed) return;
-            // console.log(bid);
-            //
-            // const line = {
-            //     amount: bid.amount,
-            //     price: bid.price,
-            //     Sum: bid.amount * bid.price,
-            //     quoteCurrency: bid.amount * bid.price,
-            //     key: bid.id,
-            //     completed: bid.completed
-            // };
 
             const {marketDepth} = this.state;
             const {buy, sell} = marketDepth;
             // console.log(marketDepth, buy, sell);
 
             if (bid.type === "sell") {
-                // sell.unshift(line);
                 sell.unshift(bid);
             }
             if (bid.type === "buy") {
-                // buy.unshift(line);
                 buy.unshift(bid);
             }
 
@@ -113,24 +102,22 @@ class MarketDepth extends Component {
                 const foundElement = buy[resOfSearchInBuy];
                 sell[resOfSearchInBuy] = {...foundElement, amount: foundElement["amount"] - bid.amount}
             }
-// debugger;
-            // const filtredBuy = (flagBuy && bid.completed) ? buy.splice(resOfSearchInBuy, 1) : buy; // remove element
-            // const filtredSell = (flagSell && bid.completed) ? sell.splice(resOfSearchInSell, 1) : sell;
-            // console.log("order_updated_", bid, "  filtredBuy =", filtredBuy, "filtredSell =", filtredSell);
             if (flagBuy && bid.completed) {buy.splice(resOfSearchInBuy, 1)} ; // remove element
             if (flagSell && bid.completed) {sell.splice(resOfSearchInSell, 1)} ; // remove element
 
-            console.log("order_updated_", bid, "  buy =", buy, "sell =", sell);
+            // console.log("order_updated_", bid, "  buy =", buy, "sell =", sell);
 
-            // const differenceSell = sell.length - filtredSell.length;
-            // const differenceBuy = buy.length - filtredBuy.length;
-            // if ( differenceSell !== 0) {console.log('!! differenceSell=', differenceSell);}
-            // if ( differenceBuy !== 0) {console.log('!! differenceBuy=', differenceBuy);}
+            orders.forEach( async (value, valueAgaine, set) => {
+                if ( value === bid.id)
+                {
+                    //update user info - call SAVE_USER_INFO action
+                    const userInfo = await getUserInfo({rout: USERINFO, token: this.props.user.token});
+                    this.props.save_user_info(userInfo.body);
+                }
+            }  );
 
             this.setState({
                 marketDepth: {
-                    // sell: filtredSell,
-                    // buy: filtredBuy,
                     buy: this.calculateSum(buy),
                     sell: this.calculateSum(sell),
                 }
@@ -151,9 +138,9 @@ class MarketDepth extends Component {
         await this.setState({marketDepth: {buy: [], sell: []}});
 
         // console.log("making getMarcketDpthData", {type: "buy", book: id});
-        console.log(this.state);
-        const buyDepth = await getMarcketDpthData({rout: ORDERS, type: "buy", book: id});
-        const sellDepth = await getMarcketDpthData({rout: ORDERS, type: "sell", book: id});
+        // console.log(this.state);
+        const buyDepth = await getMarcketDpthData({rout: ORDERS, type: "buy", take: 50, book: id, price: "asc"});
+        const sellDepth = await getMarcketDpthData({rout: ORDERS, type: "sell", take: 50, book: id, price: "desc"});
         // console.log(buyDepth.filter( item => (!item.completed || !item.stop ) ), buyDepth);
         await this.setState({
                 marketDepth:
@@ -219,20 +206,19 @@ class MarketDepth extends Component {
 
         const buy4DepthChart = buy.filter(item => (!item.completed && !item.stop && !item.limit ));
         const sell4DepthChart = sell.filter(item => (!item.completed && !item.stop && !item.limit ));
-        // console.log( buy, buy4DepthChart);
-        console.log( buy4DepthChart, sell4DepthChart);
+        // console.log(buy4DepthChart);
 
         return (
             <div className="marketDepth">
                 <div className="marketDepthTables">
                     <div className="marketDepthColumns">
                         <h5>BUY ORDERS</h5>
-                        <Table columns={columns} dataSource={buy} bordered={false} pagination={false} scroll={{y: 240}}
+                        <Table columns={columns} dataSource={buy.sort((a, b) => b.price - a.price )} bordered={false} pagination={false} scroll={{y: 240}}
                                size="small" rowClassName="custom__tr"/>
                     </div>
                     <div className="marketDepthColumns">
                         <h5>SELL ORDERS</h5>
-                        <Table columns={columns} dataSource={sell} bordered={false} pagination={false} scroll={{y: 240}}
+                        <Table columns={columns} dataSource={sell.sort((a, b) => a.price - b.price )} bordered={false} pagination={false} scroll={{y: 240}}
                                size="small" rowClassName="custom__tr"/>
                     </div>
                 </div>
@@ -256,5 +242,22 @@ MarketDepth.propTypes = {
     currentPair: PropTypes.object.isRequired,
 };
 
-export default MarketDepth;
+// export default MarketDepth;
 
+
+MarketDepth.propTypes = {
+    // dispatch: PropTypes.func.isRequired
+}
+
+function mapStateToProps(state) {
+    return {
+        user:  state.user,
+        orders: state.user.orders
+    }
+}
+
+const mapDispatchToProps = dispatch => ({
+    save_user_info: (info) => dispatch(save_user_info(info)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(MarketDepth)

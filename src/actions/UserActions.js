@@ -4,7 +4,8 @@ import {
     LOGIN_REQUEST,
     LOGIN_FAIL,
     LOGIN_SUCCESS,
-    LOGOUT_SUCCESS
+    LOGOUT_SUCCESS,
+    SAVE_USER_INFO,
 } from '../constants'
 
 export function logout() {
@@ -24,6 +25,20 @@ export const login_success = (token) =>  dispatch => {
     dispatch({
         type: 'LOGIN_SUCCESS',
         payload: token
+    })
+};
+export const save_user_info = (info) =>  dispatch => {
+    console.log("save_user_info", info);
+    dispatch({
+        type: 'SAVE_USER_INFO',
+        payload: info
+    })
+};
+export const save_user_orders = (orders) =>  dispatch => {
+    console.log("save_user_orders", orders);
+    dispatch({
+        type: 'SAVE_USER_ORDERS',
+        payload: orders
     })
 };
 /* eslint-enable no-unused-vars */
