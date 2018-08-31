@@ -21,7 +21,9 @@ import Activate from './components/Activate';
 import ChangePassword from './components/ChangePassword';
 import Balances from './components/Balances';
 import Orders from './components/Orders';
+import OpenOrders from './components/OpenOrders';
 import LoginHistory from './components/LoginHistory';
+import Confirm from './components/Confirm';
 // import {changePair} from "./actions/ExchangeActions";
 import {simpleAction} from "./actions/simpleAction";
 // import {bindActionCreators} from "redux/index";
@@ -53,7 +55,9 @@ class App extends Component {
                         <Route path="/changepassword" component={ChangePassword}/>
                         <Route path="/balances" component={Balances}/>
                         <Route path="/orders" component={Orders}/>
+                        <Route path="/OpenOrders" component={OpenOrders}/>
                         <Route path="/loginhistory" component={LoginHistory}/>
+                        <Route path="/Confirm" component={Confirm}/>
                         <Route path="*" component={NotFound}/>
                     </Switch>
                 </div>
