@@ -116,7 +116,12 @@ class Orders extends Component {
                     <span>Total:</span>
                     <Input {...optionsTotal}/>
                 </div>
-                <Button type="primary" ghost onClick={() => { onBidButtonClick({type})} }>{type}</Button>
+
+                <div className="ordBtn">
+                    <Button type="primary" ghost onClick={() => { onBidButtonClick({type})} }>{type}</Button>
+                </div>
+
+
             </div>
         )
     };
@@ -202,8 +207,13 @@ class Orders extends Component {
                     <span>Total:</span>
                     <Input {...optionsTotal}/>
                 </div>
-                <Button type="primary" ghost onClick={() => { onBidButtonClick({type: "buy"})} } className="">Buy</Button>
-                <Button type="primary" ghost onClick={() => { onBidButtonClick({type: "sell"})} } className="">Sell</Button>
+
+                <div className="ordBtn">
+                    <Button type="primary" ghost onClick={() => { onBidButtonClick({type: "buy"})} } className="">Buy</Button>
+                    <Button type="primary" ghost onClick={() => { onBidButtonClick({type: "sell"})} } className="">Sell</Button>
+                </div>
+
+
             </div>
         )
     };

@@ -137,13 +137,13 @@ class ContactUs extends Component {
                                         <td>Message:</td>
                                         <td>
                                             <textarea
-                                            rows="10"
-                                            cols="20"
-                                            name="message"
-                                            id="message"
-                                            value={this.state.message}
-                                            onChange={this.handleMessage}
-                                            required
+                                                rows="10"
+                                                cols="20"
+                                                name="message"
+                                                id="message"
+                                                value={this.state.message}
+                                                onChange={this.handleMessage}
+                                                required
                                             ></textarea></td>
                                     </tr>
 
@@ -160,14 +160,7 @@ class ContactUs extends Component {
                             </form>
                         </div>
 
-                        <div className="column2">
-                            <h3 className="standard">
-                                <a href="#" className="forgot">
-                                <i className="fa fa-medkit start"></i>Contact Support</a></h3>
-                            <p>All Technical Support issues are handled though our support system.</p>
 
-
-                        </div>
 
                     </div>
                 </div>
