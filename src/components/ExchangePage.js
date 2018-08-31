@@ -10,6 +10,7 @@ import Footer from './Footer';
 import Orders from './Orders';
 import Graphic from './Graphic/Graphic'
 import MarketDepth from './MarketDepth'
+import OrdersHistory from './OrdersHistory'
 import '../App.css';
 import CoinsList from "./CoinsList";
 import UserInfo from "./UserInfo";
@@ -134,6 +135,7 @@ class ExchangePage extends Component {
                             <UserInfo short />
                             <MarketDepth currentPair={this.state.currentPair}/>
                             <Orders {...this.state.pair} price={52} amount={1} loanRate={2} firePostToServer={this.firePostToServer}/>
+                            <OrdersHistory />
                         </div>
                         <div className="box notices">
                             <div className="head">

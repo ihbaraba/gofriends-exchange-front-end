@@ -50,9 +50,7 @@ class Registration extends Component {
         getData(options).then(countries => {
             const countries2state = countries.reduce((countries, item) => ({...countries, [item.name]: item}), {});
             // console.log("countries2state=", countries2state, Object.keys(countries2state));
-            this.setState({countries: countries2state}
-            // , ()=> { console.log("countries=", countries)}
-            )
+            this.setState({countries: countries2state});
         });
     };
 
@@ -300,7 +298,6 @@ class Registration extends Component {
                                                 placeholder="TotpCode"
                                                 value={this.state.totpCode}
                                                 onChange={this.handleTotpCode}
-                                                required
                                             />
                                             <button className="ant-btn fixed-width-btn" type="submit" name="login">Sign in</button>
                                         </fieldset>

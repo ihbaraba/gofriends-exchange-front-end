@@ -7,7 +7,7 @@ import request from  'superagent' ;
               .set('Accept', 'application/json')
               .set('Content-Type', 'application/json')
               .set('Authorization', token)
-              .send()
+              .query()
               // .then(res => {
               //     console.log(res);
               //     return res;

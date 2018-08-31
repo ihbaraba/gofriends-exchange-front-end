@@ -21,6 +21,7 @@ import Activate from './components/Activate';
 import ChangePassword from './components/ChangePassword';
 import Balances from './components/Balances';
 import Orders from './components/Orders';
+import UserOrdersHistory from './components/UserOrderHistory';
 import LoginHistory from './components/LoginHistory';
 import UserInfo from './components/UserInfo';
 // import {changePair} from "./actions/ExchangeActions";
@@ -54,7 +55,7 @@ class App extends Component {
                         <Route path="/changepassword" component={ChangePassword}/>
                         {/*<Route path="/balances" component={Balances}/>*/}
                         <Route path="/balances" component={UserInfo}/>
-                        <Route path="/orders" component={Orders}/>
+                        <Route path="/orders" component={UserOrdersHistory}/>
                         <Route path="/loginhistory" component={LoginHistory}/>
                         <Route path="*" component={NotFound}/>
                     </Switch>

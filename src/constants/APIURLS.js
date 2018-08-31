@@ -15,7 +15,7 @@ const SERVERS = {
     };
 
 
-export const current_server = SERVERS.PRODUCT;
+export const current_server = SERVERS.DEV;
 
 
 /**************************
@@ -52,6 +52,10 @@ export const PAIRS = `${current_server.XHR}/api/v1/pairs/`;
 export const MARKETS = `${current_server.XHR}/api/v1/markets/`;
 
 export const ORDERS = `${current_server.XHR}/api/v1/orders`;
+
+export const USERORDERSHISTORY = `${current_server.XHR}/api/v1/users/me/orders`;
+
+export const ORDERSHISTORY = `${current_server.XHR}/api/v1/orders`;
 
 export const USERINFO = `${current_server.XHR}/api/v1/users/me`;
 
