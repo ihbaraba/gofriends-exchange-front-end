@@ -7,8 +7,11 @@ import {connect} from "react-redux";
 import {getData, sendRequest} from "./Graphic/utils";
 import {REGISTER, COUNTRIES, LOGIN} from "../constants/APIURLS";
 import {login_success} from "../actions/UserActions";
-
+import { Switch } from 'antd';
 import '../App.css';
+// import 'antd/dist/antd.css';
+
+
 
 class Registration extends Component {
     constructor(props) {
@@ -189,8 +192,12 @@ class Registration extends Component {
     };
 
     render() {
-        const {countries: options, country, showQRCode, QRImage} = this.state;
+        const {countries: options, country, QRImage} = this.state;
+        const showQRCode = true;
         const regFormVAlid = this.validateForm();
+        function onChange(checked) {
+            console.log(`switch to ${checked}`);
+        }
         return (
             <div>
                 <Header/>
@@ -284,6 +291,16 @@ class Registration extends Component {
                                     <form onSubmit={this.handleSignInSubmit}>
                                         <fieldset className="aboveCaptcha">
                                             <p><strong>Thank you for registration. </strong></p>
+
+
+                                            <Switch defaultChecked onChange={onChange} />
+
+
+
+
+
+
+
                                             <p>You can move directly to <a href="/exchange">trading page</a> or  </p>
                                             <p>if you need to make your account more secure,  </p>
                                             <p>we can offer you to use 2 factor authentication. </p>
