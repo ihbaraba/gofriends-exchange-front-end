@@ -1546,8 +1546,6 @@ body.twofactor .column1 {
     padding: 25px 0;
     background: #212c3b;
     margin-top: 90px;
-    flex: 0 0 auto;
-
 }
 
 .wrap {
@@ -2415,6 +2413,25 @@ input{
     }
 }
 
+@media (max-width: 1300px) and (max-device-width: 1300px) {
+    .orders__item .ant-input-group-wrapper {
+        flex-basis: 100%;
+        margin-top: 4px;
+    }
+    .rightSide {
+        width: 66%;
+        order: 1;
+    }
+
+    .side {
+        width: 30%;
+        order: 2;
+        margin-left: auto;
+    }
+}
+
+
+
 @media (max-width: 1200px) and (max-device-width: 1200px) {
 
     .orders__item .ant-input-group-wrapper {
@@ -2422,7 +2439,7 @@ input{
         margin-top: 4px;
     }
     .rightSide {
-        width: 70%;
+        width: 66%;
         order: 1;
     }
 
@@ -2434,6 +2451,45 @@ input{
 
 
 }
+
+
+
+@media (max-width: 1080px) and (max-device-width: 1080px) {
+    .orders__item .ant-input-group-wrapper {
+        flex-basis: 100%;
+        margin-top: 4px;
+    }
+    .rightSide {
+        width: 66%;
+        order: 1;
+    }
+
+    .side {
+        width: 100%;
+        order: 2;
+        margin-left: auto;
+    }
+}
+
+
+@media (max-width: 1079px) and (max-device-width: 1079px) {
+    .orders__item .ant-input-group-wrapper {
+        flex-basis: 100%;
+        margin-top: 4px;
+    }
+    .rightSide {
+        width: 64%;
+        order: 1;
+    }
+
+    .side {
+        width: 30%;
+        order: 2;
+        margin-left: auto;
+    }
+}
+
+
 
 @media (max-width: 1050px) and (max-device-width: 1050px) {
     body .ant-table-small > .ant-table-content > .ant-table-header > table > .ant-table-thead > tr > th, body .ant-table-small > .ant-table-content > .ant-table-body > table > .ant-table-thead > tr > th, body .ant-table-small > .ant-table-content > .ant-table-scroll > .ant-table-header > table > .ant-table-thead > tr > th, body .ant-table-small > .ant-table-content > .ant-table-scroll > .ant-table-body > table > .ant-table-thead > tr > th, body .ant-table-small > .ant-table-content > .ant-table-fixed-left > .ant-table-header > table > .ant-table-thead > tr > th, body .ant-table-small > .ant-table-content > .ant-table-fixed-right > .ant-table-header > table > .ant-table-thead > tr > th, body .ant-table-small > .ant-table-content > .ant-table-fixed-left > .ant-table-body-outer > .ant-table-body-inner > table > .ant-table-thead > tr > th, body .ant-table-small > .ant-table-content > .ant-table-fixed-right > .ant-table-body-outer > .ant-table-body-inner > table > .ant-table-thead > tr > th, body .ant-table-small > .ant-table-content > .ant-table-header > table > .ant-table-tbody > tr > td, body .ant-table-small > .ant-table-content > .ant-table-body > table > .ant-table-tbody > tr > td, body .ant-table-small > .ant-table-content > .ant-table-scroll > .ant-table-header > table > .ant-table-tbody > tr > td, body .ant-table-small > .ant-table-content > .ant-table-scroll > .ant-table-body > table > .ant-table-tbody > tr > td, body .ant-table-small > .ant-table-content > .ant-table-fixed-left > .ant-table-header > table > .ant-table-tbody > tr > td, body .ant-table-small > .ant-table-content > .ant-table-fixed-right > .ant-table-header > table > .ant-table-tbody > tr > td, body .ant-table-small > .ant-table-content > .ant-table-fixed-left > .ant-table-body-outer > .ant-table-body-inner > table > .ant-table-tbody > tr > td, body body .ant-table-small > .ant-table-content > .ant-table-fixed-right > .ant-table-body-outer > .ant-table-body-inner > table > .ant-table-tbody > tr > td {
@@ -2522,7 +2578,7 @@ input{
         font-size:30px;
     }
 
-    .featureBanner.twoCol .contentWrapper {св
+    .featureBanner.twoCol .contentWrapper {
     width:100%;
     }
 
