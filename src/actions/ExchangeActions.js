@@ -4,12 +4,12 @@ import {
     CHANGE_PAIR,
 } from '../constants'
 
-export function changePair(payload) {
-    console.log("changePair action", payload);
-    // TODO
-    return {
-        type: CHANGE_PAIR
-    }
-}
 
+export const pair = (payload) =>  dispatch => {
+    console.log("change pair action", payload);
+    dispatch({
+        type: 'CHANGE_PAIR',
+        payload: payload
+    })
+};
 /* eslint-enable no-unused-vars */

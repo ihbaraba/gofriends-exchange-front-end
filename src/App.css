@@ -1448,8 +1448,8 @@ input, select, textarea {
 
 .rightSide {
     /*flex: 1 0 auto;*/
-    width: 70%;
-    flex: 1 0 auto;
+    width: 66%;
+    /*flex: 1 0 auto;*/
     margin-right: 1rem;
 }
 
@@ -1463,8 +1463,8 @@ input, select, textarea {
     /*float: right;*/
     /*margin: 15px;*/
     /*min-width: 1px;*/
-    flex: 0 0 500px;
-    width: 30%;
+    /*flex: 0 0 500px;*/
+    width: 350px;
 
 }
 
@@ -2119,7 +2119,7 @@ body .ant-table-small > .ant-table-content > .ant-table-header > table > .ant-ta
 
 body .ant-tabs.ant-tabs-card > .ant-tabs-bar .ant-tabs-tab {
     background: #0d1d36;
-    color: #374f72;
+    color: #eee;
     border-radius: 6px;
     border-color: transparent;
     display: inline-block;
@@ -2402,12 +2402,12 @@ input{
     }
 
     .rightSide {
-        width: 70%;
+        width: 66%;
         order: 1;
     }
 
     .side {
-        width: 30%;
+        width: 300px;
         order: 2;
         margin-left: auto;
     }
@@ -2439,7 +2439,7 @@ input{
         margin-top: 4px;
     }
     .rightSide {
-        width: 66%;
+        width: 70%;
         order: 1;
     }
 
@@ -2454,40 +2454,6 @@ input{
 
 
 
-@media (max-width: 1080px) and (max-device-width: 1080px) {
-    .orders__item .ant-input-group-wrapper {
-        flex-basis: 100%;
-        margin-top: 4px;
-    }
-    .rightSide {
-        width: 66%;
-        order: 1;
-    }
-
-    .side {
-        width: 100%;
-        order: 2;
-        margin-left: auto;
-    }
-}
-
-
-@media (max-width: 1079px) and (max-device-width: 1079px) {
-    .orders__item .ant-input-group-wrapper {
-        flex-basis: 100%;
-        margin-top: 4px;
-    }
-    .rightSide {
-        width: 64%;
-        order: 1;
-    }
-
-    .side {
-        width: 30%;
-        order: 2;
-        margin-left: auto;
-    }
-}
 
 
 
@@ -2503,7 +2469,7 @@ input{
     }
 
     .rightSide {
-        width: 70%;
+        width: 66%;
     }
 
     .notices {
@@ -2527,11 +2493,11 @@ input{
     }
 
     .side {
-        flex-basis: 100%;
+        width: 100%;
     }
 
     .rightSide {
-        width: 70%;
+        width: 100%;
     }
 
     .ordersTables {
@@ -2568,6 +2534,7 @@ input{
         margin-top: 25px;
     }
 }
+
 
 @media (max-width: 768px) and (max-device-width: 768px) {
 
@@ -2680,6 +2647,14 @@ input{
 
     .header .tabs {
         margin-bottom: 20px;
+    }
+
+    .side {
+        width: 100%;
+    }
+
+    .rightSide {
+        width: 100%;
     }
 
 }

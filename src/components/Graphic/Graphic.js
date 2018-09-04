@@ -74,10 +74,10 @@ class Graphic extends React.Component {
                 interval: nextInterval,
                 appendFake,
             };
-            console.log("options = ", options);
+            // console.log("options = ", options);
 
             getData(options).then(data => {
-                console.log(data);
+                // console.log(data);
                 if (data.length === 0)
                 {
                     alert("Historical and current data for this pair is absent");

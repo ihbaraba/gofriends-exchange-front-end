@@ -21,7 +21,8 @@ class UserOrder extends React.Component {
         };
 }
 
-    calculateSum(bids) {
+    calculateSum(bids = []) {
+
         return bids.map( bid => {
             const price = +bid["price"];
             const amount = +bid["initialAmount"];
@@ -55,7 +56,8 @@ class UserOrder extends React.Component {
             parameters: { completed, withStop: "true", take: 50, sort: "createdAt:asc"},
             token: this.props.user.token,
         });
-        console.log(orders, loadedOrders.body);
+        // console.log(orders, loadedOrders.body, loadedOrders["body"].length );
+        // if
         this.setState({
                 [orders]: this.calculateSum(loadedOrders.body)
             }

@@ -28,14 +28,14 @@ export const login_success = (token) =>  dispatch => {
     })
 };
 export const save_user_info = (info) =>  dispatch => {
-    console.log("save_user_info", info);
+    // console.log("save_user_info", info);
     dispatch({
         type: 'SAVE_USER_INFO',
         payload: info
     })
 };
 export const save_user_orders = (orders) =>  dispatch => {
-    console.log("save_user_orders", orders);
+    // console.log("save_user_orders", orders);
     dispatch({
         type: 'SAVE_USER_ORDERS',
         payload: orders

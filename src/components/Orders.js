@@ -38,12 +38,15 @@ class Orders extends Component {
         };
     }
     checkKeyPress(evt){
-        // console.log(evt.target.value);
-        if((evt.charCode>= 48 && evt.charCode <= 57) || evt.charCode== 46 ||evt.charCode == 0){
-            // if(data.indexOf('.') > -1){
-            //     if(evt.charCode== 46)
-            //         evt.preventDefault();
-            // }
+        // console.log(evt.charCode, evt.target.value);
+        const data = evt.target.value;
+        if((evt.charCode>= 48 && evt.charCode <= 57) || evt.charCode == 46 ||evt.charCode == 0){
+
+            console.log(evt.charCode, data);
+            if(data.indexOf('.') > -1){
+                if(evt.charCode== 46)
+                    evt.preventDefault();
+            }
         }else
             evt.preventDefault();
     };
@@ -61,23 +64,28 @@ class Orders extends Component {
             value: this.state[`${type}Price`],
             onKeyPress: (e) => { this.checkKeyPress(e) },
             onChange: (e) => {
-                const price = +e.target.value;
-                console.log(price);
-                const total = price * this.state[`${type}Amount`];
+                const price = e.target.value;
+                // console.log(price);
+                const total = +price * (+this.state[`${type}Amount`]);
                 this.setState({
                     [`${type}Price`]: price,
                     [`${type}Total`]: total,
                 });
             }
         };
+
         const optionsAmount = {
             addonAfter: first,
             style: { width: '15rem' },
             value: this.state[`${type}Amount`],
             onKeyPress: (e) => { this.checkKeyPress(e) },
             onChange: (e) => {
-                const amount = +e.target.value;
-                const total = this.state[`${type}Price`] * amount;
+                const amount = e.target.value;
+                // const amountStr = +e.target.value;
+                // const amount = amountStr.toFixed(5);
+                // const amount = parseFloat(e.target.value);
+                console.log(amount);
+                const total = +this.state[`${type}Price`] * (+amount);
                 // console.log(amount, total);
                 this.setState({
                     [`${type}Amount`]: amount,
@@ -91,7 +99,7 @@ class Orders extends Component {
             value: this.state.loanRate,
             onKeyPress: (e) => { this.checkKeyPress(e) },
             onChange: (e) => {
-                const val = +e.target.value;
+                const val = e.target.value;
                 this.setState({loanRate: val});
             }
         };
@@ -101,7 +109,8 @@ class Orders extends Component {
             value: this.state[`${type}Total`],
             onKeyPress: (e) => { this.checkKeyPress(e) },
             onChange: (e) => {
-                const total = +e.target.value;
+                const total = e.target.value;
+                // const total = (e.target.value).toFixed(2);
                 const price = total / this.state[`${type}Amount`];
                 this.setState({
                     [`${type}Price`]: price,
@@ -113,9 +122,9 @@ class Orders extends Component {
             // console.log("onBidButtonClick", type);
             firePostToServer({
                 token: this.props.token,
-                price: this.state[`${type}Price`],
-                amount: this.state[`${type}Amount`],
-                loanRate: this.state.loanRate,
+                price: 1*this.state[`${type}Price`],
+                amount: 1*this.state[`${type}Amount`],
+                loanRate: 1*this.state.loanRate,
                 type,
             });
         };
@@ -155,8 +164,8 @@ class Orders extends Component {
             value: this.state.limit,
             onKeyPress: (e) => { this.checkKeyPress(e) },
             onChange: (e) => {
-                const limit = +e.target.value;
-                const stopTotal = limit * this.state.stopAmount;
+                const limit = e.target.value;
+                const stopTotal = +limit * this.state.stopAmount;
                 this.setState({
                     limit,
                     stopTotal,
@@ -169,8 +178,8 @@ class Orders extends Component {
             value: this.state[`stopAmount`],
             onKeyPress: (e) => { this.checkKeyPress(e) },
             onChange: (e) => {
-                const amount = +e.target.value;
-                const total =  this.state.stopStop * amount;
+                const amount = e.target.value;
+                const total = +this.state.stopStop * (+amount);
                 // console.log(amount, total);
                 this.setState({
                     [`stopAmount`]: amount,
@@ -184,7 +193,7 @@ class Orders extends Component {
             value: this.state[`stopStop`],
             onKeyPress: (e) => { this.checkKeyPress(e) },
             onChange: (e) => {
-                const stop = +e.target.value;
+                const stop = e.target.value;
                 // const total =  this.state[`${type}Price`] * amount;
                 this.setState({
                     [`stopStop`]: stop,
@@ -198,8 +207,8 @@ class Orders extends Component {
             value: this.state[`stopTotal`],
             onKeyPress: (e) => { this.checkKeyPress(e) },
             onChange: (e) => {
-                const total = +e.target.value;
-                const price = total / this.state[`stopAmount`];
+                const total = e.target.value;
+                const price = +total / this.state[`stopAmount`];
                 this.setState({
                     [`stopStop`]: price,
                     [`stopTotal`]: total,
@@ -210,9 +219,9 @@ class Orders extends Component {
             // console.log(type, this.state.stop,this.state.limit, this.state.stopAmount);
             firePostToServer({
                 token: this.props.token,
-                stop: this.state.stopStop,
-                limit: this.state.limit,
-                amount: this.state.stopAmount,
+                stop: (1) * this.state.stopStop,
+                limit: (1) * this.state.limit,
+                amount: (1) * this.state.stopAmount,
                 type,
             });
         };
@@ -249,7 +258,7 @@ class Orders extends Component {
         // console.log( this.props.token );
         const {first, second, price, loanRate, firePostToServer} = this.props;
         const {sellPrice, buyPrice, stopPrice, total} = this.state;
-        console.log(first, second, price, total, loanRate);
+        // console.log(first, second, price, total, loanRate);
         return (
             <div className="orders">
                 <div className="ordersTables">
