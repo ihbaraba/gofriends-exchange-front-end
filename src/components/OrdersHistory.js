@@ -5,7 +5,7 @@ import {Table} from 'antd';
 import {getOrdersHistory} from "./../utils"
 import { ORDERSHISTORY, ORDERS} from "./../constants/APIURLS.js"
 import {save_user_info} from "../actions/UserActions";
-
+import UserOrder from "./UserOrder";
 
 class OredersHistory extends Component {
 
@@ -26,9 +26,11 @@ class OredersHistory extends Component {
         const calculated = bids.map( bid => {
             const price = +bid["price"];
             const amount = +bid["initialAmount"];
-
+            const completedAtDate = new Date(bid["completedAt"]);
+            const completedAt = `${completedAtDate.toLocaleDateString()} ${completedAtDate.toLocaleTimeString()}`;
             return ({
                 ...bid,
+                completedAt,
                 price: +price.toFixed(5),
                 amount: +amount.toFixed(5),
                 Sum: +(bid.initialAmount * bid.price).toFixed(5),
@@ -72,9 +74,9 @@ class OredersHistory extends Component {
         const {orders} = this.state;
 
         const columns = [{
-            title: 'id',
-            dataIndex: 'id',
-            key: 'id',
+            title: 'Date',
+            dataIndex: 'completedAt',
+            key: 'date',
             width: 150,
         },{
             title: 'Type',
@@ -102,11 +104,23 @@ class OredersHistory extends Component {
             <div className="marketDepth">
                 <div className="marketDepthTables">
                     <div className="marketDepthColumns">
-                        <h5>TRADE HISTORY</h5>
-                        <Table columns={columns} dataSource={orders} bordered={false} pagination={false} scroll={{y: 240}}
-                               size="small" rowClassName="custom__tr"/>
+                        <h5>YOUR OPEN ORDERS</h5>
+                        <UserOrder completed="false"/>
                     </div>
-
+                </div>
+                <div className="marketDepthTables">
+                    <div className="marketDepthColumns">
+                        <h5>TRADE HISTORY</h5>
+                        <Table
+                            columns={columns}
+                            dataSource={orders}
+                            bordered={false}
+                            pagination={false}
+                            scroll={{y: 240}}
+                            size="small"
+                            rowClassName="custom__tr"
+                        />
+                    </div>
                 </div>
             </div>
         )

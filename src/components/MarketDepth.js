@@ -46,7 +46,7 @@ class MarketDepth extends Component {
                 quoteCurrency: +(bid.amount * bid.price).toFixed(5),
         })
 
-        })
+        });
         return calculated
     }
 
@@ -139,7 +139,7 @@ class MarketDepth extends Component {
 
         // console.log("making getMarcketDpthData", {type: "buy", book: id});
         // console.log(this.state);
-        const buyDepth = await getMarcketDpthData({rout: ORDERS, type: "buy", take: 50, book: id, price: "asc"});
+        const buyDepth = await getMarcketDpthData({rout: ORDERS, type: "buy", take: 50, book: id, price: "desc"});
         const sellDepth = await getMarcketDpthData({rout: ORDERS, type: "sell", take: 50, book: id, price: "desc"});
         // console.log(buyDepth.filter( item => (!item.completed || !item.stop ) ), buyDepth);
         await this.setState({
@@ -213,7 +213,7 @@ class MarketDepth extends Component {
                 <div className="marketDepthTables">
                     <div className="marketDepthColumns">
                         <h5>BUY ORDERS</h5>
-                        <Table columns={columns} dataSource={buy.sort((a, b) => b.price - a.price )} bordered={false} pagination={false} scroll={{y: 240}}
+                        <Table columns={columns} dataSource={buy.sort((a, b) => a.price - b.price )} bordered={false} pagination={false} scroll={{y: 240}}
                                size="small" rowClassName="custom__tr"/>
                     </div>
                     <div className="marketDepthColumns">

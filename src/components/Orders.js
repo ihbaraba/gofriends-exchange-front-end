@@ -15,6 +15,8 @@ class Orders extends Component {
 
         this.InputsFrame = this.InputsFrame.bind(this);
         this.StopLimitFrame = this.StopLimitFrame.bind(this);
+        this.validate = this.validate.bind(this);
+        this.checkKeyPress = this.checkKeyPress.bind(this);
 
         this.state = {
             sellPrice: this.props.price,//price of the fist coin of the pair
@@ -35,14 +37,32 @@ class Orders extends Component {
             amount: 1,
         };
     }
+    checkKeyPress(evt){
+        // console.log(evt.target.value);
+        if((evt.charCode>= 48 && evt.charCode <= 57) || evt.charCode== 46 ||evt.charCode == 0){
+            // if(data.indexOf('.') > -1){
+            //     if(evt.charCode== 46)
+            //         evt.preventDefault();
+            // }
+        }else
+            evt.preventDefault();
+    };
+
+
+    validate(s) {
+        const rgx = /^[0-9]*\.?[0-9]*$/;
+        return s.match(rgx);
+    }
 
     InputsFrame = ({first, second, loanRate, firePostToServer, type}) => {
         const optionsPrice = {
             addonAfter: second,
             style: { width: '15rem' },
             value: this.state[`${type}Price`],
+            onKeyPress: (e) => { this.checkKeyPress(e) },
             onChange: (e) => {
                 const price = +e.target.value;
+                console.log(price);
                 const total = price * this.state[`${type}Amount`];
                 this.setState({
                     [`${type}Price`]: price,
@@ -54,6 +74,7 @@ class Orders extends Component {
             addonAfter: first,
             style: { width: '15rem' },
             value: this.state[`${type}Amount`],
+            onKeyPress: (e) => { this.checkKeyPress(e) },
             onChange: (e) => {
                 const amount = +e.target.value;
                 const total = this.state[`${type}Price`] * amount;
@@ -68,6 +89,7 @@ class Orders extends Component {
             addonAfter: loanRate,
             style: { width: '15rem' },
             value: this.state.loanRate,
+            onKeyPress: (e) => { this.checkKeyPress(e) },
             onChange: (e) => {
                 const val = +e.target.value;
                 this.setState({loanRate: val});
@@ -77,6 +99,7 @@ class Orders extends Component {
             addonAfter: second,
             style: { width: '15rem' },
             value: this.state[`${type}Total`],
+            onKeyPress: (e) => { this.checkKeyPress(e) },
             onChange: (e) => {
                 const total = +e.target.value;
                 const price = total / this.state[`${type}Amount`];
@@ -130,6 +153,7 @@ class Orders extends Component {
             addonAfter: second,
             style: { width: '15rem' },
             value: this.state.limit,
+            onKeyPress: (e) => { this.checkKeyPress(e) },
             onChange: (e) => {
                 const limit = +e.target.value;
                 const stopTotal = limit * this.state.stopAmount;
@@ -143,6 +167,7 @@ class Orders extends Component {
             addonAfter: first,
             style: { width: '15rem' },
             value: this.state[`stopAmount`],
+            onKeyPress: (e) => { this.checkKeyPress(e) },
             onChange: (e) => {
                 const amount = +e.target.value;
                 const total =  this.state.stopStop * amount;
@@ -157,6 +182,7 @@ class Orders extends Component {
             addonAfter: second,
             style: { width: '15rem' },
             value: this.state[`stopStop`],
+            onKeyPress: (e) => { this.checkKeyPress(e) },
             onChange: (e) => {
                 const stop = +e.target.value;
                 // const total =  this.state[`${type}Price`] * amount;
@@ -170,6 +196,7 @@ class Orders extends Component {
             addonAfter: second,
             style: { width: '15rem' },
             value: this.state[`stopTotal`],
+            onKeyPress: (e) => { this.checkKeyPress(e) },
             onChange: (e) => {
                 const total = +e.target.value;
                 const price = total / this.state[`stopAmount`];
@@ -222,7 +249,7 @@ class Orders extends Component {
         // console.log( this.props.token );
         const {first, second, price, loanRate, firePostToServer} = this.props;
         const {sellPrice, buyPrice, stopPrice, total} = this.state;
-        // console.log(first, second, price, total, loanRate);
+        console.log(first, second, price, total, loanRate);
         return (
             <div className="orders">
                 <div className="ordersTables">

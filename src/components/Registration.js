@@ -20,8 +20,10 @@ class Registration extends Component {
         this.handleChangeCountry = this.handleChangeCountry.bind(this);
         this.handleUserName = this.handleUserName.bind(this);
         this.validateForm = this.validateForm.bind(this);
+        this.swithOnChange = this.swithOnChange.bind(this);
 
         this.state = {
+            switchState: false,
             options: [{
                 code: '',
                 value: ''
@@ -190,14 +192,36 @@ class Registration extends Component {
                 this.state.password === this.state.confirmPassword
         );
     };
-
+    swithOnChange(checked) {
+        console.log(`switch to ${checked}`);
+        this.setState({ switchState: checked });
+    }
     render() {
-        const {countries: options, country, QRImage} = this.state;
-        const showQRCode = true;
+        const {countries: options, country, QRImage, showQRCode, switchState} = this.state;
         const regFormVAlid = this.validateForm();
-        function onChange(checked) {
-            console.log(`switch to ${checked}`);
-        }
+
+        const content = switchState
+            ? <div>
+                <p>Please scan this QR-code by Google Authenticator application of your smartphone. </p>
+                <img src={QRImage} alt="Please scan it" />
+                <p>and enter Your Google Authenticator Six-Digit Code. </p>
+                <input
+                    className="userPassInput"
+                    type="totpCode"
+                    name="totpCode"
+                    id="totpCode"
+                    placeholder="TotpCode"
+                    value={this.state.totpCode}
+                    onChange={this.handleTotpCode}
+                />
+                <button className="ant-btn fixed-width-btn" type="submit" name="login">Sign in</button>
+            </div>
+             :  <div>
+                    <button className="ant-btn fixed-width-btn" type="submit" name="login">Go exchange</button>
+                </div>
+        ;
+
+
         return (
             <div>
                 <Header/>
@@ -291,33 +315,12 @@ class Registration extends Component {
                                     <form onSubmit={this.handleSignInSubmit}>
                                         <fieldset className="aboveCaptcha">
                                             <p><strong>Thank you for registration. </strong></p>
-
-
-                                            <Switch defaultChecked onChange={onChange} />
-
-
-
-
-
-
-
-                                            <p>You can move directly to <a href="/exchange">trading page</a> or  </p>
                                             <p>if you need to make your account more secure,  </p>
                                             <p>we can offer you to use 2 factor authentication. </p>
-                                            <p>To do this, please scan this QR-code by Google Authenticator application of your smartphone. </p>
-                                            <img src={QRImage} alt="Please scan it" />
-                                            <p>and enter Your Google Authenticator Six-Digit Code. </p>
-                                            <input
-                                                className="userPassInput"
-                                                type="totpCode"
-                                                name="totpCode"
-                                                id="totpCode"
-                                                placeholder="TotpCode"
-                                                value={this.state.totpCode}
-                                                onChange={this.handleTotpCode}
-                                            />
-                                            <button className="ant-btn fixed-width-btn" type="submit" name="login">Sign in</button>
-                                        </fieldset>
+                                            <p><strong>Turn on/off 2-factor authentication </strong><Switch onChange={this.swithOnChange} /></p>
+                                            { content  }
+
+                                            </fieldset>
                                     </form>
                                 </div>
                             }

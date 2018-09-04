@@ -77,9 +77,17 @@ class Graphic extends React.Component {
             console.log("options = ", options);
 
             getData(options).then(data => {
-                this.setState({data}
-                // , ()=> { console.log("Chart data updated. new Id=", nextEndPoint)}
+                console.log(data);
+                if (data.length === 0)
+                {
+                    alert("Historical and current data for this pair is absent");
+                }
+                else
+                {
+                    this.setState({data}
+                        // , ()=> { console.log("Chart data updated. new Id=", nextEndPoint)}
                     )
+                }
             })
         }
     }

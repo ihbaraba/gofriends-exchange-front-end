@@ -24,7 +24,6 @@ import {ORDERS, USERINFO} from "./../constants/APIURLS.js"
 import {login_success, save_user_info, save_user_orders} from "../actions/UserActions";
 import {chart_timing} from "../actions/ChartActions";
 
-
 class ExchangePage extends Component {
 
     constructor() {

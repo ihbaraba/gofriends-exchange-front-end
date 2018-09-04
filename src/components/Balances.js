@@ -3,58 +3,36 @@ import Header2 from './Header2';
 import Footer from './Footer';
 import '../App.css';
 
-import { Table, Divider, Tag } from 'antd';
-
-
-
-
-
-
-
+import { Table } from 'antd';
 
 class Balances extends Component {
     constructor(props) {
         super(props);
-
         this.state = {};
     }
 
-
     render() {
-        const dataSource = [{
-            key: '1',
-            name: 'BTC',
-            age: 612.00000000,
-            action: '10 Downing Street'
-        },
-            {
-                key: '2',
-                name: 'ETH',
-                age: 612.00000000,
-                action: '10 Downing Street'
-            },
-            {
-                key: '3',
-                name: 'LTC',
-                age: 0.30000000,
-                action: '10 Downing Street'
-            },
 
-            {
-                key: '4',
-                name: 'ZEC',
-                age: 183.60000000,
-                action: '1'
-            }];
+        const user = this.props.user;
+        const {balances = []} = user;
+        // console.log("Balances. User = ", user);
+
+        const dataSource = balances.map( item => (
+            { key: item.currency.name+""+item.amount,
+                    name: item.currency.name,
+                    code: item.currency.code,
+                    amount: item.amount,
+                    action: ""}
+            ));
 
         const columns = [{
             title: 'Coins',
             dataIndex: 'name',
             key: 'name',
         }, {
-            title: 'Price',
-            dataIndex: 'age',
-            key: 'age',
+            title: 'Amount',
+            dataIndex: 'amount',
+            key: 'amount',
         },
 
             {
@@ -63,34 +41,23 @@ class Balances extends Component {
                 key: 'action',
                 render: (text, record) => (
                     <span>
-                          <a href="javascript:;" className="act-btn">Enter {record.name}</a>
+                          <a href="javascript:;" className="act-btn">Deposit {record.code}</a>
 
-                          <a href="javascript:;" className="act-btn">Withdraw</a>
+                          <a href="javascript:;" className="act-btn">Withdraw {record.code}</a>
                      </span>
 
                 ),
             }];
-
         return (
-
             <div className="wrap">
                 <Header2/>
-                <div style={{clear: "both"}}>
-                    <h1 className="sign">Balance panel</h1>
-
+                <div className="card-container, currencysPairs" style={{width:"70vh", margin: "auto" }}>
+                    <div className="card-container-head" >
+                        <h1 style={{ margin: "2rem" }}>BALANCE</h1>
+                        <Table dataSource={dataSource} columns={columns} pagination={false} rowClassName="custom__tr"/>
+                    </div>
                 </div>
-
-
-               <div className="tab-wrap">
-
-                   <Table dataSource={dataSource} columns={columns} pagination={false} />
-               </div>
-
-
-
                 <Footer/>
-
-
             </div>
         )
     }
