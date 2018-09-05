@@ -22,6 +22,7 @@ class Balances extends Component {
                     name: item.currency.name,
                     code: item.currency.code,
                     amount: item.amount,
+                    address: item.address,
                     action: ""}
             ));
 
@@ -33,6 +34,10 @@ class Balances extends Component {
             title: 'Amount',
             dataIndex: 'amount',
             key: 'amount',
+        }, {
+            title: 'Deposit address',
+            dataIndex: 'address',
+            key: 'address',
         },
 
             {
@@ -41,8 +46,7 @@ class Balances extends Component {
                 key: 'action',
                 render: (text, record) => (
                     <span>
-                          <a href="javascript:;" className="act-btn">Deposit {record.code}</a>
-
+                          {/*<a href="javascript:;" className="act-btn">Deposit {record.code}</a>*/}
                           <a href="javascript:;" className="act-btn">Withdraw {record.code}</a>
                      </span>
 

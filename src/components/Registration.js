@@ -101,6 +101,11 @@ class Registration extends Component {
     handlerRegistrationSubmit = async (event) => {
         event.preventDefault();
 
+        if (this.state.password !== this.state.confirmPassword) {
+            alert("Passwords is not equivalent. Please enter it again.");
+            return
+        }
+
         const responce = await sendRequest({
             rout: REGISTER,
             options: {
@@ -113,9 +118,7 @@ class Registration extends Component {
         const { usrMsg, errorCode } = responce;
 
         if (typeof usrMsg !== "undefined") {
-
-            console.log(errorCode, usrMsg);
-
+            // console.log(errorCode, usrMsg);
             switch (errorCode) {
                 case 0 :
                 case 1 :
@@ -129,7 +132,7 @@ class Registration extends Component {
             }
         else
             {
-                console.log("Registration responce =", responce);
+                // console.log("Registration responce =", responce);
                 const QRImage = responce.qr;
                 this.setState( //show input for QRCode
                     {
@@ -145,7 +148,7 @@ class Registration extends Component {
     };
 
     handleSignInSubmit = async (event) => {
-        console.log("handleSubmit this.props=", this.props);
+        // console.log("handleSubmit this.props=", this.props);
         event.preventDefault();
         const user = {
             email: this.state.email,
@@ -193,7 +196,7 @@ class Registration extends Component {
         );
     };
     swithOnChange(checked) {
-        console.log(`switch to ${checked}`);
+        // console.log(`switch to ${checked}`);
         this.setState({ switchState: checked });
     }
     render() {

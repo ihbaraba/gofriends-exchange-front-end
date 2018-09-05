@@ -85,7 +85,9 @@ class UserOrder extends React.Component {
 
         const {username, id} = user;
 
-        const columns = (completed) => [{
+        const columns = function (pcompleted){
+           const completed = JSON.parse(pcompleted);
+           return [{
             title: 'date',
             dataIndex: completed ? 'completedAt' : 'createdAt',
             key: 'date',
@@ -110,14 +112,29 @@ class UserOrder extends React.Component {
             dataIndex: 'Sum',
             key: 'Sum',
             width: 150,
-        }];
+        },
+            ...(!completed ? [{
+            title: 'Action',
+            dataIndex: 'action',
+            key: 'action',
+            width: 150,
+            render: (text, record) => (
+                <span>
+                      <a href="javascript:;" className="act-btn">Cancel {record.code}</a>
+                </span>
+
+            ),
+        }]
+        : []),
+        ]};
+
         return (
             <Table
                 columns={columns(completed)}
                 dataSource={completed ? ordersHistory : orders}
                 bordered={false}
                 pagination={false}
-                scroll={{y: 240}}
+                scroll={{y: 330}}
                 size="small"
                 rowClassName="custom__tr"/>
         )
