@@ -24,6 +24,9 @@ class OredersHistory extends Component {
     calculateSum(bids) {
 
         const calculated = bids.map( bid => {
+            const {pair: { baseCurrency, quoteCurrency } } = this.props;
+            // console.log( baseCurrency, quoteCurrency, this.props );
+
             const price = +bid["price"];
             const amount = +bid["initialAmount"];
             const completedAtDate = new Date(bid["completedAt"]);
@@ -31,6 +34,7 @@ class OredersHistory extends Component {
             return ({
                 ...bid,
                 completedAt,
+                // type: `${bid["type"]} ${baseCurrency}`,
                 price: +price.toFixed(5),
                 amount: +amount.toFixed(5),
                 Sum: +(bid.initialAmount * bid.price).toFixed(5),
@@ -64,14 +68,16 @@ class OredersHistory extends Component {
     }
 
     async componentWillReceiveProps(nextProps) {
-        if (nextProps.currentPair.id !== this.props.currentPair.id) {
-            const {currentPair: {id = 1}} = nextProps;
+        if (nextProps.pair.id !== this.props.pair.id) {
+            const {pair: {id = 1}} = nextProps;
             await this.getInitialPairDataFromServer(id);
         }
     }
 
     render() {
         const {orders} = this.state;
+        const {pair: { baseCurrency, quoteCurrency } } = this.props;
+        // console.log( baseCurrency, quoteCurrency, this.props );
 
         const columns = [{
             title: 'Date',
@@ -84,17 +90,17 @@ class OredersHistory extends Component {
             key: 'type',
             width: 150,
         },{
-            title: `Price(${this.props.currentPair.first})`,
+            title: `Price(${baseCurrency})`,
             dataIndex: 'price',
             key: 'price',
             width: 150,
         }, {
-            title: `Amount(${this.props.currentPair.second})`,
+            title: `Amount(${quoteCurrency})`,
             dataIndex: 'amount',
             key: 'amount',
             width: 150,
         }, {
-            title: `Sum(${this.props.currentPair.first})`,
+            title: `Sum(${baseCurrency})`,
             dataIndex: 'Sum',
             key: 'Sum',
             width: 150,
@@ -146,7 +152,7 @@ OredersHistory.propTypes = {
 function mapStateToProps(state) {
     return {
         user:  state.user,
-        // orders: state.user.orders
+        pair: state.pair,
     }
 }
 

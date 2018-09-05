@@ -86,7 +86,7 @@ class MarketDepth extends Component {
         this.socket.on("order_updated_" + socket, (bid) => {
 
             const {marketDepth} = this.state;
-            const {buy, sell} = marketDepth;
+            const {buy = [], sell = []} = marketDepth;
 
             const resOfSearchInBuy = buy.findIndex(item => item.id === bid.id);
             const resOfSearchInSell = sell.findIndex(item => item.id === bid.id);
@@ -213,7 +213,7 @@ class MarketDepth extends Component {
                 <div className="marketDepthTables">
                     <div className="marketDepthColumns">
                         <h5>BUY ORDERS</h5>
-                        <Table columns={columns} dataSource={buy.sort((a, b) => a.price - b.price )} bordered={false} pagination={false} scroll={{y: 240}}
+                        <Table columns={columns} dataSource={buy.sort((a, b) => b.price - a.price )} bordered={false} pagination={false} scroll={{y: 240}}
                                size="small" rowClassName="custom__tr"/>
                     </div>
                     <div className="marketDepthColumns">

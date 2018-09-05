@@ -2,11 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import {changePair} from '../actions/ExchangeActions'
+import {pair} from '../actions/ExchangeActions'
 import {PAIRS, MARKETS} from '../constants/APIURLS'
 
 import {getCoinsList} from "./../utils"
 import {Tabs, Table} from "antd";
+import {login_success} from "../actions/UserActions";
 // import 'antd/lib/table/style/css';
 
 
@@ -52,6 +53,7 @@ class CoinsList extends React.Component {
         const pairs = this.state.pairs;
         const newCurrent = pairs.find( item => item.id === +key.id  );
         this.props.setCurentCoinsPair2State(newCurrent);
+        this.props.pair(newCurrent);
     }
 
     currenciesTabs = items => {
@@ -150,11 +152,13 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        actions: bindActionCreators(changePair, dispatch),
-        // dispatch: (action)=>{action(); console.log("test dispatch")},
-        changePair: () => {
-            changePair();
-        }
+        actions: bindActionCreators(pair, dispatch),
+
+        pair: (newPair) => dispatch(pair(newPair)),
+
+        // changePair: () => {
+        //     changePair();
+        // }
     }
 }
 
