@@ -12,17 +12,19 @@ class WelcomePage extends Component {
             <div>
                 <Header/>
                 <div style={{clear: "both"}}>
-                    <h1 className="sign">TRADE. INNOVATE. DISCOVER.</h1>
+                    <h1 className="sign">Welcome to one of the most <br/> active crypto exchanges in the world</h1>
                 </div>
+
+
+
                 <div className="featureBanner">
 
-                    <h4 className="headline">Welcome to one of the most <br/> active crypto exchanges in the world</h4>
                     <NavLink to="/signup">
                         <button
-                            className="signUpButton"
+                            className="main-btn"
                             type="submit"
                             name="createAccount"
-                            >
+                        >
                             Create Your Account
                         </button>
                     </NavLink>

@@ -23,9 +23,19 @@ import Balances from './components/Balances';
 import Orders from './components/Orders';
 import UserOrdersHistory from './components/UserOrderHistory';
 import LoginHistory from './components/LoginHistory';
+
 import UserInfo from './components/UserInfo';
+import OpenOrders from './components/OpenOrders';
+import Bann from './components/Bann';
+import OrderPanel from './components/OrderPanel';
+import DepositHistory from './components/DepositHistory';
+import Withdrawalpanel from './components/Withdrawalpanel';
+import Transactions from './components/Transactions';
+import Confirm from './components/Confirm';
+import BalancesPanel from './components/BalancesPanel';
 // import {changePair} from "./actions/ExchangeActions";
 import {simpleAction} from "./actions/simpleAction";
+import YourOpenOrders from "./components/YourOpenOrders";
 // import {bindActionCreators} from "redux/index";
 
 // const store = configureStore();
@@ -37,7 +47,7 @@ class App extends Component {
             <Router>
                 <div className="App">
                     <Switch>
-                        {/*<Route exact path="/" component={WelcomePage}/>*/}
+                        <Route exact path="/" component={WelcomePage}/>
                         <Route exact path="/" component={Registration}/>
                         <Route path="/exchange" component={ExchangePage}/>
                         <Route path="/margintrading" component={MarginTrading}/>
@@ -57,6 +67,17 @@ class App extends Component {
                         <Route path="/balances" component={UserInfo}/>
                         <Route path="/orders" component={UserOrdersHistory}/>
                         <Route path="/loginhistory" component={LoginHistory}/>
+
+
+                        <Route path="/OpenOrders" component={OpenOrders}/>
+                        <Route path="/Bann" component={Bann}/>
+                        <Route path="/OrderPanel" component={OrderPanel}/>
+                        <Route path="/DepositHistory" component={DepositHistory}/>
+                        <Route path="/Withdrawalpanel" component={Withdrawalpanel}/>
+                        <Route path="/Transactions" component={Transactions}/>
+                        <Route path="/Confirm" component={Confirm}/>
+                        <Route path="/BalancesPanel" component={BalancesPanel}/>
+                        <Route path="/YourOpenOrders" component={YourOpenOrders}/>
                         <Route path="*" component={NotFound}/>
                     </Switch>
                 </div>

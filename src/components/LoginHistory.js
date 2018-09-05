@@ -73,7 +73,12 @@ class LoginHistory extends Component {
                         </tbody>
                     </table>
                 </div>
+
+                    <Footer/>
+
             </div>
+
+
         )
     }
 }
