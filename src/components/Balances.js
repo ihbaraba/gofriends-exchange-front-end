@@ -55,7 +55,7 @@ class Balances extends Component {
         return (
             <div className="wrap">
                 <Header2/>
-                <div className="card-container, currencysPairs" style={{width:"70vh", margin: "auto" }}>
+                <div className="card-container, currencysPairs" style={{width:"70vw ", margin: "auto" }}>
                     <div className="card-container-head" >
                         <h1 style={{ margin: "2rem" }}>BALANCE</h1>
                         <Table dataSource={dataSource} columns={columns} pagination={false} rowClassName="custom__tr"/>

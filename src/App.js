@@ -33,6 +33,10 @@ import Withdrawalpanel from './components/Withdrawalpanel';
 import Transactions from './components/Transactions';
 import Confirm from './components/Confirm';
 import BalancesPanel from './components/BalancesPanel';
+import Knowledge from './components/Knowledge';
+import ProfileVerification from './components/ProfileVerification';
+
+
 // import {changePair} from "./actions/ExchangeActions";
 import {simpleAction} from "./actions/simpleAction";
 import YourOpenOrders from "./components/YourOpenOrders";
@@ -78,6 +82,9 @@ class App extends Component {
                         <Route path="/Confirm" component={Confirm}/>
                         <Route path="/BalancesPanel" component={BalancesPanel}/>
                         <Route path="/YourOpenOrders" component={YourOpenOrders}/>
+                        <Route path="/Knowledge" component={Knowledge}/>
+                        <Route path="/Knowledge" component={Knowledge}/>
+                        <Route path="/ProfileVerification" component={ProfileVerification}/>
                         <Route path="*" component={NotFound}/>
                     </Switch>
                 </div>

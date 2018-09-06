@@ -23,7 +23,7 @@ class CoinsList extends React.Component {
         return (
             <div>
                 <Header2/>
-                <div className="card-container, currencysPairs" style={{width:"70vh", margin: "auto" }}>
+                <div className="card-container, currencysPairs" style={{width:"70vw", margin: "auto" }}>
                     <div className="card-container-head" >
                         <p className="h2">
                             Name:&emsp;<strong>{`${username}`}</strong>&emsp; &emsp; &emsp; &emsp;  E-mail:&emsp;<strong>{`${username}`}</strong>&emsp; &emsp; &emsp; &emsp;  id:{id}
