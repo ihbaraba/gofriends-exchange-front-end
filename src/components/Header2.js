@@ -1,63 +1,89 @@
 import React from 'react';
 import logo from '../img/Logo.png';
 import NavLink from './NavLink';
-// import 'antd/dist/antd.css';
 import '../App.css';
 import { Menu, Dropdown, Icon } from 'antd';
+import Login from "./Login";
 
 const Header2 = () => {
     const menu1 = (
         <Menu>
             <Menu.Item>
-                <a  rel="noopener noreferrer" href="">TRANSFER BALANCES</a>
+                <NavLink to="/balances">
+                            <span className="title topLevel">TRANSFER BALANCES</span>
+                </NavLink>
             </Menu.Item>
+
             <Menu.Item>
-                <a  rel="noopener noreferrer" href="/balancespanel">DEPOSITS & WITHDRAWALS</a>
+                <NavLink to="/balances">
+                    <span className="title topLevel">DEPOSITS & WITHDRAWALS</span>
+                </NavLink>
             </Menu.Item>
+
             <Menu.Item>
-                <a  rel="noopener noreferrer" href="#">HISTORY</a>
+                <NavLink to="/DepositHistory">
+                    <span className="title topLevel">HISTORY</span>
+                </NavLink>
             </Menu.Item>
         </Menu>
     );
     const menu2 = (
         <Menu>
             <Menu.Item>
-                <a  rel="noopener noreferrer" href="#">MY OPEN ORDERS</a>
+                <NavLink to="/orders">
+                    <span className="title topLevel">MY OPEN ORDERS</span>
+                </NavLink>
             </Menu.Item>
             <Menu.Item>
-                <a  rel="noopener noreferrer" href="#">MY TRADE HISTORY & ANALYSIS</a>
+                <NavLink to="/orders">
+                    <span className="title topLevel">MY TRADE HISTORY & ANALYSIS</span>
+                </NavLink>
             </Menu.Item>
         </Menu>
     );
     const menu3 = (
         <Menu>
+            {/*<Menu.Item>*/}
+                {/*<a target="_blank" rel="noopener noreferrer" href="#">TWO-FACTOR AUTHENTICATION</a>*/}
+            {/*</Menu.Item>*/}
             <Menu.Item>
-                <a target="_blank" rel="noopener noreferrer" href="#">TWO-FACTOR AUTHENTICATION</a>
+                <NavLink to="/exchange">
+                    <span className="title topLevel">API Keys</span>
+                </NavLink>
             </Menu.Item>
             <Menu.Item>
-                <a target="_blank" rel="noopener noreferrer" href="#">API Keys</a>
+                <NavLink to="/exchange">
+                    <span className="title topLevel">Trading Tier Status</span>
+                </NavLink>
             </Menu.Item>
             <Menu.Item>
-                <a target="_blank" rel="noopener noreferrer" href="#">Trading Tier Status</a>
+                <NavLink to="/loginhistory">
+                    <span className="title topLevel">Login History</span>
+                </NavLink>
             </Menu.Item>
             <Menu.Item>
-                <a target="_blank" rel="noopener noreferrer" href="#">Login History</a>
+                <NavLink to="/changepassword">
+                    <span className="title topLevel">Change Password</span>
+                </NavLink>
             </Menu.Item>
             <Menu.Item>
-                <a target="_blank" rel="noopener noreferrer" href="#">Change Password</a>
-            </Menu.Item>
-            <Menu.Item>
-                <a target="_blank" rel="noopener noreferrer" href="#">Logout</a>
+                <NavLink to="/Logout">
+                    <span className="title topLevel">Logout</span>
+                </NavLink>
             </Menu.Item>
         </Menu>
     );
     const menu4 = (
         <Menu>
             <Menu.Item>
-                <a target="_blank" rel="noopener noreferrer" href="/profile" target="">My Profile</a>
+                <NavLink to="/profile">
+                    <span className="title topLevel">My Profile</span>
+                </NavLink>
             </Menu.Item>
             <Menu.Item>
-                <a target="_blank" rel="noopener noreferrer" href="#">Linked Accounts</a>
+                <NavLink to="/exchange">
+                    <span className="title topLevel">Linked Accounts</span>
+                </NavLink>
             </Menu.Item>
         </Menu>
     );
@@ -77,42 +103,6 @@ const Header2 = () => {
 
 
             <div className="tabs right ">
-                {/*<ul>*/}
-
-                    {/*<li className="desktopNav hideAlert ">*/}
-                        {/*<NavLink to="/balances">*/}
-                        {/*<span className="title topLevel">Balances*/}
-                            {/*<i className="fa fa-caret-down dim"></i>*/}
-                        {/*</span>*/}
-                        {/*</NavLink>*/}
-                    {/*</li>*/}
-                    {/*<li className="desktopNav hideAlert">*/}
-                        {/*<NavLink to="/orders">*/}
-                        {/*<span className="title topLevel">*/}
-                            {/*Orders*/}
-                            {/*<i className="fa fa-caret-down dim"></i>*/}
-                        {/*</span>*/}
-                        {/*</NavLink>*/}
-
-                    {/*</li>*/}
-                    {/*<li className="desktopNav hideAlert">*/}
-                        {/*<span className="title topLevel">*/}
-                            {/*<i className="fa fa-wrench"></i>*/}
-                            {/*<i className="fa fa-caret-down dim"></i>*/}
-                        {/*</span>*/}
-                    {/*</li>*/}
-                    {/*<li className="desktopNav hideAlert active">*/}
-                        {/*<NavLink to="/signup" >*/}
-                        {/*<span className="title topLevel">*/}
-                            {/*<i className="fa fa-user"></i>*/}
-                            {/*<i className="fa fa-caret-down dim"></i>*/}
-                        {/*</span>*/}
-                        {/*</NavLink>*/}
-
-                    {/*</li>*/}
-
-
-                {/*</ul>*/}
 
                 <div>
                     <Dropdown overlay={menu1}>
@@ -139,7 +129,6 @@ const Header2 = () => {
                                 <i className="fa fa-wrench"></i>
                                 <i className="fa fa-caret-down dim"></i>
                             </span>
-                            {/*<Icon type="down" />*/}
                         </a>
                     </Dropdown>
                     <Dropdown overlay={menu4}>
@@ -150,10 +139,7 @@ const Header2 = () => {
                         </span>
                         </NavLink>
                     </Dropdown>
-
-
                 </div>
-
             </div>
         </div>
     )

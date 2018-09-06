@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import Header from './Header';
+import Header2 from './Header2';
 import NavLink from './NavLink';
 import Footer from './Footer';
 import '../App.css';
@@ -10,7 +10,7 @@ class WelcomePage extends Component {
     render() {
         return (
             <div>
-                <Header/>
+                <Header2/>
                 <div style={{clear: "both"}}>
                     <h1 className="sign">Welcome to one of the most <br/> active crypto exchanges in the world</h1>
                 </div>

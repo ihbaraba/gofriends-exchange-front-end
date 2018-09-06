@@ -2,8 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import Header2 from './Header2';
-import Footer from './Footer';
 import {getOrdersHistory} from "../utils";
 import { USERORDERSHISTORY } from "./../constants/APIURLS.js"
 import {Table} from 'antd';

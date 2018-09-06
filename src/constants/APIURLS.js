@@ -15,8 +15,8 @@ const SERVERS = {
     };
 
 
-// export const current_server = SERVERS.DEV;
-export const current_server = SERVERS.PRODUCT;
+export const current_server = SERVERS.DEV;
+// export const current_server = SERVERS.PRODUCT;
 
 
 /**************************

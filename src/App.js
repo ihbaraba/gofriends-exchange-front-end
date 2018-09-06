@@ -1,10 +1,12 @@
 import React, {Component} from 'react';
-import {BrowserRouter as Router, Route, Switch, Redirect} from 'react-router-dom';
+import {BrowserRouter as Router, Route, Switch, Redirect, } from 'react-router-dom';
+// import { createHistory } from 'history';
 import { connect } from 'react-redux'
 // import { Provider } from 'react-redux'
 // import configureStore from './store/configureStore'
 import WelcomePage from './components/WelcomePage';
 import Login from './components/Login';
+import LogOut from './components/LogOut';
 import Registration from './components/Registration';
 import ExchangePage from './components/ExchangePage';
 import MarginTrading from './components/MarginTrading';
@@ -33,16 +35,10 @@ import Withdrawalpanel from './components/Withdrawalpanel';
 import Transactions from './components/Transactions';
 import Confirm from './components/Confirm';
 import BalancesPanel from './components/BalancesPanel';
-// import {changePair} from "./actions/ExchangeActions";
-import {simpleAction} from "./actions/simpleAction";
 import YourOpenOrders from "./components/YourOpenOrders";
-// import {bindActionCreators} from "redux/index";
-
-// const store = configureStore();
 
 class App extends Component {
     render() {
-            {/*<Provider store={store}>*/}
         return (
             <Router>
                 <div className="App">
@@ -53,6 +49,7 @@ class App extends Component {
                         <Route path="/margintrading" component={MarginTrading}/>
                         <Route path="/lending" component={Lending}/>
                         <Route path="/login" component={Login}/>
+                        <Route path="/logOut" component={LogOut}/>
                         <Route path="/signup" component={Registration}/>
                         <Route path="/profile" component={Profile}/>
                         <Route path="/resetPassword" component={ResetPassword}/>
@@ -63,8 +60,8 @@ class App extends Component {
                         <Route path="/terms" component={Terms}/>
                         <Route path="/activate" component={Activate}/>
                         <Route path="/changepassword" component={ChangePassword}/>
-                        {/*<Route path="/balances" component={Balances}/>*/}
-                        <Route path="/balances" component={UserInfo}/>
+                        <Route path="/balances" component={Balances}/>
+                        {/*<Route path="/balances" component={UserInfo}/>*/}
                         <Route path="/orders" component={UserOrdersHistory}/>
                         <Route path="/loginhistory" component={LoginHistory}/>
 
@@ -83,25 +80,6 @@ class App extends Component {
                 </div>
             </Router>
         );
-            // </Provider>
     }
 }
-//
-// const mapStateToProps = state => ({
-//         ...state
-//     });
-//
-// const mapDispatchToProps = dispatch => ({
-//     simpleAction: () => dispatch(simpleAction())
-//         // actions: bindActionCreators(changePair, dispatch),
-//         // dispatch: (action) => {
-//         //     console.log("test dispatch")
-//             // action();
-//         // },
-//         // changePair: () => {
-//         //     changePair();
-//         // }
-// });
-
-// export default connect(mapStateToProps, mapDispatchToProps)(App);
 export default App;

@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import Header from './Header';
+import Header2 from './Header2';
 import Footer from './Footer';
 import NavLink from './NavLink';
 import {connect} from "react-redux";
@@ -227,7 +227,7 @@ class Registration extends Component {
 
         return (
             <div>
-                <Header/>
+                <Header2/>
                 <div style={{clear: "both"}}>
                     <h1 className="sign">CREATE YOUR ACCOUNT</h1>
                     <div className="featureBanner form2col">

@@ -153,12 +153,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
     return {
         actions: bindActionCreators(pair, dispatch),
-
-        pair: (newPair) => dispatch(pair(newPair)),
-
-        // changePair: () => {
-        //     changePair();
-        // }
+            pair: (newPair) => dispatch(pair(newPair)),
     }
 }
 
