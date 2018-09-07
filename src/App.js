@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
-import {BrowserRouter as Router, Route, Switch, Redirect, } from 'react-router-dom';
-// import { createHistory } from 'history';
+import {BrowserRouter as Router, Route, Switch, Redirect} from 'react-router-dom';
 import { connect } from 'react-redux'
 // import { Provider } from 'react-redux'
 // import configureStore from './store/configureStore'
@@ -35,6 +34,12 @@ import Withdrawalpanel from './components/Withdrawalpanel';
 import Transactions from './components/Transactions';
 import Confirm from './components/Confirm';
 import BalancesPanel from './components/BalancesPanel';
+import Knowledge from './components/Knowledge';
+import ProfileVerification from './components/ProfileVerification';
+
+
+// import {changePair} from "./actions/ExchangeActions";
+import {simpleAction} from "./actions/simpleAction";
 import YourOpenOrders from "./components/YourOpenOrders";
 
 class App extends Component {
@@ -49,7 +54,6 @@ class App extends Component {
                         <Route path="/margintrading" component={MarginTrading}/>
                         <Route path="/lending" component={Lending}/>
                         <Route path="/login" component={Login}/>
-                        <Route path="/logOut" component={LogOut}/>
                         <Route path="/signup" component={Registration}/>
                         <Route path="/profile" component={Profile}/>
                         <Route path="/resetPassword" component={ResetPassword}/>
@@ -75,6 +79,9 @@ class App extends Component {
                         <Route path="/Confirm" component={Confirm}/>
                         <Route path="/BalancesPanel" component={BalancesPanel}/>
                         <Route path="/YourOpenOrders" component={YourOpenOrders}/>
+                        <Route path="/Knowledge" component={Knowledge}/>
+                        <Route path="/Knowledge" component={Knowledge}/>
+                        <Route path="/ProfileVerification" component={ProfileVerification}/>
                         <Route path="*" component={NotFound}/>
                     </Switch>
                 </div>
