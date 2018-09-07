@@ -98,7 +98,7 @@ class CoinsList extends React.Component {
                          [...pairs.filter( pair => pair.first === item )]
                             .map(item => ({
                                     coin: item.quoteCurrency,
-                                    price: item.price,
+                                    price: item["price"].toFixed(3),
                                     volume: item["volumeBase"].toFixed(3),
                                     change: item["change"].toFixed(2),
                                     name: item.quoteCurrencyName,

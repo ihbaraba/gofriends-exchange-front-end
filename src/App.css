@@ -291,6 +291,44 @@ span, p, div{
 }
 
 
+/*formVerification*/
+
+
+.formVerificationWrap {
+    width: 794px;
+    margin: 0 auto;
+}
+
+
+
+
+.profileVerification {
+    width: 348px;
+    height: 769px;
+    background-color: #545c68;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    padding: 38px 42px 41px 40px;
+}
+
+.profileVerification input[type="text"] {
+    width: 100%;
+    height: 52px;
+    background-color: #ffffff;
+    opacity: 0.7;
+    color: #000;
+}
+
+.profile-v-btn {
+    width: 100%;
+    height: 47px;
+    border-radius: 22px;
+    border: 1px solid #00b29c;
+    background-color: #00b29c;
+}
+
+
 
 
 
@@ -3446,11 +3484,6 @@ input{
 
 
 
-.profileVerification {
-    width: 348px;
-    height: 769px;
-    background-color: #545c68;
-}
 
 
 /* hz kto tak nazval...*/
@@ -3466,7 +3499,7 @@ input{
 }
 /*1800*/
 
-@media (max-width: 1800px) and (max-device-width: 1800px) {
+@media (max-width: 1800px) {
     /*.side {*/
         /*flex-basis: 380px;*/
     /*}*/
@@ -3480,7 +3513,7 @@ input{
     }
 }
 
-@media (max-width: 1680px) and (max-device-width: 1680px) {
+@media (max-width: 1680px) {
 
     body .ant-table-small > .ant-table-content > .ant-table-header > table > .ant-table-thead > tr > th, body .ant-table-small > .ant-table-content > .ant-table-body > table > .ant-table-thead > tr > th, body .ant-table-small > .ant-table-content > .ant-table-scroll > .ant-table-header > table > .ant-table-thead > tr > th, body .ant-table-small > .ant-table-content > .ant-table-scroll > .ant-table-body > table > .ant-table-thead > tr > th, body .ant-table-small > .ant-table-content > .ant-table-fixed-left > .ant-table-header > table > .ant-table-thead > tr > th, body .ant-table-small > .ant-table-content > .ant-table-fixed-right > .ant-table-header > table > .ant-table-thead > tr > th, body .ant-table-small > .ant-table-content > .ant-table-fixed-left > .ant-table-body-outer > .ant-table-body-inner > table > .ant-table-thead > tr > th, body .ant-table-small > .ant-table-content > .ant-table-fixed-right > .ant-table-body-outer > .ant-table-body-inner > table > .ant-table-thead > tr > th, body .ant-table-small > .ant-table-content > .ant-table-header > table > .ant-table-tbody > tr > td, body .ant-table-small > .ant-table-content > .ant-table-body > table > .ant-table-tbody > tr > td, body .ant-table-small > .ant-table-content > .ant-table-scroll > .ant-table-header > table > .ant-table-tbody > tr > td, body .ant-table-small > .ant-table-content > .ant-table-scroll > .ant-table-body > table > .ant-table-tbody > tr > td, body .ant-table-small > .ant-table-content > .ant-table-fixed-left > .ant-table-header > table > .ant-table-tbody > tr > td, body .ant-table-small > .ant-table-content > .ant-table-fixed-right > .ant-table-header > table > .ant-table-tbody > tr > td, body .ant-table-small > .ant-table-content > .ant-table-fixed-left > .ant-table-body-outer > .ant-table-body-inner > table > .ant-table-tbody > tr > td, body body .ant-table-small > .ant-table-content > .ant-table-fixed-right > .ant-table-body-outer > .ant-table-body-inner > table > .ant-table-tbody > tr > td {
         padding: 14px 2px;
@@ -3496,7 +3529,7 @@ input{
 
 }
 
-@media (max-width: 1450px) and (max-device-width: 1450px) {
+@media (max-width: 1450px) {
     .orders__item .ant-input-group-wrapper {
         flex-basis: 260px;
     }
@@ -3523,7 +3556,7 @@ input{
     }
 }
 
-@media (max-width: 1300px) and (max-device-width: 1300px) {
+@media (max-width: 1300px)  {
     .orders__item .ant-input-group-wrapper {
         flex-basis: 100%;
         margin-top: 4px;
@@ -3534,61 +3567,81 @@ input{
     }
 
     span {
-        font-size: 18px;
+        font-size: 12px;
+    }
+
+    .side {
+        width: 340px;
+        order: 2;
+        margin-left: auto;
+    }
+
+    .notices {
+        width: 100%;
+    }
+
+    .ant-table-tbody > tr > td {
+        padding: 16px 4px;
+    }
+}
+
+
+
+@media (max-width: 1200px)  {
+
+    .side {
+        width: 313px;
+        order: 2;
+        margin-left: auto;
+    }
+    .rightSide {
+        width: 66%;
+        order: 1;
+    }
+
+    body .ant-tabs.ant-tabs-card > .ant-tabs-bar .ant-tabs-tab {
+        padding: 14px 16px;
+    }
+
+    .ant-table-tbody > tr > td {
+        padding: 16px 4px;
+    }
+    .ant-table-thead > tr > th {
+        padding: 10px 2px;
+    }
+    span {
+        font-size: 13px;
+    }
+
+    /*.orders__item .ant-input-group-wrapper {*/
+    /*flex-basis: 100%;*/
+    /*margin-top: 4px;*/
+    /*}*/
+
+    /*.notices {*/
+    /*width: 100%;*/
+    /*}*/
+
+
+}
+
+
+
+
+
+@media (max-width: 1000px)  {
+    body .ant-table-small > .ant-table-content > .ant-table-header > table > .ant-table-thead > tr > th, body .ant-table-small > .ant-table-content > .ant-table-body > table > .ant-table-thead > tr > th, body .ant-table-small > .ant-table-content > .ant-table-scroll > .ant-table-header > table > .ant-table-thead > tr > th, body .ant-table-small > .ant-table-content > .ant-table-scroll > .ant-table-body > table > .ant-table-thead > tr > th, body .ant-table-small > .ant-table-content > .ant-table-fixed-left > .ant-table-header > table > .ant-table-thead > tr > th, body .ant-table-small > .ant-table-content > .ant-table-fixed-right > .ant-table-header > table > .ant-table-thead > tr > th, body .ant-table-small > .ant-table-content > .ant-table-fixed-left > .ant-table-body-outer > .ant-table-body-inner > table > .ant-table-thead > tr > th, body .ant-table-small > .ant-table-content > .ant-table-fixed-right > .ant-table-body-outer > .ant-table-body-inner > table > .ant-table-thead > tr > th, body .ant-table-small > .ant-table-content > .ant-table-header > table > .ant-table-tbody > tr > td, body .ant-table-small > .ant-table-content > .ant-table-body > table > .ant-table-tbody > tr > td, body .ant-table-small > .ant-table-content > .ant-table-scroll > .ant-table-header > table > .ant-table-tbody > tr > td, body .ant-table-small > .ant-table-content > .ant-table-scroll > .ant-table-body > table > .ant-table-tbody > tr > td, body .ant-table-small > .ant-table-content > .ant-table-fixed-left > .ant-table-header > table > .ant-table-tbody > tr > td, body .ant-table-small > .ant-table-content > .ant-table-fixed-right > .ant-table-header > table > .ant-table-tbody > tr > td, body .ant-table-small > .ant-table-content > .ant-table-fixed-left > .ant-table-body-outer > .ant-table-body-inner > table > .ant-table-tbody > tr > td, body body .ant-table-small > .ant-table-content > .ant-table-fixed-right > .ant-table-body-outer > .ant-table-body-inner > table > .ant-table-tbody > tr > td {
+        padding: 14px 1px;
+        font-size: 8px;
+        text-align: center;
+    }
+
+    body .ant-tabs.ant-tabs-card > .ant-tabs-bar .ant-tabs-tab {
+        padding: 14px 16px;
     }
 
     .side {
         width: 30%;
-        order: 2;
-        margin-left: auto;
-    }
-
-    .notices {
-        width: 100%;
-    }
-}
-
-
-
-@media (max-width: 1200px) and (max-device-width: 1200px) {
-
-    .orders__item .ant-input-group-wrapper {
-        flex-basis: 100%;
-        margin-top: 4px;
-    }
-    .rightSide {
-        width: 68%;
-        order: 1;
-    }
-
-    .side {
-        width: 100%;
-        order: 2;
-        margin-left: auto;
-    }
-    .notices {
-        width: 100%;
-    }
-
-    span {
-        font-size: 18px;
-    }
-
-}
-
-
-
-
-
-@media (max-width: 1050px) and (max-device-width: 1050px) {
-    body .ant-table-small > .ant-table-content > .ant-table-header > table > .ant-table-thead > tr > th, body .ant-table-small > .ant-table-content > .ant-table-body > table > .ant-table-thead > tr > th, body .ant-table-small > .ant-table-content > .ant-table-scroll > .ant-table-header > table > .ant-table-thead > tr > th, body .ant-table-small > .ant-table-content > .ant-table-scroll > .ant-table-body > table > .ant-table-thead > tr > th, body .ant-table-small > .ant-table-content > .ant-table-fixed-left > .ant-table-header > table > .ant-table-thead > tr > th, body .ant-table-small > .ant-table-content > .ant-table-fixed-right > .ant-table-header > table > .ant-table-thead > tr > th, body .ant-table-small > .ant-table-content > .ant-table-fixed-left > .ant-table-body-outer > .ant-table-body-inner > table > .ant-table-thead > tr > th, body .ant-table-small > .ant-table-content > .ant-table-fixed-right > .ant-table-body-outer > .ant-table-body-inner > table > .ant-table-thead > tr > th, body .ant-table-small > .ant-table-content > .ant-table-header > table > .ant-table-tbody > tr > td, body .ant-table-small > .ant-table-content > .ant-table-body > table > .ant-table-tbody > tr > td, body .ant-table-small > .ant-table-content > .ant-table-scroll > .ant-table-header > table > .ant-table-tbody > tr > td, body .ant-table-small > .ant-table-content > .ant-table-scroll > .ant-table-body > table > .ant-table-tbody > tr > td, body .ant-table-small > .ant-table-content > .ant-table-fixed-left > .ant-table-header > table > .ant-table-tbody > tr > td, body .ant-table-small > .ant-table-content > .ant-table-fixed-right > .ant-table-header > table > .ant-table-tbody > tr > td, body .ant-table-small > .ant-table-content > .ant-table-fixed-left > .ant-table-body-outer > .ant-table-body-inner > table > .ant-table-tbody > tr > td, body body .ant-table-small > .ant-table-content > .ant-table-fixed-right > .ant-table-body-outer > .ant-table-body-inner > table > .ant-table-tbody > tr > td {
-        padding: 14px 1px;
-        font-size: 10px;
-        text-align: center;
-    }
-
-    .side {
-        flex-basis: 100%;
     }
 
     .rightSide {
@@ -3602,7 +3655,7 @@ input{
 
 }
 
-@media (max-width: 992px) and (max-device-width: 992px) {
+@media (max-width: 992px) {
     .marketDepthColumns {
         width: 100%;
     }
@@ -3616,11 +3669,28 @@ input{
     }
 
     .side {
-        width: 100%;
+        width: 30%;
     }
 
+    span {
+        font-size: 9px;
+    }
+
+    body .ant-tabs.ant-tabs-card > .ant-tabs-bar .ant-tabs-tab {
+        padding: 8px 8px;
+    }
+
+    .ant-table-tbody > tr > td {
+        padding: 16px 4px;
+        font-size: 10px;
+    }
+
+
+
+
+
     .rightSide {
-        width: 100%;
+        width: 66%;
     }
 
     .ordersTables {
@@ -3632,17 +3702,14 @@ input{
         margin-bottom: 40px;
     }
 
-    .orders__item .ant-input-group-wrapper {
-        flex-basis: 60%;
-    }
+    /*.orders__item .ant-input-group-wrapper {*/
+        /*flex-basis: 60%;*/
+    /*}*/
 
-    .ant-btn {
-        padding: 14px 40px;
-    }
+    /*.ant-btn {*/
+        /*padding: 14px 40px;*/
+    /*}*/
 
-    span {
-        font-size: 18px;
-    }
 
     body .ant-table-small > .ant-table-content > .ant-table-header > table > .ant-table-thead > tr > th, body .ant-table-small > .ant-table-content > .ant-table-body > table > .ant-table-thead > tr > th, body .ant-table-small > .ant-table-content > .ant-table-scroll > .ant-table-header > table > .ant-table-thead > tr > th, body .ant-table-small > .ant-table-content > .ant-table-scroll > .ant-table-body > table > .ant-table-thead > tr > th, body .ant-table-small > .ant-table-content > .ant-table-fixed-left > .ant-table-header > table > .ant-table-thead > tr > th, body .ant-table-small > .ant-table-content > .ant-table-fixed-right > .ant-table-header > table > .ant-table-thead > tr > th, body .ant-table-small > .ant-table-content > .ant-table-fixed-left > .ant-table-body-outer > .ant-table-body-inner > table > .ant-table-thead > tr > th, body .ant-table-small > .ant-table-content > .ant-table-fixed-right > .ant-table-body-outer > .ant-table-body-inner > table > .ant-table-thead > tr > th, body .ant-table-small > .ant-table-content > .ant-table-header > table > .ant-table-tbody > tr > td, body .ant-table-small > .ant-table-content > .ant-table-body > table > .ant-table-tbody > tr > td, body .ant-table-small > .ant-table-content > .ant-table-scroll > .ant-table-header > table > .ant-table-tbody > tr > td, body .ant-table-small > .ant-table-content > .ant-table-scroll > .ant-table-body > table > .ant-table-tbody > tr > td, body .ant-table-small > .ant-table-content > .ant-table-fixed-left > .ant-table-header > table > .ant-table-tbody > tr > td, body .ant-table-small > .ant-table-content > .ant-table-fixed-right > .ant-table-header > table > .ant-table-tbody > tr > td, body .ant-table-small > .ant-table-content > .ant-table-fixed-left > .ant-table-body-outer > .ant-table-body-inner > table > .ant-table-tbody > tr > td, body body .ant-table-small > .ant-table-content > .ant-table-fixed-right > .ant-table-body-outer > .ant-table-body-inner > table > .ant-table-tbody > tr > td {
         font-size: 14px;
@@ -3661,7 +3728,7 @@ input{
 
 
 
-@media (max-width: 768px) and (max-device-width: 768px) {
+@media (max-width: 768px)  {
 
         body .ant-table-small > .ant-table-content > .ant-table-header > table > .ant-table-thead > tr > th, body .ant-table-small > .ant-table-content > .ant-table-body > table > .ant-table-thead > tr > th, body .ant-table-small > .ant-table-content > .ant-table-scroll > .ant-table-header > table > .ant-table-thead > tr > th, body .ant-table-small > .ant-table-content > .ant-table-scroll > .ant-table-body > table > .ant-table-thead > tr > th, body .ant-table-small > .ant-table-content > .ant-table-fixed-left > .ant-table-header > table > .ant-table-thead > tr > th, body .ant-table-small > .ant-table-content > .ant-table-fixed-right > .ant-table-header > table > .ant-table-thead > tr > th, body .ant-table-small > .ant-table-content > .ant-table-fixed-left > .ant-table-body-outer > .ant-table-body-inner > table > .ant-table-thead > tr > th, body .ant-table-small > .ant-table-content > .ant-table-fixed-right > .ant-table-body-outer > .ant-table-body-inner > table > .ant-table-thead > tr > th, body .ant-table-small > .ant-table-content > .ant-table-header > table > .ant-table-tbody > tr > td, body .ant-table-small > .ant-table-content > .ant-table-body > table > .ant-table-tbody > tr > td, body .ant-table-small > .ant-table-content > .ant-table-scroll > .ant-table-header > table > .ant-table-tbody > tr > td, body .ant-table-small > .ant-table-content > .ant-table-scroll > .ant-table-body > table > .ant-table-tbody > tr > td, body .ant-table-small > .ant-table-content > .ant-table-fixed-left > .ant-table-header > table > .ant-table-tbody > tr > td, body .ant-table-small > .ant-table-content > .ant-table-fixed-right > .ant-table-header > table > .ant-table-tbody > tr > td, body .ant-table-small > .ant-table-content > .ant-table-fixed-left > .ant-table-body-outer > .ant-table-body-inner > table > .ant-table-tbody > tr > td, body body .ant-table-small > .ant-table-content > .ant-table-fixed-right > .ant-table-body-outer > .ant-table-body-inner > table > .ant-table-tbody > tr > td {
             font-size: 12px;
@@ -3795,12 +3862,16 @@ input{
             padding: 50px;
         }
 
+    .ordersBlock {
+        width: 100%;
+    }
+
     }
 
 
 
 
-@media (max-width: 579px) and (max-device-width: 579px) {
+@media (max-width: 579px)  {
     body .ant-radio-button-wrapper {
         padding: 6px 10px;
     }
@@ -3877,27 +3948,27 @@ input{
 }
 
 
-@media (max-width: 451px) and (max-device-width: 451px) {
+@media (max-width: 451px)  {
     span {
         font-size: 10px;
     }
 }
 
-@media (max-width: 401px) and (max-device-width: 401px) {
+@media (max-width: 401px)  {
     span {
         font-size: 9px;
     }
 }
 
 
-@media (max-width: 381px) and (max-device-width: 381px) {
+@media (max-width: 381px)  {
     body .ant-radio-button-wrapper {
         padding: 6px 5px;
     }
 }
 
 
-@media (max-width: 320px) and (max-device-width: 320px) {
+@media (max-width: 320px)  {
     body .ant-radio-button-wrapper {
         padding: 6px 4px;
     }
