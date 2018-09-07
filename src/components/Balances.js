@@ -10,6 +10,7 @@ import {USERINFO} from "./../constants/APIURLS.js"
 import {save_user_info, save_user_orders} from "../actions/UserActions";
 
 import 'antd/lib/tooltip/style/css';
+import 'antd/lib/popconfirm/style/css';
 
 class Balances extends Component {
     constructor(props) {
@@ -47,34 +48,49 @@ class Balances extends Component {
             title: 'Coins',
             dataIndex: 'name',
             key: 'name',
+            width: 150,
         }, {
             title: 'Amount',
             dataIndex: 'amount',
             key: 'amount',
-        }, {
-            title: 'Deposit address',
-            dataIndex: 'address',
-            key: 'address',
+            width: 150,
+        // }, {
+        //     title: 'Deposit address',
+        //     dataIndex: 'address',
+        //     key: 'address',
         },
 
             {
                 title: 'Action',
                 dataIndex: 'action',
                 key: 'action',
+                width: 200,
                 render: (text, record) => (
-                    <Tooltip title={record.code}>
-    <span>
-                          {/*<a href="javascript:;" className="act-btn">Deposit {record.code}</a>*/}
-        <a href="javascript:;" className="act-btn">Withdraw {record.code}</a>
+                    <div >
+                        <Tooltip
+                            title={<div style={{
+                                // width: "22rem",
+                                margin: "0rem",
+                                padding: "1.5rem",
+                                backgroundColor: "rgba(10,40,50,0.9)",
+                                // whiteSpace: 'nowrap'
+                            }}><h3>Internal address for deposit {record.code}</h3><br/><br/><h3>{record.address}</h3></div>}
+                            trigger="click"
+                            placement="topRight"
+                        >
+                        <span>
+                          <a href="javascript:;" className="act-btn">Deposit {record.code}</a>
                      </span>
                     </Tooltip>
+                          <a href="javascript:;" className="act-btn">Withdraw {record.code}</a>
+                    </div>
 
                 ),
             }];
         return (
             <div className="wrap">
                 <Header2/>
-                <div className="card-container, currencysPairs" style={{width:"70vw", margin: "auto" }}>
+                <div className="card-container, currencysPairs" style={{width:"auto", margin: "auto" }}>
                     <div className="card-container-head" >
                         <h1 style={{ margin: "2rem" }}>BALANCE</h1>
                         <Table dataSource={dataSource} columns={columns} pagination={false} rowClassName="custom__tr"/>

@@ -79,8 +79,10 @@ class ExchangePage extends Component {
     };
 
     render() {
-        const {pair: { first, second, id }, interval, appendFake, isAuthorised, token, user } = this.state;
-        // console.log("isAuthorised =",isAuthorised);
+        const {pair} = this.props;
+        const {first, second, id} = pair;
+        const {interval, appendFake, isAuthorised, token, user } = this.state;
+        // console.log(pair, first, second, id, isAuthorised);
         return (
             <div>
                 <Header2/>
@@ -128,7 +130,7 @@ class ExchangePage extends Component {
                         <div className="main-content">
                             <UserInfo short />
                             <MarketDepth currentPair={this.state.currentPair}/>
-                            <Orders {...this.state.pair} price={52} amount={1} loanRate={2} firePostToServer={this.firePostToServer}/>
+                            <Orders {...pair} price={52} amount={1} loanRate={2} firePostToServer={this.firePostToServer}/>
                             <OrdersHistory />
                         </div>
                         <div className="box notices">
