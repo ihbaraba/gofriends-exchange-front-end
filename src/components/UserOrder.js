@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import {getOrdersHistory} from "../utils";
 import { USERORDERSHISTORY } from "./../constants/APIURLS.js"
-import {Table} from 'antd';
+import {Table, Icon, Tooltip} from 'antd';
 
 class UserOrder extends React.Component {
     constructor() {
@@ -17,7 +17,7 @@ class UserOrder extends React.Component {
             orders: [],
             ordersHistory: [],
         };
-}
+    }
 
     calculateSum(bids = []) {
 
@@ -38,6 +38,7 @@ class UserOrder extends React.Component {
                 amount: `${+amount.toFixed(5)} ${bid["pair"]["baseCurrency"]["code"]}`,
                 Sum: `${+(bid.initialAmount * bid.price).toFixed(5)} ${bid["pair"]["quoteCurrency"]["code"]}`,
                 quoteCurrency: +(bid.initialAmount * bid.price).toFixed(5),
+                genuine: bid,
             })
         });
     }
@@ -84,47 +85,70 @@ class UserOrder extends React.Component {
         const {username, id} = user;
 
         const columns = function (pcompleted){
-           const completed = JSON.parse(pcompleted);
-           return [{
-            title: 'date',
-            dataIndex: completed ? 'completedAt' : 'createdAt',
-            key: 'date',
-            width: 150,
-        },{
-            title: 'Type',
-            dataIndex: 'type',
-            key: 'type',
-            width: 150,
-        },{
-            title: `Price`,
-            dataIndex: 'price',
-            key: 'price',
-            width: 150,
-        }, {
-            title: `Amount`,
-            dataIndex: 'amount',
-            key: 'amount',
-            width: 150,
-        }, {
-            title: `Sum`,
-            dataIndex: 'Sum',
-            key: 'Sum',
-            width: 150,
-        },
-            ...(!completed ? [{
-            title: 'Action',
-            dataIndex: 'action',
-            key: 'action',
-            width: 150,
-            render: (text, record) => (
-                <span>
+            const completed = JSON.parse(pcompleted);
+            return [{
+                title: 'date',
+                dataIndex: completed ? 'completedAt' : 'createdAt',
+                key: 'date',
+                width: 150,
+            },{
+                title: 'Type',
+                dataIndex: 'type',
+                key: 'type',
+                width: 150,
+            },{
+                title: `Price`,
+                dataIndex: 'price',
+                key: 'price',
+                width: 150,
+            }, {
+                title: `Amount`,
+                dataIndex: 'amount',
+                key: 'amount',
+                width: 150,
+            }, {
+                title: `Sum`,
+                dataIndex: 'Sum',
+                key: 'Sum',
+                width: 150,
+            },
+                ...(!completed ? [{
+                        title: `Info`,
+                        dataIndex: 'info',
+                        key: 'info',
+                        width: 80,
+                        render: (text, record) => {
+                            const stopLimit = record.limit || record.stop;
+                            // console.log(stopLimit, record);
+                            return ( stopLimit
+                                    ? <span>
+                                            <Tooltip placement="bottomRight" title={
+                                                record.genuine.type === "sell"
+                                                    ? `If the highest bid drops to or below ${record.genuine.stop}, an order to buy ${record.genuine.amount} at a price of ${record.genuine.price} will be placed`
+                                                    : `If the lowest ask rises to or above ${record.genuine.stop}, an order to buy ${record.genuine.amount} at a price of ${record.genuine.price} will be placed`
+                                            }>
+                                              <a href="javascript:;" className="act-btn"><Icon type="info-circle" theme="outlined"/></a>
+                                            </Tooltip>
+                                        </span>
+                                    : null
+                            )
+                        },
+                    } ]
+                    : []),
+                ...(!completed ? [{
+                        title: 'Action',
+                        dataIndex: 'action',
+                        key: 'action',
+                        width: 150,
+                        render: (text, record) => (
+                            <span>
                       <a href="javascript:;" className="act-btn">Cancel {record.code}</a>
                 </span>
 
-            ),
-        }]
-        : []),
-        ]};
+                        ),
+                    }]
+                    : []),
+            ]};
 
         return (
             <Table

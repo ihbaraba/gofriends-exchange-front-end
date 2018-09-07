@@ -142,11 +142,8 @@ class MarketDepth extends Component {
         const buyDepth = await getMarcketDpthData({rout: ORDERS, type: "buy", take: 50, book: id, price: "desc"});
         const sellDepth = await getMarcketDpthData({rout: ORDERS, type: "sell", take: 50, book: id, price: "desc"});
 
-        const buy_ = buyDepth.filter(item => !item.completed);
-
-        console.log("buy_ =", buy_);
-
-
+        // const buy_ = buyDepth.filter(item => !item.completed);
+        // console.log("buy_ =", buy_);
 
         await this.setState({
                 marketDepth:
