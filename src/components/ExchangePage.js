@@ -17,8 +17,6 @@ import UserInfo from "./UserInfo";
 import initialState from "../store/initialState";
 import {sendOrder, getUserInfo} from "./../utils";
 import { Radio } from "antd";
-// import * as ExchangeActions from '../actions/ExchangeActions'
-// import ExchangePageLogic from './Logics/ExchangePageLogic';
 import "antd/lib/radio/style/css";
 import {ORDERS, USERINFO} from "./../constants/APIURLS.js"
 import {login_success, save_user_info, save_user_orders} from "../actions/UserActions";
@@ -45,14 +43,11 @@ class ExchangePage extends Component {
          * and save it into redux store
          **/
         const { user: {token} } = this.props; //read from redux state
-        console.log("token =", token, "this.state ==>", this.state);
+        // console.log("token =", token, "this.state ==>", this.state);
         const isAuthorised = (token !== "") && (token !== null); // ? true : false
-        // const isAuthorised = true; // ? true : false
         this.setState({isAuthorised, token});
         if (isAuthorised) {
-            // this.props.login_success({token});
             const userInfo = await getUserInfo({rout: USERINFO, token});
-            // console.log("userInfo", userInfo.body);
             const {body} = userInfo;
             this.props.save_user_info(body);
         }

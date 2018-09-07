@@ -2,10 +2,13 @@ import {
     LOGIN_REQUEST,
     LOGIN_FAIL,
     LOGIN_SUCCESS,
-    LOGOUT_SUCCESS,
+    LOGOUT,
     SAVE_USER_INFO,
     SAVE_USER_ORDERS
 } from '../constants/index'
+import initialState from '../store/initialState'
+
+
 
 export default function userState(state = {}, action) {
     const { payload } = action;
@@ -43,9 +46,11 @@ export default function userState(state = {}, action) {
             // TODO
             return state;
 
-        case LOGOUT_SUCCESS:
-            // TODO
-            return state;
+        case LOGOUT:
+            // localStorage.clear();
+            localStorage.removeItem("exchange_token");
+            // console.log(localStorage.getItem("exchange_token"), initialState.user);
+            return initialState.user;
 
         default:
             return state

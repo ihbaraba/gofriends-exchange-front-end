@@ -17,7 +17,7 @@ const initialState = {
         quoteCurrency: "ETH",
     },
     user: {
-        email: "john.doe@gmail.com",
+        email: "Unauthorized",
         username: "Unauthorized",
         countryId: 1,
         password: "1",

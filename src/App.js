@@ -5,6 +5,7 @@ import { connect } from 'react-redux'
 // import configureStore from './store/configureStore'
 import WelcomePage from './components/WelcomePage';
 import Login from './components/Login';
+import LogOut from './components/LogOut';
 import Registration from './components/Registration';
 import ExchangePage from './components/ExchangePage';
 import MarginTrading from './components/MarginTrading';
@@ -40,13 +41,9 @@ import ProfileVerification from './components/ProfileVerification';
 // import {changePair} from "./actions/ExchangeActions";
 import {simpleAction} from "./actions/simpleAction";
 import YourOpenOrders from "./components/YourOpenOrders";
-// import {bindActionCreators} from "redux/index";
-
-// const store = configureStore();
 
 class App extends Component {
     render() {
-            {/*<Provider store={store}>*/}
         return (
             <Router>
                 <div className="App">
@@ -67,8 +64,8 @@ class App extends Component {
                         <Route path="/terms" component={Terms}/>
                         <Route path="/activate" component={Activate}/>
                         <Route path="/changepassword" component={ChangePassword}/>
-                        {/*<Route path="/balances" component={Balances}/>*/}
-                        <Route path="/balances" component={UserInfo}/>
+                        <Route path="/balances" component={Balances}/>
+                        {/*<Route path="/balances" component={UserInfo}/>*/}
                         <Route path="/orders" component={UserOrdersHistory}/>
                         <Route path="/loginhistory" component={LoginHistory}/>
 
@@ -90,25 +87,6 @@ class App extends Component {
                 </div>
             </Router>
         );
-            // </Provider>
     }
 }
-//
-// const mapStateToProps = state => ({
-//         ...state
-//     });
-//
-// const mapDispatchToProps = dispatch => ({
-//     simpleAction: () => dispatch(simpleAction())
-//         // actions: bindActionCreators(changePair, dispatch),
-//         // dispatch: (action) => {
-//         //     console.log("test dispatch")
-//             // action();
-//         // },
-//         // changePair: () => {
-//         //     changePair();
-//         // }
-// });
-
-// export default connect(mapStateToProps, mapDispatchToProps)(App);
 export default App;
