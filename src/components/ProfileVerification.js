@@ -33,7 +33,7 @@ class ProfileVerification extends Component{
 
 
                     <form className="profileVerification">
-                        <p>Profile Verification</p>
+                        <h4>Profile Verification</h4>
                         <div>
                             <label>First Name</label>
                             <input type="text"/>
