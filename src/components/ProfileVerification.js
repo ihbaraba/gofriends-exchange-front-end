@@ -4,10 +4,15 @@ import Footer from './Footer';
 import '../App.css';
 
 
+
 class ProfileVerification extends Component{
 
+
+
+
     render(){
-        return(
+
+            return(
             <div>
                 <Header2/>
                 <div style={{clear: "both"}}>
@@ -17,20 +22,12 @@ class ProfileVerification extends Component{
 
 
 
-
-
-
-
-
-
-
-
                 <div className="formVerificationWrap">
-                    <p className="slogan">To begin trading, you’ll first need to submit your profile for verification.<br/>
+                    <p className="slogan"><span>To begin trading, you’ll first need to submit your profile for verification.</span><br/>
 
                         Note: you may only have one profile. If you have more than one account,
                         you need to link them rather than submit multiple profiles.</p>
-
+                </div>
 
                     <form className="profileVerification">
                         <h4>Profile Verification</h4>
@@ -56,6 +53,10 @@ class ProfileVerification extends Component{
                             <label>Street Address</label>
                             <input type="text"/>
                         </div>
+                        <div>
+                            <label>Postal Code</label>
+                            <input type="text"/>
+                        </div>
 
                         <div>
                             <label>Phone Number</label>
@@ -71,8 +72,11 @@ class ProfileVerification extends Component{
                         <button className="profile-v-btn">
                             Begin Verifications
                         </button>
+                        <div className="learn">
+                            <a href="#" >Learn how your privacy is protected.</a>
+                        </div>
                     </form>
-                </div>
+
 
 
 
