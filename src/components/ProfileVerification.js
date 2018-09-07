@@ -15,8 +15,18 @@ class ProfileVerification extends Component{
                 </div>
 
 
+
+
+
+
+
+
+
+
+
+
                 <div className="formVerificationWrap">
-                    <p>To begin trading, you’ll first need to submit your profile for verification.<br/>
+                    <p className="slogan">To begin trading, you’ll first need to submit your profile for verification.<br/>
 
                         Note: you may only have one profile. If you have more than one account,
                         you need to link them rather than submit multiple profiles.</p>
@@ -58,7 +68,7 @@ class ProfileVerification extends Component{
                                 Terms of Use
                             </a>.
                         </p>
-                        <button className="verif-btn">
+                        <button className="profile-v-btn">
                             Begin Verifications
                         </button>
                     </form>
