@@ -38,6 +38,7 @@ import Knowledge from './components/Knowledge';
 import ProfileVerification from './components/ProfileVerification';
 
 
+
 // import {changePair} from "./actions/ExchangeActions";
 import {simpleAction} from "./actions/simpleAction";
 import YourOpenOrders from "./components/YourOpenOrders";
@@ -84,6 +85,7 @@ class App extends Component {
                         <Route path="/Knowledge" component={Knowledge}/>
                         <Route path="/Knowledge" component={Knowledge}/>
                         <Route path="/ProfileVerification" component={ProfileVerification}/>
+
                         <Route path="*" component={NotFound}/>
                     </Switch>
                 </div>
