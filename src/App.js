@@ -55,11 +55,13 @@ class App extends Component {
                         <Route path="/margintrading" component={MarginTrading}/>
                         <Route path="/lending" component={Lending}/>
                         <Route path="/login" component={Login}/>
+                        <Route path="/logout" component={LogOut}/>
                         <Route path="/signup" component={Registration}/>
                         <Route path="/profile" component={Profile}/>
                         <Route path="/resetPassword" component={ResetPassword}/>
                         <Route path="/2fa" component={TwoFactorAuth}/>
                         <Route path="/login2" component={Login2}/>
+                        <Route path="/logout" component={LogOut}/>
                         <Route path="/contact" component={ContactUs}/>
                         <Route path="/privacy" component={Policy}/>
                         <Route path="/terms" component={Terms}/>
