@@ -3,6 +3,7 @@ import logo from '../img/Logo.png';
 import NavLink from './NavLink';
 import '../App.css';
 
+
 const Footer = () => {
     return (
         <div className="footer">
