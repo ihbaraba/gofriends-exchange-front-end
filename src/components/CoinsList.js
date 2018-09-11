@@ -38,10 +38,10 @@ class CoinsList extends React.Component {
             volumeBase: markets_pairs[idx]["volumeBase"],
             volumeQuote: markets_pairs[idx]["volumeQuote"],
         })).sort((a, b) => a.id - b.id);
-        console.log(pairs);
+        // console.log(pairs);
         // const coins = [... new Set( data.map( item => item.baseCurrency.code ))];
         const coins = [... new Set( pairs.map( item => item.baseCurrency ))];
-        console.log("PAIRS ", pairs, coins, markets_pairs, data);
+        // console.log("PAIRS ", pairs, coins, markets_pairs, data);
         this.setState({data, coins, pairs});
         this.props.pair(pairs[0]);
     }

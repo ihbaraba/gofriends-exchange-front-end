@@ -11,16 +11,16 @@ import Orders from './Orders';
 import Graphic from './Graphic/Graphic'
 import MarketDepth from './MarketDepth'
 import OrdersHistory from './OrdersHistory'
-import '../App.css';
 import CoinsList from "./CoinsList";
 import UserInfo from "./UserInfo";
 import initialState from "../store/initialState";
 import {sendOrder, getUserInfo} from "./../utils";
 import { Radio } from "antd";
-import "antd/lib/radio/style/css";
 import {ORDERS, USERINFO} from "./../constants/APIURLS.js"
 import {login_success, save_user_info, save_user_orders} from "../actions/UserActions";
 import {chart_timing} from "../actions/ChartActions";
+import "antd/lib/radio/style/css";
+import '../App.css';
 
 class ExchangePage extends Component {
 
@@ -82,7 +82,7 @@ class ExchangePage extends Component {
         const {pair} = this.props;
         const {first, second, id} = pair;
         const {interval, appendFake, isAuthorised, token, user } = this.state;
-        // console.log(pair, first, second, id, isAuthorised);
+        console.log(pair, first, second, id, isAuthorised);
         return (
             <div>
                 <Header2/>

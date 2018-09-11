@@ -249,7 +249,7 @@ class CandleStickChartPanToLoadMore extends React.Component {
                     calculatedData
                     // calculatedData.slice(-rowsToDownload).concat(prevData)
                 );
-                console.log(index, " |||| right data dataToCalculate =", dataToCalculate);
+                // console.log(index, " |||| right data dataToCalculate =", dataToCalculate);
                 const xScaleProvider = discontinuousTimeScaleProviderBuilder()
                     .initialIndex(Math.ceil(start))
                     .withIndex(index);
@@ -331,7 +331,10 @@ http://rrag.github.io/react-stockcharts/documentation.html#/zoom_and_pan
                         displayFormat={format(".2f")}
                     />
 
-                    <CandlestickSeries />
+                    <CandlestickSeries
+                        stroke={d => d.close > d.open ? "#69FF83" : "#FF0000"}
+                        wickStroke={d => d.close > d.open ? "#6BA583" : "#DB0000"}
+                        fill={d => d.close > d.open ? "#6BA583" : "#DB0000"}/>
                     <LineSeries yAccessor={ema26.accessor()} stroke={ema26.stroke()} />
                     <LineSeries yAccessor={ema12.accessor()} stroke={ema12.stroke()} />
 

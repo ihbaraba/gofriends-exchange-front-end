@@ -117,7 +117,10 @@ class OHLCChartWithElderImpulseIndicator extends React.Component {
 
                     <EdgeIndicator itemType="last" orient="right" edgeAt="right"
                                    yAccessor={d => d.close} fill={d => d.close > d.open ? "#6BA583" : "#FF0000"}/>
-                    <CandlestickSeries />
+                    <CandlestickSeries
+                        stroke={d => d.close > d.open ? "#6BA583" : "#DB0000"}
+                        wickStroke={d => d.close > d.open ? "#6BA583" : "#DB0000"}
+                        fill={d => d.close > d.open ? "#6BA583" : "#DB0000"}/>
 
                     <OHLCTooltip origin={[-40, -10]}/>
                     <MovingAverageTooltip

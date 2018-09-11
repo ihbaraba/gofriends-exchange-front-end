@@ -1,6 +1,6 @@
 // import request from  'superagent' ;
 
-export default function getMarcketDpthData({rout, type = "buy", book = 1, takeamount = 20, completed = false}) {
+export default function getMarcketDpthData({rout, type = "buy", book = 1, takeamount = 20, completed = false, withStop = false}) {
 
     // console.log("getMarcketDpthData", `${rout}?type=${type}&pairId=${book}&take=${takeamount}`);
     //
@@ -24,7 +24,7 @@ export default function getMarcketDpthData({rout, type = "buy", book = 1, takeam
 
 
     // const promiseMSFT = fetch(`//gofriends.ru/api/v1/orders?type=${type}&pairId=${book}&take=${takeamount}`)
-    const promiseMSFT = fetch(`${rout}?type=${type}&pairId=${book}&take=${takeamount}&completed=${completed}`)
+    const promiseMSFT = fetch(`${rout}?type=${type}&pairId=${book}&take=${takeamount}&completed=${completed}&withStop=${withStop}`)
             .then(response => response.json())
         // .then(data => {data.reduce((data, item) => {
         //         data.push(parseData(parseDate)(item));

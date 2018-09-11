@@ -80,7 +80,9 @@ class Graphic extends React.Component {
                 // console.log(data);
                 if (data.length === 0)
                 {
-                    alert("Historical and current data for this pair is absent");
+                    // alert("Historical and current data for this pair is absent");
+                    // console.log("Historical and current data for this pair is absent");
+                    this.setState({data});
                 }
                 else
                 {
@@ -226,6 +228,17 @@ class Graphic extends React.Component {
             return <div>Loading...</div>
         }
         // console.log("Graphics props", this.props);
+        const {data} = this.state;
+        if (data.length === 0)
+        {
+            // alert("Historical and current data for this pair is absent");
+            return <div className="card-container, currencysPairs" style={{width:"auto", margin: "auto" }}>
+                        <div className="card-container-head" >
+                            <h1>Historical and current data for this pair is absent</h1>
+                    </div>
+                </div>
+        }
+
         return (
             <Chart type="hybrid" data={this.state.data} newDiapazone={this.newDiapazone}/>
         )
