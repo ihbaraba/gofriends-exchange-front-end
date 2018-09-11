@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {BrowserRouter as Router, Route, Switch, Redirect} from 'react-router-dom';
-import { connect } from 'react-redux'
+import {connect} from 'react-redux'
 // import { Provider } from 'react-redux'
 // import configureStore from './store/configureStore'
 import WelcomePage from './components/WelcomePage';
@@ -9,7 +9,6 @@ import LogOut from './components/LogOut';
 import Registration from './components/Registration';
 import ExchangePage from './components/ExchangePage';
 import MarginTrading from './components/MarginTrading';
-import Lending from './components/Lending';
 import Profile from './components/Profile';
 import NotFound from './components/NotFound';
 import ResetPassword from './components/ResetPassword';
@@ -36,61 +35,75 @@ import Confirm from './components/Confirm';
 import BalancesPanel from './components/BalancesPanel';
 import Knowledge from './components/Knowledge';
 import ProfileVerification from './components/ProfileVerification';
-
+import Footer from './components/Footer';
 
 
 // import {changePair} from "./actions/ExchangeActions";
 import {simpleAction} from "./actions/simpleAction";
 import YourOpenOrders from "./components/YourOpenOrders";
 
+// import Footer from "./components/Footer";
+
 class App extends Component {
     render() {
         return (
-            <Router>
-                <div className="App">
-                    <Switch>
-                        <Route exact path="/" component={WelcomePage}/>
-                        <Route exact path="/" component={Registration}/>
-                        <Route path="/exchange" component={ExchangePage}/>
-                        <Route path="/margintrading" component={MarginTrading}/>
-                        <Route path="/lending" component={Lending}/>
-                        <Route path="/login" component={Login}/>
-                        <Route path="/logout" component={LogOut}/>
-                        <Route path="/signup" component={Registration}/>
-                        <Route path="/profile" component={Profile}/>
-                        <Route path="/resetPassword" component={ResetPassword}/>
-                        <Route path="/2fa" component={TwoFactorAuth}/>
-                        <Route path="/login2" component={Login2}/>
-                        <Route path="/logout" component={LogOut}/>
-                        <Route path="/contact" component={ContactUs}/>
-                        <Route path="/privacy" component={Policy}/>
-                        <Route path="/terms" component={Terms}/>
-                        <Route path="/activate" component={Activate}/>
-                        <Route path="/changepassword" component={ChangePassword}/>
-                        <Route path="/balances" component={Balances}/>
-                        {/*<Route path="/balances" component={UserInfo}/>*/}
-                        <Route path="/orders" component={UserOrdersHistory}/>
-                        <Route path="/loginhistory" component={LoginHistory}/>
+            <div className="w-wrapper">
+                <Router>
+                    <div className="w-wrapper">
+                    {/*<div className="App">*/}
+                        <div className="w-content">
+                            <Switch>
+                                <Route exact path="/" component={WelcomePage}/>
+                                <Route exact path="/" component={Registration}/>
+                                <Route path="/exchange" component={ExchangePage}/>
+                                <Route path="/margintrading" component={MarginTrading}/>
+                                <Route path="/login" component={Login}/>
+                                <Route path="/logout" component={LogOut}/>
+                                <Route path="/signup" component={Registration}/>
+                                <Route path="/profile" component={Profile}/>
+                                <Route path="/resetPassword" component={ResetPassword}/>
+                                <Route path="/2fa" component={TwoFactorAuth}/>
+                                <Route path="/login2" component={Login2}/>
+                                <Route path="/logout" component={LogOut}/>
+                                <Route path="/contact" component={ContactUs}/>
+                                <Route path="/privacy" component={Policy}/>
+                                <Route path="/terms" component={Terms}/>
+                                <Route path="/activate" component={Activate}/>
+                                <Route path="/changepassword" component={ChangePassword}/>
+                                <Route path="/balances" component={Balances}/>
+                                {/*<Route path="/balances" component={UserInfo}/>*/}
+                                <Route path="/orders" component={UserOrdersHistory}/>
+                                <Route path="/loginhistory" component={LoginHistory}/>
 
 
-                        <Route path="/OpenOrders" component={OpenOrders}/>
-                        <Route path="/Bann" component={Bann}/>
-                        <Route path="/OrderPanel" component={OrderPanel}/>
-                        <Route path="/DepositHistory" component={DepositHistory}/>
-                        <Route path="/Withdrawalpanel" component={Withdrawalpanel}/>
-                        <Route path="/Transactions" component={Transactions}/>
-                        <Route path="/Confirm" component={Confirm}/>
-                        <Route path="/BalancesPanel" component={BalancesPanel}/>
-                        <Route path="/YourOpenOrders" component={YourOpenOrders}/>
-                        <Route path="/Knowledge" component={Knowledge}/>
-                        <Route path="/Knowledge" component={Knowledge}/>
-                        <Route path="/ProfileVerification" component={ProfileVerification}/>
+                                <Route path="/OpenOrders" component={OpenOrders}/>
+                                <Route path="/Bann" component={Bann}/>
+                                <Route path="/OrderPanel" component={OrderPanel}/>
+                                <Route path="/DepositHistory" component={DepositHistory}/>
+                                <Route path="/Withdrawalpanel" component={Withdrawalpanel}/>
+                                <Route path="/Transactions" component={Transactions}/>
+                                <Route path="/Confirm" component={Confirm}/>
+                                <Route path="/BalancesPanel" component={BalancesPanel}/>
+                                <Route path="/YourOpenOrders" component={YourOpenOrders}/>
+                                <Route path="/Knowledge" component={Knowledge}/>
+                                <Route path="/ProfileVerification" component={ProfileVerification}/>
 
-                        <Route path="*" component={NotFound}/>
-                    </Switch>
-                </div>
-            </Router>
+                                <Route path="*" component={NotFound}/>
+
+
+                            </Switch>
+                        </div>
+                    {/*</div>*/}
+
+
+                    <div className="w-footer">
+                        <Footer/>
+                    </div>
+                    </div>
+                </Router>
+            </div>
         );
     }
 }
+
 export default App;

@@ -57,7 +57,7 @@ class Profile extends Component{
                     </div>
 
 
-                <Footer/>
+
             </div>
         )
     }

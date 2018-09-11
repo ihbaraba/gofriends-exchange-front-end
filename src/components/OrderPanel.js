@@ -42,7 +42,7 @@ class OrderPanel extends Component {
                     </table>
                 </div>
 
-                <Footer/>
+
 
             </div>
         )

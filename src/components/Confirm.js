@@ -55,7 +55,7 @@ class Confirm extends Component{
 
 
 
-                <Footer/>
+
             </div>
         )
     }

@@ -42,7 +42,7 @@ class Accountspanel extends Component {
                     </table>
                 </div>
 
-                <Footer/>
+
 
             </div>
         )

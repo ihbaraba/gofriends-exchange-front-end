@@ -74,7 +74,6 @@ class LoginHistory extends Component {
                     </table>
                 </div>
 
-                    <Footer/>
 
             </div>
 

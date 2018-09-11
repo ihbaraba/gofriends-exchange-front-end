@@ -34,7 +34,7 @@ class Bann extends Component {
                     </table>
                 </div>
 
-                <Footer/>
+
 
             </div>
         )

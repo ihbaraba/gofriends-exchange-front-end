@@ -14,7 +14,7 @@ const Activate = () => {
                 <h2>Please check your email for confirmation letter</h2>
                 <p>Be sure to check your spam box if it does not arrive within a few minutes</p>
             </div>
-            <Footer/>
+
         </div>
     )
 };

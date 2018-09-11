@@ -64,7 +64,7 @@ class Login2 extends Component {
 
                     </div>
                 </div>
-                <Footer/>
+
             </div>
         )
     }
