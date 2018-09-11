@@ -70,7 +70,7 @@ class ChangePassword extends Component {
 
                     </div>
                 </div>
-                <Footer/>
+
             </div>
         )
     }

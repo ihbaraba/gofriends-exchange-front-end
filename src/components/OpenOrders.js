@@ -14,7 +14,7 @@ class OpenOrders extends Component{
                 </div>
 
                 <div className="ordwrap"><h2>You have no open orders.</h2></div>
-                <Footer/>
+
             </div>
         )
     }

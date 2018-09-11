@@ -162,7 +162,7 @@ class BalancesPanel extends Component {
                     </table>
                 </div>
 
-                <Footer/>
+
 
             </div>
 

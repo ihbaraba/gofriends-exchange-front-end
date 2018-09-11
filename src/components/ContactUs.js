@@ -164,7 +164,7 @@ class ContactUs extends Component {
 
                     </div>
                 </div>
-                <Footer/>
+
             </div>
     )
     }

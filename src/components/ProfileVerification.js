@@ -82,7 +82,7 @@ class ProfileVerification extends Component{
 
 
 
-                <Footer/>
+
             </div>
 
         )

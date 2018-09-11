@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import Header2 from './Header2';
+import Header from './Header';
 import Footer from './Footer';
 import NavLink from './NavLink';
 import API from './api';
@@ -100,7 +100,7 @@ class Login extends Component {
         const {showTotpCodeInput} = this.state;
         return (
             <div>
-                <Header2/>
+                <Header/>
                 <div style={{clear: "both"}}>
                     <h1 className="sign">Sign in to you account</h1>
                 </div>
@@ -184,7 +184,7 @@ class Login extends Component {
 
                     </div>
                 </div>
-                <Footer/>
+
             </div>
         )
     }

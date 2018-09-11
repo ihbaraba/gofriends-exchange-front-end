@@ -97,7 +97,7 @@ class Knowledge extends Component{
 
 
 
-                <Footer/>
+
             </div>
         )
     }

@@ -70,7 +70,6 @@ class DepositHistory extends Component {
 
 
 
-                <Footer/>
 
             </div>
         )

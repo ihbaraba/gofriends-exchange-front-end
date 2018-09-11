@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import Header2 from './Header2';
+import Header from './Header';
 import Footer from './Footer';
 import NavLink from './NavLink';
 import {connect} from "react-redux";
@@ -227,7 +227,7 @@ class Registration extends Component {
 
         return (
             <div>
-                <Header2/>
+                <Header/>
                 <div style={{clear: "both"}}>
                     <h1 className="sign">CREATE YOUR ACCOUNT</h1>
                     <div className="featureBanner form2col">
@@ -252,7 +252,7 @@ class Registration extends Component {
                                                 id="userNAme"
                                                 required/>
                                         </div>
-                                        <div style={{marginBottom: "2rem",}}>
+                                        <div>
                                             <label>Country:</label>
                                             <select key={country} onChange={this.handleChangeCountry} value={country} style={{color: "#eef",}}>
                                                 <option value={country} >{country}</option>
@@ -340,7 +340,7 @@ class Registration extends Component {
                         </div>
                     </div>
                 </div>
-                <Footer/>
+
             </div>
         )
     }

@@ -80,7 +80,7 @@ class ResetPassword extends Component {
 
                     </div>
                 </div>
-                <Footer/>
+
             </div>
         )
     }

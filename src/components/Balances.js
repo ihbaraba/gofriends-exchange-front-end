@@ -9,8 +9,11 @@ import {getUserInfo} from "../utils";
 import {USERINFO} from "./../constants/APIURLS.js"
 import {save_user_info, save_user_orders} from "../actions/UserActions";
 
-import 'antd/lib/tooltip/style/css';
-import 'antd/lib/popconfirm/style/css';
+import qrcode from '../img/qr.png';
+import { Icon } from 'antd';
+
+// import 'antd/lib/tooltip/style/css';
+// import 'antd/lib/popconfirm/style/css';
 
 class Balances extends Component {
     constructor(props) {
@@ -64,25 +67,92 @@ class Balances extends Component {
                 title: 'Action',
                 dataIndex: 'action',
                 key: 'action',
-                width: 200,
+                    width: 200,
                 render: (text, record) => (
                     <div >
                         <Tooltip
-                            title={<div style={{
-                                // width: "22rem",
-                                margin: "0rem",
-                                padding: "1.5rem",
-                                backgroundColor: "rgba(10,40,50,0.9)",
-                                // whiteSpace: 'nowrap'
-                            }}><h3>Internal address for deposit {record.code}</h3><br/><br/><h3>{record.address}</h3></div>}
+                            title={
+
+                                <div>
+
+                                    <h3>Deposit {record.name}</h3>
+                                    <div className="line"></div>
+
+                                     <div className="tooltip-block">
+                                         <img src={qrcode} className="qrImg"/>
+                                         <h4>Internal address for deposit  {record.name}</h4>
+                                     </div>
+
+
+                                    <p><span>Wallet:</span> {record.address}</p>
+                                </div>
+                            }
                             trigger="click"
                             placement="topRight"
                         >
+
                         <span>
                           <a href="javascript:;" className="act-btn">Deposit {record.code}</a>
-                     </span>
+                        </span>
                     </Tooltip>
-                          <a href="javascript:;" className="act-btn">Withdraw {record.code}</a>
+
+
+                        <a href="javascript:;" className="act-btn">Withdraw {record.code}</a>
+
+
+                        {/*<Tooltip*/}
+                            {/*title={*/}
+
+                                {/*<div>*/}
+
+                                    {/*<h3>Withdraw {record.name}</h3>*/}
+                                    {/*<div className="line"></div>*/}
+
+                                   {/*<div>*/}
+                                       {/*<div className="formWrap">*/}
+                                           {/*<label>Your wallet address:</label>*/}
+                                           {/*<input type="text"  />*/}
+                                       {/*</div>*/}
+
+                                       {/*<div className="formWrap">*/}
+                                           {/*<label>Amount:</label>*/}
+                                           {/*<input type="number"  />*/}
+                                       {/*</div>*/}
+
+                                       {/*<div className="formWrap">*/}
+                                           {/*<label>Transaction Fee:</label>*/}
+                                           {/*<input type="number"  />*/}
+                                       {/*</div>*/}
+
+
+
+                                       {/*<div className="formWrap">*/}
+                                           {/*<div>Total:</div>*/}
+                                           {/*<div>*/}
+                                               {/*<span>0.00000000</span>&nbsp;*/}
+                                               {/*<span className="currency"></span>*/}
+                                           {/*</div>*/}
+                                       {/*</div>*/}
+
+                                       {/*<a href="#" className="act-btn">Cancel</a>*/}
+                                       {/*<a href="#" className="act-btn">Withdraw</a>*/}
+                                   {/*</div>*/}
+
+
+
+                                {/*</div>*/}
+                            {/*}*/}
+                            {/*trigger="click"*/}
+                            {/*placement="topRight">*/}
+
+                            {/*<span>*/}
+                                {/*<a href="javascript:;" className="act-btn">Withdraw {record.code}</a>*/}
+                            {/*</span>*/}
+
+                        {/*</Tooltip>*/}
+
+
+
                     </div>
 
                 ),
@@ -96,7 +166,7 @@ class Balances extends Component {
                         <Table dataSource={dataSource} columns={columns} pagination={false} rowClassName="custom__tr"/>
                     </div>
                 </div>
-                <Footer/>
+
             </div>
         )
     }
