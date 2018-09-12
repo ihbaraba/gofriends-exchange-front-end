@@ -115,18 +115,33 @@ class Registration extends Component {
                 "countryId": this.state.countryId,
             }
         });
-        const { usrMsg, errorCode } = responce;
+        const { errorMessage, errorTextCode } = responce;
 
-        if (typeof usrMsg !== "undefined") {
-            // console.log(errorCode, usrMsg);
-            switch (errorCode) {
-                case 0 :
-                case 1 :
-                case 2 :
-                case 3 :
-                case 4 :
-                case 5 : alert(usrMsg);
+        // if (typeof usrMsg !== "undefined") {
+        //     // console.log(errorCode, usrMsg);
+        //     switch (errorCode) {
+        //         case 0 :
+        //         case 1 :
+        //         case 2 :
+        //         case 3 :
+        //         case 4 :
+        //         case 5 : alert(usrMsg);
+        //             break;
+        //         default :
+        //     }
+        if (typeof errorTextCode !== "undefined") {
+
+            console.log(errorTextCode, errorMessage, typeof errorTextCode, " showTotpCodeInput=", this.state.showTotpCodeInput);
+
+            switch (errorTextCode) {
+                case "UserNotFound" :
+                case "WrongPassword":
+                case "UserExists" :
+                case "EmailExists" :
+                case "IncorrectTotpCode" :
+                case "TotpCodeNotProvided":  alert(errorMessage + "  (error code:" + errorTextCode + " )")
                     break;
+
                 default :
             }
             }
@@ -138,53 +153,58 @@ class Registration extends Component {
                     {
                         showQRCode: true,
                         QRImage
-                    },
-                    () => {
-                        // this.props.history.push(`/login`);
-                        setTimeout( () => { this.setState({showQRCode: false}) }, 5 * 60 * 1000) //hide input for toptCode
                     }
                 )
             }
     };
 
     handleSignInSubmit = async (event) => {
-        // console.log("handleSubmit this.props=", this.props);
         event.preventDefault();
+        const totpCode =( (this.state.totpCode !== "") && this.state.switchState) ?  {totpCode: this.state.totpCode} : {};
         const user = {
             email: this.state.email,
             password: this.state.password,
-            totpCode: this.state.totpCode,
+                ...totpCode,
         };
+        // debugger;
+        // console.log("handleSubmit this.state=", this.state, user, );
+        console.log(  (this.state.totpCode !== "") , this.state.switchState, "handleSubmit totpCode=",  ...totpCode, totpCode);
         const content = await sendRequest({
             rout: LOGIN,
             options: { ...user }
         });
 
-        const { usrMsg, errorCode } = content;
+        const { errorMessage, errorTextCode } = content;
 
-        if (typeof usrMsg !== "undefined") {
+        if (typeof errorTextCode !== "undefined") {
 
-            switch (errorCode) {
-                case 0 : // bad email
-                case 1 :
-                case 2 :
-                case 3 : alert(usrMsg);//bad password
+            // console.log(errorTextCode, errorMessage, typeof errorTextCode, " showTotpCodeInput=", this.state.showTotpCodeInput);
+
+            switch (errorTextCode) {
+                case "UserNotFound" :
+                case "WrongPassword":
+                case "UserExists" :
+                case "BadRequest" :
+                case "EmailExists" : alert(errorMessage + "  (error code:" + errorTextCode + " )");
                     break;
-                case 4 : {
-                    if (!this.state.showTotpCodeInput) // bad toptCode
-                    {this.setState( //show input for toptCode
-                        {showTotpCodeInput: true})}
-                    else
-                    { alert(usrMsg) }
+                case "IncorrectTotpCode" :
+                case "TotpCodeNotProvided": {
+                    // if (!this.state.showTotpCodeInput) // bad toptCode
+                    // {this.setState( //show input for toptCode
+                    //     {showTotpCodeInput: true}
+                    // )}
+                    // else
+                    { alert(errorMessage + "  (error code:" + errorTextCode + " )"); }
                 }
                     break;
+
                 default :
             }
         }
         else
         {
             this.props.login_success({token: content.token});
-            this.props.history.push(`/exchange`);
+              this.props.history.push(`/exchange`);
         }
     };
 
@@ -200,6 +220,7 @@ class Registration extends Component {
         this.setState({ switchState: checked });
     }
     render() {
+        // console.log("this.state = ", this.state);
         const {countries: options, country, QRImage, showQRCode, switchState} = this.state;
         const regFormVAlid = this.validateForm();
 
