@@ -4,15 +4,15 @@ http://gofriends.ru:3000/docs/#/Quotations/get_quotations__pairId_
 */
 
 const SERVERS = {
-    PRODUCT: {
-        XHR: "https://demo.gofriends.pro",
-        SOCKET: "wss://demo.gofriends.pro/",
-    },
-    DEV: {
-        XHR: "http://142.93.81.111:3000",
-        SOCKET: "http://142.93.81.111:3001",
-    },
-};
+        PRODUCT: {
+            XHR: "https://demo.gofriends.pro",
+            SOCKET: "wss://demo.gofriends.pro/",
+        },
+        DEV: {
+            XHR: "http://142.93.81.111:3000",
+            SOCKET: "http://142.93.81.111:3001",
+        },
+    };
 
 
 /*
@@ -20,19 +20,17 @@ const SERVERS = {
 * Aiming to avoid wrong backend server address
 * If it is not "localhost" setting SERVERS.PRODUCT
 * */
-const detected = document.location.hostname !== "localhost"
+const detecteding = document.location.hostname !== "localhost"
     ? SERVERS.PRODUCT
     : SERVERS.DEV; /* <=== set here server what needs for developing -  */
 
-export const current_server = detected;
-// export const current_server = SERVERS.DEV;
-// export const current_server = SERVERS.PRODUCT;
+export const current_server = detecteding;
 
-console.log('document.location', document.location.hostname, typeof document.location.hostname, document.location,);
-console.log('detected=', detected, current_server);
+console.log('document.location',detecteding, document.location,);
 const ENV = process.env;
-console.log("process.env=", ENV);
+console.log(ENV);
 
+// export const current_server = SERVERS.PRODUCT;
 
 /**************************
  * get initial data
@@ -53,7 +51,7 @@ const CRIPTOCOMPARE_TIMEFRAMES = `https://min-api.cryptocompare.com/data/histoda
 export const TIMEFRAMES = OUR_TIMEFRAMES; // OUR_TIMEFRAMES or CRIPTOCOMPARE_TIMEFRAMES
 
 /**************************
- */
+*/
 
 /*load data for chart*/
 export const QUOTATIONS = `${current_server.XHR}/api/v1/quotations`;

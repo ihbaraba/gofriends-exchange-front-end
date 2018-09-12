@@ -2,25 +2,25 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import * as d3 from "d3";
+
 import {changePair} from '../actions/ExchangeActions';
 import Header2 from './Header2';
-
-import Footer from './Footer';
 
 import Orders from './Orders';
 import Graphic from './Graphic/Graphic'
 import MarketDepth from './MarketDepth'
 import OrdersHistory from './OrdersHistory'
-import '../App.css';
 import CoinsList from "./CoinsList";
 import UserInfo from "./UserInfo";
 import initialState from "../store/initialState";
-import {sendOrder, getUserInfo} from "./../utils";
+import {sendOrder, getUserInfo, intervalInDays} from "./../utils";
 import { Radio } from "antd";
-import "antd/lib/radio/style/css";
 import {ORDERS, USERINFO} from "./../constants/APIURLS.js"
 import {login_success, save_user_info, save_user_orders} from "../actions/UserActions";
-import {chart_timing} from "../actions/ChartActions";
+import {chart_timing, chart_range} from "../actions/ChartActions";
+import "antd/lib/radio/style/css";
+import '../App.css';
 
 class ExchangePage extends Component {
 
@@ -51,6 +51,19 @@ class ExchangePage extends Component {
             const {body} = userInfo;
             this.props.save_user_info(body);
         }
+        /**
+        * Save in Redux Store current Chart range
+        **/
+        const currentDate = new Date();
+        const format = d3.timeFormat("%Y-%m-%d");
+        const currentDatePlusOdin = d3.timeDay.offset(currentDate, intervalInDays(this.state.interval, 1) ) ;
+        const offsetData = d3.timeDay.offset(currentDate, (-1) * intervalInDays(this.state.interval, 3*24) ) ;
+
+        this.props.chart_range({
+            dateFrom: format(offsetData),
+            // dateTo: format(currentDate),
+            dateTo: format(currentDatePlusOdin),
+        });
     }
 
     async firePostToServer (bidProps) {
@@ -79,10 +92,11 @@ class ExchangePage extends Component {
     };
 
     render() {
-        const {pair} = this.props;
-        const {first, second, id} = pair;
+        const {pair, chartRange: {dateFrom = "2018-08-27", dateTo = "2018-08-31"}} = this.props;
+
+        const {first, second, id, baseCurrencyName, quoteCurrencyName} = pair;
         const {interval, appendFake, isAuthorised, token, user } = this.state;
-        // console.log(pair, first, second, id, isAuthorised);
+        console.log(this.props);
         return (
             <div>
                 <Header2/>
@@ -95,7 +109,7 @@ class ExchangePage extends Component {
 
                     <div style={{display: "flex", alignItems: "center", justifyContent: "center"}}>
                         <div className="padding" style={{flex: "1 0", clear: "both"}}>
-                            <h1 className="h1">{`${first} exchange on ${second}`} </h1>
+                            <h1 className="h1">{`${baseCurrencyName} exchange on ${quoteCurrencyName}`} </h1>
                             <p className="small-text">{`${first} / ${second}`}</p>
                         </div>
                     </div>
@@ -104,9 +118,9 @@ class ExchangePage extends Component {
                         <div className="rightSide">
                             <Graphic
                                 pairId={id}
-                                dateFrom={"2018-07-24"}
-                                dateTo={"2018-07-31"}
-                                take={1000}
+                                dateFrom={dateFrom}
+                                dateTo={dateTo}
+                                take={100}
                                 interval={interval}
                                 appendFake={"false"}
                             />
@@ -221,12 +235,15 @@ class ExchangePage extends Component {
 }
 
 const mapStateToProps = state => ({
-    ...state
+    ...state,
+    pair: state.pair,
+    chartRange: state.chartRange,
 });
 
 const mapDispatchToProps = dispatch => ({
     login_success: (token) => dispatch(login_success(token)),
     chart_timing: (timing) => dispatch(chart_timing(timing)),
+    chart_range: (range) => dispatch(chart_range(range)),
     save_user_info: (info) => dispatch(save_user_info(info)),
     save_user_orders: (order) => dispatch(save_user_orders(order)),
 });

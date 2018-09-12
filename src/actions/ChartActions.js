@@ -6,6 +6,7 @@ import {
 } from '../constants'
 
 export const chart_range = (range) =>  dispatch => {
+    console.log("chart_range action", range);
     dispatch({
         type: 'CHART_RANGE',
         payload: range

@@ -84,6 +84,11 @@ class MarketDepth extends Component {
         });
 
         this.socket.on("order_updated_" + socket, (bid) => {
+            /**
+             * don't add completed and stop/sell orders to tables
+             **/
+            // console.log("order_updated_", bid, !(bid.stop || bid.limit));
+            if (!(bid.stop || bid.limit)) return;
 
             const {marketDepth} = this.state;
             const {buy = [], sell = []} = marketDepth;
@@ -139,11 +144,12 @@ class MarketDepth extends Component {
 
         // console.log("making getMarcketDpthData", {type: "buy", book: id});
         // console.log(this.state);
-        const buyDepth = await getMarcketDpthData({rout: ORDERS, type: "buy", take: 50, book: id, price: "desc"});
-        const sellDepth = await getMarcketDpthData({rout: ORDERS, type: "sell", take: 50, book: id, price: "desc"});
+        const buyDepth = await getMarcketDpthData({rout: ORDERS, type: "buy", take: 50, book: id, price: "desc", withStop: "false"});
+        const sellDepth = await getMarcketDpthData({rout: ORDERS, type: "sell", take: 50, book: id, price: "desc", withStop: "false"});
 
         // const buy_ = buyDepth.filter(item => !item.completed);
-        // console.log("buy_ =", buy_);
+        // console.log("buyDepth =", buyDepth);
+        // console.log("sellDepth =", sellDepth);
 
         await this.setState({
                 marketDepth:
@@ -209,7 +215,8 @@ class MarketDepth extends Component {
 
         const buy4DepthChart = buy.filter(item => (!item.completed && !item.stop && !item.limit ));
         const sell4DepthChart = sell.filter(item => (!item.completed && !item.stop && !item.limit ));
-        // console.log(buy4DepthChart);
+        // console.log("buy4DepthChart =", buy4DepthChart);
+        // console.log("sell4DepthChart =", sell4DepthChart);
 
         return (
             <div className="marketDepth">
