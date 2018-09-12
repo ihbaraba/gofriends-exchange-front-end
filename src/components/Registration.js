@@ -233,9 +233,13 @@ class Registration extends Component {
                     <div className="featureBanner form2col">
                         <div className="formWrapper">
                             <div className="formHelp">
-                                <p>Registering on GoFriends Exchange is the first step toward creating an account. Once your email
-                                    is confirmed, you'll need to complete your profile and verify your identity before
-                                    you can begin trading.</p>
+
+                                <div className="test5">
+                                    <p>Registering on GoFriends Exchange is the first step toward creating an account. Once your email
+                                        is confirmed, you'll need to complete your profile and verify your identity before
+                                        you can begin trading.</p>
+                                </div>
+
                             </div>
                             { (!showQRCode) &&
                             <div className="column1">

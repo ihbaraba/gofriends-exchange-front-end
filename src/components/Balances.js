@@ -8,6 +8,7 @@ import { Table, Tooltip } from 'antd';
 import {getUserInfo} from "../utils";
 import {USERINFO} from "./../constants/APIURLS.js"
 import {save_user_info, save_user_orders} from "../actions/UserActions";
+import WithdrawPanel from "./WithdrawLogic"
 
 import qrcode from '../img/qr.png';
 import { Icon } from 'antd';
@@ -95,38 +96,33 @@ class Balances extends Component {
                           <a href="javascript:;" className="act-btn">Deposit {record.code}</a>
                         </span>
                     </Tooltip>
+<WithdrawPanel record={record}/>
 
-
-                        <a href="javascript:;" className="act-btn">Withdraw {record.code}</a>
 
 
                         {/*<Tooltip*/}
                             {/*title={*/}
-
                                 {/*<div>*/}
-
                                     {/*<h3>Withdraw {record.name}</h3>*/}
                                     {/*<div className="line"></div>*/}
 
                                    {/*<div>*/}
                                        {/*<div className="formWrap">*/}
-                                           {/*<label>Your wallet address:</label>*/}
+                                           {/*<label>Your wallet address:</label><br/>*/}
                                            {/*<input type="text"  />*/}
                                        {/*</div>*/}
 
                                        {/*<div className="formWrap">*/}
-                                           {/*<label>Amount:</label>*/}
-                                           {/*<input type="number"  />*/}
+                                           {/*<label>Amount:</label><br/>*/}
+                                           {/*<input type="number" />*/}
                                        {/*</div>*/}
 
                                        {/*<div className="formWrap">*/}
-                                           {/*<label>Transaction Fee:</label>*/}
+                                           {/*<label>Transaction Fee:</label><br/>*/}
                                            {/*<input type="number"  />*/}
                                        {/*</div>*/}
 
-
-
-                                       {/*<div className="formWrap">*/}
+                                       {/*<div className="formWraptotal">*/}
                                            {/*<div>Total:</div>*/}
                                            {/*<div>*/}
                                                {/*<span>0.00000000</span>&nbsp;*/}
@@ -134,8 +130,13 @@ class Balances extends Component {
                                            {/*</div>*/}
                                        {/*</div>*/}
 
-                                       {/*<a href="#" className="act-btn">Cancel</a>*/}
-                                       {/*<a href="#" className="act-btn">Withdraw</a>*/}
+
+
+                                       {/*<div className="formWrap">*/}
+                                           {/*<a href="#" className="act-btn">Cancel</a>*/}
+                                           {/*<a href="#" className="act-btn">Withdraw</a>*/}
+                                       {/*</div>*/}
+
                                    {/*</div>*/}
 
 
