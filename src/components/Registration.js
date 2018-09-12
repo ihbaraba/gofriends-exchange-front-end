@@ -242,7 +242,7 @@ class Registration extends Component {
                                 <form onSubmit={this.handlerRegistrationSubmit}>
                                     <fieldset className="aboveCaptcha">
                                         <div>
-                                            <label>User name</label>
+                                            <label>First Name Last Name</label>
                                             <input
                                                 className="userPassInput"
                                                 type="userName"

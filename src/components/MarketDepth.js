@@ -110,7 +110,7 @@ class MarketDepth extends Component {
             if (flagBuy && bid.completed) {buy.splice(resOfSearchInBuy, 1)} ; // remove element
             if (flagSell && bid.completed) {sell.splice(resOfSearchInSell, 1)} ; // remove element
 
-            console.log("order_updated_", bid, "  buy =", buy, "sell =", sell);
+            // console.log("order_updated_", bid, "  buy =", buy, "sell =", sell);
 
             orders.forEach( async (value, valueAgaine, set) => {
                 if ( value === bid.id)
@@ -215,8 +215,8 @@ class MarketDepth extends Component {
 
         const buy4DepthChart = buy.filter(item => (!item.completed && !item.stop && !item.limit ));
         const sell4DepthChart = sell.filter(item => (!item.completed && !item.stop && !item.limit ));
-        console.log("buy4DepthChart =", buy4DepthChart);
-        console.log("sell4DepthChart =", sell4DepthChart);
+        // console.log("buy4DepthChart =", buy4DepthChart);
+        // console.log("sell4DepthChart =", sell4DepthChart);
 
         return (
             <div className="marketDepth">

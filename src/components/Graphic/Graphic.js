@@ -2,7 +2,8 @@ import React from 'react';
 import {connect} from "react-redux";
 
 import Chart from './UpdatebleChart';
-import {getData, getDataFromSocket, coinapiHystoricalData} from "./utils"
+import {getData, getDataFromSocket, coinapiHystoricalData, } from "./utils"
+import {intervalInDays} from "./../../utils"
 import {TIMEFRAMES} from "./../../constants/APIURLS.js"
 
 import * as d3 from "d3";
@@ -62,14 +63,18 @@ class Graphic extends React.Component {
 
     componentWillReceiveProps(nextProps) {
         const { pairId = 1, interval } = this.props;
-        const { pairId: nextPairId = 1, interval: nextInterval, appendFake } = nextProps;
+        const {
+            pairId: nextPairId = 1,
+            interval: nextInterval, appendFake,
+            chartRange: {dateFrom = "2018-08-27", dateTo = "2018-08-31"}
+        } = nextProps;
         // console.log("Graphic componentWillReceiveProps", nextProps);
         if ((pairId !== nextPairId) || (interval !== nextInterval)) {
             const options = {
                 pairId: nextPairId,
                 APIURL: TIMEFRAMES,
-                dateFrom: "2018-01-01",
-                dateTo: "2018-07-31",
+                dateFrom,
+                dateTo,
                 take: 100,
                 interval: nextInterval,
                 appendFake,
@@ -179,18 +184,7 @@ class Graphic extends React.Component {
     };
 
      async newDiapazone({rowsToDownload, start, end, data, callback}){
-        const intervalInDays = (interval, period) => {
-            switch (interval) {
-                case "5min" : {return Math.ceil(period * 5 / 60 / 24) }
-                case "15min" : {return Math.ceil(period * 15 / 60 / 24) }
-                case "30min" : {return Math.ceil(period * 30 / 60 / 24) }
-                case "1hr" : {return Math.ceil(period * 60 / 60 / 24) }
-                case "2hr" : {return Math.ceil(period * 120 / 60 / 24) }
-                case "4hr" : {return Math.ceil(period * 240 / 60 / 24) }
-                case "1day" : {return Math.ceil(period * 1)}
-                default : return 1
-            }
-        };
+
          console.log("START =", start, "END = ", end, data.length, data);
         return new Promise(() => {
             const format = d3.timeFormat("%Y-%m-%d");
