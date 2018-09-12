@@ -150,6 +150,9 @@ class ContactUs extends Component {
                                     <tr>
                                         <td></td>
                                         <td className="buttonRow">
+
+                                            <p>This inbox is not monitored for support requests.
+                                                For technical assistance, Contact Support.</p>
                                             <button className="signUpButton small" type="submit">Submit
                                             </button>
                                         </td>
