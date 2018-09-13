@@ -8,11 +8,11 @@ import Login from "./Login";
 const Header2 = () => {
     const menu1 = (
         <Menu>
-            <Menu.Item>
-                <NavLink to="/balances">
-                            <span className="title topLevel">TRANSFER BALANCES</span>
-                </NavLink>
-            </Menu.Item>
+            {/*<Menu.Item>*/}
+                {/*<NavLink to="/balances">*/}
+                            {/*<span className="title topLevel">TRANSFER BALANCES</span>*/}
+                {/*</NavLink>*/}
+            {/*</Menu.Item>*/}
 
             <Menu.Item>
                 <NavLink to="/balances">
@@ -34,28 +34,25 @@ const Header2 = () => {
                     <span className="title topLevel">MY OPEN ORDERS</span>
                 </NavLink>
             </Menu.Item>
-            <Menu.Item>
-                <NavLink to="/orders">
-                    <span className="title topLevel">MY TRADE HISTORY & ANALYSIS</span>
-                </NavLink>
-            </Menu.Item>
+            {/*<Menu.Item>*/}
+                {/*<NavLink to="/orders">*/}
+                    {/*<span className="title topLevel">MY TRADE HISTORY & ANALYSIS</span>*/}
+                {/*</NavLink>*/}
+            {/*</Menu.Item>*/}
         </Menu>
     );
     const menu3 = (
         <Menu>
             {/*<Menu.Item>*/}
-                {/*<a target="_blank" rel="noopener noreferrer" href="#">TWO-FACTOR AUTHENTICATION</a>*/}
+                {/*<NavLink to="/exchange">*/}
+                    {/*<span className="title topLevel">API Keys</span>*/}
+                {/*</NavLink>*/}
             {/*</Menu.Item>*/}
-            <Menu.Item>
-                <NavLink to="/exchange">
-                    <span className="title topLevel">API Keys</span>
-                </NavLink>
-            </Menu.Item>
-            <Menu.Item>
-                <NavLink to="/exchange">
-                    <span className="title topLevel">Trading Tier Status</span>
-                </NavLink>
-            </Menu.Item>
+            {/*<Menu.Item>*/}
+                {/*<NavLink to="/exchange">*/}
+                    {/*<span className="title topLevel">Trading Tier Status</span>*/}
+                {/*</NavLink>*/}
+            {/*</Menu.Item>*/}
             <Menu.Item>
                 <NavLink to="/loginhistory">
                     <span className="title topLevel">Login History</span>
@@ -80,11 +77,11 @@ const Header2 = () => {
                     <span className="title topLevel">My Profile</span>
                 </NavLink>
             </Menu.Item>
-            <Menu.Item>
-                <NavLink to="/exchange">
-                    <span className="title topLevel">Linked Accounts</span>
-                </NavLink>
-            </Menu.Item>
+            {/*<Menu.Item>*/}
+                {/*<NavLink to="/exchange">*/}
+                    {/*<span className="title topLevel">Linked Accounts</span>*/}
+                {/*</NavLink>*/}
+            {/*</Menu.Item>*/}
         </Menu>
     );
     return (
@@ -132,7 +129,7 @@ const Header2 = () => {
                         </a>
                     </Dropdown>
                     <Dropdown overlay={menu4}>
-                        <NavLink to="/signup" >
+                        <NavLink to="/profile" >
                         <span className="title topLevel">
                             <i className="fa fa-user"></i>
                             <i className="fa fa-caret-down dim"></i>
