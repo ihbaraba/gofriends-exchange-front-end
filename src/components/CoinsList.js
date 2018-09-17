@@ -3,20 +3,24 @@ import PropTypes from 'prop-types'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import {pair} from '../actions/ExchangeActions'
-import {PAIRS, MARKETS} from '../constants/APIURLS'
+import {PAIRS, MARKETS, SOCKET_SOURCE} from '../constants/APIURLS'
 
 import {getCoinsList} from "./../utils"
 import {Tabs, Table} from "antd";
 import {login_success} from "../actions/UserActions";
+import {getUserInfo} from "../utils";
+import io from "socket.io-client";
 // import 'antd/lib/table/style/css';
 
-
 const TabPane = Tabs.TabPane;
-
 
 class CoinsList extends React.Component {
     constructor() {
         super();
+
+        this.socket = io(SOCKET_SOURCE);
+
+        this.getDataFromSocket = this.getDataFromSocket.bind(this);
         this.list = this.list.bind(this);
         this.tabsCallback = this.tabsCallback.bind(this);
         // this.currenciesTabs = this.currenciesTabs.bind(this);
@@ -38,20 +42,41 @@ class CoinsList extends React.Component {
             volumeBase: markets_pairs[idx]["volumeBase"],
             volumeQuote: markets_pairs[idx]["volumeQuote"],
         })).sort((a, b) => a.id - b.id);
-        // console.log(pairs);
+        // console.log("pairs=", pairs);
         // const coins = [... new Set( data.map( item => item.baseCurrency.code ))];
         const coins = [... new Set( pairs.map( item => item.baseCurrency ))];
         // console.log("PAIRS ", pairs, coins, markets_pairs, data);
         this.setState({data, coins, pairs});
-        this.props.pair(pairs[0]);
+        this.props.pair(pairs[0]); //set current pair
+        pairs.forEach( item => this.getDataFromSocket(item.id, 0) );
     }
 
     list = data => data.map(
       item => (<div key={`CoinsList_${item.baseCurrency.code}_${item.quoteCurrency.code}`}>{item.id} {item.baseCurrency.name} / {item.quoteCurrency.code}</div>)
     );
 
+    getDataFromSocket(id, stopTime = 0) {
+        const pairs = this.state.pairs;
+        const idx = pairs.findIndex( el => el.id === id);
+        // console.log("idx =", idx, "id =", id);
+
+        this.socket.on("markets_updated_" + id, (bid) => {
+            const pairs = this.state.pairs;
+            const newPair = {
+                ...pairs[idx],
+                ...bid,
+            };
+            const newPairs = [...pairs];
+            newPairs[idx] = newPair;
+            // console.log("id =", id, "newPair =",newPair);
+            // console.log("newPairs =", newPairs);
+            this.setState({
+                pairs: [ ...newPairs]
+            });
+        });
+    }
+
     tabsCallback(key) {
-        // console.log(key, key.id, this.state.pairs);
         const pairs = this.state.pairs;
         const newCurrent = pairs.find( item => item.id === +key.id  );
         this.props.setCurentCoinsPair2State(newCurrent);
@@ -60,7 +85,6 @@ class CoinsList extends React.Component {
 
     currenciesTabs = items => {
         const pairs = this.state.pairs;
-        // console.log(items, pairs);
 
         const columns = [{
             title: 'Coin',

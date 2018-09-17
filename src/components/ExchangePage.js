@@ -96,7 +96,7 @@ class ExchangePage extends Component {
 
         const {first, second, id, baseCurrencyName, quoteCurrencyName} = pair;
         const {interval, appendFake, isAuthorised, token, user } = this.state;
-        console.log(this.props);
+        // console.log(this.props);
         return (
             <div>
                 <Header2/>

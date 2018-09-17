@@ -36,7 +36,7 @@ class Balances extends Component {
 
     render() {
         const user = this.props.user;
-        console.log("Balances. User = ", this.props);
+        // console.log("Balances. User = ", this.props);
         const {balances = []} = user;
 
         const dataSource = balances.map( item => (
@@ -85,7 +85,7 @@ class Balances extends Component {
                                      </div>
 
 
-                                    <p><span>Wallet:</span> {record.address}</p>
+                                    <p>{record.address}</p>
                                 </div>
                             }
                             trigger="click"
@@ -96,67 +96,10 @@ class Balances extends Component {
                           <a href="javascript:;" className="act-btn">Deposit {record.code}</a>
                         </span>
                     </Tooltip>
-<WithdrawPanel record={record}/>
-
-
-
-                        {/*<Tooltip*/}
-                            {/*title={*/}
-                                {/*<div>*/}
-                                    {/*<h3>Withdraw {record.name}</h3>*/}
-                                    {/*<div className="line"></div>*/}
-
-                                   {/*<div>*/}
-                                       {/*<div className="formWrap">*/}
-                                           {/*<label>Your wallet address:</label><br/>*/}
-                                           {/*<input type="text"  />*/}
-                                       {/*</div>*/}
-
-                                       {/*<div className="formWrap">*/}
-                                           {/*<label>Amount:</label><br/>*/}
-                                           {/*<input type="number" />*/}
-                                       {/*</div>*/}
-
-                                       {/*<div className="formWrap">*/}
-                                           {/*<label>Transaction Fee:</label><br/>*/}
-                                           {/*<input type="number"  />*/}
-                                       {/*</div>*/}
-
-                                       {/*<div className="formWraptotal">*/}
-                                           {/*<div>Total:</div>*/}
-                                           {/*<div>*/}
-                                               {/*<span>0.00000000</span>&nbsp;*/}
-                                               {/*<span className="currency"></span>*/}
-                                           {/*</div>*/}
-                                       {/*</div>*/}
-
-
-
-                                       {/*<div className="formWrap">*/}
-                                           {/*<a href="#" className="act-btn">Cancel</a>*/}
-                                           {/*<a href="#" className="act-btn">Withdraw</a>*/}
-                                       {/*</div>*/}
-
-                                   {/*</div>*/}
-
-
-
-                                {/*</div>*/}
-                            {/*}*/}
-                            {/*trigger="click"*/}
-                            {/*placement="topRight">*/}
-
-                            {/*<span>*/}
-                                {/*<a href="javascript:;" className="act-btn">Withdraw {record.code}</a>*/}
-                            {/*</span>*/}
-
-                        {/*</Tooltip>*/}
-
-
+                    <WithdrawPanel record={record}/>
 
                     </div>
-
-                ),
+                )
             }];
         return (
             <div className="wrap">

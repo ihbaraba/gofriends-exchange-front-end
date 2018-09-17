@@ -44,48 +44,66 @@ class Login extends Component {
     };
 
     handleSubmit = async (event) => {
-        console.log("handleSubmit this.props=", this.props);
+        // console.log("handleSubmit this.props=", this.props);
         event.preventDefault();
         const user = {
             email: this.state.email,
             password: this.state.password,
             totpCode: this.state.totpCode,
         };
-        console.log("handleSubmit options=", user);
+        // console.log("handleSubmit options=", user);
 
         const content = await sendRequest({
             rout: LOGIN,
             options: { ...user }
         });
+        const { errorMessage, errorTextCode } = content;
 
-        const { usrMsg, errorCode } = content;
+        if (typeof errorTextCode !== "undefined") {
 
-        if (typeof usrMsg !== "undefined") {
+            // console.log(errorTextCode, errorMessage, typeof errorTextCode, " showTotpCodeInput=", this.state.showTotpCodeInput);
 
-            console.log(errorCode, usrMsg, typeof errorCode, " showTotpCodeInput=", this.state.showTotpCodeInput);
-
-            switch (errorCode) {
-                case 0 : // bad email
-                case 1 :
-                case 2 :
-                case 3 : alert(usrMsg);//bad password
+            switch (errorTextCode) {
+                case "UserNotFound" :
+                case "WrongPassword":
+                case "UserExists" :
+                case "BadRequest" :
+                case "EmailExists" : alert(errorMessage + "  (error code:" + errorTextCode + " )");
                     break;
-                case 5 :
-                case 4 : {
+                case "IncorrectTotpCode" :
+                case "TotpCodeNotProvided": {
                     if (!this.state.showTotpCodeInput) // bad toptCode
                         {this.setState( //show input for toptCode
                             {showTotpCodeInput: true}
-                            // ,() => {
-                            //     setTimeout( () => { this.setState({showTotpCodeInput: false}) }, 5 * 60 * 100) //hide input for toptCode
-                            // }
                             )}
                     else
-                        { alert(usrMsg) }
+                        { alert(errorMessage + "  (error code:" + errorTextCode + " )"); }
                 }
                     break;
 
                 default :
             }
+            // console.log(errorCode, usrMsg, typeof errorCode, " showTotpCodeInput=", this.state.showTotpCodeInput);
+            //
+            // switch (errorCode) {
+            //     case 0 : // bad email
+            //     case 1 :
+            //     case 2 :
+            //     case 3 : alert(usrMsg);//bad password
+            //         break;
+            //     case 5 :
+            //     case 4 : {
+            //         if (!this.state.showTotpCodeInput) // bad toptCode
+            //             {this.setState( //show input for toptCode
+            //                 {showTotpCodeInput: true}
+            //                 )}
+            //         else
+            //             { alert(usrMsg) }
+            //     }
+            //         break;
+            //
+            //     default :
+            // }
         }
         else
         {

@@ -53,10 +53,6 @@ class MarketDepth extends Component {
     getDataFromSocket(socket, stopTime = 0) {
         // console.log('state: ', this.state);
 
-        if (stopTime !== 0) {
-            console.time("Getting data from socket time took");
-        }
-
         const { orders } = this.props;
 
         this.socket.on("order_created_" + socket, (bid) => {
@@ -129,13 +125,6 @@ class MarketDepth extends Component {
             });
         });
 
-        if (stopTime !== 0) {
-            setTimeout(() => {
-                // console.log("closing");
-                console.timeEnd("Getting data from socket time took");
-                this.socket.close();
-            }, stopTime);
-        }
     }
 
     async getInitialPairDataFromServer(id) {
@@ -252,12 +241,9 @@ MarketDepth.propTypes = {
     currentPair: PropTypes.object.isRequired,
 };
 
-// export default MarketDepth;
-
-
 MarketDepth.propTypes = {
     // dispatch: PropTypes.func.isRequired
-}
+};
 
 function mapStateToProps(state) {
     return {
