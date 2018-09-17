@@ -60,7 +60,7 @@ class Orders extends Component {
     InputsFrame = ({first, second, loanRate, firePostToServer, type}) => {
         const optionsPrice = {
             addonAfter: second,
-            style: { width: '15rem' },
+            // style: { width: '15rem' },
             value: this.state[`${type}Price`],
             onKeyPress: (e) => { this.checkKeyPress(e) },
             onChange: (e) => {
@@ -76,7 +76,7 @@ class Orders extends Component {
 
         const optionsAmount = {
             addonAfter: first,
-            style: { width: '15rem' },
+            // style: { width: '15rem' },
             value: this.state[`${type}Amount`],
             onKeyPress: (e) => { this.checkKeyPress(e) },
             onChange: (e) => {
@@ -95,7 +95,7 @@ class Orders extends Component {
         };
         const optionsLoanRate = {
             addonAfter: loanRate,
-            style: { width: '15rem' },
+            // style: { width: '15rem' },
             value: this.state.loanRate,
             onKeyPress: (e) => { this.checkKeyPress(e) },
             onChange: (e) => {
@@ -105,7 +105,7 @@ class Orders extends Component {
         };
         const optionsTotal = {
             addonAfter: second,
-            style: { width: '15rem' },
+            // style: { width: '15rem' },
             value: this.state[`${type}Total`],
             onKeyPress: (e) => { this.checkKeyPress(e) },
             onChange: (e) => {
@@ -133,19 +133,19 @@ class Orders extends Component {
         return (
             <div className="fullHeight" style={{width: "30 rem",}}>
                <div className="orders__item">
-                        <span>Price:</span>
+                        <span className="orders__item_name">Price:</span>
                         <Input {...optionsPrice} />
                     </div>
                 <div className="orders__item">
-                    <span>Amount:</span>
+                    <span className="orders__item_name">Amount:</span>
                     <Input {...optionsAmount}/>
                 </div>
                 <div className="orders__item">
-                    <span>Loan Rate:</span>
+                    <span className="orders__item_name">Loan Rate:</span>
                     <Input {...optionsLoanRate}/>
                 </div>
                 <div className="orders__item orders__item-total">
-                    <span>Total:</span>
+                    <span className="orders__item_name">Total:</span>
                     <Input {...optionsTotal}/>
                 </div>
 
@@ -160,7 +160,7 @@ class Orders extends Component {
     StopLimitFrame = ({first, second, loanRate, firePostToServer, type}) => {
         const optionsLimit = {
             addonAfter: second,
-            style: { width: '15rem' },
+            // style: { width: '15rem' },
             value: this.state.limit,
             onKeyPress: (e) => { this.checkKeyPress(e) },
             onChange: (e) => {
@@ -174,7 +174,7 @@ class Orders extends Component {
         };
         const optionsAmount = {
             addonAfter: first,
-            style: { width: '15rem' },
+            // style: { width: '15rem' },
             value: this.state[`stopAmount`],
             onKeyPress: (e) => { this.checkKeyPress(e) },
             onChange: (e) => {
@@ -189,7 +189,7 @@ class Orders extends Component {
         };
         const optionsStop = {
             addonAfter: second,
-            style: { width: '15rem' },
+            // style: { width: '15rem' },
             value: this.state[`stopStop`],
             onKeyPress: (e) => { this.checkKeyPress(e) },
             onChange: (e) => {
@@ -203,7 +203,7 @@ class Orders extends Component {
         };
         const optionsTotal = {
             addonAfter: second,
-            style: { width: '15rem' },
+            // style: { width: '15rem' },
             value: this.state[`stopTotal`],
             onKeyPress: (e) => { this.checkKeyPress(e) },
             onChange: (e) => {
@@ -228,19 +228,19 @@ class Orders extends Component {
         return (
             <div className="fullHeight" style={{width: "30 rem",}}>
                <div className="orders__item">
-                        <span>Stop:</span>
+                        <span className="orders__item_name">Stop:</span>
                         <Input {...optionsStop} />
                     </div>
                 <div className="orders__item">
-                    <span>Limit:</span>
+                    <span className="orders__item_name">Limit:</span>
                     <Input {...optionsLimit}/>
                 </div>
                 <div className="orders__item">
-                    <span>Amount:</span>
+                    <span className="orders__item_name">Amount:</span>
                     <Input {...optionsAmount}/>
                 </div>
                 <div className="orders__item orders__item-total">
-                    <span>Total:</span>
+                    <span className="orders__item_name">Total:</span>
                     <Input {...optionsTotal}/>
                 </div>
 

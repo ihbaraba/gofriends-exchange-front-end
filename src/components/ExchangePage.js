@@ -149,7 +149,7 @@ class ExchangePage extends Component {
                         </div>
                         <div className="box notices">
                             <div className="head">
-                                <div className="name h1">Notices</div>
+                                <div><h3>Notices</h3></div>
                                 <div className="social">
                                     <a href="#" className="twitter-icon"></a>
                                 </div>

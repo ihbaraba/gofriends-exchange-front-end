@@ -3,6 +3,8 @@ import Header from './Header';
 import Footer from './Footer';
 import '../App.css';
 
+import img from '../img/captcha.png';
+
 
 class ResetPassword extends Component {
 
@@ -54,18 +56,22 @@ class ResetPassword extends Component {
                                     </tbody>
                                 </table>
                                 <div className="g-recaptcha">
+                                    <img src={img} alt=""/>
                                     <div>
-                                        <div>
-                                            <iframe
-                                                src="https://www.google.com/recaptcha/api2/anchor?ar=1&amp;k=6LcGrf4SAAAAACynUoTh36j68QP99woJp6rUEAn6&amp;co=aHR0cHM6Ly9wb2xvbmlleC5jb206NDQz&amp;hl=uk&amp;v=v1526884278587&amp;theme=light&amp;size=normal&amp;cb=kqjv32ooxv7a"
-                                                width="304" height="78" role="presentation" frameborder="0"
-                                                scrolling="no"
-                                                sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-top-navigation allow-modals allow-popups-to-escape-sandbox">
-                                            </iframe>
-                                        </div>
-                                        {/*<textarea id="g-recaptcha-response" name="g-recaptcha-response"*/}
-                                        {/*class="g-recaptcha-response"*/}
-                                        {/*></textarea>*/}
+
+
+                                        {/*<div>*/}
+                                            {/*<iframe*/}
+                                                {/*src="https://www.google.com/recaptcha/api2/anchor?ar=1&amp;k=6LcGrf4SAAAAACynUoTh36j68QP99woJp6rUEAn6&amp;co=aHR0cHM6Ly9wb2xvbmlleC5jb206NDQz&amp;hl=uk&amp;v=v1526884278587&amp;theme=light&amp;size=normal&amp;cb=kqjv32ooxv7a"*/}
+                                                {/*width="304" height="78" role="presentation" frameborder="0"*/}
+                                                {/*scrolling="no"*/}
+                                                {/*sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-top-navigation allow-modals allow-popups-to-escape-sandbox">*/}
+                                            {/*</iframe>*/}
+                                        {/*</div>*/}
+                                        {/*/!*<textarea id="g-recaptcha-response" name="g-recaptcha-response"*!/*/}
+                                        {/*/!*class="g-recaptcha-response"*!/*/}
+                                        {/*/!*></textarea>*!/*/}
+
                                     </div>
                                 </div>
                                 <button className="signUpButton" type="submit" name="login">

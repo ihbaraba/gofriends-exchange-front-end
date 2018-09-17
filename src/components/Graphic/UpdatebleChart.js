@@ -48,7 +48,7 @@ const macdAppearance = {
         signal: "#00F300"
     },
     fill: {
-        divergence: "#4682B4"
+        divergence: "#fff"
     }
 };
 const axisColor = "#EEEEEE";
