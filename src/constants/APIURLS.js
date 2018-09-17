@@ -4,6 +4,10 @@ http://gofriends.ru:3000/docs/#/Quotations/get_quotations__pairId_
 */
 
 const SERVERS = {
+    EXCHANGE: {
+        XHR: "https://exchange.gofriends.pro",
+        SOCKET: "wss://exchange.gofriends.pro/",
+    },
     PRODUCT: {
         XHR: "https://demo.gofriends.pro",
         SOCKET: "wss://demo.gofriends.pro/",
@@ -21,8 +25,7 @@ const SERVERS = {
 * If it is not "localhost" setting SERVERS.PRODUCT
 * */
 const detected = document.location.hostname !== "localhost"
-    // ? SERVERS.PRODUCT
-    ? document.location.hostname
+    ? SERVERS.EXCHANGE
     : SERVERS.DEV; /* <=== set here server what needs for developing -  */
 
 export const current_server = detected;
