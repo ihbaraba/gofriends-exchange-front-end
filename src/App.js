@@ -35,6 +35,7 @@ import Confirm from './components/Confirm';
 import BalancesPanel from './components/BalancesPanel';
 import Knowledge from './components/Knowledge';
 import ProfileVerification from './components/ProfileVerification';
+
 import Footer from './components/Footer';
 
 
@@ -87,6 +88,7 @@ class App extends Component {
                                 <Route path="/YourOpenOrders" component={YourOpenOrders}/>
                                 <Route path="/Knowledge" component={Knowledge}/>
                                 <Route path="/ProfileVerification" component={ProfileVerification}/>
+
 
                                 <Route path="*" component={NotFound}/>
 

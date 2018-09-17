@@ -154,6 +154,7 @@ class Login extends Component {
                                             value={this.state.totpCode}
                                             onChange={this.handleTotpCode}
                                             required
+                                            style="color:#000;"
                                         />
                                     </div>}
                                 </fieldset>
@@ -161,7 +162,7 @@ class Login extends Component {
 
 
 
-                                <button className="ant-btn fixed-width-btn" type="submit" name="login">
+                                <button className="signUpButton fixed-width-btn" type="submit" name="login">
                                     Sign in
                                 </button>
                             </form>
@@ -174,7 +175,7 @@ class Login extends Component {
                             <p>Create one to start trading on the world's most active digital asset exchange.</p>
                             <NavLink to="/signup">
                                 <button
-                                    className="ant-btn fixed-width-btn"
+                                    className="signUpButton  fixed-width-btn"
                                     type="submit"
                                     name="createAccount">
                                     Create Your Account

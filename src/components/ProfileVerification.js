@@ -62,7 +62,7 @@ class ProfileVerification extends Component{
                             <label>Phone Number</label>
                             <input type="tel"/>
                         </div>
-                        <p>
+                        <p className="check">
                             <input type="checkbox" name="terms" required/> I agree to the
                             <a href="/terms"
                                className="forgot">

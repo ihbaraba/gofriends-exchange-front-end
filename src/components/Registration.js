@@ -31,7 +31,7 @@ class Registration extends Component {
             ],
             countries: [],
             countryId: 1,
-            country: "select country",
+            country: "Select country",
             userName: '',
             email: '',
             password: '',
@@ -229,7 +229,7 @@ class Registration extends Component {
             <div>
                 <Header/>
                 <div style={{clear: "both"}}>
-                    <h1 className="sign">CREATE YOUR ACCOUNT</h1>
+                    <h1 className="create">CREATE YOUR ACCOUNT</h1>
                     <div className="featureBanner form2col">
                         <div className="formWrapper">
                             <div className="formHelp">
@@ -258,7 +258,7 @@ class Registration extends Component {
                                         </div>
                                         <div>
                                             <label>Country:</label>
-                                            <select key={country} onChange={this.handleChangeCountry} value={country} style={{color: "#eef",}}>
+                                            <select key={country} onChange={this.handleChangeCountry} value={country} style={{color: "#000",}}>
                                                 <option value={country} >{country}</option>
                                                 {Object.keys(options).map(item => (
                                                     <option key={options[item]["code"]} value={options[item]["name"]} code={item.code} id={options[item]["id"]}>
