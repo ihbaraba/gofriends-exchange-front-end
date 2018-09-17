@@ -1,3 +1,6 @@
+# bin/universal-deploy.sh -hIPserver
+# bin/universal-deploy.sh -h168......
+
 #!/bin/bash
 
 # colors for output

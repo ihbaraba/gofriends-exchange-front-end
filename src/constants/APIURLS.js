@@ -21,12 +21,11 @@ const SERVERS = {
 * If it is not "localhost" setting SERVERS.PRODUCT
 * */
 const detected = document.location.hostname !== "localhost"
-    ? SERVERS.PRODUCT
+    // ? SERVERS.PRODUCT
+    ? document.location.hostname
     : SERVERS.DEV; /* <=== set here server what needs for developing -  */
 
 export const current_server = detected;
-// export const current_server = SERVERS.DEV;
-// export const current_server = SERVERS.PRODUCT;
 
 console.log('document.location', document.location.hostname, typeof document.location.hostname, document.location,);
 console.log('detected=', detected, current_server);
