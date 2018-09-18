@@ -18,7 +18,6 @@ const SERVERS = {
     },
 };
 
-
 /*
 * Getting current URL.
 * Aiming to avoid wrong backend server address
@@ -34,7 +33,6 @@ console.log('document.location', document.location.hostname, typeof document.loc
 console.log('detected=', detected, current_server);
 const ENV = process.env;
 console.log("process.env=", ENV);
-
 
 /**************************
  * get initial data
