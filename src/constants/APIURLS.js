@@ -23,13 +23,20 @@ const SERVERS = {
 * Aiming to avoid wrong backend server address
 * If it is not "localhost" setting SERVERS.PRODUCT
 * */
-const detected = document.location.hostname !== "localhost"
-    ? SERVERS.EXCHANGE
-    : SERVERS.DEV; /* <=== set here server what needs for developing -  */
+
+console.log('document.location', document.location.hostname, typeof document.location.hostname, document.location,);
+
+const generatedDetected = {
+    XHR: `https://${document.location.hostname}`,
+    SOCKET: `wss://${document.location.hostname}/`,
+};
+
+const detected = document.location.hostname === "localhost"
+    ? SERVERS.DEV /* <=== set here server what needs for developing -  */
+    : generatedDetected;
 
 export const current_server = detected;
 
-console.log('document.location', document.location.hostname, typeof document.location.hostname, document.location,);
 console.log('detected=', detected, current_server);
 const ENV = process.env;
 console.log("process.env=", ENV);
