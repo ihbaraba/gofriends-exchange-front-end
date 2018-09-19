@@ -172,7 +172,7 @@ class Login extends Component {
                                             value={this.state.totpCode}
                                             onChange={this.handleTotpCode}
                                             required
-                                            style="color:#000;"
+                                            style={{"color":"#000"}}
                                         />
                                     </div>}
                                 </fieldset>
