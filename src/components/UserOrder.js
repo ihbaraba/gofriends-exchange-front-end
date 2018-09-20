@@ -2,9 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import {getOrdersHistory} from "../utils";
+import {getOrdersHistory, sendOrder} from "../utils";
 import { USERORDERSHISTORY } from "./../constants/APIURLS.js"
-import {Table, Icon, Tooltip} from 'antd';
+import {Table, Icon, Tooltip, Button} from 'antd';
+import {ORDERS} from "../constants/APIURLS";
 
 class UserOrder extends React.Component {
     constructor() {
@@ -12,7 +13,10 @@ class UserOrder extends React.Component {
 
         this.getInitialPairDataFromServer = this.getInitialPairDataFromServer.bind(this);
         this.calculateSum = this.calculateSum.bind(this);
+        this.firePostToServer = this.firePostToServer.bind(this);
 
+
+        this.orders = [];
         this.state = {
             orders: [],
             ordersHistory: [],
@@ -20,8 +24,8 @@ class UserOrder extends React.Component {
     }
 
     calculateSum(bids = []) {
-
-        return bids.map( bid => {
+        const filteredOutCencelled = bids.filter( item => item.status !== "cancelled");
+        return filteredOutCencelled.map( bid => {
             const price = +bid["price"];
             const amount = +bid["initialAmount"];
 
@@ -29,6 +33,7 @@ class UserOrder extends React.Component {
             const completedAt = `${completedAtDate.toLocaleDateString()} ${completedAtDate.toLocaleTimeString()}`;
             const createdAtDate = new Date(bid["createdAt"]);
             const createdAt = `${createdAtDate.toLocaleDateString()} ${createdAtDate.toLocaleTimeString()}`;
+
             return ({
                 ...bid,
                 completedAt,
@@ -47,7 +52,7 @@ class UserOrder extends React.Component {
 
         const orders = completed ? "ordersHistory" : "orders";
 
-        await this.setState({ [orders]: [] });
+        // await this.setState({ [orders]: [] });
         // console.log("UserOrderHistory completed =", completed);
 
         const loadedOrders = await getOrdersHistory({
@@ -55,14 +60,29 @@ class UserOrder extends React.Component {
             parameters: { completed, withStop: "true", take: 50, sort: "createdAt:asc"},
             token: this.props.user.token,
         });
-        // console.log(orders, loadedOrders.body, loadedOrders["body"].length );
-        // if
-        this.setState({
-                [orders]: this.calculateSum(loadedOrders.body)
-            }
-            // ,()=> {console.log(this.state)}
-        );
+
+        const calculated = this.calculateSum(loadedOrders.body);
+        this.orders = calculated;
+                this.setState({
+                        ...this.state,
+                        [orders]: calculated
+                    }
+                );
     }
+
+    async firePostToServer (bidProps) {
+        /**
+        *activating cencel button
+        **/
+        const {token, orderId, status} = bidProps;
+        const responce = await sendOrder({
+            rout: `${ORDERS}/${orderId}`,
+            token,
+            status,
+        });
+        // console.log("fire cancel to server ", responce);
+        await this.getInitialPairDataFromServer({completed: false, cancelled: false});
+    };
 
     async componentDidMount() {
         const { completed } = this.props;
@@ -76,7 +96,16 @@ class UserOrder extends React.Component {
     }
     render() {
         const { user, token, completed } = this.props;
-        const { orders, ordersHistory } = this.state;
+        const { orders = [], ordersHistory = [] } = this.state;
+
+        const onBidButtonClick = ({status, order}) => {
+            this.firePostToServer({
+                token: this.props.token,
+                orderId: +order.id,
+                status,
+            });
+        };
+
 
         if ( token === "" ) {
             return <div> Need authorization...</div>
@@ -142,18 +171,20 @@ class UserOrder extends React.Component {
                         width: 150,
                         render: (text, record) => (
                             <span>
-                      <a href="javascript:;" className="act-btn">Cancel {record.code}</a>
+                                <Button type="primary" ghost onClick={(order) => { onBidButtonClick({status: "cancelled", order: record})} } className="">Cancel</Button>
                 </span>
 
                         ),
                     }]
                     : []),
             ]};
-
+        const dataSource = this.orders ;
+        // console.log("completed =", completed, "dataSource=", completed ? this.state.ordersHistory : this.state.orders, this.state);
+        // console.log("dataSource =", dataSource, );
         return (
             <Table
                 columns={columns(completed)}
-                dataSource={completed ? ordersHistory : orders}
+                dataSource={dataSource}
                 bordered={false}
                 pagination={false}
                 scroll={{y: 330}}

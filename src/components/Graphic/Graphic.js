@@ -40,7 +40,7 @@ class Graphic extends React.Component {
         };
         getData(options).then(data => {
             this.setState({data}
-            // , this.appendRealtimeLoadedData()
+            , this.appendRealtimeLoadedData()
             )
         });
 
@@ -133,10 +133,11 @@ class Graphic extends React.Component {
     };
 
     updatedLastCandleFromSocket(bid) {
+        console.log("bid=", bid);
         const { data } = this.state;
         const lastBar = data[data.length - 1];
         data[data.length - 1] = {...data[data.length - 1], ...bid};
-        // console.log("last ", data.length, data[data.length - 1], " data =", data);
+        console.log("last ", data.length, data[data.length - 1], " data =", data);
 
         this.setState({data}
             // , () => { console.log(lastBar,"updatedLastCandleFromSocket ", bid, data[data.length - 1] ); }
@@ -175,12 +176,12 @@ class Graphic extends React.Component {
             callback: this.saveTheLastCandleAndCreateNewOne,
         });
         /* just updating last candle */
-        // getDataFromSocket({
-        //     point: "timeframe_updated_",
-        //     id: this.props.pairId,
-        //     stopTime: 0,
-        //     callback: this.updatedLastCandleFromSocket,
-        // });
+        getDataFromSocket({
+            point: "timeframe_updated_",
+            id: this.props.pairId,
+            stopTime: 0,
+            callback: this.updatedLastCandleFromSocket,
+        });
     };
 
      async newDiapazone({rowsToDownload, start, end, data, callback}){

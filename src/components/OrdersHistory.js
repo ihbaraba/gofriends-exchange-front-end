@@ -50,7 +50,7 @@ class OredersHistory extends Component {
 
         const orders = await getOrdersHistory({
             rout: ORDERSHISTORY,
-            parameters: {pairId: id, completed: "true", withStop: "true", take: 30, sort: "completedAt:asc"},
+            parameters: {pairId: id, completed: "true", withStop: "true", take: 30, sort: "completedAt:desc"},
             token: this.props.user.token,
         });
 
