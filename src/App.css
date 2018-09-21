@@ -156,7 +156,7 @@
         line-height: 20px;
         vertical-align: middle;
         border-radius: 100px;
-        border: 1px solid transparent;
+        border: 1px solid #fff;
         background-color: rgba(0, 0, 0, 0.25);
         cursor: pointer;
         -webkit-transition: all 0.36s;
@@ -399,6 +399,7 @@
         border: 1px solid #00b29c;
         background-color: #00b29c;
     }
+
 
 
 
@@ -1390,6 +1391,8 @@
     .tooltip-block  .qrImg {
          width: 25%;
         margin-right: 10px;
+        background: #fff;
+        height: 85px;
      }
 
 
@@ -2726,6 +2729,7 @@
         margin:0 auto;
         margin-bottom: 35px;
         border:0;
+        cursor: pointer;
     }
 
     .main-btn:hover {
@@ -3113,8 +3117,8 @@
         width: 100%;
         margin-bottom: 20px;
         border: 0;
-        background: #0F1E34;
-        color: rgba(254, 254, 254, 0.502);
+        background: #fff;
+        color: #000;
         font-size: 14px;
     }
 
@@ -3123,9 +3127,13 @@
         width: 100%;
         margin-bottom: 20px;
         border: 0;
-        background: #0F1E34;
-        color: rgba(254, 254, 254, 0.502);
+        background: #fff;
+        color: #000;
         font-size: 14px;
+    }
+
+    .confirmForm input[type="checkbox"] {
+        width: 13px;
     }
 
     .learn {
@@ -3295,7 +3303,7 @@
         margin-top: 10px;
         /*margin-left: auto;*/
         display: flex;
-        /*width: 107px;*/
+        width: 150px;
         margin-left: 10px;
         border: 1px solid transparent;
     }
@@ -3682,6 +3690,7 @@
         display: inline-block;
         padding: 10px 10px;
         margin: 2px 2px;
+        cursor: pointer;
     }
 
     /*body .ant-tabs.ant-tabs-card > .ant-tabs-bar .ant-tabs-tab-active {*/
@@ -3899,6 +3908,8 @@
 
     .header-create:hover {
         color: #00b29c;
+        -webkit-box-shadow: 0 0 17px 0 #02a383;
+        box-shadow: 0 0 17px 0 #02a383;
     }
 
     .create {
@@ -3909,6 +3920,21 @@
         margin: 22px 0 10px 0;
         text-align: center;
     }
+
+    .create-btn {
+        width: 170px;;
+        height: 47px;
+        border-radius: 22px;
+        border: 1px solid #00b29c;
+        background-color: transparent;
+    }
+
+    .create-btn:hover {
+        color: #00b29c;
+        -webkit-box-shadow: 0 0 17px 0 #02a383;
+        box-shadow: 0 0 17px 0 #02a383;
+    }
+
 
 
 

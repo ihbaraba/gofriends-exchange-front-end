@@ -25,11 +25,11 @@ const Footer = () => {
                             <h3>Terms of Use</h3>
                         </div>
                     </NavLink>
-                    <NavLink to="/support">
-                        <div className="group">
-                            <h3>Support</h3>
-                        </div>
-                    </NavLink>
+                    {/*<NavLink to="/support">*/}
+                        {/*<div className="group">*/}
+                            {/*<h3>Support</h3>*/}
+                        {/*</div>*/}
+                    {/*</NavLink>*/}
                 </div>
 
                 <div className="meta">

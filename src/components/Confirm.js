@@ -42,8 +42,7 @@ class Confirm extends Component{
                     <p>
                         <input type="checkbox" name="terms" required/> I agree to the
                         <a href="/terms"
-                           className="forgot">
-                            Terms of Use
+                           className="forgot"> Terms of Use
                         </a>.
                     </p>
 

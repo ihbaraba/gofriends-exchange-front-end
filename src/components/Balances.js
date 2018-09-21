@@ -80,7 +80,7 @@ class Balances extends Component {
                                     <div className="line"></div>
 
                                      <div className="tooltip-block">
-                                         <img src={qrcode} className="qrImg"/>
+                                         <div className="qrImg"></div>
                                          <h4>Internal address for deposit  {record.name}</h4>
                                      </div>
 

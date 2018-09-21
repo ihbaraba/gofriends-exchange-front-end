@@ -37,7 +37,8 @@ class Registration extends Component {
             password: '',
             confirmPassword: '',
             value: '',
-            showQRCode: false,
+            showQRCode: true,
+            // showQRCode: false,
             // QRImage: '',
             totpCode:'',
             qr: '',
@@ -238,10 +239,10 @@ class Registration extends Component {
                     value={this.state.totpCode}
                     onChange={this.handleTotpCode}
                 />
-                <button className="ant-btn fixed-width-btn" type="submit" name="login">Sign in</button>
+                <button className="ant-btn create-btn fixed-width-btn" type="submit" name="login">Sign in</button>
             </div>
              :  <div>
-                    <button className="ant-btn fixed-width-btn" type="submit" name="login">Go exchange</button>
+                    <button className="create-btn  fixed-width-btn" type="submit" name="login">Go exchange</button>
                 </div>
         ;
 
@@ -324,10 +325,9 @@ class Registration extends Component {
                                     </fieldset>
 
                                     <p>
-                                        <input type="checkbox" name="terms" required/> I agree to the
+                                        <input type="checkbox" name="terms" required/>  I agree to the
                                         <a href="/terms"
-                                           className="forgot">
-                                            Terms of Use
+                                           className="forgot"> Terms of Use
                                         </a>.
                                     </p>
 
@@ -345,8 +345,9 @@ class Registration extends Component {
                                             <p><strong>Thank you for registration. </strong></p>
                                             <p>if you need to make your account more secure,  </p>
                                             <p>we can offer you to use 2 factor authentication. </p>
-                                            <p><strong>Turn on/off 2-factor authentication </strong><Switch onChange={this.swithOnChange} /></p>
+                                            <p><strong>Turn on/off 2-factor authentication  </strong> <Switch onChange={this.swithOnChange} /></p>
                                             { content  }
+
 
                                             </fieldset>
                                     </form>

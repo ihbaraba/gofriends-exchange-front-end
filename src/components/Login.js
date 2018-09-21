@@ -185,7 +185,7 @@ class Login extends Component {
                                 </button>
                             </form>
 
-                            <NavLink to="/resetPassword" className="forgot colored-link">Forgot your password</NavLink>
+                            {/*<NavLink to="/resetPassword" className="forgot colored-link">Forgot your password</NavLink>*/}
                         </div>
 
                         <div className="column2">
