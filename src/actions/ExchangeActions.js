@@ -6,7 +6,7 @@ import {
 
 
 export const pair = (payload) =>  dispatch => {
-    console.log("change pair action", payload);
+    // console.log("change pair action", payload);
     dispatch({
         type: 'CHANGE_PAIR',
         payload: payload

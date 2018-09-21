@@ -1,6 +1,6 @@
 const initialState = {
     // chart: {
-    interval: "1hr",
+    interval: "5min",
     chart_range: {
                 start: "",
                 end: "",
@@ -9,7 +9,7 @@ const initialState = {
     // },
     // exchange:  {
     pair:  {
-        id: 2,
+        id: 16,
         name: "order_created_1",
         first: "BTC",
         baseCurrency: "BTC",

@@ -210,7 +210,7 @@ class CandleStickChartPanToLoadMore extends React.Component {
         });
     };
     componentWillReceiveProps(nextProps) {
-        // console.log("===nextProps.data===", nextProps.data, nextProps);
+        console.log("===nextProps.data===", nextProps.data, nextProps);
         /****************************************************************
          nextProps.data - is not right data - it is just initial diapason
          ***************************************************************/
@@ -289,7 +289,7 @@ class CandleStickChartPanToLoadMore extends React.Component {
 Zoom and Pan description
 http://rrag.github.io/react-stockcharts/documentation.html#/zoom_and_pan
 */
-// console.log("render data =", data);
+console.log("render UPDATEBLECHART data =", data);
         return (
             <ChartCanvas
                 ratio={ratio}
@@ -347,13 +347,13 @@ http://rrag.github.io/react-stockcharts/documentation.html#/zoom_and_pan
                         fill={ema12.stroke()}
                     />
 
-                    <EdgeIndicator
-                        itemType="last"
-                        orient="right"
-                        edgeAt="right"
-                        yAccessor={d => d.close}
-                        fill={d => (d.close > d.open ? "#6BA583" : "#FF0000")}
-                    />
+                    {/*<EdgeIndicator*/}
+                        {/*itemType="last"*/}
+                        {/*orient="right"*/}
+                        {/*edgeAt="right"*/}
+                        {/*yAccessor={d => d.close}*/}
+                        {/*fill={d => (d.close > d.open ? "#6BA583" : "#FF0000")}*/}
+                    {/*/>*/}
 
                     <OHLCTooltip origin={[-40, 0]} />
                     <MovingAverageTooltip
