@@ -7,6 +7,22 @@ import {intervalInDays} from "./../../utils"
 import {TIMEFRAMES} from "./../../constants/APIURLS.js"
 
 import * as d3 from "d3";
+import {timeParse} from "d3-time-format";
+
+function parseData(parse) {
+    return function (d) {
+        d.date = parse(d.date);
+        d.open = +d.open;
+        d.high = +d.high;
+        d.low = +d.low;
+        d.close = +d.close;
+        d.volume = +d.volume;
+
+        return d;
+    };
+}
+
+const parseDate = timeParse("%Y-%m-%dT%H:%M:%S.%LZ");
 
 class Graphic extends React.Component {
     constructor(props) {
@@ -40,7 +56,7 @@ class Graphic extends React.Component {
         };
         getData(options).then(data => {
             this.setState({data}
-            // , this.appendRealtimeLoadedData()
+            , this.appendRealtimeLoadedData()
             )
         });
 
@@ -79,10 +95,10 @@ class Graphic extends React.Component {
                 interval: nextInterval,
                 appendFake,
             };
-            // console.log("options = ", options);
+            console.log("options = ", options);
 
             getData(options).then(data => {
-                // console.log(data);
+                console.log(data);
                 if (data.length === 0)
                 {
                     // alert("Historical and current data for this pair is absent");
@@ -133,9 +149,12 @@ class Graphic extends React.Component {
     };
 
     updatedLastCandleFromSocket(bid) {
+        const parsedBid = parseData(parseDate)(bid);
+        // console.log("bid = , ", bid, " ===> ", parsedBid);
         const { data } = this.state;
         const lastBar = data[data.length - 1];
-        data[data.length - 1] = {...data[data.length - 1], ...bid};
+        // data[data.length - 1] = {...data[data.length - 1], ...bid};
+        data[data.length - 1] = {...data[data.length - 1], ...parsedBid};
         // console.log("last ", data.length, data[data.length - 1], " data =", data);
 
         this.setState({data}
@@ -148,7 +167,9 @@ class Graphic extends React.Component {
         const { data } = this.state;
         const { interval, } = this.props;
 
-        data[data.length - 1] = {...data[data.length - 1], ...bid};
+        const parsedBid = parseData(parseDate)(bid);
+
+        data[data.length - 1] = {...data[data.length - 1], ...parsedBid};
 
         /* open a new candle witch will be updated by this.updatedLastCandleFromSocket function */
         setInterval(() => {
@@ -157,7 +178,7 @@ class Graphic extends React.Component {
 
             this.setState({data}
                 , () => {
-                    // console.log(lastBar,"saveTheLastCandleAndCreateNewOne ", bid, data[data.length - 1] );
+                    // console.log("saveTheLastCandleAndCreateNewOne ", bid, data[data.length - 1] );
                     // console.log(interval, this.intervalInMiliseconds(interval, 1), "setInterval ", bid.date);
                 }
             );
@@ -175,17 +196,17 @@ class Graphic extends React.Component {
             callback: this.saveTheLastCandleAndCreateNewOne,
         });
         /* just updating last candle */
-        // getDataFromSocket({
-        //     point: "timeframe_updated_",
-        //     id: this.props.pairId,
-        //     stopTime: 0,
-        //     callback: this.updatedLastCandleFromSocket,
-        // });
+        getDataFromSocket({
+            point: "timeframe_updated_",
+            id: this.props.pairId,
+            stopTime: 0,
+            callback: this.updatedLastCandleFromSocket,
+        });
     };
 
      async newDiapazone({rowsToDownload, start, end, data, callback}){
 
-         console.log("START =", start, "END = ", end, data.length, data);
+         // console.log("START =", start, "END = ", end, data.length, data);
         return new Promise(() => {
             const format = d3.timeFormat("%Y-%m-%d");
             const { pairId = 1, dateFrom, dateTo, take, interval, appendFake } = this.props;
@@ -195,7 +216,7 @@ class Graphic extends React.Component {
             // const lastBar = data[Math.min(Math.abs(start), data.length-1)];
             const offsetData = d3.timeDay.offset(lastBar.date, (-1) * intervalInDays(interval, rowsToDownload) ) ;
 
-            console.log("From, ", format(lastBar.date), "lastBarIndex = ", lastBarIndex, "Offset to",offsetData, " on days", intervalInDays(interval, rowsToDownload));
+            // console.log("From, ", format(lastBar.date), "lastBarIndex = ", lastBarIndex, "Offset to",offsetData, " on days", intervalInDays(interval, rowsToDownload));
             const stringOffset = format(offsetData); // returns a string
 
             const options = {
@@ -207,10 +228,10 @@ class Graphic extends React.Component {
                 interval,
                 appendFake
             };
-            console.log("options = ", options);
+            // console.log("options = ", options);
 
             return getData(options).then(data => {
-                console.log("getData data ====> ", data);
+                // console.log("getData data ====> ", data);
                 callback(data);
                 // return data
             });
@@ -218,6 +239,7 @@ class Graphic extends React.Component {
     }
 
     render() {
+
         if (this.state == null) {
             return <div>Loading...</div>
         }

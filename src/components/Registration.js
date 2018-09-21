@@ -175,7 +175,7 @@ class Registration extends Component {
             options: { ...user }
         });
 
-        const { errorMessage, errorTextCode } = content;
+        const { errorMessage, errorTextCode, httpStatus, userMessage  } = content;
 
         if (typeof errorTextCode !== "undefined") {
 
@@ -186,7 +186,7 @@ class Registration extends Component {
                 case "WrongPassword":
                 case "UserExists" :
                 case "BadRequest" :
-                case "EmailExists" : alert(errorMessage + "  (error code:" + errorTextCode + " )");
+                case "EmailExists" : alert(userMessage + "  (" + errorTextCode + " error code:" + httpStatus + " )");
                     break;
                 case "IncorrectTotpCode" :
                 case "TotpCodeNotProvided": {
@@ -195,7 +195,7 @@ class Registration extends Component {
                     //     {showTotpCodeInput: true}
                     // )}
                     // else
-                    { alert(errorMessage + "  (error code:" + errorTextCode + " )"); }
+                    { alert(userMessage + "  (" + errorTextCode + " error code:" + httpStatus + " )"); }
                 }
                     break;
 

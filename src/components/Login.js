@@ -57,18 +57,18 @@ class Login extends Component {
             rout: LOGIN,
             options: { ...user }
         });
-        const { errorMessage, errorTextCode } = content;
+        const { errorMessage, errorTextCode, httpStatus, userMessage } = content;
 
         if (typeof errorTextCode !== "undefined") {
 
-            // console.log(errorTextCode, errorMessage, typeof errorTextCode, " showTotpCodeInput=", this.state.showTotpCodeInput);
+            // console.log(content, errorTextCode, errorMessage, typeof errorTextCode, " showTotpCodeInput=", this.state.showTotpCodeInput);
 
             switch (errorTextCode) {
                 case "UserNotFound" :
                 case "WrongPassword":
                 case "UserExists" :
                 case "BadRequest" :
-                case "EmailExists" : alert(errorMessage + "  (error code:" + errorTextCode + " )");
+                case "EmailExists" : alert(userMessage + "  (" + errorTextCode + " error code:" + httpStatus + " )");
                     break;
                 case "IncorrectTotpCode" :
                 case "TotpCodeNotProvided": {
@@ -77,7 +77,7 @@ class Login extends Component {
                             {showTotpCodeInput: true}
                             )}
                     else
-                        { alert(errorMessage + "  (error code:" + errorTextCode + " )"); }
+                        { alert(userMessage + "  (" + errorTextCode + " error code:" + httpStatus + " )"); }
                 }
                     break;
 
