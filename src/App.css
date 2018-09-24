@@ -3295,14 +3295,16 @@
         background: transparent;
         font-weight: 500;
         font-size: 12px;
-        border: none;
         padding: 5px 15px;
         margin-top: 10px;
         /*margin-left: auto;*/
         display: flex;
+        align-items: center;
+        justify-content: center;
         width: 150px;
         margin-left: 10px;
-        border: 1px solid transparent;
+        border: 1px solid #999;
+
     }
 
     .ant-btn span {
