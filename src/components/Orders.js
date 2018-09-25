@@ -265,7 +265,7 @@ class Orders extends Component {
                     <div className="ordersBlock">
                         <span className="h5">Buy {`${first}`}</span>
                         <hr className="ordersHr"/>
-                        {this.InputsFrame({first, second, price: buyPrice, loanRate, firePostToServer, type : "buy"})}
+                        {this.InputsFrame({first, second, price: buyPrice, loanRate, firePostToServer, type : "Buy"})}
                     </div>
                     <div className="ordersBlock">
                         <span className="h5">Limits</span>
@@ -276,7 +276,7 @@ class Orders extends Component {
                     <div className="ordersBlock">
                         <span className="h5">Sell {`${first}`}</span>
                         <hr className="ordersHr"/>
-                        {this.InputsFrame({first, second, price: sellPrice, loanRate, firePostToServer, type : "sell"})}
+                        {this.InputsFrame({first, second, price: sellPrice, loanRate, firePostToServer, type : "Sell"})}
 
                     </div>
                 </div>

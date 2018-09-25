@@ -120,6 +120,7 @@ class CoinsList extends React.Component {
                     columns={columns}
                     pagination={false}
                     onRowClick={this.tabsCallback}
+                    rowClassName={"ant-table-row-cursor"}
                     dataSource={
                          [...pairs.filter( pair => pair.first === item )]
                             .map(item => ({

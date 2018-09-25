@@ -53,11 +53,11 @@ const Header2 = () => {
                     {/*<span className="title topLevel">Trading Tier Status</span>*/}
                 {/*</NavLink>*/}
             {/*</Menu.Item>*/}
-            <Menu.Item>
-                <NavLink to="/loginhistory">
-                    <span className="title topLevel">Login History</span>
-                </NavLink>
-            </Menu.Item>
+            {/*<Menu.Item>*/}
+                {/*<NavLink to="/loginhistory">*/}
+                    {/*<span className="title topLevel">Login History</span>*/}
+                {/*</NavLink>*/}
+            {/*</Menu.Item>*/}
             <Menu.Item>
                 <NavLink to="/changepassword">
                     <span className="title topLevel">Change Password</span>

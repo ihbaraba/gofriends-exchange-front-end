@@ -37,8 +37,7 @@ class Registration extends Component {
             password: '',
             confirmPassword: '',
             value: '',
-            showQRCode: true,
-            // showQRCode: false,
+            showQRCode: false,
             // QRImage: '',
             totpCode:'',
             qr: '',
@@ -100,10 +99,31 @@ class Registration extends Component {
     };
 
     handlerRegistrationSubmit = async (event) => {
+
+        function validateEmail(email) {
+            const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+            return re.test(email);
+        }
+
         event.preventDefault();
 
-        if (this.state.password !== this.state.confirmPassword) {
+        const email = this.state.email;
+
+
+        if (!validateEmail(email)) {
+            alert("Email is wrong. Please enter it again.");
+            return
+        }
+
+        const password = this.state.password;
+
+        if (password !== this.state.confirmPassword) {
             alert("Passwords is not equivalent. Please enter it again.");
+            return
+        }
+
+        if (password.length <= 6) {
+            alert("Passwords is short. Please enter it again.");
             return
         }
 
@@ -132,7 +152,7 @@ class Registration extends Component {
         //     }
         if (typeof errorTextCode !== "undefined") {
 
-            console.log(errorTextCode, errorMessage, typeof errorTextCode, " showTotpCodeInput=", this.state.showTotpCodeInput);
+            console.log(errorTextCode, errorMessage, typeof errorTextCode, " showTotpCodeInput=", this.state.showTotpCodeInput, responce);
 
             switch (errorTextCode) {
                 case "UserNotFound" :
@@ -179,7 +199,7 @@ class Registration extends Component {
 
         if (typeof errorTextCode !== "undefined") {
 
-            // console.log(errorTextCode, errorMessage, typeof errorTextCode, " showTotpCodeInput=", this.state.showTotpCodeInput);
+            console.log(errorTextCode, errorMessage, typeof errorTextCode, " showTotpCodeInput=", this.state.showTotpCodeInput);
 
             switch (errorTextCode) {
                 case "UserNotFound" :

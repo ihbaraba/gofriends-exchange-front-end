@@ -1,15 +1,31 @@
+import * as d3 from "d3";
+import {intervalInDays} from "../utils";
+
+const interval = "1hr";
+const numbeOfCandlesInitially = 3 * 24 * 20;
+
+function initialRange() {
+    const currentDate = new Date();
+    const format = d3.timeFormat("%Y-%m-%d");
+    const currentDatePlusOdin = d3.timeDay.offset(currentDate, intervalInDays(interval, 1) ) ;
+    const offsetData = d3.timeDay.offset(currentDate, (-1) * intervalInDays(interval, numbeOfCandlesInitially) ) ;
+
+    return ({
+        dateFrom: format(offsetData),
+        dateTo: format(currentDatePlusOdin),
+    });
+}
+
 const initialState = {
-    // chart: {
-    interval: "5min",
-    chart_range: {
+    interval,
+    chartRange: {
                 start: "",
                 end: "",
+                ...initialRange(),
         },
     appendFake: "false",
-    // },
-    // exchange:  {
     pair:  {
-        id: 16,
+        id: 1,
         name: "order_created_1",
         first: "BTC",
         baseCurrency: "BTC",

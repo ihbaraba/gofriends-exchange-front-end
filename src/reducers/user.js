@@ -50,7 +50,10 @@ export default function userState(state = {}, action) {
             // localStorage.clear();
             localStorage.removeItem("exchange_token");
             // console.log(localStorage.getItem("exchange_token"), initialState.user);
-            return initialState.user;
+            return {
+                ...initialState.user,
+                token: ""
+            };
 
         default:
             return state

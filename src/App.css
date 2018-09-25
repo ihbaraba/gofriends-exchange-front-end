@@ -2500,6 +2500,10 @@
 
     /*  ++++++++++++++++=================== antd styles for table ++++++++++++++++===================*/
 
+    .ant-table-row-cursor {
+        cursor: pointer;
+    }
+
     .header .tabs {
         /*float: left;*/
         /*border-left: 1px solid #06393b;*/

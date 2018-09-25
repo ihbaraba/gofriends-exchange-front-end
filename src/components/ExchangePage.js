@@ -43,7 +43,7 @@ class ExchangePage extends Component {
          * and save it into redux store
          **/
         const { user: {token} } = this.props; //read from redux state
-        // console.log("token =", token, "this.state ==>", this.state);
+        console.log("token =", token, "this.state ==>", this.state);
         const isAuthorised = (token !== "") && (token !== null); // ? true : false
         this.setState({isAuthorised, token});
         if (isAuthorised) {
@@ -54,20 +54,18 @@ class ExchangePage extends Component {
         /**
         * Save in Redux Store current Chart range
         **/
-        const currentDate = new Date();
-        const format = d3.timeFormat("%Y-%m-%d");
-        const currentDatePlusOdin = d3.timeDay.offset(currentDate, intervalInDays(this.state.interval, 1) ) ;
-        const offsetData = d3.timeDay.offset(currentDate, (-1) * intervalInDays(this.state.interval, 3*24) ) ;
-
-        this.props.chart_range({
-            dateFrom: format(offsetData),
-            // dateTo: format(currentDate),
-            dateTo: format(currentDatePlusOdin),
-        });
+        // const currentDate = new Date();
+        // const format = d3.timeFormat("%Y-%m-%d");
+        // const currentDatePlusOdin = d3.timeDay.offset(currentDate, intervalInDays(this.state.interval, 1) ) ;
+        // const offsetData = d3.timeDay.offset(currentDate, (-1) * intervalInDays(this.state.interval, 3*24) ) ;
+        // this.props.chart_range({
+        //     dateFrom: format(offsetData),
+        //     dateTo: format(currentDatePlusOdin),
+        // });
     }
 
     async firePostToServer (bidProps) {
-      // console.log("firePostToServer", this.state.pair.id, bidProps);
+      // console.log("firePostToServer", this.state.pair, bidProps);
       const responce = await sendOrder({
           rout: ORDERS,
           pairId: this.state.pair.id,

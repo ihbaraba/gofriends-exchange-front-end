@@ -27,6 +27,7 @@ const parseDate = timeParse("%Y-%m-%dT%H:%M:%S.%LZ");
 class Graphic extends React.Component {
     constructor(props) {
         super(props);
+        this.chartData = []; //mirror of state
         this.simulationInterval = 1000;
         this.simulationDuration = 20;
         this.dataIndex = 0;
@@ -55,6 +56,7 @@ class Graphic extends React.Component {
             appendFake
         };
         getData(options).then(data => {
+            this.chartData = data;
             this.setState({data}
             , this.appendRealtimeLoadedData()
             )
@@ -78,35 +80,42 @@ class Graphic extends React.Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        const { pairId = 1, interval } = this.props;
+        const { pairId = 1, interval, dateFrom, dateTo } = this.props;
         const {
             pairId: nextPairId = 1,
             interval: nextInterval, appendFake,
-            chartRange: {dateFrom = "2018-08-27", dateTo = "2018-08-31"}
+            chartRange: {dateFrom: nextdateFrom = "2018-08-27", dateTo: nextdateTo = "2018-09-01"}
         } = nextProps;
-        // console.log("Graphic componentWillReceiveProps", nextProps);
-        if ((pairId !== nextPairId) || (interval !== nextInterval)) {
+        const candlesToDownload = 200; // Avoid lag of data loading
+        const offsetData = d3.timeDay.offset(new Date(dateTo), (-1) * intervalInDays(nextInterval, candlesToDownload) ) ;
+        const format = d3.timeFormat("%Y-%m-%d");
+        const stringOffset = format(offsetData); // returns a string
+
+        if ((pairId !== nextPairId) || (interval !== nextInterval) || (dateFrom !== nextdateFrom) || (dateTo !== nextdateTo) ) {
             const options = {
                 pairId: nextPairId,
                 APIURL: TIMEFRAMES,
-                dateFrom,
+                dateFrom: stringOffset,
                 dateTo,
                 take: 100,
                 interval: nextInterval,
                 appendFake,
             };
-            console.log("options = ", options);
+            // console.log(new Date(dateTo), (-1) * intervalInDays(interval, candlesToDownload));
+            // console.log("options = ", options, "offsetData =",offsetData);
 
             getData(options).then(data => {
-                console.log(data);
+                // console.log(data);
                 if (data.length === 0)
                 {
                     // alert("Historical and current data for this pair is absent");
                     // console.log("Historical and current data for this pair is absent");
+                    this.chartData = data;
                     this.setState({data});
                 }
                 else
                 {
+                    this.chartData = data;
                     this.setState({data}
                         // , ()=> { console.log("Chart data updated. new Id=", nextEndPoint)}
                     )
@@ -150,21 +159,23 @@ class Graphic extends React.Component {
 
     updatedLastCandleFromSocket(bid) {
         const parsedBid = parseData(parseDate)(bid);
-        // console.log("bid = , ", bid, " ===> ", parsedBid);
+        console.log("updatedLastCandleFromSocket bid = , ", bid, " ===> ", parsedBid);
         const { data } = this.state;
         const lastBar = data[data.length - 1];
         // data[data.length - 1] = {...data[data.length - 1], ...bid};
         data[data.length - 1] = {...data[data.length - 1], ...parsedBid};
         // console.log("last ", data.length, data[data.length - 1], " data =", data);
-
+        this.chartData = data;
         this.setState({data}
             // , () => { console.log(lastBar,"updatedLastCandleFromSocket ", bid, data[data.length - 1] ); }
         );
+        // this.forceUpdate();
     }
 
     saveTheLastCandleAndCreateNewOne(bid) {
         /* fixing the last candle */
         const { data } = this.state;
+        // console.log("saveTheLastCandleAndCreateNewOne  this.state = ", this.state);
         const { interval, } = this.props;
 
         const parsedBid = parseData(parseDate)(bid);
@@ -175,10 +186,11 @@ class Graphic extends React.Component {
         setInterval(() => {
             const newFrame = { ...bid, date: d3.timeMinute.offset(bid.date, 5)};
             data.push(newFrame);
-
+            this.chartData = data;
             this.setState({data}
                 , () => {
-                    // console.log("saveTheLastCandleAndCreateNewOne ", bid, data[data.length - 1] );
+                    const { data } = this.state;
+                    console.log("saveTheLastCandleAndCreateNewOne ", bid, data.length, data[data.length - 1] );
                     // console.log(interval, this.intervalInMiliseconds(interval, 1), "setInterval ", bid.date);
                 }
             );
@@ -214,7 +226,10 @@ class Graphic extends React.Component {
             const lastBarIndex = 0;
             const lastBar = data[lastBarIndex];
             // const lastBar = data[Math.min(Math.abs(start), data.length-1)];
-            const offsetData = d3.timeDay.offset(lastBar.date, (-1) * intervalInDays(interval, rowsToDownload) ) ;
+
+            const candlesToDownload = (rowsToDownload < 600) ? rowsToDownload : 600; // Avoid lag of data loading
+
+            const offsetData = d3.timeDay.offset(lastBar.date, (-1) * intervalInDays(interval, candlesToDownload) ) ;
 
             // console.log("From, ", format(lastBar.date), "lastBarIndex = ", lastBarIndex, "Offset to",offsetData, " on days", intervalInDays(interval, rowsToDownload));
             const stringOffset = format(offsetData); // returns a string
@@ -243,7 +258,6 @@ class Graphic extends React.Component {
         if (this.state == null) {
             return <div>Loading...</div>
         }
-        // console.log("Graphics props", this.props);
         const {data} = this.state;
         if (data.length === 0)
         {
@@ -254,9 +268,10 @@ class Graphic extends React.Component {
                     </div>
                 </div>
         }
-
+        console.log("Graphics this.chartData=",  this.chartData, this.props);
+            {/*<Chart type="hybrid" data={this.state.data} newDiapazone={this.newDiapazone}/>*/}
         return (
-            <Chart type="hybrid" data={this.state.data} newDiapazone={this.newDiapazone}/>
+            <Chart type="hybrid" data={this.chartData} newDiapazone={this.newDiapazone}/>
         )
     }
 }

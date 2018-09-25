@@ -32,6 +32,8 @@ import { ema, sma, macd } from "react-stockcharts/lib/indicator";
 import { fitWidth } from "react-stockcharts/lib/helper";
 import { head, last } from "react-stockcharts/lib/utils";
 import {chart_range} from "../../actions/ChartActions";
+import * as d3 from "d3";
+import {intervalInDays} from "../../utils";
 // import {login_success} from "../actions/UserActions";
 
 
@@ -48,7 +50,7 @@ const macdAppearance = {
         signal: "#00F300"
     },
     fill: {
-        divergence: "#fff"
+        divergence: "#44d"
     }
 };
 const axisColor = "#EEEEEE";
@@ -145,6 +147,7 @@ class CandleStickChartPanToLoadMore extends React.Component {
             displayXAccessor,
             initialIndex: 0
         };
+        this.chartData = linearData;
         this.handleDownloadMore = this.handleDownloadMore.bind(this);
     }
 
@@ -152,7 +155,6 @@ class CandleStickChartPanToLoadMore extends React.Component {
         this.canvas = node;
     };
     append = newData => {
-        // console.log("newData =====> ", newData,  head(newData), last(newData));
         // const { data: inputData } = newData;
         const {
             ema26,
@@ -169,8 +171,26 @@ class CandleStickChartPanToLoadMore extends React.Component {
             smaVolume50
         ]);
         /* SERVER - START */
-        // const dataToCalculate = newData.slice(-this.canvas.fullData.length - maxWindowSize);
-        const dataToCalculate = newData;
+        /*****************************************************************
+         * Merging arrays taking into account date
+         * it works well
+         *****************************************************************/
+            const dataToCalculate = newData;
+        // const dataToCalculate = [...this.chartData].reduce((a, b) => {
+        // const dataToCalculate = [...this.chartData].reduce((a, b) => {
+        //     const match = newData.filter(({ date }) => date.getTime() === b.date.getTime());
+        //     if(match) {
+        //         a.push(Object.assign(b, match));
+        //     } else {
+        //         a.push(b);
+        //     }
+        //
+        //     return a;
+        // }, []);
+        /****************************************************************
+        /****************************************************************/
+        // console.log("newData =====> ", newData,  head(newData), last(newData));
+        // console.log("dataToCalculate =====> ", dataToCalculate,  head(dataToCalculate), last(dataToCalculate));
 
         const calculatedData = ema26(
             ema12(macdCalculator(smaVolume50(dataToCalculate)))
@@ -194,9 +214,7 @@ class CandleStickChartPanToLoadMore extends React.Component {
         } = xScaleProvider(calculatedData);
         // } = xScaleProvider(calculatedData.slice(-this.canvas.fullData.length));
 
-        // console.log("nmainData = ", this.state.data,  head(this.state.data), last(this.state.data));
-        // console.log("newData = ", linearData.length, head(linearData), last(linearData));
-        // console.log(linearData.length)
+        console.log("linearData = ", head(linearData), last(linearData));
         this.setState({
             ema26,
             ema12,
@@ -211,11 +229,10 @@ class CandleStickChartPanToLoadMore extends React.Component {
     };
     componentWillReceiveProps(nextProps) {
         console.log("===nextProps.data===", nextProps.data, nextProps);
-        /****************************************************************
-         nextProps.data - is not right data - it is just initial diapason
-         ***************************************************************/
         this.append(nextProps.data);
+        return true;
     }
+
     async handleDownloadMore(start, end) {
         if (Math.ceil(start) === end) return;
         const {
@@ -231,13 +248,30 @@ class CandleStickChartPanToLoadMore extends React.Component {
 
         await newDiapazone({
             rowsToDownload, start: Math.ceil(start), end, data: this.state.data,
-            callback: (newData) => {
-                this.props.chart_range({ start: Math.ceil(start), end}); //save to redux store
+            callback: newData => {
 
+                const currentDate = new Date();
+                const {dateFrom, dateTo} = this.props.chartRange;
+
+                // console.log(currentDate, dateFrom, dateTo, this.props);
+                console.log(currentDate, new Date(dateFrom), new Date(dateTo), this.props);
+                const format = d3.timeFormat("%Y-%m-%d");
+                // const currentDatePlusOdin = d3.timeDay.offset(new Date(dateTo), intervalInDays(this.state.interval, 1) ) ;
+                const offsetData = d3.timeDay.offset(new Date(dateFrom), (-1) * intervalInDays(this.state.interval, rowsToDownload) ) ;
+
+                // console.log("dateFrom =",  format(offsetData), "dateTo =", dateFrom);
+                // console.log("rowsToDownload =",  rowsToDownload, "intervalInDays =", (-1) * intervalInDays(this.state.interval, rowsToDownload));
+
+                // this.props.chart_range({
+                //     start: Math.ceil(start),
+                //     end,
+                //     dateFrom: format(offsetData),
+                //     dateTo: dateFrom,
+                //
+                // }); //save to redux store
 
                 // const dataToCalculate = inputData.concat(newData);
                 const dataToCalculate = [...newData, ...inputData];
-
 
                 const calculatedData = ema26(
                     ema12(macdCalculator(smaVolume50(dataToCalculate)))
@@ -289,7 +323,13 @@ class CandleStickChartPanToLoadMore extends React.Component {
 Zoom and Pan description
 http://rrag.github.io/react-stockcharts/documentation.html#/zoom_and_pan
 */
-console.log("render UPDATEBLECHART data =", data);
+console.log("render UPDATEBLECHART data =", head(data), data);
+
+        /**
+         * clamp prevents scrolling past the last data point, and is disabled by default.
+         * Supported values for clamp are left, right, or both for clamping one or both sides of the graph.
+        **/
+
         return (
             <ChartCanvas
                 ratio={ratio}
@@ -302,12 +342,13 @@ console.log("render UPDATEBLECHART data =", data);
                 xScale={xScale}
                 xAccessor={xAccessor}
                 displayXAccessor={displayXAccessor}
-                onLoadMore={this.handleDownloadMore}
                 ref={node => {
                     this.saveCanvas(node);
                 }}
-                zoomEvent={false}
-                clamp={false}
+                xExtents={[xAccessor(data[data.length - 50]), xAccessor(last(data))]}
+                zoomEvent={true}
+                clamp={"both"}
+                onLoadMore={this.handleDownloadMore}
             >
                 <Chart
                     id={1}
@@ -388,11 +429,11 @@ console.log("render UPDATEBLECHART data =", data);
                         tickFormat={format(".2s")}
                     />
 
-                    <MouseCoordinateY
-                        at="left"
-                        orient="left"
-                        displayFormat={format(".4s")}
-                    />
+                    {/*<MouseCoordinateY*/}
+                        {/*at="left"*/}
+                        {/*orient="left"*/}
+                        {/*displayFormat={format(".4s")}*/}
+                    {/*/>*/}
 
                     <BarSeries
                         yAccessor={d => d.volume}
