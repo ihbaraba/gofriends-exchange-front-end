@@ -28,7 +28,6 @@ class DepositHistory extends Component {
                             <th>Total(USDT)</th>
                             <th>Stop/Rate</th>
                             <th>Date</th>
-                            <th>Action</th>
                         </tr>
                         <tr>
                             <td>Buy</td>
@@ -37,7 +36,6 @@ class DepositHistory extends Component {
                             <td>183.6000000</td>
                             <td>-</td>
                             <td>2018-07-02  12:04:54</td>
-                            <td>Cancel</td>
                         </tr>
                         </tbody>
                     </table>
@@ -53,7 +51,6 @@ class DepositHistory extends Component {
                             <th>Total(USDT)</th>
                             <th>Stop/Rate</th>
                             <th>Date</th>
-                            <th>Action</th>
                         </tr>
                         <tr>
                             <td>Buy</td>
@@ -62,7 +59,6 @@ class DepositHistory extends Component {
                             <td>183.6000000</td>
                             <td>-</td>
                             <td>2018-07-02  12:04:54</td>
-                            <td>Cancel</td>
                         </tr>
                         </tbody>
                     </table>
