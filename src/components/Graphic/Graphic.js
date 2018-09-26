@@ -159,7 +159,7 @@ class Graphic extends React.Component {
 
     updatedLastCandleFromSocket(bid) {
         const parsedBid = parseData(parseDate)(bid);
-        console.log("updatedLastCandleFromSocket bid = , ", bid, " ===> ", parsedBid);
+        // console.log("updatedLastCandleFromSocket bid = , ", bid, " ===> ", parsedBid);
         const { data } = this.state;
         const lastBar = data[data.length - 1];
         // data[data.length - 1] = {...data[data.length - 1], ...bid};
@@ -190,7 +190,7 @@ class Graphic extends React.Component {
             this.setState({data}
                 , () => {
                     const { data } = this.state;
-                    console.log("saveTheLastCandleAndCreateNewOne ", bid, data.length, data[data.length - 1] );
+                    // console.log("saveTheLastCandleAndCreateNewOne ", bid, data.length, data[data.length - 1] );
                     // console.log(interval, this.intervalInMiliseconds(interval, 1), "setInterval ", bid.date);
                 }
             );
@@ -201,19 +201,19 @@ class Graphic extends React.Component {
     /* Getting data from the server */
     appendRealtimeLoadedData = () => {
     /* append as new candles */
-        getDataFromSocket({
-            point: "timeframe_saved_",
-            id: this.props.pairId,
-            stopTime: 0,
-            callback: this.saveTheLastCandleAndCreateNewOne,
-        });
+        // getDataFromSocket({
+        //     point: "timeframe_saved_",
+        //     id: this.props.pairId,
+        //     stopTime: 0,
+        //     callback: this.saveTheLastCandleAndCreateNewOne,
+        // });
         /* just updating last candle */
-        getDataFromSocket({
-            point: "timeframe_updated_",
-            id: this.props.pairId,
-            stopTime: 0,
-            callback: this.updatedLastCandleFromSocket,
-        });
+        // getDataFromSocket({
+        //     point: "timeframe_updated_",
+        //     id: this.props.pairId,
+        //     stopTime: 0,
+        //     callback: this.updatedLastCandleFromSocket,
+        // });
     };
 
      async newDiapazone({rowsToDownload, start, end, data, callback}){
@@ -268,7 +268,7 @@ class Graphic extends React.Component {
                     </div>
                 </div>
         }
-        console.log("Graphics this.chartData=",  this.chartData, this.props);
+        // console.log("Graphics this.chartData=",  this.chartData, this.props);
             {/*<Chart type="hybrid" data={this.state.data} newDiapazone={this.newDiapazone}/>*/}
         return (
             <Chart type="hybrid" data={this.chartData} newDiapazone={this.newDiapazone}/>

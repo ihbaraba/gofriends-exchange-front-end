@@ -130,6 +130,9 @@ class Orders extends Component {
         };
         // console.log(type, this.state[`${type}Price`],this.state[`${type}Amount`], this.state[`${type}Total`]);
         // const STOP = (type === "stop");
+        function capitalizeFirstLetter(string) {
+            return string.charAt(0).toUpperCase() + string.slice(1);
+        }
         return (
             <div className="fullHeight" style={{width: "30 rem",}}>
                <div className="orders__item">
@@ -150,7 +153,7 @@ class Orders extends Component {
                 </div>
 
                 <div className="ordBtn">
-                    <Button type="primary" ghost onClick={() => { onBidButtonClick({type})} }>{type}</Button>
+                    <Button type="primary" ghost onClick={() => { onBidButtonClick({type})} }>{capitalizeFirstLetter(type)}</Button>
                 </div>
 
 
@@ -265,7 +268,7 @@ class Orders extends Component {
                     <div className="ordersBlock">
                         <span className="h5">Buy {`${first}`}</span>
                         <hr className="ordersHr"/>
-                        {this.InputsFrame({first, second, price: buyPrice, loanRate, firePostToServer, type : "Buy"})}
+                        {this.InputsFrame({first, second, price: buyPrice, loanRate, firePostToServer, type : "buy"})}
                     </div>
                     <div className="ordersBlock">
                         <span className="h5">Limits</span>
@@ -276,7 +279,7 @@ class Orders extends Component {
                     <div className="ordersBlock">
                         <span className="h5">Sell {`${first}`}</span>
                         <hr className="ordersHr"/>
-                        {this.InputsFrame({first, second, price: sellPrice, loanRate, firePostToServer, type : "Sell"})}
+                        {this.InputsFrame({first, second, price: sellPrice, loanRate, firePostToServer, type : "sell"})}
 
                     </div>
                 </div>

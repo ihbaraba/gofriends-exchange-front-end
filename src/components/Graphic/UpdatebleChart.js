@@ -214,7 +214,7 @@ class CandleStickChartPanToLoadMore extends React.Component {
         } = xScaleProvider(calculatedData);
         // } = xScaleProvider(calculatedData.slice(-this.canvas.fullData.length));
 
-        console.log("linearData = ", head(linearData), last(linearData));
+        // console.log("linearData = ", head(linearData), last(linearData));
         this.setState({
             ema26,
             ema12,
@@ -228,7 +228,7 @@ class CandleStickChartPanToLoadMore extends React.Component {
         });
     };
     componentWillReceiveProps(nextProps) {
-        console.log("===nextProps.data===", nextProps.data, nextProps);
+        // console.log("===nextProps.data===", nextProps.data, nextProps);
         this.append(nextProps.data);
         return true;
     }
@@ -323,7 +323,7 @@ class CandleStickChartPanToLoadMore extends React.Component {
 Zoom and Pan description
 http://rrag.github.io/react-stockcharts/documentation.html#/zoom_and_pan
 */
-console.log("render UPDATEBLECHART data =", head(data), data);
+// console.log("render UPDATEBLECHART data =", head(data), data);
 
         /**
          * clamp prevents scrolling past the last data point, and is disabled by default.

@@ -29,7 +29,7 @@ class Profile extends Component{
         }
 
     render(){
-        console.log( this.props.user);
+        // console.log( this.props.user);
 
         const {username, email, country = {}} = this.props.user;
         // const {name} = country;

@@ -57,7 +57,7 @@ class UserOrder extends React.Component {
 
         const loadedOrders = await getOrdersHistory({
             rout: USERORDERSHISTORY,
-            parameters: { completed, withStop: "true", take: 50, sort: "createdAt:asc"},
+            parameters: { completed, withStop: "true", take: 50, sort: "createdAt:desc"},
             token: this.props.user.token,
         });
 
@@ -72,7 +72,7 @@ class UserOrder extends React.Component {
 
     async firePostToServer (bidProps) {
         /**
-        *activating cencel button
+        *activating cancel button
         **/
         const {token, orderId, status} = bidProps;
         const responce = await sendOrder({

@@ -20,11 +20,11 @@ const Header2 = () => {
                 </NavLink>
             </Menu.Item>
 
-            <Menu.Item>
-                <NavLink to="/DepositHistory">
-                    <span className="title topLevel">HISTORY</span>
-                </NavLink>
-            </Menu.Item>
+            {/*<Menu.Item>*/}
+                {/*<NavLink to="/DepositHistory">*/}
+                    {/*<span className="title topLevel">HISTORY</span>*/}
+                {/*</NavLink>*/}
+            {/*</Menu.Item>*/}
         </Menu>
     );
     const menu2 = (
@@ -58,11 +58,11 @@ const Header2 = () => {
                     {/*<span className="title topLevel">Login History</span>*/}
                 {/*</NavLink>*/}
             {/*</Menu.Item>*/}
-            <Menu.Item>
-                <NavLink to="/changepassword">
-                    <span className="title topLevel">Change Password</span>
-                </NavLink>
-            </Menu.Item>
+            {/*<Menu.Item>*/}
+                {/*<NavLink to="/changepassword">*/}
+                    {/*<span className="title topLevel">Change Password</span>*/}
+                {/*</NavLink>*/}
+            {/*</Menu.Item>*/}
             <Menu.Item>
                 <NavLink to="/Logout">
                     <span className="title topLevel">Logout</span>

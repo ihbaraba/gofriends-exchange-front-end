@@ -202,8 +202,18 @@ class MarketDepth extends Component {
             width: 150,
         }];
 
-        const buy4DepthChart = buy.filter(item => (!item.completed && !item.stop && !item.limit ));
-        const sell4DepthChart = sell.filter(item => (!item.completed && !item.stop && !item.limit ));
+        const buy4DepthChart = buy.filter(item => (!item.completed && !item.stop && !item.limit && (item.status === "active")));
+        const sell4DepthChart = sell.filter(item => (!item.completed && !item.stop && !item.limit && (item.status === "active") ));
+
+        const buy4Table = buy
+            .filter(item => (!item.completed && !item.stop && !item.limit ))
+            .sort((a, b) => b.price - a.price );
+
+        const sell4Table = sell
+            .filter(item => (!item.completed && !item.stop && !item.limit ))
+            .sort((a, b) => a.price - b.price ) ;
+
+        // console.log("sell4Table =", sell4Table);
         // console.log("buy4DepthChart =", buy4DepthChart);
         // console.log("sell4DepthChart =", sell4DepthChart);
 
@@ -212,12 +222,12 @@ class MarketDepth extends Component {
                 <div className="marketDepthTables">
                     <div className="marketDepthColumns">
                         <h5>BUY ORDERS</h5>
-                        <Table columns={columns} dataSource={buy.sort((a, b) => b.price - a.price )} bordered={false} pagination={false} scroll={{y: 240}}
+                        <Table columns={columns} dataSource={buy4Table} bordered={false} pagination={false} scroll={{y: 240}}
                                size="small" rowClassName="custom__tr"/>
                     </div>
                     <div className="marketDepthColumns">
                         <h5>SELL ORDERS</h5>
-                        <Table columns={columns} dataSource={sell.sort((a, b) => a.price - b.price )} bordered={false} pagination={false} scroll={{y: 240}}
+                        <Table columns={columns} dataSource={sell4Table} bordered={false} pagination={false} scroll={{y: 240}}
                                size="small" rowClassName="custom__tr"/>
                     </div>
                 </div>
