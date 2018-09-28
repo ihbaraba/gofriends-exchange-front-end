@@ -13,28 +13,28 @@ const initialData = [
     {
         "date": "2011-01-24",
         "x": 0,
-        "price": 0.2,
+        "price": 45,
         "volume": 800,
         "side": "buy",
     },
     {
         "date": "2011-01-25",
         "x": 1,
-        "price": 0.22,
+        "price": 44,
         "volume": 30,
         "side": "buy",
     },
     {
         "date": "2011-01-26",
         "x": 2,
-        "price": 0.24,
+        "price": 55,
         "volume": 200,
         "side": "sell",
     },
     {
         "date": "2011-01-27",
         "x": 3,
-        "price": 0.3,
+        "price": 59,
         "volume": 400,
         "side": "sell",
     }
@@ -79,7 +79,7 @@ class DepthChart extends React.Component {
     }
 
     render() {
-        const { data,} = this.state;
+        const { data = [],} = this.state;
 
         const {
             height,

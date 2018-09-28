@@ -12,7 +12,7 @@ class WelcomePage extends Component {
             <div>
                 <Header/>
                 <div style={{clear: "both"}}>
-                    <h1 className="sign">Welcome to one of the most <br/> active crypto exchanges in the world</h1>
+                    <h1 className="sign">Welcome to one of the most <br/> active exchanges in the world</h1>
                 </div>
 
 
