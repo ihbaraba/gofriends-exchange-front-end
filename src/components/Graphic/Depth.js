@@ -13,7 +13,7 @@ const initialData = [
     {
         "date": "2011-01-24",
         "x": 0,
-        "price": 45,
+        "price": 42,
         "volume": 800,
         "side": "buy",
     },
@@ -96,7 +96,6 @@ class DepthChart extends React.Component {
         const xScale = scaleLinear();
         // const xExtents = [0, data.length - 1];
         const xExtents = [data[0]["price"], data[data.length - 1]["price"]];
-// console.log(data, xExtents);
 
         return (
             <ChartCanvas
