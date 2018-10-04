@@ -3175,7 +3175,7 @@
     }
 
     .custom__tr:nth-child(odd) {
-        background: #000;
+        background: #343436;
     }
 
 
@@ -3194,6 +3194,7 @@
     .currencysPairs {
         margin-bottom: 0.5rem;
         border: 1px solid #999;
+        background: #343436;
 
     }
 
@@ -3275,12 +3276,14 @@
         margin: 0 0.5rem 0 0.5rem;
         flex: 1 1 auto;
         border: 1px solid #999;
+        background: #343436;
         width: 49%;
     }
 
     .ordersBlock {
         width: 33%;
         border: 1px solid #999;
+        background: #343436;
         padding: 0 16px 0 25px;
         display: flex;
         flex-direction: column;
@@ -3462,6 +3465,7 @@
 
     .notices {
         border: 1px solid #999;
+        background: #343436;
         flex: 0 0 500px;
         width: 30%;
     }
@@ -3550,7 +3554,7 @@
 
     body {
         /*background-image: url('./img/bg.png') !important;*/
-        background-color: #000 !important;
+        background-color: #232426 !important;
         font-family: 'Roboto', sans-serif;
 
     }
