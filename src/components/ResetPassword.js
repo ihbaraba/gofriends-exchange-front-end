@@ -1,13 +1,10 @@
 import React, {Component} from 'react';
 import Header from './Header';
-import Footer from './Footer';
-import '../App.css';
-
 import img from '../img/captcha.png';
+import '../App.css';
 
 
 class ResetPassword extends Component {
-
     constructor(props) {
         super(props);
 
@@ -61,12 +58,12 @@ class ResetPassword extends Component {
 
 
                                         {/*<div>*/}
-                                            {/*<iframe*/}
-                                                {/*src="https://www.google.com/recaptcha/api2/anchor?ar=1&amp;k=6LcGrf4SAAAAACynUoTh36j68QP99woJp6rUEAn6&amp;co=aHR0cHM6Ly9wb2xvbmlleC5jb206NDQz&amp;hl=uk&amp;v=v1526884278587&amp;theme=light&amp;size=normal&amp;cb=kqjv32ooxv7a"*/}
-                                                {/*width="304" height="78" role="presentation" frameborder="0"*/}
-                                                {/*scrolling="no"*/}
-                                                {/*sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-top-navigation allow-modals allow-popups-to-escape-sandbox">*/}
-                                            {/*</iframe>*/}
+                                        {/*<iframe*/}
+                                        {/*src="https://www.google.com/recaptcha/api2/anchor?ar=1&amp;k=6LcGrf4SAAAAACynUoTh36j68QP99woJp6rUEAn6&amp;co=aHR0cHM6Ly9wb2xvbmlleC5jb206NDQz&amp;hl=uk&amp;v=v1526884278587&amp;theme=light&amp;size=normal&amp;cb=kqjv32ooxv7a"*/}
+                                        {/*width="304" height="78" role="presentation" frameborder="0"*/}
+                                        {/*scrolling="no"*/}
+                                        {/*sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-top-navigation allow-modals allow-popups-to-escape-sandbox">*/}
+                                        {/*</iframe>*/}
                                         {/*</div>*/}
                                         {/*/!*<textarea id="g-recaptcha-response" name="g-recaptcha-response"*!/*/}
                                         {/*/!*class="g-recaptcha-response"*!/*/}
@@ -80,13 +77,11 @@ class ResetPassword extends Component {
                             </form>
                         </div>
                         <div className="column2">
-                            <h2 className="standard">Forget your password?</h2>
+                            <h2 className="standard">Forgot your password?</h2>
                             <p>You can use this form to reset it.</p>
                         </div>
-
                     </div>
                 </div>
-
             </div>
         )
     }

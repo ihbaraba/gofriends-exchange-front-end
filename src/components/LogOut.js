@@ -5,10 +5,6 @@ import {connect} from "react-redux";
 import {logOut} from "../actions/UserActions";
 
 class Login extends Component {
-    constructor(props) {
-        super(props);
-    }
-
     componentDidMount() {
         // console.log("Login component mounted. Firing logOut ");
         /*
@@ -32,6 +28,7 @@ class Login extends Component {
         )
     }
 }
+
 const mapStateToProps = state => ({
     ...state
 });

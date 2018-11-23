@@ -1,12 +1,10 @@
 import React, {Component} from 'react';
 import Header2 from './Header2';
-import Footer from './Footer';
 import '../App.css';
 
-class Knowledge extends Component{
-
-    render(){
-        return(
+class Knowledge extends Component {
+    render() {
+        return (
             <div>
                 <Header2/>
                 <div style={{clear: "both"}}>
@@ -94,10 +92,6 @@ class Knowledge extends Component{
                         </div>
                     </div>
                 </section>
-
-
-
-
             </div>
         )
     }

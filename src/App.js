@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
-import {BrowserRouter as Router, Route, Switch, Redirect} from 'react-router-dom';
-import {connect} from 'react-redux'
+import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 // import { Provider } from 'react-redux'
 // import configureStore from './store/configureStore'
 import WelcomePage from './components/WelcomePage';
@@ -20,11 +19,9 @@ import Terms from './components/Terms';
 import Activate from './components/Activate';
 import ChangePassword from './components/ChangePassword';
 import Balances from './components/Balances';
-import Orders from './components/Orders';
 import UserOrdersHistory from './components/UserOrderHistory';
 import LoginHistory from './components/LoginHistory';
 
-import UserInfo from './components/UserInfo';
 import OpenOrders from './components/OpenOrders';
 import Bann from './components/Bann';
 import OrderPanel from './components/OrderPanel';
@@ -38,9 +35,7 @@ import ProfileVerification from './components/ProfileVerification';
 
 import Footer from './components/Footer';
 
-
 // import {changePair} from "./actions/ExchangeActions";
-import {simpleAction} from "./actions/simpleAction";
 import YourOpenOrders from "./components/YourOpenOrders";
 
 // import Footer from "./components/Footer";
@@ -51,7 +46,7 @@ class App extends Component {
             <div className="w-wrapper">
                 <Router>
                     <div className="w-wrapper">
-                    {/*<div className="App">*/}
+                        {/*<div className="App">*/}
                         <div className="w-content">
                             <Switch>
                                 <Route exact path="/" component={WelcomePage}/>
@@ -65,7 +60,6 @@ class App extends Component {
                                 <Route path="/resetPassword" component={ResetPassword}/>
                                 <Route path="/2fa" component={TwoFactorAuth}/>
                                 <Route path="/login2" component={Login2}/>
-                                <Route path="/logout" component={LogOut}/>
                                 <Route path="/contact" component={ContactUs}/>
                                 <Route path="/privacy" component={Policy}/>
                                 <Route path="/terms" component={Terms}/>
@@ -75,7 +69,6 @@ class App extends Component {
                                 {/*<Route path="/balances" component={UserInfo}/>*/}
                                 <Route path="/orders" component={UserOrdersHistory}/>
                                 <Route path="/loginhistory" component={LoginHistory}/>
-
 
                                 <Route path="/OpenOrders" component={OpenOrders}/>
                                 <Route path="/Bann" component={Bann}/>
@@ -89,18 +82,14 @@ class App extends Component {
                                 <Route path="/Knowledge" component={Knowledge}/>
                                 <Route path="/ProfileVerification" component={ProfileVerification}/>
 
-
                                 <Route path="*" component={NotFound}/>
-
-
                             </Switch>
                         </div>
-                    {/*</div>*/}
+                        {/*</div>*/}
 
-
-                    <div className="w-footer">
-                        <Footer/>
-                    </div>
+                        <div className="w-footer">
+                            <Footer/>
+                        </div>
                     </div>
                 </Router>
             </div>

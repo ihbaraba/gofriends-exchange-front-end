@@ -43,7 +43,6 @@ const axisColor = "#EEEEEE";
 
 class OHLCChartWithElderImpulseIndicator extends React.Component {
     render() {
-
         const changeCalculator = change();
 
         // console.log("Chart rendering", this.props.data);

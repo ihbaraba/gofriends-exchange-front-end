@@ -3,7 +3,6 @@ import logo from '../img/Logo.png';
 import NavLink from './NavLink';
 import '../App.css';
 
-
 class Header extends Component {
     render() {
         return (
@@ -19,21 +18,18 @@ class Header extends Component {
                             {/*<li><NavLink to="/lending">Lending</NavLink></li>*/}
                         </ul>
                     </div>
-                    <div className="tabs right loggedOut">
+
+                    <div className="tabs right">
                         <ul>
-
-
                             <li className="message">
-                                <span className="title"><NavLink className="header-sign"  to="/login">Sign in</NavLink>  <NavLink className="header-create" to="/signup">Create an Account</NavLink></span>
+                                <span className="title">
+                                    <NavLink className="header-sign" to="/login">Sign in</NavLink>
+                                    <NavLink className="header-create" to="/signup">Create an Account</NavLink>
+                                </span>
                             </li>
-
-
-
-
                         </ul>
                     </div>
                 </div>
-
             </div>
         )
     }

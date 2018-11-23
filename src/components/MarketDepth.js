@@ -1,19 +1,16 @@
 import React, {Component} from 'react';
-import { connect } from 'react-redux'
+import {connect} from 'react-redux'
 import PropTypes from 'prop-types';
 import {Table} from 'antd';
 import DepthChart from './Graphic/Depth'
 import {getMarcketDpthData} from "./../utils"
 import io from 'socket.io-client';
-import {SOCKET_SOURCE, QUOTATIONS, ORDERS} from "./../constants/APIURLS.js"
+import {SOCKET_SOURCE, ORDERS} from "./../constants/APIURLS.js"
 import {save_user_info} from "../actions/UserActions";
-import {chart_timing} from "../actions/ChartActions";
 import {USERINFO} from "../constants/APIURLS";
 import {getUserInfo} from "../utils";
 
-
 class MarketDepth extends Component {
-
     constructor() {
         super();
 
@@ -34,7 +31,7 @@ class MarketDepth extends Component {
 
     calculateSum(bids) {
 
-        const calculated = bids.map( bid => {
+        const calculated = bids.map(bid => {
             const price = +bid["price"];
             const amount = +bid["amount"];
 
@@ -44,7 +41,7 @@ class MarketDepth extends Component {
                 amount: +amount.toFixed(5),
                 Sum: +(bid.amount * bid.price).toFixed(5),
                 quoteCurrency: +(bid.amount * bid.price).toFixed(5),
-        })
+            })
 
         });
         return calculated
@@ -53,7 +50,7 @@ class MarketDepth extends Component {
     getDataFromSocket(socket, stopTime = 0) {
         // console.log('state: ', this.state);
 
-        const { orders } = this.props;
+        const {orders} = this.props;
 
         this.socket.on("order_created_" + socket, (bid) => {
 
@@ -103,19 +100,24 @@ class MarketDepth extends Component {
                 const foundElement = buy[resOfSearchInBuy];
                 sell[resOfSearchInBuy] = {...foundElement, amount: foundElement["amount"] - bid.amount}
             }
-            if (flagBuy && bid.completed) {buy.splice(resOfSearchInBuy, 1)} ; // remove element
-            if (flagSell && bid.completed) {sell.splice(resOfSearchInSell, 1)} ; // remove element
+            if (flagBuy && bid.completed) {
+                buy.splice(resOfSearchInBuy, 1)
+            }
+            ; // remove element
+            if (flagSell && bid.completed) {
+                sell.splice(resOfSearchInSell, 1)
+            }
+            ; // remove element
 
             // console.log("order_updated_", bid, "  buy =", buy, "sell =", sell);
 
-            orders.forEach( async (value, valueAgaine, set) => {
-                if ( value === bid.id)
-                {
+            orders.forEach(async (value, valueAgaine, set) => {
+                if (value === bid.id) {
                     //update user info - call SAVE_USER_INFO action
                     const userInfo = await getUserInfo({rout: USERINFO, token: this.props.user.token});
                     this.props.save_user_info(userInfo.body);
                 }
-            }  );
+            });
 
             this.setState({
                 marketDepth: {
@@ -133,8 +135,22 @@ class MarketDepth extends Component {
 
         // console.log("making getMarcketDpthData", {type: "buy", book: id});
         // console.log(this.state);
-        const buyDepth = await getMarcketDpthData({rout: ORDERS, type: "buy", take: 50, book: id, price: "desc", withStop: "false"});
-        const sellDepth = await getMarcketDpthData({rout: ORDERS, type: "sell", take: 50, book: id, price: "desc", withStop: "false"});
+        const buyDepth = await getMarcketDpthData({
+            rout: ORDERS,
+            type: "buy",
+            take: 50,
+            book: id,
+            price: "desc",
+            withStop: "false"
+        });
+        const sellDepth = await getMarcketDpthData({
+            rout: ORDERS,
+            type: "sell",
+            take: 50,
+            book: id,
+            price: "desc",
+            withStop: "false"
+        });
 
         // const buy_ = buyDepth.filter(item => !item.completed);
         // console.log("buyDepth =", buyDepth);
@@ -147,9 +163,7 @@ class MarketDepth extends Component {
                         // buy: buyDepth.filter(item => !item.completed).map(item => {console.log(item); return item.toFixed(3)} ),
                         sell: this.calculateSum(sellDepth.filter(item => !item.completed)),
                     }
-            }
-            // , ()=> { console.log(this.state) }
-        );
+            });
     }
 
     async componentDidMount() {
@@ -178,7 +192,7 @@ class MarketDepth extends Component {
         // const {marketDepth} = this.state;
         // console.log("render marketDepth props = ", this.props.currentPair,this.state,);
 
-        const {currentPair} = this.props;
+        // const {currentPair} = this.props;
 
         const columns = [{
             title: 'Price',
@@ -202,37 +216,44 @@ class MarketDepth extends Component {
             width: 150,
         }];
 
-        const buy4DepthChart = buy.filter(item => (!item.completed && !item.stop && !item.limit && (item.status === "active")));
-        const sell4DepthChart = sell.filter(item => (!item.completed && !item.stop && !item.limit && (item.status === "active") ));
+        const buy4DepthChart = buy
+            .filter(item => (!item.completed && !item.stop && !item.limit && (item.status === "active")));
+        const sell4DepthChart = sell
+            .filter(item => (!item.completed && !item.stop && !item.limit && (item.status === "active")));
 
         const buy4Table = buy
-            .filter(item => (!item.completed && !item.stop && !item.limit ))
-            .sort((a, b) => b.price - a.price );
-
+            .filter(item => (!item.completed && !item.stop && !item.limit && (item.status === "active")))
+            .sort((a, b) => b.price - a.price);
         const sell4Table = sell
-            .filter(item => (!item.completed && !item.stop && !item.limit ))
-            .sort((a, b) => a.price - b.price ) ;
-
-        // console.log("sell4Table =", sell4Table);
-        // console.log("buy4DepthChart =", buy4DepthChart);
-        // console.log("sell4DepthChart =", sell4DepthChart);
+            .filter(item => (!item.completed && !item.stop && !item.limit && (item.status === "active")))
+            .sort((a, b) => a.price - b.price);
 
         return (
             <div className="marketDepth">
                 <div className="marketDepthTables">
                     <div className="marketDepthColumns">
                         <h5>BUY ORDERS</h5>
-                        <Table columns={columns} dataSource={buy4Table} bordered={false} pagination={false} scroll={{y: 240}}
+                        <Table columns={columns}
+                               dataSource={buy4Table}
+                               bordered={false}
+                               pagination={false}
+                               rowKey={record => record.id}
+                               scroll={{y: 240}}
                                size="small" rowClassName="custom__tr"/>
                     </div>
                     <div className="marketDepthColumns">
                         <h5>SELL ORDERS</h5>
-                        <Table columns={columns} dataSource={sell4Table} bordered={false} pagination={false} scroll={{y: 240}}
+                        <Table columns={columns}
+                               dataSource={sell4Table}
+                               bordered={false}
+                               pagination={false}
+                               rowKey={record => record.id}
+                               scroll={{y: 240}}
                                size="small" rowClassName="custom__tr"/>
                     </div>
                 </div>
                 <div className="marketDepthChart">
-                    { readyForDrawing && <DepthChart buy={buy4DepthChart} sell={sell4DepthChart} height={200}/> }
+                    {readyForDrawing && <DepthChart buy={buy4DepthChart} sell={sell4DepthChart} height={200}/>}
                 </div>
             </div>
         )
@@ -257,7 +278,7 @@ MarketDepth.propTypes = {
 
 function mapStateToProps(state) {
     return {
-        user:  state.user,
+        user: state.user,
         orders: state.user.orders
     }
 }

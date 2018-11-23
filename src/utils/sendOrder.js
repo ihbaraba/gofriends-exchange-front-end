@@ -4,7 +4,7 @@ import request from  'superagent' ;
  export default async function sendRequestsendOrder (bidProps) {
  //    const {rout, ...restProps} = bidProps;
     const {rout, token, ...restProps} = bidProps;
-    const {pairId, balanceId, type, price, amount, stop, limit} = restProps
+    const {pairId, balanceId} = restProps;
           // console.log("sendOrder", rout, restProps, token);
     return await request
               .post(rout)

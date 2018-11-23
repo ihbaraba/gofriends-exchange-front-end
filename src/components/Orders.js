@@ -1,13 +1,8 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import {Input, Button } from 'antd';
-import io from 'socket.io-client';
-
 // import 'antd/lib/input/style/css';
-
 import '../App.css';
-import {chart_timing} from "../actions/ChartActions";
-import {login_success} from "../actions/UserActions";
 
 class Orders extends Component {
     constructor(props) {
@@ -37,14 +32,15 @@ class Orders extends Component {
             amount: 1,
         };
     }
+
     checkKeyPress(evt){
         // console.log(evt.charCode, evt.target.value);
         const data = evt.target.value;
-        if((evt.charCode>= 48 && evt.charCode <= 57) || evt.charCode == 46 ||evt.charCode == 0){
+        if((evt.charCode>= 48 && evt.charCode <= 57) || +evt.charCode === 46 || +evt.charCode === 0){
 
             console.log(evt.charCode, data);
             if(data.indexOf('.') > -1){
-                if(evt.charCode== 46)
+                if(+evt.charCode === 46)
                     evt.preventDefault();
             }
         }else
@@ -155,11 +151,10 @@ class Orders extends Component {
                 <div className="ordBtn">
                     <Button type="primary" ghost onClick={() => { onBidButtonClick({type})} }>{capitalizeFirstLetter(type)}</Button>
                 </div>
-
-
             </div>
         )
     };
+
     StopLimitFrame = ({first, second, loanRate, firePostToServer, type}) => {
         const optionsLimit = {
             addonAfter: second,
@@ -251,16 +246,14 @@ class Orders extends Component {
                     <Button type="primary" ghost onClick={() => { onBidButtonClick({type: "buy"})} } className="">Buy</Button>
                     <Button type="primary" ghost onClick={() => { onBidButtonClick({type: "sell"})} } className="">Sell</Button>
                 </div>
-
-
             </div>
         )
     };
 
     render() {
         // console.log( this.props.token );
-        const {first, second, price, loanRate, firePostToServer} = this.props;
-        const {sellPrice, buyPrice, stopPrice, total} = this.state;
+        const { first, second, loanRate, firePostToServer } = this.props;
+        const { sellPrice, buyPrice, stopPrice } = this.state;
         // console.log(first, second, price, total, loanRate);
         return (
             <div className="orders">
@@ -280,7 +273,6 @@ class Orders extends Component {
                         <span className="h5">Sell {`${first}`}</span>
                         <hr className="ordersHr"/>
                         {this.InputsFrame({first, second, price: sellPrice, loanRate, firePostToServer, type : "sell"})}
-
                     </div>
                 </div>
             </div>

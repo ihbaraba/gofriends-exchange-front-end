@@ -1,8 +1,7 @@
 import React from 'react';
 import {connect} from "react-redux";
-
 import Chart from './UpdatebleChart';
-import {getData, getDataFromSocket, coinapiHystoricalData, } from "./utils"
+import { getData } from "./utils"
 import {intervalInDays} from "./../../utils"
 import {TIMEFRAMES} from "./../../constants/APIURLS.js"
 
@@ -43,9 +42,7 @@ class Graphic extends React.Component {
     }
 
     componentDidMount() {
-        const { pairId = 1, dateFrom, dateTo, take, interval, appendFake
-            , pair: { baseCurrency, quoteCurrency},
-        } = this.props;
+        const { pairId = 1, dateFrom, dateTo, take, interval, appendFake } = this.props;
         const options = {
             pairId: pairId,
             APIURL: TIMEFRAMES,
@@ -161,7 +158,7 @@ class Graphic extends React.Component {
         const parsedBid = parseData(parseDate)(bid);
         // console.log("updatedLastCandleFromSocket bid = , ", bid, " ===> ", parsedBid);
         const { data } = this.state;
-        const lastBar = data[data.length - 1];
+        // const lastBar = data[data.length - 1];
         // data[data.length - 1] = {...data[data.length - 1], ...bid};
         data[data.length - 1] = {...data[data.length - 1], ...parsedBid};
         // console.log("last ", data.length, data[data.length - 1], " data =", data);
@@ -187,15 +184,8 @@ class Graphic extends React.Component {
             const newFrame = { ...bid, date: d3.timeMinute.offset(bid.date, 5)};
             data.push(newFrame);
             this.chartData = data;
-            this.setState({data}
-                , () => {
-                    const { data } = this.state;
-                    // console.log("saveTheLastCandleAndCreateNewOne ", bid, data.length, data[data.length - 1] );
-                    // console.log(interval, this.intervalInMiliseconds(interval, 1), "setInterval ", bid.date);
-                }
-            );
+            this.setState({data});
         },  this.intervalInMiliseconds(interval, 1));
-
     }
 
     /* Getting data from the server */
@@ -221,7 +211,7 @@ class Graphic extends React.Component {
          // console.log("START =", start, "END = ", end, data.length, data);
         return new Promise(() => {
             const format = d3.timeFormat("%Y-%m-%d");
-            const { pairId = 1, dateFrom, dateTo, take, interval, appendFake } = this.props;
+            const { pairId = 1, take, interval, appendFake } = this.props;
             // const lastBarIndex = Math.min(Math.abs(end), data.length-1);
             const lastBarIndex = 0;
             const lastBar = data[lastBarIndex];
@@ -254,7 +244,6 @@ class Graphic extends React.Component {
     }
 
     render() {
-
         if (this.state == null) {
             return <div>Loading...</div>
         }
@@ -269,7 +258,7 @@ class Graphic extends React.Component {
                 </div>
         }
         // console.log("Graphics this.chartData=",  this.chartData, this.props);
-            {/*<Chart type="hybrid" data={this.state.data} newDiapazone={this.newDiapazone}/>*/}
+        // <Chart type="hybrid" data={this.state.data} newDiapazone={this.newDiapazone}/>
         return (
             <Chart type="hybrid" data={this.chartData} newDiapazone={this.newDiapazone}/>
         )

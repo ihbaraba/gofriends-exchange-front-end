@@ -1,10 +1,5 @@
 import React, {Component} from 'react';
-import PropTypes from 'prop-types';
-import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import * as d3 from "d3";
-
-import {changePair} from '../actions/ExchangeActions';
 import Header2 from './Header2';
 
 import Orders from './Orders';
@@ -14,7 +9,7 @@ import OrdersHistory from './OrdersHistory'
 import CoinsList from "./CoinsList";
 import UserInfo from "./UserInfo";
 import initialState from "../store/initialState";
-import {sendOrder, getUserInfo, intervalInDays} from "./../utils";
+import {sendOrder, getUserInfo} from "./../utils";
 import { Radio } from "antd";
 import {ORDERS, USERINFO} from "./../constants/APIURLS.js"
 import {login_success, save_user_info, save_user_orders} from "../actions/UserActions";
@@ -43,7 +38,7 @@ class ExchangePage extends Component {
          * and save it into redux store
          **/
         const { user: {token} } = this.props; //read from redux state
-        console.log("token =", token, "this.state ==>", this.state);
+
         const isAuthorised = (token !== "") && (token !== null); // ? true : false
         this.setState({isAuthorised, token});
         if (isAuthorised) {
@@ -93,14 +88,14 @@ class ExchangePage extends Component {
         const {pair, chartRange: {dateFrom = "2018-08-27", dateTo = "2018-08-31"}} = this.props;
 
         const {first, second, id, baseCurrencyName, quoteCurrencyName} = pair;
-        const {interval, appendFake, isAuthorised, token, user } = this.state;
+        const {interval, isAuthorised } = this.state;
         // console.log(this.props);
         return (
             <div>
                 <Header2/>
                 { (!isAuthorised) &&
                     <div className="wrapper-all">
-                        <h3><bold>You have not been authorized. Please go to the authorization page.</bold></h3>
+                        <h3><b>You have not been authorized. Please go to the authorization page.</b></h3>
                     </div>}
                 { isAuthorised &&
                         <div className="wrapper-all">
@@ -149,7 +144,7 @@ class ExchangePage extends Component {
                             <div className="head">
                                 <div><h3>Notices</h3></div>
                                 <div className="social">
-                                    <a href="#" className="twitter-icon"></a>
+                                    <a href="" className="twitter-icon"> </a>
                                 </div>
                             </div>
                             <div className="data" id="noticesBoard">
@@ -211,8 +206,7 @@ class ExchangePage extends Component {
                                 <div className="msg">
                                     <div className="info">On May 15, we're introducing more compelling, consistent
                                         pricing
-                                        across the board. Read more <a
-                                            href="#"><b><u>here</u></b></a>.
+                                        across the board. Read more <a href=""><b><u>here</u></b></a>.
                                     </div>
                                     <div className="by">Posted by <strong>GoFriends Team</strong> at 2018-05-01
                                         18:45:56
@@ -225,8 +219,6 @@ class ExchangePage extends Component {
                     </div>
                 </div>
                 }
-
-
             </div>
         )
     }

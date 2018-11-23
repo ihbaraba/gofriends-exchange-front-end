@@ -1,19 +1,16 @@
 import React, {Component} from 'react';
 import Header from './Header';
-import Footer from './Footer';
 import '../App.css';
 import img from '../img/captcha.png';
 
-class Confirm extends Component{
-
-    render(){
-        return(
+class Confirm extends Component {
+    render() {
+        return (
             <div>
                 <Header/>
                 <div style={{clear: "both"}}>
                     <h1 className="sign">Confirm your email</h1>
                 </div>
-
 
                 <form className="confirmForm">
                     <div>
@@ -46,15 +43,8 @@ class Confirm extends Component{
                         </a>.
                     </p>
 
-
-
                     <button className="conf-btn" type="submit">Sign in</button>
                 </form>
-
-
-
-
-
             </div>
         )
     }

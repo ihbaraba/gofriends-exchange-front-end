@@ -24,12 +24,13 @@ const SERVERS = {
 * If it is not "localhost" setting SERVERS.PRODUCT
 * */
 
-console.log('document.location', document.location.hostname, typeof document.location.hostname, document.location,);
+// console.log('document.location', document.location.hostname, typeof document.location.hostname, document.location,);
 
 const generatedDetected = {
     XHR: `https://${document.location.hostname}`,
     SOCKET: `wss://${document.location.hostname}/`,
 };
+
 
 const detected = document.location.hostname === "localhost"
     ? SERVERS.DEV /* <=== set here server what needs for developing -  */
@@ -37,9 +38,10 @@ const detected = document.location.hostname === "localhost"
 
 export const current_server = detected;
 
-console.log('detected=', detected, current_server);
-const ENV = process.env;
-console.log("process.env=", ENV);
+// const ENV = process.env;
+
+// console.log('detected=', detected, current_server);
+// console.log("process.env=", ENV);
 
 /**************************
  * get initial data
@@ -55,7 +57,7 @@ https://min-api.cryptocompare.com/data/histoday?fsym=BTC&tsym=USD&limit=200
 https://min-api.cryptocompare.com/
 https://docs.coinapi.io/?shell#list-all-periods
 * */
-const CRIPTOCOMPARE_TIMEFRAMES = `https://min-api.cryptocompare.com/data/histoday`;
+// const CRIPTOCOMPARE_TIMEFRAMES = `https://min-api.cryptocompare.com/data/histoday`;
 
 export const TIMEFRAMES = OUR_TIMEFRAMES; // OUR_TIMEFRAMES or CRIPTOCOMPARE_TIMEFRAMES
 

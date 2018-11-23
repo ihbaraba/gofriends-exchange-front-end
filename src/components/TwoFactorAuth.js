@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import Header from './Header';
-import Footer from './Footer';
 import API from './api';
 import '../App.css';
 
@@ -90,10 +89,10 @@ class ExchangePage extends Component {
                             </p>
                             <br/>
                             <br/>
-                            <a className="colored-link" href="#">
+                            <a className="colored-link" href="">
                                 What is 2FA and why do I need it?
                             </a>
-                            <a className="colored-link" href="#">
+                            <a className="colored-link" href="">
                                 How do I to set up 2FA?
                             </a>
                             <br/>
@@ -179,7 +178,7 @@ class ExchangePage extends Component {
                                     {this.state.base32}
                                 </span>
                             </strong>
-                            <a className="colored-link" href="#">
+                            <a className="colored-link" href="">
                                 Print a backup of your recovery key.
                             </a>
                             <br/>

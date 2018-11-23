@@ -1,7 +1,4 @@
 import React, {Component} from 'react';
-import Header from './Header';
-import NavLink from './NavLink';
-import Footer from './Footer';
 import '../App.css';
 import Header2 from "./Header2";
 
@@ -36,9 +33,6 @@ class Transactions extends Component {
                         </tbody>
                     </table>
                 </div>
-
-                <Footer/>
-
             </div>
         )
     }

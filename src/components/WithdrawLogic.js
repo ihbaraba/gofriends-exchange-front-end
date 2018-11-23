@@ -1,11 +1,8 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
-import {Input, Button, Tooltip} from 'antd';
-import io from 'socket.io-client';
+import {Input, Tooltip} from 'antd';
 
 import '../App.css';
-import {chart_timing} from "../actions/ChartActions";
-import {login_success} from "../actions/UserActions";
 
 class WithdrawLogic extends Component {
     constructor(props) {
@@ -25,11 +22,11 @@ class WithdrawLogic extends Component {
     checkKeyPress(evt){
         // console.log(evt.charCode, evt.target.value);
         const data = evt.target.value;
-        if((evt.charCode>= 48 && evt.charCode <= 57) || evt.charCode == 46 ||evt.charCode == 0){
+        if((evt.charCode>= 48 && evt.charCode <= 57) || +evt.charCode === 46 || +evt.charCode === 0){
 
             // console.log(evt.charCode, data);
             if(data.indexOf('.') > -1){
-                if(evt.charCode== 46)
+                if(+evt.charCode === 46)
                     evt.preventDefault();
             }
         }else
@@ -88,15 +85,16 @@ class WithdrawLogic extends Component {
             }
         };
 
-        const onBidButtonClick = ({type}) => {
-            firePostToServer({
-                token: this.props.token,
-                price: 1*this.state[`${type}Price`],
-                amount: 1*this.state[`${type}Amount`],
-                loanRate: 1*this.state.loanRate,
-                type,
-            });
-        };
+        // const onBidButtonClick = ({type}) => {
+        //     firePostToServer({
+        //         token: this.props.token,
+        //         price: 1*this.state[`${type}Price`],
+        //         amount: 1*this.state[`${type}Amount`],
+        //         loanRate: 1*this.state.loanRate,
+        //         type,
+        //     });
+        // };
+
         const total = +this.state.transactionFee + (+this.state.amount);
         return (
             <div  style={{width: "30 rem", paddingBottom: "20px",}}>
@@ -119,7 +117,7 @@ class WithdrawLogic extends Component {
 
                 <div>
                     {/*<a href="#" className="act-btn">Cancel</a>*/}
-                    <a href="#" className="act-btn">Withdraw</a>
+                    <a href="" className="act-btn">Withdraw</a>
                 </div>
 
 
@@ -132,7 +130,7 @@ class WithdrawLogic extends Component {
         const {record} = this.props;
 
         // console.log( first, second, price: sellPrice, loanRate, firePostToServer, type : "sell");
-        const {first, second, price, loanRate, firePostToServer} = this.props;
+        const {first, second, loanRate, firePostToServer} = this.props;
 
         return (
             <Tooltip
@@ -147,7 +145,7 @@ class WithdrawLogic extends Component {
                 placement="topRight">
 
                             <span>
-                                <a href="javascript:;" className="act-btn">Withdraw {record.code}</a>
+                                <a href="" className="act-btn">Withdraw {record.code}</a>
                             </span>
 
             </Tooltip>

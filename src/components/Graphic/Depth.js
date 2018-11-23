@@ -1,11 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import { scaleLinear } from "d3-scale";
-import { curveStepBefore } from 'd3-shape';
+import {scaleLinear} from "d3-scale";
+import {curveStepBefore} from 'd3-shape';
 
 import {ChartCanvas, Chart} from "react-stockcharts";
-import { AreaSeries, } from "react-stockcharts/lib/series";
+import {AreaSeries,} from "react-stockcharts/lib/series";
 import {XAxis, YAxis} from "react-stockcharts/lib/axes";
 import {fitDimensions} from "react-stockcharts/lib/helper";
 
@@ -47,48 +47,70 @@ class DepthChart extends React.Component {
         this.state = {
             data: initialData,
         };
-}
+    }
 
+    handleProps = data => {
+        const {sell, buy,} = data;
 
-    componentWillReceiveProps(nextProps) {
-        const { sell, buy, } = nextProps;
-
-        let sellVolume = 0;
-        let buyVolume = 0;
+        // let sellVolume = 0;
+        // let buyVolume = 0;
 
         const buyArray = buy
-            .sort( (a, b) => ( a.price < b.price ? 1 : -1) )
-            .map( item => {
-                buyVolume += item.amount;
-                return ({"price": item.price, "volume": buyVolume,  "side": "buy", "id": item.id})
+            .sort((a, b) => (a.price < b.price ? 1 : -1))
+            .map(item => {
+                // buyVolume += item.amount;
+                return ({"price": item.price, "volume": item.amount, "side": "buy", "id": item.id})
             });
         const sellArray = sell
-            .sort( (a, b) => ( a.price > b.price ? 1 : -1) )
-            .map( item => {
-                sellVolume += item.amount;
-                return ({"price": item.price, "volume": sellVolume,  "side": "sell", "id": item.id})
+            .sort((a, b) => (a.price > b.price ? 1 : -1))
+            .map(item => {
+                // sellVolume += item.amount;
+                return ({"price": item.price, "volume": item.amount, "side": "sell", "id": item.id})
             });
         // const depthArray = sellArray.reverse().concat( buyArray).map( (item, idx) => ({ ...item, x: idx}));
 
-/*
-* option based on simple sorting by price. And applying it to horizontal axis
-**/
-        const depthArray = buyArray.concat(sellArray).sort((a, b) => ( a.price > b.price ? 1 : -1));
+        /*
+        * option based on simple sorting by price. And applying it to horizontal axis
+        **/
+
+        const depthArray = [
+            ...buyArray,
+            {
+                "price": buyArray[buyArray.length-1].price + 0.001,
+                "volume": 0,
+                "side": "buy",
+                "id": 0
+            },
+            {
+                "price": sellArray[0].price - 0.001,
+                "volume": 0,
+                "side": "buy",
+                "id": 0
+            },
+            ...sellArray
+        ]
+            .sort((a, b) => (a.price > b.price ? 1 : -1));
+
         this.setState({data: depthArray});
-        // console.log("depthArray =", depthArray);
+    };
+
+
+    componentWillReceiveProps(nextProps) {
+        this.handleProps(nextProps);
+    }
+
+    componentDidMount() {
+        this.handleProps(this.props);
     }
 
     render() {
-        const { data = [],} = this.state;
+        const {data = [],} = this.state;
 
         const {
             height,
             type,
-            margin,
             width,
             ratio,
-            sell,
-            buy,
         } = this.props;
 
         const axisColor = "#EEE";
@@ -109,6 +131,7 @@ class DepthChart extends React.Component {
                 // xAccessor={d => d.x}
                 xAccessor={d => d.price}
                 xExtents={xExtents}
+                displayXAccessor={d => d.price}
 
                 xScale={xScale}
                 panEvent={false}
@@ -125,12 +148,14 @@ class DepthChart extends React.Component {
                         orient="right"
                         tickStroke={axisColor}
                     />
-                    <AreaSeries yAccessor={d => d.side == "buy" && d.volume} fill="#00FF00" interpolation={curveStepBefore}/>
-                    <AreaSeries yAccessor={d => d.side == "sell" && d.volume} fill="#FF0000" interpolation={curveStepBefore}/>
+                    <AreaSeries yAccessor={d => d.side === "buy" && d.volume} fill="#00FF00"
+                                interpolation={curveStepBefore}/>
+                    <AreaSeries yAccessor={d => d.side === "sell" && d.volume} fill="#FF0000"
+                                interpolation={curveStepBefore}/>
                     {/*<HoverTooltip*/}
-                        {/*fontSize={10}*/}
-                        {/*tooltipContent={tooltipContent([])  }*/}
-                        {/*yAccessor={d => d.volume}*/}
+                    {/*fontSize={10}*/}
+                    {/*tooltipContent={tooltipContent([])  }*/}
+                    {/*yAccessor={d => d.volume}*/}
                     {/*/>*/}
                 </Chart>
             </ChartCanvas>
@@ -138,16 +163,16 @@ class DepthChart extends React.Component {
     }
 }
 
-    DepthChart.propTypes = {
-    data: PropTypes.array.isRequired,
+DepthChart.propTypes = {
+    data: PropTypes.array,
     width: PropTypes.number.isRequired,
     ratio: PropTypes.number.isRequired,
     type: PropTypes.oneOf(["svg", "hybrid"]).isRequired,
 };
 
-    DepthChart.defaultProps = {
+DepthChart.defaultProps = {
     type: "svg",
 };
-    DepthChart = fitDimensions(DepthChart);
+DepthChart = fitDimensions(DepthChart);
 
-    export default DepthChart;
+export default DepthChart;

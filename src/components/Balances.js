@@ -1,17 +1,12 @@
 import React, {Component} from 'react';
-import { connect } from 'react-redux'
+import {connect} from 'react-redux'
 import Header2 from './Header2';
-import Footer from './Footer';
-import '../App.css';
-
-import { Table, Tooltip } from 'antd';
+import {Table, Tooltip} from 'antd';
 import {getUserInfo} from "../utils";
 import {USERINFO} from "./../constants/APIURLS.js"
-import {save_user_info, save_user_orders} from "../actions/UserActions";
+import {save_user_info} from "../actions/UserActions";
 import WithdrawPanel from "./WithdrawLogic"
-
-import qrcode from '../img/qr.png';
-import { Icon } from 'antd';
+import '../App.css';
 
 // import 'antd/lib/tooltip/style/css';
 // import 'antd/lib/popconfirm/style/css';
@@ -23,7 +18,7 @@ class Balances extends Component {
     }
 
     async componentDidMount() {
-        const { user: {token} } = this.props; //read from redux state
+        const {user: {token}} = this.props; //read from redux state
         const isAuthorised = (token !== "") && (token !== null); // ? true : false
         // this.setState({isAuthorised, token});
         if (isAuthorised) {
@@ -39,14 +34,16 @@ class Balances extends Component {
         // console.log("Balances. User = ", this.props);
         const {balances = []} = user;
 
-        const dataSource = balances.map( item => (
-            { key: item.currency.name+""+item.amount,
-                    name: item.currency.name,
-                    code: item.currency.code,
-                    amount: item.amount,
-                    address: item.address,
-                    action: ""}
-            ));
+        const dataSource = balances.map(item => (
+            {
+                key: item.currency.name + "" + item.amount,
+                name: item.currency.name,
+                code: item.currency.code,
+                amount: item.amount,
+                address: item.address,
+                action: ""
+            }
+        ));
 
         const columns = [{
             title: 'Coins',
@@ -58,32 +55,29 @@ class Balances extends Component {
             dataIndex: 'amount',
             key: 'amount',
             width: 150,
-        // }, {
-        //     title: 'Deposit address',
-        //     dataIndex: 'address',
-        //     key: 'address',
+            // }, {
+            //     title: 'Deposit address',
+            //     dataIndex: 'address',
+            //     key: 'address',
         },
 
             {
                 title: 'Action',
                 dataIndex: 'action',
                 key: 'action',
-                    width: 200,
+                width: 200,
                 render: (text, record) => (
-                    <div >
+                    <div>
                         <Tooltip
                             title={
-
                                 <div>
-
                                     <h3>Deposit {record.name}</h3>
                                     <div className="line"></div>
 
-                                     <div className="tooltip-block">
-                                         <div className="qrImg"></div>
-                                         <h4>Internal address for deposit  {record.name}</h4>
-                                     </div>
-
+                                    <div className="tooltip-block">
+                                        <div className="qrImg"></div>
+                                        <h4>Internal address for deposit {record.name}</h4>
+                                    </div>
 
                                     <p>{record.address}</p>
                                 </div>
@@ -93,10 +87,10 @@ class Balances extends Component {
                         >
 
                         <span>
-                          <a href="javascript:;" className="act-btn">Deposit {record.code}</a>
+                          <a href="" className="act-btn">Deposit {record.code}</a>
                         </span>
-                    </Tooltip>
-                    <WithdrawPanel record={record}/>
+                        </Tooltip>
+                        <WithdrawPanel record={record}/>
 
                     </div>
                 )
@@ -104,10 +98,10 @@ class Balances extends Component {
         return (
             <div className="wrap">
                 <Header2/>
-                <div className="card-container, currencysPairs" style={{width:"auto", margin: "auto" }}>
-                    <div className="card-container-head" >
-                        <h1 style={{ margin: "2rem" }}>BALANCE</h1>
-                        <Table dataSource={dataSource} columns={columns} pagination={false} rowClassName="custom__tr"/>
+                <div className="card-container, currencysPairs" style={{width: "auto", margin: "auto"}}>
+                    <div className="card-container-head">
+                        <h1 style={{margin: "2rem"}}>BALANCE</h1>
+                        <Table rowKey="uid" dataSource={dataSource} columns={columns} pagination={false} rowClassName="custom__tr"/>
                     </div>
                 </div>
 
@@ -115,6 +109,7 @@ class Balances extends Component {
         )
     }
 }
+
 function mapStateToProps(state) {
     return {
         user: state.user,

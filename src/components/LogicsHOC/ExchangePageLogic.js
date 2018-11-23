@@ -1,9 +1,7 @@
 import React from 'react';
 import initialState from "../../store/initialState";
 
-
 const translateProps = (props) => {
-
     console.log("translateProps", this.props);
 
     const newProps = {...props, state: initialState};

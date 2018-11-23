@@ -1,14 +1,12 @@
 import React, {Component} from 'react';
 import Header from './Header';
-import Footer from './Footer';
 import NavLink from './NavLink';
-import API from './api';
 import {connect} from "react-redux";
 // import {simpleAction} from "../actions/simpleAction";
 import {login_success} from "../actions/UserActions";
-import {LOGIN, USERINFO} from "../constants/APIURLS";
+import {LOGIN} from "../constants/APIURLS";
 import {sendRequest} from "./Graphic/utils";
-import {getUserInfo} from "../utils";
+
 // import '../App.css';
 
 class Login extends Component {
@@ -18,8 +16,8 @@ class Login extends Component {
         this.state = {
             email: '',
             password: '',
-            error:'',
-            totpCode:'',
+            error: '',
+            totpCode: '',
             qr: '',
             showTotpCodeInput: false,
         };
@@ -55,9 +53,9 @@ class Login extends Component {
 
         const content = await sendRequest({
             rout: LOGIN,
-            options: { ...user }
+            options: {...user}
         });
-        const { errorMessage, errorTextCode, httpStatus, userMessage } = content;
+        const {errorTextCode, httpStatus, userMessage} = content;
 
         if (typeof errorTextCode !== "undefined") {
 
@@ -68,17 +66,21 @@ class Login extends Component {
                 case "WrongPassword":
                 case "UserExists" :
                 case "BadRequest" :
-                case "EmailExists" : alert(userMessage + "  (" + errorTextCode + " error code:" + httpStatus + " )");
+                case "EmailExists" :
+                    alert(userMessage + "  (" + errorTextCode + " error code:" + httpStatus + " )");
                     break;
                 case "IncorrectTotpCode" :
-                case "TotpCodeNotProvided": {
+                case "TotpCodeNotProvided":
                     if (!this.state.showTotpCodeInput) // bad toptCode
-                        {this.setState( //show input for toptCode
+                    {
+                        this.setState( //show input for toptCode
                             {showTotpCodeInput: true}
-                            )}
-                    else
-                        { alert(userMessage + "  (" + errorTextCode + " error code:" + httpStatus + " )"); }
-                }
+                        )
+                    }
+                    else {
+                        alert(userMessage + "  (" + errorTextCode + " error code:" + httpStatus + " )");
+                    }
+
                     break;
 
                 default :
@@ -105,8 +107,7 @@ class Login extends Component {
             //     default :
             // }
         }
-        else
-        {
+        else {
             // console.log("Login content =", content);
             this.props.login_success({token: content.token});
 
@@ -126,7 +127,7 @@ class Login extends Component {
                     <div className="formWrapper">
 
 
-                        <div className="column1" >
+                        <div className="column1">
                             <h3 className="standard">Sign In</h3>
                             <p className="formError">
                                 {this.state.error}
@@ -134,33 +135,33 @@ class Login extends Component {
 
                             <form onSubmit={this.handleSubmit}>
                                 <fieldset className="aboveCaptcha">
-                                    { (!showTotpCodeInput) && <div>
-                                    <div>
-                                        <input
-                                            className="userPassInput"
-                                            type="email"
-                                            name="username"
-                                            placeholder="Email"
-                                            id="username"
-                                            value={this.state.email}
-                                            onChange={this.handleEmail}
-                                            required
-                                        />
-                                    </div>
-                                    <div>
-                                        <input
-                                            className="userPassInput"
-                                            type="password"
-                                            name="password"
-                                            id="password"
-                                            placeholder="Password"
-                                            value={this.state.password}
-                                            onChange={this.handlePassword}
-                                            required
-                                        />
-                                    </div>
+                                    {(!showTotpCodeInput) && <div>
+                                        <div>
+                                            <input
+                                                className="userPassInput"
+                                                type="email"
+                                                name="username"
+                                                placeholder="Email"
+                                                id="username"
+                                                value={this.state.email}
+                                                onChange={this.handleEmail}
+                                                required
+                                            />
+                                        </div>
+                                        <div>
+                                            <input
+                                                className="userPassInput"
+                                                type="password"
+                                                name="password"
+                                                id="password"
+                                                placeholder="Password"
+                                                value={this.state.password}
+                                                onChange={this.handlePassword}
+                                                required
+                                            />
+                                        </div>
                                     </div>}
-                                    { (showTotpCodeInput) && <div>
+                                    {(showTotpCodeInput) && <div>
                                         <h4>You have 2 factor authentication enabled.<br/>Please Enter Your Google
                                             Authenticator Six-Digit Code</h4>
                                         <input
@@ -172,12 +173,11 @@ class Login extends Component {
                                             value={this.state.totpCode}
                                             onChange={this.handleTotpCode}
                                             required
-                                            style={{"color":"#000"}}
+                                            style={{"color": "#000"}}
                                         />
                                     </div>}
                                 </fieldset>
                                 <br/>
-
 
 
                                 <button className="signUpButton fixed-width-btn" type="submit" name="login">
@@ -208,6 +208,7 @@ class Login extends Component {
         )
     }
 }
+
 const mapStateToProps = state => ({
     ...state
 });

@@ -1,12 +1,9 @@
 import React, {Component} from 'react';
 import Header from './Header';
 import NavLink from './NavLink';
-import Footer from './Footer';
 import '../App.css';
 
-
 class WelcomePage extends Component {
-
     render() {
         return (
             <div>
@@ -15,10 +12,7 @@ class WelcomePage extends Component {
                     <h1 className="sign">Welcome to one of the most <br/> active exchanges in the world</h1>
                 </div>
 
-
-
                 <div className="featureBanner">
-
                     <NavLink to="/signup">
                         <button
                             className="main-btn"
@@ -48,7 +42,6 @@ class WelcomePage extends Component {
                         <p>Access the latest tokens and technologies that are pushing the industry forward.</p>
                     </div>
                 </div>
-                
             </div>
         )
     }

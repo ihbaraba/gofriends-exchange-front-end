@@ -32,7 +32,7 @@ const parseDate = timeParse("%Y-%m-%dT%H:%M:%S.%LZ");
 
 export function getData({pairId = 1, APIURL = QUOTATIONS, dateFrom, dateTo, take = 10000, interval = "5min", appendFake = "true"}) {
 
-console.log(`${APIURL}?pairId=${pairId}&dateFrom=${dateFrom}&dateTo=${dateTo}&take=${take}&interval=${interval}&appendFake=${appendFake}`);
+// console.log(`${APIURL}?pairId=${pairId}&dateFrom=${dateFrom}&dateTo=${dateTo}&take=${take}&interval=${interval}&appendFake=${appendFake}`);
         const promiseMSFT = fetch(`${APIURL}?pairId=${pairId}&dateFrom=${dateFrom}&dateTo=${dateTo}&take=${take}&interval=${interval}&appendFake=${appendFake}`)
         .then(response => response.json())
         .then(data => {data.reduce((data, item) => {
@@ -56,7 +56,6 @@ export function getDataFromSocket({point, id, stopTime = 0, callback}) {
     }
 
     socket.on(point + id, (bid) => {
-        // console.log(point + id, bid);
         callback(bid);
     });
 

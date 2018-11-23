@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import Header from './Header';
-import Footer from './Footer';
 import '../App.css';
 
 class MarginTrading extends Component {
@@ -14,7 +13,7 @@ class MarginTrading extends Component {
                         <div className="head">
                             <div className="name">Notices</div>
                             <div className="social">
-                                <a href="#"><i className="fa fa-twitter-square"></i></a>
+                                <a href=""><i className="fa fa-twitter-square"></i></a>
                             </div>
                         </div>
 
@@ -69,7 +68,7 @@ class MarginTrading extends Component {
                             <div className="msg">
                                 <div className="info">On May 15, we're introducing more compelling, consistent pricing
                                     across the board. Read more <a
-                                        href="#"><b><u>here</u></b></a>.
+                                        href=""><b><u>here</u></b></a>.
                                 </div>
                                 <div className="by">Posted by <strong>GoFriends Team</strong> at 2018-05-01
                                     18:45:56

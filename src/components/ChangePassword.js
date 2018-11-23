@@ -1,9 +1,6 @@
 import React, {Component} from 'react';
 import Header2 from './Header2';
-import Footer from './Footer';
 import '../App.css';
-// import '../styles/style.css';
-import API from './api';
 
 class ChangePassword extends Component {
     constructor(props) {
@@ -18,10 +15,23 @@ class ChangePassword extends Component {
             email: '',
             password: '',
             confirmPassword: '',
-            value: ''
+            value: '',
+
+            oldPassword: '',
+            newPassword: '',
+            newPasswordRepeat: ''
         }
         ;
     }
+
+    handlerChangeInput = event => {
+        let name = event.target.name;
+        let value = event.target.value;
+
+        this.setState({
+            [name]: value
+        })
+    };
 
     render() {
         return (
@@ -32,23 +42,42 @@ class ChangePassword extends Component {
                 </div>
                 <div className="featureBanner form2col">
                     <div className="formWrapper">
-
-
                         <div className="column1">
                             <form>
                                 <table>
                                     <tbody>
                                     <tr>
                                         <td>Old Password:</td>
-                                        <td><input type="password" name="oldPassword" value=""/></td>
+                                        <td>
+                                            <input
+                                                type="text"
+                                                name="oldPassword"
+                                                value={this.state.oldPassword}
+                                                onChange={this.handlerChangeInput}
+                                            />
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td>New Password:</td>
-                                        <td><input type="password" name="newPassword" value=""/></td>
+                                        <td>
+                                            <input
+                                                type="password"
+                                                name="newPassword"
+                                                value={this.state.newPassword}
+                                                onChange={this.handlerChangeInput}
+                                            />
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td>Repeat New Password:</td>
-                                        <td><input type="password" name="newPasswordRepeat" value=""/></td>
+                                        <td>
+                                            <input
+                                                type="password"
+                                                name="newPasswordRepeat"
+                                                value={this.state.newPasswordRepeat}
+                                                onChange={this.handlerChangeInput}
+                                            />
+                                        </td>
                                     </tr>
                                     </tbody>
                                 </table>
@@ -57,6 +86,7 @@ class ChangePassword extends Component {
                                 </button>
                             </form>
                         </div>
+
                         <div className="column2">
                             <p>Use this form to change your password.</p>
                             <p>After you submit it, you will be logged out and will need to log in with your new
@@ -66,11 +96,8 @@ class ChangePassword extends Component {
                                 choose a random, alphanumeric password of at least 32 characters.</p>
                             <p>NEVER use a password for an exchange that you use ANYWHERE else.</p>
                         </div>
-
-
                     </div>
                 </div>
-
             </div>
         )
     }

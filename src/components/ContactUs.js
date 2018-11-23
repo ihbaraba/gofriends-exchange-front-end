@@ -1,8 +1,6 @@
 import React, {Component} from 'react';
 import Header from './Header';
-import Footer from './Footer';
 import '../App.css';
-
 
 class ContactUs extends Component {
     constructor(props) {
@@ -68,9 +66,7 @@ class ContactUs extends Component {
                 </div>
                 <div className="featureBanner twoCol contact">
                     <div className="contentWrapper">
-
                         <div className="column1">
-
                             <form id="contactForm">
                                 <table>
                                     <tbody>
@@ -162,16 +158,11 @@ class ContactUs extends Component {
                                 </table>
                             </form>
                         </div>
-
-
-
                     </div>
                 </div>
-
             </div>
-    )
+        )
     }
+}
 
-    }
-
-    export default ContactUs;
+export default ContactUs;

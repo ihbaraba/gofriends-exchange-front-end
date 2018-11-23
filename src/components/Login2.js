@@ -1,13 +1,10 @@
 import React, {Component} from 'react';
 import Header from './Header';
-import Footer from './Footer';
 import API from './api';
 import '../App.css';
-import ExchangePage from "./ExchangePage";
-
 
 class Login2 extends Component {
-    constructor(props){
+    constructor(props) {
         super(props);
 
         this.state = {
@@ -64,7 +61,6 @@ class Login2 extends Component {
 
                     </div>
                 </div>
-
             </div>
         )
     }

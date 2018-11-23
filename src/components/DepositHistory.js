@@ -1,14 +1,8 @@
 import React, {Component} from 'react';
-import Header from './Header';
-import NavLink from './NavLink';
-import Footer from './Footer';
 import '../App.css';
 import Header2 from "./Header2";
 
-
 class DepositHistory extends Component {
-
-
     render() {
         return (
             <div>
@@ -35,7 +29,7 @@ class DepositHistory extends Component {
                             <td>0.3000000</td>
                             <td>183.6000000</td>
                             <td>-</td>
-                            <td>2018-07-02  12:04:54</td>
+                            <td>2018-07-02 12:04:54</td>
                         </tr>
                         </tbody>
                     </table>
@@ -58,15 +52,11 @@ class DepositHistory extends Component {
                             <td>0.3000000</td>
                             <td>183.6000000</td>
                             <td>-</td>
-                            <td>2018-07-02  12:04:54</td>
+                            <td>2018-07-02 12:04:54</td>
                         </tr>
                         </tbody>
                     </table>
                 </div>
-
-
-
-
             </div>
         )
     }

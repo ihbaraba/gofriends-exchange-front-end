@@ -1,7 +1,5 @@
 import React, {Component} from 'react';
 import Header2 from './Header2';
-
-import Footer from './Footer';
 import '../App.css';
 
 class LoginHistory extends Component {
@@ -10,7 +8,6 @@ class LoginHistory extends Component {
 
         this.state = {};
     }
-
 
     render() {
         return (
@@ -73,11 +70,7 @@ class LoginHistory extends Component {
                         </tbody>
                     </table>
                 </div>
-
-
             </div>
-
-
         )
     }
 }

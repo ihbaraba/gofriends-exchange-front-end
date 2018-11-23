@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import {pair} from '../actions/ExchangeActions'
@@ -7,8 +6,6 @@ import {PAIRS, MARKETS, SOCKET_SOURCE} from '../constants/APIURLS'
 
 import {getCoinsList} from "./../utils"
 import {Tabs, Table} from "antd";
-import {login_success} from "../actions/UserActions";
-import {getUserInfo} from "../utils";
 import io from "socket.io-client";
 // import 'antd/lib/table/style/css';
 
@@ -44,7 +41,7 @@ class CoinsList extends React.Component {
         })).sort((a, b) => a.id - b.id);
         // console.log("pairs=", pairs);
         // const coins = [... new Set( data.map( item => item.baseCurrency.code ))];
-        const coins = [... new Set( pairs.map( item => item.baseCurrency ))];
+        const coins = [...new Set( pairs.map( item => item.baseCurrency ))];
         // console.log("PAIRS ", pairs, coins, markets_pairs, data);
         this.setState({data, coins, pairs});
         this.props.pair(pairs[0]); //set current pair
@@ -77,6 +74,7 @@ class CoinsList extends React.Component {
     }
 
     tabsCallback(key) {
+        console.log(key);
         const pairs = this.state.pairs;
         const newCurrent = pairs.find( item => item.id === +key.id  );
         this.props.setCurentCoinsPair2State(newCurrent);
@@ -119,8 +117,13 @@ class CoinsList extends React.Component {
                 <Table
                     columns={columns}
                     pagination={false}
-                    onRowClick={this.tabsCallback}
+                    onRow={(record) => {
+                        return {
+                            onClick: () => this.tabsCallback(record),       // click row
+                        };
+                    }}
                     rowClassName={"ant-table-row-cursor"}
+                    rowKey={item.id}
                     dataSource={
                          [...pairs.filter( pair => pair.first === item )]
                             .map(item => ({

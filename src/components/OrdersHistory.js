@@ -3,12 +3,11 @@ import { connect } from 'react-redux'
 import PropTypes from 'prop-types';
 import {Table} from 'antd';
 import {getOrdersHistory} from "./../utils"
-import { ORDERSHISTORY, ORDERS} from "./../constants/APIURLS.js"
+import { ORDERSHISTORY} from "./../constants/APIURLS.js"
 import {save_user_info} from "../actions/UserActions";
 import UserOrder from "./UserOrder";
 
 class OredersHistory extends Component {
-
     constructor() {
         super();
 
@@ -24,7 +23,7 @@ class OredersHistory extends Component {
     calculateSum(bids) {
 
         const calculated = bids.map( bid => {
-            const {pair: { baseCurrency, quoteCurrency } } = this.props;
+            // const {pair: { baseCurrency, quoteCurrency } } = this.props;
             // console.log( baseCurrency, quoteCurrency, this.props );
 
             const price = +bid["price"];
@@ -45,16 +44,11 @@ class OredersHistory extends Component {
     }
 
     async getInitialPairDataFromServer(id) {
-
-        await this.setState({orders});
-
         const orders = await getOrdersHistory({
             rout: ORDERSHISTORY,
             parameters: {pairId: id, completed: "true", withStop: "true", take: 30, sort: "completedAt:desc"},
             token: this.props.user.token,
         });
-
-        // console.log(orders.body);
 
         this.setState({
                 orders: this.calculateSum(orders.body)
@@ -107,7 +101,7 @@ class OredersHistory extends Component {
         }];
 
         return (
-            <div className="marketDepth">
+            <div className="marketDepth order-history-block">
                 <div className="marketDepthTables">
                     <div className="marketDepthColumns">
                         <h5>YOUR OPEN ORDERS</h5>
@@ -123,6 +117,7 @@ class OredersHistory extends Component {
                             bordered={false}
                             pagination={false}
                             scroll={{y: 240}}
+                            rowKey={record => record.id}
                             size="small"
                             rowClassName="custom__tr"
                         />

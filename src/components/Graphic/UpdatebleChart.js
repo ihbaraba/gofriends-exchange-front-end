@@ -1,11 +1,11 @@
-import { format } from "d3-format";
-import { timeFormat } from "d3-time-format";
+import {format} from "d3-format";
+import {timeFormat} from "d3-time-format";
 
 import React from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 
-import { ChartCanvas, Chart } from "react-stockcharts";
+import {ChartCanvas, Chart} from "react-stockcharts";
 import {
     BarSeries,
     AreaSeries,
@@ -13,36 +13,35 @@ import {
     LineSeries,
     MACDSeries
 } from "react-stockcharts/lib/series";
-import { XAxis, YAxis } from "react-stockcharts/lib/axes";
+import {XAxis, YAxis} from "react-stockcharts/lib/axes";
 import {
     CrossHairCursor,
-    EdgeIndicator,
     CurrentCoordinate,
     MouseCoordinateX,
     MouseCoordinateY
 } from "react-stockcharts/lib/coordinates";
 
-import { discontinuousTimeScaleProviderBuilder } from "react-stockcharts/lib/scale";
+import {discontinuousTimeScaleProviderBuilder} from "react-stockcharts/lib/scale";
 import {
     OHLCTooltip,
     MovingAverageTooltip,
     MACDTooltip
 } from "react-stockcharts/lib/tooltip";
-import { ema, sma, macd } from "react-stockcharts/lib/indicator";
-import { fitWidth } from "react-stockcharts/lib/helper";
-import { head, last } from "react-stockcharts/lib/utils";
+import {ema, sma, macd} from "react-stockcharts/lib/indicator";
+import {fitWidth} from "react-stockcharts/lib/helper";
+import {last} from "react-stockcharts/lib/utils";
 import {chart_range} from "../../actions/ChartActions";
-import * as d3 from "d3";
-import {intervalInDays} from "../../utils";
+// import * as d3 from "d3";
+// import {intervalInDays} from "../../utils";
 // import {login_success} from "../actions/UserActions";
 
 
-function getMaxUndefined(calculators) {
-    return calculators
-        .map(each => each.undefinedLength())
-        .reduce((a, b) => Math.max(a, b));
-}
-const LENGTH_TO_SHOW = 180;
+// function getMaxUndefined(calculators) {
+//     return calculators
+//         .map(each => each.undefinedLength())
+//         .reduce((a, b) => Math.max(a, b));
+// }
+// const LENGTH_TO_SHOW = 180;
 
 const macdAppearance = {
     stroke: {
@@ -58,11 +57,11 @@ const axisColor = "#EEEEEE";
 class CandleStickChartPanToLoadMore extends React.Component {
     constructor(props) {
         super(props);
-        const { data: inputData } = props;
+        const {data: inputData} = props;
 
         const ema26 = ema()
             .id(0)
-            .options({ windowSize: 26 })
+            .options({windowSize: 26})
             .merge((d, c) => {
                 d.ema26 = c;
             })
@@ -70,7 +69,7 @@ class CandleStickChartPanToLoadMore extends React.Component {
 
         const ema12 = ema()
             .id(1)
-            .options({ windowSize: 12 })
+            .options({windowSize: 12})
             .merge((d, c) => {
                 d.ema12 = c;
             })
@@ -98,12 +97,12 @@ class CandleStickChartPanToLoadMore extends React.Component {
             })
             .accessor(d => d.smaVolume50);
 
-        const maxWindowSize = getMaxUndefined([
-            ema26,
-            ema12,
-            macdCalculator,
-            smaVolume50
-        ]);
+        // const maxWindowSize = getMaxUndefined([
+        //     ema26,
+        //     ema12,
+        //     macdCalculator,
+        //     smaVolume50
+        // ]);
         /* SERVER - START */
         // const dataToCalculate = inputData.slice(-LENGTH_TO_SHOW - maxWindowSize);
         // const dataToCalculate = inputData.slice( - maxWindowSize);
@@ -113,10 +112,10 @@ class CandleStickChartPanToLoadMore extends React.Component {
             ema12(macdCalculator(smaVolume50(dataToCalculate)))
         );
         const indexCalculator = discontinuousTimeScaleProviderBuilder()
-            // .initialIndex(initialIndex)
+        // .initialIndex(initialIndex)
             .indexCalculator();
 
-        const { index } = indexCalculator(calculatedData);
+        const {index} = indexCalculator(calculatedData);
 
         /* SERVER - END */
         // console.log(inputData.length, dataToCalculate.length, maxWindowSize, index);
@@ -164,18 +163,18 @@ class CandleStickChartPanToLoadMore extends React.Component {
             initialIndex
         } = this.state;
 
-        const maxWindowSize = getMaxUndefined([
-            ema26,
-            ema12,
-            macdCalculator,
-            smaVolume50
-        ]);
+        // const maxWindowSize = getMaxUndefined([
+        //     ema26,
+        //     ema12,
+        //     macdCalculator,
+        //     smaVolume50
+        // ]);
         /* SERVER - START */
         /*****************************************************************
          * Merging arrays taking into account date
          * it works well
          *****************************************************************/
-            const dataToCalculate = newData;
+        const dataToCalculate = newData;
         // const dataToCalculate = [...this.chartData].reduce((a, b) => {
         // const dataToCalculate = [...this.chartData].reduce((a, b) => {
         //     const match = newData.filter(({ date }) => date.getTime() === b.date.getTime());
@@ -188,19 +187,19 @@ class CandleStickChartPanToLoadMore extends React.Component {
         //     return a;
         // }, []);
         /****************************************************************
-        /****************************************************************/
-        // console.log("newData =====> ", newData,  head(newData), last(newData));
-        // console.log("dataToCalculate =====> ", dataToCalculate,  head(dataToCalculate), last(dataToCalculate));
+         /****************************************************************/
+            // console.log("newData =====> ", newData,  head(newData), last(newData));
+            // console.log("dataToCalculate =====> ", dataToCalculate,  head(dataToCalculate), last(dataToCalculate));
 
         const calculatedData = ema26(
             ema12(macdCalculator(smaVolume50(dataToCalculate)))
-        );
+            );
         const indexCalculator = discontinuousTimeScaleProviderBuilder()
             .initialIndex(initialIndex)
             .indexCalculator();
 
         // console.log(inputData.length, dataToCalculate.length, maxWindowSize)
-        const { index } = indexCalculator(calculatedData);
+        const {index} = indexCalculator(calculatedData);
         /* SERVER - END */
 
         const xScaleProvider = discontinuousTimeScaleProviderBuilder()
@@ -227,6 +226,7 @@ class CandleStickChartPanToLoadMore extends React.Component {
             displayXAccessor
         });
     };
+
     componentWillReceiveProps(nextProps) {
         // console.log("===nextProps.data===", nextProps.data, nextProps);
         this.append(nextProps.data);
@@ -236,13 +236,13 @@ class CandleStickChartPanToLoadMore extends React.Component {
     async handleDownloadMore(start, end) {
         if (Math.ceil(start) === end) return;
         const {
-            data: prevData,
+            // data: prevData,
             ema26,
             ema12,
             macdCalculator,
             smaVolume50
         } = this.state;
-        const { data: inputData, newDiapazone } = this.props;
+        const {data: inputData, newDiapazone} = this.props;
 
         const rowsToDownload = end - Math.ceil(start);
 
@@ -250,14 +250,12 @@ class CandleStickChartPanToLoadMore extends React.Component {
             rowsToDownload, start: Math.ceil(start), end, data: this.state.data,
             callback: newData => {
 
-                const currentDate = new Date();
-                const {dateFrom, dateTo} = this.props.chartRange;
+                // const currentDate = new Date();
+                // const {dateFrom, dateTo} = this.props.chartRange;
 
-                // console.log(currentDate, dateFrom, dateTo, this.props);
-                console.log(currentDate, new Date(dateFrom), new Date(dateTo), this.props);
-                const format = d3.timeFormat("%Y-%m-%d");
+                // const format = d3.timeFormat("%Y-%m-%d");
                 // const currentDatePlusOdin = d3.timeDay.offset(new Date(dateTo), intervalInDays(this.state.interval, 1) ) ;
-                const offsetData = d3.timeDay.offset(new Date(dateFrom), (-1) * intervalInDays(this.state.interval, rowsToDownload) ) ;
+                // const offsetData = d3.timeDay.offset(new Date(dateFrom), (-1) * intervalInDays(this.state.interval, rowsToDownload) ) ;
 
                 // console.log("dateFrom =",  format(offsetData), "dateTo =", dateFrom);
                 // console.log("rowsToDownload =",  rowsToDownload, "intervalInDays =", (-1) * intervalInDays(this.state.interval, rowsToDownload));
@@ -279,7 +277,7 @@ class CandleStickChartPanToLoadMore extends React.Component {
                 const indexCalculator = discontinuousTimeScaleProviderBuilder()
                     .initialIndex(Math.ceil(start))
                     .indexCalculator();
-                const { index } = indexCalculator(
+                const {index} = indexCalculator(
                     calculatedData
                     // calculatedData.slice(-rowsToDownload).concat(prevData)
                 );
@@ -296,19 +294,19 @@ class CandleStickChartPanToLoadMore extends React.Component {
                 } = xScaleProvider(calculatedData);
                 // } = xScaleProvider(calculatedData.slice(-rowsToDownload).concat(prevData));
 
-                    this.setState({
-                        data: linearData,
-                        xScale,
-                        xAccessor,
-                        displayXAccessor,
-                        initialIndex: Math.ceil(start)
-                    });
+                this.setState({
+                    data: linearData,
+                    xScale,
+                    xAccessor,
+                    displayXAccessor,
+                    initialIndex: Math.ceil(start)
+                });
             }
         });
     }
 
     render() {
-        const { type, width, ratio } = this.props;
+        const {type, width, ratio} = this.props;
         const {
             data,
             ema26,
@@ -319,23 +317,23 @@ class CandleStickChartPanToLoadMore extends React.Component {
             xAccessor,
             displayXAccessor
         } = this.state;
-/*
-Zoom and Pan description
-http://rrag.github.io/react-stockcharts/documentation.html#/zoom_and_pan
-*/
+        /*
+        Zoom and Pan description
+        http://rrag.github.io/react-stockcharts/documentation.html#/zoom_and_pan
+        */
 // console.log("render UPDATEBLECHART data =", head(data), data);
 
         /**
          * clamp prevents scrolling past the last data point, and is disabled by default.
          * Supported values for clamp are left, right, or both for clamping one or both sides of the graph.
-        **/
+         **/
 
         return (
             <ChartCanvas
                 ratio={ratio}
                 width={width}
                 height={600}
-                margin={{ left: 70, right: 70, top: 20, bottom: 30 }}
+                margin={{left: 70, right: 70, top: 20, bottom: 30}}
                 type={type}
                 seriesName="MSFT"
                 data={data}
@@ -354,7 +352,7 @@ http://rrag.github.io/react-stockcharts/documentation.html#/zoom_and_pan
                     id={1}
                     height={400}
                     yExtents={[d => [d.high, d.low], ema26.accessor(), ema12.accessor()]}
-                    padding={{ top: 10, bottom: 20 }}
+                    padding={{top: 10, bottom: 20}}
                 >
                     <XAxis
                         axisAt="bottom"
@@ -363,8 +361,9 @@ http://rrag.github.io/react-stockcharts/documentation.html#/zoom_and_pan
                         outerTickSize={0}
                     />
                     {/*<YAxis axisAt="right" orient="right" ticks={5} />*/}
-                    <XAxis axisAt="bottom" orient="bottom" showTicks={false} tickStroke={axisColor} outerTickSize={0} stroke={axisColor}/>
-                    <YAxis axisAt="right" orient="right" ticks={2} tickStroke={axisColor} />
+                    <XAxis axisAt="bottom" orient="bottom" showTicks={false} tickStroke={axisColor} outerTickSize={0}
+                           stroke={axisColor}/>
+                    <YAxis axisAt="right" orient="right" ticks={2} tickStroke={axisColor}/>
 
                     <MouseCoordinateY
                         at="right"
@@ -376,8 +375,8 @@ http://rrag.github.io/react-stockcharts/documentation.html#/zoom_and_pan
                         stroke={d => d.close > d.open ? "#69FF83" : "#FF0000"}
                         wickStroke={d => d.close > d.open ? "#6BA583" : "#DB0000"}
                         fill={d => d.close > d.open ? "#6BA583" : "#DB0000"}/>
-                    <LineSeries yAccessor={ema26.accessor()} stroke={ema26.stroke()} />
-                    <LineSeries yAccessor={ema12.accessor()} stroke={ema12.stroke()} />
+                    <LineSeries yAccessor={ema26.accessor()} stroke={ema26.stroke()}/>
+                    <LineSeries yAccessor={ema12.accessor()} stroke={ema12.stroke()}/>
 
                     <CurrentCoordinate
                         yAccessor={ema26.accessor()}
@@ -389,14 +388,14 @@ http://rrag.github.io/react-stockcharts/documentation.html#/zoom_and_pan
                     />
 
                     {/*<EdgeIndicator*/}
-                        {/*itemType="last"*/}
-                        {/*orient="right"*/}
-                        {/*edgeAt="right"*/}
-                        {/*yAccessor={d => d.close}*/}
-                        {/*fill={d => (d.close > d.open ? "#6BA583" : "#FF0000")}*/}
+                    {/*itemType="last"*/}
+                    {/*orient="right"*/}
+                    {/*edgeAt="right"*/}
+                    {/*yAccessor={d => d.close}*/}
+                    {/*fill={d => (d.close > d.open ? "#6BA583" : "#FF0000")}*/}
                     {/*/>*/}
 
-                    <OHLCTooltip origin={[-40, 0]} />
+                    <OHLCTooltip origin={[-40, 0]}/>
                     <MovingAverageTooltip
                         onClick={e => console.log(e)}
                         origin={[-38, 15]}
@@ -430,9 +429,9 @@ http://rrag.github.io/react-stockcharts/documentation.html#/zoom_and_pan
                     />
 
                     {/*<MouseCoordinateY*/}
-                        {/*at="left"*/}
-                        {/*orient="left"*/}
-                        {/*displayFormat={format(".4s")}*/}
+                    {/*at="left"*/}
+                    {/*orient="left"*/}
+                    {/*displayFormat={format(".4s")}*/}
                     {/*/>*/}
 
                     <BarSeries
@@ -450,9 +449,10 @@ http://rrag.github.io/react-stockcharts/documentation.html#/zoom_and_pan
                     height={150}
                     yExtents={macdCalculator.accessor()}
                     origin={(w, h) => [0, h - 150]}
-                    padding={{ top: 10, bottom: 10 }}
+                    padding={{top: 10, bottom: 10}}
                 >
-                    <XAxis axisAt="bottom" orient="bottom" showTicks={true} tickStroke={axisColor} outerTickSize={0} stroke={axisColor}/>
+                    <XAxis axisAt="bottom" orient="bottom" showTicks={true} tickStroke={axisColor} outerTickSize={0}
+                           stroke={axisColor}/>
                     <YAxis axisAt="right" orient="right" ticks={2} tickStroke={axisColor}/>
 
                     <MouseCoordinateX
@@ -496,7 +496,9 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-    chart_range: (newRange) => { dispatch(chart_range(newRange)); } //set "dateFrom" and "dateTo"
+    chart_range: (newRange) => {
+        dispatch(chart_range(newRange));
+    } //set "dateFrom" and "dateTo"
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(CandleStickChartPanToLoadMore);

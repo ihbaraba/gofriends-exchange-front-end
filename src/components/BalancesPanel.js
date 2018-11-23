@@ -1,7 +1,5 @@
 import React, {Component} from 'react';
 import Header2 from './Header2';
-
-import Footer from './Footer';
 import '../App.css';
 
 class BalancesPanel extends Component {
@@ -10,7 +8,6 @@ class BalancesPanel extends Component {
 
         this.state = {};
     }
-
 
     render() {
         return (
@@ -161,12 +158,7 @@ class BalancesPanel extends Component {
                         </tbody>
                     </table>
                 </div>
-
-
-
             </div>
-
-
         )
     }
 }

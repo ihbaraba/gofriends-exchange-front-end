@@ -8,7 +8,6 @@ const Footer = () => {
     return (
         <div className="footer">
             <div className="footer-container">
-
                 <div className="links noWrap">
                     <NavLink to="/contact">
                         <div className="group">
