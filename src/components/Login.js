@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
-import Header from './Header';
 import NavLink from './NavLink';
 import {connect} from "react-redux";
+import Recaptcha from 'react-recaptcha';
 // import {simpleAction} from "../actions/simpleAction";
 import {login_success} from "../actions/UserActions";
 import {LOGIN} from "../constants/APIURLS";
@@ -20,8 +20,15 @@ class Login extends Component {
             totpCode: '',
             qr: '',
             showTotpCodeInput: false,
+            isVerified: false
         };
     }
+
+    handleChangeRecaptcha = res => {
+        if (res) {
+            this.setState({isVerified: true});
+        }
+    };
 
     handleEmail = (event) => {
         this.setState({
@@ -42,76 +49,77 @@ class Login extends Component {
     };
 
     handleSubmit = async (event) => {
-        // console.log("handleSubmit this.props=", this.props);
         event.preventDefault();
-        const user = {
-            email: this.state.email,
-            password: this.state.password,
-            totpCode: this.state.totpCode,
-        };
-        // console.log("handleSubmit options=", user);
+        if (this.state.isVerified) {
+            const user = {
+                email: this.state.email,
+                password: this.state.password,
+                totpCode: this.state.totpCode,
+            };
+            // console.log("handleSubmit options=", user);
 
-        const content = await sendRequest({
-            rout: LOGIN,
-            options: {...user}
-        });
-        const {errorTextCode, httpStatus, userMessage} = content;
+            const content = await sendRequest({
+                rout: LOGIN,
+                options: {...user}
+            });
+            const {errorTextCode, httpStatus, userMessage} = content;
 
-        if (typeof errorTextCode !== "undefined") {
+            if (typeof errorTextCode !== "undefined") {
 
-            // console.log(content, errorTextCode, errorMessage, typeof errorTextCode, " showTotpCodeInput=", this.state.showTotpCodeInput);
+                // console.log(content, errorTextCode, errorMessage, typeof errorTextCode, " showTotpCodeInput=", this.state.showTotpCodeInput);
 
-            switch (errorTextCode) {
-                case "UserNotFound" :
-                case "WrongPassword":
-                case "UserExists" :
-                case "BadRequest" :
-                case "EmailExists" :
-                    alert(userMessage + "  (" + errorTextCode + " error code:" + httpStatus + " )");
-                    break;
-                case "IncorrectTotpCode" :
-                case "TotpCodeNotProvided":
-                    if (!this.state.showTotpCodeInput) // bad toptCode
-                    {
-                        this.setState( //show input for toptCode
-                            {showTotpCodeInput: true}
-                        )
-                    }
-                    else {
+                switch (errorTextCode) {
+                    case "UserNotFound" :
+                    case "WrongPassword":
+                    case "UserExists" :
+                    case "BadRequest" :
+                    case "EmailExists" :
                         alert(userMessage + "  (" + errorTextCode + " error code:" + httpStatus + " )");
-                    }
+                        break;
+                    case "IncorrectTotpCode" :
+                    case "TotpCodeNotProvided":
+                        if (!this.state.showTotpCodeInput) // bad toptCode
+                        {
+                            this.setState( //show input for toptCode
+                                {showTotpCodeInput: true}
+                            )
+                        }
+                        else {
+                            alert(userMessage + "  (" + errorTextCode + " error code:" + httpStatus + " )");
+                        }
 
-                    break;
+                        break;
 
-                default :
+                    default :
+                }
+                // console.log(errorCode, usrMsg, typeof errorCode, " showTotpCodeInput=", this.state.showTotpCodeInput);
+                //
+                // switch (errorCode) {
+                //     case 0 : // bad email
+                //     case 1 :
+                //     case 2 :
+                //     case 3 : alert(usrMsg);//bad password
+                //         break;
+                //     case 5 :
+                //     case 4 : {
+                //         if (!this.state.showTotpCodeInput) // bad toptCode
+                //             {this.setState( //show input for toptCode
+                //                 {showTotpCodeInput: true}
+                //                 )}
+                //         else
+                //             { alert(usrMsg) }
+                //     }
+                //         break;
+                //
+                //     default :
+                // }
             }
-            // console.log(errorCode, usrMsg, typeof errorCode, " showTotpCodeInput=", this.state.showTotpCodeInput);
-            //
-            // switch (errorCode) {
-            //     case 0 : // bad email
-            //     case 1 :
-            //     case 2 :
-            //     case 3 : alert(usrMsg);//bad password
-            //         break;
-            //     case 5 :
-            //     case 4 : {
-            //         if (!this.state.showTotpCodeInput) // bad toptCode
-            //             {this.setState( //show input for toptCode
-            //                 {showTotpCodeInput: true}
-            //                 )}
-            //         else
-            //             { alert(usrMsg) }
-            //     }
-            //         break;
-            //
-            //     default :
-            // }
-        }
-        else {
-            // console.log("Login content =", content);
-            this.props.login_success({token: content.token});
+            else {
+                // console.log("Login content =", content);
+                this.props.login_success({token: content.token});
 
-            this.props.history.push(`/exchange`);
+                this.props.history.push(`/exchange`);
+            }
         }
     };
 
@@ -119,14 +127,11 @@ class Login extends Component {
         const {showTotpCodeInput} = this.state;
         return (
             <div>
-                <Header/>
                 <div style={{clear: "both"}}>
                     <h1 className="sign">Sign in to you account</h1>
                 </div>
                 <div className="featureBanner form2col">
                     <div className="formWrapper">
-
-
                         <div className="column1">
                             <h3 className="standard">Sign In</h3>
                             <p className="formError">
@@ -148,6 +153,7 @@ class Login extends Component {
                                                 required
                                             />
                                         </div>
+
                                         <div>
                                             <input
                                                 className="userPassInput"
@@ -160,6 +166,13 @@ class Login extends Component {
                                                 required
                                             />
                                         </div>
+
+                                        <Recaptcha
+                                            sitekey="6LdXEH0UAAAAANNTQtS9e4ZwdASHuZ5zWM7psA2S"
+                                            render="explicit"
+                                            theme='dark'
+                                            verifyCallback={this.handleChangeRecaptcha}
+                                        />
                                     </div>}
                                     {(showTotpCodeInput) && <div>
                                         <h4>You have 2 factor authentication enabled.<br/>Please Enter Your Google
@@ -177,8 +190,6 @@ class Login extends Component {
                                         />
                                     </div>}
                                 </fieldset>
-                                <br/>
-
 
                                 <button className="signUpButton fixed-width-btn" type="submit" name="login">
                                     Sign in

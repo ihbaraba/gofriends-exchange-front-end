@@ -1,18 +1,10 @@
 import React, {Component} from 'react';
-import Header from './Header';
-import NavLink from './NavLink';
-import Footer from './Footer';
 import '../App.css';
-import Header2 from "./Header2";
-
 
 class Accountspanel extends Component {
-
-
     render() {
         return (
             <div>
-                <Header2/>
                 <div style={{clear: "both"}}>
                     <h1 className="sign">Account panel</h1>
                 </div>
@@ -41,9 +33,6 @@ class Accountspanel extends Component {
                         </tbody>
                     </table>
                 </div>
-
-
-
             </div>
         )
     }

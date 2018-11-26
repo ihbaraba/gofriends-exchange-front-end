@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
-import Header from './Header';
 import {connect} from "react-redux";
-
+import Recaptcha from 'react-recaptcha';
 import {getData, sendRequest} from "./Graphic/utils";
 import {REGISTER, COUNTRIES, LOGIN} from "../constants/APIURLS";
 import {login_success} from "../actions/UserActions";
@@ -21,6 +20,7 @@ class Registration extends Component {
 
         this.state = {
             switchState: false,
+            isVerified: false,
             options: [{
                 code: '',
                 value: ''
@@ -54,6 +54,12 @@ class Registration extends Component {
             // console.log("countries2state=", countries2state, Object.keys(countries2state));
             this.setState({countries: countries2state});
         });
+    };
+
+    handleChangeRecaptcha = res => {
+        if (res) {
+            this.setState({isVerified: true})
+        }
     };
 
     handleChangeCountry = (e) => {
@@ -96,83 +102,87 @@ class Registration extends Component {
     };
 
     handlerRegistrationSubmit = async (event) => {
-
-        function validateEmail(email) {
-            const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-            return re.test(email);
-        }
-
         event.preventDefault();
-
-        const email = this.state.email;
-
-        if (!validateEmail(email)) {
-            alert("Email is wrong. Please enter it again.");
-            return
-        }
-
-        const password = this.state.password;
-
-        if (password !== this.state.confirmPassword) {
-            alert("Passwords is not equivalent. Please enter it again.");
-            return
-        }
-
-        if (password.length <= 6) {
-            alert("Passwords is short. Please enter it again.");
-            return
-        }
-
-        const responce = await sendRequest({
-            rout: REGISTER,
-            options: {
-                "email": this.state.email,
-                "username": this.state.userName,
-                "password": this.state.password,
-                "countryId": this.state.countryId,
+        console.log(this.state.isVerified)
+        if (this.state.isVerified) {
+            function validateEmail(email) {
+                const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+                return re.test(email);
             }
-        });
-        const {errorMessage, errorTextCode} = responce;
 
-        // if (typeof usrMsg !== "undefined") {
-        //     // console.log(errorCode, usrMsg);
-        //     switch (errorCode) {
-        //         case 0 :
-        //         case 1 :
-        //         case 2 :
-        //         case 3 :
-        //         case 4 :
-        //         case 5 : alert(usrMsg);
-        //             break;
-        //         default :
-        //     }
-        if (typeof errorTextCode !== "undefined") {
+            event.preventDefault();
 
-            console.log(errorTextCode, errorMessage, typeof errorTextCode, " showTotpCodeInput=", this.state.showTotpCodeInput, responce);
+            const email = this.state.email;
 
-            switch (errorTextCode) {
-                case "UserNotFound" :
-                case "WrongPassword":
-                case "UserExists" :
-                case "EmailExists" :
-                case "IncorrectTotpCode" :
-                case "TotpCodeNotProvided":
-                    alert(errorMessage + "  (error code:" + errorTextCode + " )")
-                    break;
-
-                default :
+            if (!validateEmail(email)) {
+                alert("Email is wrong. Please enter it again.");
+                return
             }
-        }
-        else {
-            // console.log("Registration responce =", responce);
-            const QRImage = responce.qr;
-            this.setState( //show input for QRCode
-                {
-                    showQRCode: true,
-                    QRImage
+
+            const password = this.state.password;
+
+            if (password !== this.state.confirmPassword) {
+                alert("Passwords is not equivalent. Please enter it again.");
+                return
+            }
+
+            if (password.length <= 6) {
+                alert("Passwords is short. Please enter it again.");
+                return
+            }
+
+            const responce = await sendRequest({
+                rout: REGISTER,
+                options: {
+                    "email": this.state.email,
+                    "username": this.state.userName,
+                    "password": this.state.password,
+                    "countryId": this.state.countryId,
                 }
-            )
+            });
+            const {errorMessage, errorTextCode} = responce;
+
+            // if (typeof usrMsg !== "undefined") {
+            //     // console.log(errorCode, usrMsg);
+            //     switch (errorCode) {
+            //         case 0 :
+            //         case 1 :
+            //         case 2 :
+            //         case 3 :
+            //         case 4 :
+            //         case 5 : alert(usrMsg);
+            //             break;
+            //         default :
+            //     }
+            if (typeof errorTextCode !== "undefined") {
+
+                console.log(errorTextCode, errorMessage, typeof errorTextCode, " showTotpCodeInput=", this.state.showTotpCodeInput, responce);
+
+                switch (errorTextCode) {
+                    case "UserNotFound" :
+                    case "WrongPassword":
+                    case "UserExists" :
+                    case "EmailExists" :
+                    case "IncorrectTotpCode" :
+                    case "TotpCodeNotProvided":
+                        alert(errorMessage + "  (error code:" + errorTextCode + " )")
+                        break;
+
+                    default :
+                }
+            }
+            else {
+                // console.log("Registration responce =", responce);
+                const QRImage = responce.qr;
+                this.setState( //show input for QRCode
+                    {
+                        showQRCode: true,
+                        QRImage
+                    }
+                )
+            }
         }
+
     };
 
     handleSignInSubmit = async (event) => {
@@ -268,7 +278,6 @@ class Registration extends Component {
 
         return (
             <div>
-                <Header/>
                 <div style={{clear: "both"}}>
                     <h1 className="create">CREATE YOUR ACCOUNT</h1>
                     <div className="featureBanner form2col">
@@ -353,6 +362,13 @@ class Registration extends Component {
                                            className="forgot"> Terms of Use
                                         </a>.
                                     </p>
+
+                                    <Recaptcha
+                                        sitekey="6LdXEH0UAAAAANNTQtS9e4ZwdASHuZ5zWM7psA2S"
+                                        render="explicit"
+                                        theme='dark'
+                                        verifyCallback={this.handleChangeRecaptcha}
+                                    />
 
                                     <button className="signUpButton" type="submit" name="createAccount"
                                             disabled={!this.validateForm}>

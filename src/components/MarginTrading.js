@@ -1,12 +1,10 @@
 import React, {Component} from 'react';
-import Header from './Header';
 import '../App.css';
 
 class MarginTrading extends Component {
     render() {
         return (
             <div>
-                <Header/>
                 <div className="side">
 
                     <div className="box notices">

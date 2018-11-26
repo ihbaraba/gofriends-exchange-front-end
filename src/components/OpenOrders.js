@@ -1,12 +1,10 @@
 import React, {Component} from 'react';
-import Header2 from './Header2';
 import '../App.css';
 
 class OpenOrders extends Component {
     render() {
         return (
             <div>
-                <Header2/>
                 <div style={{clear: "both"}}>
                     <h1 className="sign">Your open Orders</h1>
                 </div>

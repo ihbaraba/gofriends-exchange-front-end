@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import '../App.css';
-import Header2 from "./Header2";
 
 
 class Transactions extends Component {
@@ -9,7 +8,6 @@ class Transactions extends Component {
     render() {
         return (
             <div>
-                <Header2/>
                 <div style={{clear: "both"}}>
                     <h1 className="sign">Transaction panel</h1>
                 </div>

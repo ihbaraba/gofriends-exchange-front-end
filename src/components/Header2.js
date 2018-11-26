@@ -5,10 +5,6 @@ import '../App.css';
 import {Menu, Dropdown} from 'antd';
 
 const Header2 = () => {
-    const isLoggedIn = () => {
-        return localStorage.getItem('exchange_token') ? true : false;
-    };
-
     const menu1 = (
         <Menu>
             {/*<Menu.Item>*/}

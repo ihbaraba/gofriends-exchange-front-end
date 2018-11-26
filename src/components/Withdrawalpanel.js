@@ -1,15 +1,10 @@
 import React, {Component} from 'react';
 import '../App.css';
-import Header2 from "./Header2";
-
 
 class Withdrawalpanel extends Component {
-
-
     render() {
         return (
             <div>
-                <Header2/>
                 <div style={{clear: "both"}}>
                     <h1 className="sign">Withdrawal panel</h1>
                 </div>

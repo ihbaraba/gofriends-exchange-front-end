@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import Header2 from './Header2';
 import '../App.css';
 
 class BalancesPanel extends Component {
@@ -12,7 +11,6 @@ class BalancesPanel extends Component {
     render() {
         return (
             <div>
-                <Header2/>
                 <div style={{clear: "both"}}>
                     <h1 className="sign">Balances, deposits & withdrowals</h1>
                 </div>

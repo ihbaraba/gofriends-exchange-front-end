@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux'
-import Header2 from './Header2';
 import {Table, Tooltip} from 'antd';
 import {getUserInfo} from "../utils";
 import {USERINFO} from "./../constants/APIURLS.js"
@@ -23,7 +22,6 @@ class Balances extends Component {
         // this.setState({isAuthorised, token});
         if (isAuthorised) {
             const userInfo = await getUserInfo({rout: USERINFO, token});
-            console.log("userInfo", userInfo.body);
             const {body} = userInfo;
             this.props.save_user_info(body);
         }
@@ -97,11 +95,16 @@ class Balances extends Component {
             }];
         return (
             <div className="wrap">
-                <Header2/>
                 <div className="card-container, currencysPairs" style={{width: "auto", margin: "auto"}}>
                     <div className="card-container-head">
                         <h1 style={{margin: "2rem"}}>BALANCE</h1>
-                        <Table rowKey="uid" dataSource={dataSource} columns={columns} pagination={false} rowClassName="custom__tr"/>
+                        <Table
+                            rowKey={record => record.name}
+                            dataSource={dataSource}
+                            columns={columns}
+                            pagination={false}
+                            rowClassName="custom__tr"
+                        />
                     </div>
                 </div>
 

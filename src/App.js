@@ -1,7 +1,5 @@
 import React, {Component} from 'react';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
-// import { Provider } from 'react-redux'
-// import configureStore from './store/configureStore'
 import WelcomePage from './components/WelcomePage';
 import Login from './components/Login';
 import LogOut from './components/LogOut';
@@ -21,7 +19,6 @@ import ChangePassword from './components/ChangePassword';
 import Balances from './components/Balances';
 import UserOrdersHistory from './components/UserOrderHistory';
 import LoginHistory from './components/LoginHistory';
-
 import OpenOrders from './components/OpenOrders';
 import Bann from './components/Bann';
 import OrderPanel from './components/OrderPanel';
@@ -34,11 +31,10 @@ import Knowledge from './components/Knowledge';
 import ProfileVerification from './components/ProfileVerification';
 
 import Footer from './components/Footer';
+import Header from './components/Header';
 
-// import {changePair} from "./actions/ExchangeActions";
 import YourOpenOrders from "./components/YourOpenOrders";
 
-// import Footer from "./components/Footer";
 
 class App extends Component {
     render() {
@@ -46,7 +42,10 @@ class App extends Component {
             <div className="w-wrapper">
                 <Router>
                     <div className="w-wrapper">
-                        {/*<div className="App">*/}
+                        <div className="w-header">
+                            <Header/>
+                        </div>
+
                         <div className="w-content">
                             <Switch>
                                 <Route exact path="/" component={WelcomePage}/>
@@ -85,7 +84,6 @@ class App extends Component {
                                 <Route path="*" component={NotFound}/>
                             </Switch>
                         </div>
-                        {/*</div>*/}
 
                         <div className="w-footer">
                             <Footer/>

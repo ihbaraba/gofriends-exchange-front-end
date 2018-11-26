@@ -1,12 +1,10 @@
 import React, {Component} from 'react';
-import Header2 from './Header2';
 import '../App.css';
 
 class Knowledge extends Component {
     render() {
         return (
             <div>
-                <Header2/>
                 <div style={{clear: "both"}}>
                     <h1 className="sign">Knowledge Base</h1>
                 </div>

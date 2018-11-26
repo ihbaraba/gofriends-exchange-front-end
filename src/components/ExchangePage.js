@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
-import { connect } from 'react-redux';
-import Header2 from './Header2';
+import {connect} from 'react-redux';
 
 import Orders from './Orders';
 import Graphic from './Graphic/Graphic'
@@ -10,7 +9,7 @@ import CoinsList from "./CoinsList";
 import UserInfo from "./UserInfo";
 import initialState from "../store/initialState";
 import {sendOrder, getUserInfo} from "./../utils";
-import { Radio } from "antd";
+import {Radio} from "antd";
 import {ORDERS, USERINFO} from "./../constants/APIURLS.js"
 import {login_success, save_user_info, save_user_orders} from "../actions/UserActions";
 import {chart_timing, chart_range} from "../actions/ChartActions";
@@ -37,7 +36,7 @@ class ExchangePage extends Component {
          * then request user data
          * and save it into redux store
          **/
-        const { user: {token} } = this.props; //read from redux state
+        const {user: {token}} = this.props; //read from redux state
 
         const isAuthorised = (token !== "") && (token !== null); // ? true : false
         this.setState({isAuthorised, token});
@@ -47,8 +46,8 @@ class ExchangePage extends Component {
             this.props.save_user_info(body);
         }
         /**
-        * Save in Redux Store current Chart range
-        **/
+         * Save in Redux Store current Chart range
+         **/
         // const currentDate = new Date();
         // const format = d3.timeFormat("%Y-%m-%d");
         // const currentDatePlusOdin = d3.timeDay.offset(currentDate, intervalInDays(this.state.interval, 1) ) ;
@@ -59,15 +58,15 @@ class ExchangePage extends Component {
         // });
     }
 
-    async firePostToServer (bidProps) {
-      // console.log("firePostToServer", this.state.pair, bidProps);
-      const responce = await sendOrder({
-          rout: ORDERS,
-          pairId: this.state.pair.id,
-          balanceId: this.state.pair.id,
-          ...bidProps
-      });
-      // console.log(responce);
+    async firePostToServer(bidProps) {
+        // console.log("firePostToServer", this.state.pair, bidProps);
+        const responce = await sendOrder({
+            rout: ORDERS,
+            pairId: this.state.pair.id,
+            balanceId: this.state.pair.id,
+            ...bidProps
+        });
+        // console.log(responce);
         this.props.save_user_orders(responce.id);
     };
 
@@ -88,17 +87,16 @@ class ExchangePage extends Component {
         const {pair, chartRange: {dateFrom = "2018-08-27", dateTo = "2018-08-31"}} = this.props;
 
         const {first, second, id, baseCurrencyName, quoteCurrencyName} = pair;
-        const {interval, isAuthorised } = this.state;
+        const {interval, isAuthorised} = this.state;
         // console.log(this.props);
         return (
             <div>
-                <Header2/>
-                { (!isAuthorised) &&
-                    <div className="wrapper-all">
-                        <h3><b>You have not been authorized. Please go to the authorization page.</b></h3>
-                    </div>}
-                { isAuthorised &&
-                        <div className="wrapper-all">
+                {(!isAuthorised) &&
+                <div className="wrapper-all">
+                    <h3><b>You have not been authorized. Please go to the authorization page.</b></h3>
+                </div>}
+                {isAuthorised &&
+                <div className="wrapper-all">
 
                     <div style={{display: "flex", alignItems: "center", justifyContent: "center"}}>
                         <div className="padding" style={{flex: "1 0", clear: "both"}}>
@@ -119,13 +117,13 @@ class ExchangePage extends Component {
                             />
                             <div className="candlesticks">
                                 <Radio.Group value={interval} onChange={this.handleTimeFrameChange}>
-                                    <Radio.Button value="5min" >5-min</Radio.Button>
-                                    <Radio.Button value="15min" >15-min</Radio.Button>
-                                    <Radio.Button value="30min" >30-min</Radio.Button>
-                                    <Radio.Button value="1hr" >1-hr</Radio.Button>
-                                    <Radio.Button value="2hr" >2-hr</Radio.Button>
-                                    <Radio.Button value="4hr" >4-hr</Radio.Button>
-                                    <Radio.Button value="1day" >1-day</Radio.Button>
+                                    <Radio.Button value="5min">5-min</Radio.Button>
+                                    <Radio.Button value="15min">15-min</Radio.Button>
+                                    <Radio.Button value="30min">30-min</Radio.Button>
+                                    <Radio.Button value="1hr">1-hr</Radio.Button>
+                                    <Radio.Button value="2hr">2-hr</Radio.Button>
+                                    <Radio.Button value="4hr">4-hr</Radio.Button>
+                                    <Radio.Button value="1day">1-day</Radio.Button>
                                 </Radio.Group>
                             </div>
                         </div>
@@ -135,10 +133,11 @@ class ExchangePage extends Component {
                     </div>
                     <div className="centerArea-second">
                         <div className="main-content">
-                            <UserInfo short />
+                            <UserInfo short/>
                             <MarketDepth currentPair={this.state.currentPair}/>
-                            <Orders {...pair} price={52} amount={1} loanRate={2} firePostToServer={this.firePostToServer}/>
-                            <OrdersHistory />
+                            <Orders {...pair} price={52} amount={1} loanRate={2}
+                                    firePostToServer={this.firePostToServer}/>
+                            <OrdersHistory/>
                         </div>
                         <div className="box notices">
                             <div className="head">

@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import Header from './Header';
 import API from './api';
 import '../App.css';
 
@@ -38,7 +37,6 @@ class Login2 extends Component {
     render() {
         return (
             <div>
-                <Header/>
                 <div className="featureBanner form1col">
                     <div className="formWrapper">
                         <h5 className="standard">You have 2 factor authentication enabled.<br/>Please Enter Your Google

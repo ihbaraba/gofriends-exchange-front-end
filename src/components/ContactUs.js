@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import Header from './Header';
 import '../App.css';
 
 class ContactUs extends Component {
@@ -60,7 +59,6 @@ class ContactUs extends Component {
     render() {
         return (
             <div>
-                <Header/>
                 <div style={{clear: "both"}}>
                     <h1 className="sign">CONTACT US</h1>
                 </div>
@@ -140,7 +138,9 @@ class ContactUs extends Component {
                                                 value={this.state.message}
                                                 onChange={this.handleMessage}
                                                 required
-                                            ></textarea></td>
+                                            >
+
+                                            </textarea></td>
                                     </tr>
 
                                     <tr>
@@ -154,7 +154,6 @@ class ContactUs extends Component {
                                         </td>
                                     </tr>
                                     </tbody>
-
                                 </table>
                             </form>
                         </div>

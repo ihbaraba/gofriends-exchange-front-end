@@ -1,6 +1,5 @@
 import React from 'react';
 import {connect} from 'react-redux'
-import Header2 from './Header2';
 import UserOrder from "./UserOrder";
 
 class CoinsList extends React.Component {
@@ -14,7 +13,6 @@ class CoinsList extends React.Component {
         const {username, email, id} = user;
         return (
             <div>
-                <Header2/>
                 <div className="card-container, currencysPairs" style={{width: "70vw", margin: "auto"}}>
                     <div className="card-container-head">
                         <p className="h2">

@@ -1,12 +1,10 @@
 import React, {Component} from 'react';
-import Header from './Header';
 import '../App.css';
 
 class Policy extends Component {
     render() {
         return (
             <div>
-                <Header/>
                 <div style={{clear: "both"}}>
                     <h1 className="sign">GoFriends privacy policy</h1>
                 </div>

@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import Header2 from './Header2';
 import verif from "../img/verif.svg";
 import {USERINFO} from "../constants/APIURLS";
 import {getUserInfo} from "../utils";
@@ -34,7 +33,6 @@ class Profile extends Component {
 
         return (
             <div>
-                <Header2/>
                 <div style={{clear: "both"}}>
                     <h1 className="sign">My profile</h1>
                 </div>

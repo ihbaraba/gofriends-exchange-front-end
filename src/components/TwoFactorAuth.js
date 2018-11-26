@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import Header from './Header';
 import API from './api';
 import '../App.css';
 
@@ -74,7 +73,6 @@ class ExchangePage extends Component {
     render() {
         return (
             <div>
-                <Header/>
                 <div style={{clear: "both"}}>
                     <h1 className="sign">Two-factor authentication (2FA) is disabled</h1>
                 </div>

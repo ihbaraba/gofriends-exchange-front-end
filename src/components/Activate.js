@@ -1,10 +1,8 @@
 import React from 'react';
-import Header from './Header';
 
 const Activate = () => {
     return (
         <div>
-            <Header/>
             <div style={{clear: "both"}}>
                 <h1 className="sign">CREATE YOUR ACCOUNT</h1>
             </div>
