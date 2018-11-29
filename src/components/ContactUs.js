@@ -6,6 +6,7 @@ class ContactUs extends Component {
         super(props);
 
         this.state = {
+            subject: '',
             name: '',
             organisation: '',
             email: '',
@@ -13,150 +14,101 @@ class ContactUs extends Component {
         }
     }
 
-    handleName = (event) => {
-        this.setState({
-            name: event.target.value
-        });
-    };
+    handlerChangeInput = e => {
+        let name = e.target.name,
+            value = e.target.value;
 
-    handleEmail = (event) => {
-        this.setState({
-            email: event.target.value
-        });
-    };
-
-    handleOrganisation = (event) => {
-        this.setState({
-            organisation: event.target.value
-        });
-    };
-    handleMessage = (event) => {
-        this.setState({
-            message: event.target.value
-        });
+        this.setState({[name]: value})
     };
 
     handleSubmit = (event) => {
         event.preventDefault();
-        // console.log(this.state.value);
-        // const user = {
-        //     email: this.state.email,
-        //     password: this.state.password,
-        //     country_code: this.state.value
-        // };
-        //
-        // API.post(`/api/auth/sign_up`, user )
-        //     .then(response => {
-        //         localStorage.setItem('token', response.data.token);
-        //         console.log(response);
-        //         window.location = "/activate"
-        //     })
-        //     .catch(error => {
-        //         alert(error.response.data.errors)
-        //     });
+
+        console.log(this.state)
+
     };
 
     render() {
         return (
             <div>
                 <div style={{clear: "both"}}>
-                    <h1 className="sign">CONTACT US</h1>
+                    <h1 className="sign" style={{margin: '0'}}>CONTACT US</h1>
                 </div>
                 <div className="featureBanner twoCol contact">
-                    <div className="contentWrapper">
-                        <div className="column1">
-                            <form id="contactForm">
-                                <table>
-                                    <tbody>
-                                    <tr>
-                                        <td></td>
-                                        <td>
-                                            <h3>Let us know what you need.</h3>
-                                            <span id="contactFormError" className="valueNegative"></span>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td className="lbl">
-                                            <div className="formContent">Subject:</div>
-                                        </td>
-                                        <td>
-                                            <select name="subject" id="subject">
-                                                <option value="null">Select a topic...</option>
-                                                <option value="1">Business Development Inquiry</option>
-                                                <option value="3">Media Inquiry</option>
-                                                <option value="4">Careers</option>
-                                                <option value="support">Technical Support</option>
-                                            </select>
-                                        </td>
-                                    </tr>
-                                    </tbody>
+                    <div className="contentWrapper formWrapper column1">
+                        <h3 style={{textAlign: 'center'}}>Let us know what you need.</h3>
+                        <form onSubmit={this.handleSubmit}>
+                            <fieldset className="aboveCaptcha">
+                                <div>
+                                    <label>Subject:</label>
+                                    <select
+                                        style={{color: "#000"}}
+                                        name='subject'
+                                        value={this.state.subject}
+                                        onChange={this.handlerChangeInput}
+                                        required
+                                    >
+                                        <option value="">Select a topic...</option>
+                                        <option value="Business Development Inquiry">Business Development Inquiry</option>
+                                        <option value="Media Inquiry">Media Inquiry</option>
+                                        <option value="Careers">Careers</option>
+                                        <option value="Technical Support">Technical Support</option>
+                                    </select>
+                                </div>
 
-                                    <tbody className="formContent">
-                                    <tr>
-                                        <td>Name:</td>
-                                        <td><input
-                                            type="text"
-                                            name="name"
-                                            id="name"
-                                            value={this.state.name}
-                                            onChange={this.handleName}
-                                            required
-                                        /></td>
-                                    </tr>
-                                    <tr>
-                                        <td id="orgLabel">Organization:</td>
-                                        <td><input
-                                            type="text"
-                                            name="org"
-                                            id="org"
-                                            value={this.state.organisation}
-                                            onChange={this.handleOrganisation}
-                                            required
-                                        /></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Email:</td>
-                                        <td>
-                                            <input
-                                                type="email"
-                                                name="fromEmail"
-                                                id="fromEmail"
-                                                value={this.state.email}
-                                                onChange={this.handleEmail}
-                                                required
-                                            />
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Message:</td>
-                                        <td>
-                                            <textarea
-                                                rows="10"
-                                                cols="20"
-                                                name="message"
-                                                id="message"
-                                                value={this.state.message}
-                                                onChange={this.handleMessage}
-                                                required
-                                            >
+                                <div>
+                                    <label>Name:</label>
+                                    <input
+                                        className="userPassInput"
+                                        type='text'
+                                        name="name"
+                                        value={this.state.name}
+                                        onChange={this.handlerChangeInput}
+                                        required/>
+                                </div>
+                                <div>
+                                    <label>Organization:</label>
+                                    <input
+                                        className="userPassInput"
+                                        type="text"
+                                        name="organisation"
+                                        value={this.state.organisation}
+                                        onChange={this.handlerChangeInput}
+                                        required/>
+                                </div>
+                                <div>
+                                    <label>Email:</label>
+                                    <input
+                                        className="userPassInput"
+                                        type="email"
+                                        name="email"
+                                        value={this.state.email}
+                                        onChange={this.handlerChangeInput}
+                                        required/>
+                                </div>
+                                <div>
+                                    <label>Message:</label>
+                                    <textarea
+                                        rows="10"
+                                        name='message'
+                                        value={this.state.message}
+                                        onChange={this.handlerChangeInput}
+                                        required
+                                    >
+                                </textarea>
+                                </div>
 
-                                            </textarea></td>
-                                    </tr>
 
-                                    <tr>
-                                        <td></td>
-                                        <td className="buttonRow">
+                                <div className="buttonRow">
+                                    <p>This inbox is not monitored for support requests.
+                                        For technical assistance, Contact Support.</p>
+                                    <button className="signUpButton small" type="submit">
+                                        Send
+                                    </button>
+                                </div>
+                            </fieldset>
+                        </form>
 
-                                            <p>This inbox is not monitored for support requests.
-                                                For technical assistance, Contact Support.</p>
-                                            <button className="signUpButton small" type="submit">Submit
-                                            </button>
-                                        </td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                            </form>
-                        </div>
                     </div>
                 </div>
             </div>

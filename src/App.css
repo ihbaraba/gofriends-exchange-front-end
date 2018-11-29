@@ -117,12 +117,19 @@ button {
     text-align: center;
 }
 
+.balance-action-block {
+    display: flex;
+    justify-content: space-around;
+}
+
 .act-btn {
-    margin-right: 10px;
+    width: 48%;
     color: #fff;
     background: #0088cc;
     padding: 5px 15px;
     border-radius: 100px;
+    text-align: center;
+    cursor: pointer;
 }
 
 .act-btn:hover {
@@ -1411,10 +1418,13 @@ tr.ant-table-expanded-row:hover {
 }
 
 .tooltip-block .qrImg {
-    width: 25%;
+    width: 128px;
+    height: 128px;
+    padding: 5px;
+    box-sizing: content-box;
     margin-right: 10px;
     background: #fff;
-    height: 85px;
+    color: #000000
 }
 
 .ant-tooltip .formWrap {
@@ -3501,8 +3511,10 @@ hr.ordersHr {
     text-transform: uppercase;
 }
 
-.verif-btn {
-    color: #00b29c;
+.verif-btn:hover {
+    color: #fff;
+    border-color: #fff;
+    transition: .3s;
 }
 
 .entityEmail {
@@ -3810,6 +3822,38 @@ body .ant-table-small > .ant-table-content > .ant-table-header > table > .ant-ta
     padding: 10px 24px 10px 10px;
 }
 
+body .ant-tabs.ant-tabs-card > .ant-tabs-bar .ant-tabs-tab-active {
+    background: #d1edfb !important;
+}
+
+.selected-coin-row {
+    background: #d1edfb !important;
+    color: #000000;
+}
+
+.selected-coin-row:hover {
+    color: #fff;
+    transition: 0s;
+}
+
+.ant-table-row {
+    transition: 0s !important;
+}
+
+.reset-password-block {
+    width: 100%;
+    text-align: center;
+    margin: 10px 0 0 0;
+}
+
+.reset-password-block a{
+    color: #fff;
+}
+
+.reset-password-block a:hover {
+    color: #00b29c;
+}
+
 body .ant-tabs.ant-tabs-card > .ant-tabs-bar .ant-tabs-tab {
     background: #0088cc;
     color: #0e0e0e;
@@ -3821,6 +3865,25 @@ body .ant-tabs.ant-tabs-card > .ant-tabs-bar .ant-tabs-tab {
     margin: 2px 2px;
     cursor: pointer;
 }
+
+.contact {
+    margin-top: 0;
+}
+
+.contact .column1 {
+    padding: 0 !important;
+}
+
+.contact .column1 button {
+    margin: 0 auto;
+}
+
+.contact .column1 textarea{
+    width: 100%;
+    color: #000000;
+}
+
+
 
 /*body .ant-tabs.ant-tabs-card > .ant-tabs-bar .ant-tabs-tab-active {*/
 /*background: #00b29c;*/

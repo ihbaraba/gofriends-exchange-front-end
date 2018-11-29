@@ -194,6 +194,11 @@ class Login extends Component {
                                 <button className="signUpButton fixed-width-btn" type="submit" name="login">
                                     Sign in
                                 </button>
+                                <div className='reset-password-block'>
+                                    <NavLink to='/resetPassword'>
+                                        Forgot your password?
+                                    </NavLink>
+                                </div>
                             </form>
 
                             {/*<NavLink to="/resetPassword" className="forgot colored-link">Forgot your password</NavLink>*/}

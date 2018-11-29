@@ -15,7 +15,7 @@ class ResetPassword extends Component {
     }
 
     handleChangeRecaptcha = res => {
-        if(res) {
+        if (res) {
             this.setState({isVerified: true})
         }
     };
@@ -28,7 +28,7 @@ class ResetPassword extends Component {
 
     handleSubmit = (event) => {
         event.preventDefault();
-        if(this.state.isVerified) {
+        if (this.state.isVerified) {
 
         }
     };
@@ -43,16 +43,16 @@ class ResetPassword extends Component {
                     <div className="formWrapper">
                         <div className="column1">
                             <form onSubmit={this.handleSubmit}>
-                                        <div>
-                                            <input
-                                                type="email"
-                                                name="username"
-                                                placeholder='Enter your Email'
-                                                value={this.state.email}
-                                                onChange={this.handleEmail}
-                                                required
-                                            />
-                                        </div>
+                                <div>
+                                    <input
+                                        type="email"
+                                        name="username"
+                                        placeholder='Enter your Email'
+                                        value={this.state.email}
+                                        onChange={this.handleEmail}
+                                        required
+                                    />
+                                </div>
 
                                 <Recaptcha
                                     sitekey="6LdXEH0UAAAAANNTQtS9e4ZwdASHuZ5zWM7psA2S"

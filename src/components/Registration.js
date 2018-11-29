@@ -103,7 +103,6 @@ class Registration extends Component {
 
     handlerRegistrationSubmit = async (event) => {
         event.preventDefault();
-        console.log(this.state.isVerified)
         if (this.state.isVerified) {
             function validateEmail(email) {
                 const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -140,20 +139,9 @@ class Registration extends Component {
                     "countryId": this.state.countryId,
                 }
             });
+
             const {errorMessage, errorTextCode} = responce;
 
-            // if (typeof usrMsg !== "undefined") {
-            //     // console.log(errorCode, usrMsg);
-            //     switch (errorCode) {
-            //         case 0 :
-            //         case 1 :
-            //         case 2 :
-            //         case 3 :
-            //         case 4 :
-            //         case 5 : alert(usrMsg);
-            //             break;
-            //         default :
-            //     }
             if (typeof errorTextCode !== "undefined") {
 
                 console.log(errorTextCode, errorMessage, typeof errorTextCode, " showTotpCodeInput=", this.state.showTotpCodeInput, responce);
@@ -270,7 +258,8 @@ class Registration extends Component {
             </div>
             : <div>
                 <button style={{cursor: 'pointer'}} className="create-btn  fixed-width-btn" type="submit"
-                        name="login">Go exchange
+                        name="login">
+                    Go exchange
                 </button>
             </div>
         ;
@@ -384,11 +373,9 @@ class Registration extends Component {
                                         <p><strong>Thank you for registration. </strong></p>
                                         <p>if you need to make your account more secure, </p>
                                         <p>we can offer you to use 2 factor authentication. </p>
-                                        <p><strong>Turn on/off 2-factor authentication </strong> <Switch
-                                            onChange={this.swithOnChange}/></p>
+                                        <p><strong>Turn on/off 2-factor authentication </strong>
+                                            <Switch onChange={this.swithOnChange}/></p>
                                         {content}
-
-
                                     </fieldset>
                                 </form>
                             </div>

@@ -1,14 +1,12 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux'
 import {Table, Tooltip} from 'antd';
+import QRCode from 'qrcode-react';
 import {getUserInfo} from "../utils";
 import {USERINFO} from "./../constants/APIURLS.js"
 import {save_user_info} from "../actions/UserActions";
 import WithdrawPanel from "./WithdrawLogic"
 import '../App.css';
-
-// import 'antd/lib/tooltip/style/css';
-// import 'antd/lib/popconfirm/style/css';
 
 class Balances extends Component {
     constructor(props) {
@@ -53,19 +51,15 @@ class Balances extends Component {
             dataIndex: 'amount',
             key: 'amount',
             width: 150,
-            // }, {
-            //     title: 'Deposit address',
-            //     dataIndex: 'address',
-            //     key: 'address',
         },
 
             {
                 title: 'Action',
                 dataIndex: 'action',
                 key: 'action',
-                width: 200,
+                width: 250,
                 render: (text, record) => (
-                    <div>
+                    <div className='balance-action-block'>
                         <Tooltip
                             title={
                                 <div>
@@ -73,7 +67,12 @@ class Balances extends Component {
                                     <div className="line"></div>
 
                                     <div className="tooltip-block">
-                                        <div className="qrImg"></div>
+                                        <div className="qrImg">
+                                            {record.address ?
+                                                <QRCode
+                                                    value={record.address}
+                                                /> : ''}
+                                        </div>
                                         <h4>Internal address for deposit {record.name}</h4>
                                     </div>
 
@@ -84,9 +83,8 @@ class Balances extends Component {
                             placement="topRight"
                         >
 
-                        <span>
-                          <a href="" className="act-btn">Deposit {record.code}</a>
-                        </span>
+                            <div className="act-btn">Deposit {record.code}</div>
+
                         </Tooltip>
                         <WithdrawPanel record={record}/>
 

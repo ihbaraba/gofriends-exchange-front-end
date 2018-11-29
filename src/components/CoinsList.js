@@ -74,7 +74,6 @@ class CoinsList extends React.Component {
     }
 
     tabsCallback(key) {
-        console.log(key);
         const pairs = this.state.pairs;
         const newCurrent = pairs.find( item => item.id === +key.id  );
         this.props.setCurentCoinsPair2State(newCurrent);
@@ -83,7 +82,6 @@ class CoinsList extends React.Component {
 
     currenciesTabs = items => {
         const pairs = this.state.pairs;
-
         const columns = [{
             title: 'Coin',
             dataIndex: 'coin',
@@ -122,7 +120,11 @@ class CoinsList extends React.Component {
                             onClick: () => this.tabsCallback(record),       // click row
                         };
                     }}
-                    rowClassName={"ant-table-row-cursor"}
+                    rowClassName={record => {
+                        if((record.coin === this.props.state.pair.quoteCurrency) && (item ===this.props.state.pair.baseCurrency)) {
+                            return 'selected-coin-row'
+                        }
+                    }}
                     rowKey={item.id}
                     dataSource={
                          [...pairs.filter( pair => pair.first === item )]

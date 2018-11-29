@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
-import '../App.css';
+import Recaptcha from 'react-recaptcha';
+
 
 class ChangePassword extends Component {
     constructor(props) {
@@ -9,8 +10,7 @@ class ChangePassword extends Component {
             options: [{
                 code: '',
                 value: ''
-            }
-            ],
+            }],
             email: '',
             password: '',
             confirmPassword: '',
@@ -18,9 +18,9 @@ class ChangePassword extends Component {
 
             oldPassword: '',
             newPassword: '',
-            newPasswordRepeat: ''
-        }
-        ;
+            newPasswordRepeat: '',
+            isVerified: false
+        };
     }
 
     handlerChangeInput = event => {
@@ -32,56 +32,86 @@ class ChangePassword extends Component {
         })
     };
 
+    handleChangeRecaptcha = res => {
+        if (res) {
+            this.setState({isVerified: true});
+        }
+    };
+
+    handleSubmit = e => {
+        e.preventDefault();
+        if(this.state.newPassword === this.state.newPasswordRepeat && this.state.isVerified) {
+            alert('done')
+
+            this.setState({
+                oldPassword: '',
+                newPassword: '',
+                newPasswordRepeat: ''
+            })
+        }
+    };
+
     render() {
         return (
             <div>
                 <div style={{clear: "both"}}>
                     <h1 className="sign">CHANGE YOUR PASSWORD</h1>
                 </div>
+
                 <div className="featureBanner form2col">
                     <div className="formWrapper">
-                        <div className="column1">
-                            <form>
-                                <table>
-                                    <tbody>
-                                    <tr>
-                                        <td>Old Password:</td>
-                                        <td>
-                                            <input
-                                                type="text"
-                                                name="oldPassword"
-                                                value={this.state.oldPassword}
-                                                onChange={this.handlerChangeInput}
-                                            />
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>New Password:</td>
-                                        <td>
-                                            <input
-                                                type="password"
-                                                name="newPassword"
-                                                value={this.state.newPassword}
-                                                onChange={this.handlerChangeInput}
-                                            />
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Repeat New Password:</td>
-                                        <td>
-                                            <input
-                                                type="password"
-                                                name="newPasswordRepeat"
-                                                value={this.state.newPasswordRepeat}
-                                                onChange={this.handlerChangeInput}
-                                            />
-                                        </td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                                <button className="signUpButton" type="submit" name="login">Change
-                                    Password
-                                </button>
+                        <div className="contentWrapper formWrapper column1">
+                            <form onSubmit={this.handleSubmit}>
+                                <fieldset className="aboveCaptcha">
+                                    <div>
+                                        <label>Old Password:</label>
+                                        <input
+                                            className="userPassInput"
+                                            type='text'
+                                            name="oldPassword"
+                                            value={this.state.oldPassword}
+                                            onChange={this.handlerChangeInput}
+                                            required/>
+                                    </div>
+                                    <div>
+                                        <label>New Password:</label>
+                                        <input
+                                            className="userPassInput"
+                                            type="password"
+                                            name="newPassword"
+                                            value={this.state.newPassword}
+                                            onChange={this.handlerChangeInput}
+                                            required/>
+                                    </div>
+                                    <div>
+                                        <label>Repeat New Password:</label>
+                                        <input
+                                            className="userPassInput"
+                                            type="password"
+                                            name="newPasswordRepeat"
+                                            value={this.state.newPasswordRepeat}
+                                            onChange={this.handlerChangeInput}
+                                            required/>
+                                    </div>
+
+                                    <Recaptcha
+                                        sitekey="6LdXEH0UAAAAANNTQtS9e4ZwdASHuZ5zWM7psA2S"
+                                        render="explicit"
+                                        theme='dark'
+                                        verifyCallback={this.handleChangeRecaptcha}
+                                    />
+
+
+                                    <div className="buttonRow">
+                                        <button
+                                            className="signUpButton small"
+                                            type="submit"
+                                        style={{margin: '20px auto'}}
+                                        >
+                                            Submit
+                                        </button>
+                                    </div>
+                                </fieldset>
                             </form>
                         </div>
 

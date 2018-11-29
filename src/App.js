@@ -73,7 +73,7 @@ class App extends Component {
                                 <Route path="/Bann" component={Bann}/>
                                 <Route path="/OrderPanel" component={OrderPanel}/>
                                 <Route path="/DepositHistory" component={DepositHistory}/>
-                                <Route path="/Withdrawalpanel" component={Withdrawalpanel}/>
+                                <Route path="/withdrawalpanel" component={Withdrawalpanel}/>
                                 <Route path="/Transactions" component={Transactions}/>
                                 <Route path="/Confirm" component={Confirm}/>
                                 <Route path="/BalancesPanel" component={BalancesPanel}/>

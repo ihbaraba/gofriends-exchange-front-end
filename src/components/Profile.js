@@ -4,6 +4,8 @@ import verif from "../img/verif.svg";
 import {USERINFO} from "../constants/APIURLS";
 import {getUserInfo} from "../utils";
 import {save_user_info} from "../actions/UserActions";
+import {Switch} from 'antd';
+
 import '../App.css';
 
 class Profile extends Component {
@@ -27,7 +29,7 @@ class Profile extends Component {
     render() {
         // console.log( this.props.user);
 
-        const {username, email, country = {}} = this.props.user;
+        const {username, email, country = {}, twoFactorAuthEnabled} = this.props.user;
         // const {name} = country;
         const {name: countryName = "Ukraine"} = country;
 
@@ -68,6 +70,18 @@ class Profile extends Component {
                                 <div>{countryName}</div>
                                 <div className="entityEmail">{email}</div>
                                 <div className="numberPhone">+380 ## ## ### 12</div>
+
+                                    <form onSubmit={this.handleSignInSubmit} style={{margin: '20px 0 0 0'}}>
+                                        <fieldset className="aboveCaptcha">
+                                            <p><strong style={{margin: '0 5px 0 0'}}>Turn on/off 2-factor authentication </strong>
+                                                <Switch
+                                                    defaultChecked={twoFactorAuthEnabled}
+                                                    onChange={this.swithOnChange}
+                                                /></p>
+                                            {/*{content}*/}
+                                        </fieldset>
+                                    </form>
+
                             </div>
                         </div>
                     </div>

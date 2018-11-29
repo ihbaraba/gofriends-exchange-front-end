@@ -14,6 +14,7 @@ function parseData(parse) {
         return d;
     };
 }
+
 function parseCryptocompareData(parse) {
     return function (d) {
         // console.log("d = ", d);
@@ -33,16 +34,17 @@ const parseDate = timeParse("%Y-%m-%dT%H:%M:%S.%LZ");
 export function getData({pairId = 1, APIURL = QUOTATIONS, dateFrom, dateTo, take = 10000, interval = "5min", appendFake = "true"}) {
 
 // console.log(`${APIURL}?pairId=${pairId}&dateFrom=${dateFrom}&dateTo=${dateTo}&take=${take}&interval=${interval}&appendFake=${appendFake}`);
-        const promiseMSFT = fetch(`${APIURL}?pairId=${pairId}&dateFrom=${dateFrom}&dateTo=${dateTo}&take=${take}&interval=${interval}&appendFake=${appendFake}`)
+    const promiseMSFT = fetch(`${APIURL}?pairId=${pairId}&dateFrom=${dateFrom}&dateTo=${dateTo}&take=${take}&interval=${interval}&appendFake=${appendFake}`)
         .then(response => response.json())
-        .then(data => {data.reduce((data, item) => {
+        .then(data => {
+            data.reduce((data, item) => {
                 data.push(parseData(parseDate)(item));
                 return data
             }, []);
 
-        // console.log("getData:", data);
-        return data
-        } );
+            // console.log("getData:", data);
+            return data
+        });
 
     return promiseMSFT;
 }
@@ -69,7 +71,7 @@ export function getDataFromSocket({point, id, stopTime = 0, callback}) {
 }
 
 
-export async function sendRequest ({rout, options}) {
+export async function sendRequest({rout, options}) {
     console.log("sendRequest", rout, JSON.stringify(options));
 
     const rawResponse = await fetch(`${rout}`, {
@@ -86,14 +88,14 @@ export async function sendRequest ({rout, options}) {
     return rawResponse.json();
 }
 
-export async function coinapiHystoricalData (
+export async function coinapiHystoricalData(
     {
         // APIURL = "https://min-api.cryptocompare.com/data/histoday?fsym=BTC&tsym=USD&limit=200",
         APIURL = "https://min-api.cryptocompare.com/data/histoday",
         fsym = "BTC",
         tsym = "USD",
         limit = 200,
-     } = {}
+    } = {}
 ) {
     // const promiseMSFT = fetch
     console.log(`${APIURL}?fsym=${fsym}&tsym=${tsym}&limit=${limit}`);
@@ -103,11 +105,11 @@ export async function coinapiHystoricalData (
             // console.log("getData:", data);
             return data["Data"].reduce((data, item) => {
 
-                data.push(parseCryptocompareData(Time => (new Date(Time*1000)))(item));
+                data.push(parseCryptocompareData(Time => (new Date(Time * 1000)))(item));
                 // console.log("item = ", item, " | ", data);
                 return data
-                }, []);
-            } );
+            }, []);
+        });
 
     return promiseMSFT;
 }

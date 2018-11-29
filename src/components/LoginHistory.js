@@ -1,4 +1,6 @@
 import React, {Component} from 'react';
+import {Table} from 'antd';
+
 import '../App.css';
 
 class LoginHistory extends Component {
@@ -8,65 +10,53 @@ class LoginHistory extends Component {
         this.state = {};
     }
 
+    columns = [
+        {
+            title: 'Date',
+            dataIndex: 'date',
+            key: 'date',
+            width: 150,
+        },
+        {
+            title: 'IP Address',
+            dataIndex: 'address',
+            key: 'address',
+            width: 150,
+        },
+        {
+            title: 'Used Two-Factor Authentication',
+            dataIndex: 'twoFactor',
+            key: 'twoFactor',
+            width: 300,
+        },
+
+    ]
+
+
     render() {
+        let testData = [
+            {
+                date: '24 03 2018',
+                address: '134.132.352.1',
+                twoFactor: 'yes'
+            }
+        ]
         return (
             <div>
                 <div style={{clear: "both"}}>
                     <h1 className="sign">MY LOGIN HISTORY</h1>
                 </div>
                 <div className="orderBookWrap">
-                    <table className="orderBook">
-                        <tbody>
-                        <tr>
-                            <th>Date</th>
-                            <th>IP Address</th>
-                            <th>Used Two-Factor Authentication</th>
-                        </tr>
-                        <tr>
-                            <td>2018-06-14 10:05:36</td>
-                            <td>93.73.15.146</td>
-                            <td>Yes</td>
-                        </tr>
-                        <tr>
-                            <td>2018-06-14 07:19:58</td>
-                            <td>93.73.15.146</td>
-                            <td>Yes</td>
-                        </tr>
+                    <Table
+                        columns={this.columns}
+                        dataSource={testData}
+                        bordered={false}
+                        pagination={false}
+                        rowKey="uid"
+                        scroll={{y: 330}}
+                        size="small"
+                        rowClassName="custom__tr"/>
 
-                        <tr>
-                            <td>2018-06-05 08:58:26</td>
-                            <td>93.73.15.146</td>
-                            <td>No</td>
-                        </tr>
-                        <tr>
-                            <td>2018-06-05 08:58:26</td>
-                            <td>93.73.15.146</td>
-                            <td>No</td>
-                        </tr>
-                        <tr>
-                            <td>2018-06-14 10:05:36</td>
-                            <td>93.73.15.146</td>
-                            <td>Yes</td>
-                        </tr>
-                        <tr>
-                            <td>2018-06-14 07:19:58</td>
-                            <td>93.73.15.146</td>
-                            <td>Yes</td>
-                        </tr>
-
-                        <tr>
-                            <td>2018-06-05 08:58:26</td>
-                            <td>93.73.15.146</td>
-                            <td>No</td>
-                        </tr>
-                        <tr>
-                            <td>2018-06-05 08:58:26</td>
-                            <td>93.73.15.146</td>
-                            <td>No</td>
-                        </tr>
-
-                        </tbody>
-                    </table>
                 </div>
             </div>
         )

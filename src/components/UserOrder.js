@@ -1,8 +1,9 @@
 import React from 'react';
 import {connect} from 'react-redux'
-import {getOrdersHistory} from "../utils";
-import {USERORDERSHISTORY} from "./../constants/APIURLS.js"
+import {getOrdersHistory, sendOrder} from "../utils";
+import {USERORDERSHISTORY, ORDERS} from "./../constants/APIURLS.js"
 import {Table, Icon, Tooltip, Button} from 'antd';
+
 // import {ORDERS} from "../constants/APIURLS";
 
 class UserOrder extends React.Component {
@@ -71,14 +72,17 @@ class UserOrder extends React.Component {
         /**
          *activating cancel button
          **/
-        // const {token, orderId, status} = bidProps;
-        // const responce = await sendOrder({
-        //     rout: `${ORDERS}/${orderId}`,
-        //     token,
-        //     status,
-        // });
-        // console.log("fire cancel to server ", responce);
-        await this.getInitialPairDataFromServer({completed: false, cancelled: false});
+        const {token, orderId, status} = bidProps;
+        const responce = await sendOrder({
+            rout: `${ORDERS}/${orderId}`,
+            token,
+            status,
+        })
+            .then(() => {
+                this.getInitialPairDataFromServer({completed: false, cancelled: false});
+            });
+
+        console.log("fire cancel to server ", responce);
     };
 
     async componentDidMount() {
@@ -93,7 +97,7 @@ class UserOrder extends React.Component {
     }
 
     render() {
-        const { token, completed } = this.props;
+        const {token, completed} = this.props;
         // const {orders = [], ordersHistory = []} = this.state;
 
         const onBidButtonClick = ({status, order}) => {
@@ -155,7 +159,7 @@ class UserOrder extends React.Component {
                                                     : `If the lowest ask rises to or above ${record.genuine.stop}, an order to buy ${record.genuine.amount} at a price of ${record.genuine.price} will be placed`
                                             }>
                                               <a href="" className="act-btn"><Icon type="info-circle"
-                                                                                               theme="outlined"/></a>
+                                                                                   theme="outlined"/></a>
                                             </Tooltip>
                                         </span>
                                     : null
@@ -170,10 +174,17 @@ class UserOrder extends React.Component {
                         width: 150,
                         render: (text, record) => (
                             <span>
-                                <Button type="primary" ghost onClick={(order) => {
-                                    onBidButtonClick({status: "cancelled", order: record})
-                                }} className="">Cancel</Button>
-                </span>
+                                <Button
+                                    type="primary"
+                                    ghost
+                                    onClick={(order) => {
+                                            onBidButtonClick({status: "cancelled", order: record})
+                                            }}
+                                    style={{margin: '0 0 0 auto'}}
+                                >
+                                    Cancel
+                                </Button>
+                            </span>
 
                         ),
                     }]

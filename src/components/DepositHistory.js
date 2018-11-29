@@ -1,59 +1,57 @@
 import React, {Component} from 'react';
+import {Table} from 'antd';
 import '../App.css';
 
 class DepositHistory extends Component {
+    columns = [
+        {
+            title: 'ID',
+            dataIndex: 'id',
+            key: 'id',
+            width: 150,
+        },
+        {
+            title: 'Currency',
+            dataIndex: 'currency',
+            key: 'currency',
+            width: 150,
+        },
+        {
+            title: 'Amount',
+            dataIndex: 'amount',
+            key: 'amount',
+            width: 150,
+        },
+        {
+            title: 'Total',
+            dataIndex: 'total',
+            key: 'total',
+            width: 150,
+        },
+        {
+            title: 'Date',
+            dataIndex: 'date',
+            key: 'date',
+            width: 150,
+        },
+    ];
+
     render() {
         return (
             <div>
                 <div style={{clear: "both"}}>
-                    <h1 className="sign">DEPOSIT & WITHDRAWAL HISTORY</h1>
+                    <h1 className="sign">DEPOSIT HISTORY</h1>
                 </div>
                 <div className="orderBookWrap">
-                    <h3 id="depositsHeading">Deposit History</h3>
-                    <p>ZEC/USDT</p>
-                    <table className="orderBook">
-                        <tbody>
-                        <tr>
-                            <th>Type</th>
-                            <th>Price(USDT)</th>
-                            <th>Amount(ZEC)</th>
-                            <th>Total(USDT)</th>
-                            <th>Stop/Rate</th>
-                            <th>Date</th>
-                        </tr>
-                        <tr>
-                            <td>Buy</td>
-                            <td>612.00000000</td>
-                            <td>0.3000000</td>
-                            <td>183.6000000</td>
-                            <td>-</td>
-                            <td>2018-07-02 12:04:54</td>
-                        </tr>
-                        </tbody>
-                    </table>
+                    <Table
+                        columns={this.columns}
+                        bordered={false}
+                        pagination={false}
+                        rowKey="uid"
+                        scroll={{y: 330}}
+                        size="small"
+                        rowClassName="custom__tr"/>
 
-                    <h3 id="depositsHeading">WITHDRAWAL HISTORY</h3>
-                    <p>ZEC/USDT</p>
-                    <table className="orderBook">
-                        <tbody>
-                        <tr>
-                            <th>Type</th>
-                            <th>Price(USDT)</th>
-                            <th>Amount(ZEC)</th>
-                            <th>Total(USDT)</th>
-                            <th>Stop/Rate</th>
-                            <th>Date</th>
-                        </tr>
-                        <tr>
-                            <td>Buy</td>
-                            <td>612.00000000</td>
-                            <td>0.3000000</td>
-                            <td>183.6000000</td>
-                            <td>-</td>
-                            <td>2018-07-02 12:04:54</td>
-                        </tr>
-                        </tbody>
-                    </table>
                 </div>
             </div>
         )

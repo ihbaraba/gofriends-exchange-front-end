@@ -10,21 +10,20 @@ class CoinsList extends React.Component {
             return <div> Need authorization...</div>
         }
 
-        const {username, email, id} = user;
+        const {username, email} = user;
         return (
             <div>
                 <div className="card-container, currencysPairs" style={{width: "70vw", margin: "auto"}}>
                     <div className="card-container-head">
                         <p className="h2">
                             Name:&emsp;<strong>{`${username}`}</strong>&emsp; &emsp; &emsp; &emsp;  E-mail:&emsp;
-                            <strong>{`${email}`}</strong>&emsp; &emsp; &emsp; &emsp;  id:{id}
+                            <strong>{`${email}`}</strong>
                         </p>
-                        <h1 style={{margin: "2rem"}}>Your open orders</h1>
-                        <UserOrder completed="false"/>
+                        <div style={{clear: "both"}}>
+                            <h1 className="sign">YOUR ORDERS HISTORY</h1>
+                        </div>
 
-                        <h1 style={{margin: "2rem"}}>Your orders history</h1>
                         <UserOrder completed="true"/>
-
                     </div>
                 </div>
             </div>

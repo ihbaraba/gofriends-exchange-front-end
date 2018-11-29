@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import logo from '../img/Logo.png';
 import NavLink from './NavLink';
 import {Menu, Dropdown} from 'antd';
-import '../App.css';
 
 
 class Header extends Component {
@@ -20,26 +19,34 @@ class Header extends Component {
                 </NavLink>
             </Menu.Item>
 
-            {/*<Menu.Item>*/}
-            {/*<NavLink to="/DepositHistory">*/}
-            {/*<span className="title topLevel">HISTORY</span>*/}
-            {/*</NavLink>*/}
-            {/*</Menu.Item>*/}
+            <Menu.Item>
+                <NavLink to="/DepositHistory">
+                    <span className="title topLevel">DEPOSIT HISTORY</span>
+                </NavLink>
+            </Menu.Item>
+
+            <Menu.Item>
+                <NavLink to="/withdrawalpanel">
+                    <span className="title topLevel">WITHDRAWAL HISTORY</span>
+                </NavLink>
+            </Menu.Item>
+
         </Menu>
     );
 
     menu2 = (
         <Menu>
             <Menu.Item>
-                <NavLink to="/orders">
+                <NavLink to="/OpenOrders">
                     <span className="title topLevel">MY OPEN ORDERS</span>
                 </NavLink>
             </Menu.Item>
-            {/*<Menu.Item>*/}
-            {/*<NavLink to="/orders">*/}
-            {/*<span className="title topLevel">MY TRADE HISTORY & ANALYSIS</span>*/}
-            {/*</NavLink>*/}
-            {/*</Menu.Item>*/}
+
+            <Menu.Item>
+                <NavLink to="/orders">
+                    <span className="title topLevel">MY TRADE HISTORY & ANALYSIS</span>
+                </NavLink>
+            </Menu.Item>
         </Menu>
     );
 
@@ -55,19 +62,9 @@ class Header extends Component {
             {/*<span className="title topLevel">Trading Tier Status</span>*/}
             {/*</NavLink>*/}
             {/*</Menu.Item>*/}
-            {/*<Menu.Item>*/}
-            {/*<NavLink to="/loginhistory">*/}
-            {/*<span className="title topLevel">Login History</span>*/}
-            {/*</NavLink>*/}
-            {/*</Menu.Item>*/}
-            {/*<Menu.Item>*/}
-            {/*<NavLink to="/changepassword">*/}
-            {/*<span className="title topLevel">Change Password</span>*/}
-            {/*</NavLink>*/}
-            {/*</Menu.Item>*/}
             <Menu.Item>
-                <NavLink to="/Logout">
-                    <span className="title topLevel">Logout</span>
+                <NavLink to="/changepassword">
+                    <span className="title topLevel">Change Password</span>
                 </NavLink>
             </Menu.Item>
         </Menu>
@@ -80,6 +77,17 @@ class Header extends Component {
                     <span className="title topLevel">My Profile</span>
                 </NavLink>
             </Menu.Item>
+            <Menu.Item>
+                <NavLink to="/loginhistory">
+                    <span className="title topLevel">Login History</span>
+                </NavLink>
+            </Menu.Item>
+            <Menu.Item>
+                <NavLink to="/Logout">
+                    <span className="title topLevel">Logout</span>
+                </NavLink>
+            </Menu.Item>
+
             {/*<Menu.Item>*/}
             {/*<NavLink to="/exchange">*/}
             {/*<span className="title topLevel">Linked Accounts</span>*/}
@@ -104,7 +112,7 @@ class Header extends Component {
                     </Dropdown>
 
                     <Dropdown overlay={this.menu2}>
-                        <NavLink to="/orders">
+                        <NavLink to="/OpenOrders">
                             <span className="title topLevel">
                                 Orders
                                 <i className="fa fa-caret-down dim"></i>
@@ -113,12 +121,12 @@ class Header extends Component {
                     </Dropdown>
 
                     <Dropdown overlay={this.menu3}>
-                        <a className="ant-dropdown-link" href="">
+                        <NavLink to='/changepassword'>
                             <span className="title topLevel">
                                 <i className="fa fa-wrench"></i>
                                 <i className="fa fa-caret-down dim"></i>
                             </span>
-                        </a>
+                        </NavLink>
                     </Dropdown>
 
                     <Dropdown overlay={this.menu4}>
