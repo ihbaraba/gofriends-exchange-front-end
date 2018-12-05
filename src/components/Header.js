@@ -1,8 +1,10 @@
-import React, {Component} from 'react';
-import logo from '../img/Logo.png';
+import React, {Component, Fragment} from 'react';
+import logo from '../img/logo_go.svg';
+import userIcon from '../img/user_icon.svg';
 import NavLink from './NavLink';
 import {Menu, Dropdown} from 'antd';
 
+import '../styles/header.css';
 
 class Header extends Component {
     menu1 = (
@@ -15,19 +17,19 @@ class Header extends Component {
 
             <Menu.Item>
                 <NavLink to="/balances">
-                    <span className="title topLevel">DEPOSITS & WITHDRAWALS</span>
+                    <span className="title topLevel">Deposits & withdrawals</span>
                 </NavLink>
             </Menu.Item>
 
             <Menu.Item>
                 <NavLink to="/DepositHistory">
-                    <span className="title topLevel">DEPOSIT HISTORY</span>
+                    <span className="title topLevel">Deposit history</span>
                 </NavLink>
             </Menu.Item>
 
             <Menu.Item>
                 <NavLink to="/withdrawalpanel">
-                    <span className="title topLevel">WITHDRAWAL HISTORY</span>
+                    <span className="title topLevel">Withdrawal history</span>
                 </NavLink>
             </Menu.Item>
 
@@ -38,13 +40,13 @@ class Header extends Component {
         <Menu>
             <Menu.Item>
                 <NavLink to="/OpenOrders">
-                    <span className="title topLevel">MY OPEN ORDERS</span>
+                    <span className="title topLevel">My open orders</span>
                 </NavLink>
             </Menu.Item>
 
             <Menu.Item>
                 <NavLink to="/orders">
-                    <span className="title topLevel">MY TRADE HISTORY & ANALYSIS</span>
+                    <span className="title topLevel">My trade history & analysis</span>
                 </NavLink>
             </Menu.Item>
         </Menu>
@@ -83,6 +85,11 @@ class Header extends Component {
                 </NavLink>
             </Menu.Item>
             <Menu.Item>
+                <NavLink to="/changepassword">
+                    <span className="title topLevel">Account settings</span>
+                </NavLink>
+            </Menu.Item>
+            <Menu.Item>
                 <NavLink to="/Logout">
                     <span className="title topLevel">Logout</span>
                 </NavLink>
@@ -101,12 +108,12 @@ class Header extends Component {
 
         if (isLoggedIn) {
             return (
-                <div>
+                <Fragment>
                     <Dropdown overlay={this.menu1}>
                         <NavLink to="/balances">
                             <span className="title topLevel">
                                 Balances
-                                <i className="fa fa-caret-down dim"></i>
+                                {/*<i className="fa fa-caret-down dim"></i>*/}
                             </span>
                         </NavLink>
                     </Dropdown>
@@ -115,64 +122,77 @@ class Header extends Component {
                         <NavLink to="/OpenOrders">
                             <span className="title topLevel">
                                 Orders
-                                <i className="fa fa-caret-down dim"></i>
+                                {/*<i className="fa fa-caret-down dim"></i>*/}
                             </span>
                         </NavLink>
                     </Dropdown>
 
-                    <Dropdown overlay={this.menu3}>
-                        <NavLink to='/changepassword'>
-                            <span className="title topLevel">
-                                <i className="fa fa-wrench"></i>
-                                <i className="fa fa-caret-down dim"></i>
-                            </span>
-                        </NavLink>
-                    </Dropdown>
+                    {/*<Dropdown overlay={this.menu3}>*/}
+                    {/*<NavLink to='/changepassword'>*/}
+                    {/*<span className="title topLevel">*/}
+                    {/*Settings*/}
+                    {/*/!*<i className="fa fa-caret-down dim"></i>*!/*/}
+                    {/*</span>*/}
+                    {/*</NavLink>*/}
+                    {/*</Dropdown>*/}
 
                     <Dropdown overlay={this.menu4}>
                         <NavLink to="/profile">
                         <span className="title topLevel">
-                            <i className="fa fa-user"></i>
-                            <i className="fa fa-caret-down dim"></i>
+                            {/*<i className="fa fa-user-o" aria-hidden="true"></i>*/}
+                            <img src={userIcon} alt=""/>
+                            {/*<i className="fa fa-caret-down dim"></i>*/}
                         </span>
                         </NavLink>
                     </Dropdown>
-                </div>
+                </Fragment>
             )
         } else {
             return (
-                <ul>
-                    <li className="message">
-                        <span className="title">
-                            <NavLink className="header-sign" to="/login">Sign in</NavLink>
-                            <NavLink className="header-create" to="/signup">Create an Account</NavLink>
-                        </span>
-                    </li>
-                </ul>
+                <Fragment>
+                    <div className="message">
+                        <div className='logout-navigtion'>
+                            <NavLink to="/balances">
+                            <span className="title topLevel">
+                                Support
+                                {/*<i className="fa fa-caret-down dim"></i>*/}
+                            </span>
+                            </NavLink>
+
+                            <NavLink to="/balances">
+                            <span className="title topLevel">
+                                News
+                                {/*<i className="fa fa-caret-down dim"></i>*/}
+                            </span>
+                            </NavLink>
+                        </div>
+                        <NavLink className="header-create" to="/signup">Sign up</NavLink>
+                        <NavLink className="header-sign" to="/login">Log in</NavLink>
+                    </div>
+                </Fragment>
+
             )
         }
     };
 
     render() {
         return (
-            <div className="App">
-                <div className="header">
-                    <div className="logo">
-                        <NavLink to="/"><img src={logo} alt="logo"/></NavLink>
-                    </div>
-                    <div className="tabs">
-                        <ul>
-                            <li><NavLink to="/exchange">Exchange</NavLink></li>
-                            {/*<li><NavLink to="/marginTrading">Margin Trading</NavLink></li>*/}
-                            {/*<li><NavLink to="/lending">Lending</NavLink></li>*/}
-                        </ul>
-                    </div>
+            <header>
+                <div className='size-container'>
+                    <div className='header'>
+                        <div className="logo">
+                            <NavLink to="/"><img src={logo} alt="logo"/></NavLink>
+                        </div>
+                        <div className="tabs exchange-link">
+                            <NavLink to="/exchange">Exchange</NavLink>
+                        </div>
 
-                    <div className="tabs right">
-                        {this.renderMenu()}
+                        <div className="tabs right">
+                            {this.renderMenu()}
+                        </div>
                     </div>
                 </div>
-            </div>
+            </header>
         )
     }
 }

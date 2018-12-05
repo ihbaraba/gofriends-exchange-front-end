@@ -5,7 +5,14 @@ import QRCode from 'qrcode-react';
 import {getUserInfo} from "../utils";
 import {USERINFO} from "./../constants/APIURLS.js"
 import {save_user_info} from "../actions/UserActions";
-import WithdrawPanel from "./WithdrawLogic"
+import WithdrawPanel from "./WithdrawLogic";
+import BTC from '../img/coins/BTC.png';
+import BTG from '../img/coins/BTG_gold.png';
+import BCH from '../img/coins/BTG.png';
+import ETH from '../img/coins/ETH.png';
+import LTC from '../img/coins/LTC.png';
+import ZEC from '../img/coins/ZEC.png';
+import '../styles/balances.css';
 import '../App.css';
 
 class Balances extends Component {
@@ -26,6 +33,9 @@ class Balances extends Component {
     }
 
     render() {
+        const coinsLogo = {
+            BTC, BCH, BTG, ETH, LTC, ZEC
+        };
         const user = this.props.user;
         // console.log("Balances. User = ", this.props);
         const {balances = []} = user;
@@ -41,20 +51,34 @@ class Balances extends Component {
             }
         ));
 
-        const columns = [{
-            title: 'Coins',
-            dataIndex: 'name',
-            key: 'name',
-            width: 150,
-        }, {
-            title: 'Amount',
-            dataIndex: 'amount',
-            key: 'amount',
-            width: 150,
-        },
+        const columns = [
+            {
+                title: 'Coin',
+                dataIndex: 'name',
+                key: 'name',
+                width: 150,
+                render: (text, record) => (
+                    <div style={{display: 'flex', justifyContent: 'center'}}>
+                        <img style={{width: '13px', height: '13px', margin: '1px 10px 0 0'}} src={coinsLogo[record.code]} alt=""/>
+                        <h4>{record.code}</h4>
+                    </div>
+                )
+            },
+            {
+                title: 'Name',
+                dataIndex: 'name',
+                key: 'name',
+                width: 150,
+            },
+            {
+                title: 'Total balance',
+                dataIndex: 'amount',
+                key: 'amount',
+                width: 150,
+            },
 
             {
-                title: 'Action',
+                title: '',
                 dataIndex: 'action',
                 key: 'action',
                 width: 250,
@@ -83,29 +107,32 @@ class Balances extends Component {
                             placement="topRight"
                         >
 
-                            <div className="act-btn">Deposit {record.code}</div>
+                            <div className="act-btn">Deposit</div>
 
                         </Tooltip>
+
                         <WithdrawPanel record={record}/>
 
+                        <div className="act-btn">Trade</div>
                     </div>
                 )
             }];
         return (
-            <div className="wrap">
-                <div className="card-container, currencysPairs" style={{width: "auto", margin: "auto"}}>
-                    <div className="card-container-head">
-                        <h1 style={{margin: "2rem"}}>BALANCE</h1>
-                        <Table
-                            rowKey={record => record.name}
-                            dataSource={dataSource}
-                            columns={columns}
-                            pagination={false}
-                            rowClassName="custom__tr"
-                        />
-                    </div>
+            <div className="balances-page">
+                <div>
+                    <h3>Balances</h3>
                 </div>
-
+                <div className='table'>
+                    {/*<div className='blur-bg'></div>*/}
+                    <Table
+                        dataSource={dataSource}
+                        columns={columns}
+                        pagination={false}
+                        bordered={false}
+                        rowKey={record => record.id}
+                        size="small"
+                    />
+                </div>
             </div>
         )
     }

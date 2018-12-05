@@ -1,6 +1,6 @@
 import React from 'react';
-import { bindActionCreators } from 'redux'
-import { connect } from 'react-redux'
+import {bindActionCreators} from 'redux'
+import {connect} from 'react-redux'
 import {pair} from '../actions/ExchangeActions'
 import {PAIRS, MARKETS, SOCKET_SOURCE} from '../constants/APIURLS'
 
@@ -21,11 +21,12 @@ class CoinsList extends React.Component {
         this.list = this.list.bind(this);
         this.tabsCallback = this.tabsCallback.bind(this);
         // this.currenciesTabs = this.currenciesTabs.bind(this);
-}
+    }
+
     async componentDidMount() {
         const data = await getCoinsList(PAIRS);
         const markets_pairs = await getCoinsList(MARKETS);
-        const pairs = data.map( (item, idx) => ({
+        const pairs = data.map((item, idx) => ({
             id: item.id,
             first: item.baseCurrency.code,
             baseCurrency: item.baseCurrency.code,
@@ -41,20 +42,21 @@ class CoinsList extends React.Component {
         })).sort((a, b) => a.id - b.id);
         // console.log("pairs=", pairs);
         // const coins = [... new Set( data.map( item => item.baseCurrency.code ))];
-        const coins = [...new Set( pairs.map( item => item.baseCurrency ))];
+        const coins = [...new Set(pairs.map(item => item.baseCurrency))];
         // console.log("PAIRS ", pairs, coins, markets_pairs, data);
         this.setState({data, coins, pairs});
         this.props.pair(pairs[0]); //set current pair
-        pairs.forEach( item => this.getDataFromSocket(item.id, 0) );
+        pairs.forEach(item => this.getDataFromSocket(item.id, 0));
     }
 
     list = data => data.map(
-      item => (<div key={`CoinsList_${item.baseCurrency.code}_${item.quoteCurrency.code}`}>{item.id} {item.baseCurrency.name} / {item.quoteCurrency.code}</div>)
+        item => (<div
+            key={`CoinsList_${item.baseCurrency.code}_${item.quoteCurrency.code}`}>{item.id} {item.baseCurrency.name} / {item.quoteCurrency.code}</div>)
     );
 
     getDataFromSocket(id, stopTime = 0) {
         const pairs = this.state.pairs;
-        const idx = pairs.findIndex( el => el.id === id);
+        const idx = pairs.findIndex(el => el.id === id);
         // console.log("idx =", idx, "id =", id);
 
         this.socket.on("markets_updated_" + id, (bid) => {
@@ -68,14 +70,14 @@ class CoinsList extends React.Component {
             // console.log("id =", id, "newPair =",newPair);
             // console.log("newPairs =", newPairs);
             this.setState({
-                pairs: [ ...newPairs]
+                pairs: [...newPairs]
             });
         });
     }
 
     tabsCallback(key) {
         const pairs = this.state.pairs;
-        const newCurrent = pairs.find( item => item.id === +key.id  );
+        const newCurrent = pairs.find(item => item.id === +key.id);
         this.props.setCurentCoinsPair2State(newCurrent);
         this.props.pair(newCurrent);
     }
@@ -104,38 +106,43 @@ class CoinsList extends React.Component {
             defaultSortOrder: 'descend',
             sorter: (a, b) => a.change - b.change,
             className: 'coinRawItems',
-        }, {
-            title: 'Name',
-            dataIndex: 'name',
-            className: 'coinRawItems',
-        }];
+        },
+        //     {
+        //     title: 'Name',
+        //     dataIndex: 'name',
+        //     className: 'coinRawItems',
+        // }
+        ];
 
         return (items.map(
             (item, idx) => <TabPane tab={item} key={idx} className="coinsPairs">
                 <Table
                     columns={columns}
                     pagination={false}
+                    rowKey={item.id}
+                    bordered={false}
+                    scroll={{y: 330}}
+
                     onRow={(record) => {
                         return {
                             onClick: () => this.tabsCallback(record),       // click row
                         };
                     }}
                     rowClassName={record => {
-                        if((record.coin === this.props.state.pair.quoteCurrency) && (item ===this.props.state.pair.baseCurrency)) {
+                        if ((record.coin === this.props.state.pair.quoteCurrency) && (item === this.props.state.pair.baseCurrency)) {
                             return 'selected-coin-row'
                         }
                     }}
-                    rowKey={item.id}
                     dataSource={
-                         [...pairs.filter( pair => pair.first === item )]
+                        [...pairs.filter(pair => pair.first === item)]
                             .map(item => ({
-                                    coin: item.quoteCurrency,
-                                    price: item["price"].toFixed(3),
-                                    volume: item["volumeBase"].toFixed(3),
-                                    change: item["change"].toFixed(2),
-                                    name: item.quoteCurrencyName,
-                                    id: item.id,
-                                    key: `key_${item.id}`,
+                                coin: item.quoteCurrency,
+                                price: item["price"].toFixed(3),
+                                volume: item["volumeBase"].toFixed(3),
+                                change: item["change"].toFixed(2),
+                                name: item.quoteCurrencyName,
+                                id: item.id,
+                                key: `key_${item.id}`,
                             }))
                     }
                 />
@@ -152,20 +159,11 @@ class CoinsList extends React.Component {
         }
 
         return (
-            <div>
-                <div className="card-container, currencysPairs">
-                    <div className="card-container-head">
-                        <h3>
-                            Markets
-                        </h3>
-                    </div>
-                    <Tabs type="card" >
-                        { this.state.coins && this.currenciesTabs(this.state.coins) }
-                    </Tabs>
-                </div>
-                {/*<div classNme="coinsList">*/}
-                    {/*<p>Coins List</p>*/}
-                    {/*{this.list(this.state.data)}*/}
+            <div className="currencysPairs table-block">
+                {/*<div className='border2'>*/}
+                <Tabs type="card">
+                    {this.state.coins && this.currenciesTabs(this.state.coins)}
+                </Tabs>
                 {/*</div>*/}
             </div>
         )
@@ -185,7 +183,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
     return {
         actions: bindActionCreators(pair, dispatch),
-            pair: (newPair) => dispatch(pair(newPair)),
+        pair: (newPair) => dispatch(pair(newPair)),
     }
 }
 

@@ -118,7 +118,7 @@ class UserOrder extends React.Component {
         const columns = function (pcompleted) {
             const completed = JSON.parse(pcompleted);
             return [{
-                title: 'date',
+                title: 'Date',
                 dataIndex: completed ? 'completedAt' : 'createdAt',
                 key: 'date',
                 width: 150,
@@ -173,7 +173,6 @@ class UserOrder extends React.Component {
                         key: 'action',
                         width: 150,
                         render: (text, record) => (
-                            <span>
                                 <Button
                                     type="primary"
                                     ghost
@@ -181,11 +180,10 @@ class UserOrder extends React.Component {
                                             onBidButtonClick({status: "cancelled", order: record})
                                             }}
                                     style={{margin: '0 0 0 auto'}}
+                                    className='act-btn'
                                 >
                                     Cancel
                                 </Button>
-                            </span>
-
                         ),
                     }]
                     : []),

@@ -1,22 +1,21 @@
 import React from 'react';
-import logo from '../img/Logo.png';
+import logo from '../img/logo_go.svg';
 import NavLink from './NavLink';
-import '../App.css';
+import '../styles/footer.css';
 
 
 const Footer = () => {
     return (
-        <div className="footer">
-            <div className="footer-container">
+        <div className="footer ">
+            <div className="footer-container size-container">
+                <div className="group">
+                    <img src={logo} alt="Exchange"/>
+                </div>
+
                 <div className="links noWrap">
                     <NavLink to="/contact">
                         <div className="group">
-                            <h3>Contact Us</h3>
-                        </div>
-                    </NavLink>
-                    <NavLink to="/privacy">
-                        <div className="group">
-                            <h3>Privacy Policy</h3>
+                            <h3>About</h3>
                         </div>
                     </NavLink>
                     <NavLink to="/terms">
@@ -24,36 +23,21 @@ const Footer = () => {
                             <h3>Terms of Use</h3>
                         </div>
                     </NavLink>
-                    {/*<NavLink to="/support">*/}
-                        {/*<div className="group">*/}
-                            {/*<h3>Support</h3>*/}
-                        {/*</div>*/}
-                    {/*</NavLink>*/}
+                    <NavLink to="/privacy">
+                        <div className="group">
+                            <h3>Privacy Policy</h3>
+                        </div>
+                    </NavLink>
+                    <NavLink to="/contact">
+                        <div className="group">
+                            <h3>Contact</h3>
+                        </div>
+                    </NavLink>
                 </div>
+            </div>
 
-                <div className="meta">
-                    <div className="group">
-                        <img src={logo} alt="Exchange"/>
-                    </div>
-                    <div className="footer-info">
-                        <div>
-                            <p>
-                                28a Panasa Mirnogo street
-                            </p>
-                            <p>
-                                Kyiv, Ukraine
-                            </p>
-                        </div>
-                        <div>
-                            <a href="tel:+380630101797">
-                                Tel. +38 063 01 01 797
-                            </a>
-                            <a href="mailto:evgeniymeo@gmail.com">
-                                evgeniymeo@gmail.com
-                            </a>
-                        </div>
-                    </div>
-                </div>
+            <div className='copyright-block'>
+                © 2017 - 2018  Gofriends.pro. All rights reserved
             </div>
         </div>
     );

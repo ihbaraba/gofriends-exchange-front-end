@@ -1,0 +1,439 @@
+.centerArea {
+    display: grid;
+    grid-column-gap: 15px;
+    grid-template-columns: 24% 50% 24%;
+    grid-template-areas: "pairInformation pairInformation coins" "market graphic coins" "market graphic orderHistory" "market orders orderHistory" "openOrder openOrder openOrder";
+
+    /*grid-template-columns: 100px 100px 100px;*/
+    /*grid-gap: 10px;*/
+
+    /*flex-wrap: wrap;*/
+    /*justify-content: space-between;*/
+    /*align-items: flex-end;*/
+}
+
+.pair-information {
+    grid-area: pairInformation;
+    margin: 0 0 25px 0;
+}
+
+.current-pair {
+
+}
+
+.current-pair .first {
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.current-pair .second {
+    font-size: 15px;
+
+}
+
+.pair-description {
+    font-size: 11px;
+}
+
+.order-history-block {
+    grid-area: orderHistory;
+}
+
+.order-history-block .table-block{
+   padding: 0.5px;
+}
+
+.order-history-block .table-block {
+    height: 95%;
+}
+
+.order-history-block .ant-tabs-ink-bar {
+    width: inherit !important;
+}
+
+.order-history-block .trade-history-title {
+    font-size: 14px;
+    font-weight: bold;
+    color: #fff;
+    height: 5%;
+    letter-spacing: 1px;
+}
+
+.order-history-block .ant-tabs-nav {
+    height: 34px;
+    padding: 0 10px 0 0;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    background-color: #313131;
+    border: 0.5px solid rgba(0, 0, 0, 0.7);
+    border-radius: 5px 5px 0 0;
+}
+
+.order-history-block .ant-tabs-tab {
+    height: 23px;
+    width: 64px;
+    text-align: center;
+    cursor: pointer;
+    margin-right: 5px;
+    border-radius: 1px;
+    background-color: #000000;
+    font-family: Roboto;
+}
+
+.order-history-block .ant-tabs-tab.ant-tabs-tab-active {
+    background-color: #4A998C;
+}
+
+.order-history-block .row-buy-type td:first-child {
+    color: #00CE7D !important;
+}
+
+.order-history-block .row-sell-type td:first-child {
+    color: #DD4457 !important;
+}
+
+/*marketDepth component*/
+.marketDepth {
+    grid-area: market;
+}
+
+.marketDepth .buy-table {
+    height: 50%;
+    margin-bottom: 28px;
+}
+
+.marketDepth .sell-table {
+    height: 50%;
+}
+
+.marketDepth .buy-table tr td:first-child {
+    color: #DD4457;
+}
+
+.marketDepth .sell-table tr td:first-child {
+    color: #00CE7D;
+}
+
+.marketDepth .marketDepthTables {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+/*graphic component*/
+.rightSide {
+    grid-area: graphic;
+    background-color: rgba(7, 3, 10, 0.35);
+    border: 1.5px solid rgba(255, 255, 255, 0.1) !important;
+    border-radius: 5px;
+    padding: 0.5px;
+}
+
+.rightSide .candlesticks {
+    height: 34px;
+    display: flex;
+    align-items: center;
+    background-color: #313131;
+    border: 0.5px solid rgba(0, 0, 0, 0.7);
+    border-radius: 5px 5px 0 0;
+}
+
+.rightSide .ant-radio-group {
+    display: flex;
+    padding: 0 0 0 5px;
+}
+
+.rightSide .candlesticks .ant-radio-button-wrapper {
+    height: 20px;
+    width: 60px;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    line-height: inherit;
+    border-radius: 1px;
+    background-color: #000000;
+    border: 0;
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+.ant-radio-button-wrapper:not(:first-child)::before {
+    background-color: #000000;
+}
+
+.rightSide .candlesticks .ant-radio-button-wrapper-checked {
+    background: #4A998C;
+    box-shadow: none !important;
+}
+
+/*orders block*/
+.orders {
+    grid-area: orders;
+    width: 100%;
+    background-color: rgba(7,3,10,0.73);
+    border: 1.5px solid rgba(255, 255, 255, 0.15) !important;
+    border-radius: 5px;
+    margin: 15px 0 0 0;
+    padding: 0.5px;
+}
+
+.orders .ant-tabs-bar {
+    border: 0.5px solid rgba(0, 0, 0, 0.7);
+    background-color: #313131;
+    border-radius: 5px 5px 0 0;
+}
+
+.orders .ordersBlock {
+    width: 100%;
+    height: 355px;
+    padding: 20px 30px 35px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: stretch;
+}
+
+.orders .ant-tabs-nav {
+    height: 34px;
+    padding: 0 0 0 5px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.orders .buy-order {
+    width: 50%;
+    padding: 0 20px 20px 0;
+    border-right: 1px solid #3B3D3E;
+}
+
+.orders .ordersBlock input[type='text'] {
+    height: 30px;
+    width: 160px;
+    border: 1px solid rgba(255, 255, 255, 0.39);
+    margin-right: -1px;
+    border-right: 0;
+    border-radius: 1px;
+    color: #fff !important;
+    text-align: left;
+    background-color: #000000;
+    box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.35);
+}
+
+.orders .ordersBlock .ant-input-group-addon {
+    color: rgba(255, 255, 255, 0.51);
+    height: 30px;
+    width: 50px;
+    border: 1px solid rgba(255, 255, 255, 0.39);
+    border-left: 0;
+    border-radius: 1px;
+    background-color: #000000;
+    box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.35);
+}
+
+.orders__item span.ant-input-wrapper.ant-input-group {
+    width: 210px;
+    margin-left: auto;
+}
+
+.orders .rate-block {
+    justify-content: flex-end;
+}
+
+.orders .orders__item {
+    display: flex;
+    justify-content: space-between;
+    color: #ffffff;
+    align-items: center;
+    margin-top: 15px;
+    /*margin-bottom: 10px;*/
+}
+
+.orders .ant-radio-group {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.orders .rate-block .ant-radio-button-wrapper {
+    height: 26px;
+    width: 47px;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 0 0 7px;
+    border: 1px solid rgba(255, 255, 255, 0.39);
+    border-radius: 1px;
+    background-color: #000000;
+    cursor: pointer;
+}
+
+.orders .rate-block .ant-radio-button-wrapper:last-child {
+    margin: 0 0 0 8px;
+}
+
+.orders .ant-radio-button-wrapper-checked {
+    background: #4A998C !important;
+    box-shadow: none !important;
+    border: 0 !important;
+}
+
+.orders .ant-radio-button-wrapper:not(:first-child)::before {
+    background: rgba(255, 255, 255, 0.39);
+}
+
+.orders .sell-order {
+    width: 50%;
+    padding: 0 0 20px 20px;
+}
+
+.orders .order-action-btn {
+    width: 100%;
+    height: 36px;
+    box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.35);
+    border: 0;
+    border-radius: 2px;
+    font-weight: bold;
+    margin: 47px 0 0 0;
+}
+
+.orders .order-action-btn.order-buy-btn {
+    background-color: #00CE7D;
+}
+
+.orders .order-action-btn.order-sell-btn {
+    background-color: #DD4457;
+}
+
+.orders .ant-tabs-nav .ant-tabs-tab {
+    height: 23px;
+    width: 82px;
+    border-radius: 1px;
+    background-color: #000000;
+    text-align: center;
+    margin: 0 0 0 10px;
+    cursor: pointer;
+}
+
+.orders .ant-tabs-nav .ant-tabs-tab-active {
+    background: #4A998C !important;
+}
+
+.orders .ant-tabs-ink-bar-animated {
+    width: inherit !important;
+}
+
+/*coins list component*/
+.currencysPairs {
+    grid-area: coins;
+    margin: 10px 0 0 0;
+    padding: 0.5px;
+    height: 92%;
+}
+
+.currencysPairs .ant-tabs-bar {
+    height: 34px;
+    background-color: #313131;
+    border: 0.5px solid rgba(0, 0, 0, 0.7);
+    border-radius: 5px 5px 0 0;
+}
+
+.currencysPairs .ant-table-header tr th:first-child {
+    padding-left: 20px;
+}
+
+.currencysPairs .ant-table-thead th {
+    text-align: center;
+}
+
+.currencysPairs .ant-tabs-ink-bar-animated {
+    width: inherit !important;
+}
+
+.currencysPairs .ant-table-thead th span {
+    display: flex;
+    align-items: center;
+    /*justify-content: center;*/
+}
+
+.currencysPairs .ant-tabs-nav {
+    height: 31px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.currencysPairs .ant-tabs-bar .ant-tabs-tab {
+    height: 23px;
+    width: 46px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #000000;
+    border-radius: 1px;
+    color: #fff;
+    font-size: 12px;
+    font-weight: 500;
+    margin: 0 7px 0 0;
+    cursor: pointer;
+}
+
+.currencysPairs .ant-table-tbody tr {
+    cursor: pointer;
+}
+
+.currencysPairs .ant-tabs-bar .ant-tabs-tab-active {
+    background: #4A998C !important;
+}
+
+.ant-table-column-sorter-up.on .anticon-caret-up,
+.ant-table-column-sorter-down.on .anticon-caret-up,
+.ant-table-column-sorter-up.on .anticon-caret-down,
+.ant-table-column-sorter-down.on .anticon-caret-down {
+    color: #4A998C;
+}
+
+.currencysPairs .selected-coin-row {
+    background: #1B1B1B !important;
+}
+
+/*open-orders-block*/
+.open-orders-block {
+    grid-area: openOrder;
+    margin-top: 25px;
+}
+
+/*default table style*/
+.centerArea .table-block {
+    box-sizing: border-box;
+    border: 1.5px solid rgba(255, 255, 255, 0.1) !important;
+    background-color: rgba(7, 3, 10, 0.35);
+    box-shadow: 0 3px 15px 0 rgba(0, 0, 0, 0.19);
+    border-radius: 5px;
+}
+
+.centerArea .table-block .ant-table-header {
+    border-bottom: 1px solid #696969 !important;
+    padding: 7px 0;
+}
+
+.centerArea .table-block .ant-table-header th {
+    /*padding: 12px 0;*/
+}
+
+.centerArea .table-block .table-title {
+    height: 34px;
+    display: flex;
+    align-items: center;
+    padding: 0 0 0 24px;
+    color: #fff;
+    font-weight: bold;
+    font-size: 14px;
+    letter-spacing: 1px;
+    background-color: #313131;
+    border: 0.5px solid rgba(0, 0, 0, 0.7);
+    border-radius: 5px 5px 0 0;
+}

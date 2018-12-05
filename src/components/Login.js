@@ -6,8 +6,10 @@ import Recaptcha from 'react-recaptcha';
 import {login_success} from "../actions/UserActions";
 import {LOGIN} from "../constants/APIURLS";
 import {sendRequest} from "./Graphic/utils";
+import logo from '../img/logo_go.svg';
 
-// import '../App.css';
+
+import '../styles/login.css';
 
 class Login extends Component {
     constructor(props) {
@@ -126,99 +128,110 @@ class Login extends Component {
     render() {
         const {showTotpCodeInput} = this.state;
         return (
-            <div>
-                <div style={{clear: "both"}}>
-                    <h1 className="sign">Sign in to you account</h1>
-                </div>
-                <div className="featureBanner form2col">
-                    <div className="formWrapper">
-                        <div className="column1">
-                            <h3 className="standard">Sign In</h3>
-                            <p className="formError">
-                                {this.state.error}
-                            </p>
+            <div className='login-page'>
+                {/*<div style={{clear: "both"}}>*/}
+                {/*<h1 className="sign">Sign in to you account</h1>*/}
+                {/*</div>*/}
+                <div className="login-form">
+                    <div className='back-btn' onClick={() => window.history.back()}>
+                        <i className="fa fa-angle-left" aria-hidden="true"></i>
+                        Back
+                    </div>
 
-                            <form onSubmit={this.handleSubmit}>
-                                <fieldset className="aboveCaptcha">
-                                    {(!showTotpCodeInput) && <div>
-                                        <div>
-                                            <input
-                                                className="userPassInput"
-                                                type="email"
-                                                name="username"
-                                                placeholder="Email"
-                                                id="username"
-                                                value={this.state.email}
-                                                onChange={this.handleEmail}
-                                                required
-                                            />
-                                        </div>
+                    <img src={logo} alt=""/>
 
-                                        <div>
-                                            <input
-                                                className="userPassInput"
-                                                type="password"
-                                                name="password"
-                                                id="password"
-                                                placeholder="Password"
-                                                value={this.state.password}
-                                                onChange={this.handlePassword}
-                                                required
-                                            />
-                                        </div>
+                    <div className='login-title-block'>
+                        <hr className='hr-login'/>
+                        <span>Login</span>
+                        <hr className='hr-login'/>
+                    </div>
 
-                                        <Recaptcha
-                                            sitekey="6LdXEH0UAAAAANNTQtS9e4ZwdASHuZ5zWM7psA2S"
-                                            render="explicit"
-                                            theme='dark'
-                                            verifyCallback={this.handleChangeRecaptcha}
-                                        />
-                                    </div>}
-                                    {(showTotpCodeInput) && <div>
-                                        <h4>You have 2 factor authentication enabled.<br/>Please Enter Your Google
-                                            Authenticator Six-Digit Code</h4>
-                                        <input
-                                            className="userPassInput"
-                                            type="totpCode"
-                                            name="totpCode"
-                                            id="totpCode"
-                                            placeholder="TotpCode"
-                                            value={this.state.totpCode}
-                                            onChange={this.handleTotpCode}
-                                            required
-                                            style={{"color": "#000"}}
-                                        />
-                                    </div>}
-                                </fieldset>
+                    <form onSubmit={this.handleSubmit}>
+                        <fieldset className="aboveCaptcha">
+                            {(!showTotpCodeInput) && <div>
+                                <div className='login-form-item'>
+                                    <label>Email</label>
+                                    <input
+                                        className="userPassInput"
+                                        type="email"
+                                        name="username"
+                                        placeholder="Email"
+                                        id="username"
+                                        value={this.state.email}
+                                        onChange={this.handleEmail}
+                                        required
+                                    />
+                                </div>
 
-                                <button className="signUpButton fixed-width-btn" type="submit" name="login">
-                                    Sign in
-                                </button>
+                                <div className='login-form-item'>
+                                    <label>Password</label>
+                                    <input
+                                        className="userPassInput"
+                                        type="password"
+                                        name="password"
+                                        id="password"
+                                        placeholder="Password"
+                                        value={this.state.password}
+                                        onChange={this.handlePassword}
+                                        required
+                                    />
+                                </div>
+
                                 <div className='reset-password-block'>
                                     <NavLink to='/resetPassword'>
                                         Forgot your password?
                                     </NavLink>
                                 </div>
-                            </form>
 
-                            {/*<NavLink to="/resetPassword" className="forgot colored-link">Forgot your password</NavLink>*/}
-                        </div>
+                                <Recaptcha
+                                    sitekey="6LdXEH0UAAAAANNTQtS9e4ZwdASHuZ5zWM7psA2S"
+                                    render="explicit"
+                                    theme='dark'
+                                    verifyCallback={this.handleChangeRecaptcha}
+                                />
+                            </div>}
+                            {(showTotpCodeInput) && <div>
+                                <h4>You have 2 factor authentication enabled.<br/>Please Enter Your Google
+                                    Authenticator Six-Digit Code</h4>
+                                <input
+                                    className="userPassInput"
+                                    type="totpCode"
+                                    name="totpCode"
+                                    id="totpCode"
+                                    placeholder="TotpCode"
+                                    value={this.state.totpCode}
+                                    onChange={this.handleTotpCode}
+                                    required
+                                    style={{"color": "#000"}}
+                                />
+                            </div>}
+                        </fieldset>
 
-                        <div className="column2">
-                            <h3 className="standard">Don't have an account?</h3>
-                            <p>Create one to start trading on the world's most active digital asset exchange.</p>
-                            <NavLink to="/signup">
-                                <button
-                                    className="signUpButton  fixed-width-btn"
-                                    type="submit"
-                                    name="createAccount">
-                                    Create Your Account
-                                </button>
+                        <button className="signUpButton" type="submit" name="login">
+                            Login
+                        </button>
+
+                        <div className='havnt-account'>
+                            <NavLink to='/signup'>
+                                I don’t have an account
                             </NavLink>
                         </div>
-
-                    </div>
+                    </form>
+                    {/*<NavLink to="/resetPassword" className="forgot colored-link">Forgot your password</NavLink>*/}
                 </div>
+
+                {/*<div className="column2">*/}
+                {/*<h3 className="standard">Don't have an account?</h3>*/}
+                {/*<p>Create one to start trading on the world's most active digital asset exchange.</p>*/}
+                {/*<NavLink to="/signup">*/}
+                {/*<button*/}
+                {/*className="signUpButton  fixed-width-btn"*/}
+                {/*type="submit"*/}
+                {/*name="createAccount">*/}
+                {/*Create Your Account*/}
+                {/*</button>*/}
+                {/*</NavLink>*/}
+                {/*</div>*/}
 
             </div>
         )

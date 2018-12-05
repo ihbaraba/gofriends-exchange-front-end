@@ -33,6 +33,7 @@ import ProfileVerification from './components/ProfileVerification';
 import Footer from './components/Footer';
 import Header from './components/Header';
 
+
 import YourOpenOrders from "./components/YourOpenOrders";
 
 
@@ -46,43 +47,44 @@ class App extends Component {
                             <Header/>
                         </div>
 
-                        <div className="w-content">
-                            <Switch>
-                                <Route exact path="/" component={WelcomePage}/>
-                                <Route exact path="/" component={Registration}/>
-                                <Route path="/exchange" component={ExchangePage}/>
-                                <Route path="/margintrading" component={MarginTrading}/>
-                                <Route path="/login" component={Login}/>
-                                <Route path="/logout" component={LogOut}/>
-                                <Route path="/signup" component={Registration}/>
-                                <Route path="/profile" component={Profile}/>
-                                <Route path="/resetPassword" component={ResetPassword}/>
-                                <Route path="/2fa" component={TwoFactorAuth}/>
-                                <Route path="/login2" component={Login2}/>
-                                <Route path="/contact" component={ContactUs}/>
-                                <Route path="/privacy" component={Policy}/>
-                                <Route path="/terms" component={Terms}/>
-                                <Route path="/activate" component={Activate}/>
-                                <Route path="/changepassword" component={ChangePassword}/>
-                                <Route path="/balances" component={Balances}/>
-                                {/*<Route path="/balances" component={UserInfo}/>*/}
-                                <Route path="/orders" component={UserOrdersHistory}/>
-                                <Route path="/loginhistory" component={LoginHistory}/>
+                        <div className="w-content first-background">
+                            <div className='size-container'>
+                                <Switch>
+                                    <Route exact path="/" component={WelcomePage}/>
+                                    <Route exact path="/" component={Registration}/>
+                                    <Route path="/exchange" component={ExchangePage}/>
+                                    <Route path="/margintrading" component={MarginTrading}/>
+                                    <Route path="/login" component={Login}/>
+                                    <Route path="/logout" component={LogOut}/>
+                                    <Route path="/signup" component={Registration}/>
+                                    <Route path="/profile" component={Profile}/>
+                                    <Route path="/resetPassword" component={ResetPassword}/>
+                                    <Route path="/2fa" component={TwoFactorAuth}/>
+                                    <Route path="/login2" component={Login2}/>
+                                    <Route path="/contact" component={ContactUs}/>
+                                    <Route path="/privacy" component={Policy}/>
+                                    <Route path="/terms" component={Terms}/>
+                                    <Route path="/activate" component={Activate}/>
+                                    <Route path="/changepassword" component={ChangePassword}/>
+                                    <Route path="/balances" component={Balances}/>
+                                    <Route path="/orders" component={UserOrdersHistory}/>
+                                    <Route path="/loginhistory" component={LoginHistory}/>
 
-                                <Route path="/OpenOrders" component={OpenOrders}/>
-                                <Route path="/Bann" component={Bann}/>
-                                <Route path="/OrderPanel" component={OrderPanel}/>
-                                <Route path="/DepositHistory" component={DepositHistory}/>
-                                <Route path="/withdrawalpanel" component={Withdrawalpanel}/>
-                                <Route path="/Transactions" component={Transactions}/>
-                                <Route path="/Confirm" component={Confirm}/>
-                                <Route path="/BalancesPanel" component={BalancesPanel}/>
-                                <Route path="/YourOpenOrders" component={YourOpenOrders}/>
-                                <Route path="/Knowledge" component={Knowledge}/>
-                                <Route path="/ProfileVerification" component={ProfileVerification}/>
+                                    <Route path="/OpenOrders" component={OpenOrders}/>
+                                    <Route path="/Bann" component={Bann}/>
+                                    <Route path="/OrderPanel" component={OrderPanel}/>
+                                    <Route path="/DepositHistory" component={DepositHistory}/>
+                                    <Route path="/withdrawalpanel" component={Withdrawalpanel}/>
+                                    <Route path="/Transactions" component={Transactions}/>
+                                    <Route path="/Confirm" component={Confirm}/>
+                                    <Route path="/BalancesPanel" component={BalancesPanel}/>
+                                    <Route path="/YourOpenOrders" component={YourOpenOrders}/>
+                                    <Route path="/Knowledge" component={Knowledge}/>
+                                    <Route path="/ProfileVerification" component={ProfileVerification}/>
 
-                                <Route path="*" component={NotFound}/>
-                            </Switch>
+                                    <Route path="*" component={NotFound}/>
+                                </Switch>
+                            </div>
                         </div>
 
                         <div className="w-footer">

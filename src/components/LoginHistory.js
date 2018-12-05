@@ -42,11 +42,12 @@ class LoginHistory extends Component {
             }
         ]
         return (
-            <div>
-                <div style={{clear: "both"}}>
-                    <h1 className="sign">MY LOGIN HISTORY</h1>
+            <div className='card-container'>
+                <div className='card-container-head'>
+                    <h3>My login history</h3>
                 </div>
-                <div className="orderBookWrap">
+
+                <div className="table">
                     <Table
                         columns={this.columns}
                         dataSource={testData}

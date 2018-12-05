@@ -1,0 +1,19 @@
+.footer {
+    height: 163px;
+    display: flex;
+    flex: 0 0 auto;
+    flex-direction: column;
+    padding: 50px 0 30px 0;
+    background-color: #1A1A1A;
+}
+
+.footer .footer-container {
+    display: flex;
+    width: 80%;
+    justify-content: space-between;
+}
+
+.footer .copyright-block {
+    text-align: center;
+    margin: 30px 0 0 0;
+}

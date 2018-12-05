@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {Component, Fragment} from 'react';
 import {connect} from 'react-redux';
 
 import Orders from './Orders';
@@ -6,6 +6,7 @@ import Graphic from './Graphic/Graphic'
 import MarketDepth from './MarketDepth'
 import OrdersHistory from './OrdersHistory'
 import CoinsList from "./CoinsList";
+import UserOrder from './UserOrder';
 import UserInfo from "./UserInfo";
 import Notices from './Notices';
 import initialState from "../store/initialState";
@@ -15,7 +16,7 @@ import {ORDERS, USERINFO} from "./../constants/APIURLS.js"
 import {login_success, save_user_info, save_user_orders} from "../actions/UserActions";
 import {chart_timing, chart_range} from "../actions/ChartActions";
 import "antd/lib/radio/style/css";
-import '../App.css';
+import '../styles/exchangePage.css';
 
 class ExchangePage extends Component {
 
@@ -33,6 +34,8 @@ class ExchangePage extends Component {
 
 
     async componentDidMount() {
+        document.querySelector('.w-content').classList.add('second-background');
+
         /**
          * Read token -  check if the current session is authorized
          * then request user data
@@ -58,6 +61,10 @@ class ExchangePage extends Component {
         //     dateFrom: format(offsetData),
         //     dateTo: format(currentDatePlusOdin),
         // });
+    }
+
+    componentWillUnmount() {
+        document.querySelector('.w-content').classList.remove('second-background');
     }
 
     async firePostToServer(bidProps) {
@@ -92,31 +99,25 @@ class ExchangePage extends Component {
         const {interval, isAuthorised} = this.state;
         // console.log(this.props);
         return (
-            <div>
+            <Fragment>
                 {(!isAuthorised) &&
                 <div className="wrapper-all">
                     <h3><b>You have not been authorized. Please go to the authorization page.</b></h3>
                 </div>}
                 {isAuthorised &&
                 <div className="wrapper-all">
-
-                    <div style={{display: "flex", alignItems: "center", justifyContent: "center"}}>
-                        <div className="padding" style={{flex: "1 0", clear: "both"}}>
-                            <h1 className="h1">{`${baseCurrencyName} exchange on ${quoteCurrencyName}`} </h1>
-                            <p className="small-text">{`${first} / ${second}`}</p>
-                        </div>
-                    </div>
-
                     <div className="centerArea">
-                        <div className="rightSide">
-                            <Graphic
-                                pairId={id}
-                                dateFrom={dateFrom}
-                                dateTo={dateTo}
-                                take={100}
-                                interval={interval}
-                                appendFake={"false"}
-                            />
+                        <div className='pair-information' style={{display: "flex", alignItems: "center", justifyContent: "center"}}>
+                            <div className="padding" style={{flex: "1 0", clear: "both"}}>
+                                <div className="small-text current-pair"><span className='first'>{first}</span>/<span className='second'>{second}</span></div>
+
+                                <div className="pair-description">{`${baseCurrencyName} exchange on ${quoteCurrencyName}`} </div>
+                            </div>
+                        </div>
+
+                        <MarketDepth currentPair={this.state.currentPair}/>
+
+                        <div className="rightSide ">
                             <div className="candlesticks">
                                 <Radio.Group value={interval} onChange={this.handleTimeFrameChange}>
                                     <Radio.Button value="5min">5-min</Radio.Button>
@@ -128,34 +129,44 @@ class ExchangePage extends Component {
                                     <Radio.Button value="1day">1-day</Radio.Button>
                                 </Radio.Group>
                             </div>
+
+                            <Graphic
+                                pairId={id}
+                                dateFrom={dateFrom}
+                                dateTo={dateTo}
+                                take={100}
+                                interval={interval}
+                                appendFake={"false"}
+                            />
                         </div>
-                        <div className="side">
-                            <CoinsList setCurentCoinsPair2State={this.setCurrentCoinsPair2State}/>
+
+                        <Orders
+                            {...pair}
+                            price={52}
+                            amount={1}
+                            loanRate={2}
+                            firePostToServer={this.firePostToServer}
+                        />
+
+                        <CoinsList setCurentCoinsPair2State={this.setCurrentCoinsPair2State}/>
+
+                        <OrdersHistory/>
+
+                        <div className='open-orders-block table-block'>
+                            <div className='table-title'>
+                                Open orders
+                            </div>
+                            <UserOrder completed="false"/>
                         </div>
                     </div>
+
                     <div className="centerArea-second">
                         <div className="main-content">
-                            <UserInfo short/>
-                            <MarketDepth currentPair={this.state.currentPair}/>
-                            <Orders {...pair} price={52} amount={1} loanRate={2}
-                                    firePostToServer={this.firePostToServer}/>
-                            <OrdersHistory/>
                         </div>
-                        <div className="box notices">
-                            <div className="head">
-                                <div><h3>Notices</h3></div>
-                                <div className="social">
-                                    <a href="" className="twitter-icon"> </a>
-                                </div>
-                            </div>
-
-                            <Notices />
-                        </div>
-
                     </div>
                 </div>
                 }
-            </div>
+            </Fragment>
         )
     }
 }

@@ -5,7 +5,10 @@ import {getData, sendRequest} from "./Graphic/utils";
 import {REGISTER, COUNTRIES, LOGIN} from "../constants/APIURLS";
 import {login_success} from "../actions/UserActions";
 import {Switch} from 'antd';
-import '../App.css';
+import logo from '../img/logo_go.svg';
+import NavLink from './NavLink';
+
+import '../styles/registration.css';
 
 // import 'antd/dist/antd.css';
 
@@ -264,137 +267,136 @@ class Registration extends Component {
             </div>
         ;
 
-
         return (
-            <div>
-                <div style={{clear: "both"}}>
-                    <h1 className="create">CREATE YOUR ACCOUNT</h1>
-                    <div className="featureBanner form2col">
-                        <div className="formWrapper">
-                            <div className="formHelp">
-
-                                <div className="test5">
-                                    <p>Registering on GoFriends Exchange is the first step toward creating an account.
-                                        Once your email
-                                        is confirmed, you'll need to complete your profile and verify your identity
-                                        before
-                                        you can begin trading.</p>
-                                </div>
-
-                            </div>
-                            {(!showQRCode) &&
-                            <div className="column1">
-                                <form onSubmit={this.handlerRegistrationSubmit}>
-                                    <fieldset className="aboveCaptcha">
-                                        <div>
-                                            <label>First Name Last Name</label>
-                                            <input
-                                                className="userPassInput"
-                                                type="userName"
-                                                name="username"
-                                                value={this.state.userName}
-                                                onChange={this.handleUserName}
-                                                id="userNAme"
-                                                required/>
-                                        </div>
-                                        <div>
-                                            <label>Country:</label>
-                                            <select required key={country} onChange={this.handleChangeCountry}
-                                                    value={country} style={{color: "#000",}}>
-                                                <option value='' selected>{country}</option>
-                                                {Object.keys(options).map(item => (
-                                                    <option key={options[item]["code"]} value={options[item]["name"]}
-                                                            code={item.code} id={options[item]["id"]}>
-                                                        {options[item]["name"]}
-                                                    </option>
-                                                ))}
-                                            </select>
-                                        </div>
-                                        <div>
-                                            <label>Email:</label>
-                                            <input
-                                                className="userPassInput"
-                                                type="email"
-                                                name="email"
-                                                value={this.state.email}
-                                                onChange={this.handleEmail}
-                                                id="email"
-                                                required/>
-                                        </div>
-                                        <div>
-                                            <label>Password:</label>
-                                            <input
-                                                className="userPassInput"
-                                                type="password"
-                                                name="password"
-                                                value={this.state.password}
-                                                onChange={this.handlePassword}
-                                                id="password"
-                                                required/>
-                                        </div>
-                                        <div>
-                                            <label>Repeat Password:</label>
-                                            <input
-                                                className="userPassInput"
-                                                type="password"
-                                                name="confirmPassword"
-                                                value={this.state.confirmPassword}
-                                                onChange={this.handleConfirmPassword}
-                                                id="password2"
-                                                required/>
-                                        </div>
-                                    </fieldset>
-
-                                    <p>
-                                        <input type="checkbox" name="terms" required/> I agree to the
-                                        <a href="/terms"
-                                           className="forgot"> Terms of Use
-                                        </a>.
-                                    </p>
-
-                                    <Recaptcha
-                                        sitekey="6LdXEH0UAAAAANNTQtS9e4ZwdASHuZ5zWM7psA2S"
-                                        render="explicit"
-                                        theme='dark'
-                                        verifyCallback={this.handleChangeRecaptcha}
-                                    />
-
-                                    <button className="signUpButton" type="submit" name="createAccount"
-                                            disabled={!this.validateForm}>
-                                        Register
-                                    </button>
-                                </form>
-                            </div>
-                            }
-                            {showQRCode &&
-                            <div className="column1">
-                                <form onSubmit={this.handleSignInSubmit}>
-                                    <fieldset className="aboveCaptcha">
-                                        <p><strong>Thank you for registration. </strong></p>
-                                        <p>if you need to make your account more secure, </p>
-                                        <p>we can offer you to use 2 factor authentication. </p>
-                                        <p><strong>Turn on/off 2-factor authentication </strong>
-                                            <Switch onChange={this.swithOnChange}/></p>
-                                        {content}
-                                    </fieldset>
-                                </form>
-                            </div>
-                            }
-                            <div className="column2">
-                                <p>The email address you provide will become your GoFriends Exchange ID and will be used
-                                    for all
-                                    future communications, including account recovery. <strong>Protect your email
-                                        account like you would your GoFriends account.</strong> Sign-ups using throwaway
-                                    email addresses will be rejected.</p>
-                                <p>Your password must be at least 8 characters long, but it is HIGHLY recommended that
-                                    you choose a random, alphanumeric password of at least 32 characters.</p>
-                                <p>NEVER use a password for an exchange that you use ANYWHERE else, especially for the
-                                    email address you sign up with.</p>
-                            </div>
-                        </div>
+            <div className='registration-page login-page'>
+                <div className='registration-form login-form'>
+                    <div className='back-btn' onClick={() => window.history.back()}>
+                        <i className="fa fa-angle-left" aria-hidden="true"></i>
+                        Back
                     </div>
-                </div>
 
+                    <img src={logo} alt=""/>
+
+                    <div className='login-title-block'>
+                        <hr className='hr-login'/>
+                        <span>Sign up</span>
+                        <hr className='hr-login'/>
+                    </div>
+
+                    {(!showQRCode) &&
+                    <form onSubmit={this.handlerRegistrationSubmit}>
+                        <fieldset className="aboveCaptcha">
+                            <div className='login-form-item'>
+                                <label>Full Name</label>
+                                <input
+                                    className="userPassInput"
+                                    type="userName"
+                                    name="username"
+                                    value={this.state.userName}
+                                    onChange={this.handleUserName}
+                                    id="userNAme"
+                                    required/>
+                            </div>
+                            <div className='login-form-item'>
+                                <label>Country:</label>
+                                <select required key={country} onChange={this.handleChangeCountry}
+                                        value={country} style={{color: "#000",}}>
+                                    <option value='' selected>{country}</option>
+                                    {Object.keys(options).map(item => (
+                                        <option key={options[item]["code"]} value={options[item]["name"]}
+                                                code={item.code} id={options[item]["id"]}>
+                                            {options[item]["name"]}
+                                        </option>
+                                    ))}
+                                </select>
+                            </div>
+                            <div className='login-form-item'>
+                                <label>Email:</label>
+                                <input
+                                    className="userPassInput"
+                                    type="email"
+                                    name="email"
+                                    value={this.state.email}
+                                    onChange={this.handleEmail}
+                                    id="email"
+                                    required/>
+                            </div>
+                            <div className='login-form-item'>
+                                <label>Password:</label>
+                                <input
+                                    className="userPassInput"
+                                    type="password"
+                                    name="password"
+                                    value={this.state.password}
+                                    onChange={this.handlePassword}
+                                    id="password"
+                                    required/>
+                            </div>
+                            <div className='login-form-item'>
+                                <label>Repeat Password:</label>
+                                <input
+                                    className="userPassInput"
+                                    type="password"
+                                    name="confirmPassword"
+                                    value={this.state.confirmPassword}
+                                    onChange={this.handleConfirmPassword}
+                                    id="password2"
+                                    required/>
+                            </div>
+                        </fieldset>
+
+                        <div className='recaptcha-and-terms'>
+                            <div className='terms-of-us'>
+
+                                <label className="checkbox-container">
+                                        <input type="checkbox" name="terms" required/>
+                                        <span className="checkmark"></span>
+                                </label>
+
+                                <span>
+                                    I agree to the <br/>
+                                    <a href="/terms" className="forgot">
+                                        Terms of Use
+                                    </a>.
+                                </span>
+                            </div>
+
+                            <Recaptcha
+                                sitekey="6LdXEH0UAAAAANNTQtS9e4ZwdASHuZ5zWM7psA2S"
+                                render="explicit"
+                                theme='dark'
+                                verifyCallback={this.handleChangeRecaptcha}
+                            />
+                        </div>
+
+
+                        <button className="signUpButton" type="submit" name="createAccount"
+                                disabled={!this.validateForm}>
+                            Creae my account
+                        </button>
+
+                        <div className='havnt-account'>
+                            <NavLink to='/login'>
+                                I already have an account
+                            </NavLink>
+                        </div>
+                    </form>
+                    }
+                    {showQRCode &&
+                    <div className="column1">
+                        <form onSubmit={this.handleSignInSubmit}>
+                            <fieldset className="aboveCaptcha">
+                                <p><strong>Thank you for registration. </strong></p>
+                                <p>if you need to make your account more secure, </p>
+                                <p>we can offer you to use 2 factor authentication. </p>
+                                <p><strong>Turn on/off 2-factor authentication </strong>
+                                    <Switch onChange={this.swithOnChange}/></p>
+                                {content}
+                            </fieldset>
+                        </form>
+                    </div>
+                    }
+                </div>
             </div>
         )
     }

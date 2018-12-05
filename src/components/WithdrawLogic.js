@@ -146,7 +146,7 @@ class WithdrawLogic extends Component {
                 trigger="click"
                 placement="topRight">
 
-                <div className="act-btn">Withdraw {record.code}</div>
+                <div className="act-btn">Withdrawal</div>
 
             </Tooltip>
         )

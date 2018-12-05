@@ -38,11 +38,12 @@ class DepositHistory extends Component {
 
     render() {
         return (
-            <div>
-                <div style={{clear: "both"}}>
-                    <h1 className="sign">DEPOSIT HISTORY</h1>
+            <div className='card-container'>
+                <div className="card-container-head">
+                    <h3>Deposit history</h3>
                 </div>
-                <div className="orderBookWrap">
+
+                <div className="table">
                     <Table
                         columns={this.columns}
                         bordered={false}
@@ -51,7 +52,6 @@ class DepositHistory extends Component {
                         scroll={{y: 330}}
                         size="small"
                         rowClassName="custom__tr"/>
-
                 </div>
             </div>
         )

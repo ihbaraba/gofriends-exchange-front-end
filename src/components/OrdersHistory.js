@@ -1,11 +1,14 @@
-import React, {Component} from 'react';
-import { connect } from 'react-redux'
+import React, {Component, Fragment} from 'react';
+import {connect} from 'react-redux'
 import PropTypes from 'prop-types';
-import {Table} from 'antd';
+import {Table, Tabs} from 'antd';
 import {getOrdersHistory} from "./../utils"
-import { ORDERSHISTORY} from "./../constants/APIURLS.js"
+import {ORDERSHISTORY} from "./../constants/APIURLS.js"
 import {save_user_info} from "../actions/UserActions";
 import UserOrder from "./UserOrder";
+
+const TabPane = Tabs.TabPane;
+
 
 class OredersHistory extends Component {
     constructor() {
@@ -22,7 +25,7 @@ class OredersHistory extends Component {
 
     calculateSum(bids) {
 
-        const calculated = bids.map( bid => {
+        const calculated = bids.map(bid => {
             // const {pair: { baseCurrency, quoteCurrency } } = this.props;
             // console.log( baseCurrency, quoteCurrency, this.props );
 
@@ -38,7 +41,7 @@ class OredersHistory extends Component {
                 amount: +amount.toFixed(5),
                 Sum: +(bid.initialAmount * bid.price).toFixed(5),
                 quoteCurrency: +(bid.initialAmount * bid.price).toFixed(5),
-        })
+            })
         });
         return calculated
     }
@@ -70,59 +73,75 @@ class OredersHistory extends Component {
 
     render() {
         const {orders} = this.state;
-        const {pair: { baseCurrency, quoteCurrency } } = this.props;
+        const {pair: {baseCurrency, quoteCurrency}} = this.props;
         // console.log( baseCurrency, quoteCurrency, this.props );
 
-        const columns = [{
-            title: 'Date',
-            dataIndex: 'completedAt',
-            key: 'date',
-            width: 150,
-        },{
-            title: 'Type',
-            dataIndex: 'type',
-            key: 'type',
-            width: 150,
-        },{
-            title: `Price(${baseCurrency})`,
-            dataIndex: 'price',
-            key: 'price',
-            width: 150,
-        }, {
-            title: `Amount(${quoteCurrency})`,
-            dataIndex: 'amount',
-            key: 'amount',
-            width: 150,
-        }, {
-            title: `Sum(${baseCurrency})`,
-            dataIndex: 'Sum',
-            key: 'Sum',
-            width: 150,
-        }];
+        const columns = [
+            //     {
+            //     title: 'Type',
+            //     dataIndex: 'type',
+            //     key: 'type',
+            //     width: 150,
+            // },
+            {
+                title: `Price(${baseCurrency})`,
+                dataIndex: 'price',
+                key: 'price',
+                width: 150,
+            },
+            {
+                title: `Amount(${quoteCurrency})`,
+                dataIndex: 'amount',
+                key: 'amount',
+                width: 150,
+            },
+            //     {
+            //     title: `Sum(${baseCurrency})`,
+            //     dataIndex: 'Sum',
+            //     key: 'Sum',
+            //     width: 150,
+            // }
+            {
+                title: 'Date',
+                dataIndex: 'completedAt',
+                key: 'date',
+                width: 150,
+            },
+        ];
 
         return (
-            <div className="marketDepth order-history-block">
-                <div className="marketDepthTables">
-                    <div className="marketDepthColumns">
-                        <h5>YOUR OPEN ORDERS</h5>
-                        <UserOrder completed="false"/>
-                    </div>
+            <div className="order-history-block">
+                {/*<div className="marketDepthTables">*/}
+                {/*<div className="marketDepthColumns">*/}
+                {/*<h5>YOUR OPEN ORDERS</h5>*/}
+                {/*</div>*/}
+                {/*</div>*/}
+                <div className='trade-history-title'>
+                    Trade history
                 </div>
-                <div className="marketDepthTables">
-                    <div className="marketDepthColumns">
-                        <h5>TRADE HISTORY</h5>
-                        <Table
-                            columns={columns}
-                            dataSource={orders}
-                            bordered={false}
-                            pagination={false}
-                            scroll={{y: 240}}
-                            rowKey={record => record.id}
-                            size="small"
-                            rowClassName="custom__tr"
-                        />
-                    </div>
+
+                <div className='table-block'>
+
+                    <Tabs defaultActiveKey="1" type="card">
+                        <TabPane tab="Market" key="1">
+                            <Table
+                                columns={columns}
+                                dataSource={orders}
+                                bordered={false}
+                                pagination={false}
+                                scroll={{y: 630}}
+                                rowKey={record => record.id}
+                                rowClassName={record => record.type === 'buy' ? 'custom__tr row-buy-type' : 'custom__tr row-sell-type'}
+                                size="small"
+                            />
+                        </TabPane>
+
+                        <TabPane tab="Yours" key="2">
+                            <UserOrder completed="true"/>
+                        </TabPane>
+                    </Tabs>
                 </div>
+
             </div>
         )
     }
@@ -146,7 +165,7 @@ OredersHistory.propTypes = {
 
 function mapStateToProps(state) {
     return {
-        user:  state.user,
+        user: state.user,
         pair: state.pair,
     }
 }

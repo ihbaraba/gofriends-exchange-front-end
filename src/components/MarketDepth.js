@@ -231,30 +231,32 @@ class MarketDepth extends Component {
         return (
             <div className="marketDepth">
                 <div className="marketDepthTables">
-                    <div className="marketDepthColumns">
-                        <h5>BUY ORDERS</h5>
+                    <div className="marketDepthColumns table-block buy-table">
+                        <div className='table-title'>Buy orders</div>
                         <Table columns={columns}
                                dataSource={buy4Table}
                                bordered={false}
                                pagination={false}
                                rowKey={record => record.id}
-                               scroll={{y: 240}}
-                               size="small" rowClassName="custom__tr"/>
+                               scroll={{y: 450}}
+                               size="small"
+                               rowClassName="custom__tr"/>
                     </div>
-                    <div className="marketDepthColumns">
-                        <h5>SELL ORDERS</h5>
+                    <div className="marketDepthColumns table-block sell-table">
+                        <div className='table-title'>Sell orders</div>
                         <Table columns={columns}
                                dataSource={sell4Table}
                                bordered={false}
                                pagination={false}
                                rowKey={record => record.id}
-                               scroll={{y: 240}}
-                               size="small" rowClassName="custom__tr"/>
+                               scroll={{y: 450}}
+                               size="small"
+                               rowClassName="custom__tr"/>
                     </div>
                 </div>
-                <div className="marketDepthChart">
-                    {readyForDrawing && <DepthChart buy={buy4DepthChart} sell={sell4DepthChart} height={200}/>}
-                </div>
+                {/*<div className="marketDepthChart">*/}
+                    {/*{readyForDrawing && <DepthChart buy={buy4DepthChart} sell={sell4DepthChart} height={200}/>}*/}
+                {/*</div>*/}
             </div>
         )
     }
