@@ -6,19 +6,39 @@ import {getUserInfo} from "../utils";
 import {USERINFO} from "./../constants/APIURLS.js"
 import {save_user_info} from "../actions/UserActions";
 import WithdrawPanel from "./WithdrawLogic";
+import Modal from 'react-modal';
+
 import BTC from '../img/coins/BTC.png';
 import BTG from '../img/coins/BTG_gold.png';
 import BCH from '../img/coins/BTG.png';
 import ETH from '../img/coins/ETH.png';
 import LTC from '../img/coins/LTC.png';
 import ZEC from '../img/coins/ZEC.png';
+
 import '../styles/balances.css';
 import '../App.css';
+
+const customStyles = {
+    content: {
+        top: '50%',
+        left: '50%',
+        right: 'auto',
+        bottom: 'auto',
+        marginRight: '-50%',
+        transform: 'translate(-50%, -50%)',
+        padding: '0'
+    }
+};
+
+Modal.setAppElement('#root');
 
 class Balances extends Component {
     constructor(props) {
         super(props);
-        this.state = {};
+        this.state = {
+            modalIsOpen: false,
+            selectCoin: {}
+        };
     }
 
     async componentDidMount() {
@@ -32,13 +52,30 @@ class Balances extends Component {
         }
     }
 
+    openModal = (coin, type) => {
+        this.setState({
+            modalIsOpen: true,
+            selectCoin: {
+                ...coin,
+                type
+            }
+        })
+    }
+
+    closeModal = () => {
+        this.setState({modalIsOpen: false})
+    }
+
     render() {
         const coinsLogo = {
             BTC, BCH, BTG, ETH, LTC, ZEC
         };
+
         const user = this.props.user;
         // console.log("Balances. User = ", this.props);
         const {balances = []} = user;
+        console.log(this.state.selectCoin)
+        const {name, address, type} = this.state.selectCoin;
 
         const dataSource = balances.map(item => (
             {
@@ -54,12 +91,12 @@ class Balances extends Component {
         const columns = [
             {
                 title: 'Coin',
-                dataIndex: 'name',
-                key: 'name',
+                key: 'nameCoin',
                 width: 150,
                 render: (text, record) => (
                     <div style={{display: 'flex', justifyContent: 'center'}}>
-                        <img style={{width: '13px', height: '13px', margin: '1px 10px 0 0'}} src={coinsLogo[record.code]} alt=""/>
+                        <img style={{width: '13px', height: '13px', margin: '1px 10px 0 0'}}
+                             src={coinsLogo[record.code]} alt=""/>
                         <h4>{record.code}</h4>
                     </div>
                 )
@@ -84,36 +121,19 @@ class Balances extends Component {
                 width: 250,
                 render: (text, record) => (
                     <div className='balance-action-block'>
-                        <Tooltip
-                            title={
-                                <div>
-                                    <h3>Deposit {record.name}</h3>
-                                    <div className="line"></div>
+                        <div onClick={() => this.openModal(record, 'deposit')} className="act-btn">
+                            Deposit
+                        </div>
 
-                                    <div className="tooltip-block">
-                                        <div className="qrImg">
-                                            {record.address ?
-                                                <QRCode
-                                                    value={record.address}
-                                                /> : ''}
-                                        </div>
-                                        <h4>Internal address for deposit {record.name}</h4>
-                                    </div>
 
-                                    <p>{record.address}</p>
-                                </div>
-                            }
-                            trigger="click"
-                            placement="topRight"
-                        >
+                        <div onClick={() => this.openModal(record, 'withdrawal')} className="act-btn">
+                            Withdrawal
+                        </div>
 
-                            <div className="act-btn">Deposit</div>
 
-                        </Tooltip>
 
-                        <WithdrawPanel record={record}/>
 
-                        <div className="act-btn">Trade</div>
+                        {/*<div className="act-btn">Trade</div>*/}
                     </div>
                 )
             }];
@@ -122,8 +142,8 @@ class Balances extends Component {
                 <div>
                     <h3>Balances</h3>
                 </div>
+
                 <div className='table'>
-                    {/*<div className='blur-bg'></div>*/}
                     <Table
                         dataSource={dataSource}
                         columns={columns}
@@ -133,6 +153,49 @@ class Balances extends Component {
                         size="small"
                     />
                 </div>
+
+                <Modal
+                    isOpen={this.state.modalIsOpen}
+                    onRequestClose={this.closeModal}
+                    style={customStyles}
+                    contentLabel="Example Modal"
+                >
+                    <div className="modal-window">
+                        <div className="close-modal-btn" onClick={this.closeModal}>
+                            <i className="fa fa-times" aria-hidden="true"></i>
+                        </div>
+                        <div className="modal-title">
+                            {(type === 'deposit' ? 'Deposit' : 'Withdraw')} {name}
+                        </div>
+
+                        {type === 'deposit' ?
+                            <div className='deposit'>
+                                <div className="qrCode">
+                                    {address ?
+                                        <QRCode
+                                            value={address}
+                                        /> : ''}
+                                </div>
+
+                                <div className='qr-description'>
+                                    Internal address for deposit {name}
+                                </div>
+
+                                <div className='address-description'>
+                                    ADA Deposit Address
+                                </div>
+
+                                <div className="address">
+                                    {address}
+                                </div>
+                            </div>
+                            :
+                            <div className='withdraw'>
+                                <WithdrawPanel record={this.state.selectCoin} close={this.closeModal}/>
+                            </div>
+                        }
+                    </div>
+                </Modal>
             </div>
         )
     }

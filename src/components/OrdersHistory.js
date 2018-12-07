@@ -1,4 +1,4 @@
-import React, {Component, Fragment} from 'react';
+import React, {Component} from 'react';
 import {connect} from 'react-redux'
 import PropTypes from 'prop-types';
 import {Table, Tabs} from 'antd';
@@ -111,17 +111,11 @@ class OredersHistory extends Component {
 
         return (
             <div className="order-history-block">
-                {/*<div className="marketDepthTables">*/}
-                {/*<div className="marketDepthColumns">*/}
-                {/*<h5>YOUR OPEN ORDERS</h5>*/}
-                {/*</div>*/}
-                {/*</div>*/}
                 <div className='trade-history-title'>
                     Trade history
                 </div>
 
                 <div className='table-block'>
-
                     <Tabs defaultActiveKey="1" type="card">
                         <TabPane tab="Market" key="1">
                             <Table
@@ -141,7 +135,6 @@ class OredersHistory extends Component {
                         </TabPane>
                     </Tabs>
                 </div>
-
             </div>
         )
     }

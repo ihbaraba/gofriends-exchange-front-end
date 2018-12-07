@@ -217,22 +217,7 @@ class Login extends Component {
                             </NavLink>
                         </div>
                     </form>
-                    {/*<NavLink to="/resetPassword" className="forgot colored-link">Forgot your password</NavLink>*/}
                 </div>
-
-                {/*<div className="column2">*/}
-                {/*<h3 className="standard">Don't have an account?</h3>*/}
-                {/*<p>Create one to start trading on the world's most active digital asset exchange.</p>*/}
-                {/*<NavLink to="/signup">*/}
-                {/*<button*/}
-                {/*className="signUpButton  fixed-width-btn"*/}
-                {/*type="submit"*/}
-                {/*name="createAccount">*/}
-                {/*Create Your Account*/}
-                {/*</button>*/}
-                {/*</NavLink>*/}
-                {/*</div>*/}
-
             </div>
         )
     }

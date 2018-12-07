@@ -1,44 +1,165 @@
 import React, {Component} from 'react';
 import NavLink from './NavLink';
-import '../App.css';
+import {Tabs, Table} from 'antd';
+
+import '../styles/welcome.css';
+
+const TabPane = Tabs.TabPane;
+
 
 class WelcomePage extends Component {
     render() {
+        const columns = [
+            {
+                title: 'Pair',
+                dataIndex: 'type',
+                key: 'type',
+                width: 150,
+            },
+            {
+                title: `Coin`,
+                dataIndex: 'price',
+                key: 'price',
+                width: 150,
+            },
+            {
+                title: `Last price`,
+                dataIndex: 'amount',
+                key: 'amount',
+                width: 150,
+            },
+            {
+                title: `24 change`,
+                dataIndex: 'Sum',
+                key: 'Sum',
+                width: 150,
+            },
+            {
+                title: '24 high',
+                dataIndex: 'completedAt',
+                key: 'completedAt',
+                width: 150,
+            },
+            {
+                title: '24 Low',
+                dataIndex: 'Low',
+                key: 'Low',
+                width: 150,
+            },
+            {
+                title: '24 Volume',
+                dataIndex: 'Volume',
+                key: 'Volume',
+                width: 150,
+            },
+        ];
+
+        const dataSource = [
+            {
+                type: 'ETH/BTC',
+                price: 'Ethereum',
+                amount: '0.028221 / $113.37',
+                Sum: '0.32%',
+                completedAt: '0.00000420',
+                Low: 'Volume',
+                Volume: 'qfdwef'
+
+            }, {
+                type: 'ETH/BTC',
+                price: 'Ethereum',
+                amount: '0.028221 / $113.37',
+                Sum: '0.32%',
+                completedAt: '0.00000420',
+                Low: 'Volume',
+                Volume: 'qfdwef'
+
+            }, {
+                type: 'ETH/BTC',
+                price: 'Ethereum',
+                amount: '0.028221 / $113.37',
+                Sum: '0.32%',
+                completedAt: '0.00000420',
+                Low: 'Volume',
+                Volume: 'qfdwef'
+
+            }, {
+                type: 'ETH/BTC',
+                price: 'Ethereum',
+                amount: '0.028221 / $113.37',
+                Sum: '0.32%',
+                completedAt: '0.00000420',
+                Low: 'Volume',
+                Volume: 'qfdwef'
+
+            }, {
+                type: 'ETH/BTC',
+                price: 'Ethereum',
+                amount: '0.028221 / $113.37',
+                Sum: '0.32%',
+                completedAt: '0.00000420',
+                Low: 'Volume',
+                Volume: 'qfdwef'
+
+            }, {
+                type: 'ETH/BTC',
+                price: 'Ethereum',
+                amount: '0.028221 / $113.37',
+                Sum: '0.32%',
+                completedAt: '0.00000420',
+                Low: 'Volume',
+                Volume: 'qfdwef'
+
+            }, {
+                type: 'ETH/BTC',
+                price: 'Ethereum',
+                amount: '0.028221 / $113.37',
+                Sum: '0.32%',
+                completedAt: '0.00000420',
+                Low: 'Volume',
+                Volume: 'qfdwef'
+
+            },
+        ]
+
         return (
-            <div>
-                <div style={{clear: "both"}}>
-                    <h1 className="sign">Welcome to one of the most <br/> active exchanges in the world</h1>
+            <div className='welcome-page'>
+                <div className='title-block'>
+                    <div className='h1'>Gofriends crypto exchange</div>
+
+                    <div className='h3'>One of the most active exchanges in the world</div>
+
+                    <NavLink to="/signup" className="go-to-login">Sign up</NavLink>
                 </div>
 
-                <div className="featureBanner">
-                    <NavLink to="/signup">
-                        <button
-                            className="main-btn"
-                            type="submit"
-                            name="createAccount"
-                        >
-                            Create Your Account
-                        </button>
-                    </NavLink>
-                    <br/>
-                    <p>Already a member? <NavLink to="/login" className="forgot">Sign in</NavLink>.</p>
-                </div>
-                <div className="home3col">
-                    <div className="column">
-                        <h4 className="highlight">Advanced trading tools</h4>
-                        <p>Take advantage of dozens of technical indicators and our robust API to inform and execute
-                            your trading strategy.</p>
-                    </div>
-                    <div className="column">
-                        <h4 className="highlight">Cold storage and 24/7 monitoring</h4>
-                        <p>To protect your money, we keep most deposits in air-gapped cold storage. Online, we have only
-                            what’s needed for active trading. We also monitor activity 24/7 to block any suspicious
-                            activity.</p>
-                    </div>
-                    <div className="column last">
-                        <h4 className="highlight">Innovative projects</h4>
-                        <p>Access the latest tokens and technologies that are pushing the industry forward.</p>
-                    </div>
+                <div className='statistics-block'>
+                    <Tabs defaultActiveKey="1" type="card">
+                        <TabPane tab="BTC Markets" key="1">
+                            <div className='table-stat'>
+                                <Table
+                                    columns={columns}
+                                    dataSource={dataSource}
+                                    bordered={false}
+                                    pagination={false}
+                                    rowKey="uid"
+                                    scroll={{y: 630}}
+                                    size="small"
+                                    rowClassName="custom__tr"/>
+                            </div>
+                        </TabPane>
+
+                        <TabPane tab="BCH Markets" key="2">
+                            <div className='table-stat'>
+                                Hello!
+                            </div>
+                        </TabPane>
+
+                        <TabPane tab="USD Markets" key="3">
+                            <div className='table-stat'>
+                                Hello!
+                            </div>
+                        </TabPane>
+                    </Tabs>
+
                 </div>
             </div>
         )

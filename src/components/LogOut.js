@@ -10,7 +10,7 @@ class Login extends Component {
         * - clear token in localStore
         **/
         this.props.logOut();
-        this.props.history.push(`/login`);
+        this.props.history.push(`/`);
     }
 
     render() {

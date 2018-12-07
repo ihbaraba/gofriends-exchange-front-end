@@ -158,8 +158,9 @@ class UserOrder extends React.Component {
                                                     ? `If the highest bid drops to or below ${record.genuine.stop}, an order to buy ${record.genuine.amount} at a price of ${record.genuine.price} will be placed`
                                                     : `If the lowest ask rises to or above ${record.genuine.stop}, an order to buy ${record.genuine.amount} at a price of ${record.genuine.price} will be placed`
                                             }>
-                                              <a href="" className="act-btn"><Icon type="info-circle"
-                                                                                   theme="outlined"/></a>
+                                              <a href="" className="act-btn">
+                                                  <Icon type="info-circle" theme="outlined"/>
+                                              </a>
                                             </Tooltip>
                                         </span>
                                     : null
@@ -179,7 +180,7 @@ class UserOrder extends React.Component {
                                     onClick={(order) => {
                                             onBidButtonClick({status: "cancelled", order: record})
                                             }}
-                                    style={{margin: '0 0 0 auto'}}
+                                    style={{margin: '0 auto'}}
                                     className='act-btn'
                                 >
                                     Cancel
@@ -199,7 +200,7 @@ class UserOrder extends React.Component {
                 bordered={false}
                 pagination={false}
                 rowKey="uid"
-                scroll={{y: 330}}
+                scroll={{y: 630}}
                 size="small"
                 rowClassName="custom__tr"/>
         )

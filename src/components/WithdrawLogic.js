@@ -8,7 +8,7 @@ class WithdrawLogic extends Component {
     constructor(props) {
         super(props);
 
-        this.InputsFrame = this.InputsFrame.bind(this);
+        // this.InputsFrame = this.InputsFrame.bind(this);
         this.validate = this.validate.bind(this);
         this.checkKeyPress = this.checkKeyPress.bind(this);
 
@@ -40,7 +40,9 @@ class WithdrawLogic extends Component {
         return s.match(rgx);
     }
 
-    InputsFrame = ({first, second, loanRate, firePostToServer, type}) => {
+    render() {
+        const {record: {first, second, loanRate, firePostToServer, type}, close} = this.props;
+
         const optionsWallet = {
             addonAfter: second,
             style: {width: '15rem'},
@@ -98,57 +100,36 @@ class WithdrawLogic extends Component {
         // };
 
         const total = +this.state.transactionFee + (+this.state.amount);
-        return (
-            <div style={{width: "30 rem", paddingBottom: "20px",}}>
-                <div className="formWrap">
-                    <label>Your wallet address:</label> <br/>
-                    <Input {...optionsWallet} style={{width: "100%",}}/>
-                </div>
-                <div className="formWrap">
-                    <label>Amount:</label> <br/>
-                    <Input {...optionsAmount} style={{width: "100%",}}/>
-                </div>
-                <div className="formWrap">
-                    <label>Transaction Fee</label><br/>
-                    <Input {...optionsTransactionFee} style={{width: "100%",}}/>
-                </div>
-                <div className="formWraptotal">
-                    <label>Total:</label><br/>
-                    <span>{total}</span>
-                </div>
-
-                <div>
-                    {/*<a href="#" className="act-btn">Cancel</a>*/}
-                    <a href="" className="act-btn">Withdraw</a>
-                </div>
-
-
-            </div>
-        )
-    };
-
-    render() {
         // console.log( this.props.token );
         const {record} = this.props;
 
         // console.log( first, second, price: sellPrice, loanRate, firePostToServer, type : "sell");
-        const {first, second, loanRate, firePostToServer} = this.props;
 
         return (
-            <Tooltip
-                title={
-                    <div>
-                        <h3>Withdraw {record.name}</h3>
-                        <div className="line"></div>
-                        {this.InputsFrame({first, second, loanRate, firePostToServer, type: "sell"})}
-                    </div>
-                }
-                trigger="click"
-                placement="topRight">
+            <div>
+                <div className="formWrap">
+                    <label>Your wallet address:</label>
+                    <Input {...optionsWallet} style={{width: "100%",}}/>
+                </div>
+                <div className="formWrap">
+                    <label>Amount:</label>
+                    <Input {...optionsAmount} style={{width: "100%",}}/>
+                </div>
+                <div className="formWrap">
+                    <label>Transaction Fee</label>
+                    <Input {...optionsTransactionFee} style={{width: "100%",}}/>
+                </div>
+                <div className="formWraptotal">
+                    <label>Total:</label>
+                    <span>{total}</span>
+                </div>
 
-                <div className="act-btn">Withdrawal</div>
+                <button className='btn' onClick={close}>
+                    Withdraw
+                </button>
 
-            </Tooltip>
+
+            </div>
         )
     }
 }

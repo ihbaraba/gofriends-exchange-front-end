@@ -45,12 +45,13 @@
 }
 
 .login-page .login-form .login-title-block span {
-    font-size: 22px;
+    font-size: 20px;
     letter-spacing: 2px;
+    margin: 0 15px;
 }
 
 .login-page .login-form .hr-login {
-    width: 171px;
+    flex: 1;
     height: 1px;
     background: #979797;
     border: 0;
@@ -77,6 +78,7 @@
 .login-page .login-form .signUpButton {
     width: 100%;
     border: 0;
+    font-size: 15px;
     background: #00CE7D;
     box-shadow: 0 2px 8px 0 rgba(255, 255, 255, 0.35);
     height: 54px;

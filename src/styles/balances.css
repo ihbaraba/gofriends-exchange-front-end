@@ -11,3 +11,98 @@
     background-color: #313131;
     border: 0.5px solid rgba(0, 0, 0, 0.7);
 }
+
+/*MODAL WINDOW*/
+
+.ReactModal__Overlay {
+    /*background-color: rgba(0, 0, 0, 0.59) !important;*/
+    background-image: url("../img/bg (2).png");
+}
+
+.ReactModal__Content {
+    background: inherit !important;
+}
+
+.modal-window {
+    width: 40vw;
+    padding: 80px 100px;
+    box-sizing: border-box;
+    border: 1px solid #3F4755;
+    background-color: rgba(7, 3, 10, 0.35);
+    box-shadow: 0 3px 15px 0 rgba(0, 0, 0, 0.19);
+}
+
+.modal-window .close-modal-btn {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    font-size: 25px;
+    cursor: pointer;
+}
+
+.modal-window .modal-title {
+    padding: 0 0 20px 0;
+    border-bottom: 1px solid #3F4755;
+    font-family: Ubuntu;
+    font-size: 20px;
+    letter-spacing: 2px;
+    text-align: center;
+}
+
+.modal-window .qrCode {
+    width: 132px;
+    height: 132px;
+    padding: 2px;
+    margin: 50px auto 25px auto;
+    background: #fff;
+}
+
+.modal-window .qr-description {
+    width: 100%;
+    text-align: center;
+    font-family: Roboto;
+    font-size: 12px;
+    letter-spacing: 1.2px;
+}
+
+.modal-window .address-description {
+    margin: 65px 0 10px 0;
+    font-family: Roboto;
+    font-size: 12px;
+    letter-spacing: 1.2px;
+}
+
+.modal-window .address {
+    width: 100%;
+    padding: 20px 0;
+    text-align: center;
+    border: 1px solid #979797;
+    font-family: Roboto;
+    font-size: 15px;
+    letter-spacing: 1.5px;
+}
+
+.modal-window .withdraw .formWrap {
+    margin: 20px 0 0 0;
+}
+
+.modal-window .withdraw .formWrap label {
+    margin: 0 0 10px 0;
+    display: block;
+    font-family: Roboto;
+    font-size: 12px;
+    letter-spacing: 1.2px;
+}
+
+.modal-window .withdraw .formWrap input {
+    height: 47px;
+    font-size: 14px;
+    padding: 0 0 0 10px;
+}
+
+.modal-window .formWraptotal {
+    margin: 40px 0 50px 0;
+    font-family: Roboto;
+    font-size: 15px;
+    letter-spacing: 1.5px;
+}

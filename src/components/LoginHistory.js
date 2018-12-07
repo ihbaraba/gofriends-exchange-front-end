@@ -29,6 +29,12 @@ class LoginHistory extends Component {
             key: 'twoFactor',
             width: 300,
         },
+        {
+            title: 'Location',
+            dataIndex: 'Location',
+            key: 'Location',
+            width: 300,
+        },
 
     ]
 
@@ -38,14 +44,55 @@ class LoginHistory extends Component {
             {
                 date: '24 03 2018',
                 address: '134.132.352.1',
-                twoFactor: 'yes'
-            }
+                twoFactor: 'yes',
+                Location: 'Kiev Ukraine'
+            }, {
+                date: '24 03 2018',
+                address: '134.132.352.1',
+                twoFactor: 'yes',
+                Location: 'Kiev Ukraine'
+            }, {
+                date: '24 03 2018',
+                address: '134.132.352.1',
+                twoFactor: 'yes',
+                Location: 'Kiev Ukraine'
+            }, {
+                date: '24 03 2018',
+                address: '134.132.352.1',
+                twoFactor: 'yes',
+                Location: 'Kiev Ukraine'
+            }, {
+                date: '24 03 2018',
+                address: '134.132.352.1',
+                twoFactor: 'yes',
+                Location: 'Kiev Ukraine'
+            }, {
+                date: '24 03 2018',
+                address: '134.132.352.1',
+                twoFactor: 'yes',
+                Location: 'Kiev Ukraine'
+            }, {
+                date: '24 03 2018',
+                address: '134.132.352.1',
+                twoFactor: 'yes',
+                Location: 'Kiev Ukraine'
+            }, {
+                date: '24 03 2018',
+                address: '134.132.352.1',
+                twoFactor: 'yes',
+                Location: 'Kiev Ukraine'
+            }, {
+                date: '24 03 2018',
+                address: '134.132.352.1',
+                twoFactor: 'yes',
+                Location: 'Kiev Ukraine'
+            },
         ]
         return (
             <div className='card-container'>
-                <div className='card-container-head'>
-                    <h3>My login history</h3>
-                </div>
+                {/*<div className='card-container-head'>*/}
+                    {/*<h3>My login history</h3>*/}
+                {/*</div>*/}
 
                 <div className="table">
                     <Table

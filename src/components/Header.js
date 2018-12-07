@@ -79,16 +79,16 @@ class Header extends Component {
                     <span className="title topLevel">My Profile</span>
                 </NavLink>
             </Menu.Item>
-            <Menu.Item>
-                <NavLink to="/loginhistory">
-                    <span className="title topLevel">Login History</span>
-                </NavLink>
-            </Menu.Item>
-            <Menu.Item>
-                <NavLink to="/changepassword">
-                    <span className="title topLevel">Account settings</span>
-                </NavLink>
-            </Menu.Item>
+            {/*<Menu.Item>*/}
+                {/*<NavLink to="/loginhistory">*/}
+                    {/*<span className="title topLevel">Login History</span>*/}
+                {/*</NavLink>*/}
+            {/*</Menu.Item>*/}
+            {/*<Menu.Item>*/}
+                {/*<NavLink to="/changepassword">*/}
+                    {/*<span className="title topLevel">Account settings</span>*/}
+                {/*</NavLink>*/}
+            {/*</Menu.Item>*/}
             <Menu.Item>
                 <NavLink to="/Logout">
                     <span className="title topLevel">Logout</span>

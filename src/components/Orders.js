@@ -1,10 +1,8 @@
-import React, {Component} from 'react';
+import React, {Component, Fragment} from 'react';
 import {connect} from 'react-redux';
-import {Input, Button, Tabs, Radio} from 'antd';
+import {Input, Button, Tabs} from 'antd';
 
 const TabPane = Tabs.TabPane;
-const RadioButton = Radio.Button;
-const RadioGroup = Radio.Group;
 
 
 class Orders extends Component {
@@ -96,6 +94,7 @@ class Orders extends Component {
                 });
             }
         };
+
         const optionsLoanRate = {
             addonAfter: loanRate,
             // style: { width: '15rem' },
@@ -108,6 +107,7 @@ class Orders extends Component {
                 this.setState({loanRate: val});
             }
         };
+
         const optionsTotal = {
             addonAfter: second,
             // style: { width: '15rem' },
@@ -125,6 +125,7 @@ class Orders extends Component {
                 });
             }
         };
+
         const onBidButtonClick = ({type}) => {
             // console.log("onBidButtonClick", type);
             firePostToServer({
@@ -153,18 +154,18 @@ class Orders extends Component {
                     <Input {...optionsAmount}/>
                 </div>
 
-                {/*<div className="orders__item">*/}
-                {/*<span className="orders__item_name">Loan Rate:</span>*/}
-                {/*<Input {...optionsLoanRate}/>*/}
-                {/*</div>*/}
+                <div className="orders__item">
+                    <span className="orders__item_name">Limit:</span>
+                    <Input {...optionsLoanRate}/>
+                </div>
 
                 {/*<div className="rate-block orders__item">*/}
-                    {/*<RadioGroup defaultValue="25">*/}
-                        {/*<RadioButton value="25">25%</RadioButton>*/}
-                        {/*<RadioButton value="50">50%</RadioButton>*/}
-                        {/*<RadioButton value="75">75%</RadioButton>*/}
-                        {/*<RadioButton value="100">100%</RadioButton>*/}
-                    {/*</RadioGroup>*/}
+                {/*<RadioGroup defaultValue="25">*/}
+                {/*<RadioButton value="25">25%</RadioButton>*/}
+                {/*<RadioButton value="50">50%</RadioButton>*/}
+                {/*<RadioButton value="75">75%</RadioButton>*/}
+                {/*<RadioButton value="100">100%</RadioButton>*/}
+                {/*</RadioGroup>*/}
                 {/*</div>*/}
 
                 <div className="orders__item orders__item-total">
@@ -185,7 +186,7 @@ class Orders extends Component {
         )
     };
 
-    StopLimitFrame = ({first, second, loanRate, firePostToServer, type}) => {
+    StopLimitFrame = ({first, second, loanRate, firePostToServer, hz, type}) => {
         const optionsLimit = {
             addonAfter: second,
             // style: { width: '15rem' },
@@ -262,7 +263,7 @@ class Orders extends Component {
             });
         };
         return (
-            <div>
+            <Fragment>
                 <div className="orders__item">
                     <span className="orders__item_name">Stop:</span>
                     <Input {...optionsStop} />
@@ -280,29 +281,27 @@ class Orders extends Component {
                     <Input {...optionsTotal}/>
                 </div>
 
-                <div className="ordBtn">
                     <Button
                         type="primary"
                         ghost
                         onClick={() => {
                             onBidButtonClick({type: "buy"})
                         }}
-                        className="order-buy-btn"
+                        className="order-buy-btn order-action-btn"
                     >
-                        Buy
+                        {type}
                     </Button>
 
-                    <Button
-                        type="primary"
-                        ghost onClick={() => {
-                        onBidButtonClick({type: "sell"})
-                        }}
-                        className="order-sell-btn"
-                    >
-                        Sell
-                    </Button>
-                </div>
-            </div>
+                    {/*<Button*/}
+                        {/*type="primary"*/}
+                        {/*ghost onClick={() => {*/}
+                        {/*onBidButtonClick({type: "sell"})*/}
+                    {/*}}*/}
+                        {/*className="order-sell-btn order-action-btn"*/}
+                    {/*>*/}
+                        {/*Sell*/}
+                    {/*</Button>*/}
+            </Fragment>
         )
     };
 
@@ -342,12 +341,17 @@ class Orders extends Component {
                         </div>
                     </TabPane>
 
-                    <TabPane tab="Market" key="2">
-                        <div className="ordersBlock">
-                            <span className="h5">Limits</span>
-                            <hr className="ordersHr"/>
-                            {this.StopLimitFrame({first, second, price: stopPrice, loanRate, firePostToServer})}
+                    <TabPane tab="Stop-Limit" key="2">
+                        <div className="ordersBlock market">
+                            <div className='buy-order'>
+                                <span className="order-block-title">Buy {`${first}`}</span>
+                                {this.StopLimitFrame({first, second, price: stopPrice, loanRate, firePostToServer,type: 'Buy'})}
+                            </div>
 
+                            <div className='sell-order'>
+                                <span className="order-block-title">Sell {`${first}`}</span>
+                                {this.StopLimitFrame({first, second, price: stopPrice, loanRate, firePostToServer,type: 'Sell'})}
+                            </div>
                         </div>
                     </TabPane>
                 </Tabs>

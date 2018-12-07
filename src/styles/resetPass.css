@@ -1,0 +1,16 @@
+.reset-pass-page {
+
+}
+
+.reset-pass-page .enter-email {
+    text-align: center;
+    margin: 35px 0;
+    font-family: Ubuntu;
+    letter-spacing: 1.2px;
+}
+
+.reset-pass-page .g-recaptcha {
+    margin: 50px auto 60px auto;
+    display: flex;
+    justify-content: center;
+}

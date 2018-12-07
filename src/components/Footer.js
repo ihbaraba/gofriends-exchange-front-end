@@ -15,22 +15,22 @@ const Footer = () => {
                 <div className="links noWrap">
                     <NavLink to="/contact">
                         <div className="group">
-                            <h3>About</h3>
+                            <span>About</span>
                         </div>
                     </NavLink>
                     <NavLink to="/terms">
                         <div className="group">
-                            <h3>Terms of Use</h3>
+                            <span>Terms of Use</span>
                         </div>
                     </NavLink>
                     <NavLink to="/privacy">
                         <div className="group">
-                            <h3>Privacy Policy</h3>
+                            <span>Privacy Policy</span>
                         </div>
                     </NavLink>
                     <NavLink to="/contact">
                         <div className="group">
-                            <h3>Contact</h3>
+                            <span>Contact</span>
                         </div>
                     </NavLink>
                 </div>

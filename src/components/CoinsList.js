@@ -84,34 +84,46 @@ class CoinsList extends React.Component {
 
     currenciesTabs = items => {
         const pairs = this.state.pairs;
-        const columns = [{
-            title: 'Coin',
-            dataIndex: 'coin',
-            className: 'coinRawItems',
-        }, {
-            title: 'Price',
-            dataIndex: 'price',
-            defaultSortOrder: 'descend',
-            sorter: (a, b) => a.price - b.price,
-            className: 'coinRawItems',
-        }, {
-            title: 'Volume',
-            dataIndex: 'volume',
-            defaultSortOrder: 'descend',
-            sorter: (a, b) => a.volume - b.volume,
-            className: 'coinRawItems',
-        }, {
-            title: 'Change',
-            dataIndex: 'change',
-            defaultSortOrder: 'descend',
-            sorter: (a, b) => a.change - b.change,
-            className: 'coinRawItems',
-        },
-        //     {
-        //     title: 'Name',
-        //     dataIndex: 'name',
-        //     className: 'coinRawItems',
-        // }
+        const columns = [
+            {
+                title: 'Coin',
+                dataIndex: 'coin',
+                className: 'coinRawItems',
+                width: '25%',
+
+            },
+            {
+                title: 'Price',
+                dataIndex: 'price',
+                defaultSortOrder: 'descend',
+                sorter: (a, b) => a.price - b.price,
+                className: 'coinRawItems',
+                width: '25%',
+
+            },
+            {
+                title: 'Volume',
+                dataIndex: 'volume',
+                defaultSortOrder: 'descend',
+                sorter: (a, b) => a.volume - b.volume,
+                className: 'coinRawItems',
+                width: '25%',
+
+            },
+            {
+                title: 'Change',
+                dataIndex: 'change',
+                defaultSortOrder: 'descend',
+                sorter: (a, b) => a.change - b.change,
+                className: 'coinRawItems',
+                width: '25%',
+
+            },
+            //     {
+            //     title: 'Name',
+            //     dataIndex: 'name',
+            //     className: 'coinRawItems',
+            // }
         ];
 
         return (items.map(

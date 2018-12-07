@@ -15,5 +15,16 @@
 
 .footer .copyright-block {
     text-align: center;
+    font-size: 11px;
+    opacity: 0.4;
     margin: 30px 0 0 0;
+}
+
+.footer .links  a{
+    font-size: 12px;
+    letter-spacing: 1.2px;
+}
+
+.footer .links  a:hover span{
+   color: #4A998C;
 }

@@ -1,0 +1,83 @@
+.welcome-page .title-block {
+    margin-top: 35px;
+    height: 370px;
+    padding: 60px 0 100px 0;
+    box-sizing: border-box;
+    background-image: url("../img/welcome_bg.svg");
+}
+
+.welcome-page .title-block .h1 {
+    font-family: Ubuntu;
+    font-size: 40px;
+    font-weight: bold;
+    letter-spacing: 4px;
+    line-height: 46px;
+    text-align: center;
+}
+
+.welcome-page .title-block .h3 {
+    margin: 30px 0 65px 0;
+    font-family: Ubuntu;
+    font-size: 20px;
+    letter-spacing: 2px;
+    line-height: 24px;
+    text-align: center;
+}
+
+.welcome-page .go-to-login {
+    height: 45px;
+    width: 173px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    letter-spacing: 1.2px;
+    font-size: 12px;
+    border-radius: 3px;
+    background-color: #4A998C;
+}
+
+.welcome-page .go-to-login:hover {
+    color: #fff;
+}
+
+.welcome-page .ant-tabs-nav {
+    display: flex;
+}
+
+.welcome-page .ant-tabs-ink-bar-animated {
+    display: none !important;
+}
+
+.welcome-page .ant-tabs-nav .ant-tabs-tab {
+    height: 38px;
+    width: 109px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-left: 1px solid #3F4755;
+    border-top: 1px solid #3F4755;
+    background-color: #000000;
+    cursor: pointer;
+}
+
+.welcome-page .ant-tabs-nav .ant-tabs-tab:last-child {
+    border-right: 1px solid #3F4755;
+}
+
+.welcome-page .ant-tabs-nav .ant-tabs-tab-active {
+    background-color: #4A998C;
+}
+
+.welcome-page .table-stat {
+    height: 500px;
+    border: 1px solid #3F4755 !important;
+    background-color: rgba(7,3,10,0.05) !important;
+    margin-bottom: 100px;
+}
+
+.welcome-page tr th,
+.welcome-page tr td {
+    border-bottom: 1px solid #3F4755 !important;
+    padding: 9px 0 !important;
+}

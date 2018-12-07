@@ -1,12 +1,18 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import verif from "../img/verif.svg";
+import NavLink from './NavLink';
 import {USERINFO} from "../constants/APIURLS";
 import {getUserInfo} from "../utils";
 import {save_user_info} from "../actions/UserActions";
+import LoginHistory from './LoginHistory';
 import {Switch} from 'antd';
 
-import '../App.css';
+import avatar from '../img/avatar.svg';
+import authentication from '../img/authentication.svg';
+import padlock from '../img/padlock.svg';
+
+import '../styles/profile.css';
 
 class Profile extends Component {
     async componentDidMount() {
@@ -34,58 +40,100 @@ class Profile extends Component {
         const {name: countryName = "Ukraine"} = country;
 
         return (
-            <div>
-                <div style={{clear: "both"}}>
-                    <h1 className="sign">My profile</h1>
+            <div className='profile-page'>
+                <div className='page-title'>
+                    My profile
                 </div>
 
-                <div>
-                    <p className="verif-Wrap">Note: you may only have one profile.
-                        If you have more than one account,
-                        you need to link them rather than submit multiple profiles.</p>
+                <div className='page-content'>
+                    <div className="user-information">
+                        <div className="top">
+                            <div className="avatar-block">
+                                <img src={avatar} alt=""/>
 
-                    <div className="mainVerifBlock verif-Wrap">
-                        <div className="verif-block">
-
-                            <div className=" verif-status">
-                                <h5>Verification status:</h5>
-                                <a className="verif-btn">
-                                    <img src={verif} alt="" className="verifimg"/>
-                                    VERIFIED
-                                </a>
+                                <NavLink to="/Logout">
+                                    <span className="title topLevel">Logout</span>
+                                </NavLink>
                             </div>
 
                             <div>
-                                <span className="verStatus">Withdrawal limit: $25 USD equivalent per day</span>
+                                <div className="user-name">
+                                    {username}
+
+                                    <div className="verification-status">
+                                        <i className="fa fa-check" aria-hidden="true"></i>
+                                        Verified
+                                    </div>
+                                </div>
+
+                                <div className='last-login'>
+                                    Last login Time: 2018-12-06 15:57:06 IP: 178.214.198.9
+                                </div>
                             </div>
                         </div>
 
-                        <div className="entityperson">
-                            <div>
-                                <i className="fa fa-user-circle-o p-icon" aria-hidden="true"></i>
+                        <div className="bottom">
+                            <div className="country">
+                                Country: {countryName}
                             </div>
 
-                            <div>
-                                <div className="displayName">{username}</div>
-                                <div>{countryName}</div>
-                                <div className="entityEmail">{email}</div>
-                                <div className="numberPhone">+380 ## ## ### 12</div>
+                            <div className="phone">
+                                Country: +380 ## ## ### 12
+                            </div>
 
-                                    <form onSubmit={this.handleSignInSubmit} style={{margin: '20px 0 0 0'}}>
-                                        <fieldset className="aboveCaptcha">
-                                            <p><strong style={{margin: '0 5px 0 0'}}>Turn on/off 2-factor authentication </strong>
-                                                <Switch
-                                                    defaultChecked={twoFactorAuthEnabled}
-                                                    onChange={this.swithOnChange}
-                                                /></p>
-                                            {/*{content}*/}
-                                        </fieldset>
-                                    </form>
+                            <div className="limits">
+                                Withdrawal limit: $25 USD equivalent per day
+                            </div>
+                        </div>
+                    </div>
 
+                    <div className='user-settings'>
+                        <div className='authentication-block'>
+                            <div className='title-block'>
+                                <div className='img'>
+                                    <img src={authentication} alt=""/>
+                                </div>
+
+                                <span>
+                                    2-factor authentication
+                                </span>
+                            </div>
+
+                            <div className='switch-block'>
+                                <span className='title'>
+                                    Turn on/off 2-factor authentication
+                                </span>
+
+                                <Switch
+                                    className='switch'
+                                    defaultChecked={twoFactorAuthEnabled}
+                                    onChange={this.swithOnChange}
+                                />
+                            </div>
+                        </div>
+
+                        <div className='change-pass-block'>
+                            <div className='img'>
+                                <img src={padlock} alt=""/>
+                            </div>
+
+                            <span>
+                                Change Password
+                            </span>
+
+                            <div className='change-btn'>
+                                <NavLink to="/changepassword">
+                                    Change
+                                </NavLink>
                             </div>
                         </div>
                     </div>
                 </div>
+
+                <div className='page-title'>
+                    My login history
+                </div>
+                <LoginHistory />
             </div>
         )
     }

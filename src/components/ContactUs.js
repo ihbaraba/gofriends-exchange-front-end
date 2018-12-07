@@ -31,8 +31,8 @@ class ContactUs extends Component {
     render() {
         return (
             <div>
-                <div style={{clear: "both"}}>
-                    <h1 className="sign" style={{margin: '0'}}>CONTACT US</h1>
+                <div>
+                    <h3 style={{textAlign: 'center'}}>CONTACT US</h3>
                 </div>
                 <div className="featureBanner twoCol contact">
                     <div className="contentWrapper formWrapper column1">
@@ -102,7 +102,7 @@ class ContactUs extends Component {
                                 <div className="buttonRow">
                                     <p>This inbox is not monitored for support requests.
                                         For technical assistance, Contact Support.</p>
-                                    <button className="signUpButton small" type="submit">
+                                    <button className="btn" type="submit">
                                         Send
                                     </button>
                                 </div>

@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import Recaptcha from 'react-recaptcha';
+import logo from '../img/logo_go.svg';
 
 
 class ChangePassword extends Component {
@@ -40,7 +41,7 @@ class ChangePassword extends Component {
 
     handleSubmit = e => {
         e.preventDefault();
-        if(this.state.newPassword === this.state.newPasswordRepeat && this.state.isVerified) {
+        if (this.state.newPassword === this.state.newPasswordRepeat && this.state.isVerified) {
             alert('done')
 
             this.setState({
@@ -53,78 +54,76 @@ class ChangePassword extends Component {
 
     render() {
         return (
-            <div>
-                <div style={{clear: "both"}}>
-                    <h1 className="sign">CHANGE YOUR PASSWORD</h1>
-                </div>
-
-                <div className="featureBanner form2col">
-                    <div className="formWrapper">
-                        <div className="contentWrapper formWrapper column1">
-                            <form onSubmit={this.handleSubmit}>
-                                <fieldset className="aboveCaptcha">
-                                    <div>
-                                        <label>Old Password:</label>
-                                        <input
-                                            className="userPassInput"
-                                            type='text'
-                                            name="oldPassword"
-                                            value={this.state.oldPassword}
-                                            onChange={this.handlerChangeInput}
-                                            required/>
-                                    </div>
-                                    <div>
-                                        <label>New Password:</label>
-                                        <input
-                                            className="userPassInput"
-                                            type="password"
-                                            name="newPassword"
-                                            value={this.state.newPassword}
-                                            onChange={this.handlerChangeInput}
-                                            required/>
-                                    </div>
-                                    <div>
-                                        <label>Repeat New Password:</label>
-                                        <input
-                                            className="userPassInput"
-                                            type="password"
-                                            name="newPasswordRepeat"
-                                            value={this.state.newPasswordRepeat}
-                                            onChange={this.handlerChangeInput}
-                                            required/>
-                                    </div>
-
-                                    <Recaptcha
-                                        sitekey="6LdXEH0UAAAAANNTQtS9e4ZwdASHuZ5zWM7psA2S"
-                                        render="explicit"
-                                        theme='dark'
-                                        verifyCallback={this.handleChangeRecaptcha}
-                                    />
-
-
-                                    <div className="buttonRow">
-                                        <button
-                                            className="signUpButton small"
-                                            type="submit"
-                                        style={{margin: '20px auto'}}
-                                        >
-                                            Submit
-                                        </button>
-                                    </div>
-                                </fieldset>
-                            </form>
-                        </div>
-
-                        <div className="column2">
-                            <p>Use this form to change your password.</p>
-                            <p>After you submit it, you will be logged out and will need to log in with your new
-                                password.</p>
-
-                            <p>Your password must be at least 8 characters long, but it is HIGHLY recommended that you
-                                choose a random, alphanumeric password of at least 32 characters.</p>
-                            <p>NEVER use a password for an exchange that you use ANYWHERE else.</p>
-                        </div>
+            <div className='login-page'>
+                <div className="login-form">
+                    <div className='back-btn' onClick={() => window.history.back()}>
+                        <i className="fa fa-angle-left" aria-hidden="true"></i>
+                        Back
                     </div>
+
+                    <img src={logo} alt=""/>
+
+                    <div className='login-title-block'>
+                        <hr className='hr-login'/>
+                        <span>Change your password</span>
+                        <hr className='hr-login'/>
+                    </div>
+
+                    <form onSubmit={this.handleSubmit}>
+                        <fieldset className="aboveCaptcha">
+                            <div className='login-form-item'>
+                                <label>Old Password:</label>
+                                <input
+                                    className="userPassInput"
+                                    type='text'
+                                    name="oldPassword"
+                                    value={this.state.oldPassword}
+                                    onChange={this.handlerChangeInput}
+                                    required/>
+                            </div>
+
+                            <div className='login-form-item'>
+                                <label>New Password:</label>
+                                <input
+                                    className="userPassInput"
+                                    type="password"
+                                    name="newPassword"
+                                    value={this.state.newPassword}
+                                    onChange={this.handlerChangeInput}
+                                    required/>
+                            </div>
+
+                            <div className='login-form-item'>
+                                <label>Confirm password:</label>
+                                <input
+                                    className="userPassInput"
+                                    type="password"
+                                    name="newPasswordRepeat"
+                                    value={this.state.newPasswordRepeat}
+                                    onChange={this.handlerChangeInput}
+                                    required/>
+                            </div>
+
+                            <div style={{display: 'flex', justifyContent: 'center', margin: '45px 0 25px 0'}}>
+                                <Recaptcha
+                                    sitekey="6LdXEH0UAAAAANNTQtS9e4ZwdASHuZ5zWM7psA2S"
+                                    render="explicit"
+                                    theme='dark'
+                                    verifyCallback={this.handleChangeRecaptcha}
+                                />
+                            </div>
+
+                            <div className="buttonRow">
+                                <button
+                                    className="btn"
+                                    type="submit"
+                                    style={{margin: '20px auto'}}
+                                >
+                                    Change password
+                                </button>
+                            </div>
+                        </fieldset>
+                    </form>
                 </div>
             </div>
         )

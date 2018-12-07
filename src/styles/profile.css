@@ -1,0 +1,209 @@
+.profile-page {
+
+}
+
+.profile-page .page-content {
+    display: flex;
+    justify-content: space-between;
+}
+
+.profile-page .page-title {
+    margin: 20px 0;
+    font-family: Ubuntu;
+    font-size: 20px;
+    font-weight: bold;
+    letter-spacing: 1.4px;
+}
+
+.profile-page .user-information {
+    width: 49%;
+    padding: 60px 40px;
+    box-sizing: border-box;
+    border: 1px solid #3F4755;
+    border-radius: 5px;
+    background-color: rgba(7, 3, 10, 0.05);
+    box-shadow: 0 3px 15px 0 rgba(0, 0, 0, 0.19);
+}
+
+.profile-page .top {
+    display: flex;
+    padding: 0 0 40px 0;
+    border-bottom: 1px solid #979797;;
+}
+
+.profile-page .avatar-block {
+    width: 20%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.profile-page .avatar-block a {
+    padding: 0 15px;
+}
+
+.profile-page .avatar-block span {
+    margin: 20px 0 0 0;
+    display: block;
+    font-family: Roboto;
+    font-size: 12px;
+    letter-spacing: 1.2px;
+    cursor: pointer;
+}
+
+.profile-page .user-information .user-name {
+    height: max-content;
+    display: flex;
+    align-items: center;
+    font-family: Roboto;
+    font-size: 25px;
+    font-weight: bold;
+    letter-spacing: 2.5px;
+}
+
+.profile-page .user-information .user-name .verification-status {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 0 0 20px;
+    height: 20px;
+    width: 85px;
+    border-radius: 4px;
+    background-color: #00CE7D;
+    font-family: Roboto;
+    font-size: 12px;
+    letter-spacing: 1px;
+}
+
+.profile-page .user-information .last-login {
+    margin: 20px 0 0 0;
+    font-family: Roboto;
+    font-size: 12px;
+    letter-spacing: 1.2px;
+}
+
+.profile-page .user-information .bottom {
+    padding: 40px 0 0 20%;
+    font-family: Roboto;
+    font-size: 15px;
+    letter-spacing: 1.5px;
+}
+
+.profile-page .user-information .bottom .country {
+    margin: 0 0 30px 0;
+}
+
+.profile-page .user-information .bottom .phone {
+    margin: 0 0 30px 0;
+}
+
+.profile-page .user-information .bottom .limits {
+    color: #00CE7D;
+}
+
+.profile-page .user-settings {
+    width: 49%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.profile-page .user-settings .authentication-block {
+    width: 100%;
+    flex: 1;
+    margin: 0 0 30px 0;
+    padding: 40px 50px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border: 1px solid #3F4755;
+    border-radius: 5px;
+    background-color: rgba(7, 3, 10, 0.05);
+    box-shadow: 0 3px 15px 0 rgba(0, 0, 0, 0.19);
+}
+
+.profile-page .user-settings .title-block {
+    display: flex;
+    align-items: center;
+}
+
+.profile-page .img {
+    width: 10%;
+}
+
+.profile-page .user-settings .title-block span {
+    /*margin: 0 0 0 25px;*/
+    font-family: Roboto;
+    font-size: 18px;
+    font-weight: bold;
+    letter-spacing: 1.8px;
+}
+
+.profile-page .user-settings .switch-block {
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.profile-page .user-settings .switch-block span.title {
+    width: 60%;
+    margin: 0 0 0 10%;
+    font-family: Roboto;
+    font-size: 15px;
+    letter-spacing: 1.5px;
+}
+
+.profile-page .user-settings .switch {
+    height: 45px;
+    width: 100px;
+    border: 2px solid rgba(255, 255, 255, 0.26);
+}
+
+.profile-page .user-settings .ant-switch:after {
+    width: 40px;
+    height: 39px;
+    border-radius: 50%;
+    background-color: #4A998C;
+}
+
+.profile-page .user-settings .ant-switch-checked {
+    background-color: #4A998C;
+}
+
+.profile-page .user-settings .ant-switch-checked:after {
+    background-color: #fff !important;
+}
+
+.change-pass-block {
+    width: 100%;
+    flex: 1;
+    padding: 40px 50px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    border: 1px solid #3F4755;
+    border-radius: 5px;
+    background-color: rgba(7, 3, 10, 0.05);
+    box-shadow: 0 3px 15px 0 rgba(0, 0, 0, 0.19);
+}
+
+.change-pass-block span {
+    width: 60%;
+    font-family: Roboto;
+    font-size: 18px;
+    font-weight: bold;
+    letter-spacing: 1.8px;
+}
+
+.change-pass-block .change-btn a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 45px;
+    width: 173px;
+    border-radius: 3px;
+    background-color: #4A998C;
+    font-size: 12px;
+    letter-spacing: 1.2px;
+}

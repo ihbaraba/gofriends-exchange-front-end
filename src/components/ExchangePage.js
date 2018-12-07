@@ -1,5 +1,6 @@
 import React, {Component, Fragment} from 'react';
 import {connect} from 'react-redux';
+import {Redirect} from 'react-router-dom';
 
 import Orders from './Orders';
 import Graphic from './Graphic/Graphic'
@@ -7,8 +8,6 @@ import MarketDepth from './MarketDepth'
 import OrdersHistory from './OrdersHistory'
 import CoinsList from "./CoinsList";
 import UserOrder from './UserOrder';
-import UserInfo from "./UserInfo";
-import Notices from './Notices';
 import initialState from "../store/initialState";
 import {sendOrder, getUserInfo} from "./../utils";
 import {Radio} from "antd";
@@ -34,8 +33,6 @@ class ExchangePage extends Component {
 
 
     async componentDidMount() {
-        document.querySelector('.w-content').classList.add('second-background');
-
         /**
          * Read token -  check if the current session is authorized
          * then request user data
@@ -49,23 +46,17 @@ class ExchangePage extends Component {
             const userInfo = await getUserInfo({rout: USERINFO, token});
             const {body} = userInfo;
             this.props.save_user_info(body);
+        } else {
+            this.props.history.push('/login')
         }
         /**
          * Save in Redux Store current Chart range
          **/
-        // const currentDate = new Date();
-        // const format = d3.timeFormat("%Y-%m-%d");
-        // const currentDatePlusOdin = d3.timeDay.offset(currentDate, intervalInDays(this.state.interval, 1) ) ;
-        // const offsetData = d3.timeDay.offset(currentDate, (-1) * intervalInDays(this.state.interval, 3*24) ) ;
-        // this.props.chart_range({
-        //     dateFrom: format(offsetData),
-        //     dateTo: format(currentDatePlusOdin),
-        // });
     }
 
-    componentWillUnmount() {
-        document.querySelector('.w-content').classList.remove('second-background');
-    }
+    // componentWillUnmount() {
+    //     document.querySelector('.w-content').classList.remove('second-background');
+    // }
 
     async firePostToServer(bidProps) {
         // console.log("firePostToServer", this.state.pair, bidProps);
@@ -85,6 +76,7 @@ class ExchangePage extends Component {
             pair: pair,
         })
     };
+
     handleTimeFrameChange = (e) => {
         const interval = e.target.value;
         // console.log("chart_timing interval =", interval );

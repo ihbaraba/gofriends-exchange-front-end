@@ -32,7 +32,7 @@ header {
     display: flex;
     align-items: center;
     height: 100%;
-    margin-right: 100px;
+    margin-right: 7%;
 }
 
 .header .exchange-link a {
@@ -41,6 +41,10 @@ header {
     font-size: 15px;
     letter-spacing: 1.5px;
     cursor: pointer;
+}
+
+.header .exchange-link a:hover {
+    color: #4A998C;
 }
 
 /*header right menu*/
@@ -58,7 +62,7 @@ header {
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 14px;
+    font-size: 12px;
     border-left: 1px solid #444444;
     height: 70px;
     padding-left: 25px;
@@ -76,7 +80,7 @@ header {
     height: 31px;
     background: #4A998C;
     border-radius: 3px;
-    font-size: 14px;
+    font-size: 12px;
     text-transform: initial;
     margin-left: 28px;
 }
@@ -98,11 +102,13 @@ header {
 }
 
 .header .right .ant-dropdown-trigger {
+    font-size: 12px;
     border-left: 1px solid #444444;
     height: 70px;
     padding: 0 15px;
     display: flex;
     align-items: center;
+    letter-spacing: 1.2px;
 }
 
 .header .right .ant-dropdown-trigger:last-child {
