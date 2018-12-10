@@ -28,3 +28,10 @@
 .footer .links  a:hover span{
    color: #4A998C;
 }
+
+
+@media (max-width: 600px) {
+    .footer {
+        height: auto;
+    }
+}

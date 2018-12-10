@@ -1,8 +1,8 @@
 import React from 'react';
 import logo from '../img/logo_go.svg';
 import NavLink from './NavLink';
-import '../styles/footer.css';
 
+import '../styles/footer.css';
 
 const Footer = () => {
     return (
@@ -10,6 +10,15 @@ const Footer = () => {
             <div className="footer-container size-container">
                 <div className="group">
                     <img src={logo} alt="Exchange"/>
+
+                    {/*<div className="meta">*/}
+                        {/*<div className="group" style={{fontSize: '40px'}}>Sinsline</div>*/}
+                        {/*<div className="footer-info" style={{fontSize: '12px'}}>*/}
+                            {/*<div><p>Musterstrasse 1</p><p>Musterort, Germany</p></div>*/}
+                            {/*<div><a href="tel:+49123456789">Tel. +49123456789</a><a*/}
+                                {/*href="mailto:sinsline21@gmail.com">sinsline21@gmail.com</a></div>*/}
+                        {/*</div>*/}
+                    {/*</div>*/}
                 </div>
 
                 <div className="links noWrap">

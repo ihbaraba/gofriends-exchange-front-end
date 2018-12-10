@@ -2,6 +2,8 @@ import React, {Component, Fragment} from 'react';
 import {connect} from 'react-redux';
 import {Input, Button, Tabs} from 'antd';
 
+import Wallet from '../img/ic_wallet.svg'
+
 const TabPane = Tabs.TabPane;
 
 
@@ -17,8 +19,6 @@ class Orders extends Component {
         this.state = {
             sellPrice: this.props.price,//price of the fist coin of the pair
             buyPrice: this.props.price,//price of the fist coin of the pair
-            limit: this.props.price,
-            stopStop: this.props.price,
             price: this.props.price,//price of the fist coin of the pair
             first: this.props.first,//name of the fist coin of the pair
             second: this.props.second,//name of the 2nd coin of the pair
@@ -26,16 +26,22 @@ class Orders extends Component {
             total: this.props.price * 1,
             sellTotal: this.props.price * 1,
             buyTotal: this.props.price * 1,
-            stopTotal: this.props.price * 1,
             sellAmount: 1,
             buyAmount: 1,
-            stopAmount: 1,
             amount: 1,
+            //    stop limit value
+            buyLimit: this.props.price,
+            sellLimit: this.props.price,
+            buyStop: this.props.price,
+            sellStop: this.props.price,
+            buyStopTotal: this.props.price * 1,
+            sellStopTotal: this.props.price * 1,
+            buyStopAmount: 1,
+            sellStopAmount: 1,
         };
     }
 
     checkKeyPress(evt) {
-        // console.log(evt.charCode, evt.target.value);
         const data = evt.target.value;
         if ((evt.charCode >= 48 && evt.charCode <= 57) || +evt.charCode === 46 || +evt.charCode === 0) {
 
@@ -54,17 +60,25 @@ class Orders extends Component {
         return s.match(rgx);
     }
 
+    capitalizeFirstLetter = (string) => {
+        return string.charAt(0).toUpperCase() + string.slice(1);
+    };
+
     InputsFrame = ({first, second, loanRate, firePostToServer, type}) => {
+        let currencyWallet = 0;
+
+        this.props.userBalances ? this.props.userBalances.forEach(item => {
+            if(item.currency.code === first) currencyWallet = item.amount;
+        }) : null;
+
         const optionsPrice = {
             addonAfter: second,
-            // style: { width: '15rem' },
             value: this.state[`${type}Price`],
             onKeyPress: (e) => {
                 this.checkKeyPress(e)
             },
             onChange: (e) => {
                 const price = e.target.value;
-                // console.log(price);
                 const total = +price * (+this.state[`${type}Amount`]);
                 this.setState({
                     [`${type}Price`]: price,
@@ -75,19 +89,14 @@ class Orders extends Component {
 
         const optionsAmount = {
             addonAfter: first,
-            // style: { width: '15rem' },
             value: this.state[`${type}Amount`],
             onKeyPress: (e) => {
                 this.checkKeyPress(e)
             },
             onChange: (e) => {
                 const amount = e.target.value;
-                // const amountStr = +e.target.value;
-                // const amount = amountStr.toFixed(5);
-                // const amount = parseFloat(e.target.value);
-                console.log(amount);
                 const total = +this.state[`${type}Price`] * (+amount);
-                // console.log(amount, total);
+
                 this.setState({
                     [`${type}Amount`]: amount,
                     [`${type}Total`]: total,
@@ -97,7 +106,6 @@ class Orders extends Component {
 
         const optionsLoanRate = {
             addonAfter: loanRate,
-            // style: { width: '15rem' },
             value: this.state.loanRate,
             onKeyPress: (e) => {
                 this.checkKeyPress(e)
@@ -110,7 +118,6 @@ class Orders extends Component {
 
         const optionsTotal = {
             addonAfter: second,
-            // style: { width: '15rem' },
             value: this.state[`${type}Total`],
             onKeyPress: (e) => {
                 this.checkKeyPress(e)
@@ -127,7 +134,6 @@ class Orders extends Component {
         };
 
         const onBidButtonClick = ({type}) => {
-            // console.log("onBidButtonClick", type);
             firePostToServer({
                 token: this.props.token,
                 price: 1 * this.state[`${type}Price`],
@@ -136,14 +142,14 @@ class Orders extends Component {
                 type,
             });
         };
-        // console.log(type, this.state[`${type}Price`],this.state[`${type}Amount`], this.state[`${type}Total`]);
-        // const STOP = (type === "stop");
-        function capitalizeFirstLetter(string) {
-            return string.charAt(0).toUpperCase() + string.slice(1);
-        }
 
         return (
             <div>
+                <div className="order-block-title">
+                    <span>{`${this.capitalizeFirstLetter(type)}  ${first}`}</span>
+                    <span className='total-coins'><img src={Wallet} alt=""/>{`${currencyWallet} ${first}`}</span>
+                </div>
+
                 <div className="orders__item">
                     <span className="orders__item_name">Price:</span>
                     <Input {...optionsPrice} />
@@ -180,50 +186,55 @@ class Orders extends Component {
                     onClick={() => {
                         onBidButtonClick({type})
                     }}>
-                    {capitalizeFirstLetter(type) + ` ${first}`}
+                    {this.capitalizeFirstLetter(type) + ` ${first}`}
                 </Button>
             </div>
         )
     };
 
     StopLimitFrame = ({first, second, loanRate, firePostToServer, hz, type}) => {
+        let currencyWallet = 0;
+
+        this.props.userBalances ? this.props.userBalances.forEach(item => {
+            if(item.currency.code === first) currencyWallet = item.amount;
+        }) : null;
+
         const optionsLimit = {
             addonAfter: second,
-            // style: { width: '15rem' },
-            value: this.state.limit,
+            value: this.state[`${type}Limit`],
             onKeyPress: (e) => {
                 this.checkKeyPress(e)
             },
             onChange: (e) => {
                 const limit = e.target.value;
-                const stopTotal = +limit * this.state.stopAmount;
+                const stopTotal = +limit * this.state[`${type}StopAmount`];
                 this.setState({
-                    limit,
-                    stopTotal,
+                    [`${type}Limit`]: limit,
+                    [`${type}StopTotal`]: stopTotal,
                 });
             }
         };
         const optionsAmount = {
             addonAfter: first,
-            // style: { width: '15rem' },
-            value: this.state[`stopAmount`],
+            value: this.state[`${type}StopAmount`],
+
             onKeyPress: (e) => {
                 this.checkKeyPress(e)
             },
+
             onChange: (e) => {
                 const amount = e.target.value;
-                const total = +this.state.stopStop * (+amount);
-                // console.log(amount, total);
+                const total = +this.state[`${type}Stop`] * (+amount);
+
                 this.setState({
-                    [`stopAmount`]: amount,
-                    [`stopTotal`]: total,
+                    [`${type}StopAmount`]: amount,
+                    [`${type}StopTotal`]: total,
                 });
             }
         };
         const optionsStop = {
             addonAfter: second,
-            // style: { width: '15rem' },
-            value: this.state[`stopStop`],
+            value: this.state[`${type}Stop`],
             onKeyPress: (e) => {
                 this.checkKeyPress(e)
             },
@@ -231,29 +242,27 @@ class Orders extends Component {
                 const stop = e.target.value;
                 // const total =  this.state[`${type}Price`] * amount;
                 this.setState({
-                    [`stopStop`]: stop,
+                    [`${type}Stop`]: stop,
                     // [`${type}Total`]: total,
                 });
             }
         };
         const optionsTotal = {
             addonAfter: second,
-            // style: { width: '15rem' },
-            value: this.state[`stopTotal`],
+            value: this.state[`${type}StopTotal`],
             onKeyPress: (e) => {
                 this.checkKeyPress(e)
             },
             onChange: (e) => {
                 const total = e.target.value;
-                const price = +total / this.state[`stopAmount`];
+                const price = +total / this.state[`${type}topAmount`];
                 this.setState({
-                    [`stopStop`]: price,
-                    [`stopTotal`]: total,
+                    [`${type}Stop`]: price,
+                    [`${type}topTotal`]: total,
                 });
             }
         };
         const onBidButtonClick = ({type}) => {
-            // console.log(type, this.state.stop,this.state.limit, this.state.stopAmount);
             firePostToServer({
                 token: this.props.token,
                 stop: (1) * this.state.stopStop,
@@ -264,6 +273,11 @@ class Orders extends Component {
         };
         return (
             <Fragment>
+                <div className="order-block-title">
+                    <span>{`${this.capitalizeFirstLetter(type)} ${first}`}</span>
+                    <span className='total-coins'><img src={Wallet} alt=""/>{`${currencyWallet} ${first}`}</span>
+                </div>
+
                 <div className="orders__item">
                     <span className="orders__item_name">Stop:</span>
                     <Input {...optionsStop} />
@@ -281,42 +295,39 @@ class Orders extends Component {
                     <Input {...optionsTotal}/>
                 </div>
 
-                    <Button
-                        type="primary"
-                        ghost
-                        onClick={() => {
-                            onBidButtonClick({type: "buy"})
-                        }}
-                        className="order-buy-btn order-action-btn"
-                    >
-                        {type}
-                    </Button>
+                <Button
+                    type="primary"
+                    ghost
+                    onClick={() => {
+                        onBidButtonClick({type: type})
+                    }}
+                    className={type === 'buy' ? "order-buy-btn order-action-btn" : 'order-sell-btn order-action-btn'}
+                >
+                    {this.capitalizeFirstLetter(type) + ` ${first}`}
+                </Button>
 
-                    {/*<Button*/}
-                        {/*type="primary"*/}
-                        {/*ghost onClick={() => {*/}
-                        {/*onBidButtonClick({type: "sell"})*/}
-                    {/*}}*/}
-                        {/*className="order-sell-btn order-action-btn"*/}
-                    {/*>*/}
-                        {/*Sell*/}
-                    {/*</Button>*/}
+                {/*<Button*/}
+                {/*type="primary"*/}
+                {/*ghost onClick={() => {*/}
+                {/*onBidButtonClick({type: "sell"})*/}
+                {/*}}*/}
+                {/*className="order-sell-btn order-action-btn"*/}
+                {/*>*/}
+                {/*Sell*/}
+                {/*</Button>*/}
             </Fragment>
         )
     };
 
     render() {
-        // console.log( this.props.token );
         const {first, second, loanRate, firePostToServer} = this.props;
-        const {sellPrice, buyPrice, stopPrice} = this.state;
-        // console.log(first, second, price, total, loanRate);
+        const {sellPrice, buyPrice, stopBuyPrice, stopSellPrice} = this.state;
         return (
             <div className="orders">
                 <Tabs defaultActiveKey="1" type="card">
                     <TabPane tab="Limit" key="1">
                         <div className="ordersBlock">
                             <div className='buy-order'>
-                                <span className="order-block-title">Buy {`${first}`}</span>
                                 {this.InputsFrame({
                                     first,
                                     second,
@@ -328,7 +339,6 @@ class Orders extends Component {
                             </div>
 
                             <div className='sell-order'>
-                                <span className="order-block-title">Sell {`${first}`}</span>
                                 {this.InputsFrame({
                                     first,
                                     second,
@@ -344,23 +354,29 @@ class Orders extends Component {
                     <TabPane tab="Stop-Limit" key="2">
                         <div className="ordersBlock market">
                             <div className='buy-order'>
-                                <span className="order-block-title">Buy {`${first}`}</span>
-                                {this.StopLimitFrame({first, second, price: stopPrice, loanRate, firePostToServer,type: 'Buy'})}
+                                {this.StopLimitFrame({
+                                    first,
+                                    second,
+                                    price: stopBuyPrice,
+                                    loanRate,
+                                    firePostToServer,
+                                    type: 'buy'
+                                })}
                             </div>
 
                             <div className='sell-order'>
-                                <span className="order-block-title">Sell {`${first}`}</span>
-                                {this.StopLimitFrame({first, second, price: stopPrice, loanRate, firePostToServer,type: 'Sell'})}
+                                {this.StopLimitFrame({
+                                    first,
+                                    second,
+                                    price: stopSellPrice,
+                                    loanRate,
+                                    firePostToServer,
+                                    type: 'sell'
+                                })}
                             </div>
                         </div>
                     </TabPane>
                 </Tabs>
-
-
-                {/*<div className="ordersTables">*/}
-
-
-                {/*</div>*/}
             </div>
         )
     }
@@ -368,6 +384,7 @@ class Orders extends Component {
 
 const mapStateToProps = state => ({
     token: state.user.token,
+    userBalances: state.user.balances,
 });
 
 const mapDispatchToProps = dispatch => ({});

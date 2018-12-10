@@ -42,46 +42,55 @@ class LoginHistory extends Component {
     render() {
         let testData = [
             {
+                id: 1,
                 date: '24 03 2018',
                 address: '134.132.352.1',
                 twoFactor: 'yes',
                 Location: 'Kiev Ukraine'
             }, {
+                id: 2,
                 date: '24 03 2018',
                 address: '134.132.352.1',
                 twoFactor: 'yes',
                 Location: 'Kiev Ukraine'
             }, {
+                id: 3,
                 date: '24 03 2018',
                 address: '134.132.352.1',
                 twoFactor: 'yes',
                 Location: 'Kiev Ukraine'
             }, {
+                id: 4,
                 date: '24 03 2018',
                 address: '134.132.352.1',
                 twoFactor: 'yes',
                 Location: 'Kiev Ukraine'
             }, {
+                id: 5,
                 date: '24 03 2018',
                 address: '134.132.352.1',
                 twoFactor: 'yes',
                 Location: 'Kiev Ukraine'
             }, {
+                id: 6,
                 date: '24 03 2018',
                 address: '134.132.352.1',
                 twoFactor: 'yes',
                 Location: 'Kiev Ukraine'
             }, {
+                id: 7,
                 date: '24 03 2018',
                 address: '134.132.352.1',
                 twoFactor: 'yes',
                 Location: 'Kiev Ukraine'
             }, {
+                id: 8,
                 date: '24 03 2018',
                 address: '134.132.352.1',
                 twoFactor: 'yes',
                 Location: 'Kiev Ukraine'
             }, {
+                id: 9,
                 date: '24 03 2018',
                 address: '134.132.352.1',
                 twoFactor: 'yes',
@@ -91,7 +100,7 @@ class LoginHistory extends Component {
         return (
             <div className='card-container'>
                 {/*<div className='card-container-head'>*/}
-                    {/*<h3>My login history</h3>*/}
+                {/*<h3>My login history</h3>*/}
                 {/*</div>*/}
 
                 <div className="table">
@@ -100,8 +109,8 @@ class LoginHistory extends Component {
                         dataSource={testData}
                         bordered={false}
                         pagination={false}
-                        rowKey="uid"
-                        scroll={{y: 330}}
+                        rowKey={record => record.id}
+                        scroll={{y: 330, x: 400}}
                         size="small"
                         rowClassName="custom__tr"/>
 

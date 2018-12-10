@@ -1,6 +1,5 @@
 import React, {Component, Fragment} from 'react';
 import {connect} from 'react-redux';
-import {Redirect} from 'react-router-dom';
 
 import Orders from './Orders';
 import Graphic from './Graphic/Graphic'

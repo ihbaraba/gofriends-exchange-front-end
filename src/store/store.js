@@ -19,7 +19,7 @@ export default function configureStore (initState = {}) {
 
     const enhancer = composeEnhancers(
         applyMiddleware(thunk),
-        applyMiddleware(createLogger())
+        // applyMiddleware(createLogger())
         // other store enhancers if any
     );
 

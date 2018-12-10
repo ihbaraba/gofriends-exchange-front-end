@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import verif from "../img/verif.svg";
 import NavLink from './NavLink';
 import {USERINFO} from "../constants/APIURLS";
 import {getUserInfo} from "../utils";
@@ -35,7 +34,7 @@ class Profile extends Component {
     render() {
         // console.log( this.props.user);
 
-        const {username, email, country = {}, twoFactorAuthEnabled} = this.props.user;
+        const {username, country = {}, twoFactorAuthEnabled} = this.props.user;
         // const {name} = country;
         const {name: countryName = "Ukraine"} = country;
 
@@ -133,6 +132,7 @@ class Profile extends Component {
                 <div className='page-title'>
                     My login history
                 </div>
+
                 <LoginHistory />
             </div>
         )

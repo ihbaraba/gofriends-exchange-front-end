@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux'
-import {Table, Tooltip} from 'antd';
+import {Table} from 'antd';
 import QRCode from 'qrcode-react';
 import {getUserInfo} from "../utils";
 import {USERINFO} from "./../constants/APIURLS.js"
@@ -74,7 +74,6 @@ class Balances extends Component {
         const user = this.props.user;
         // console.log("Balances. User = ", this.props);
         const {balances = []} = user;
-        console.log(this.state.selectCoin)
         const {name, address, type} = this.state.selectCoin;
 
         const dataSource = balances.map(item => (
@@ -125,14 +124,9 @@ class Balances extends Component {
                             Deposit
                         </div>
 
-
                         <div onClick={() => this.openModal(record, 'withdrawal')} className="act-btn">
                             Withdrawal
                         </div>
-
-
-
-
                         {/*<div className="act-btn">Trade</div>*/}
                     </div>
                 )
@@ -149,7 +143,8 @@ class Balances extends Component {
                         columns={columns}
                         pagination={false}
                         bordered={false}
-                        rowKey={record => record.id}
+                        rowKey={record => record.code}
+                        scroll={{x: 500}}
                         size="small"
                     />
                 </div>

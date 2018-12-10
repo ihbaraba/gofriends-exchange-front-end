@@ -37,7 +37,7 @@ const initialState = {
         username: "Unauthorized",
         countryId: 1,
         password: "1",
-        token: localStorage.getItem("exchange_token"),
+        token: sessionStorage.getItem("exchange_token"),
         orders: new Set(),
     },
 };

@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {Input, Tooltip} from 'antd';
+import {Input} from 'antd';
 
 import '../App.css';
 
@@ -41,7 +41,7 @@ class WithdrawLogic extends Component {
     }
 
     render() {
-        const {record: {first, second, loanRate, firePostToServer, type}, close} = this.props;
+        const {record: {first, second}, close} = this.props;
 
         const optionsWallet = {
             addonAfter: second,
@@ -101,7 +101,7 @@ class WithdrawLogic extends Component {
 
         const total = +this.state.transactionFee + (+this.state.amount);
         // console.log( this.props.token );
-        const {record} = this.props;
+        // const {record} = this.props;
 
         // console.log( first, second, price: sellPrice, loanRate, firePostToServer, type : "sell");
 
@@ -109,15 +109,19 @@ class WithdrawLogic extends Component {
             <div>
                 <div className="formWrap">
                     <label>Your wallet address:</label>
-                    <Input {...optionsWallet} style={{width: "100%",}}/>
+                    <Input {...optionsWallet} style={{width: "100%"}}/>
                 </div>
                 <div className="formWrap">
                     <label>Amount:</label>
-                    <Input {...optionsAmount} style={{width: "100%",}}/>
+                    <Input {...optionsAmount} style={{width: "100%"}}/>
                 </div>
-                <div className="formWrap">
-                    <label>Transaction Fee</label>
-                    <Input {...optionsTransactionFee} style={{width: "100%",}}/>
+                {/*<div className="formWrap">*/}
+                    {/*<label>Transaction Fee</label>*/}
+                    {/*<Input {...optionsTransactionFee} style={{width: "100%",}}/>*/}
+                {/*</div>*/}
+                <div className="formWraptotal">
+                    <label>Transaction Fee:</label>
+                    <span>{optionsTransactionFee.value}</span>
                 </div>
                 <div className="formWraptotal">
                     <label>Total:</label>
@@ -127,8 +131,6 @@ class WithdrawLogic extends Component {
                 <button className='btn' onClick={close}>
                     Withdraw
                 </button>
-
-
             </div>
         )
     }

@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux'
 import PropTypes from 'prop-types';
 import {Table} from 'antd';
-import DepthChart from './Graphic/Depth'
 import {getMarcketDpthData} from "./../utils"
 import io from 'socket.io-client';
 import {SOCKET_SOURCE, ORDERS} from "./../constants/APIURLS.js"
@@ -188,7 +187,7 @@ class MarketDepth extends Component {
 
     render() {
         const {marketDepth: {buy, sell}} = this.state;
-        const readyForDrawing = buy.length > 0 && sell.length > 0;
+        // const readyForDrawing = buy.length > 0 && sell.length > 0;
         // const {marketDepth} = this.state;
         // console.log("render marketDepth props = ", this.props.currentPair,this.state,);
 
@@ -216,10 +215,10 @@ class MarketDepth extends Component {
             width: 150,
         }];
 
-        const buy4DepthChart = buy
-            .filter(item => (!item.completed && !item.stop && !item.limit && (item.status === "active")));
-        const sell4DepthChart = sell
-            .filter(item => (!item.completed && !item.stop && !item.limit && (item.status === "active")));
+        // const buy4DepthChart = buy
+        //     .filter(item => (!item.completed && !item.stop && !item.limit && (item.status === "active")));
+        // const sell4DepthChart = sell
+        //     .filter(item => (!item.completed && !item.stop && !item.limit && (item.status === "active")));
 
         const buy4Table = buy
             .filter(item => (!item.completed && !item.stop && !item.limit && (item.status === "active")))

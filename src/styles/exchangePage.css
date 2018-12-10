@@ -2,11 +2,7 @@
     display: grid;
     grid-column-gap: 15px;
     grid-template-columns: 24% 50% 24%;
-    grid-template-areas: "pairInformation pairInformation coins"
-                         "market graphic coins"
-                         "market graphic orderHistory"
-                         "market orders orderHistory"
-                         "openOrder openOrder openOrder";
+    grid-template-areas: "pairInformation pairInformation coins" "market graphic coins" "market graphic orderHistory" "market orders orderHistory" "openOrder openOrder openOrder";
 
     /*grid-template-columns: 100px 100px 100px;*/
     /*grid-gap: 10px;*/
@@ -264,7 +260,18 @@
 }
 
 .orders .order-block-title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     font-weight: bold;
+}
+
+.orders .order-block-title .total-coins {
+    font-weight: normal;
+}
+
+.orders .order-block-title .total-coins img{
+    margin-right: 10px;
 }
 
 .orders .rate-block .ant-radio-button-wrapper {

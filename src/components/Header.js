@@ -104,7 +104,7 @@ class Header extends Component {
     );
 
     renderMenu = () => {
-        let isLoggedIn = localStorage.getItem('exchange_token') ? true : false;
+        let isLoggedIn = sessionStorage.getItem('exchange_token') ? true : false;
 
         if (isLoggedIn) {
             return (
@@ -181,7 +181,10 @@ class Header extends Component {
                 <div className='size-container'>
                     <div className='header'>
                         <div className="logo">
-                            <NavLink to="/"><img src={logo} alt="logo"/></NavLink>
+                            <NavLink to="/">
+                                <img src={logo} alt="logo"/>
+                                {/*<span style={{fontSize: '48px'}}>Sinsline</span>*/}
+                            </NavLink>
                         </div>
                         <div className="tabs exchange-link">
                             <NavLink to="/exchange">Exchange</NavLink>

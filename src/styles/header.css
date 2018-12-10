@@ -1,6 +1,6 @@
 header {
     width: 100%;
-    height: 70px;
+    height: 71px;
     padding: 0 1rem;
 
     border-left: none;
@@ -20,7 +20,6 @@ header {
 
 .header {
     width: 100%;
-    height: -webkit-fill-available;
     padding: 0 1rem;
     display: flex;
     justify-content: space-between;
@@ -56,6 +55,7 @@ header {
 .header .message {
     display: flex;
     align-items: center;
+    flex-wrap: wrap;
 }
 
 .header .message .header-create {
@@ -136,4 +136,11 @@ header {
 .ant-dropdown-menu-item:hover,
 .ant-dropdown-menu-submenu-title:hover {
     background-color: rgba(74, 153, 140, 0.21);
+}
+
+
+@media (max-width: 600px) {
+    header {
+        height: auto;
+    }
 }

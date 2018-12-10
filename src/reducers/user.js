@@ -21,7 +21,7 @@ export default function userState(state = {}, action) {
 
         case LOGIN_SUCCESS:
             // console.log("userState Reducer ==> ", action, state);
-            localStorage.setItem('exchange_token', action.payload.token);
+            sessionStorage.setItem('exchange_token', action.payload.token);
             return {
                 ...state,
                 token: action.payload.token,
@@ -45,7 +45,7 @@ export default function userState(state = {}, action) {
 
         case LOGOUT:
             // localStorage.clear();
-            localStorage.removeItem("exchange_token");
+            sessionStorage.removeItem("exchange_token");
             // console.log(localStorage.getItem("exchange_token"), initialState.user);
             return {
                 ...initialState.user,

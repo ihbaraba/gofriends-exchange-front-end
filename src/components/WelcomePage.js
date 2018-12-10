@@ -56,6 +56,7 @@ class WelcomePage extends Component {
 
         const dataSource = [
             {
+                id: 1,
                 type: 'ETH/BTC',
                 price: 'Ethereum',
                 amount: '0.028221 / $113.37',
@@ -65,6 +66,7 @@ class WelcomePage extends Component {
                 Volume: 'qfdwef'
 
             }, {
+                id: 2,
                 type: 'ETH/BTC',
                 price: 'Ethereum',
                 amount: '0.028221 / $113.37',
@@ -74,6 +76,7 @@ class WelcomePage extends Component {
                 Volume: 'qfdwef'
 
             }, {
+                id: 3,
                 type: 'ETH/BTC',
                 price: 'Ethereum',
                 amount: '0.028221 / $113.37',
@@ -83,6 +86,7 @@ class WelcomePage extends Component {
                 Volume: 'qfdwef'
 
             }, {
+                id: 4,
                 type: 'ETH/BTC',
                 price: 'Ethereum',
                 amount: '0.028221 / $113.37',
@@ -92,6 +96,7 @@ class WelcomePage extends Component {
                 Volume: 'qfdwef'
 
             }, {
+                id: 5,
                 type: 'ETH/BTC',
                 price: 'Ethereum',
                 amount: '0.028221 / $113.37',
@@ -101,6 +106,7 @@ class WelcomePage extends Component {
                 Volume: 'qfdwef'
 
             }, {
+                id: 6,
                 type: 'ETH/BTC',
                 price: 'Ethereum',
                 amount: '0.028221 / $113.37',
@@ -110,6 +116,7 @@ class WelcomePage extends Component {
                 Volume: 'qfdwef'
 
             }, {
+                id: 7,
                 type: 'ETH/BTC',
                 price: 'Ethereum',
                 amount: '0.028221 / $113.37',
@@ -140,8 +147,8 @@ class WelcomePage extends Component {
                                     dataSource={dataSource}
                                     bordered={false}
                                     pagination={false}
-                                    rowKey="uid"
-                                    scroll={{y: 630}}
+                                    rowKey={record => record.id}
+                                    scroll={{y: 500, x:400}}
                                     size="small"
                                     rowClassName="custom__tr"/>
                             </div>
@@ -149,17 +156,34 @@ class WelcomePage extends Component {
 
                         <TabPane tab="BCH Markets" key="2">
                             <div className='table-stat'>
-                                Hello!
+                                <Table
+                                    columns={columns}
+                                    dataSource={dataSource}
+                                    bordered={false}
+                                    pagination={false}
+                                    rowKey={record => record.id}
+                                    scroll={{y: 500, x:400}}
+                                    size="small"
+                                    rowClassName="custom__tr"/>
+
                             </div>
                         </TabPane>
 
                         <TabPane tab="USD Markets" key="3">
                             <div className='table-stat'>
-                                Hello!
+                                <Table
+                                    columns={columns}
+                                    dataSource={dataSource}
+                                    bordered={false}
+                                    pagination={false}
+                                    rowKey={record => record.id}
+                                    scroll={{y: 500, x:400}}
+                                    size="small"
+                                    rowClassName="custom__tr"/>
+
                             </div>
                         </TabPane>
                     </Tabs>
-
                 </div>
             </div>
         )

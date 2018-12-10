@@ -174,17 +174,17 @@ class UserOrder extends React.Component {
                         key: 'action',
                         width: 150,
                         render: (text, record) => (
-                                <Button
-                                    type="primary"
-                                    ghost
-                                    onClick={(order) => {
-                                            onBidButtonClick({status: "cancelled", order: record})
-                                            }}
-                                    style={{margin: '0 auto'}}
-                                    className='act-btn'
-                                >
-                                    Cancel
-                                </Button>
+                            <Button
+                                type="primary"
+                                ghost
+                                onClick={(order) => {
+                                    onBidButtonClick({status: "cancelled", order: record})
+                                }}
+                                style={{margin: '0 auto'}}
+                                className='act-btn'
+                            >
+                                Cancel
+                            </Button>
                         ),
                     }]
                     : []),
@@ -199,8 +199,8 @@ class UserOrder extends React.Component {
                 dataSource={dataSource}
                 bordered={false}
                 pagination={false}
-                rowKey="uid"
-                scroll={{y: 630}}
+                rowKey={record => record.id}
+                scroll={{y: 630, x: 400}}
                 size="small"
                 rowClassName="custom__tr"/>
         )

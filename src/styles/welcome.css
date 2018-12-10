@@ -1,6 +1,6 @@
 .welcome-page .title-block {
     margin-top: 35px;
-    height: 370px;
+    /*height: 370px;*/
     padding: 60px 0 100px 0;
     box-sizing: border-box;
     background-image: url("../img/welcome_bg.svg");
