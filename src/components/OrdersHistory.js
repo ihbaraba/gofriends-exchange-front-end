@@ -116,7 +116,9 @@ class OredersHistory extends Component {
                 </div>
 
                 <div className='table-block'>
-                    <Tabs defaultActiveKey="1" type="card">
+                    <Tabs
+                        defaultActiveKey="1"
+                        type="card">
                         <TabPane tab="Market" key="1">
                             <Table
                                 columns={columns}

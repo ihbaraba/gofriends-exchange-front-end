@@ -52,6 +52,16 @@ header {
     display: flex;
 }
 
+.header .right .desk-nav {
+    display: flex;
+}
+
+.header .right .mobile-nav {
+    display: none;
+    font-size: 25px;
+    color: #4A998C;
+}
+
 .header .message {
     display: flex;
     align-items: center;
@@ -69,7 +79,7 @@ header {
 }
 
 .header .message .header-create:hover {
-   color: #4A998C;
+    color: #4A998C;
 }
 
 .header .message .header-sign {
@@ -138,9 +148,178 @@ header {
     background-color: rgba(74, 153, 140, 0.21);
 }
 
-
 @media (max-width: 600px) {
     header {
-        height: auto;
+        height: 50px;
+        padding: 0 !important;
+        position: fixed;
+        top: 0;
+        z-index: 1000;
+    }
+
+    .header {
+        padding: 0 !important;
+        height: 100%;
+    }
+
+    .header .logo img {
+        width: 80px;
+        height: 26px;
+    }
+
+    .mobile-authentication-link {
+        margin: 0 40px 0;
+        display: flex;
+    }
+
+    .mobile-authentication-link .header-create {
+        border-right: 1px solid rgba(245, 245, 245, 0.2);
+    }
+
+    .mobile-authentication-link a {
+        font-size: 12px;
+        padding: 0 10px;
+    }
+
+    .w-content .size-container {
+        padding-top: 50px !important;
+    }
+
+    .header .right .desk-nav,
+    .exchange-link {
+        display: none;
+    }
+
+    .header .right .mobile-nav {
+        display: block;
+    }
+
+    /* Position and sizing of burger button */
+    .bm-burger-button {
+        position: fixed;
+        width: 20px;
+        height: 20px;
+        right: 15px;
+        top: 15px;
+    }
+
+    /* Color/shape of burger icon bars */
+    .bm-burger-bars {
+        background: #4A998C;
+    }
+
+    .bm-menu-wrap {
+        top: 0;
+    }
+
+    /* Position and sizing of clickable cross button */
+    .bm-cross-button {
+        height: 24px;
+        width: 24px;
+        top: 12px !important;
+    }
+
+    /* Color/shape of close button cross */
+    .bm-cross {
+        background: #00CE7D;
+    }
+
+    /* General sidebar styles */
+    .bm-menu {
+        background-color: rgba(30, 30, 30, 0.99);
+        padding: 10px 1.5em 0;
+        font-size: 1.15em;
+    }
+
+    /* Morph shape necessary with bubble or elastic */
+    .bm-morph-shape {
+        fill: #373a47;
+    }
+
+    /* Wrapper for item list */
+    .bm-item-list {
+        color: #b8b7ad;
+        padding: 0;
+    }
+
+    /* Individual item */
+    .bm-item {
+        display: inline-block;
+    }
+
+    /* Styling of overlay */
+    .bm-overlay {
+        background: rgba(0, 0, 0, 0.3);
+    }
+
+    .burger-menu {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .top-side-burger-menu {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+    }
+
+    .top-side-burger-menu img {
+        margin: 0 20px 0 0;
+    }
+
+    .top-side-burger-menu a {
+        font-size: 15px !important;
+        padding: 0 10px;
+    }
+
+    .top-side-burger-menu a.header-create {
+        border-right: 1px solid rgba(245, 245, 245, 0.2);
+    }
+
+    .logout-navigation {
+        margin: 20px 0 0 0;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .login-navigation {
+        margin: 20px 0 0 0;
+        display: flex;
+        flex-direction: column;
+        font-size: 15px;
+    }
+
+    .logout-navigation a {
+        font-family: Roboto;
+        font-size: 15px;
+        letter-spacing: 1.5px;
+        margin: 0 0 20px;
+    }
+
+    .logout-navigation a.active {
+        color: #05AB6A;
+    }
+
+    .login-navigation .sub-menu {
+        padding: 10px 0 0 15px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .login-navigation .sub-menu a {
+        font-size: 15px;
+        margin: 0 0 5px 0 !important;
+    }
+
+    .login-navigation a {
+        font-family: Roboto;
+        font-size: 15px;
+        letter-spacing: 1.5px;
+        margin: 0 0 20px;
+    }
+
+    .login-navigation a.active {
+        color: #05AB6A;
     }
 }
+

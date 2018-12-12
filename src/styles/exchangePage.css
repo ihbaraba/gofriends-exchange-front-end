@@ -12,6 +12,17 @@
     /*align-items: flex-end;*/
 }
 
+.centerArea.desktop {
+    max-width: 1460px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 10px;
+}
+
+.centerArea.mobile {
+    display: none;
+}
+
 .pair-information {
     grid-area: pairInformation;
     margin: 0 0 25px 0;
@@ -19,6 +30,34 @@
 
 .current-pair {
 
+}
+
+.pair-information .coin-statistics {
+    width: 80%;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+.pair-information .coin-statistics > div {
+    display: flex;
+    flex-direction: column;
+}
+
+.pair-information .coin-statistics .label {
+    font-family: Roboto;
+    font-size: 12px;
+    font-weight: 300;
+    letter-spacing: 1.2px;
+    margin: 0 0 5px 0;
+}
+
+.pair-information .coin-statistics .value {
+    font-family: Ubuntu;
+    font-size: 14px;
+    font-weight: bold;
+    letter-spacing: 1.4px;
+    line-height: 19px;
 }
 
 .current-pair .first {
@@ -270,7 +309,7 @@
     font-weight: normal;
 }
 
-.orders .order-block-title .total-coins img{
+.orders .order-block-title .total-coins img {
     margin-right: 10px;
 }
 
@@ -478,9 +517,299 @@
 }
 
 @media (max-width: 600px) {
-    .centerArea {
-        grid-template-columns: 95%;
-        grid-template-areas: "pairInformation" "graphic" "coins" "orders" "market" "orderHistory" "openOrder";
+    .w-content {
+        padding: 0 0 30px 0 !important;
     }
 
+    .ant-tabs-ink-bar-animated {
+        display: none !important;
+    }
+
+    .centerArea.desktop {
+        display: none;
+    }
+
+    .centerArea.mobile {
+        display: block;
+    }
+
+    .centerArea.mobile .mobile-tab-content {
+        padding: 95px 10px 10px 10px;
+    }
+
+    /*-------------------------*/
+    /*Charts tab*/
+    /*-------------------------*/
+    .centerArea.mobile .coin-statistics {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+    }
+
+    .centerArea.mobile .coin-statistics > div {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+    }
+
+    .centerArea.mobile .mobile-tab-content .fa-caret-down {
+        color: #4A998C;
+        margin: 0 0 0 5px;
+    }
+
+    .centerArea.mobile .coin-statistics .label {
+        margin: 0 5px 0 0;
+        font-size: 10px;
+        font-weight: 300;
+        letter-spacing: 1px;
+    }
+
+    .centerArea.mobile .coin-statistics .value {
+        font-size: 12px;
+        font-weight: bold;
+        letter-spacing: 1.2px;
+    }
+
+    .centerArea.mobile .ant-tabs-nav {
+        height: 35px;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        background-color: #2B2A2A;
+
+    }
+
+    .centerArea.mobile .current-pair .first,
+    .centerArea.mobile .current-pair .second {
+        font-size: 15px;
+    }
+
+    .centerArea.mobile .ant-tabs-nav .ant-tabs-tab {
+        height: 35px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-family: Ubuntu;
+        font-size: 14px;
+        font-weight: bold;
+        letter-spacing: 1.4px;
+        flex: 1;;
+    }
+
+    .centerArea.mobile .ant-tabs-tab-active {
+        color: #4A998C;
+        border-bottom: 3px solid #4A998C;
+    }
+
+    .rightSide .candlesticks .ant-radio-button-wrapper {
+        width: 50px !important;
+    }
+
+    .centerArea.mobile .rightSide {
+        margin: 10px 0 15px 0;
+    }
+
+    .centerArea.mobile .order-history-block .ant-tabs-nav {
+        background-color: #313131;
+        justify-content: flex-end;
+    }
+
+    .centerArea.mobile .order-history-block .ant-tabs-nav .ant-tabs-tab {
+        height: 23px;
+        width: 64px;
+        color: #fff;
+        flex: none;
+        font-size: 12px !important;
+        font-family: Roboto;
+    }
+
+    .centerArea.mobile .trade-nav-btn {
+        height: 55px;
+        position: fixed;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        bottom: 0;
+        width: 100%;
+        right: 0;
+        background-color: #1E1E1E;
+        z-index: 1000;
+    }
+
+    .centerArea.mobile .trade-nav-btn .btn {
+        width: 45%;
+        height: 36px;
+        margin: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 12px;
+        box-shadow: none;
+    }
+
+    .centerArea.mobile .trade-nav-btn .btn.sell-btn {
+        background-color: #DD4457;
+    }
+
+    /*-------------------------*/
+    /*Trade tab*/
+    /*-------------------------*/
+    .centerArea.mobile .mobile-trade-block {
+        display: flex;
+    }
+
+    .centerArea.mobile .mobile-trade-block .ant-tabs-nav .ant-tabs-tab {
+        width: 60px;
+        height: 23px;
+        color: #fff;
+        flex: none;
+        margin-left: 3px;
+    }
+
+    .centerArea.mobile .mobile-trade-block .ant-tabs-nav .ant-tabs-tab-active {
+        border: 0;
+    }
+
+    .centerArea.mobile .mobile-trade-block .orders.mobile {
+        margin: 0 10px 0 0;
+        padding: 0 0 10px 0;
+        height: max-content;
+    }
+
+    .centerArea.mobile .mobile-trade-block .orders.mobile .ordersBlock {
+        padding: 20px 10px 35px;
+    }
+
+    .centerArea.mobile .mobile-trade-block .orders.mobile span.ant-input-group-wrapper {
+        width: 100%;
+    }
+
+    .centerArea.mobile .mobile-trade-block .orders__item {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .centerArea.mobile .mobile-trade-block .orders.mobile .buy-order {
+        width: 100%;
+        border: 0;
+        padding: 0;
+    }
+
+    .centerArea.mobile .mobile-trade-block .orders.mobile .sell-order {
+        width: 100%;
+        border: 0;
+        padding: 0;
+    }
+
+    /*-------------------------*/
+    /*Open orders*/
+    /*-------------------------*/
+    .centerArea.mobile .title-last-tab {
+        margin: 0 0 10px 0;
+        opacity: 0.4;
+        color: #FFFFFF;
+        font-family: Ubuntu;
+        font-size: 15px;
+        font-weight: bold;
+        letter-spacing: 1.5px;
+        line-height: 20px;
+    }
+
+    .centerArea.mobile .mobile-version .order-card {
+        width: 95%;
+        height: 164px;
+        margin: 0 auto 20px auto;
+        border: 0.5px solid rgba(0, 0, 0, 0.7);
+        background-color: rgba(7, 3, 10, 0.35);
+    }
+
+    .centerArea.mobile .mobile-version .order-card .header-card {
+        height: 30px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 10px;
+        border-radius: 2px 2px 0 0;
+        background-color: #38363A;
+        font-size: 12px;
+    }
+
+    .centerArea.mobile .mobile-version .order-information {
+        padding: 30px 5%;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .centerArea.mobile .mobile-version .order-information .information-item {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .centerArea.mobile .mobile-version .order-information .information-item .label {
+        font-family: Roboto;
+        font-size: 10px;
+        font-weight: 300;
+        letter-spacing: 1px;
+    }
+
+    .centerArea.mobile .mobile-version .order-information .information-item .value {
+        font-family: Roboto;
+        font-size: 12px;
+        letter-spacing: 1.2px;
+    }
+
+    .order-action {
+        padding: 0 5%;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .order-action > div {
+        width: 35%;
+        height: 24px;
+        border-radius: 3px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .info-btn {
+        background-color: #4A998C;
+    }
+
+    .info-btn i {
+        margin: 0 0 0 5px;
+    }
+
+    .cancel-btn {
+        background-color: #D0021B;
+        margin-left: auto;
+    }
+
+    .ReactModal__Overlay {
+        z-index: 10000;
+    }
+
+    .ReactModal__Content {
+        background: none !important;
+    }
+
+    .select-coin-modal {
+        width: 100vw !important;
+        height: 100vh;
+        padding: 20vh 10% !important;
+    }
+
+    .select-coin-modal .close-modal-btn {
+        right: 10% !important;
+        top: 15vh !important;
+        font-size: 18px;
+        color: #00CE7D;
+    }
+
+    .select-coin-modal .ant-tabs {
+        border: 1.5px solid rgba(255, 255, 255, 0.1) !important;
+        background-color: rgba(7, 3, 10, 0.35);
+    }
 }

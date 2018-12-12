@@ -156,13 +156,13 @@ class MarketDepth extends Component {
         // console.log("sellDepth =", sellDepth);
 
         await this.setState({
-                marketDepth:
-                    {
-                        buy: this.calculateSum(buyDepth.filter(item => !item.completed)), //save not completed bids only
-                        // buy: buyDepth.filter(item => !item.completed).map(item => {console.log(item); return item.toFixed(3)} ),
-                        sell: this.calculateSum(sellDepth.filter(item => !item.completed)),
-                    }
-            });
+            marketDepth:
+                {
+                    buy: this.calculateSum(buyDepth.filter(item => !item.completed)), //save not completed bids only
+                    // buy: buyDepth.filter(item => !item.completed).map(item => {console.log(item); return item.toFixed(3)} ),
+                    sell: this.calculateSum(sellDepth.filter(item => !item.completed)),
+                }
+        });
     }
 
     async componentDidMount() {
@@ -187,6 +187,7 @@ class MarketDepth extends Component {
 
     render() {
         const {marketDepth: {buy, sell}} = this.state;
+        const {mobile} = this.props;
         // const readyForDrawing = buy.length > 0 && sell.length > 0;
         // const {marketDepth} = this.state;
         // console.log("render marketDepth props = ", this.props.currentPair,this.state,);
@@ -215,6 +216,33 @@ class MarketDepth extends Component {
             width: 150,
         }];
 
+        const mobileColumns = [
+            {
+                title: 'Price',
+                dataIndex: 'price',
+                key: 'price',
+                width: 150,
+            },
+            // {
+            //     title: this.props.currentPair.first,
+            //     dataIndex: 'amount',
+            //     key: 'amount',
+            //     width: 150,
+            // },
+            // {
+            //     title: this.props.currentPair.second,
+            //     dataIndex: 'quoteCurrency',
+            //     key: 'quoteCurrency',
+            //     width: 150,
+            // },
+            {
+                title: 'Sum',
+                dataIndex: 'Sum',
+                key: 'Sum',
+                width: 150,
+            }
+        ];
+
         // const buy4DepthChart = buy
         //     .filter(item => (!item.completed && !item.stop && !item.limit && (item.status === "active")));
         // const sell4DepthChart = sell
@@ -232,7 +260,7 @@ class MarketDepth extends Component {
                 <div className="marketDepthTables">
                     <div className="marketDepthColumns table-block buy-table">
                         <div className='table-title'>Buy orders</div>
-                        <Table columns={columns}
+                        <Table columns={mobile ? mobileColumns : columns}
                                dataSource={buy4Table}
                                bordered={false}
                                pagination={false}
@@ -243,7 +271,7 @@ class MarketDepth extends Component {
                     </div>
                     <div className="marketDepthColumns table-block sell-table">
                         <div className='table-title'>Sell orders</div>
-                        <Table columns={columns}
+                        <Table columns={mobile ? mobileColumns : columns}
                                dataSource={sell4Table}
                                bordered={false}
                                pagination={false}
@@ -254,7 +282,7 @@ class MarketDepth extends Component {
                     </div>
                 </div>
                 {/*<div className="marketDepthChart">*/}
-                    {/*{readyForDrawing && <DepthChart buy={buy4DepthChart} sell={sell4DepthChart} height={200}/>}*/}
+                {/*{readyForDrawing && <DepthChart buy={buy4DepthChart} sell={sell4DepthChart} height={200}/>}*/}
                 {/*</div>*/}
             </div>
         )

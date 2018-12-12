@@ -207,3 +207,28 @@
     font-size: 12px;
     letter-spacing: 1.2px;
 }
+
+@media (max-width: 600px) {
+    .profile-page .page-content {
+        flex-direction: column;
+    }
+
+    .profile-page .avatar-block {
+        width: 40%;
+    }
+
+    .profile-page .user-information {
+        width: 100%;
+        margin: 0 0 30px 0;
+        padding: 60px 10px;
+    }
+
+    .profile-page .user-settings {
+        width: 100%;
+    }
+
+    .profile-page .user-settings .authentication-block ,
+    .profile-page .user-settings .change-pass-block {
+        padding: 40px 10px;
+    }
+}

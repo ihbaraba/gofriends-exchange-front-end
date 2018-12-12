@@ -6,7 +6,7 @@ import {
     SAVE_USER_INFO,
     SAVE_USER_ORDERS
 } from '../constants/index'
-import initialState from '../store/initialState'
+import initialState from '../store/initialState';
 
 export default function userState(state = {}, action) {
     const {payload} = action;

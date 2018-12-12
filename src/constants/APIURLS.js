@@ -87,5 +87,7 @@ export const REGISTER = `${current_server.XHR}/api/v1/auth/register`;
 
 export const LOGIN = `${current_server.XHR}/api/v1/auth/login`;
 
+export const CHANGE_PASSWORD = `${current_server.XHR}/api/v1/`;
+
 
 

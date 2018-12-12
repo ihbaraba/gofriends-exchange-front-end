@@ -38,6 +38,8 @@ class Orders extends Component {
             sellStopTotal: this.props.price * 1,
             buyStopAmount: 1,
             sellStopAmount: 1,
+            //    -------
+            activeTab: this.props.activeTab ? this.props.activeTab : '1'
         };
     }
 
@@ -64,11 +66,21 @@ class Orders extends Component {
         return string.charAt(0).toUpperCase() + string.slice(1);
     };
 
+    componentDidMount() {
+        this.setState({
+            activeTab: this.props.activeTab
+        })
+    }
+
+    componentWillReceiveProps(nextProps) {
+        this.setState({activeTab: nextProps.activeTab})
+    }
+
     InputsFrame = ({first, second, loanRate, firePostToServer, type}) => {
         let currencyWallet = 0;
 
         this.props.userBalances ? this.props.userBalances.forEach(item => {
-            if(item.currency.code === first) currencyWallet = item.amount;
+            if (item.currency.code === first) currencyWallet = item.amount;
         }) : null;
 
         const optionsPrice = {
@@ -196,7 +208,7 @@ class Orders extends Component {
         let currencyWallet = 0;
 
         this.props.userBalances ? this.props.userBalances.forEach(item => {
-            if(item.currency.code === first) currencyWallet = item.amount;
+            if (item.currency.code === first) currencyWallet = item.amount;
         }) : null;
 
         const optionsLimit = {
@@ -320,64 +332,107 @@ class Orders extends Component {
     };
 
     render() {
-        const {first, second, loanRate, firePostToServer} = this.props;
+        const {first, second, loanRate, firePostToServer, mobile} = this.props;
         const {sellPrice, buyPrice, stopBuyPrice, stopSellPrice} = this.state;
         return (
-            <div className="orders">
-                <Tabs defaultActiveKey="1" type="card">
-                    <TabPane tab="Limit" key="1">
-                        <div className="ordersBlock">
-                            <div className='buy-order'>
-                                {this.InputsFrame({
-                                    first,
-                                    second,
-                                    price: buyPrice,
-                                    loanRate,
-                                    firePostToServer,
-                                    type: "buy"
-                                })}
-                            </div>
+            <Fragment>
+                {mobile ?
+                    <div className="orders mobile">
+                        <Tabs
+                            activeKey={this.state.activeTab}
+                            onTabClick={i => this.setState({activeTab: i})}
+                            type="card"
+                        >
+                            <TabPane tab="Buy" key="1">
+                                <div className="ordersBlock">
+                                    <div className='buy-order'>
+                                        {this.InputsFrame({
+                                            first,
+                                            second,
+                                            price: buyPrice,
+                                            loanRate,
+                                            firePostToServer,
+                                            type: "buy"
+                                        })}
+                                    </div>
+                                </div>
+                            </TabPane>
 
-                            <div className='sell-order'>
-                                {this.InputsFrame({
-                                    first,
-                                    second,
-                                    price: sellPrice,
-                                    loanRate,
-                                    firePostToServer,
-                                    type: "sell"
-                                })}
-                            </div>
-                        </div>
-                    </TabPane>
+                            <TabPane tab="Sell" key="2">
+                                <div className="ordersBlock">
+                                    <div className='sell-order'>
+                                        {this.InputsFrame({
+                                            first,
+                                            second,
+                                            price: sellPrice,
+                                            loanRate,
+                                            firePostToServer,
+                                            type: "sell"
+                                        })}
+                                    </div>
+                                </div>
+                            </TabPane>
+                        </Tabs>
+                    </div>
+                    :
+                    <div className="orders desktop">
+                        <Tabs defaultActiveKey="1" type="card">
+                            <TabPane tab="Limit" key="1">
+                                <div className="ordersBlock">
+                                    <div className='buy-order'>
+                                        {this.InputsFrame({
+                                            first,
+                                            second,
+                                            price: buyPrice,
+                                            loanRate,
+                                            firePostToServer,
+                                            type: "buy"
+                                        })}
+                                    </div>
 
-                    <TabPane tab="Stop-Limit" key="2">
-                        <div className="ordersBlock market">
-                            <div className='buy-order'>
-                                {this.StopLimitFrame({
-                                    first,
-                                    second,
-                                    price: stopBuyPrice,
-                                    loanRate,
-                                    firePostToServer,
-                                    type: 'buy'
-                                })}
-                            </div>
+                                    <div className='sell-order'>
+                                        {this.InputsFrame({
+                                            first,
+                                            second,
+                                            price: sellPrice,
+                                            loanRate,
+                                            firePostToServer,
+                                            type: "sell"
+                                        })}
+                                    </div>
+                                </div>
+                            </TabPane>
 
-                            <div className='sell-order'>
-                                {this.StopLimitFrame({
-                                    first,
-                                    second,
-                                    price: stopSellPrice,
-                                    loanRate,
-                                    firePostToServer,
-                                    type: 'sell'
-                                })}
-                            </div>
-                        </div>
-                    </TabPane>
-                </Tabs>
-            </div>
+                            <TabPane tab="Stop-Limit" key="2">
+                                <div className="ordersBlock market">
+                                    <div className='buy-order'>
+                                        {this.StopLimitFrame({
+                                            first,
+                                            second,
+                                            price: stopBuyPrice,
+                                            loanRate,
+                                            firePostToServer,
+                                            type: 'buy'
+                                        })}
+                                    </div>
+
+                                    <div className='sell-order'>
+                                        {this.StopLimitFrame({
+                                            first,
+                                            second,
+                                            price: stopSellPrice,
+                                            loanRate,
+                                            firePostToServer,
+                                            type: 'sell'
+                                        })}
+                                    </div>
+                                </div>
+                            </TabPane>
+                        </Tabs>
+                    </div>
+                }
+
+            </Fragment>
         )
     }
 }

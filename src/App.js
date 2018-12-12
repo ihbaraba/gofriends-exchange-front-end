@@ -48,11 +48,12 @@ class App extends Component {
                         </div>
 
                         <div className="w-content first-background">
+                            <Route path="/exchange" component={ExchangePage}/>
+
                             <div className='size-container'>
                                 <Switch>
                                     <Route exact path="/" component={WelcomePage}/>
                                     <Route exact path="/" component={Registration}/>
-                                    <Route path="/exchange" component={ExchangePage}/>
                                     <Route path="/margintrading" component={MarginTrading}/>
                                     <Route path="/login" component={Login}/>
                                     <Route path="/logout" component={LogOut}/>
@@ -81,8 +82,6 @@ class App extends Component {
                                     <Route path="/YourOpenOrders" component={YourOpenOrders}/>
                                     <Route path="/Knowledge" component={Knowledge}/>
                                     <Route path="/ProfileVerification" component={ProfileVerification}/>
-
-                                    <Route path="*" component={NotFound}/>
                                 </Switch>
                             </div>
                         </div>

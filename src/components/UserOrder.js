@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Fragment} from 'react';
 import {connect} from 'react-redux'
 import {getOrdersHistory, sendOrder} from "../utils";
 import {USERORDERSHISTORY, ORDERS} from "./../constants/APIURLS.js"
@@ -97,7 +97,7 @@ class UserOrder extends React.Component {
     }
 
     render() {
-        const {token, completed} = this.props;
+        const {token, completed, mobile} = this.props;
         // const {orders = [], ordersHistory = []} = this.state;
 
         const onBidButtonClick = ({status, order}) => {
@@ -191,18 +191,69 @@ class UserOrder extends React.Component {
             ]
         };
         const dataSource = this.orders;
+        console.log(dataSource)
         // console.log("completed =", completed, "dataSource=", completed ? this.state.ordersHistory : this.state.orders, this.state);
         // console.log("dataSource =", dataSource, );
         return (
-            <Table
-                columns={columns(completed)}
-                dataSource={dataSource}
-                bordered={false}
-                pagination={false}
-                rowKey={record => record.id}
-                scroll={{y: 630, x: 400}}
-                size="small"
-                rowClassName="custom__tr"/>
+            <Fragment>
+                {mobile ?
+                    <div className='mobile-version'>
+
+                        {dataSource.map(item => (
+                            <div key={item.id} className='order-card'>
+                                <div className='header-card'>
+                                    <span>{item.createdAt}</span>
+                                    <span>{item.type}</span>
+                                </div>
+                                <div className='body-card'>
+                                    <div className="order-information">
+                                        <div className="information-item">
+                                            <span className='label'>Price:</span>
+                                            <span className='value'>{item.price}</span>
+                                        </div>
+                                        <div className="information-item">
+                                            <span className='label'>Amount:</span>
+                                            <span className='value'>{item.amount}</span>
+                                        </div>
+                                        <div className="information-item">
+                                            <span className='label'>Sum:</span>
+                                            <span className='value'>{item.Sum}</span>
+                                        </div>
+                                    </div>
+
+                                    <div className="order-action">
+                                        {item.limit || item.stop ?
+                                            <div className='info-btn'>
+                                                Info
+                                                <i className="fa fa-angle-down" aria-hidden="true"></i>
+                                            </div> : ''
+                                        }
+
+                                        <div
+                                            className='cancel-btn'
+                                            onClick={() => {
+                                                onBidButtonClick({status: "cancelled", order: item})
+                                            }}
+
+                                        >
+                                            Cancel
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                    :
+                    <Table
+                        columns={columns(completed)}
+                        dataSource={dataSource}
+                        bordered={false}
+                        pagination={false}
+                        rowKey={record => record.id}
+                        scroll={{y: 630, x: 400}}
+                        size="small"
+                        rowClassName="custom__tr"/>}
+            </Fragment>
         )
     }
 }

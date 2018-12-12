@@ -1,8 +1,10 @@
 import React, {Component, Fragment} from 'react';
 import logo from '../img/logo_go.svg';
 import userIcon from '../img/user_icon.svg';
+import userGreenIcon from '../img/avatarGreen.svg';
 import NavLink from './NavLink';
 import {Menu, Dropdown} from 'antd';
+import {slide as MenuBurger} from 'react-burger-menu';
 
 import '../styles/header.css';
 
@@ -80,14 +82,14 @@ class Header extends Component {
                 </NavLink>
             </Menu.Item>
             {/*<Menu.Item>*/}
-                {/*<NavLink to="/loginhistory">*/}
-                    {/*<span className="title topLevel">Login History</span>*/}
-                {/*</NavLink>*/}
+            {/*<NavLink to="/loginhistory">*/}
+            {/*<span className="title topLevel">Login History</span>*/}
+            {/*</NavLink>*/}
             {/*</Menu.Item>*/}
             {/*<Menu.Item>*/}
-                {/*<NavLink to="/changepassword">*/}
-                    {/*<span className="title topLevel">Account settings</span>*/}
-                {/*</NavLink>*/}
+            {/*<NavLink to="/changepassword">*/}
+            {/*<span className="title topLevel">Account settings</span>*/}
+            {/*</NavLink>*/}
             {/*</Menu.Item>*/}
             <Menu.Item>
                 <NavLink to="/Logout">
@@ -175,10 +177,13 @@ class Header extends Component {
         }
     };
 
+
     render() {
+        let isLoggedIn = sessionStorage.getItem('exchange_token') ? true : false;
+
         return (
             <header>
-                <div className='size-container'>
+                <div className='size-container' style={{height: '100%'}}>
                     <div className='header'>
                         <div className="logo">
                             <NavLink to="/">
@@ -191,7 +196,101 @@ class Header extends Component {
                         </div>
 
                         <div className="tabs right">
-                            {this.renderMenu()}
+                            <div className='desk-nav'>
+                                {this.renderMenu()}
+                            </div>
+
+                            <div className='mobile-nav'>
+                                {!isLoggedIn ? <div className='mobile-authentication-link'>
+                                    <NavLink className="header-create" to="/signup">Sign up</NavLink>
+                                    <NavLink className="header-sign" to="/login">Login</NavLink>
+                                </div> : ''}
+
+                                <MenuBurger isOpen={false} right>
+                                    {isLoggedIn ?
+                                        <div className='burger-menu login'>
+                                            <div className='top-side-burger-menu'>
+                                                <img src={userGreenIcon} alt=""/>
+                                                <NavLink className="header-sign" to="/profile">My profile</NavLink>
+                                            </div>
+
+                                            <div className='login-navigation'>
+                                                <NavLink to="/exchange">
+                                                    Exchange
+                                                </NavLink>
+
+                                                <div>
+                                                    Balances
+
+                                                    <div className="sub-menu">
+                                                        <NavLink to="/balances">
+                                                            Balances
+                                                        </NavLink>
+
+                                                        <NavLink to="/DepositHistory">
+                                                            Deposit history
+                                                        </NavLink>
+
+                                                        <NavLink to="/withdrawalpanel">
+                                                            Withdrawal history
+                                                        </NavLink>
+                                                    </div>
+
+                                                </div>
+
+                                                <div>
+                                                    Orders
+
+                                                    <div className="sub-menu">
+                                                        <NavLink to="/OpenOrders">
+                                                            My open orders
+                                                        </NavLink>
+
+                                                        <NavLink to="/orders">
+                                                            My trade history
+                                                        </NavLink>
+                                                    </div>
+
+                                                </div>
+
+                                                <NavLink to="/balances">
+                                                    News
+                                                </NavLink>
+
+                                                <NavLink to="/contact">
+                                                    Contact
+                                                </NavLink>
+
+                                                <NavLink to="/Logout">
+                                                    Logout
+                                                </NavLink>
+                                            </div>
+                                        </div>
+                                        :
+                                        <div className='burger-menu logout'>
+                                            <div className='top-side-burger-menu'>
+                                                <img src={userGreenIcon} alt=""/>
+                                                <NavLink className="header-create" to="/signup">Sign up</NavLink>
+                                                <NavLink className="header-sign" to="/login">Log in</NavLink>
+                                            </div>
+
+                                            <div className='logout-navigation'>
+                                                <NavLink to="/">
+                                                    Home
+                                                </NavLink>
+
+                                                <NavLink to="/balances">
+                                                    Support
+                                                </NavLink>
+
+                                                <NavLink to="/balances">
+                                                    News
+                                                </NavLink>
+                                            </div>
+                                        </div>
+                                    }
+                                </MenuBurger>
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -1,6 +1,9 @@
 import React, {Component} from 'react';
 import Recaptcha from 'react-recaptcha';
 import logo from '../img/logo_go.svg';
+import axios from 'axios';
+
+import {CHANGE_PASSWORD} from '../constants/APIURLS';
 
 
 class ChangePassword extends Component {
@@ -42,7 +45,7 @@ class ChangePassword extends Component {
     handleSubmit = e => {
         e.preventDefault();
         if (this.state.newPassword === this.state.newPasswordRepeat && this.state.isVerified) {
-            alert('done')
+            axios.post(CHANGE_PASSWORD, this.state.newPassword);
 
             this.setState({
                 oldPassword: '',

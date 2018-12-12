@@ -8,6 +8,7 @@ import {LOGIN} from "../constants/APIURLS";
 import {sendRequest} from "./Graphic/utils";
 import logo from '../img/logo_go.svg';
 
+import axios from 'axios';
 
 import '../styles/login.css';
 
@@ -119,6 +120,7 @@ class Login extends Component {
             else {
                 // console.log("Login content =", content);
                 this.props.login_success({token: content.token});
+                axios.defaults.headers.common['Authorization'] =  content.token;
 
                 this.props.history.push(`/exchange`);
             }

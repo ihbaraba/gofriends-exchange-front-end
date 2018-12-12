@@ -54,6 +54,27 @@ class WelcomePage extends Component {
             },
         ];
 
+        const mobileColumns = [
+            {
+                title: 'Pair',
+                dataIndex: 'type',
+                key: 'type',
+                width: 150,
+            },
+            {
+                title: `Last price`,
+                dataIndex: 'amount',
+                key: 'amount',
+                width: 150,
+            },
+            {
+                title: `24 change`,
+                dataIndex: 'Sum',
+                key: 'Sum',
+                width: 150,
+            }
+        ];
+
         const dataSource = [
             {
                 id: 1,
@@ -126,7 +147,8 @@ class WelcomePage extends Component {
                 Volume: 'qfdwef'
 
             },
-        ]
+        ];
+
 
         return (
             <div className='welcome-page'>
@@ -143,12 +165,12 @@ class WelcomePage extends Component {
                         <TabPane tab="BTC Markets" key="1">
                             <div className='table-stat'>
                                 <Table
-                                    columns={columns}
+                                    columns={window.screen.width < '600' ? mobileColumns : columns}
                                     dataSource={dataSource}
                                     bordered={false}
                                     pagination={false}
                                     rowKey={record => record.id}
-                                    scroll={{y: 500, x:400}}
+                                    scroll={{y: 500, x:300}}
                                     size="small"
                                     rowClassName="custom__tr"/>
                             </div>
@@ -157,12 +179,12 @@ class WelcomePage extends Component {
                         <TabPane tab="BCH Markets" key="2">
                             <div className='table-stat'>
                                 <Table
-                                    columns={columns}
+                                    columns={window.screen.width < '600' ? mobileColumns : columns}
                                     dataSource={dataSource}
                                     bordered={false}
                                     pagination={false}
                                     rowKey={record => record.id}
-                                    scroll={{y: 500, x:400}}
+                                    scroll={{y: 500, x:300}}
                                     size="small"
                                     rowClassName="custom__tr"/>
 
@@ -172,12 +194,12 @@ class WelcomePage extends Component {
                         <TabPane tab="USD Markets" key="3">
                             <div className='table-stat'>
                                 <Table
-                                    columns={columns}
+                                    columns={window.screen.width < '600' ? mobileColumns : columns}
                                     dataSource={dataSource}
                                     bordered={false}
                                     pagination={false}
                                     rowKey={record => record.id}
-                                    scroll={{y: 500, x:400}}
+                                    scroll={{y: 500, x:300}}
                                     size="small"
                                     rowClassName="custom__tr"/>
 
