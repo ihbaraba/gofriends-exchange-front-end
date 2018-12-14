@@ -217,7 +217,7 @@ class ExchangePage extends Component {
                             position: 'fixed',
                             width: '100%',
                             left: '0',
-                            top: '49px',
+                            top: '47px',
                             zIndex: '999'
                         }}
                     >
@@ -282,7 +282,7 @@ class ExchangePage extends Component {
                                     />
                                 </div>
 
-                                <OrdersHistory/>
+                                <OrdersHistory mobile={true}/>
 
                                 <div className='trade-nav-btn'>
                                     <div className='btn buy-btn' onClick={() => this.openTradeTab('2', '1')}>Buy BTC</div>
@@ -309,7 +309,6 @@ class ExchangePage extends Component {
                                 </div>
 
                                 <div className='mobile-trade-block'>
-
                                     <Orders
                                         {...pair}
                                         price={52}

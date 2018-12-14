@@ -1,0 +1,27 @@
+.admin-version .w-header ,
+.admin-version .w-footer {
+    display: none;
+}
+
+.admin-version .w-content,
+.admin-version .size-container {
+    padding: 0;
+    margin: 0;
+    max-width: initial;
+    display: flex;
+}
+
+.admin-panel {
+    width: 100%;
+    height: 100%;
+    display: flex;
+
+}
+
+.admin-panel .nav-bar {
+    margin: 0 20px 0 0;
+}
+
+.admin-panel .nav-bar ul.ant-menu {
+    height: 100%;
+}

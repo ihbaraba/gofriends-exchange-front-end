@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
+import {BrowserRouter as Router, Route, Switch, Redirect} from 'react-router-dom';
 import WelcomePage from './components/WelcomePage';
 import Login from './components/Login';
 import LogOut from './components/LogOut';
@@ -29,6 +29,12 @@ import Confirm from './components/Confirm';
 import BalancesPanel from './components/BalancesPanel';
 import Knowledge from './components/Knowledge';
 import ProfileVerification from './components/ProfileVerification';
+import AdminPanel from "./components/AdminPanel";
+
+import Users from './components/AdminPanel/Users'
+
+
+import axios from 'axios';
 
 import Footer from './components/Footer';
 import Header from './components/Header';
@@ -36,6 +42,15 @@ import Header from './components/Header';
 
 import YourOpenOrders from "./components/YourOpenOrders";
 
+
+(function () {
+    let token = sessionStorage.getItem("exchange_token");
+    if (token) {
+        axios.defaults.headers.common['Authorization'] = token;
+    } else {
+        axios.defaults.headers.common['Authorization'] = null;
+    }
+})();
 
 class App extends Component {
     render() {
@@ -53,7 +68,7 @@ class App extends Component {
                             <div className='size-container'>
                                 <Switch>
                                     <Route exact path="/" component={WelcomePage}/>
-                                    <Route exact path="/" component={Registration}/>
+                                    {/*<Route exact path="/" component={Registration}/>*/}
                                     <Route path="/margintrading" component={MarginTrading}/>
                                     <Route path="/login" component={Login}/>
                                     <Route path="/logout" component={LogOut}/>
@@ -82,6 +97,14 @@ class App extends Component {
                                     <Route path="/YourOpenOrders" component={YourOpenOrders}/>
                                     <Route path="/Knowledge" component={Knowledge}/>
                                     <Route path="/ProfileVerification" component={ProfileVerification}/>
+
+                                    <Route path='/admin' render={() => (
+                                        <AdminPanel>
+                                            <Redirect from='/admin' to='/admin/users'/>
+                                            <Route path='/admin/users' component={Users}/>
+                                        </AdminPanel>
+                                    )}>
+                                    </Route>
                                 </Switch>
                             </div>
                         </div>

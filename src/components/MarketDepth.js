@@ -265,7 +265,7 @@ class MarketDepth extends Component {
                                bordered={false}
                                pagination={false}
                                rowKey={record => record.id}
-                               scroll={{y: 450}}
+                               scroll={{y: mobile ? 200 : 450}}
                                size="small"
                                rowClassName="custom__tr"/>
                     </div>
@@ -276,7 +276,7 @@ class MarketDepth extends Component {
                                bordered={false}
                                pagination={false}
                                rowKey={record => record.id}
-                               scroll={{y: 450}}
+                               scroll={{y: mobile ? 200 : 450}}
                                size="small"
                                rowClassName="custom__tr"/>
                     </div>

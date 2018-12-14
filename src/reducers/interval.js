@@ -7,8 +7,7 @@ export default (state = {}, action) => {
     switch (action.type) {
 
         case 'INTERVAL':
-            console.log("interval reducer ==> INTREVAL", action, state);
-            return action.payload
+            return action.payload;
 
         default:
             return state

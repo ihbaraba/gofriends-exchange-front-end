@@ -114,9 +114,9 @@
     margin: 0 0 30px 0;
     padding: 40px 50px;
     box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+    /*display: flex;*/
+    /*flex-direction: column;*/
+    /*justify-content: space-between;*/
     border: 1px solid #3F4755;
     border-radius: 5px;
     background-color: rgba(7, 3, 10, 0.05);
@@ -142,6 +142,7 @@
 
 .profile-page .user-settings .switch-block {
     width: 100%;
+    margin: 25px 0;
     display: flex;
     align-items: center;
 }
@@ -154,25 +155,76 @@
     letter-spacing: 1.5px;
 }
 
-.profile-page .user-settings .switch {
+.switch {
     height: 45px;
     width: 100px;
     border: 2px solid rgba(255, 255, 255, 0.26);
 }
 
-.profile-page .user-settings .ant-switch:after {
+.ant-switch:after {
     width: 40px;
     height: 39px;
     border-radius: 50%;
     background-color: #4A998C;
 }
 
-.profile-page .user-settings .ant-switch-checked {
+.ant-switch-checked {
     background-color: #4A998C;
 }
 
-.profile-page .user-settings .ant-switch-checked:after {
+.ant-switch-checked:after {
     background-color: #fff !important;
+}
+
+.qr-authentication-block .qr-code {
+    font-size: 12px;
+    margin: 0 20px 0 0;
+    text-align: center;
+}
+
+.qr-authentication-block .qr-code .title {
+    margin: 0 0 20px 0;
+    text-align: center;
+}
+
+.qr-authentication-block .enter-code {
+    text-align: center;
+    font-size: 12px;
+}
+
+.qr-authentication-block .enter-code .title {
+    margin: 0 0 20px 0;
+}
+
+.qr-authentication-block .enter-code input {
+    border: 1px solid #979797;
+    background: none;
+    font-size: 15px;
+    color: #fff !important;
+    text-align: center;
+    padding: 10px 0;
+    margin: 0 0 20px 0;
+}
+
+.qr-authentication-block .two-factor-cod-block {
+    display: flex;
+}
+
+.activate-btn {
+    margin: 30px auto 0 auto;
+}
+
+.profile-page .user-settings .qr-authentication-block .activate-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 45px;
+    width: 173px;
+    border-radius: 3px;
+    background-color: #4A998C;
+    font-size: 12px;
+    letter-spacing: 1.2px;
+    cursor: pointer;
 }
 
 .change-pass-block {
@@ -208,27 +260,68 @@
     letter-spacing: 1.2px;
 }
 
+.login-page .send-email-token {
+    text-align: center;
+    font-size: 14px;
+    letter-spacing: 1.5px;
+    color: #4A998C;
+}
+
+.changed-pass {
+    font-size: 16px;
+    text-align: center;
+    margin: 20px 0;
+}
+
 @media (max-width: 600px) {
     .profile-page .page-content {
         flex-direction: column;
     }
 
-    .profile-page .avatar-block {
-        width: 40%;
+    .profile-page .avatar-block,
+    .profile-page .title-block img,
+    .profile-page .change-pass-block img {
+        display: none;
+    }
+
+    .profile-page .top,
+    .profile-page .bottom {
+        padding-left: 5% !important;
+    }
+
+    .profile-page .img {
+        width: 0 !important;
+    }
+
+    .profile-page .user-settings .switch-block span.title {
+        margin: 0 !important;
+    }
+
+    .profile-page .user-settings .authentication-block,
+    .profile-page .user-settings .change-pass-block {
+        padding: 40px 5% !important;
     }
 
     .profile-page .user-information {
         width: 100%;
         margin: 0 0 30px 0;
-        padding: 60px 10px;
+        padding: 60px 0;
     }
 
     .profile-page .user-settings {
         width: 100%;
     }
 
-    .profile-page .user-settings .authentication-block ,
+    .profile-page .user-settings .authentication-block,
     .profile-page .user-settings .change-pass-block {
         padding: 40px 10px;
+    }
+
+    .qr-authentication-block .two-factor-cod-block {
+        flex-direction: column;
+    }
+
+    .qr-authentication-block .two-factor-cod-block .enter-code {
+        margin: 20px 0 0 0;
     }
 }

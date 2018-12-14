@@ -633,7 +633,7 @@
         width: 100%;
         right: 0;
         background-color: #1E1E1E;
-        z-index: 1000;
+        z-index: 999;
     }
 
     .centerArea.mobile .trade-nav-btn .btn {

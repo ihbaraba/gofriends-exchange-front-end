@@ -133,7 +133,7 @@ class Balances extends Component {
             }];
         return (
             <div className="balances-page">
-                <div>
+                <div className='card-container-head'>
                     <h3>Balances</h3>
                 </div>
 

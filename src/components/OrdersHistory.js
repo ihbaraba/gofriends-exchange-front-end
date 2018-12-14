@@ -6,6 +6,7 @@ import {getOrdersHistory} from "./../utils"
 import {ORDERSHISTORY} from "./../constants/APIURLS.js"
 import {save_user_info} from "../actions/UserActions";
 import UserOrder from "./UserOrder";
+import moment from 'moment';
 
 const TabPane = Tabs.TabPane;
 
@@ -73,41 +74,58 @@ class OredersHistory extends Component {
 
     render() {
         const {orders} = this.state;
-        const {pair: {baseCurrency, quoteCurrency}} = this.props;
+        const {pair: {baseCurrency, quoteCurrency}, mobile} = this.props;
         // console.log( baseCurrency, quoteCurrency, this.props );
 
         const columns = [
-            //     {
-            //     title: 'Type',
-            //     dataIndex: 'type',
-            //     key: 'type',
-            //     width: 150,
-            // },
-            {
-                title: `Price(${baseCurrency})`,
-                dataIndex: 'price',
-                key: 'price',
-                width: 150,
-            },
-            {
-                title: `Amount(${quoteCurrency})`,
-                dataIndex: 'amount',
-                key: 'amount',
-                width: 150,
-            },
-            //     {
-            //     title: `Sum(${baseCurrency})`,
-            //     dataIndex: 'Sum',
-            //     key: 'Sum',
-            //     width: 150,
-            // }
-            {
-                title: 'Date',
-                dataIndex: 'completedAt',
-                key: 'date',
-                width: 150,
-            },
-        ];
+                //     {
+                //     title: 'Type',
+                //     dataIndex: 'type',
+                //     key: 'type',
+                //     width: 150,
+                // },
+                {
+                    title: `Price(${baseCurrency})`,
+                    dataIndex: 'price',
+                    key: 'price',
+                    width: 150,
+                },
+                {
+                    title: `Amount(${quoteCurrency})`,
+                    dataIndex: 'amount',
+                    key: 'amount',
+                    width: 150,
+                },
+                //     {
+                //     title: `Sum(${baseCurrency})`,
+                //     dataIndex: 'Sum',
+                //     key: 'Sum',
+                //     width: 150,
+                // }
+                {
+                    title: 'Date',
+                    dataIndex: 'completedAt',
+                    key: 'date',
+                    width: 150,
+                    render: (item) => {
+                        if (mobile) {
+                            return (
+                                <span>
+                                    {moment(item, 'DD.MM.YYYY HH:mm:ss').format('DD.MM.YY')}
+                                    <br/>
+                                    {moment(item, 'DD.MM.YYYY HH:mm:ss').format('HH:mm')}
+                                </span>
+                            )
+                        } else {
+                            return (
+                                <span>
+                                {item}
+                            </span>
+                            )
+                        }
+                    }
+                },
+            ];
 
         return (
             <div className="order-history-block">
@@ -133,7 +151,7 @@ class OredersHistory extends Component {
                         </TabPane>
 
                         <TabPane tab="Yours" key="2">
-                            <UserOrder completed="true"/>
+                            <UserOrder completed="true" newDateFormat={mobile}/>
                         </TabPane>
                     </Tabs>
                 </div>

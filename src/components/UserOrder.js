@@ -3,6 +3,7 @@ import {connect} from 'react-redux'
 import {getOrdersHistory, sendOrder} from "../utils";
 import {USERORDERSHISTORY, ORDERS} from "./../constants/APIURLS.js"
 import {Table, Icon, Tooltip, Button} from 'antd';
+import moment from "moment/moment";
 
 // import {ORDERS} from "../constants/APIURLS";
 
@@ -97,7 +98,7 @@ class UserOrder extends React.Component {
     }
 
     render() {
-        const {token, completed, mobile} = this.props;
+        const {token, completed, mobile, newDateFormat} = this.props;
         // const {orders = [], ordersHistory = []} = this.state;
 
         const onBidButtonClick = ({status, order}) => {
@@ -122,6 +123,23 @@ class UserOrder extends React.Component {
                 dataIndex: completed ? 'completedAt' : 'createdAt',
                 key: 'date',
                 width: 150,
+                render: (item) => {
+                    if (newDateFormat) {
+                        return (
+                            <span>
+                                {moment(item, 'DD.MM.YYYY HH:mm:ss').format('DD.MM.YY')}
+                                <br/>
+                                {moment(item, 'DD.MM.YYYY HH:mm:ss').format('HH:mm')}
+                            </span>
+                        )
+                    } else {
+                        return (
+                            <span>
+                                {item}
+                            </span>
+                        )
+                    }
+                }
             }, {
                 title: 'Type',
                 dataIndex: 'type',
@@ -191,7 +209,6 @@ class UserOrder extends React.Component {
             ]
         };
         const dataSource = this.orders;
-        console.log(dataSource)
         // console.log("completed =", completed, "dataSource=", completed ? this.state.ordersHistory : this.state.orders, this.state);
         // console.log("dataSource =", dataSource, );
         return (

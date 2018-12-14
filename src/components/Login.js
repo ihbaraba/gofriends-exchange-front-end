@@ -193,14 +193,13 @@ class Login extends Component {
                                 />
                             </div>}
                             {(showTotpCodeInput) && <div>
-                                <h4>You have 2 factor authentication enabled.<br/>Please Enter Your Google
+                                <h4 style={{textAlign: 'center', margin: '20px 0'}}>You have 2 factor authentication enabled.<br/>Please Enter Your Google
                                     Authenticator Six-Digit Code</h4>
                                 <input
-                                    className="userPassInput"
+                                    className="userQrPassInput"
                                     type="totpCode"
                                     name="totpCode"
                                     id="totpCode"
-                                    placeholder="TotpCode"
                                     value={this.state.totpCode}
                                     onChange={this.handleTotpCode}
                                     required

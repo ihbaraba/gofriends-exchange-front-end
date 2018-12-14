@@ -1,11 +1,12 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import NavLink from './NavLink';
-import {USERINFO} from "../constants/APIURLS";
+import {USERINFO, TWO_FACTOR_AUTHENTICATION} from "../constants/APIURLS";
 import {getUserInfo} from "../utils";
 import {save_user_info} from "../actions/UserActions";
 import LoginHistory from './LoginHistory';
 import {Switch} from 'antd';
+import axios from 'axios';
 
 import avatar from '../img/avatar.svg';
 import authentication from '../img/authentication.svg';
@@ -14,6 +15,13 @@ import padlock from '../img/padlock.svg';
 import '../styles/profile.css';
 
 class Profile extends Component {
+    state = {
+        showQr: false,
+        qrCode: '',
+        totpCode: '',
+        twoFactorAuthEnabled: this.props.user.twoFactorAuthEnabled
+    };
+
     async componentDidMount() {
         /**
          * Read token -  check if the current session is authorized
@@ -31,13 +39,51 @@ class Profile extends Component {
         }
     }
 
-    render() {
-        // console.log( this.props.user);
+    swithOnChange = async (onTwoFActor) => {
+        if (onTwoFActor) {
+            let qrCode = await axios.get(TWO_FACTOR_AUTHENTICATION);
 
+            this.setState({
+                showQr: true,
+                qrCode: qrCode.data.qr,
+                twoFactorAuthEnabled: true
+            })
+        } else {
+            await this.activateTwoFactor(true);
+
+            this.setState({
+                twoFactorAuthEnabled: false,
+                showQr: false,
+            })
+        }
+    };
+
+    activateTwoFactor = async (disable) => {
+        if (disable === true) {
+            axios.put(TWO_FACTOR_AUTHENTICATION, {
+                enable: false
+            })
+        } else {
+            await axios.put(TWO_FACTOR_AUTHENTICATION, {
+                enable: true,
+                totpCode: this.state.totpCode
+            });
+
+            this.setState({showQr: false})
+        }
+    };
+
+    componentWillReceiveProps(nextProps) {
+        this.setState({
+            twoFactorAuthEnabled: nextProps.user.twoFactorAuthEnabled
+        })
+    }
+
+    render() {
+        const {showQr, qrCode, totpCode} = this.state;
         const {username, country = {}, twoFactorAuthEnabled} = this.props.user;
         // const {name} = country;
         const {name: countryName = "Ukraine"} = country;
-
         return (
             <div className='profile-page'>
                 <div className='page-title'>
@@ -105,10 +151,38 @@ class Profile extends Component {
 
                                 <Switch
                                     className='switch'
-                                    defaultChecked={twoFactorAuthEnabled}
+                                    checked={this.state.twoFactorAuthEnabled}
                                     onChange={this.swithOnChange}
                                 />
                             </div>
+
+                            {showQr ?
+                                <div className='qr-authentication-block'>
+                                    <div className='two-factor-cod-block'>
+                                        <div className="qr-code">
+                                            <div className='title'>
+                                                Plese scun this QR-code by <a style={{color: '#4A998C'}} href='https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2' target="_blank">Google authenticator</a> app on your smartphone
+                                            </div>
+
+                                            <img src={qrCode} alt="QR - code"/>
+                                        </div>
+
+                                        <div className='enter-code'>
+                                            <div className='title'>And enter Your Google authenticator six-digit code
+                                            </div>
+                                            <input
+                                                type="text"
+                                                value={totpCode}
+                                                onChange={(e) => this.setState({totpCode: e.target.value})}
+                                            />
+                                        </div>
+                                    </div>
+
+                                    <div className='activate-btn' onClick={this.activateTwoFactor}>
+                                        Activate
+                                    </div>
+                                </div>
+                                : ''}
                         </div>
 
                         <div className='change-pass-block'>
@@ -133,7 +207,7 @@ class Profile extends Component {
                     My login history
                 </div>
 
-                <LoginHistory />
+                <LoginHistory/>
             </div>
         )
     }
