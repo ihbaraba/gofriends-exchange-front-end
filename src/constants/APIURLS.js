@@ -27,7 +27,7 @@ const SERVERS = {
 // console.log('document.location', document.location.hostname, typeof document.location.hostname, document.location,);
 
 const generatedDetected = {
-    XHR: `https://${document.location.hostname}`,
+    XHR: `https://${document.location.hostname}/api/v1/`,
     SOCKET: `wss://${document.location.hostname}/`,
 };
 
