@@ -13,7 +13,7 @@ const SERVERS = {
         SOCKET: "wss://demo.gofriends.pro/",
     },
     DEV: {
-        XHR: "http://142.93.81.111:3000",
+        XHR: "http://ex.dev.gofriends.pro/api/v1/",
         SOCKET: "http://142.93.81.111:3001",
     },
 };
@@ -27,7 +27,7 @@ const SERVERS = {
 // console.log('document.location', document.location.hostname, typeof document.location.hostname, document.location,);
 
 const generatedDetected = {
-    XHR: `https://${document.location.hostname}`,
+    XHR: `https://${document.location.hostname}/api/v1/`,
     SOCKET: `wss://${document.location.hostname}/`,
 };
 
@@ -49,7 +49,7 @@ export const current_server = detected;
 /*
 get initial data from our API for the chart
 * */
-const OUR_TIMEFRAMES = `${current_server.XHR}/api/v1/timeframes`;
+const OUR_TIMEFRAMES = `${current_server.XHR}timeframes`;
 
 /*
 get initial data from CRIPTOCOMPARE API for the chart
@@ -65,33 +65,33 @@ export const TIMEFRAMES = OUR_TIMEFRAMES; // OUR_TIMEFRAMES or CRIPTOCOMPARE_TIM
  */
 
 /*load data for chart*/
-export const QUOTATIONS = `${current_server.XHR}/api/v1/quotations`;
+export const QUOTATIONS = `${current_server.XHR}quotations`;
 
-export const PAIRS = `${current_server.XHR}/api/v1/pairs/`;
+export const PAIRS = `${current_server.XHR}pairs/`;
 
-export const MARKETS = `${current_server.XHR}/api/v1/markets/`;
+export const MARKETS = `${current_server.XHR}markets/`;
 
-export const ORDERS = `${current_server.XHR}/api/v1/orders`;
+export const ORDERS = `${current_server.XHR}orders`;
 
-export const USERORDERSHISTORY = `${current_server.XHR}/api/v1/users/me/orders`;
+export const USERORDERSHISTORY = `${current_server.XHR}users/me/orders`;
 
-export const ORDERSHISTORY = `${current_server.XHR}/api/v1/orders`;
+export const ORDERSHISTORY = `${current_server.XHR}orders`;
 
-export const USERINFO = `${current_server.XHR}/api/v1/users/me`;
+export const USERINFO = `${current_server.XHR}users/me`;
 
 export const SOCKET_SOURCE = `${current_server.SOCKET}`;
 
-export const COUNTRIES = `${current_server.XHR}/api/v1/countries`;
+export const COUNTRIES = `${current_server.XHR}countries`;
 
-export const REGISTER = `${current_server.XHR}/api/v1/auth/register`;
+export const REGISTER = `${current_server.XHR}auth/register`;
 
-export const LOGIN = `${current_server.XHR}/api/v1/auth/login`;
+export const LOGIN = `${current_server.XHR}auth/login`;
 
 
 //user api urls
-export const TWO_FACTOR_AUTHENTICATION = `${current_server.XHR}/api/v1/auth/twofactor`;
+export const TWO_FACTOR_AUTHENTICATION = `${current_server.XHR}auth/twofactor`;
 
-export const CHANGE_PASSWORD = `${current_server.XHR}/api/v1/auth/password`;
+export const CHANGE_PASSWORD = `${current_server.XHR}auth/password`;
 
 
 
