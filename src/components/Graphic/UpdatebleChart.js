@@ -321,7 +321,7 @@ class CandleStickChartPanToLoadMore extends React.Component {
         Zoom and Pan description
         http://rrag.github.io/react-stockcharts/documentation.html#/zoom_and_pan
         */
-// console.log("render UPDATEBLECHART data =", head(data), data);
+        // console.log("render UPDATEBLECHART data =", head(data), data);
 
         /**
          * clamp prevents scrolling past the last data point, and is disabled by default.
@@ -333,7 +333,7 @@ class CandleStickChartPanToLoadMore extends React.Component {
                 ratio={ratio}
                 width={width}
                 height={600}
-                margin={{left: 70, right: 70, top: 20, bottom: 30}}
+                margin={{left: 30, right: 30, top: 20, bottom: 30}}
                 type={type}
                 seriesName="MSFT"
                 data={data}
@@ -354,20 +354,20 @@ class CandleStickChartPanToLoadMore extends React.Component {
                     yExtents={[d => [d.high, d.low], ema26.accessor(), ema12.accessor()]}
                     padding={{top: 10, bottom: 20}}
                 >
-                    <XAxis
-                        axisAt="bottom"
-                        orient="bottom"
-                        showTicks={false}
-                        outerTickSize={0}
+
+                    <XAxis axisAt="bottom"
+                           orient="bottom"
+                           showTicks={false}
+                           tickStroke={axisColor}
+                           outerTickSize={0}
+                           stroke={axisColor}
                     />
-                    {/*<YAxis axisAt="right" orient="right" ticks={5} />*/}
-                    <XAxis axisAt="bottom" orient="bottom" showTicks={false} tickStroke={axisColor} outerTickSize={0}
-                           stroke={axisColor}/>
-                    <YAxis axisAt="right" orient="right" ticks={2} tickStroke={axisColor}/>
+
+                    <YAxis axisAt="right" orient="left" ticks={2} tickStroke={axisColor}/>
 
                     <MouseCoordinateY
                         at="right"
-                        orient="right"
+                        orient="left"
                         displayFormat={format(".2f")}
                     />
 
@@ -395,26 +395,33 @@ class CandleStickChartPanToLoadMore extends React.Component {
                     {/*fill={d => (d.close > d.open ? "#6BA583" : "#FF0000")}*/}
                     {/*/>*/}
 
-                    <OHLCTooltip origin={[-40, 0]}/>
-                    <MovingAverageTooltip
-                        onClick={e => console.log(e)}
-                        origin={[-38, 15]}
-                        options={[
-                            {
-                                yAccessor: ema26.accessor(),
-                                type: ema26.type(),
-                                stroke: ema26.stroke(),
-                                ...ema26.options()
-                            },
-                            {
-                                yAccessor: ema12.accessor(),
-                                type: ema12.type(),
-                                stroke: ema12.stroke(),
-                                ...ema12.options()
-                            }
-                        ]}
+
+                    {/*information at a certain point*/}
+                    <OHLCTooltip
+                        origin={[0, 0]}
+                        textFill={'#fff'}
                     />
+
+                    {/*<MovingAverageTooltip*/}
+                    {/*onClick={e => console.log(e)}*/}
+                    {/*origin={[-38, 15]}*/}
+                    {/*options={[*/}
+                    {/*{*/}
+                    {/*yAccessor: ema26.accessor(),*/}
+                    {/*type: ema26.type(),*/}
+                    {/*stroke: ema26.stroke(),*/}
+                    {/*...ema26.options()*/}
+                    {/*},*/}
+                    {/*{*/}
+                    {/*yAccessor: ema12.accessor(),*/}
+                    {/*type: ema12.type(),*/}
+                    {/*stroke: ema12.stroke(),*/}
+                    {/*...ema12.options()*/}
+                    {/*}*/}
+                    {/*]}*/}
+                    {/*/>*/}
                 </Chart>
+
                 <Chart
                     id={2}
                     height={150}
@@ -444,16 +451,17 @@ class CandleStickChartPanToLoadMore extends React.Component {
                         fill={smaVolume50.fill()}
                     />
                 </Chart>
+
                 <Chart
                     id={3}
                     height={150}
                     yExtents={macdCalculator.accessor()}
                     origin={(w, h) => [0, h - 150]}
-                    padding={{top: 10, bottom: 10}}
+                    // padding={{top: 10, bottom: 10}}
                 >
                     <XAxis axisAt="bottom" orient="bottom" showTicks={true} tickStroke={axisColor} outerTickSize={0}
                            stroke={axisColor}/>
-                    <YAxis axisAt="right" orient="right" ticks={2} tickStroke={axisColor}/>
+                    <YAxis axisAt="right" orient="left" ticks={2} tickStroke={axisColor}/>
 
                     <MouseCoordinateX
                         at="bottom"
@@ -461,12 +469,13 @@ class CandleStickChartPanToLoadMore extends React.Component {
                         displayFormat={timeFormat("%Y-%m-%d")}/>
                     <MouseCoordinateY
                         at="right"
-                        orient="right"
+                        orient="left"
                         displayFormat={format(".2f")}/>
 
                     <MACDSeries yAccessor={d => d.macd} {...macdAppearance} />
+
                     <MACDTooltip
-                        origin={[-38, 15]}
+                        origin={[0, 15]}
                         yAccessor={d => d.macd}
                         options={macdCalculator.options()}
                         appearance={macdAppearance}

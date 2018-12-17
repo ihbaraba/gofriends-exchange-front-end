@@ -1,3 +1,5 @@
+@import "../AdminPanel/Users/users.css";
+
 .admin-version .w-header ,
 .admin-version .w-footer {
     display: none;
@@ -9,19 +11,31 @@
     margin: 0;
     max-width: initial;
     display: flex;
+    background: none !important;
 }
 
 .admin-panel {
     width: 100%;
     height: 100%;
-    display: flex;
-
+    display: grid;
+    grid-column-gap: 15px;
+    grid-template-columns: 10% auto;
+    grid-template-areas: "navBar adminContent";
 }
 
+.admin-panel .admin-content {
+    grid-area: adminContent;
+}
+
+/*------------------------------*/
+/*NAV BAR*/
+/*------------------------------*/
 .admin-panel .nav-bar {
-    margin: 0 20px 0 0;
+    grid-area: navBar;
+    background: #001529;
 }
 
-.admin-panel .nav-bar ul.ant-menu {
-    height: 100%;
+.admin-panel .nav-bar img {
+    display: block;
+    margin: 20px auto;
 }

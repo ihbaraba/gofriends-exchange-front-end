@@ -29,9 +29,9 @@ import Confirm from './components/Confirm';
 import BalancesPanel from './components/BalancesPanel';
 import Knowledge from './components/Knowledge';
 import ProfileVerification from './components/ProfileVerification';
-import AdminPanel from "./components/AdminPanel";
 
-import Users from './components/AdminPanel/Users'
+import AdminPanel from "./AdminPanel";
+import Users from './AdminPanel/Users/Users'
 
 
 import axios from 'axios';
