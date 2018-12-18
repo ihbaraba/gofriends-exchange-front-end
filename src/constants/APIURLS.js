@@ -9,7 +9,7 @@ const SERVERS = {
         SOCKET: "wss://exchange.gofriends.pro/",
     },
     PRODUCT: {
-        XHR: "https://demo.gofriends.pro",
+        XHR: "https://demo.gofriends.pro/api/v1/",
         SOCKET: "wss://demo.gofriends.pro/",
     },
     DEV: {

@@ -46,7 +46,8 @@ class ResetPassword extends Component {
                         Back
                     </div>
 
-                    <img src={logo} alt=""/>
+                    {/*<img src={logo} alt=""/>*/}
+                    <h2 className='sinsline-logo-title'>SINSLINE</h2>
 
                     <div className='login-title-block'>
                         <hr className='hr-login'/>

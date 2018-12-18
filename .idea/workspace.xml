@@ -2,7 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1e4a1018-d054-48e3-b750-a34c269c93ec" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/bin/universal-deploy.sh" beforeDir="false" afterPath="$PROJECT_DIR$/bin/universal-deploy.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/ChangePassword.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ChangePassword.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Login.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Login.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Registration.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Registration.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/ResetPassword.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ResetPassword.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/constants/APIURLS.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/constants/APIURLS.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -23,41 +28,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Header.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/components/Header.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2745">
-              <caret line="191" column="36" selection-start-line="191" selection-start-column="36" selection-end-line="191" selection-end-column="36" />
-              <folding>
-                <element signature="e#0#49#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Footer.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/components/Footer.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="21" column="22" selection-start-line="21" selection-start-column="22" selection-end-line="21" selection-end-column="22" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="universal-deploy.sh" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/bin/universal-deploy.sh">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="105">
-              <caret line="7" column="23" selection-start-line="7" selection-start-column="23" selection-end-line="7" selection-end-column="23" />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="APIURLS.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/constants/APIURLS.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="291">
-              <caret line="29" column="55" selection-start-line="29" selection-start-column="55" selection-end-line="29" selection-end-column="55" />
+            <state relative-caret-position="255">
+              <caret line="17" column="6" lean-forward="true" selection-start-line="17" selection-start-column="6" selection-end-line="17" selection-end-column="6" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
               </folding>
@@ -65,20 +40,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/index.html">
+      <file leaf-file-name="universal-deploy.sh" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/bin/universal-deploy.sh">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="360">
-              <caret line="24" column="19" selection-start-line="24" selection-start-column="19" selection-end-line="24" selection-end-column="19" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="WelcomePage.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/components/WelcomePage.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2415">
-              <caret line="165" column="56" selection-start-line="165" selection-start-column="56" selection-end-line="165" selection-end-column="56" />
+            <state relative-caret-position="210">
+              <caret line="14" column="18" lean-forward="true" selection-start-line="14" selection-start-column="18" selection-end-line="14" selection-end-column="18" />
             </state>
           </provider>
         </entry>
@@ -95,9 +61,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>profile-page</find>
-      <find>capitalizeFirstLetter</find>
-      <find>stopPrice</find>
       <find>order-block-title</find>
       <find>stopTotal</find>
       <find>firePostToServer</find>
@@ -125,6 +88,9 @@
       <find>ChartCanvas</find>
       <find>MovingAverageTooltip</find>
       <find>macdCalculator</find>
+      <find>src={logo}</find>
+      <find>src={logo}</find>
+      <find>logo_go</find>
     </findStrings>
     <replaceStrings>
       <replace>{axisColor}</replace>
@@ -137,8 +103,8 @@
       <dir>E:\projects\gofriends-exchange-front-end\src\components\Graphic</dir>
       <dir>E:\projects\gofriends-exchange-front-end\src\components</dir>
       <dir>E:\projects\gofriends-exchange-front-end\src</dir>
-      <dir>$PROJECT_DIR$/src</dir>
       <dir>$PROJECT_DIR$/src/components</dir>
+      <dir>$PROJECT_DIR$/src</dir>
     </dirStrings>
   </component>
   <component name="Git.Settings">
@@ -157,14 +123,12 @@
         <option value="$PROJECT_DIR$/src/components/ContactUs.js" />
         <option value="$PROJECT_DIR$/src/components/CoinsList.js" />
         <option value="$PROJECT_DIR$/src/styles/resetPass.css" />
-        <option value="$PROJECT_DIR$/src/components/ResetPassword.js" />
         <option value="$PROJECT_DIR$/src/styles/prfile.css" />
         <option value="$PROJECT_DIR$/src/components/LogOut.js" />
         <option value="$PROJECT_DIR$/src/store/store.js" />
         <option value="$PROJECT_DIR$/src/components/WithdrawLogic.js" />
         <option value="$PROJECT_DIR$/src/styles/welcome.css" />
         <option value="$PROJECT_DIR$/src/styles/login.css" />
-        <option value="$PROJECT_DIR$/src/App.css" />
         <option value="$PROJECT_DIR$/src/styles/balances.css" />
         <option value="$PROJECT_DIR$/src/components/LoginHistory.js" />
         <option value="$PROJECT_DIR$/src/store/initialState.js" />
@@ -176,11 +140,8 @@
         <option value="$PROJECT_DIR$/src/components/Balances.js" />
         <option value="$PROJECT_DIR$/src/utils/request.js" />
         <option value="$PROJECT_DIR$/src/styles/registration.css" />
-        <option value="$PROJECT_DIR$/src/components/Login.js" />
         <option value="$PROJECT_DIR$/src/components/Profile.js" />
-        <option value="$PROJECT_DIR$/src/components/Registration.js" />
         <option value="$PROJECT_DIR$/src/styles/profile.css" />
-        <option value="$PROJECT_DIR$/src/components/ChangePassword.js" />
         <option value="$PROJECT_DIR$/src/styles/exchangePage.css" />
         <option value="$PROJECT_DIR$/src/components/OrdersHistory.js" />
         <option value="$PROJECT_DIR$/src/components/UserOrder.js" />
@@ -201,9 +162,14 @@
         <option value="$PROJECT_DIR$/src/AdminPanel/Users/users.css" />
         <option value="$PROJECT_DIR$/src/components/Header.js" />
         <option value="$PROJECT_DIR$/src/components/Footer.js" />
+        <option value="$PROJECT_DIR$/bin/universal-deploy.sh" />
+        <option value="$PROJECT_DIR$/src/components/Login.js" />
+        <option value="$PROJECT_DIR$/src/App.css" />
+        <option value="$PROJECT_DIR$/src/components/Registration.js" />
+        <option value="$PROJECT_DIR$/src/components/ResetPassword.js" />
+        <option value="$PROJECT_DIR$/src/components/ChangePassword.js" />
         <option value="$PROJECT_DIR$/public/index.html" />
         <option value="$PROJECT_DIR$/src/constants/APIURLS.js" />
-        <option value="$PROJECT_DIR$/bin/universal-deploy.sh" />
       </list>
     </option>
   </component>
@@ -369,8 +335,8 @@
         <item itemvalue="npm.build" />
         <item itemvalue="npm.start" />
         <item itemvalue="Node.js.UpdatebleChart.js" />
-        <item itemvalue="npm.start" />
         <item itemvalue="npm.build" />
+        <item itemvalue="npm.start" />
       </list>
     </recent_temporary>
   </component>
@@ -738,7 +704,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1130011000" />
+    <option name="totallyTimeSpent" value="1131211000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -752,13 +718,14 @@
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1680" height="1050" extended-state="0" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.47553515" visible="true" weight="0.17480409" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.47487178" visible="true" weight="0.17480409" />
       <window_info anchor="bottom" id="TODO" order="5" weight="0.32923076" />
       <window_info anchor="bottom" id="Docker" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="12" sideWeight="0.50090414" side_tool="true" weight="0.46153846" />
-      <window_info anchor="bottom" id="Version Control" order="10" sideWeight="0.49909583" weight="0.3723077" />
+      <window_info anchor="bottom" id="Find" order="2" weight="0.32923076" />
+      <window_info anchor="bottom" id="Version Control" order="10" sideWeight="0.49909583" weight="0.2125206" />
       <window_info anchor="bottom" id="Run" order="3" weight="0.32923076" />
-      <window_info id="npm" order="2" sideWeight="0.52446485" side_tool="true" weight="0.17480409" />
+      <window_info id="npm" order="2" sideWeight="0.5251282" side_tool="true" weight="0.17480409" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info active="true" anchor="bottom" x="10" y="441" width="1659" height="167" id="Terminal" order="11" visible="true" weight="0.41641027" />
       <window_info id="Favorites" order="3" sideWeight="0.50082374" side_tool="true" weight="0.1913767" />
@@ -783,16 +750,15 @@
       <window_info anchor="bottom" id="Event Log" order="12" sideWeight="0.50090414" side_tool="true" weight="0.46153846" />
       <window_info anchor="bottom" id="Database Changes" order="13" show_stripe_button="false" />
       <window_info anchor="bottom" id="Cvs" order="6" weight="0.25" />
-      <window_info anchor="bottom" id="Find" order="2" weight="0.32923076" />
       <window_info anchor="bottom" x="10" y="441" width="1659" height="167" id="Terminal" order="11" visible="true" weight="0.41641027" />
       <window_info id="Favorites" order="3" sideWeight="0.50082374" side_tool="true" weight="0.1913767" />
     </layout>
     <layout-to-restore>
+      <window_info anchor="bottom" id="Version Control" order="10" sideWeight="0.49909583" weight="0.2125206" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Docker" order="8" show_stripe_button="false" />
       <window_info id="npm" order="2" sideWeight="0.51376146" side_tool="true" weight="0.20012055" />
       <window_info anchor="bottom" id="Inspection" order="7" weight="0.4" />
-      <window_info anchor="bottom" id="Cvs" order="6" weight="0.25" />
       <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.48623854" visible="true" weight="0.20012055" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
@@ -806,7 +772,7 @@
       <window_info anchor="bottom" x="10" y="441" width="1659" height="167" id="Terminal" order="11" weight="0.3271795" />
       <window_info anchor="bottom" id="Debug" order="4" weight="0.4" />
       <window_info anchor="bottom" id="Database Changes" order="13" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="10" sideWeight="0.49909583" weight="0.2125206" />
+      <window_info anchor="bottom" id="Cvs" order="6" weight="0.25" />
       <window_info anchor="bottom" id="Event Log" order="12" sideWeight="0.50090414" side_tool="true" weight="0.46153846" />
       <window_info anchor="bottom" id="Message" order="1" />
       <window_info anchor="bottom" id="Messages" order="0" />
@@ -883,20 +849,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/styles/welcome.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="573">
-          <caret line="83" selection-start-line="83" selection-end-line="83" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/styles/login.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="318">
-          <caret line="117" lean-forward="true" selection-start-line="111" selection-end-line="117" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/App.test.js">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -932,13 +884,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="180">
           <caret line="12" column="11" selection-start-line="12" selection-start-column="11" selection-end-line="12" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/App.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="720">
-          <caret line="48" selection-start-line="48" selection-end-line="49" />
         </state>
       </provider>
     </entry>
@@ -999,24 +944,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/Login.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="482">
-          <caret line="202" selection-start-line="202" selection-end-line="202" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/Profile.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1460">
           <caret line="157" selection-start-line="157" selection-end-line="157" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/Registration.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="266">
-          <caret line="242" column="52" lean-forward="true" selection-start-line="242" selection-start-column="52" selection-end-line="242" selection-end-column="52" />
         </state>
       </provider>
     </entry>
@@ -1038,13 +969,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="467">
           <caret line="269" column="13" selection-start-line="269" selection-start-column="13" selection-end-line="269" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/ChangePassword.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="500">
-          <caret line="162" column="13" selection-start-line="162" selection-start-column="13" selection-end-line="162" selection-end-column="13" />
         </state>
       </provider>
     </entry>
@@ -1180,6 +1104,13 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/Footer.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="21" column="22" selection-start-line="21" selection-start-column="22" selection-end-line="21" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/Header.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2745">
@@ -1190,31 +1121,65 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/Footer.js">
+    <entry file="file://$PROJECT_DIR$/src/components/WelcomePage.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="21" column="22" selection-start-line="21" selection-start-column="22" selection-end-line="21" selection-end-column="22" />
+        <state relative-caret-position="343">
+          <caret line="165" column="56" selection-start-line="165" selection-start-column="56" selection-end-line="165" selection-end-column="56" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/Login.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="293">
+          <caret line="141" lean-forward="true" selection-start-line="141" selection-end-line="141" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/Registration.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="280" selection-start-line="280" selection-end-line="281" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/logo_go.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/ChangePassword.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="919">
+          <caret line="92" lean-forward="true" selection-start-line="92" selection-end-line="92" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/public/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="24" column="19" selection-start-line="24" selection-start-column="19" selection-end-line="24" selection-end-column="19" />
+        <state relative-caret-position="165">
+          <caret line="11" column="57" selection-start-line="11" selection-start-column="57" selection-end-line="11" selection-end-column="57" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/WelcomePage.js">
+    <entry file="file://$PROJECT_DIR$/src/components/ResetPassword.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2415">
-          <caret line="165" column="56" selection-start-line="165" selection-start-column="56" selection-end-line="165" selection-end-column="56" />
+        <state relative-caret-position="594">
+          <caret line="50" lean-forward="true" selection-start-line="50" selection-end-line="50" />
+          <folding>
+            <element signature="e#0#39#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/App.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="630">
+          <caret line="42" column="24" selection-start-line="42" selection-start-column="24" selection-end-line="42" selection-end-column="24" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/constants/APIURLS.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="291">
-          <caret line="29" column="55" selection-start-line="29" selection-start-column="55" selection-end-line="29" selection-end-column="55" />
+        <state relative-caret-position="255">
+          <caret line="17" column="6" lean-forward="true" selection-start-line="17" selection-start-column="6" selection-end-line="17" selection-end-column="6" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
           </folding>
@@ -1223,8 +1188,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/bin/universal-deploy.sh">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="7" column="23" selection-start-line="7" selection-start-column="23" selection-end-line="7" selection-end-column="23" />
+        <state relative-caret-position="210">
+          <caret line="14" column="18" lean-forward="true" selection-start-line="14" selection-start-column="18" selection-end-line="14" selection-end-column="18" />
         </state>
       </provider>
     </entry>
