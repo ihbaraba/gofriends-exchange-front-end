@@ -1,7 +1,7 @@
-import React from 'react';
+import React, {Component} from 'react';
 import {connect} from "react-redux";
 import Chart from './UpdatebleChart';
-import { getData } from "./utils"
+import {getData} from "./utils"
 import {intervalInDays} from "./../../utils"
 import {TIMEFRAMES} from "./../../constants/APIURLS.js"
 
@@ -23,7 +23,7 @@ function parseData(parse) {
 
 const parseDate = timeParse("%Y-%m-%dT%H:%M:%S.%LZ");
 
-class Graphic extends React.Component {
+class Graphic extends Component {
     constructor(props) {
         super(props);
         this.chartData = []; //mirror of state
@@ -41,8 +41,9 @@ class Graphic extends React.Component {
         // this.updatedDateFromSocket = this.updatedDateFromSocket.bind(this);
     }
 
-    componentDidMount() {
-        const { pairId = 1, dateFrom, dateTo, take, interval, appendFake } = this.props;
+
+    async componentDidMount() {
+        const {pairId = 1, dateFrom, dateTo, take, interval, appendFake} = this.props;
         const options = {
             pairId: pairId,
             APIURL: TIMEFRAMES,
@@ -52,43 +53,29 @@ class Graphic extends React.Component {
             interval,
             appendFake
         };
-        getData(options).then(data => {
-            this.chartData = data;
-            this.setState({data}
-            , this.appendRealtimeLoadedData()
-            )
-        });
 
-        // coinapiHystoricalData({
-        //     APIURL: TIMEFRAMES,
-        //     fsym: baseCurrency,
-        //     tsym: quoteCurrency,
-        //     limit: 500,
-        // })
-        //     .then(data => {
-        //         console.log("coinapiHystoricalData ==>", data);
-        //         this.setState({data}
-        //             , this.appendRealtimeLoadedData()
-        //     )
-        // });
+        let data = await getData(options);
+        this.chartData = data;
+        this.setState({data}, this.appendRealtimeLoadedData())
     }
+
     componentWillUnmount() {
         clearInterval(this.intervalId);
     }
 
     componentWillReceiveProps(nextProps) {
-        const { pairId = 1, interval, dateFrom, dateTo } = this.props;
+        const {pairId = 1, interval, dateFrom, dateTo} = this.props;
         const {
             pairId: nextPairId = 1,
             interval: nextInterval, appendFake,
             chartRange: {dateFrom: nextdateFrom = "2018-08-27", dateTo: nextdateTo = "2018-09-01"}
         } = nextProps;
         const candlesToDownload = 200; // Avoid lag of data loading
-        const offsetData = d3.timeDay.offset(new Date(dateTo), (-1) * intervalInDays(nextInterval, candlesToDownload) ) ;
+        const offsetData = d3.timeDay.offset(new Date(dateTo), (-1) * intervalInDays(nextInterval, candlesToDownload));
         const format = d3.timeFormat("%Y-%m-%d");
         const stringOffset = format(offsetData); // returns a string
 
-        if ((pairId !== nextPairId) || (interval !== nextInterval) || (dateFrom !== nextdateFrom) || (dateTo !== nextdateTo) ) {
+        if ((pairId !== nextPairId) || (interval !== nextInterval) || (dateFrom !== nextdateFrom) || (dateTo !== nextdateTo)) {
             const options = {
                 pairId: nextPairId,
                 APIURL: TIMEFRAMES,
@@ -98,23 +85,15 @@ class Graphic extends React.Component {
                 interval: nextInterval,
                 appendFake,
             };
-            // console.log(new Date(dateTo), (-1) * intervalInDays(interval, candlesToDownload));
-            // console.log("options = ", options, "offsetData =",offsetData);
 
             getData(options).then(data => {
-                // console.log(data);
-                if (data.length === 0)
-                {
-                    // alert("Historical and current data for this pair is absent");
-                    // console.log("Historical and current data for this pair is absent");
+                if (data.length === 0) {
                     this.chartData = data;
                     this.setState({data});
                 }
-                else
-                {
+                else {
                     this.chartData = data;
                     this.setState({data}
-                        // , ()=> { console.log("Chart data updated. new Id=", nextEndPoint)}
                     )
                 }
             })
@@ -122,42 +101,56 @@ class Graphic extends React.Component {
     }
 
     shouldComponentUpdate(nextProps) {
-        const { pairId = 1 } = this.props;
-        const { pairId: nextPairId = 1 } = nextProps;
+        const {pairId = 1} = this.props;
+        const {pairId: nextPairId = 1} = nextProps;
         /*
             we preventing rendering when receiving new id of tokens pair
             and fire it when then load data for the chart
          */
 
-        if (pairId !== nextPairId)
-            {
-                // console.log("Returning",nextEndPoint, !(endPoint !== nextEndPoint) );
-                return !(pairId !== nextPairId)
-            }
-            else {
-                // console.log("Returning",nextEndPoint, true );
-                return true
-            }
+        if (pairId !== nextPairId) {
+            // console.log("Returning",nextEndPoint, !(endPoint !== nextEndPoint) );
+            return !(pairId !== nextPairId)
+        }
+        else {
+            // console.log("Returning",nextEndPoint, true );
+            return true
+        }
     }
 
     intervalInMiliseconds = (interval, period) => {
         const MsInMin = 60 * 1000;
         switch (interval) {
-            case "5min" : {return Math.ceil(period * 5 * MsInMin) }
-            case "15min" : {return Math.ceil(period * 15 * MsInMin) }
-            case "30min" : {return Math.ceil(period * 30 * MsInMin) }
-            case "1hr" : {return Math.ceil(period * 60 * MsInMin) }
-            case "2hr" : {return Math.ceil(period * 120 * MsInMin) }
-            case "4hr" : {return Math.ceil(period * 240 * MsInMin) }
-            case "1day" : {return Math.ceil(period * 1440 * MsInMin)}
-            default : return MsInMin
+            case "5min" : {
+                return Math.ceil(period * 5 * MsInMin)
+            }
+            case "15min" : {
+                return Math.ceil(period * 15 * MsInMin)
+            }
+            case "30min" : {
+                return Math.ceil(period * 30 * MsInMin)
+            }
+            case "1hr" : {
+                return Math.ceil(period * 60 * MsInMin)
+            }
+            case "2hr" : {
+                return Math.ceil(period * 120 * MsInMin)
+            }
+            case "4hr" : {
+                return Math.ceil(period * 240 * MsInMin)
+            }
+            case "1day" : {
+                return Math.ceil(period * 1440 * MsInMin)
+            }
+            default :
+                return MsInMin
         }
     };
 
     updatedLastCandleFromSocket(bid) {
         const parsedBid = parseData(parseDate)(bid);
         // console.log("updatedLastCandleFromSocket bid = , ", bid, " ===> ", parsedBid);
-        const { data } = this.state;
+        const {data} = this.state;
         // const lastBar = data[data.length - 1];
         // data[data.length - 1] = {...data[data.length - 1], ...bid};
         data[data.length - 1] = {...data[data.length - 1], ...parsedBid};
@@ -171,9 +164,9 @@ class Graphic extends React.Component {
 
     saveTheLastCandleAndCreateNewOne(bid) {
         /* fixing the last candle */
-        const { data } = this.state;
+        const {data} = this.state;
         // console.log("saveTheLastCandleAndCreateNewOne  this.state = ", this.state);
-        const { interval, } = this.props;
+        const {interval,} = this.props;
 
         const parsedBid = parseData(parseDate)(bid);
 
@@ -181,16 +174,16 @@ class Graphic extends React.Component {
 
         /* open a new candle witch will be updated by this.updatedLastCandleFromSocket function */
         setInterval(() => {
-            const newFrame = { ...bid, date: d3.timeMinute.offset(bid.date, 5)};
+            const newFrame = {...bid, date: d3.timeMinute.offset(bid.date, 5)};
             data.push(newFrame);
             this.chartData = data;
             this.setState({data});
-        },  this.intervalInMiliseconds(interval, 1));
+        }, this.intervalInMiliseconds(interval, 1));
     }
 
     /* Getting data from the server */
     appendRealtimeLoadedData = () => {
-    /* append as new candles */
+        /* append as new candles */
         // getDataFromSocket({
         //     point: "timeframe_saved_",
         //     id: this.props.pairId,
@@ -206,12 +199,12 @@ class Graphic extends React.Component {
         // });
     };
 
-     async newDiapazone({rowsToDownload, start, end, data, callback}){
+    async newDiapazone({rowsToDownload, start, end, data, callback}) {
 
-         // console.log("START =", start, "END = ", end, data.length, data);
+        // console.log("START =", start, "END = ", end, data.length, data);
         return new Promise(() => {
             const format = d3.timeFormat("%Y-%m-%d");
-            const { pairId = 1, take, interval, appendFake } = this.props;
+            const {pairId = 1, take, interval, appendFake} = this.props;
             // const lastBarIndex = Math.min(Math.abs(end), data.length-1);
             const lastBarIndex = 0;
             const lastBar = data[lastBarIndex];
@@ -219,7 +212,7 @@ class Graphic extends React.Component {
 
             const candlesToDownload = (rowsToDownload < 600) ? rowsToDownload : 600; // Avoid lag of data loading
 
-            const offsetData = d3.timeDay.offset(lastBar.date, (-1) * intervalInDays(interval, candlesToDownload) ) ;
+            const offsetData = d3.timeDay.offset(lastBar.date, (-1) * intervalInDays(interval, candlesToDownload));
 
             // console.log("From, ", format(lastBar.date), "lastBarIndex = ", lastBarIndex, "Offset to",offsetData, " on days", intervalInDays(interval, rowsToDownload));
             const stringOffset = format(offsetData); // returns a string
@@ -248,28 +241,29 @@ class Graphic extends React.Component {
             return <div>Loading...</div>
         }
         const {data} = this.state;
-        if (data.length === 0)
-        {
+
+        if (data.length === 0) {
             // alert("Historical and current data for this pair is absent");
-            return <div className="card-container, currencysPairs" style={{width:"auto", margin: "auto" }}>
-                        <div className="card-container-head" >
-                            <h1>Historical and current data for this pair is absent</h1>
-                    </div>
+            return <div className="card-container, currencysPairs" style={{width: "auto", margin: "auto"}}>
+                <div className="card-container-head">
+                    <h1>Historical and current data for this pair is absent</h1>
                 </div>
+            </div>
         }
         // console.log("Graphics this.chartData=",  this.chartData, this.props);
-        // <Chart type="hybrid" data={this.state.data} newDiapazone={this.newDiapazone}/>
+        {/*<Chart type="hybrid" data={this.state.data} newDiapazone={this.newDiapazone}/>*/
+        }
         return (
             <Chart type="hybrid" data={this.chartData} newDiapazone={this.newDiapazone}/>
         )
     }
 }
+
 const mapStateToProps = state => ({
     ...state
 });
 
-const mapDispatchToProps = dispatch => ({
-});
+const mapDispatchToProps = dispatch => ({});
 
 export default connect(mapStateToProps, mapDispatchToProps)(Graphic);
 

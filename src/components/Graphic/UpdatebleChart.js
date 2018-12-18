@@ -1,11 +1,12 @@
+import React, {Component} from "react";
+
 import {format} from "d3-format";
 import {timeFormat} from "d3-time-format";
 
-import React from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 
-import {ChartCanvas, Chart} from "react-stockcharts";
+import {ChartCanvas, Chart, ZoomButtons} from "react-stockcharts";
 import {
     BarSeries,
     AreaSeries,
@@ -52,9 +53,10 @@ const macdAppearance = {
         divergence: "#44d"
     }
 };
+
 const axisColor = "#EEEEEE";
 
-class CandleStickChartPanToLoadMore extends React.Component {
+class CandleStickChartPanToLoadMore extends Component {
     constructor(props) {
         super(props);
         const {data: inputData} = props;
@@ -144,7 +146,7 @@ class CandleStickChartPanToLoadMore extends React.Component {
             xScale,
             xAccessor,
             displayXAccessor,
-            initialIndex: 0
+            initialIndex: 0,
         };
         this.chartData = linearData;
         this.handleDownloadMore = this.handleDownloadMore.bind(this);
@@ -227,8 +229,13 @@ class CandleStickChartPanToLoadMore extends React.Component {
         });
     };
 
+    componentDidMount() {
+        this.setState({
+            xExtents: [this.props.data.length, this.props.data.length - 100]
+        });
+    }
+
     componentWillReceiveProps(nextProps) {
-        // console.log("===nextProps.data===", nextProps.data, nextProps);
         this.append(nextProps.data);
         return true;
     }
@@ -236,7 +243,6 @@ class CandleStickChartPanToLoadMore extends React.Component {
     async handleDownloadMore(start, end) {
         if (Math.ceil(start) === end) return;
         const {
-            // data: prevData,
             ema26,
             ema12,
             macdCalculator,
@@ -248,25 +254,8 @@ class CandleStickChartPanToLoadMore extends React.Component {
 
         await newDiapazone({
             rowsToDownload, start: Math.ceil(start), end, data: this.state.data,
+
             callback: newData => {
-
-                // const currentDate = new Date();
-                // const {dateFrom, dateTo} = this.props.chartRange;
-
-                // const format = d3.timeFormat("%Y-%m-%d");
-                // const currentDatePlusOdin = d3.timeDay.offset(new Date(dateTo), intervalInDays(this.state.interval, 1) ) ;
-                // const offsetData = d3.timeDay.offset(new Date(dateFrom), (-1) * intervalInDays(this.state.interval, rowsToDownload) ) ;
-
-                // console.log("dateFrom =",  format(offsetData), "dateTo =", dateFrom);
-                // console.log("rowsToDownload =",  rowsToDownload, "intervalInDays =", (-1) * intervalInDays(this.state.interval, rowsToDownload));
-
-                // this.props.chart_range({
-                //     start: Math.ceil(start),
-                //     end,
-                //     dateFrom: format(offsetData),
-                //     dateTo: dateFrom,
-                //
-                // }); //save to redux store
 
                 // const dataToCalculate = inputData.concat(newData);
                 const dataToCalculate = [...newData, ...inputData];
@@ -297,16 +286,18 @@ class CandleStickChartPanToLoadMore extends React.Component {
                 this.setState({
                     data: linearData,
                     xScale,
-                    xAccessor,
-                    displayXAccessor,
-                    initialIndex: Math.ceil(start)
+                    // xAccessor,
+                    // displayXAccessor,
+                    initialIndex: Math.ceil(start),
+                    xExtents: [start, end]
                 });
             }
         });
     }
 
+
     render() {
-        const {type, width, ratio} = this.props;
+        const {type, width, ratio, mouseMoveEvent, panEvent, zoomEvent, clamp, zoomAnchor} = this.props;
         const {
             data,
             ema26,
@@ -315,8 +306,10 @@ class CandleStickChartPanToLoadMore extends React.Component {
             smaVolume50,
             xScale,
             xAccessor,
-            displayXAccessor
+            displayXAccessor,
+            xExtents
         } = this.state;
+
         /*
         Zoom and Pan description
         http://rrag.github.io/react-stockcharts/documentation.html#/zoom_and_pan
@@ -336,16 +329,22 @@ class CandleStickChartPanToLoadMore extends React.Component {
                 margin={{left: 30, right: 30, top: 20, bottom: 30}}
                 type={type}
                 seriesName="MSFT"
+
+                mouseMoveEvent={mouseMoveEvent}
+                panEvent={panEvent}
+                zoomEvent={zoomEvent}
+                clamp={clamp}
+                zoomAnchor={zoomAnchor}
+                xExtents={xExtents}
+
                 data={data}
                 xScale={xScale}
                 xAccessor={xAccessor}
                 displayXAccessor={displayXAccessor}
-                ref={node => {
-                    this.saveCanvas(node);
-                }}
-                xExtents={[xAccessor(data[data.length - 50]), xAccessor(last(data))]}
-                zoomEvent={true}
-                clamp={"both"}
+                // ref={node => {
+                //     this.saveCanvas(node);
+                // }}
+                // clamp={"both"}
                 onLoadMore={this.handleDownloadMore}
             >
                 <Chart
