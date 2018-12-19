@@ -38,7 +38,7 @@ const Notices = ()=> {
                         >
                         </div>
 
-                        <div className="by">Posted by <strong>GoFriends Team</strong> at {item.createDate}
+                        <div className="by">Posted by <strong>Sinsline Team</strong> at {item.createDate}
                         </div>
                     </div>
                 )
