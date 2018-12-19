@@ -3,10 +3,11 @@ import NavLink from './NavLink';
 import {connect} from "react-redux";
 import Recaptcha from 'react-recaptcha';
 // import {simpleAction} from "../actions/simpleAction";
-import {login_success} from "../actions/UserActions";
-import {LOGIN} from "../constants/APIURLS";
+import {login_success, save_user_info} from "../actions/UserActions";
+import {LOGIN, USERINFO} from "../constants/APIURLS";
 import {sendRequest} from "./Graphic/utils";
 import logo from '../img/logo_go.svg';
+import {getUserInfo} from "./../utils";
 
 import axios from 'axios';
 
@@ -118,11 +119,12 @@ class Login extends Component {
                 // }
             }
             else {
-                // console.log("Login content =", content);
+                const userInfo = await getUserInfo({rout: USERINFO, token: content.token});
+                this.props.save_user_info(userInfo.body);
+
                 this.props.login_success({token: content.token});
                 axios.defaults.headers.common['Authorization'] =  content.token;
-
-                this.props.history.push(`/exchange`);
+                this.props.history.push(`/admin/dashboard`);
             }
         }
     };
@@ -230,6 +232,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
     login_success: (token) => dispatch(login_success(token)),
+    save_user_info: (info) => dispatch(save_user_info(info)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);

@@ -94,5 +94,10 @@ export const TWO_FACTOR_AUTHENTICATION = `${current_server.XHR}auth/twofactor`;
 
 export const CHANGE_PASSWORD = `${current_server.XHR}auth/password`;
 
+//ADMIN PANEL
+//users page
+export const GET_USERS = `${current_server.XHR}users`;
+
+
 
 

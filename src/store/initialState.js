@@ -29,7 +29,7 @@ const initialState = {
         quoteCurrency: "ETH",
     },
     user: {
-        email: "Unauthorized",
+        email: sessionStorage.getItem("user_email"),
         username: "Unauthorized",
         countryId: 1,
         password: "1",
