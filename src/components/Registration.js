@@ -155,6 +155,7 @@ class Registration extends Component {
                     case "WrongPassword":
                     case "UserExists" :
                     case "EmailExists" :
+                    case "RegistrationDisabled" :
                     case "IncorrectTotpCode" :
                     case "TotpCodeNotProvided":
                         alert(errorMessage + "  (error code:" + errorTextCode + " )")

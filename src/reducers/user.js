@@ -20,7 +20,6 @@ export default function userState(state = {}, action) {
             };
 
         case LOGIN_SUCCESS:
-            // console.log("userState Reducer ==> ", action, state);
             sessionStorage.setItem('exchange_token', action.payload.token);
             return {
                 ...state,
@@ -28,6 +27,8 @@ export default function userState(state = {}, action) {
             };
 
         case SAVE_USER_INFO:
+            sessionStorage.setItem('user_email', payload.email);
+
             const user = {...state, ...payload};
             // console.log("SAVE_USER_INFO Reducer ==> ", user, action, state);
             return {...user};

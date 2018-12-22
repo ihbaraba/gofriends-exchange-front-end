@@ -14,6 +14,7 @@ const SERVERS = {
     },
     DEV: {
         XHR: "http://ex.dev.gofriends.pro/api/v1/",
+        // XHR: "https://demo.gofriends.pro/api/v1/",
         SOCKET: "http://142.93.81.111:3001",
     },
 };
@@ -92,6 +93,15 @@ export const LOGIN = `${current_server.XHR}auth/login`;
 export const TWO_FACTOR_AUTHENTICATION = `${current_server.XHR}auth/twofactor`;
 
 export const CHANGE_PASSWORD = `${current_server.XHR}auth/password`;
+
+//ADMIN PANEL
+//users page
+export const GET_USERS = `${current_server.XHR}users`;
+
+//settings page
+export const SETTINGS_PARAMS = `${current_server.XHR}settings`;
+
+
 
 
 

@@ -1,5 +1,9 @@
 import React, {Component} from 'react';
 import {BrowserRouter as Router, Route, Switch, Redirect} from 'react-router-dom';
+import axios from 'axios';
+
+import Footer from './components/Footer';
+import Header from './components/Header';
 import WelcomePage from './components/WelcomePage';
 import Login from './components/Login';
 import LogOut from './components/LogOut';
@@ -29,18 +33,19 @@ import Confirm from './components/Confirm';
 import BalancesPanel from './components/BalancesPanel';
 import Knowledge from './components/Knowledge';
 import ProfileVerification from './components/ProfileVerification';
+import YourOpenOrders from "./components/YourOpenOrders";
 
 import AdminPanel from "./AdminPanel";
 import Users from './AdminPanel/Users/Users'
+import Settings from "./AdminPanel/Settings/Settings";
+import Dashboard from "./AdminPanel/Dashboard/Dashboard";
+import TradeHistory from "./AdminPanel/TradeHistory/TradeHistory";
+import News from "./AdminPanel/News/News";
+import NewsEditor from "./AdminPanel/News/NewsEditor";
+import AdminWallet from "./AdminPanel/AdminWallet/AdminWallet";
+import WithdrawList from "./AdminPanel/WithdrawList/WithdrawList";
+import Commissions from "./AdminPanel/Comissions/Commissions";
 
-
-import axios from 'axios';
-
-import Footer from './components/Footer';
-import Header from './components/Header';
-
-
-import YourOpenOrders from "./components/YourOpenOrders";
 
 
 (function () {
@@ -100,8 +105,17 @@ class App extends Component {
 
                                     <Route path='/admin' render={() => (
                                         <AdminPanel>
-                                            <Redirect from='/admin' to='/admin/users'/>
+                                            {/*<Redirect from='/admin' to='/admin/dashboard'/>*/}
                                             <Route path='/admin/users' component={Users}/>
+                                            <Route path='/admin/settings' component={Settings}/>
+                                            <Route path='/admin/dashboard' component={Dashboard}/>
+                                            <Route path='/admin/trade_history' component={TradeHistory}/>
+                                            <Route exact path='/admin/news' component={News}/>
+                                            <Route path='/admin/news/:id' component={NewsEditor}/>
+                                            <Route path='/admin/create_new' component={NewsEditor}/>
+                                            <Route path='/admin/admin_wallet' component={AdminWallet}/>
+                                            <Route path='/admin/withdraw_list' component={WithdrawList}/>
+                                            <Route path='/admin/commissions' component={Commissions}/>
                                         </AdminPanel>
                                     )}>
                                     </Route>
