@@ -124,7 +124,7 @@ class Login extends Component {
 
                 this.props.login_success({token: content.token});
                 axios.defaults.headers.common['Authorization'] =  content.token;
-                this.props.history.push(`/admin/dashboard`);
+                this.props.history.push(`/exchange`);
             }
         }
     };
