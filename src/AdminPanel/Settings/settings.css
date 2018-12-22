@@ -1,0 +1,65 @@
+.settings-page {
+
+}
+
+.settings-page .switch {
+    width: 60px !important;
+    height: 25px !important;
+    margin: 0 20px;
+}
+
+.settings-page .ant-switch:after {
+    width: 20px !important;
+    height: 19px !important;
+}
+
+/*------------------------------*/
+/*registration settings block*/
+/*------------------------------*/
+.settings-page .registration-settings {
+    width: 100%;
+    height: 100px;
+    margin: 0 0 35px 0;
+    padding: 0 35px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    border-radius: 3px;
+    background-color: #1E1E1E;
+    box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.35);
+}
+
+.settings-page .registration-settings h1 {
+    font-family: Roboto;
+    font-size: 18px;
+    font-weight: 500;
+    letter-spacing: 1.8px;
+    margin: 0 70px 0 0;
+}
+
+.settings-page .registration-settings span {
+    font-family: Roboto;
+    font-size: 12px;
+    font-weight: 300;
+    letter-spacing: 1.2px;
+}
+
+/*------------------------------*/
+/*email settings block*/
+/*------------------------------*/
+.settings-page .email-settings {
+    width: 100%;
+    padding: 35px;
+    border-radius: 3px;
+    background-color: #1E1E1E;
+    box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.35);
+}
+
+.settings-page .email-settings h1 {
+    margin: 0;
+    font-family: Roboto;
+    font-size: 18px;
+    font-weight: 500;
+    letter-spacing: 1.8px;
+    line-height: 21px;
+}

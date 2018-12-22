@@ -98,6 +98,10 @@ export const CHANGE_PASSWORD = `${current_server.XHR}auth/password`;
 //users page
 export const GET_USERS = `${current_server.XHR}users`;
 
+//settings page
+export const SETTINGS_PARAMS = `${current_server.XHR}settings`;
+
+
 
 
 

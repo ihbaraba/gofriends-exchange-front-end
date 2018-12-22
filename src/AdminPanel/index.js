@@ -7,10 +7,13 @@ import Header from './components/Header';
 import '../styles/adminPanel.css';
 import 'antd/dist/antd.css';
 
+
 class Index extends Component {
     state = {
         currentPage: 'Dashboard'
     };
+
+
 
    async componentDidMount() {
         document.getElementById('root').classList.add('admin-version');

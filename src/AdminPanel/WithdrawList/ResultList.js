@@ -4,6 +4,13 @@ import moment from 'moment';
 
 const columns = [
     {
+        title: 'Currency',
+        dataIndex: 'currency',
+        key: 'currency',
+        width: 100,
+        sorter: true,
+    },
+    {
         title: 'User ID',
         dataIndex: 'id',
         key: 'id',
@@ -11,38 +18,46 @@ const columns = [
         sorter: true,
     },
     {
-        title: 'Username',
-        dataIndex: 'username',
-        key: 'username',
+        title: 'Transaction ID',
+        dataIndex: 'transaction_id',
+        key: 'transaction_id',
         width: 200,
         sorter: true,
     },
     {
-        title: 'Email',
-        dataIndex: 'email',
-        key: 'email',
+        title: 'Recepient',
+        dataIndex: 'recepient',
+        key: 'recepient',
         width: 200,
         sorter: true,
     },
     {
-        title: 'Verify ststus',
-        dataIndex: 'verifyStatus',
-        key: 'verifyStatus',
-        width: 150,
+        title: 'Sender',
+        dataIndex: 'sender',
+        key: 'sender',
+        width: 200,
         sorter: true,
-        render: (item) => {
-            if (item === 'verified') {
-                return (<span style={{color: '#00CE7D'}}>Verified</span>)
-            }
-        }
     },
     {
-        title: 'Created at',
-        dataIndex: 'createdAt',
-        key: 'createdAt',
-        width: 150,
+        title: 'Amount',
+        dataIndex: 'amount',
+        key: 'amount',
+        width: 200,
         sorter: true,
-        render: (item) => (<span>{moment(item).format('YYYY-MM-DD HH-mm')}</span>)
+    },
+    {
+        title: 'Tax ID',
+        dataIndex: 'tax_id',
+        key: 'tax_id',
+        width: 200,
+        sorter: true,
+    },
+    {
+        title: 'Date',
+        dataIndex: 'date',
+        key: 'date',
+        width: 200,
+        sorter: true,
     },
     {
         title: 'Status',
@@ -55,21 +70,11 @@ const columns = [
             return (<span style={{color: '#00CE7D'}}>Active</span>)
             // }
         }
-    },
-    {
-        title: '',
-        dataIndex: 'actions',
-        key: 'actions',
-        width: 150,
-        render: () => (
-            <button className='admin-btn'>View</button>
-        )
-
-    },
+    }
 ];
 
 
-const UsersList = ({list, total, current, pageSize, onChange}) => {
+const ResultList = ({list, total, current, pageSize, onChange}) => {
     const config = {
         pagination: {
             // pageSizeOptions : ['30', '40'],
@@ -81,13 +86,13 @@ const UsersList = ({list, total, current, pageSize, onChange}) => {
     };
 
     return (
-        <div className='users-list'>
+        <div className='result-list response-side'>
             <Table
                 {...config}
                 columns={columns}
-                dataSource={list}
+                // dataSource={list}
                 rowKey={record => record.id}
-                onChange={onChange}
+                // onChange={onChange}
                 // loading={list.length === 0}
                 className='admin-table'
             />
@@ -95,4 +100,4 @@ const UsersList = ({list, total, current, pageSize, onChange}) => {
     )
 };
 
-export default UsersList;
+export default ResultList;

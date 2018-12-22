@@ -83,7 +83,8 @@ class Profile extends Component {
         const {showQr, qrCode, totpCode} = this.state;
         const {username, country = {}, twoFactorAuthEnabled} = this.props.user;
         // const {name} = country;
-        const {name: countryName = "Ukraine"} = country;
+        const countryName = country ? country.countryName : 'Ukraine';
+
         return (
             <div className='profile-page'>
                 <div className='page-title'>

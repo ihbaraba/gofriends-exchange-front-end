@@ -110,20 +110,23 @@
 }
 
 .order-history-block .ant-tabs-tab {
-    height: 23px;
-    width: 64px;
-    display: flex;
+    height: 23px !important;
+    width: 64px !important;
+    display: flex !important;
     align-items: center;
     justify-content: center;
     cursor: pointer;
     margin-right: 5px;
-    border-radius: 1px;
-    background-color: #000000;
+    border-radius: 1px !important;
+    padding: 0 !important;
+    border: 0 !important;
+    background-color: #000000 !important;
     font-family: Roboto;
 }
 
 .order-history-block .ant-tabs-tab.ant-tabs-tab-active {
-    background-color: #4A998C;
+    background-color: #4A998C !important;
+    color: #fff !important;
 }
 
 .order-history-block .row-buy-type td:first-child {
@@ -203,7 +206,7 @@
 }
 
 .ant-radio-button-wrapper:not(:first-child)::before {
-    background-color: #000000;
+    background-color: #000000 !important;
 }
 
 .rightSide .candlesticks .ant-radio-button-wrapper-checked {
@@ -223,7 +226,7 @@
 }
 
 .orders .ant-tabs-bar {
-    border: 0.5px solid rgba(0, 0, 0, 0.7);
+    border: 0.5px solid rgba(0, 0, 0, 0.7) !important;
     background-color: #313131;
     border-radius: 5px 5px 0 0;
 }
@@ -266,13 +269,16 @@
 
 .orders .ordersBlock .ant-input-group-addon {
     color: rgba(255, 255, 255, 0.51);
-    height: 30px;
+    height: 30px !important;
     /*width: 20%;*/
     border: 1px solid rgba(255, 255, 255, 0.39);
     border-left: 0;
     border-radius: 1px;
     background-color: #000000;
     box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.35);
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .orders__item span.ant-input-wrapper.ant-input-group {
@@ -357,11 +363,13 @@
 }
 
 .orders .order-action-btn.order-buy-btn {
-    background-color: #00CE7D;
+    background-color: #00CE7D !important;
+    font-weight: normal !important;
 }
 
 .orders .order-action-btn.order-sell-btn {
-    background-color: #DD4457;
+    background-color: #DD4457 !important;
+    font-weight: normal !important;
 }
 
 .orders .market {
@@ -370,20 +378,23 @@
 }
 
 .orders .ant-tabs-nav .ant-tabs-tab {
-    height: 23px;
-    width: 82px;
-    display: flex;
+    height: 23px !important;
+    width: 82px !important;
+    display: flex !important;
     justify-content: center;
     align-items: center;
-    border-radius: 1px;
-    background-color: #000000;
+    border-radius: 1px !important;
+    border: 0 !important;
+    background-color: #000000 !important;
     text-align: center;
-    margin: 0 0 0 10px;
+    margin: 0 0 0 10px !important;
     cursor: pointer;
 }
 
 .orders .ant-tabs-nav .ant-tabs-tab-active {
     background: #4A998C !important;
+    color: #fff !important;
+    font-weight: normal !important;
 }
 
 .orders .ant-tabs-ink-bar-animated {
@@ -401,8 +412,16 @@
 .currencysPairs .ant-tabs-bar {
     height: 34px;
     background-color: #313131;
-    border: 0.5px solid rgba(0, 0, 0, 0.7);
+    border: 0.5px solid rgba(0, 0, 0, 0.7) !important;
     border-radius: 5px 5px 0 0;
+}
+
+.ant-tabs-nav-container {
+    padding: 0 !important;
+}
+
+.ant-tabs-tab-prev.ant-tabs-tab-arrow-show, .ant-tabs-tab-next.ant-tabs-tab-arrow-show{
+    display: none !important;
 }
 
 .currencysPairs tr th span {
@@ -423,8 +442,8 @@
 }
 
 .currencysPairs .ant-table-thead th span {
-    display: flex;
-    align-items: center;
+    display: flex !important;
+    align-items: center !important;
     /*justify-content: center;*/
 }
 
@@ -441,12 +460,13 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #000000;
-    border-radius: 1px;
-    color: #fff;
-    font-size: 12px;
-    font-weight: 500;
-    margin: 0 7px 0 0;
+    background-color: #000000 !important;
+    border-radius: 1px !important;
+    border: 0 !important;
+    color: #fff !important;
+    font-size: 12px !important;
+    font-weight: 500 !important;
+    margin: 0 7px 0 0 !important;
     cursor: pointer;
 }
 
@@ -490,7 +510,7 @@
 }
 
 .centerArea .table-block .ant-table-header th {
-    /*padding: 12px 0;*/
+    padding: 10px 0 !important;
 }
 
 .centerArea .table-block .table-title {
@@ -575,7 +595,7 @@
         display: flex;
         justify-content: space-around;
         align-items: center;
-        background-color: #2B2A2A;
+        background-color: #2B2A2A !important;
 
     }
 
@@ -589,6 +609,10 @@
         display: flex;
         justify-content: center;
         align-items: center;
+        background: none !important;
+        border-left: 0 !important;
+        border-right: 0 !important;
+        border-top: 0 !important;
         font-family: Ubuntu;
         font-size: 14px;
         font-weight: bold;
@@ -597,8 +621,8 @@
     }
 
     .centerArea.mobile .ant-tabs-tab-active {
-        color: #4A998C;
-        border-bottom: 3px solid #4A998C;
+        color: #4A998C !important;
+        border-bottom: 3px solid #4A998C !important;
     }
 
     .rightSide .candlesticks .ant-radio-button-wrapper {
@@ -614,14 +638,24 @@
         justify-content: flex-end;
     }
 
+
+
     .centerArea.mobile .order-history-block .ant-tabs-nav .ant-tabs-tab {
         height: 23px;
         width: 64px;
-        color: #fff;
+        color: #fff ;
         flex: none;
         font-size: 12px !important;
         font-family: Roboto;
+        background: #000 !important;
     }
+
+
+    .centerArea.mobile .order-history-block  .ant-tabs-tab.ant-tabs-tab-active {
+        background: #4A998C !important;
+        color: #fff !important;
+    }
+
 
     .centerArea.mobile .trade-nav-btn {
         height: 55px;
@@ -662,12 +696,15 @@
         width: 60px;
         height: 23px;
         color: #fff;
+        background: #000000 !important;
         flex: none;
         margin-left: 3px;
     }
 
     .centerArea.mobile .mobile-trade-block .ant-tabs-nav .ant-tabs-tab-active {
         border: 0;
+        background: #4A998C !important;
+        color: #fff !important;
     }
 
     .centerArea.mobile .mobile-trade-block .orders.mobile {

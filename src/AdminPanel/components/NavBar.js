@@ -13,6 +13,7 @@ import comissions from '../../img/admin-nav-bar-icons/comissions.svg';
 import news from '../../img/admin-nav-bar-icons/news.svg';
 import settings from '../../img/admin-nav-bar-icons/settings.svg';
 import report from '../../img/admin-nav-bar-icons/report.svg';
+import pairs from '../../img/admin-nav-bar-icons/pairs.svg';
 
 
 const NavBar = ({changePage}) => {
@@ -43,8 +44,8 @@ const NavBar = ({changePage}) => {
             icon: tradeHistory
         },
         {
-            title: 'Comissions',
-            href: 'comissions',
+            title: 'Commissions',
+            href: 'commissions',
             icon: comissions
         },
         {
@@ -61,6 +62,11 @@ const NavBar = ({changePage}) => {
             title: 'All time report',
             href: 'report',
             icon: report
+        },
+        {
+            title: 'Pairs',
+            href: 'pairs',
+            icon: pairs
         },
     ];
 
@@ -79,12 +85,14 @@ const NavBar = ({changePage}) => {
                 {menu.map((item, index) => (
                     <Menu.Item key={index} onClick={() => changePage(item.title)}>
                         <NavLink to={`/admin/${item.href}`}>
-                            <ReactSVG
-                                src={item.icon}
-                                svgClassName='menu-icon'
-                                className='wrapper-svg-icon'
-                            />
-                            <span>{item.title}</span>
+                            <div className='link-side'>
+                                <ReactSVG
+                                    src={item.icon}
+                                    svgClassName='menu-icon'
+                                    className='wrapper-svg-icon'
+                                />
+                                <span>{item.title}</span>
+                            </div>
                         </NavLink>
                     </Menu.Item>
                 ))}

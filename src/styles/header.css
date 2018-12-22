@@ -135,18 +135,18 @@ header {
     position: relative;
     list-style-type: none;
     padding: 0;
-    margin: -6px 0 0 0;
+    margin: -5px 0 0 0 !important;
     text-align: left;
-    background-color: #302F2F;
+    background-color: #302F2F !important;
     border-radius: 4px;
-    -webkit-box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-    background-clip: padding-box;
+    -webkit-box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15) !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15) !important;
+    background-clip: padding-box !important;
 }
 
 .ant-dropdown-menu-item:hover,
 .ant-dropdown-menu-submenu-title:hover {
-    background-color: rgba(74, 153, 140, 0.21);
+    background-color: rgba(74, 153, 140, 0.21) !important;
 }
 
 @media (max-width: 600px) {
