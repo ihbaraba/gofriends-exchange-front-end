@@ -10,3 +10,8 @@ export const CHANGE_PAIR = 'CHANGE_PAIR';
 
 export const CHART_RANGE = 'CHART_RANGE';
 export const INTERVAL = 'INTERVAL';
+
+
+export const CHANGE_CURRENT_PAGE = 'CHANGE_CURRENT_PAGE';
+export const CHANGE_SUB_PAGE = 'CHANGE_SUB_PAGE';
+export const BACK_TO_LAST_PAGE = 'BACK_TO_LAST_PAGE';

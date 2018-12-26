@@ -100,7 +100,7 @@ class FilterBlock extends Component {
                     <label>*by status </label>
                 </div>
 
-                <button className='admin-btn search-btn' onClick={() => onSearch(this.state)}>Search</button>
+                <button className='admin-btn search-btn green-btn' onClick={() => onSearch(this.state)}>Search</button>
             </div>
         )
     }

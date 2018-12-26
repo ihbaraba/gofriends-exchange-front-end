@@ -36,6 +36,11 @@ const initialState = {
         token: sessionStorage.getItem("exchange_token"),
         orders: new Set(),
     },
+    admin: {
+        title: 'Dashboard',
+        href: 'dashboard',
+        subLink: ''
+    }
 };
 
 export default initialState;

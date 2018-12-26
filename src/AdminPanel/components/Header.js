@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Fragment} from 'react';
 import {Icon} from 'antd';
 
 import NavLink from '../../components/NavLink';
@@ -6,13 +6,33 @@ import NavLink from '../../components/NavLink';
 import userIcon from '../../img/admin-panel/user_ic.svg';
 import notifIcon from '../../img/admin-panel/notif.svg';
 
-const Header = ({user, page}) => {
+const Header = ({user, page, back}) => {
     return (
         <div className='admin-header'>
-            <div className='current-page-name'>{page}</div>
+            <div className='current-page'>
+
+                {page.subLink ?
+                    <Fragment>
+                        <span className='underline' onClick={back}>
+                        <NavLink to={`/admin/${page.href}`}>
+                            {page.title}
+                        </NavLink>
+                        </span>
+
+                        <i className="fa fa-arrow-right" aria-hidden="true"></i>
+
+                        <span className="sub-link-name">{page.subLink.title}</span>
+                    </Fragment>
+                    :
+                    <NavLink to={`/admin/${page.href}`}>
+                        {page.title}
+                    </NavLink>
+                }
+            </div>
+
             <div className='user-navigation'>
                 <img src={notifIcon} alt=""/>
-                
+
                 <img src={userIcon} alt=""/>
 
                 <span className='user-email'>

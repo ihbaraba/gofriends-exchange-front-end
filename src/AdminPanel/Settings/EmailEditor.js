@@ -4,9 +4,9 @@ import CKEditor from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 // import Link from '@ckeditor/ckeditor5-link/src/link';
 
-class NewsEditor extends Component {
+class EmailEditor extends Component {
     componentDidMount() {
-        console.log(this.props.match)
+        console.log(this.props)
     }
 
     render() {
@@ -14,10 +14,9 @@ class NewsEditor extends Component {
             <div className='news-editor-page'>
                 <div className='new-title'>
                     <div className='title'>
-                        <label>Title</label>
-                        <input type="text"/>
+                       text
                     </div>
-                    <button className='admin-btn green-btn'>Create</button>
+                    <button className='admin-btn green-btn'>Save</button>
                 </div>
 
                 <CKEditor
@@ -48,4 +47,4 @@ class NewsEditor extends Component {
     }
 }
 
-export default NewsEditor;
+export default EmailEditor;
