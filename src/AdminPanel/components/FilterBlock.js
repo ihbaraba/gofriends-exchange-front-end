@@ -32,7 +32,7 @@ class FilterBlock extends Component {
 
     render() {
         const {id, email} = this.state;
-        const {onSearch, page} = this.props;
+        const {onSearch, page, pairs} = this.props;
 
         return (
             <div className='filter-block'>
@@ -68,8 +68,12 @@ class FilterBlock extends Component {
                     <div className='filter-item'>
                         <Select placeholder='All' style={{width: 180}} onChange={e => this.setState({pairs: e})}>
                             <Option value=''>All</Option>
-                            <Option value="dch">BCH/LTC</Option>
-                            <Option value="ltc">BCH/LTC</Option>
+                            {pairs.map(item => {
+                                let pair = `${item.baseCurrency.code}/${item.quoteCurrency.code}`;
+                                return (
+                                    <Option key={item.id} value={item.id}>{pair}</Option>
+                                )
+                            })}
                         </Select>
                         <label>*by pair </label>
                     </div>

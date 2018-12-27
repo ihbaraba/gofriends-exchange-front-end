@@ -42,7 +42,7 @@ const columns = [
         key: 'createdAt',
         width: 150,
         sorter: true,
-        render: (item) => (<span>{moment(item).format('YYYY-MM-DD HH-mm')}</span>)
+        render: (item) => (<span>{moment(item).format('YYYY-MM-DD HH:mm')}</span>)
     },
     {
         title: 'Status',

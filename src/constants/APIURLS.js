@@ -102,6 +102,10 @@ export const GET_USERS = `${current_server.XHR}users`;
 export const SETTINGS_PARAMS = `${current_server.XHR}settings`;
 
 
+//trade history page
+export const GET_TRADE_HISTORY = `${current_server.XHR}settings`;
+
+
 
 
 
