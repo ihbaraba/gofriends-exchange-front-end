@@ -6,6 +6,7 @@
 @import "../AdminPanel/AdminWallet/admin-wallet.css";
 @import "../AdminPanel/Comissions/commissions.css";
 @import "../AdminPanel/AllReport/all-report.css";
+@import "../AdminPanel/Pairs/pairs.css";
 
 .admin-version .w-header,
 .admin-version .w-footer {
@@ -45,6 +46,7 @@
 
 .admin-panel .admin-content {
     padding: 12px 0 0 0;
+    position: relative;
 }
 
 .admin-panel .admin-btn {

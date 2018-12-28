@@ -47,6 +47,8 @@ import WithdrawList from "./AdminPanel/WithdrawList/WithdrawList";
 import Commissions from "./AdminPanel/Comissions/Commissions";
 import AllReport from "./AdminPanel/AllReport/AllReport";
 import EmailEditor from "./AdminPanel/Settings/EmailEditor";
+import Pairs from "./AdminPanel/Pairs/Pairs";
+import CommissionsSettings from "./AdminPanel/Comissions/CommissionsSettings";
 
 
 
@@ -118,8 +120,10 @@ class App extends Component {
                                             <Route path='/admin/create_new' component={NewsEditor}/>
                                             <Route path='/admin/admin_wallet' component={AdminWallet}/>
                                             <Route path='/admin/withdraw_list' component={WithdrawList}/>
-                                            <Route path='/admin/commissions' component={Commissions}/>
+                                            <Route exact path='/admin/commissions' component={Commissions}/>
+                                            <Route path='/admin/commissions/settings' component={CommissionsSettings}/>
                                             <Route path='/admin/report' component={AllReport}/>
+                                            <Route path='/admin/pairs' component={Pairs}/>
                                         </AdminPanel>
                                     )}>
                                     </Route>

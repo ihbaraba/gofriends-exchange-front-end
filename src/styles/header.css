@@ -171,15 +171,18 @@ header {
     .mobile-authentication-link {
         margin: 0 40px 0;
         display: flex;
+        height: 100%;
+        align-items: center;
     }
 
     .mobile-authentication-link .header-create {
-        border-right: 1px solid rgba(245, 245, 245, 0.2);
+        border-right: 1px solid rgba(136, 136, 136, 0.2);
     }
 
     .mobile-authentication-link a {
         font-size: 12px;
         padding: 0 10px;
+
     }
 
     .w-content .size-container {

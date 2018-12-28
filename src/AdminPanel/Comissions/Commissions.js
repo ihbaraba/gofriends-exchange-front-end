@@ -1,80 +1,38 @@
 import React, {Component} from 'react';
-import {Menu} from 'antd';
+
+import FilterBlock from "../components/FilterBlock";
+import CommissionsProfitList from './CommissionsProfitList'
+import NavLink from '../../components/NavLink';
+import {changeSubPage} from "../../actions/AdminActions";
+import {connect} from "react-redux";
 
 class Commissions extends Component {
 
+    goSettingsPage= () => {
+        this.props.changeSubPage({title: 'Changes'})
+    };
+
     render() {
-        const pairs = [
-            {
-                id: 1,
-                name: 'BTC/LTC'
-            },
-            {
-                id: 2,
-                name: 'BTC/LTC'
-            },
-            {
-                id: 3,
-                name: 'BTC/LTC'
-            },
-            {
-                id: 4,
-                name: 'BTC/LTC'
-            },
-            {
-                id: 5,
-                name: 'BTC/LTC'
-            },
-            {
-                id: 6,
-                name: 'BTC/LTC'
-            },
-            {
-                id: 7,
-                name: 'BTC/LTC'
-            },
-        ];
-
         return (
-            <div className='commissions-page response-side'>
-                <div className='pairs-list'>
-                    <Menu
-                        defaultSelectedKeys={['1']}
-                        mode="inline"
-                    >
-                        {pairs.map(item => (
-                            <Menu.Item key={item.id}>{item.name}</Menu.Item>
-                        ))}
-                    </Menu>
+            <div className='commissions-page'>
+                <div className='admin-btn green-btn go-settings-btn' onClick={this.goSettingsPage}>
+                    <NavLink to='/admin/commissions/settings'>
+                        <i className="fa fa-sliders" aria-hidden="true"></i>
+                        Change
+                    </NavLink>
                 </div>
+                <FilterBlock/>
 
-                <div className='commissions-value'>
-                    <div className='title-block'>
-                        <span>Amount steps</span>
-                        <span>Percent drom volume</span>
-                    </div>
-
-                    <div className='item'>
-                        <div>
-                            <label>From</label>
-                            <input type="text"/>
-                        </div>
-                        <hr/>
-                        <div>
-                            <label>To</label>
-                            <input type="text"/>
-                        </div>
-                        <hr className='arrow-line'/>
-                        <div className='fee-input'>
-                            <label>Fee</label>
-                            <input type="text"/>
-
-                        </div>
-                    </div>
-                </div>
+                <CommissionsProfitList/>
             </div>
         )
     }
 }
 
-export default Commissions;
+const mapStateToProps = state => ({});
+
+const mapDispatchToProps = dispatch => ({
+    changeSubPage: (page) => dispatch(changeSubPage(page)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Commissions);

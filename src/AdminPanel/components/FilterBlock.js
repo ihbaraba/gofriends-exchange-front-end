@@ -5,6 +5,7 @@ import moment from 'moment';
 const {RangePicker} = DatePicker;
 const Option = Select.Option;
 
+
 class FilterBlock extends Component {
     state = {
         id: '',
@@ -12,7 +13,7 @@ class FilterBlock extends Component {
         dateFrom: '',
         dateTo: '',
         status: '',
-        pairs: ''
+        pair: ''
     };
 
     handleDatePickerChange = arrDates => {
@@ -66,12 +67,11 @@ class FilterBlock extends Component {
 
                 {page === 'trade' ?
                     <div className='filter-item'>
-                        <Select placeholder='All' style={{width: 180}} onChange={e => this.setState({pairs: e})}>
+                        <Select placeholder='All' style={{width: 180}} onChange={e => this.setState({pair: e})}>
                             <Option value=''>All</Option>
                             {pairs.map(item => {
-                                let pair = `${item.baseCurrency.code}/${item.quoteCurrency.code}`;
                                 return (
-                                    <Option key={item.id} value={item.id}>{pair}</Option>
+                                    <Option key={item.id} value={item.id}>{item.name}</Option>
                                 )
                             })}
                         </Select>
@@ -81,7 +81,7 @@ class FilterBlock extends Component {
 
                 {page === 'withdraw' ?
                     <div className='filter-item'>
-                        <Select placeholder='All' style={{width: 180}} onChange={e => this.setState({pairs: e})}>
+                        <Select placeholder='All' style={{width: 180}} onChange={e => this.setState({pair: e})}>
                             <Option value=''>All</Option>
                             <Option value="dch">BCH</Option>
                             <Option value="ltc">BCl</Option>
@@ -99,7 +99,8 @@ class FilterBlock extends Component {
                     <Select placeholder='All' style={{width: 180}} onChange={e => this.setState({status: e})}>
                         <Option value=''>All</Option>
                         <Option value="active">Active</Option>
-                        <Option value="blocked">Blocked</Option>
+                        <Option value="completed">Completed</Option>
+                        <Option value="cancelled">Cancelled</Option>
                     </Select>
                     <label>*by status </label>
                 </div>

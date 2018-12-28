@@ -14,10 +14,12 @@ class TradeHistory extends Component {
         historyList: [],
         filter: {
             id: '',
-            selectPair: '',
+            pair: '',
             dateFrom: '',
             dateTo: '',
-            status: ''
+            status: '',
+            sortName: '',
+            sortType: ''
         },
         pagination: {
             total: 0,
@@ -30,43 +32,90 @@ class TradeHistory extends Component {
         this.getTradeHistory();
 
         const {data} = await axios.get(PAIRS);
+
+        let coinPairs = data.map(pair => {
+            return ({
+                id: pair.id,
+                name: `${pair.baseCurrency.code}/${pair.quoteCurrency.code}`
+            })
+        })
         this.setState({
-            coinPairs: data
+            coinPairs
         })
     }
 
     getTradeHistory = async () => {
-        const {filter: {id, selectPair, dateFrom, dateTo, status}, pagination: {current, pageSize}, historyType} = this.state;
+        const {filter: {id, pair, dateFrom, dateTo, status, sortName, sortType}, pagination: {current, pageSize}, historyType} = this.state;
 
         const urlParams = [
-            id ? `&id=${id}` : null,
-            selectPair ? `&pair=${selectPair}` : null,
+            id ? `&userId=${id}` : null,
+            pair ? `&pairId=${pair}` : null,
             dateFrom ? `&dateFrom=${dateFrom}` : null,
             dateTo ? `&dateTo=${dateTo}` : null,
             status ? `&status=${status}` : null,
+            sortName ? `&sort=${sortName}:${sortType}` : null,
         ];
 
         const url = `${GET_TRADE_HISTORY}?type=${historyType}&skip=${current * 10 - 10}&take=${pageSize}${urlParams.join('')}`;
         const {data} = await axios.get(url);
-        // this.setState({
-        //     coinPairs: data
-        // })
+        this.setState({
+            historyList: data.orders,
+            pagination: {
+                ...this.state.pagination,
+                total: +data.count
+            }
+        })
+    };
+
+    handlePaginationChange = (pagination, filters, sorter) => {
+        console.log(pagination);
+        const sortType = sorter.order === 'descend' ? 'desc' : sorter.order === 'ascend' ? 'asc' : '';
+        this.setState({
+                pagination,
+                filter: {
+                    ...this.state.filter,
+                    sortName: sorter.columnKey,
+                    sortType
+                }
+            },
+            () => this.getTradeHistory())
+    };
+
+    handleSearch = params => {
+        console.log(params);
+        this.setState({
+                filter: {
+                    ...this.state.filter,
+                    ...params
+                }
+            },
+            () => this.getTradeHistory());
+    };
+
+
+    handleChangeTab = type => {
+        this.setState({
+            historyType: type
+        }, () => this.getTradeHistory())
     };
 
     render() {
-        const {historyList, coinPairs} = this.state;
+        const {historyList, coinPairs, pagination} = this.state;
 
         return (
             <div className="trade-history">
                 <FilterBlock
-                    onSearch={e => console.log(e)}
+                    onSearch={e => this.handleSearch(e)}
                     pairs={coinPairs}
                     page='trade'
                 />
 
                 <HistoryList
-                    onChangeTab={type => this.setState({historyType: type})}
+                    {...pagination}
+                    onChangeTab={this.handleChangeTab}
+                    onChange={this.handlePaginationChange}
                     list={historyList}
+                    coinPairs={coinPairs}
                 />
             </div>
         )

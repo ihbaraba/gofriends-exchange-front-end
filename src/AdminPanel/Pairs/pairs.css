@@ -1,0 +1,77 @@
+.pairs-page {
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.pairs-page .block-title {
+    font-family: Roboto;
+    font-size: 18px;
+    font-weight: 500;
+    letter-spacing: 1.8px;
+}
+
+.pairs-page .create-pair-block {
+    width: 45%;
+    height: 200px;
+    padding: 35px;
+    background: #1E1E1E;
+}
+
+.pairs-page .create-pair-block .create-block {
+    display: flex;
+    align-items: flex-end;
+    margin: 30px 0 0 0;
+}
+
+.pairs-page .create-pair-block .create-block label {
+    display: block;
+    margin: 0 0 5px 0;
+    font-family: Roboto;
+    font-size: 12px;
+    font-weight: 300;
+    letter-spacing: 1.2px;
+}
+
+.pairs-page .create-pair-block .create-block hr {
+    margin: 0 25px 15px 25px;
+    width: 40px;
+    border-color: #979797;
+}
+
+.pairs-page .create-pair-block .create-block button {
+    margin: 0 0 4px auto;
+}
+
+.pairs-page .create-pair-block .create-block .ant-select {
+    width: 120px !important;
+}
+
+/*--------------------------*/
+
+.pairs-page .pairs-list {
+    width: 50%;
+    height: 640px;
+    padding: 35px;
+    background: #1E1E1E;
+}
+
+.pairs-page .pairs-list .list-block {
+    margin: 50px 0 0 0;
+    height: 485px;
+    overflow-y: scroll;
+}
+
+.pairs-page .pairs-list .list-block .pair {
+    height: 39px;
+    margin: 0 0 10px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 3px;
+    background-color: #313131;
+    box-shadow: 0 5px 32px 0 rgba(0, 0, 0, 0.23);
+    font-size: 11px;
+    font-weight: 300;
+    letter-spacing: 1.1px;
+}

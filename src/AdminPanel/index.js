@@ -57,7 +57,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
     changePage: (page) => dispatch(changePage(page)),
-    lastPage: (page) => dispatch(lastPage()),
+    lastPage: () => dispatch(lastPage()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Index);

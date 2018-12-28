@@ -79,7 +79,6 @@ const UsersList = ({list, total, current, pageSize, onChange}) => {
             pageSize
         }
     };
-
     return (
         <div className='users-list'>
             <Table
@@ -88,7 +87,6 @@ const UsersList = ({list, total, current, pageSize, onChange}) => {
                 dataSource={list}
                 rowKey={record => record.id}
                 onChange={onChange}
-                // loading={list.length === 0}
                 className='admin-table'
             />
         </div>
