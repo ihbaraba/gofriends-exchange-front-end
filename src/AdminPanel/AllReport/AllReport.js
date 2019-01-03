@@ -18,12 +18,12 @@ class AllReport extends Component {
     handleGenerateList = async () => {
         console.log(this.state);
 
-        const {dateFrom, dateTo} = this.state;
+        const {type, dateFrom, dateTo} = this.state;
 
-        const customUrl = `${GET_REPORT_BY_DATE}?dateFrom=${dateFrom}&dateTo=${dateTo}`;
+        const customUrl = `${GET_REPORT_BY_DATE}?type=${type}`;
         const res = await axios.get(customUrl);
         console.log(res);
-    }
+    };
 
     handleChangeDateInput = dateArr => {
         this.setState({...dateArr})

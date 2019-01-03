@@ -10,14 +10,16 @@ import {EMAIL_SETTINGS} from "../../constants/APIURLS";
 
 class EmailEditor extends Component {
     state = {
-        emailTemplate: {}
+        emailTemplate: {},
+        placeholders: []
     };
 
     async componentDidMount() {
         const res = await axios.get(`${EMAIL_SETTINGS}/${this.props.match.params.type}`);
 
         this.setState({
-            emailTemplate: res.data
+            emailTemplate: res.data,
+            placeholders: res.data.placeholders.split(', ')
         })
     }
 
@@ -28,11 +30,13 @@ class EmailEditor extends Component {
         });
 
         this.props.history.push(`/admin/settings`)
-    }
+    };
 
     render() {
-        const {emailTemplate} = this.state;
+        const {emailTemplate, placeholders} = this.state;
         let emailBody = '';
+        let cked = {};
+
         return (
             <div className='news-editor-page'>
                 <div className='new-title'>
@@ -44,10 +48,19 @@ class EmailEditor extends Component {
                     </button>
                 </div>
 
-                <button onClick={() => CKEditor.instances[0].insertText('422442242442')}>ttttttt
-                </button>
-                <button onClick={() => CKEditor.instances.IDofEditor.insertText('some text here')}>222222
-                </button>
+                <div className='placeholder-block'>
+                    {placeholders.map(item => (
+                        <div onClick={() => {
+                            cked.model.change(writer => {
+                                const insertPosition = cked.model.document.selection.getFirstPosition();
+                                writer.insertText(`{${item}}`, insertPosition);
+                            });
+                        }}
+                        >
+                            {item}
+                        </div>
+                    ))}
+                </div>
 
                 <CKEditor
                     editor={ClassicEditor}
@@ -64,6 +77,9 @@ class EmailEditor extends Component {
                         const data = editor.getData();
                         emailBody = data;
                         console.log({event, editor, data});
+
+                        cked = editor;
+
                     }}
                     // onBlur={editor => {
                     //     console.log('Blur.', editor);
