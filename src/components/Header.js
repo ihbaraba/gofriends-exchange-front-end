@@ -187,8 +187,8 @@ class Header extends Component {
                     <div className='header'>
                         <div className="logo">
                             <NavLink to="/">
-                                <img src={logo} alt="logo"/>
-                                {/*<span style={{fontSize: '48px'}}>Sinsline</span>*/}
+                                {/*<img src={logo} alt="logo"/>*/}
+                                <span style={{fontSize: '48px'}}>Beetok</span>
                             </NavLink>
                         </div>
                         <div className="tabs exchange-link">

@@ -73,7 +73,7 @@ const NavBar = ({changePage}) => {
 
     return (
         <div className='nav-bar'>
-            <img src={logo} alt="logo" className='logo'/>
+            {/*<img src={logo} alt="logo" className='logo'/>*/}
 
             <Menu
                 defaultSelectedKeys={['0']}

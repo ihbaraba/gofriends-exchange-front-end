@@ -9,7 +9,7 @@ const Footer = () => {
         <div className="footer ">
             <div className="footer-container size-container">
                 <div className="group">
-                    <img src={logo} alt="Exchange"/>
+                    {/*<img src={logo} alt="Exchange"/>*/}
 
                     {/*<div className="meta">*/}
                     {/*<div className="group" style={{fontSize: '40px'}}>Sinsline</div>*/}
@@ -66,7 +66,7 @@ const Footer = () => {
             </div>
 
             <div className='copyright-block'>
-                © 2017 - 2018  Gofriends.pro. All rights reserved
+                © 2017 - 2018  Beetok. All rights reserved
             </div>
         </div>
     );

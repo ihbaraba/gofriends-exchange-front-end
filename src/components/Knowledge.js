@@ -56,11 +56,11 @@ class Knowledge extends Component {
                                     <ul className="knowledge-question">
                                         <p className="knowledge-title-question">Frequently Asked
                                             Questions<span>(13)</span></p>
-                                        <li><a href="">Can I change the email address associated with my GoFriends
+                                        <li><a href="">Can I change the email address associated with my Beetok
                                             account?</a></li>
-                                        <li><a href="">Does GoFriends have an API?</a></li>
-                                        <li><a href="">Are there fees for using GoFriends?</a></li>
-                                        <li><a href="">How can I get a coin listed on GoFriends?</a></li>
+                                        <li><a href="">Does Beetok have an API?</a></li>
+                                        <li><a href="">Are there fees for using Beetok?</a></li>
+                                        <li><a href="">How can I get a coin listed on Beetok?</a></li>
                                         <li><a href="">What if I have coins on loan when a fork happens?</a></li>
                                         <p className="knowledge-accordion">See all 13 articles
                                             <div className="accordeon-content"><a href="">Basics to get you started</a>
