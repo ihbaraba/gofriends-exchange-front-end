@@ -1,7 +1,10 @@
 import React, {Component} from 'react';
+import axios from 'axios';
 
 import GenerateBlock from './GenerateBlock';
 import ReportList from './ReportList';
+
+import {GET_REPORT_BY_DATE} from '../../constants/APIURLS';
 
 class AllReport extends Component {
     state = {
@@ -12,9 +15,15 @@ class AllReport extends Component {
         dateTo: ''
     };
 
-    handleGenerateList = () => {
+    handleGenerateList = async () => {
         console.log(this.state);
-    };
+
+        const {dateFrom, dateTo} = this.state;
+
+        const customUrl = `${GET_REPORT_BY_DATE}?dateFrom=${dateFrom}&dateTo=${dateTo}`;
+        const res = await axios.get(customUrl);
+        console.log(res);
+    }
 
     handleChangeDateInput = dateArr => {
         this.setState({...dateArr})

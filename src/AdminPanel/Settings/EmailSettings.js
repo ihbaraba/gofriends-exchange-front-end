@@ -1,38 +1,38 @@
 import React from 'react';
 import {Table, Switch} from 'antd';
 
-const EmailSettings = () => {
+const EmailSettings = ({params, onChange, openEmail}) => {
     const columns = [
         {
             title: 'Trigger',
-            dataIndex: 'trigger',
-            key: 'trigger',
+            dataIndex: 'subject',
+            key: 'subject',
             width: 250,
         },
         {
             title: 'Title',
-            dataIndex: 'title',
+            dataIndex: 'subject',
             key: 'title',
             width: 150,
         },
         {
             title: 'Last changes',
-            dataIndex: 'changeDate',
-            key: 'changeDate',
+            dataIndex: 'updatedAt',
+            key: 'updatedAt',
             width: 150,
         },
         {
             title: '',
-            dataIndex: 'switch',
-            key: 'switch',
+            dataIndex: 'enabled',
+            key: 'enabled',
             width: 200,
-            render: (params) => {
+            render: (enabled, item) => {
                 return (<div>
                     <span className='switch-label'>Disable</span>
                     <Switch
                         className='switch'
-                        checked={params.value}
-                        // onChange={(e) => onChange(e, params.id)}
+                        checked={enabled}
+                        onChange={(e) => onChange(e, item.trigger)}
                     />
                     <span className='switch-label'>Enable</span>
                 </div>)
@@ -43,7 +43,9 @@ const EmailSettings = () => {
             dataIndex: 'edit',
             key: 'edit',
             width: 150,
-            render: (item) => (<button className='admin-btn green-btn'>Edit</button>)
+            render: (e, item) => (<button className='admin-btn green-btn' onClick={() => openEmail(item)}>
+                    Edit
+            </button>)
         },
     ];
 
@@ -52,8 +54,9 @@ const EmailSettings = () => {
             <h1 style={{margin: '0 0 40px 0'}}>Email configurations</h1>
 
             <Table
+                pagination={false}
                 columns={columns}
-                // dataSource={list}
+                dataSource={params}
                 rowKey={record => record.id}
                 className='admin-table'
             />
