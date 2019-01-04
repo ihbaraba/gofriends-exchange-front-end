@@ -107,7 +107,7 @@ export const EMAIL_SETTINGS = `${current_server.XHR}mailer/templates`;
 export const GET_TRADE_HISTORY = `${current_server.XHR}orders/history`;
 
 //all report page
-export const GET_REPORT_BY_DATE = `${current_server.XHR}orders/history`;
+export const GET_REPORT_BY_DATE = `${current_server.XHR}transactions`;
 
 
 

@@ -25,8 +25,9 @@ const GenerateBlock = ({generate, onChangeDate, onChangeType}) => {
             <div className='filter-item'>
                 <Select placeholder='All' style={{width: 180}} onChange={onChangeType}>
                     <Option value=''>All</Option>
-                    <Option value="Deposit">Deposit</Option>
-                    <Option value="ееук">Deposit</Option>
+                    <Option value="replenish">Replenish</Option>
+                    <Option value="order">Order</Option>
+                    <Option value="deposit">Deposit</Option>
                 </Select>
                 <label>*transaction type</label>
             </div>

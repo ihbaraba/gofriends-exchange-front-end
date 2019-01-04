@@ -49,6 +49,7 @@ import AllReport from "./AdminPanel/AllReport/AllReport";
 import EmailEditor from "./AdminPanel/Settings/EmailEditor";
 import Pairs from "./AdminPanel/Pairs/Pairs";
 import CommissionsSettings from "./AdminPanel/Comissions/CommissionsSettings";
+import User from "./AdminPanel/Users/User/User";
 
 
 
@@ -110,7 +111,8 @@ class App extends Component {
                                     <Route path='/admin' render={() => (
                                         <AdminPanel>
                                             <Redirect from='/admin' to='/admin/dashboard'/>
-                                            <Route path='/admin/users' component={Users}/>
+                                            <Route exact path='/admin/users' component={Users}/>
+                                            <Route path='/admin/users/:id' component={User}/>
                                             <Route exact path='/admin/settings' component={Settings}/>
                                             <Route path='/admin/settings/:type' component={EmailEditor}/>
                                             <Route path='/admin/dashboard' component={Dashboard}/>
