@@ -5,15 +5,18 @@ import moment from 'moment';
 const columns = [
     {
         title: 'Created at',
-        dataIndex: 'createDate',
-        key: 'createDate',
+        dataIndex: 'createdAt',
+        key: 'createdAt',
         width: 200,
         sorter: true,
+        render: (item) => (
+            <span>{moment(item).format('YYYY-MM-DD HH:mm:ss')}</span>
+        )
     },
     {
         title: 'User ID',
-        dataIndex: 'id',
-        key: 'id',
+        dataIndex: 'userId',
+        key: 'userId',
         width: 150,
         sorter: true,
     },
@@ -48,7 +51,7 @@ const columns = [
 ];
 
 
-const ReportList = ({list, total, current, pageSize, onChange}) => {
+const ReportList = ({list, pagination: {total, current, pageSize}, onChange}) => {
     const config = {
         pagination: {
             // pageSizeOptions : ['30', '40'],
@@ -62,12 +65,11 @@ const ReportList = ({list, total, current, pageSize, onChange}) => {
     return (
         <div className='all-report-list response-side'>
             <Table
-                /*{...config}*/
+                {...config}
                 columns={columns}
-                // dataSource={list}
-                // rowKey={record => record.id}
-                // onChange={onChange}
-                // loading={list.length === 0}
+                dataSource={list}
+                rowKey={record => record.id}
+                onChange={onChange}
                 className='admin-table'
             />
         </div>
