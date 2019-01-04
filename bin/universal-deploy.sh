@@ -13,8 +13,8 @@ YELLOW='\033[0;33m'
 
 
 REMOTE_USER='root'
-REMOTE_HOST='104.248.66.21'
-REMOTE_ROOT_FOLDER='/srv/exchange-client/'
+REMOTE_HOST='178.62.203.130'
+REMOTE_ROOT_FOLDER='/var/www/exchange-client/'
 SSH_PORT=22
 LOCAL_DIST_FOLDER='./build/*'
 LOCAL_ROOT_FOLDER='./'
