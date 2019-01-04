@@ -85,8 +85,8 @@ class Users extends Component {
     };
 
     handleOpenUser = (user) => {
-        // this.props.changeSubPage({title: user.username});
-        // this.props.history.push(`/admin/users/${user.id}`);
+        this.props.changeSubPage({title: user.username});
+        this.props.history.push(`/admin/users/${user.id}`);
     };
 
 

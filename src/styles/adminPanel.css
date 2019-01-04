@@ -378,10 +378,11 @@
 
 .admin-panel .admin-header .current-page i {
     font-size: 20px;
-    margin: 0 20px;
+    margin: 5px 20px 0 20px;
 }
 
 .admin-panel .admin-header .current-page .sub-link-name {
+    margin: 5px 0 0 0;
     font-family: Roboto;
     font-size: 18px;
     font-weight: 500;
