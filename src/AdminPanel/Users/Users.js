@@ -5,6 +5,8 @@ import FilterBlock from '../components/FilterBlock';
 import UsersList from './UsersList';
 
 import {GET_USERS} from '../../constants/APIURLS';
+import {changeSubPage} from "../../actions/AdminActions";
+import {connect} from "react-redux";
 
 
 class Users extends Component {
@@ -79,8 +81,12 @@ class Users extends Component {
             },
             () => {
                 this.getUsers()
-
             })
+    };
+
+    handleOpenUser = (user) => {
+        // this.props.changeSubPage({title: user.username});
+        // this.props.history.push(`/admin/users/${user.id}`);
     };
 
 
@@ -98,6 +104,7 @@ class Users extends Component {
                     list={users}
                     {...pagination}
                     onChange={this.handlePaginationChange}
+                    onOpenUser={this.handleOpenUser}
                 />
             </div>
         )
@@ -105,4 +112,10 @@ class Users extends Component {
 }
 
 
-export default Users;
+const mapStateToProps = state => ({});
+
+const mapDispatchToProps = dispatch => ({
+    changeSubPage: (page) => dispatch(changeSubPage(page)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Users);

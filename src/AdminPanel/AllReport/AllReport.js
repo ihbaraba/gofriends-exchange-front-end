@@ -16,11 +16,16 @@ class AllReport extends Component {
     };
 
     handleGenerateList = async () => {
-        console.log(this.state);
-
         const {type, dateFrom, dateTo} = this.state;
 
-        const customUrl = `${GET_REPORT_BY_DATE}?type=${type}`;
+        const urlParams = [
+            dateFrom ? `?dateFrom=${dateFrom}` : null,
+            dateTo ? `&dateTo=${dateTo}` : null,
+            type ? `&type=${type}` : null,
+        ];
+
+
+        const customUrl = `${GET_REPORT_BY_DATE}${urlParams.join('')}`;
         const res = await axios.get(customUrl);
         console.log(res);
     };
