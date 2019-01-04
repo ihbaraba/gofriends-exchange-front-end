@@ -79,13 +79,13 @@ class AllReport extends Component {
     }
 
     render() {
-        const {pagination} = this.state;
+        const {pagination, filter} = this.state;
         return (
             <div className='all-report-page'>
                 <GenerateBlock
                     generate={this.handleGenerateList}
                     onChangeDate={this.handleChangeDateInput}
-                    onChangeType={type => this.setState({type})}
+                    onChangeType={type => this.setState({filter: {...filter, type}})}
                 />
 
                 <ReportList
