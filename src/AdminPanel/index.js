@@ -6,16 +6,11 @@ import Header from './components/Header';
 
 import '../styles/adminPanel.css';
 import 'antd/dist/antd.css';
+import {changePage, lastPage} from "../actions/AdminActions";
 
 
 class Index extends Component {
-    state = {
-        currentPage: 'Dashboard'
-    };
-
-
-
-   async componentDidMount() {
+    async componentDidMount() {
         document.getElementById('root').classList.add('admin-version');
     }
 
@@ -24,14 +19,15 @@ class Index extends Component {
     }
 
     changePage = page => {
-        this.setState({
-            currentPage: page
-        })
+        this.props.changePage(page)
     };
 
+    goBackPage = () => {
+        this.props.lastPage()
+    }
+
     render() {
-        const {children, user} = this.props;
-        const {currentPage} = this.state;
+        const {children, user, admin} = this.props;
 
         return (
             <div className='admin-panel'>
@@ -40,8 +36,9 @@ class Index extends Component {
                 />
 
                 <Header
-                    page={currentPage}
+                    page={admin}
                     user={user}
+                    back={this.goBackPage}
                 />
 
                 <div className='admin-content'>
@@ -54,10 +51,14 @@ class Index extends Component {
 
 
 const mapStateToProps = state => ({
-    user: state.user
+    user: state.user,
+    admin: state.admin
 });
 
-const mapDispatchToProps = dispatch => ({});
+const mapDispatchToProps = dispatch => ({
+    changePage: (page) => dispatch(changePage(page)),
+    lastPage: () => dispatch(lastPage()),
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(Index);
 

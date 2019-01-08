@@ -3,6 +3,7 @@ import {Table} from 'antd';
 
 class AdminWallet extends Component {
 
+
     render() {
         const columns =
             [
@@ -39,6 +40,7 @@ class AdminWallet extends Component {
             <div className="admin-wallet-page">
                 <Table
                     columns={columns}
+                    className='admin-table'
                 />
             </div>
         )

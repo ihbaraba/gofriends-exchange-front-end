@@ -83,7 +83,7 @@ const NavBar = ({changePage}) => {
                 // inlineCollapsed={true}
             >
                 {menu.map((item, index) => (
-                    <Menu.Item key={index} onClick={() => changePage(item.title)}>
+                    <Menu.Item key={index} onClick={() => changePage(item)}>
                         <NavLink to={`/admin/${item.href}`}>
                             <div className='link-side'>
                                 <ReactSVG

@@ -1,0 +1,11 @@
+.all-report-page {
+
+}
+
+.all-report-page .generate-block {
+    justify-content: flex-start !important;
+}
+
+.all-report-page .generate-block .filter-item {
+    margin: 0 100px 0 0;
+}

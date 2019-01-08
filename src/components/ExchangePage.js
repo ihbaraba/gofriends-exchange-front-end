@@ -93,14 +93,19 @@ class ExchangePage extends Component {
     };
 
     async firePostToServer(bidProps) {
-        const responce = await sendOrder({
-            rout: ORDERS,
-            pairId: this.state.pair.id,
-            balanceId: this.state.pair.id,
-            ...bidProps
-        });
+        try {
+            const responce = await sendOrder({
+                rout: ORDERS,
+                pairId: this.state.pair.id,
+                balanceId: this.state.pair.id,
+                ...bidProps
+            });
 
-        this.props.save_user_orders(responce.id);
+            this.props.save_user_orders(responce.id);
+        } catch (error) {
+            console.log(error);
+        }
+
     };
 
     setCurrentCoinsPair2State = (pair) => {
@@ -224,7 +229,7 @@ class ExchangePage extends Component {
                         <TabPane tab="Charts" key="1">
                             <div className='mobile-tab-content'>
                                 <div
-                                     style={{flex: "1 0", display: 'flex', justifyContent: 'space-between'}}>
+                                    style={{flex: "1 0", display: 'flex', justifyContent: 'space-between'}}>
                                     <div>
                                         <div className="small-text current-pair" onClick={this.openModal}>
                                             <span className='first'>{first}</span>/<span
@@ -285,8 +290,10 @@ class ExchangePage extends Component {
                                 <OrdersHistory mobile={true}/>
 
                                 <div className='trade-nav-btn'>
-                                    <div className='btn buy-btn' onClick={() => this.openTradeTab('2', '1')}>Buy BTC</div>
-                                    <div className='btn sell-btn' onClick={() => this.openTradeTab('2', '2')}>Sell BTC</div>
+                                    <div className='btn buy-btn' onClick={() => this.openTradeTab('2', '1')}>Buy BTC
+                                    </div>
+                                    <div className='btn sell-btn' onClick={() => this.openTradeTab('2', '2')}>Sell BTC
+                                    </div>
                                 </div>
                             </div>
                         </TabPane>
@@ -294,7 +301,12 @@ class ExchangePage extends Component {
                         <TabPane tab="Trade" key="2">
                             <div className='mobile-tab-content'>
                                 <div
-                                     style={{flex: "1 0", display: 'flex', justifyContent: 'space-between', margin: '0 0 10px 0'}}>
+                                    style={{
+                                        flex: "1 0",
+                                        display: 'flex',
+                                        justifyContent: 'space-between',
+                                        margin: '0 0 10px 0'
+                                    }}>
                                     <div className="small-text current-pair" onClick={this.openModal}>
                                         <span className='first'>{first}</span>/<span
                                         className='second'>{second}</span>

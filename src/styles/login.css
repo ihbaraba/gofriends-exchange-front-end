@@ -60,10 +60,14 @@
 
 .login-page .login-form .login-form-item {
     margin: 20px 0;
+    display: flex;
+    flex-direction: column;
 }
 
 .login-page .login-form .login-form-item label {
-    font-size: 13px;
+    font-family: Helvetica;
+    font-size: 12px;
+    letter-spacing: 1.2px;
 }
 
 .login-page .login-form .reset-password-block {
@@ -102,7 +106,9 @@
     padding: 0 0 0 10px;
 }
 
-
+.login-page .login-form textarea {
+    margin: 10px 0 0 0;
+}
 
 @media (max-width: 1200px) {
     .registration-page .recaptcha-and-terms {
@@ -118,8 +124,8 @@
 
 @media (max-width: 500px) {
     .login-page {
-       border: 0 !important;
-       background: none !important;
+        border: 0 !important;
+        background: none !important;
     }
 
     .login-page .login-form {

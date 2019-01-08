@@ -1,9 +1,11 @@
 import React, {Component} from 'react';
 import {DatePicker, Select} from 'antd';
 import moment from 'moment';
+import T from 'prop-types';
 
 const {RangePicker} = DatePicker;
 const Option = Select.Option;
+
 
 class FilterBlock extends Component {
     state = {
@@ -12,7 +14,7 @@ class FilterBlock extends Component {
         dateFrom: '',
         dateTo: '',
         status: '',
-        pairs: ''
+        pair: ''
     };
 
     handleDatePickerChange = arrDates => {
@@ -32,7 +34,7 @@ class FilterBlock extends Component {
 
     render() {
         const {id, email} = this.state;
-        const {onSearch, page} = this.props;
+        const {onSearch, page, pairs} = this.props;
 
         return (
             <div className='filter-block'>
@@ -66,18 +68,21 @@ class FilterBlock extends Component {
 
                 {page === 'trade' ?
                     <div className='filter-item'>
-                        <Select placeholder='All' style={{width: 180}} onChange={e => this.setState({pairs: e})}>
+                        <Select placeholder='All' style={{width: 180}} onChange={e => this.setState({pair: e})}>
                             <Option value=''>All</Option>
-                            <Option value="dch">BCH/LTC</Option>
-                            <Option value="ltc">BCH/LTC</Option>
+                            {pairs.map(item => {
+                                return (
+                                    <Option key={item.id} value={item.id}>{item.name}</Option>
+                                )
+                            })}
                         </Select>
                         <label>*by pair </label>
                     </div>
                     : ''}
 
-                {page === 'withdraw' ?
+                {page === 'withdraw' || 'commissions' ?
                     <div className='filter-item'>
-                        <Select placeholder='All' style={{width: 180}} onChange={e => this.setState({pairs: e})}>
+                        <Select placeholder='All' style={{width: 180}} onChange={e => this.setState({pair: e})}>
                             <Option value=''>All</Option>
                             <Option value="dch">BCH</Option>
                             <Option value="ltc">BCl</Option>
@@ -95,15 +100,20 @@ class FilterBlock extends Component {
                     <Select placeholder='All' style={{width: 180}} onChange={e => this.setState({status: e})}>
                         <Option value=''>All</Option>
                         <Option value="active">Active</Option>
-                        <Option value="blocked">Blocked</Option>
+                        <Option value="completed">Completed</Option>
+                        <Option value="cancelled">Cancelled</Option>
                     </Select>
                     <label>*by status </label>
                 </div>
 
-                <button className='admin-btn search-btn' onClick={() => onSearch(this.state)}>Search</button>
+                <button className='admin-btn search-btn green-btn' onClick={() => onSearch(this.state)}>Search</button>
             </div>
         )
     }
 }
+
+FilterBlock.protoTypes = {
+    page: T.string
+};
 
 export default FilterBlock;

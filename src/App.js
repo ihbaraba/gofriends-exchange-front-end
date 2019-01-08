@@ -45,6 +45,11 @@ import NewsEditor from "./AdminPanel/News/NewsEditor";
 import AdminWallet from "./AdminPanel/AdminWallet/AdminWallet";
 import WithdrawList from "./AdminPanel/WithdrawList/WithdrawList";
 import Commissions from "./AdminPanel/Comissions/Commissions";
+import AllReport from "./AdminPanel/AllReport/AllReport";
+import EmailEditor from "./AdminPanel/Settings/EmailEditor";
+import Pairs from "./AdminPanel/Pairs/Pairs";
+import CommissionsSettings from "./AdminPanel/Comissions/CommissionsSettings/CommissionsSettings";
+import User from "./AdminPanel/Users/User/User";
 
 
 
@@ -105,9 +110,11 @@ class App extends Component {
 
                                     <Route path='/admin' render={() => (
                                         <AdminPanel>
-                                            {/*<Redirect from='/admin' to='/admin/dashboard'/>*/}
-                                            <Route path='/admin/users' component={Users}/>
-                                            <Route path='/admin/settings' component={Settings}/>
+                                            <Redirect from='/admin' to='/admin/dashboard'/>
+                                            <Route exact path='/admin/users' component={Users}/>
+                                            <Route path='/admin/users/:id' component={User}/>
+                                            <Route exact path='/admin/settings' component={Settings}/>
+                                            <Route path='/admin/settings/:type' component={EmailEditor}/>
                                             <Route path='/admin/dashboard' component={Dashboard}/>
                                             <Route path='/admin/trade_history' component={TradeHistory}/>
                                             <Route exact path='/admin/news' component={News}/>
@@ -115,7 +122,10 @@ class App extends Component {
                                             <Route path='/admin/create_new' component={NewsEditor}/>
                                             <Route path='/admin/admin_wallet' component={AdminWallet}/>
                                             <Route path='/admin/withdraw_list' component={WithdrawList}/>
-                                            <Route path='/admin/commissions' component={Commissions}/>
+                                            <Route exact path='/admin/commissions' component={Commissions}/>
+                                            <Route path='/admin/commissions/settings' component={CommissionsSettings}/>
+                                            <Route path='/admin/report' component={AllReport}/>
+                                            <Route path='/admin/pairs' component={Pairs}/>
                                         </AdminPanel>
                                     )}>
                                     </Route>

@@ -5,6 +5,8 @@
 @import "../AdminPanel/News/news.css";
 @import "../AdminPanel/AdminWallet/admin-wallet.css";
 @import "../AdminPanel/Comissions/commissions.css";
+@import "../AdminPanel/AllReport/all-report.css";
+@import "../AdminPanel/Pairs/pairs.css";
 
 .admin-version .w-header,
 .admin-version .w-footer {
@@ -44,6 +46,7 @@
 
 .admin-panel .admin-content {
     padding: 12px 0 0 0;
+    position: relative;
 }
 
 .admin-panel .admin-btn {
@@ -57,6 +60,10 @@
     font-size: 12px;
     letter-spacing: 1.2px;
     cursor: pointer;
+}
+
+.admin-panel .green-btn {
+    background: #4A998C;
 }
 
 .admin-panel .response-side {
@@ -327,15 +334,19 @@
 }
 
 .admin-panel .nav-bar a.active span {
-    color: #fff !important;
+    color: #4A998C !important;
 }
 
-.admin-panel .nav-bar a.active .menu-icon path {
+.admin-panel .nav-bar a .menu-icon path {
     fill: #fff;
 }
 
+.admin-panel .nav-bar a.active .menu-icon path {
+    fill: #4A998C;
+}
+
 .admin-panel .nav-bar a.active .menu-icon circle {
-    stroke: #fff;
+    stroke: #4A998C;
 }
 
 .admin-panel .nav-bar .ant-menu a .wrapper-svg-icon {
@@ -345,7 +356,7 @@
 .admin-panel .nav-bar .ant-menu a span {
     margin: 7px 0 0 0;
     line-height: initial;
-    color: #3A3A3A;
+    color: #fff;
     font-family: Roboto;
     font-size: 12px;
     font-weight: 300;
@@ -360,11 +371,35 @@
     align-items: center;
 }
 
-.admin-panel .admin-header .current-page-name {
+.admin-panel .admin-header .current-page {
+    display: flex;
+    align-items: center;
+}
+
+.admin-panel .admin-header .current-page i {
+    font-size: 20px;
+    margin: 5px 20px 0 20px;
+}
+
+.admin-panel .admin-header .current-page .sub-link-name {
+    margin: 5px 0 0 0;
+    font-family: Roboto;
+    font-size: 18px;
+    font-weight: 500;
+    letter-spacing: 1.8px;
+}
+
+.admin-panel .admin-header .current-page a {
     font-family: Ubuntu;
     font-size: 30px;
     font-weight: bold;
     letter-spacing: 2.05px;
+    color: #fff;
+}
+
+.admin-panel .admin-header .current-page .underline a {
+    padding: 0 0 3px 0;
+    border-bottom: 1px solid #fff;
 }
 
 .admin-panel .admin-header .user-navigation .user-email {
@@ -412,7 +447,7 @@
 }
 
 .admin-panel .filter-block .search-btn {
-    margin: 0 0 12px 0;
+    margin: 0 0 9px 0;
 }
 
 /*------------------------------*/
@@ -454,9 +489,8 @@
 /*border-radius:50%;*/
 /*position:absolute;*/
 
-/*-webkit-box-shadow: 0px 0px 200px 100px rgba(255, 255, 255, 0.41);*/
+/*-webkit-box-shadow: 0px 0px 150px 70px rgba(255, 255, 255, 0.46);*/
 
 /*transform:translate3d(-50%,-50%,0);*/
-/*!*transition:transform 0.2s cubic-bezier(.02,1.23,.79,1.08);*!*/
 /*}*/
 

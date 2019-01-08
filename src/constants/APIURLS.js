@@ -99,7 +99,15 @@ export const CHANGE_PASSWORD = `${current_server.XHR}auth/password`;
 export const GET_USERS = `${current_server.XHR}users`;
 
 //settings page
-export const SETTINGS_PARAMS = `${current_server.XHR}settings`;
+export const REGISTRATION_SETTINGS = `${current_server.XHR}settings`;
+export const EMAIL_SETTINGS = `${current_server.XHR}mailer/templates`;
+
+
+//trade history page
+export const GET_TRADE_HISTORY = `${current_server.XHR}orders/history`;
+
+//all report page
+export const GET_REPORT_BY_DATE = `${current_server.XHR}transactions`;
 
 
 

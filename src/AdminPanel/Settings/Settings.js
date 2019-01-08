@@ -4,7 +4,9 @@ import axios from 'axios';
 import RegistrationSettings from './RegistrationSettings';
 import EmailSettings from './EmailSettings';
 
-import {SETTINGS_PARAMS} from '../../constants/APIURLS';
+import {REGISTRATION_SETTINGS, EMAIL_SETTINGS} from '../../constants/APIURLS';
+import {changeSubPage} from "../../actions/AdminActions";
+import {connect} from "react-redux";
 
 class Settings extends Component {
     state = {
@@ -13,48 +15,70 @@ class Settings extends Component {
     };
 
     async componentDidMount() {
-        const res = await axios.get(SETTINGS_PARAMS);
-        let params = res.data;
+        const [registration, email] = await Promise.all([axios.get(REGISTRATION_SETTINGS), axios.get(EMAIL_SETTINGS),]);
 
-        params.forEach(item => {
-            if (item.name === 'registration') {
-                this.setState({
-                    registrationParams: item
-                })
-            } else {
-                this.setState({
-                    emailParams: [
-                        ...this.state.emailParams,
-                        item
-                    ]
-                })
-            }
-        });
+        this.setState({
+            registrationParams: registration.data[0],
+            emailParams: email.data
+        })
     }
 
-    handlerChangeSettings = async (value, id) => {
+    handlerChangeRegistrationSettings = async (value, id) => {
         if (id === this.state.registrationParams.id) {
-            const res = await axios.put(`${SETTINGS_PARAMS}/${id}`, {
+            const res = await axios.put(`${REGISTRATION_SETTINGS}/${id}`, {
                 value
             });
             this.setState({registrationParams: res.data})
         }
     };
 
+    handlerChangeEmailSettings = async (value, trigger) => {
+        const res = await axios.put(`${EMAIL_SETTINGS}/${trigger}`, {
+            isEnabled: value
+        });
+
+        let newEmailParams = await this.state.emailParams.map(item => {
+            if (item.trigger === trigger) {
+                item.enabled = value
+            }
+
+            return item
+        });
+
+        this.setState({emailParams: newEmailParams})
+    };
+
+    handleOpenEmail = (email) => {
+        this.props.changeSubPage({title: email.subject});
+        this.props.history.push(`/admin/settings/${email.trigger}`)
+    }
+
     render() {
-        const {registrationParams} = this.state;
+        const {registrationParams, emailParams} = this.state;
 
         return (
             <div className="settings-page">
                 <RegistrationSettings
                     params={registrationParams}
-                    onChange={this.handlerChangeSettings}
+                    onChange={this.handlerChangeRegistrationSettings}
                 />
 
-                <EmailSettings/>
+                <EmailSettings
+                    params={emailParams}
+                    onChange={this.handlerChangeEmailSettings}
+                    openEmail={this.handleOpenEmail}
+                />
             </div>
         )
     }
 }
 
-export default Settings;
+
+
+const mapStateToProps = state => ({});
+
+const mapDispatchToProps = dispatch => ({
+    changeSubPage: (page) => dispatch(changeSubPage(page)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Settings);

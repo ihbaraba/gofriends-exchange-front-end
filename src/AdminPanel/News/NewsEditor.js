@@ -17,7 +17,7 @@ class NewsEditor extends Component {
                         <label>Title</label>
                         <input type="text"/>
                     </div>
-                    <button className='admin-btn'>Create</button>
+                    <button className='admin-btn green-btn'>Create</button>
                 </div>
 
                 <CKEditor
