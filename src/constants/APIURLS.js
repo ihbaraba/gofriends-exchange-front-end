@@ -29,7 +29,7 @@ const SERVERS = {
 
 const generatedDetected = {
     XHR: `http://${document.location.hostname}/api/v1/`,
-    SOCKET: `wss://${document.location.hostname}/`,
+    SOCKET: `http://${document.location.hostname}/`,
 };
 
 
