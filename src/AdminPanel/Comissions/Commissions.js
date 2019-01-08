@@ -8,8 +8,12 @@ import {connect} from "react-redux";
 
 class Commissions extends Component {
 
-    goSettingsPage= () => {
+    goSettingsPage = () => {
         this.props.changeSubPage({title: 'Changes'})
+    };
+
+    handleSearch = (params) => {
+        console.log(params);
     };
 
     render() {
@@ -21,7 +25,11 @@ class Commissions extends Component {
                         Change
                     </NavLink>
                 </div>
-                <FilterBlock/>
+
+                <FilterBlock
+                    page='commissions'
+                    onSearch={this.handleSearch}
+                />
 
                 <CommissionsProfitList/>
             </div>

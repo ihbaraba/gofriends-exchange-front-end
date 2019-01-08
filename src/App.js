@@ -48,7 +48,7 @@ import Commissions from "./AdminPanel/Comissions/Commissions";
 import AllReport from "./AdminPanel/AllReport/AllReport";
 import EmailEditor from "./AdminPanel/Settings/EmailEditor";
 import Pairs from "./AdminPanel/Pairs/Pairs";
-import CommissionsSettings from "./AdminPanel/Comissions/CommissionsSettings";
+import CommissionsSettings from "./AdminPanel/Comissions/CommissionsSettings/CommissionsSettings";
 import User from "./AdminPanel/Users/User/User";
 
 
