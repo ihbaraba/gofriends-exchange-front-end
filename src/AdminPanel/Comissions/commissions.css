@@ -26,11 +26,144 @@
 /*settings*/
 .commissions-settings-page {
     display: flex;
+    height: 65%;
+}
+
+.commissions-settings-page .arrow-block {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    margin: 0 20px;
+}
+
+.commissions-settings-page .arrow-block i {
+    font-size: 25px;
 }
 
 .commissions-settings-page .pairs-list-block {
-    width: ;
+    width: 40%;
+    padding: 25px 35px;
     border-radius: 0 3px 3px 3px;
     background-color: #1E1E1E;
     box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.35);
+}
+
+.commissions-settings-page .pairs-list-block .block-title {
+    margin: 0 0 25px 0;
+    font-family: Roboto;
+    font-size: 18px;
+    letter-spacing: 1.8px;
+}
+
+.commissions-settings-page .pairs-list-block .ant-menu {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    background: none;
+    border: 0;
+}
+
+.commissions-settings-page .pairs-list-block .ant-menu:before,
+.commissions-settings-page .pairs-list-block .ant-menu:after {
+    display: none;
+}
+
+.commissions-settings-page .pairs-list-block .ant-menu-item {
+    width: 45%;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 !important;
+    border: 1px solid #fff;
+    border-top: 0;
+}
+
+.commissions-settings-page .pairs-list-block .ant-menu-item.ant-menu-item-selected {
+    background: #4A998C;
+}
+
+.commissions-settings-page .pairs-list-block .ant-menu-item.ant-menu-item-selected::after {
+    border: 0 !important
+}
+
+.commissions-settings-page .pairs-list-block .ant-menu-item:first-child,
+.commissions-settings-page .pairs-list-block .ant-menu-item:nth-child(2) {
+    border-top: 1px solid #fff;
+}
+
+/*=--------------------=*/
+.commissions-settings-page .pair-fee-block {
+    width: 55%;
+    padding: 25px 35px;
+    border-radius: 0 3px 3px 3px;
+    background-color: #1E1E1E;
+    box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.35);
+}
+
+.commissions-settings-page .pair-fee-block .title-block {
+    margin: 0 0 15px 0;
+    color: #4A998C;
+    font-family: Roboto;
+    font-size: 18px;
+    letter-spacing: 1.8px;
+}
+
+.commissions-settings-page .pair-fee-block .table-title {
+    margin: 0 0 30px 0;
+    display: flex;
+    justify-content: space-around;
+    font-family: Roboto;
+    font-size: 15px;
+    font-weight: bold;
+    letter-spacing: 1.5px;
+}
+
+.commissions-settings-page .pair-fee-block .fee-params {
+    display: flex;
+    align-items: flex-end;
+    padding: 0 0 0 60px;
+}
+
+.commissions-settings-page .pair-fee-block .fee-params .form-item {
+    display: flex;
+    flex-direction: column;
+}
+
+.commissions-settings-page .pair-fee-block .fee-params hr {
+    width: 40px;
+    margin: 0 20px 15px 20px;
+    border-bottom: 1px solid #979797;
+}
+
+.commissions-settings-page .pair-fee-block .fee-params .right-arrow {
+    width: 70px;
+    height: 2px;
+    margin: 0 50px 15px 50px;
+    background: #979797;
+    position: relative;
+}
+
+.right-arrow::before {
+    left: 100%;
+    top: 50%;
+    border: solid transparent;
+    content: " ";
+    height: 0;
+    width: 0;
+    position: absolute;
+    pointer-events: none;
+    border-left-color: #979797;
+    border-width: 5px;
+    margin-top: -5px;
+}
+
+.commissions-settings-page .pair-fee-block .fee-params .form-item input {
+    width: 65px;
+}
+
+.commissions-settings-page .pair-fee-block .green-btn {
+    margin: 40px 0 0 auto;
+    display: block;
 }

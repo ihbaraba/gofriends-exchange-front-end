@@ -68,7 +68,6 @@ class TradeHistory extends Component {
     };
 
     handlePaginationChange = (pagination, filters, sorter) => {
-        console.log(pagination);
         const sortType = sorter.order === 'descend' ? 'desc' : sorter.order === 'ascend' ? 'asc' : '';
         this.setState({
                 pagination,
