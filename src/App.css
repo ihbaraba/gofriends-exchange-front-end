@@ -189,14 +189,15 @@ button a:hover {
 }
 
 .act-btn {
-    width: 96px;
-    height: 23px;
+    width: 96px !important;
+    height: 23px !important;
     padding: 0;
-    display: flex;
+    display: flex !important;
     justify-content: center;
     align-items: center;
-    color: #fff;
-    background-color: #000000;
+    color: #fff !important;
+    background-color: #000000 !important;
+    border: 1px solid #4A998C !important;
     cursor: pointer;
 }
 

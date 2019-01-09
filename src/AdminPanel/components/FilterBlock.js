@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {DatePicker, Select} from 'antd';
 import moment from 'moment';
+import T from 'prop-types';
 
 const {RangePicker} = DatePicker;
 const Option = Select.Option;
@@ -79,7 +80,7 @@ class FilterBlock extends Component {
                     </div>
                     : ''}
 
-                {page === 'withdraw' ?
+                {page === 'withdraw' || 'commissions' ?
                     <div className='filter-item'>
                         <Select placeholder='All' style={{width: 180}} onChange={e => this.setState({pair: e})}>
                             <Option value=''>All</Option>
@@ -110,5 +111,9 @@ class FilterBlock extends Component {
         )
     }
 }
+
+FilterBlock.protoTypes = {
+    page: T.string
+};
 
 export default FilterBlock;

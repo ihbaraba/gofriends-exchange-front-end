@@ -151,6 +151,7 @@ class MarketDepth extends Component {
             withStop: "false"
         });
 
+
         // const buy_ = buyDepth.filter(item => !item.completed);
         // console.log("buyDepth =", buyDepth);
         // console.log("sellDepth =", sellDepth);
@@ -193,6 +194,9 @@ class MarketDepth extends Component {
         // console.log("render marketDepth props = ", this.props.currentPair,this.state,);
 
         // const {currentPair} = this.props;
+
+        console.log(buy);
+        console.log(sell);
 
         const columns = [{
             title: 'Price',

@@ -177,7 +177,7 @@ class Balances extends Component {
                                 </div>
 
                                 <div className='address-description'>
-                                    ADA Deposit Address
+                                    Add Deposit Address
                                 </div>
 
                                 <div className="address">
