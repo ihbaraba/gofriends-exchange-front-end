@@ -94,6 +94,9 @@ export const TWO_FACTOR_AUTHENTICATION = `${current_server.XHR}auth/twofactor`;
 
 export const CHANGE_PASSWORD = `${current_server.XHR}auth/password`;
 
+//contact us
+export const SEND_TICKETS = `${current_server.XHR}tickets`;
+
 //ADMIN PANEL
 //users page
 export const GET_USERS = `${current_server.XHR}users`;
@@ -108,6 +111,9 @@ export const GET_TRADE_HISTORY = `${current_server.XHR}orders/history`;
 
 //all report page
 export const GET_REPORT_BY_DATE = `${current_server.XHR}transactions`;
+
+//news page
+export const NEWS = `${current_server.XHR}news`;
 
 
 

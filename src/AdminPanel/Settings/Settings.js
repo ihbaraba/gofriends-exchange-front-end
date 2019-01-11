@@ -11,6 +11,7 @@ import {connect} from "react-redux";
 class Settings extends Component {
     state = {
         registrationParams: {},
+        currencyParams: {},
         emailParams: [],
     };
 
@@ -19,6 +20,7 @@ class Settings extends Component {
 
         this.setState({
             registrationParams: registration.data[0],
+            currencyParams: registration.data[1],
             emailParams: email.data
         })
     }
@@ -29,6 +31,11 @@ class Settings extends Component {
                 value
             });
             this.setState({registrationParams: res.data})
+        } else {
+            const res = await axios.put(`${REGISTRATION_SETTINGS}/${id}`, {
+                value
+            });
+            this.setState({currencyParams: res.data})
         }
     };
 
@@ -54,12 +61,13 @@ class Settings extends Component {
     }
 
     render() {
-        const {registrationParams, emailParams} = this.state;
+        const {registrationParams, emailParams, currencyParams} = this.state;
 
         return (
             <div className="settings-page">
                 <RegistrationSettings
                     params={registrationParams}
+                    currencyParams={currencyParams}
                     onChange={this.handlerChangeRegistrationSettings}
                 />
 

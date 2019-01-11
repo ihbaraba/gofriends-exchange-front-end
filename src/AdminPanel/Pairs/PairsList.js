@@ -1,7 +1,6 @@
 import React from 'react';
 
 const PairsList = ({list}) => {
-    console.log(list)
     return (
         <div className='pairs-list'>
             <div className="block-title">

@@ -66,6 +66,16 @@
     background: #4A998C;
 }
 
+.admin-panel .red-btn {
+    background: #DD4457;
+    border: 0;
+}
+
+.admin-panel .red-btn:hover {
+    background: linear-gradient(215.51deg, #942d3b 0%, #DD4457 100%) !important;
+
+}
+
 .admin-panel .response-side {
     width: 100%;
     padding: 35px;
@@ -480,6 +490,12 @@
     border: 0 !important;
     border-top: 1px solid #979797 !important;
     height: 400px;
+}
+
+.ck-dropdown__panel ul {
+    background-color: #1E1E1E !important;
+    -webkit-box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.35);
+    box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.35);
 }
 
 /*#circle{*/

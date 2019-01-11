@@ -20,8 +20,10 @@ class CoinsList extends React.Component {
         this.getDataFromSocket = this.getDataFromSocket.bind(this);
         this.list = this.list.bind(this);
         this.tabsCallback = this.tabsCallback.bind(this);
+
         // this.currenciesTabs = this.currenciesTabs.bind(this);
     }
+
 
     async componentDidMount() {
         const data = await getCoinsList(PAIRS);
@@ -55,7 +57,7 @@ class CoinsList extends React.Component {
     );
 
     getDataFromSocket(id, stopTime = 0) {
-        const pairs = this.state.pairs;
+        const pairs = this.state.pairs ? this.state.pairs : [];
         const idx = pairs.findIndex(el => el.id === id);
         // console.log("idx =", idx, "id =", id);
 

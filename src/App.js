@@ -117,9 +117,11 @@ class App extends Component {
                                             <Route path='/admin/settings/:type' component={EmailEditor}/>
                                             <Route path='/admin/dashboard' component={Dashboard}/>
                                             <Route path='/admin/trade_history' component={TradeHistory}/>
+
                                             <Route exact path='/admin/news' component={News}/>
-                                            <Route path='/admin/news/:id' component={NewsEditor}/>
+                                            <Route exact path='/admin/news/:id' component={NewsEditor}/>
                                             <Route path='/admin/create_new' component={NewsEditor}/>
+
                                             <Route path='/admin/admin_wallet' component={AdminWallet}/>
                                             <Route path='/admin/withdraw_list' component={WithdrawList}/>
                                             <Route exact path='/admin/commissions' component={Commissions}/>
