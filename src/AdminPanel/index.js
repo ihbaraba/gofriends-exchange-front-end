@@ -24,7 +24,7 @@ class Index extends Component {
 
     goBackPage = () => {
         this.props.lastPage()
-    }
+    };
 
     render() {
         const {children, user, admin} = this.props;
