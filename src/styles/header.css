@@ -168,6 +168,10 @@ header {
         height: 26px;
     }
 
+    .header .logo a span {
+       font-size: 30px !important;
+    }
+
     .mobile-authentication-link {
         margin: 0 40px 0;
         display: flex;

@@ -88,6 +88,8 @@ export const REGISTER = `${current_server.XHR}auth/register`;
 
 export const LOGIN = `${current_server.XHR}auth/login`;
 
+//orders
+export const ORDERS_PAIR = `${current_server.XHR}orders/pair`;
 
 //user api urls
 export const TWO_FACTOR_AUTHENTICATION = `${current_server.XHR}auth/twofactor`;
