@@ -6,15 +6,15 @@ http://gofriends.ru:3000/docs/#/Quotations/get_quotations__pairId_
 const SERVERS = {
     EXCHANGE: {
         XHR: "https://demo.gofriends.pro/api/v1/",
-        SOCKET: "https://demo.gofriends.pro",
+        SOCKET: "wss://demo.gofriends.pro",
     },
     PRODUCT: {
         XHR: "https://demo.gofriends.pro/api/v1/",
-        SOCKET: "https://demo.gofriends.pro",
+        SOCKET: "wss://demo.gofriends.pro",
     },
     DEV: {
         XHR: "https://demo.gofriends.pro/api/v1/",
-        SOCKET: "https://demo.gofriends.pro",
+        SOCKET: "wss://demo.gofriends.pro",
     },
 };
 
@@ -28,7 +28,7 @@ const SERVERS = {
 
 const generatedDetected = {
     XHR: `https://${document.location.hostname}/api/v1/`,
-    SOCKET: `https://${document.location.hostname}/`,
+    SOCKET: `wss://${document.location.hostname}/`,
 };
 
 
@@ -92,7 +92,6 @@ export const ORDERS_PAIR = `${current_server.XHR}orders/pair`;
 
 //user api urls
 export const TWO_FACTOR_AUTHENTICATION = `${current_server.XHR}auth/twofactor`;
-
 export const CHANGE_PASSWORD = `${current_server.XHR}auth/password`;
 
 //contact us
@@ -106,7 +105,6 @@ export const GET_USERS = `${current_server.XHR}users`;
 export const REGISTRATION_SETTINGS = `${current_server.XHR}settings`;
 export const EMAIL_SETTINGS = `${current_server.XHR}mailer/templates`;
 
-
 //trade history page
 export const GET_TRADE_HISTORY = `${current_server.XHR}orders/history`;
 
@@ -115,6 +113,9 @@ export const GET_REPORT_BY_DATE = `${current_server.XHR}transactions`;
 
 //news page
 export const NEWS = `${current_server.XHR}news`;
+
+//commissions page
+export const COMMISSIONS = `${current_server.XHR}fee`;
 
 
 

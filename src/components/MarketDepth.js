@@ -52,80 +52,80 @@ class MarketDepth extends Component {
 
         const {orders} = this.props;
 
-        this.socket.on("order_created_" + socket, (bid) => {
+        // this.socket.on("order_created_" + socket, (bid) => {
+        //
+        //     if (bid.completed) return;
+        //
+        //     const {marketDepth} = this.state;
+        //     const {buy, sell} = marketDepth;
+        //     // console.log(marketDepth, buy, sell);
+        //
+        //     if (bid.type === "sell") {
+        //         sell.unshift(bid);
+        //     }
+        //     if (bid.type === "buy") {
+        //         buy.unshift(bid);
+        //     }
+        //
+        //     this.setState({
+        //         marketDepth: {
+        //             ...marketDepth,
+        //             buy: this.calculateSum(buy),
+        //             sell: this.calculateSum(sell),
+        //         }
+        //     });
+        // });
 
-            if (bid.completed) return;
-
-            const {marketDepth} = this.state;
-            const {buy, sell} = marketDepth;
-            // console.log(marketDepth, buy, sell);
-
-            if (bid.type === "sell") {
-                sell.unshift(bid);
-            }
-            if (bid.type === "buy") {
-                buy.unshift(bid);
-            }
-
-            this.setState({
-                marketDepth: {
-                    ...marketDepth,
-                    buy: this.calculateSum(buy),
-                    sell: this.calculateSum(sell),
-                }
-            });
-        });
-
-        this.socket.on("order_updated_" + socket, (bid) => {
-            /**
-             * don't add completed and stop/sell orders to tables
-             **/
-            // console.log("order_updated_", bid, !(bid.stop || bid.limit));
-            if (!(bid.stop || bid.limit)) return;
-
-            const {marketDepth} = this.state;
-            const {buy = [], sell = []} = marketDepth;
-
-            const resOfSearchInBuy = buy.findIndex(item => item.id === bid.id);
-            const resOfSearchInSell = sell.findIndex(item => item.id === bid.id);
-
-            const flagBuy = (resOfSearchInBuy !== -1);
-            const flagSell = (resOfSearchInSell !== -1);
-
-            if (flagSell && !bid.completed) {
-                const foundElement = sell[resOfSearchInSell];
-                sell[resOfSearchInSell] = {...foundElement, amount: foundElement["amount"] - bid.amount}
-            }
-            if (flagBuy && !bid.completed) {
-                const foundElement = buy[resOfSearchInBuy];
-                sell[resOfSearchInBuy] = {...foundElement, amount: foundElement["amount"] - bid.amount}
-            }
-            if (flagBuy && bid.completed) {
-                buy.splice(resOfSearchInBuy, 1)
-            }
-            ; // remove element
-            if (flagSell && bid.completed) {
-                sell.splice(resOfSearchInSell, 1)
-            }
-            ; // remove element
-
-            orders.forEach(async (value, valueAgaine, set) => {
-                if (value === bid.id) {
-                    //update user info - call SAVE_USER_INFO action
-                    const userInfo = await getUserInfo({rout: USERINFO, token: this.props.user.token});
-                    this.props.save_user_info(userInfo.body);
-                }
-            });
-
-            this.setState({
-                marketDepth: {
-                    buy: this.calculateSum(buy),
-                    sell: this.calculateSum(sell),
-                }
-            }, () => {
-                console.log(this.state)
-            });
-        });
+        // this.socket.on("order_updated_" + socket, (bid) => {
+        //     /**
+        //      * don't add completed and stop/sell orders to tables
+        //      **/
+        //     // console.log("order_updated_", bid, !(bid.stop || bid.limit));
+        //     if (!(bid.stop || bid.limit)) return;
+        //
+        //     const {marketDepth} = this.state;
+        //     const {buy = [], sell = []} = marketDepth;
+        //
+        //     const resOfSearchInBuy = buy.findIndex(item => item.id === bid.id);
+        //     const resOfSearchInSell = sell.findIndex(item => item.id === bid.id);
+        //
+        //     const flagBuy = (resOfSearchInBuy !== -1);
+        //     const flagSell = (resOfSearchInSell !== -1);
+        //
+        //     if (flagSell && !bid.completed) {
+        //         const foundElement = sell[resOfSearchInSell];
+        //         sell[resOfSearchInSell] = {...foundElement, amount: foundElement["amount"] - bid.amount}
+        //     }
+        //     if (flagBuy && !bid.completed) {
+        //         const foundElement = buy[resOfSearchInBuy];
+        //         sell[resOfSearchInBuy] = {...foundElement, amount: foundElement["amount"] - bid.amount}
+        //     }
+        //     if (flagBuy && bid.completed) {
+        //         buy.splice(resOfSearchInBuy, 1)
+        //     }
+        //     ; // remove element
+        //     if (flagSell && bid.completed) {
+        //         sell.splice(resOfSearchInSell, 1)
+        //     }
+        //     ; // remove element
+        //
+        //     orders.forEach(async (value, valueAgaine, set) => {
+        //         if (value === bid.id) {
+        //             //update user info - call SAVE_USER_INFO action
+        //             const userInfo = await getUserInfo({rout: USERINFO, token: this.props.user.token});
+        //             this.props.save_user_info(userInfo.body);
+        //         }
+        //     });
+        //
+        //     this.setState({
+        //         marketDepth: {
+        //             buy: this.calculateSum(buy),
+        //             sell: this.calculateSum(sell),
+        //         }
+        //     }, () => {
+        //         console.log(this.state)
+        //     });
+        // });
     }
 
     getInitialPairDataFromServer = async (id) => {

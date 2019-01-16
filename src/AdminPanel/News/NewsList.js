@@ -1,7 +1,7 @@
 import React from 'react';
 import {Table} from 'antd';
 
-const NewsList = ({list, onChangeTable, deleteNews, editNews}) => {
+const NewsList = ({list = [], onChangeTable, deleteNews, editNews, total, current, pageSize}) => {
     const columns = [
         {
             title: 'ID',
@@ -50,10 +50,22 @@ const NewsList = ({list, onChangeTable, deleteNews, editNews}) => {
 
         }
     ];
+
+    const config = {
+        pagination: {
+            // pageSizeOptions : ['30', '40'],
+            // showSizeChanger : true
+            total,
+            current,
+            pageSize
+        }
+    };
+
     return (
         <div className='news-list'>
             <Table
                 columns={columns}
+                {...config}
                 dataSource={list}
                 rowKey={record => record.id}
                 onChange={onChangeTable}

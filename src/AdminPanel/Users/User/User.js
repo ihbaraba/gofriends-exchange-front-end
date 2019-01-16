@@ -33,23 +33,23 @@ class User extends Component {
                         // onChange={onChangeTab}
                     >
                         <TabPane tab="KYC" key="kyc">
-                            йуауц
+                            1
                         </TabPane>
 
                         <TabPane tab="Wallets" key="wallets">
-                            йауцаца
+                            2
                         </TabPane>
 
                         <TabPane tab="Buy trade history" key="buy">
-                            йауцаца
+                            3
                         </TabPane>
 
                         <TabPane tab="Sell trade history" key="sell">
-                            йауцаца
+                            4
                         </TabPane>
 
                         <TabPane tab="Withdraws list" key="withdraws">
-                            йауцаца
+                            5
                         </TabPane>
                     </Tabs>
 

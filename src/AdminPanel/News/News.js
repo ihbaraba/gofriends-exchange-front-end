@@ -8,14 +8,24 @@ import {NEWS} from "../../constants/APIURLS";
 
 class News extends Component {
     state = {
-        news: []
+        news: [],
+        pagination: {
+            total: 0,
+            current: 1,
+            pageSize: 10,
+        }
     };
 
     getAllNews = async () => {
-        const res = await axios.get(NEWS);
+        const {pagination: {current, pageSize}} = this.state;
+        const res = await axios.get(`${NEWS}?skip=${current * 10 - 10}&take=${pageSize}`);
 
         this.setState({
-            news: res.data
+            news: res.data,
+            pagination: {
+                ...this.state.pagination,
+                total: res.data.count
+            }
         })
     };
 
@@ -41,12 +51,22 @@ class News extends Component {
         }
     };
 
+    handlePaginationChange = (pagination) => {
+        this.setState({
+                pagination,
+            },
+            () => {
+                this.getAllNews()
+            })
+    };
+
+
     async componentDidMount() {
         this.getAllNews()
     }
 
     render() {
-        const {news} = this.state;
+        const {news, pagination} = this.state;
 
         return (
             <div className='news-page'>
@@ -59,7 +79,9 @@ class News extends Component {
                 </div>
 
                 <NewsList
-                    list={news}
+                    list={news.news}
+                    {...pagination}
+                    onChangePagination={this.handlePaginationChange}
                     deleteNews={this.handleDeleteNews}
                     editNews={this.handleEditNews}
                 />

@@ -108,7 +108,6 @@ class ExchangePage extends Component {
         } catch (error) {
             console.log(error);
         }
-
     };
 
     setCurrentCoinsPair2State = (pair = this.props.pair) => {
