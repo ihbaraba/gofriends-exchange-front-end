@@ -28,6 +28,7 @@ class CoinsList extends React.Component {
     async componentDidMount() {
         const data = await getCoinsList(PAIRS);
         const markets_pairs = await getCoinsList(MARKETS);
+
         const pairs = data.map((item, idx) => ({
             id: item.id,
             first: item.baseCurrency.code,
@@ -47,7 +48,11 @@ class CoinsList extends React.Component {
         const coins = [...new Set(pairs.map(item => item.baseCurrency))];
         // console.log("PAIRS ", pairs, coins, markets_pairs, data);
         this.setState({data, coins, pairs});
-        this.props.pair(pairs[0]); //set current pair
+
+        if (!this.props.currentPair) {
+            this.props.pair(pairs[0]);
+        }
+
         pairs.forEach(item => this.getDataFromSocket(item.id, 0));
     }
 
@@ -129,7 +134,7 @@ class CoinsList extends React.Component {
         ];
 
         return (items.map(
-            (item, idx) => <TabPane tab={item} key={idx} className="coinsPairs">
+            (item, idx) => <TabPane tab={item} key={item} className="coinsPairs">
                 <Table
                     columns={columns}
                     pagination={false}
@@ -166,7 +171,7 @@ class CoinsList extends React.Component {
 
     render() {
         // console.log(this.state);
-        // const { dispatch, changePair } = this.props
+        const {currentPair} = this.props;
 
         if (this.state == null) {
             return <div>Loading...</div>
@@ -175,7 +180,10 @@ class CoinsList extends React.Component {
         return (
             <div className="currencysPairs table-block">
                 {/*<div className='border2'>*/}
-                <Tabs type="card">
+                <Tabs
+                    type="card"
+                    defaultActiveKey={currentPair.first}
+                >
                     {this.state.coins && this.currenciesTabs(this.state.coins)}
                 </Tabs>
                 {/*</div>*/}
@@ -190,7 +198,8 @@ CoinsList.propTypes = {
 
 function mapStateToProps(state) {
     return {
-        state
+        state,
+        currentPair: state.pair
     }
 }
 

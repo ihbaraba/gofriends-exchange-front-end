@@ -59,6 +59,10 @@ html {
     border-radius: 5px 5px 0 0;
 }
 
+.marketDepthTables tr {
+    cursor: pointer;
+}
+
 span, p, div {
     color: #ffffff;
 }

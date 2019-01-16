@@ -5,17 +5,16 @@ http://gofriends.ru:3000/docs/#/Quotations/get_quotations__pairId_
 
 const SERVERS = {
     EXCHANGE: {
-        XHR: "https://exchange.gofriends.pro",
-        SOCKET: "wss://exchange.gofriends.pro/",
+        XHR: "https://demo.gofriends.pro/api/v1/",
+        SOCKET: "https://demo.gofriends.pro",
     },
     PRODUCT: {
         XHR: "https://demo.gofriends.pro/api/v1/",
-        SOCKET: "wss://demo.gofriends.pro/",
+        SOCKET: "https://demo.gofriends.pro",
     },
     DEV: {
-        XHR: "http://ex.dev.gofriends.pro/api/v1/",
-        // XHR: "https://demo.gofriends.pro/api/v1/",
-        SOCKET: "http://142.93.81.111:3001",
+        XHR: "https://demo.gofriends.pro/api/v1/",
+        SOCKET: "https://demo.gofriends.pro",
     },
 };
 
@@ -29,7 +28,7 @@ const SERVERS = {
 
 const generatedDetected = {
     XHR: `https://${document.location.hostname}/api/v1/`,
-    SOCKET: `wss://${document.location.hostname}/`,
+    SOCKET: `https://${document.location.hostname}/`,
 };
 
 

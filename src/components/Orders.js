@@ -317,23 +317,15 @@ class Orders extends Component {
                 >
                     {this.capitalizeFirstLetter(type) + ` ${first}`}
                 </Button>
-
-                {/*<Button*/}
-                {/*type="primary"*/}
-                {/*ghost onClick={() => {*/}
-                {/*onBidButtonClick({type: "sell"})*/}
-                {/*}}*/}
-                {/*className="order-sell-btn order-action-btn"*/}
-                {/*>*/}
-                {/*Sell*/}
-                {/*</Button>*/}
             </Fragment>
         )
     };
 
     render() {
-        const {first, second, loanRate, firePostToServer, mobile} = this.props;
+        const {first, second, loanRate, firePostToServer, mobile, price} = this.props;
         const {sellPrice, buyPrice, stopBuyPrice, stopSellPrice} = this.state;
+
+        console.log(price);
         return (
             <Fragment>
                 {mobile ?

@@ -129,7 +129,6 @@ class MarketDepth extends Component {
     }
 
     getInitialPairDataFromServer = async (id) => {
-
         const buyUrl = `${ORDERS_PAIR}/${id}?type=buy`;
         const sellUrl = `${ORDERS_PAIR}/${id}?type=sell`;
 
@@ -145,7 +144,7 @@ class MarketDepth extends Component {
     };
 
     async componentDidMount() {
-        const {currentPair: {id = 1}} = this.props;
+        const {pair: {id}} = this.props;
         await this.getInitialPairDataFromServer(id);
         this.getDataFromSocket(id, 0);
     }
@@ -155,17 +154,17 @@ class MarketDepth extends Component {
     }
 
     async componentWillReceiveProps(nextProps) {
-        if (nextProps.currentPair.id !== this.props.currentPair.id) {
+        // if (nextProps.currentPair.id !== this.props.pair.id) {
             // console.log("componentWillReceiveProps", nextProps);
-            const {currentPair: {id = 1}} = nextProps;
+            const {pair: {id}} = nextProps;
             await this.getInitialPairDataFromServer(id);
-            this.getDataFromSocket(nextProps.currentPair.id, 0);
-        }
+            this.getDataFromSocket(id, 0);
+        // }
     }
 
     render() {
         const {marketDepth: {buy, sell}} = this.state;
-        const {mobile} = this.props;
+        const {mobile, onSelectOrder} = this.props;
 
         const columns = [{
             title: 'Price',
@@ -240,7 +239,13 @@ class MarketDepth extends Component {
                                rowKey={record => record.id}
                                scroll={{y: mobile ? 200 : 450}}
                                size="small"
-                               rowClassName="custom__tr"/>
+                               rowClassName="custom__tr"
+                               onRow={(record) => {
+                                   return {
+                                       onClick: () => onSelectOrder(record, 'buy'),       // click row
+                                   };
+                               }}
+                        />
                     </div>
                     <div className="marketDepthColumns table-block sell-table">
                         <div className='table-title'>Sell orders</div>
@@ -251,7 +256,13 @@ class MarketDepth extends Component {
                                rowKey={record => record.id}
                                scroll={{y: mobile ? 200 : 450}}
                                size="small"
-                               rowClassName="custom__tr"/>
+                               rowClassName="custom__tr"
+                               onRow={(record) => {
+                                   return {
+                                       onClick: () => onSelectOrder(record, 'sell'),       // click row
+                                   };
+                               }}
+                        />
                     </div>
                 </div>
                 {/*<div className="marketDepthChart">*/}
@@ -281,6 +292,7 @@ MarketDepth.propTypes = {
 function mapStateToProps(state) {
     return {
         user: state.user,
+        pair: state.pair,
         orders: state.user.orders
     }
 }

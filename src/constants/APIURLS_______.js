@@ -6,7 +6,7 @@ http://gofriends.ru:3000/docs/#/Quotations/get_quotations__pairId_
 const SERVERS = {
         PRODUCT: {
             XHR: "https://demo.gofriends.pro",
-            SOCKET: "wss://demo.gofriends.pro/",
+            SOCKET: "https://demo.gofriends.pro/",
         },
         DEV: {
             XHR: "http://142.93.81.111:3000",
