@@ -50,8 +50,13 @@ class ExchangePage extends Component {
             activeTab: '1',
             activeOrderTab: '1',
             modalIsOpen: false,
-            defaultPriceOrder: {
-                price: 52
+            sellOrder: {
+                price: 52,
+                amount: 1
+            },
+            buyOrder: {
+                price: 52,
+                amount: 1
             }
         };
     }
@@ -76,6 +81,8 @@ class ExchangePage extends Component {
         /**
          * Save in Redux Store current Chart range
          **/
+
+
     }
 
     openTradeTab = (tab = '2', type = '1') => {
@@ -111,7 +118,6 @@ class ExchangePage extends Component {
     };
 
     setCurrentCoinsPair2State = (pair = this.props.pair) => {
-        console.log(pair);
         this.setState({
             currentPair: pair,
             pair: pair,
@@ -119,13 +125,15 @@ class ExchangePage extends Component {
     };
 
     handleSelectOrder = (order, type) => {
-        console.log(order);
-        this.setState({
-            defaultPriceOrder: {
-                ...order,
-                type: type
-            }
-        })
+        if (type === 'buy') {
+            this.setState({
+                sellOrder: order
+            })
+        } else {
+            this.setState({
+                buyOrder: order
+            })
+        }
     };
 
     handleTimeFrameChange = (e) => {
@@ -139,8 +147,8 @@ class ExchangePage extends Component {
         const {pair, chartRange: {dateFrom = "2018-08-27", dateTo = "2018-08-31"}} = this.props;
 
         const {first, second, id, baseCurrencyName, quoteCurrencyName} = pair;
-        const {interval, defaultPriceOrder} = this.state;
-        console.log(defaultPriceOrder);
+        const {interval, sellOrder, buyOrder} = this.state;
+
         return (
             <Fragment>
                 <div className="centerArea desktop">
@@ -212,9 +220,8 @@ class ExchangePage extends Component {
 
                     <Orders
                         {...pair}
-                        price={defaultPriceOrder.price}
-                        amount={1}
-                        loanRate={2}
+                        buy={buyOrder}
+                        sell={sellOrder}
                         firePostToServer={this.firePostToServer}
                     />
 
@@ -342,15 +349,18 @@ class ExchangePage extends Component {
                                 <div className='mobile-trade-block'>
                                     <Orders
                                         {...pair}
-                                        price={52}
-                                        amount={1}
-                                        loanRate={2}
+                                        buy={buyOrder}
+                                        sell={sellOrder}
                                         firePostToServer={this.firePostToServer}
                                         activeTab={this.state.activeOrderTab}
                                         mobile={true}
                                     />
 
-                                    <MarketDepth currentPair={this.state.currentPair} mobile={true}/>
+                                    <MarketDepth
+                                        currentPair={this.state.currentPair}
+                                        mobile={true}
+                                        onSelectOrder={this.handleSelectOrder}
+                                    />
                                 </div>
                             </div>
                         </TabPane>
