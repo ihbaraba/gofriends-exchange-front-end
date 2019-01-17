@@ -3,15 +3,15 @@ import React from 'react';
 const ShortUserInformation = () => {
     return (
         <div className="short-information-block">
-            <div className='item'>
+            <div className='user-avatar'>
                 <i className="fa fa-user-circle" aria-hidden="true"></i>
-                <div>Active</div>
+                <div style={{color: '#00CE7D'}}>Active</div>
             </div>
 
             <div className='item'>
-                <div>Mark891</div>
-                <div>id 7689</div>
-                <div>2018-12-06  10:13:09</div>
+                <div className='user-name'>Mark891</div>
+                <div className='user-id'>id 7689</div>
+                <div className='registration-date'>2018-12-06  10:13:09</div>
             </div>
 
             <div className='item'>

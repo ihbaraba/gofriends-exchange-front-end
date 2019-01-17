@@ -124,11 +124,13 @@
     display: flex;
     align-items: flex-end;
     padding: 0 0 0 60px;
+    margin: 0 0 20px 0;
 }
 
 .commissions-settings-page .pair-fee-block .fee-params .form-item {
     display: flex;
     flex-direction: column;
+    position: relative;
 }
 
 .commissions-settings-page .pair-fee-block .fee-params hr {
@@ -161,6 +163,28 @@
 
 .commissions-settings-page .pair-fee-block .fee-params .form-item input {
     width: 65px;
+}
+
+.commissions-settings-page .pair-fee-block .fee-params .form-item:last-child input {
+    padding: 0 20px 0 4px;
+}
+
+.commissions-settings-page .pair-fee-block .fee-params .form-item:last-child input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.commissions-settings-page .pair-fee-block .fee-params .form-item .rate {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    height: 32px;
+    right: 5px;
+    bottom: 0;
+    font-size: 16px;
+    z-index: 100;
+
 }
 
 .commissions-settings-page .pair-fee-block .green-btn {

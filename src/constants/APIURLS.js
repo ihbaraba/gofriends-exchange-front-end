@@ -5,17 +5,16 @@ http://gofriends.ru:3000/docs/#/Quotations/get_quotations__pairId_
 
 const SERVERS = {
     EXCHANGE: {
-        XHR: "https://exchange.gofriends.pro",
-        SOCKET: "wss://exchange.gofriends.pro/",
+        XHR: "https://demo.gofriends.pro/api/v1/",
+        SOCKET: "wss://demo.gofriends.pro",
     },
     PRODUCT: {
         XHR: "https://demo.gofriends.pro/api/v1/",
-        SOCKET: "wss://demo.gofriends.pro/",
+        SOCKET: "wss://demo.gofriends.pro",
     },
     DEV: {
-        XHR: "http://ex.dev.gofriends.pro/api/v1/",
-        // XHR: "https://demo.gofriends.pro/api/v1/",
-        SOCKET: "http://142.93.81.111:3001",
+        XHR: "https://dev.gofriends.pro/api/v1/",
+        SOCKET: "wss://dev.gofriends.pro",
     },
 };
 
@@ -88,11 +87,15 @@ export const REGISTER = `${current_server.XHR}auth/register`;
 
 export const LOGIN = `${current_server.XHR}auth/login`;
 
+//orders
+export const ORDERS_PAIR = `${current_server.XHR}orders/pair`;
 
 //user api urls
 export const TWO_FACTOR_AUTHENTICATION = `${current_server.XHR}auth/twofactor`;
-
 export const CHANGE_PASSWORD = `${current_server.XHR}auth/password`;
+
+//contact us
+export const SEND_TICKETS = `${current_server.XHR}tickets`;
 
 //ADMIN PANEL
 //users page
@@ -102,12 +105,17 @@ export const GET_USERS = `${current_server.XHR}users`;
 export const REGISTRATION_SETTINGS = `${current_server.XHR}settings`;
 export const EMAIL_SETTINGS = `${current_server.XHR}mailer/templates`;
 
-
 //trade history page
 export const GET_TRADE_HISTORY = `${current_server.XHR}orders/history`;
 
 //all report page
 export const GET_REPORT_BY_DATE = `${current_server.XHR}transactions`;
+
+//news page
+export const NEWS = `${current_server.XHR}news`;
+
+//commissions page
+export const COMMISSIONS = `${current_server.XHR}fee`;
 
 
 

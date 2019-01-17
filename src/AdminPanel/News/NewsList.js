@@ -1,10 +1,10 @@
 import React from 'react';
 import {Table} from 'antd';
 
-const NewsList = () => {
+const NewsList = ({list = [], onChangeTable, deleteNews, editNews, total, current, pageSize}) => {
     const columns = [
         {
-            title: 'No',
+            title: 'ID',
             dataIndex: 'id',
             key: 'id',
             width: 100,
@@ -20,6 +20,11 @@ const NewsList = () => {
             dataIndex: 'description',
             key: 'description',
             width: 200,
+            render: (item) => {
+                return(
+                    <span className='description-span' dangerouslySetInnerHTML={{__html: item}}></span>
+                )
+            }
         },
         {
             title: 'Created At',
@@ -32,23 +37,38 @@ const NewsList = () => {
             dataIndex: 'actions',
             key: 'actions',
             width: 150,
-            render: () => (
-                <div>
-                    <button className='admin-btn'>Edit</button>
-                    <button className='admin-btn'>Delite</button>
+            render: (e, item) => (
+                <div className='action-btn'>
+                    <button className='admin-btn green-btn' onClick={() => editNews(item)}>
+                        Edit
+                    </button>
+                    <button className='admin-btn red-btn' onClick={() => deleteNews(item.id)}>
+                        Delite
+                    </button>
                 </div>
             )
 
         }
     ];
+
+    const config = {
+        pagination: {
+            // pageSizeOptions : ['30', '40'],
+            // showSizeChanger : true
+            total,
+            current,
+            pageSize
+        }
+    };
+
     return (
         <div className='news-list'>
             <Table
                 columns={columns}
-                // dataSource={list}
-                // rowKey={record => record.id}
-                // onChange={onChange}
-                // loading={list.length === 0}
+                {...config}
+                dataSource={list}
+                rowKey={record => record.id}
+                onChange={onChangeTable}
                 className='admin-table'
             />
         </div>
