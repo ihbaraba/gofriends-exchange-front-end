@@ -7,7 +7,7 @@ import tradeIcon from '../../img/admin-nav-bar-icons/trade_hisr_white.svg';
 import withIcon from '../../img/admin-nav-bar-icons/withdrawal_white.svg';
 
 
-const LatestOperations = ({types}) => {
+const LatestOperations = ({types, coinPairs}) => {
     const type = types === 'Latest trades' ? true : false
     const columns = type ?
         [
@@ -28,6 +28,17 @@ const LatestOperations = ({types}) => {
                 dataIndex: 'pair',
                 key: 'pair',
                 width: 200,
+                render: (item) => {
+                    let currentPair = '';
+
+                    coinPairs.forEach(pair => {
+                        if (+item === +pair.id) {
+                            currentPair = pair;
+                        }
+                    });
+
+                    return (<span>{currentPair.name}</span>)
+                }
             },
             {
                 title: 'Price',
