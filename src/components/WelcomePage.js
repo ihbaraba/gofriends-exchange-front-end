@@ -160,53 +160,53 @@ class WelcomePage extends Component {
                     <NavLink to="/signup" className="go-to-login">Sign up</NavLink>
                 </div>
 
-                <div className='statistics-block'>
-                    <Tabs defaultActiveKey="1" type="card">
-                        <TabPane tab="BTC Markets" key="1">
-                            <div className='table-stat'>
-                                <Table
-                                    columns={window.screen.width < '600' ? mobileColumns : columns}
-                                    dataSource={dataSource}
-                                    bordered={false}
-                                    pagination={false}
-                                    rowKey={record => record.id}
-                                    scroll={{y: 500, x:300}}
-                                    size="small"
-                                    rowClassName="custom__tr"/>
-                            </div>
-                        </TabPane>
+                {/*<div className='statistics-block'>*/}
+                    {/*<Tabs defaultActiveKey="1" type="card">*/}
+                        {/*<TabPane tab="BTC Markets" key="1">*/}
+                            {/*<div className='table-stat'>*/}
+                                {/*<Table*/}
+                                    {/*columns={window.screen.width < '600' ? mobileColumns : columns}*/}
+                                    {/*dataSource={dataSource}*/}
+                                    {/*bordered={false}*/}
+                                    {/*pagination={false}*/}
+                                    {/*rowKey={record => record.id}*/}
+                                    {/*scroll={{y: 500, x:300}}*/}
+                                    {/*size="small"*/}
+                                    {/*rowClassName="custom__tr"/>*/}
+                            {/*</div>*/}
+                        {/*</TabPane>*/}
 
-                        <TabPane tab="BCH Markets" key="2">
-                            <div className='table-stat'>
-                                <Table
-                                    columns={window.screen.width < '600' ? mobileColumns : columns}
-                                    dataSource={dataSource}
-                                    bordered={false}
-                                    pagination={false}
-                                    rowKey={record => record.id}
-                                    scroll={{y: 500, x:300}}
-                                    size="small"
-                                    rowClassName="custom__tr"/>
+                        {/*<TabPane tab="BCH Markets" key="2">*/}
+                            {/*<div className='table-stat'>*/}
+                                {/*<Table*/}
+                                    {/*columns={window.screen.width < '600' ? mobileColumns : columns}*/}
+                                    {/*dataSource={dataSource}*/}
+                                    {/*bordered={false}*/}
+                                    {/*pagination={false}*/}
+                                    {/*rowKey={record => record.id}*/}
+                                    {/*scroll={{y: 500, x:300}}*/}
+                                    {/*size="small"*/}
+                                    {/*rowClassName="custom__tr"/>*/}
 
-                            </div>
-                        </TabPane>
+                            {/*</div>*/}
+                        {/*</TabPane>*/}
 
-                        <TabPane tab="USD Markets" key="3">
-                            <div className='table-stat'>
-                                <Table
-                                    columns={window.screen.width < '600' ? mobileColumns : columns}
-                                    dataSource={dataSource}
-                                    bordered={false}
-                                    pagination={false}
-                                    rowKey={record => record.id}
-                                    scroll={{y: 500, x:300}}
-                                    size="small"
-                                    rowClassName="custom__tr"/>
+                        {/*<TabPane tab="USD Markets" key="3">*/}
+                            {/*<div className='table-stat'>*/}
+                                {/*<Table*/}
+                                    {/*columns={window.screen.width < '600' ? mobileColumns : columns}*/}
+                                    {/*dataSource={dataSource}*/}
+                                    {/*bordered={false}*/}
+                                    {/*pagination={false}*/}
+                                    {/*rowKey={record => record.id}*/}
+                                    {/*scroll={{y: 500, x:300}}*/}
+                                    {/*size="small"*/}
+                                    {/*rowClassName="custom__tr"/>*/}
 
-                            </div>
-                        </TabPane>
-                    </Tabs>
-                </div>
+                            {/*</div>*/}
+                        {/*</TabPane>*/}
+                    {/*</Tabs>*/}
+                {/*</div>*/}
             </div>
         )
     }

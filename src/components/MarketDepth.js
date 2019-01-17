@@ -134,8 +134,8 @@ class MarketDepth extends Component {
 
         const [buyDepth, sellDepth] = await Promise.all([axios.get(buyUrl), axios.get(sellUrl)]);
 
-        this.props.onSelectOrder(buyDepth.data[0], 'buy');
-        this.props.onSelectOrder(sellDepth.data[0], 'sell');
+        this.props.onSelectOrder(buyDepth.data ? buyDepth.data[0] : '', 'buy');
+        this.props.onSelectOrder(sellDepth.data ? sellDepth.data[0] : '', 'sell');
 
         this.setState({
             marketDepth:

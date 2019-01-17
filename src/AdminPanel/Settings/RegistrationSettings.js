@@ -4,7 +4,7 @@ import {Switch} from 'antd';
 
 const RegistrationSettings = ({params, onChange, currencyParams}) => (
     <div className='registration-settings'>
-        <div>
+        <div style={{height: '100%'}}>
             <h1>Registration</h1>
 
             <span>Disable</span>
@@ -18,19 +18,19 @@ const RegistrationSettings = ({params, onChange, currencyParams}) => (
             <span>Enable</span>
         </div>
 
-        <div>
-            <h1>Currency</h1>
+        {/*<div>*/}
+            {/*<h1>Currency</h1>*/}
 
-            <span>Disable</span>
+            {/*<span>Disable</span>*/}
 
-            <Switch
-                className='switch'
-                checked={currencyParams.value}
-                onChange={(e) => onChange(e, currencyParams.id)}
-            />
+            {/*<Switch*/}
+                {/*className='switch'*/}
+                {/*checked={currencyParams.value}*/}
+                {/*onChange={(e) => onChange(e, currencyParams.id)}*/}
+            {/*/>*/}
 
-            <span>Enable</span>
-        </div>
+            {/*<span>Enable</span>*/}
+        {/*</div>*/}
     </div>
 );
 

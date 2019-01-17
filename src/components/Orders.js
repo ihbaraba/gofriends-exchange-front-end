@@ -14,8 +14,14 @@ class Orders extends Component {
         this.validate = this.validate.bind(this);
 
         this.state = {
-            buy: this.props.buy,
-            sell: this.props.sell,
+            buy: this.props.buy ? this.props.buy : {
+                price: 0,
+                amount: 0
+            },
+            sell: this.props.sell ? this.props.sell : {
+                price: 0,
+                amount: 0
+            },
             buyLimit: {
                 stop: 0,
                 limit: 0,
@@ -59,8 +65,8 @@ class Orders extends Component {
     componentWillReceiveProps(nextProps) {
         this.setState({
             activeTab: nextProps.activeTab,
-            buy: nextProps.buy,
-            sell: nextProps.sell
+            buy: nextProps.buy ? nextProps.buy : {price: 0, amount: 0},
+            sell: nextProps.sell ? nextProps.sell : {price: 0, amount: 0}
         });
     }
 
