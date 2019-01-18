@@ -51,10 +51,10 @@ import Pairs from "./AdminPanel/Pairs/Pairs";
 import CommissionsSettings from "./AdminPanel/Comissions/CommissionsSettings/CommissionsSettings";
 import User from "./AdminPanel/Users/User/User";
 
-
+let token = '';
 
 (function () {
-    let token = sessionStorage.getItem("exchange_token");
+    token = sessionStorage.getItem("exchange_token");
     if (token) {
         axios.defaults.headers.common['Authorization'] = token;
     } else {
@@ -125,7 +125,8 @@ class App extends Component {
                                             <Route path='/admin/admin_wallet' component={AdminWallet}/>
                                             <Route path='/admin/withdraw_list' component={WithdrawList}/>
                                             <Route exact path='/admin/commissions' component={Commissions}/>
-                                            <Route path='/admin/commissions/settings' component={CommissionsSettings}/>
+                                            <Route path='/admin/commissions/settings'
+                                                   component={CommissionsSettings}/>
                                             <Route path='/admin/report' component={AllReport}/>
                                             <Route path='/admin/pairs' component={Pairs}/>
                                         </AdminPanel>
