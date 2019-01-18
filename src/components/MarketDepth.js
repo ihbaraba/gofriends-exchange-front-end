@@ -4,12 +4,9 @@ import PropTypes from 'prop-types';
 import {Table} from 'antd';
 import axios from 'axios';
 
-import {getMarcketDpthData} from "./../utils"
 import io from 'socket.io-client';
 import {SOCKET_SOURCE, ORDERS, ORDERS_PAIR} from "./../constants/APIURLS.js"
 import {save_user_info} from "../actions/UserActions";
-import {USERINFO} from "../constants/APIURLS";
-import {getUserInfo} from "../utils";
 
 class MarketDepth extends Component {
     constructor() {
@@ -134,8 +131,8 @@ class MarketDepth extends Component {
 
         const [buyDepth, sellDepth] = await Promise.all([axios.get(buyUrl), axios.get(sellUrl)]);
 
-        this.props.onSelectOrder(buyDepth.data[0], 'buy');
-        this.props.onSelectOrder(sellDepth.data[0], 'sell');
+        this.props.onSelectOrder(buyDepth.data ? buyDepth.data[0] : {price: 0, amount: 0}, 'buy');
+        this.props.onSelectOrder(sellDepth.data ? sellDepth.data[0] : {price: 0, amount: 0}, 'sell');
 
         this.setState({
             marketDepth:
