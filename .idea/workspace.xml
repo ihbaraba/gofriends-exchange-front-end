@@ -1,27 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="1e4a1018-d054-48e3-b750-a34c269c93ec" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/src/AdminPanel/Admins/Admins.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/AdminPanel/Admins/AdminsList.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/AdminPanel/Admins/admins.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AdminPanel/Comissions/CommissionsSettings/CommissionsSettings.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/AdminPanel/Comissions/CommissionsSettings/CommissionsSettings.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AdminPanel/Dashboard/Dashboard.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/AdminPanel/Dashboard/Dashboard.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AdminPanel/Dashboard/LatestOperations.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/AdminPanel/Dashboard/LatestOperations.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AdminPanel/Dashboard/Statistics.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/AdminPanel/Dashboard/Statistics.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AdminPanel/components/FilterBlock.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/AdminPanel/components/FilterBlock.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AdminPanel/components/NavBar.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/AdminPanel/components/NavBar.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/ChangePassword.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ChangePassword.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/CoinsList.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/CoinsList.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/MarketDepth.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/MarketDepth.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Orders.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Orders.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/WelcomePage.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/WelcomePage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/constants/APIURLS.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/constants/APIURLS.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/styles/adminPanel.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/adminPanel.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/styles/exchangePage.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/exchangePage.css" afterDir="false" />
-    </list>
+    <list default="true" id="1e4a1018-d054-48e3-b750-a34c269c93ec" name="Default" comment="" />
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
     <ignored path="$PROJECT_DIR$/tmp/" />
@@ -62,7 +42,7 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/AdminPanel/Comissions/CommissionsSettings/CommissionsSettings.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="587">
+            <state relative-caret-position="118">
               <caret line="62" column="9" selection-start-line="62" selection-start-column="9" selection-end-line="62" selection-end-column="9" />
               <folding>
                 <element signature="e#0#39#0" expanded="true" />
@@ -450,7 +430,7 @@
       <workItem from="1547893815654" duration="4330000" />
       <workItem from="1547973204986" duration="10314000" />
       <workItem from="1548064480585" duration="1904000" />
-      <workItem from="1548068173484" duration="3003000" />
+      <workItem from="1548068173484" duration="3181000" />
     </task>
     <task id="LOCAL-00001" summary="current state (needs fixing errors)">
       <created>1532090660705</created>
@@ -722,7 +702,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="857984000" />
+    <option name="totallyTimeSpent" value="858162000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -735,9 +715,8 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
-    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.491921" visible="true" weight="0.1888654" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.491921" visible="true" weight="0.1888654" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="npm" order="2" sideWeight="0.508079" side_tool="true" weight="0.1888654" />
       <window_info id="Favorites" order="3" side_tool="true" />
@@ -752,7 +731,7 @@
       <window_info anchor="bottom" id="Docker" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="Statistic" order="9" />
       <window_info anchor="bottom" id="Version Control" order="10" sideWeight="0.49909583" weight="0.20722891" />
-      <window_info anchor="bottom" x="10" y="441" width="1659" height="167" id="Terminal" order="11" weight="0.5144578" />
+      <window_info active="true" anchor="bottom" x="10" y="441" width="1659" height="167" id="Terminal" order="11" visible="true" weight="0.5144578" />
       <window_info anchor="bottom" id="Event Log" order="12" sideWeight="0.50090414" side_tool="true" weight="0.46153846" />
       <window_info anchor="bottom" id="TypeScript" order="13" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
@@ -1269,7 +1248,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/AdminPanel/Comissions/CommissionsSettings/CommissionsSettings.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="587">
+        <state relative-caret-position="118">
           <caret line="62" column="9" selection-start-line="62" selection-start-column="9" selection-end-line="62" selection-end-column="9" />
           <folding>
             <element signature="e#0#39#0" expanded="true" />
