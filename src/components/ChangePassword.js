@@ -26,7 +26,7 @@ class ChangePassword extends Component {
         let urlParams = queryString.parseUrl(this.props.location.search).query;
         if (urlParams.token) {
             this.setState({
-                token: urlParams.body.token
+                token: urlParams.token
             })
         }
     }
@@ -64,8 +64,6 @@ class ChangePassword extends Component {
                 });
 
                 console.log(token);
-
-                await axios.get(`${CHANGE_PASSWORD}/${token}`);
 
                 this.setState({
                     oldPassword: '',

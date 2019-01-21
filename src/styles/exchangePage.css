@@ -142,6 +142,10 @@
     grid-area: market;
 }
 
+.marketDepth .ant-table-column-sorter {
+    display: none;
+}
+
 .marketDepth .buy-table {
     height: 50%;
     margin-bottom: 28px;
@@ -455,7 +459,7 @@
 }
 
 .ant-tabs-tab-prev.ant-tabs-tab-arrow-show, .ant-tabs-tab-next.ant-tabs-tab-arrow-show {
-    display: none !important;
+    /*display: none !important;*/
 }
 
 .currencysPairs tr th span {

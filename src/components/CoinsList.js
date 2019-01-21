@@ -22,8 +22,11 @@ class CoinsList extends React.Component {
         this.tabsCallback = this.tabsCallback.bind(this);
 
         // this.currenciesTabs = this.currenciesTabs.bind(this);
-    }
 
+        this.state = {
+            activeTab: ''
+        }
+    }
 
     async componentDidMount() {
         const data = await getCoinsList(PAIRS);
@@ -50,10 +53,21 @@ class CoinsList extends React.Component {
         this.setState({data, coins, pairs});
 
         if (!this.props.currentPair) {
-            this.props.pair(pairs[0]);
+            this.props.pair(pairs[pairs.length-1]);
+
+            this.setState({
+                activeTab: pairs[pairs.length-1].first
+            })
         }
 
         pairs.forEach(item => this.getDataFromSocket(item.id, 0));
+    }
+
+    componentWillReceiveProps(nextProps, nextContext) {
+        console.log(nextProps);
+        this.setState({
+            activeTab: nextProps.currentPair.first
+        })
     }
 
     list = data => data.map(
@@ -171,9 +185,8 @@ class CoinsList extends React.Component {
 
     render() {
         // console.log(this.state);
-        const {currentPair} = this.props;
-
-        if (this.state == null) {
+        const {activeTab} = this.state;
+        if (!this.state.activeTab) {
             return <div>Loading...</div>
         }
 
@@ -182,7 +195,7 @@ class CoinsList extends React.Component {
                 {/*<div className='border2'>*/}
                 <Tabs
                     type="card"
-                    defaultActiveKey={currentPair.first}
+                    defaultActiveKey={activeTab}
                 >
                     {this.state.coins && this.currenciesTabs(this.state.coins)}
                 </Tabs>

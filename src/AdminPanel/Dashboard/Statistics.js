@@ -5,8 +5,8 @@ import user from '../../img/admin-panel/us.svg';
 const Statistics = () => {
     return (
         <div className='statistics-block'>
-            {[1, 1, 1, 1, 1].map(() => (
-                <div className='statistics-information'>
+            {[1, 1, 1, 1, 1].map((item, index) => (
+                <div className='statistics-information' key={index}>
                     <div style={{display: 'flex', alignItems: 'center'}}>
                         <img src={user} alt=""/>
                         <span className='title'>Online users </span>

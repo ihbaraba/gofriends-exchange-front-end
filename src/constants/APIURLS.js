@@ -71,6 +71,8 @@ export const PAIRS = `${current_server.XHR}pairs/`;
 
 export const MARKETS = `${current_server.XHR}markets/`;
 
+export const MARKETS_START_PAGE = `${current_server.XHR}markets/daily`;
+
 export const ORDERS = `${current_server.XHR}orders`;
 
 export const USERORDERSHISTORY = `${current_server.XHR}users/me/orders`;

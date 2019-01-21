@@ -7,6 +7,7 @@
 @import "../AdminPanel/Comissions/commissions.css";
 @import "../AdminPanel/AllReport/all-report.css";
 @import "../AdminPanel/Pairs/pairs.css";
+@import "../AdminPanel/Admins/admins.css";
 
 .admin-version .w-header,
 .admin-version .w-footer {
@@ -410,6 +411,10 @@
 .admin-panel .admin-header .current-page .underline a {
     padding: 0 0 3px 0;
     border-bottom: 1px solid #fff;
+}
+
+.admin-panel .admin-header .user-navigation {
+   padding: 0 20px 0 0;
 }
 
 .admin-panel .admin-header .user-navigation .user-email {

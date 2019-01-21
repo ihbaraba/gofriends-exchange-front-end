@@ -14,6 +14,7 @@ import news from '../../img/admin-nav-bar-icons/news.svg';
 import settings from '../../img/admin-nav-bar-icons/settings.svg';
 import report from '../../img/admin-nav-bar-icons/report.svg';
 import pairs from '../../img/admin-nav-bar-icons/pairs.svg';
+import block from '../../img/admin-nav-bar-icons/block.svg';
 
 
 const NavBar = ({changePage}) => {
@@ -67,6 +68,11 @@ const NavBar = ({changePage}) => {
             title: 'Pairs',
             href: 'pairs',
             icon: pairs
+        },
+        {
+            title: 'Access rights',
+            href: 'access_rights',
+            icon: block
         },
     ];
 

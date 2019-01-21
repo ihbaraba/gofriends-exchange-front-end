@@ -51,7 +51,6 @@ class CommissionsSettings extends Component {
     handleChangeInput = (index, e) => {
         const input = e.target;
 
-        console.log(input.name);
         let newParams = this.state.pairParams;
 
         newParams[index] = {
@@ -61,7 +60,7 @@ class CommissionsSettings extends Component {
 
         this.setState({
             pairParams: newParams
-        }, () => console.log(this.state))
+        })
     };
 
     handleSaveCommissions = async () => {
