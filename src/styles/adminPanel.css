@@ -46,7 +46,7 @@
 }
 
 .admin-panel .admin-content {
-    padding: 12px 0 0 0;
+    padding: 12px 20px 0 0;
     position: relative;
 }
 
@@ -377,6 +377,7 @@
 /*HEADER*/
 /*------------------------------*/
 .admin-panel .admin-header {
+    padding: 0 20px 0 0;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -413,9 +414,6 @@
     border-bottom: 1px solid #fff;
 }
 
-.admin-panel .admin-header .user-navigation {
-   padding: 0 20px 0 0;
-}
 
 .admin-panel .admin-header .user-navigation .user-email {
     margin: 0 10px 0 20px;

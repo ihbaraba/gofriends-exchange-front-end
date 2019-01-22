@@ -44,6 +44,7 @@ class ExchangePage extends Component {
         this.setCurrentCoinsPair2State = this.setCurrentCoinsPair2State.bind(this);
         this.handleTimeFrameChange = this.handleTimeFrameChange.bind(this);
         this.firePostToServer = this.firePostToServer.bind(this);
+
         this.state = {
             ...initialState,
             isAuthorised: false,

@@ -34,6 +34,7 @@ class CoinsList extends React.Component {
 
         const pairs = data.map((item, idx) => ({
             id: item.id,
+            fee: item.fee,
             first: item.baseCurrency.code,
             baseCurrency: item.baseCurrency.code,
             baseCurrencyName: item.baseCurrency.name,
@@ -53,18 +54,19 @@ class CoinsList extends React.Component {
         this.setState({data, coins, pairs});
 
         if (!this.props.currentPair) {
-            this.props.pair(pairs[pairs.length-1]);
+            this.tabsCallback(pairs[pairs.length-1]);
 
             this.setState({
                 activeTab: pairs[pairs.length-1].first
             })
+        } else {
+            this.tabsCallback(this.props.currentPair)
         }
 
         pairs.forEach(item => this.getDataFromSocket(item.id, 0));
     }
 
     componentWillReceiveProps(nextProps, nextContext) {
-        console.log(nextProps);
         this.setState({
             activeTab: nextProps.currentPair.first
         })

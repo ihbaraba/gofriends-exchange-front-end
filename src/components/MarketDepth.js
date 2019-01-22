@@ -93,7 +93,7 @@ class MarketDepth extends Component {
             /**
              * don't add completed and stop/sell orders to tables
              **/
-            this.getInitialPairDataFromServer(this.props.pair.id)
+            // this.getInitialPairDataFromServer(this.props.pair.id)
 
             // console.log(bid);
             //
@@ -211,18 +211,6 @@ class MarketDepth extends Component {
                 width: 150,
             }
         ];
-
-        // const buy4DepthChart = buy
-        //     .filter(item => (!item.completed && !item.stop && !item.limit && (item.status === "active")));
-        // const sell4DepthChart = sell
-        //     .filter(item => (!item.completed && !item.stop && !item.limit && (item.status === "active")));
-
-        // const buy4Table = buy
-        //     .filter(item => (!item.completed && !item.stop && !item.limit && (item.status === "active")))
-        //     .sort((a, b) => b.price - a.price);
-        // const sell4Table = sell
-        //     .filter(item => (!item.completed && !item.stop && !item.limit && (item.status === "active")))
-        //     .sort((a, b) => a.price - b.price);
 
         return (
             <div className="marketDepth">
