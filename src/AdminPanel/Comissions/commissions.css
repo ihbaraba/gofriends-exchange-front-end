@@ -26,7 +26,8 @@
 /*settings*/
 .commissions-settings-page {
     display: flex;
-    height: 65%;
+    min-height: 65%;
+    height: 80%;
 }
 
 .commissions-settings-page .arrow-block {
@@ -187,7 +188,17 @@ input[type=number]::-webkit-outer-spin-button {
 
 }
 
+.commissions-settings-page .pair-fee-block .fee-params i {
+    font-size: 20px;
+    margin: 0 0 10px auto;
+    cursor: pointer;
+}
+
+.commissions-settings-page .pair-fee-block .fee-params i:hover {
+    color: #DD4457;
+}
+
 .commissions-settings-page .pair-fee-block .green-btn {
-    margin: 40px 0 0 auto;
+    margin: 40px 0 0 50px;
     display: block;
 }

@@ -50,6 +50,7 @@ import EmailEditor from "./AdminPanel/Settings/EmailEditor";
 import Pairs from "./AdminPanel/Pairs/Pairs";
 import CommissionsSettings from "./AdminPanel/Comissions/CommissionsSettings/CommissionsSettings";
 import User from "./AdminPanel/Users/User/User";
+import Admins from "./AdminPanel/Admins/Admins";
 
 let token = '';
 
@@ -129,6 +130,7 @@ class App extends Component {
                                                    component={CommissionsSettings}/>
                                             <Route path='/admin/report' component={AllReport}/>
                                             <Route path='/admin/pairs' component={Pairs}/>
+                                            <Route path='/admin/access_rights' component={Admins}/>
                                         </AdminPanel>
                                     )}>
                                     </Route>

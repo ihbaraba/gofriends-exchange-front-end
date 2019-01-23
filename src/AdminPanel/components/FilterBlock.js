@@ -80,7 +80,7 @@ class FilterBlock extends Component {
                     </div>
                     : ''}
 
-                {page === 'withdraw' || 'commissions' ?
+                {page === 'withdraw' || page === 'commissions' ?
                     <div className='filter-item'>
                         <Select placeholder='All' style={{width: 180}} onChange={e => this.setState({pair: e})}>
                             <Option value=''>All</Option>

@@ -10,7 +10,13 @@ class CommissionsSettings extends Component {
     state = {
         coinPairs: [],
         pair: {},
-        pairParams: []
+        pairParams: [
+            {
+                fromSteps: 0,
+                toSteps: 0,
+                fee: 0
+            }
+        ]
     };
 
     async componentDidMount() {
@@ -36,10 +42,14 @@ class CommissionsSettings extends Component {
         const feeParams = await axios.get(`${COMMISSIONS}/${id}`);
 
         this.setState({
-            pairParams: feeParams.data
+            pairParams: feeParams.data.length > 0 ? feeParams.data : [{
+                fromSteps: 0,
+                toSteps: 0,
+                fee: 0
+            }]
         })
 
-    }
+    };
 
     handleSelectingPair = (pair) => {
         this.getPairFee(pair.id);
@@ -51,25 +61,50 @@ class CommissionsSettings extends Component {
     handleChangeInput = (index, e) => {
         const input = e.target;
 
-        console.log(input.name);
         let newParams = this.state.pairParams;
 
         newParams[index] = {
             ...newParams[index],
-            [input.name]: input.value
+            [input.name]: +input.value
         };
 
         this.setState({
             pairParams: newParams
-        }, () => console.log(this.state))
+        })
     };
 
     handleSaveCommissions = async () => {
         try {
-            await axios.put(`${COMMISSIONS}/${this.state.pair.id}`, {feeSteps: this.state.pairParams})
+            await axios.put(`${COMMISSIONS}/${this.state.pair.id}`, {steps: this.state.pairParams})
         } catch (e) {
             console.log(e);
         }
+    };
+
+    handleAddNewStep = () => {
+        this.setState({
+            pairParams: [
+                ...this.state.pairParams,
+                {
+                    fromSteps: 0,
+                    toSteps: 0,
+                    fee: 0
+                }
+            ]
+        })
+    };
+
+    handleRemoveStep = async (index, id) => {
+        console.log(index);
+        if(id) {
+            await axios.delete(`${COMMISSIONS}/${id}`)
+        }
+
+        let newArr = this.state.pairParams;
+        newArr.splice(index, 1);
+        this.setState({
+            pairParams: newArr
+        })
     };
 
     render() {
@@ -93,6 +128,8 @@ class CommissionsSettings extends Component {
                     params={pairParams}
                     changeInput={this.handleChangeInput}
                     onSubmit={this.handleSaveCommissions}
+                    onAddNewStep={this.handleAddNewStep}
+                    onRemoveStep={this.handleRemoveStep}
                 />
             </div>
         )

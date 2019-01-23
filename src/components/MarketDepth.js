@@ -49,80 +49,75 @@ class MarketDepth extends Component {
 
         const {orders} = this.props;
 
-        // this.socket.on("order_created_" + socket, (bid) => {
-        //
-        //     if (bid.completed) return;
-        //
-        //     const {marketDepth} = this.state;
-        //     const {buy, sell} = marketDepth;
-        //     // console.log(marketDepth, buy, sell);
-        //
-        //     if (bid.type === "sell") {
-        //         sell.unshift(bid);
-        //     }
-        //     if (bid.type === "buy") {
-        //         buy.unshift(bid);
-        //     }
-        //
-        //     this.setState({
-        //         marketDepth: {
-        //             ...marketDepth,
-        //             buy: this.calculateSum(buy),
-        //             sell: this.calculateSum(sell),
-        //         }
-        //     });
-        // });
+        this.socket.on("order_created_" + socket, (bid) => {
 
-        // this.socket.on("order_updated_" + socket, (bid) => {
-        //     /**
-        //      * don't add completed and stop/sell orders to tables
-        //      **/
-        //     // console.log("order_updated_", bid, !(bid.stop || bid.limit));
-        //     if (!(bid.stop || bid.limit)) return;
-        //
-        //     const {marketDepth} = this.state;
-        //     const {buy = [], sell = []} = marketDepth;
-        //
-        //     const resOfSearchInBuy = buy.findIndex(item => item.id === bid.id);
-        //     const resOfSearchInSell = sell.findIndex(item => item.id === bid.id);
-        //
-        //     const flagBuy = (resOfSearchInBuy !== -1);
-        //     const flagSell = (resOfSearchInSell !== -1);
-        //
-        //     if (flagSell && !bid.completed) {
-        //         const foundElement = sell[resOfSearchInSell];
-        //         sell[resOfSearchInSell] = {...foundElement, amount: foundElement["amount"] - bid.amount}
-        //     }
-        //     if (flagBuy && !bid.completed) {
-        //         const foundElement = buy[resOfSearchInBuy];
-        //         sell[resOfSearchInBuy] = {...foundElement, amount: foundElement["amount"] - bid.amount}
-        //     }
-        //     if (flagBuy && bid.completed) {
-        //         buy.splice(resOfSearchInBuy, 1)
-        //     }
-        //     ; // remove element
-        //     if (flagSell && bid.completed) {
-        //         sell.splice(resOfSearchInSell, 1)
-        //     }
-        //     ; // remove element
-        //
-        //     orders.forEach(async (value, valueAgaine, set) => {
-        //         if (value === bid.id) {
-        //             //update user info - call SAVE_USER_INFO action
-        //             const userInfo = await getUserInfo({rout: USERINFO, token: this.props.user.token});
-        //             this.props.save_user_info(userInfo.body);
-        //         }
-        //     });
-        //
-        //     this.setState({
-        //         marketDepth: {
-        //             buy: this.calculateSum(buy),
-        //             sell: this.calculateSum(sell),
-        //         }
-        //     }, () => {
-        //         console.log(this.state)
-        //     });
-        // });
+            if (bid.completed) return;
+            const {marketDepth: {buy, sell}} = this.state;
+
+            let newBuyArr = buy,
+                newSellArr = sell;
+
+            if (bid.type === 'buy') {
+                if(newBuyArr.some(item => {
+                    +item.price === +bid.price.toFixed(5)
+                })) {
+                    newBuyArr.forEach(item => {
+                        if(item.price === bid.price) {
+                            item.amount = item.amount + +bid.amount
+                        }
+                    })
+                } else {
+                    newBuyArr.unshift(bid);
+                }
+            } else if (bid.type === 'sell') {
+                newSellArr.unshift(bid);
+            }
+
+                this.setState({
+                    marketDepth: {
+                        buy: this.calculateSum(newBuyArr),
+                        sell: this.calculateSum(newSellArr)
+                    }
+                })
+
+            // else if (bid.type === 'sell') {
+            //     newSellArr = sell.map(item => {
+            //         if (item.price === bid.price) {
+            //             item.amount += bid.amount
+            //         }
+            //     })
+            // }
+        });
+
+        this.socket.on("order_updated_" + socket, (bid) => {
+            /**
+             * don't add completed and stop/sell orders to tables
+             **/
+            // this.getInitialPairDataFromServer(this.props.pair.id)
+
+            // console.log(bid);
+            //
+            // const {marketDepth: {buy, sell}} = this.state;
+            //
+            // let newBuyArr = buy.map(item => {
+            //     console.log(item);
+            //     if(item.id === bid.id) {
+            //        item.price = bid.price;
+            //        item.amount = bid.amount
+            //    }
+            // });
+            //
+            // console.log(newBuyArr);
+
+            // this.setState({
+            //     marketDepth: {
+            //         buy: this.calculateSum(newBuyArr),
+            //         sell: this.calculateSum(sell),
+            //     }
+            // }, () => {
+            //     console.log(this.state)
+            // });
+        });
     }
 
     getInitialPairDataFromServer = async (id) => {
@@ -155,10 +150,10 @@ class MarketDepth extends Component {
 
     async componentWillReceiveProps(nextProps) {
         // if (nextProps.currentPair.id !== this.props.pair.id) {
-            // console.log("componentWillReceiveProps", nextProps);
-            const {pair: {id}} = nextProps;
-            await this.getInitialPairDataFromServer(id);
-            this.getDataFromSocket(id, 0);
+        // console.log("componentWillReceiveProps", nextProps);
+        const {pair: {id}} = nextProps;
+        await this.getInitialPairDataFromServer(id);
+        this.getDataFromSocket(id, 0);
         // }
     }
 
@@ -171,6 +166,8 @@ class MarketDepth extends Component {
             dataIndex: 'price',
             key: 'price',
             width: 150,
+            defaultSortOrder: 'descend',
+            sorter: (a, b) => b.price - a.price,
         }, {
             title: this.props.currentPair.first,
             dataIndex: 'amount',
@@ -215,18 +212,6 @@ class MarketDepth extends Component {
             }
         ];
 
-        // const buy4DepthChart = buy
-        //     .filter(item => (!item.completed && !item.stop && !item.limit && (item.status === "active")));
-        // const sell4DepthChart = sell
-        //     .filter(item => (!item.completed && !item.stop && !item.limit && (item.status === "active")));
-
-        // const buy4Table = buy
-        //     .filter(item => (!item.completed && !item.stop && !item.limit && (item.status === "active")))
-        //     .sort((a, b) => b.price - a.price);
-        // const sell4Table = sell
-        //     .filter(item => (!item.completed && !item.stop && !item.limit && (item.status === "active")))
-        //     .sort((a, b) => a.price - b.price);
-
         return (
             <div className="marketDepth">
                 <div className="marketDepthTables">
@@ -236,7 +221,7 @@ class MarketDepth extends Component {
                                dataSource={buy}
                                bordered={false}
                                pagination={false}
-                               rowKey={record => record.id}
+                               // rowKey={record => record.price}
                                scroll={{y: mobile ? 200 : 450}}
                                size="small"
                                rowClassName="custom__tr"
@@ -253,7 +238,7 @@ class MarketDepth extends Component {
                                dataSource={sell}
                                bordered={false}
                                pagination={false}
-                               rowKey={record => record.id}
+                               // rowKey={record => record.price}
                                scroll={{y: mobile ? 200 : 450}}
                                size="small"
                                rowClassName="custom__tr"

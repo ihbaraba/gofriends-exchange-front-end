@@ -1,55 +1,109 @@
 import React, {Component} from 'react';
+import axios from 'axios';
+import io from 'socket.io-client';
+
 import NavLink from './NavLink';
 import {Tabs, Table} from 'antd';
-
+import {MARKETS_START_PAGE, SOCKET_SOURCE} from '../constants/APIURLS';
 import '../styles/welcome.css';
 
 const TabPane = Tabs.TabPane;
 
 
 class WelcomePage extends Component {
+    state = {
+        btcMarket: [],
+        bchMarket: [],
+        usdMarket: []
+    };
+
+    socket = io(SOCKET_SOURCE);
+
+    getPairsInformation = async () => {
+        const res = await axios.get(MARKETS_START_PAGE);
+
+        let btcMarket = [],
+            bchMarket = [],
+            usdMarket = [];
+
+        await res.data.forEach(item => {
+            if (item.baseCode === 'BTC' || item.quoteCode === 'BTC') {
+                btcMarket.push(item)
+            } else if (item.baseCode === 'BCH' || item.quoteCode === 'BCH') {
+                bchMarket.push(item)
+            } else if (item.baseCode === 'BTCD' || item.quoteCode === 'ETHD' || item.quoteCode === 'USTD') {
+                usdMarket.push(item)
+            }
+        });
+
+        this.setState({
+            btcMarket,
+            bchMarket,
+            usdMarket
+        })
+    };
+
+
+    componentDidMount() {
+      this.getPairsInformation();
+    };
+
+    componentWillUnmount() {
+        this.socket.close();
+    }
+
+
     render() {
+        const {btcMarket, bchMarket, usdMarket} = this.state;
+
+        this.socket.on("markets_daily_updated_undefined", () => {
+            this.getPairsInformation()
+        });
+
         const columns = [
             {
                 title: 'Pair',
                 dataIndex: 'type',
                 key: 'type',
                 width: 150,
+                render: (item, obj) => (
+                    <span>{obj.baseCode}/{obj.quoteCode}</span>
+                )
             },
             {
                 title: `Coin`,
-                dataIndex: 'price',
-                key: 'price',
+                dataIndex: 'coin',
+                key: 'coin',
                 width: 150,
             },
             {
                 title: `Last price`,
-                dataIndex: 'amount',
-                key: 'amount',
+                dataIndex: 'priceBase',
+                key: 'priceBase',
                 width: 150,
             },
             {
                 title: `24 change`,
-                dataIndex: 'Sum',
-                key: 'Sum',
+                dataIndex: 'priceChange',
+                key: 'priceChange',
                 width: 150,
             },
             {
                 title: '24 high',
-                dataIndex: 'completedAt',
-                key: 'completedAt',
+                dataIndex: 'priceMax',
+                key: 'priceMax',
                 width: 150,
             },
             {
                 title: '24 Low',
-                dataIndex: 'Low',
-                key: 'Low',
+                dataIndex: 'priceMin',
+                key: 'priceMin',
                 width: 150,
             },
             {
                 title: '24 Volume',
-                dataIndex: 'Volume',
-                key: 'Volume',
+                dataIndex: 'volume',
+                key: 'volume',
                 width: 150,
             },
         ];
@@ -75,81 +129,6 @@ class WelcomePage extends Component {
             }
         ];
 
-        const dataSource = [
-            {
-                id: 1,
-                type: 'ETH/BTC',
-                price: 'Ethereum',
-                amount: '0.028221 / $113.37',
-                Sum: '0.32%',
-                completedAt: '0.00000420',
-                Low: 'Volume',
-                Volume: 'qfdwef'
-
-            }, {
-                id: 2,
-                type: 'ETH/BTC',
-                price: 'Ethereum',
-                amount: '0.028221 / $113.37',
-                Sum: '0.32%',
-                completedAt: '0.00000420',
-                Low: 'Volume',
-                Volume: 'qfdwef'
-
-            }, {
-                id: 3,
-                type: 'ETH/BTC',
-                price: 'Ethereum',
-                amount: '0.028221 / $113.37',
-                Sum: '0.32%',
-                completedAt: '0.00000420',
-                Low: 'Volume',
-                Volume: 'qfdwef'
-
-            }, {
-                id: 4,
-                type: 'ETH/BTC',
-                price: 'Ethereum',
-                amount: '0.028221 / $113.37',
-                Sum: '0.32%',
-                completedAt: '0.00000420',
-                Low: 'Volume',
-                Volume: 'qfdwef'
-
-            }, {
-                id: 5,
-                type: 'ETH/BTC',
-                price: 'Ethereum',
-                amount: '0.028221 / $113.37',
-                Sum: '0.32%',
-                completedAt: '0.00000420',
-                Low: 'Volume',
-                Volume: 'qfdwef'
-
-            }, {
-                id: 6,
-                type: 'ETH/BTC',
-                price: 'Ethereum',
-                amount: '0.028221 / $113.37',
-                Sum: '0.32%',
-                completedAt: '0.00000420',
-                Low: 'Volume',
-                Volume: 'qfdwef'
-
-            }, {
-                id: 7,
-                type: 'ETH/BTC',
-                price: 'Ethereum',
-                amount: '0.028221 / $113.37',
-                Sum: '0.32%',
-                completedAt: '0.00000420',
-                Low: 'Volume',
-                Volume: 'qfdwef'
-
-            },
-        ];
-
-
         return (
             <div className='welcome-page'>
                 <div className='title-block'>
@@ -166,11 +145,11 @@ class WelcomePage extends Component {
                             <div className='table-stat'>
                                 <Table
                                     columns={window.screen.width < '600' ? mobileColumns : columns}
-                                    dataSource={dataSource}
+                                    dataSource={btcMarket}
                                     bordered={false}
                                     pagination={false}
                                     rowKey={record => record.id}
-                                    scroll={{y: 500, x:300}}
+                                    scroll={{y: 500, x: 300}}
                                     size="small"
                                     rowClassName="custom__tr"/>
                             </div>
@@ -180,11 +159,11 @@ class WelcomePage extends Component {
                             <div className='table-stat'>
                                 <Table
                                     columns={window.screen.width < '600' ? mobileColumns : columns}
-                                    dataSource={dataSource}
+                                    dataSource={bchMarket}
                                     bordered={false}
                                     pagination={false}
                                     rowKey={record => record.id}
-                                    scroll={{y: 500, x:300}}
+                                    scroll={{y: 500, x: 300}}
                                     size="small"
                                     rowClassName="custom__tr"/>
 
@@ -195,14 +174,13 @@ class WelcomePage extends Component {
                             <div className='table-stat'>
                                 <Table
                                     columns={window.screen.width < '600' ? mobileColumns : columns}
-                                    dataSource={dataSource}
+                                    dataSource={usdMarket}
                                     bordered={false}
                                     pagination={false}
                                     rowKey={record => record.id}
-                                    scroll={{y: 500, x:300}}
+                                    scroll={{y: 500, x: 300}}
                                     size="small"
                                     rowClassName="custom__tr"/>
-
                             </div>
                         </TabPane>
                     </Tabs>

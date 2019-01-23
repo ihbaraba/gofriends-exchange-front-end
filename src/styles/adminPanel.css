@@ -7,6 +7,7 @@
 @import "../AdminPanel/Comissions/commissions.css";
 @import "../AdminPanel/AllReport/all-report.css";
 @import "../AdminPanel/Pairs/pairs.css";
+@import "../AdminPanel/Admins/admins.css";
 
 .admin-version .w-header,
 .admin-version .w-footer {
@@ -45,7 +46,7 @@
 }
 
 .admin-panel .admin-content {
-    padding: 12px 0 0 0;
+    padding: 12px 20px 0 0;
     position: relative;
 }
 
@@ -376,6 +377,7 @@
 /*HEADER*/
 /*------------------------------*/
 .admin-panel .admin-header {
+    padding: 0 20px 0 0;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -411,6 +413,7 @@
     padding: 0 0 3px 0;
     border-bottom: 1px solid #fff;
 }
+
 
 .admin-panel .admin-header .user-navigation .user-email {
     margin: 0 10px 0 20px;
