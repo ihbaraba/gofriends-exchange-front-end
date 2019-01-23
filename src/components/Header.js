@@ -161,7 +161,7 @@ class Header extends Component {
                             </span>
                             </NavLink>
 
-                            <NavLink to="/balances">
+                            <NavLink to="/news">
                             <span className="title topLevel">
                                 News
                                 {/*<i className="fa fa-caret-down dim"></i>*/}

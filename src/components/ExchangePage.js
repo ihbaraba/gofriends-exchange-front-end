@@ -230,6 +230,7 @@ class ExchangePage extends Component {
                         setCurentCoinsPair2State={this.setCurrentCoinsPair2State}
                     />
 
+
                     <OrdersHistory/>
 
                     <div className='open-orders-block table-block'>

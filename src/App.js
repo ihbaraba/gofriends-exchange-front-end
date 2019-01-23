@@ -41,6 +41,7 @@ import Settings from "./AdminPanel/Settings/Settings";
 import Dashboard from "./AdminPanel/Dashboard/Dashboard";
 import TradeHistory from "./AdminPanel/TradeHistory/TradeHistory";
 import News from "./AdminPanel/News/News";
+import ClientNews from "./components/News";
 import NewsEditor from "./AdminPanel/News/NewsEditor";
 import AdminWallet from "./AdminPanel/AdminWallet/AdminWallet";
 import WithdrawList from "./AdminPanel/WithdrawList/WithdrawList";
@@ -96,6 +97,7 @@ class App extends Component {
                                     <Route path="/balances" component={Balances}/>
                                     <Route path="/orders" component={UserOrdersHistory}/>
                                     <Route path="/loginhistory" component={LoginHistory}/>
+                                    <Route path="/news" component={ClientNews}/>
 
                                     <Route path="/OpenOrders" component={OpenOrders}/>
                                     <Route path="/Bann" component={Bann}/>
