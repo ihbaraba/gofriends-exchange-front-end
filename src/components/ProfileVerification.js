@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import '../App.css';
 
 class ProfileVerification extends Component {
     render() {
@@ -49,6 +48,7 @@ class ProfileVerification extends Component {
                         <label>Phone Number</label>
                         <input type="tel"/>
                     </div>
+
                     <p className="check">
                         <input type="checkbox" name="terms" required/> I agree to the
                         <a href="/terms"
@@ -59,6 +59,7 @@ class ProfileVerification extends Component {
                     <button className="profile-v-btn">
                         Begin Verifications
                     </button>
+
                     <div className="learn">
                         <a href="">Learn how your privacy is protected.</a>
                     </div>

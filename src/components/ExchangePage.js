@@ -82,7 +82,15 @@ class ExchangePage extends Component {
         /**
          * Save in Redux Store current Chart range
          **/
+    }
 
+    componentWillMount() {
+        const {user: {token}} = this.props; //read from redux state
+        const isAuthorised = (token !== "") && (token !== null); // ? true : false
+        if (!isAuthorised) {
+            this.props.history.push('/login');
+            return false;
+        }
 
     }
 

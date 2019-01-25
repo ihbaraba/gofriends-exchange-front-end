@@ -2,11 +2,13 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux'
 import {Table} from 'antd';
 import QRCode from 'qrcode-react';
+import Modal from 'react-modal';
+import axios from 'axios';
+
 import {getUserInfo} from "../utils";
-import {USERINFO} from "./../constants/APIURLS.js"
+import {USERINFO, WITHDRAW} from "./../constants/APIURLS.js"
 import {save_user_info} from "../actions/UserActions";
 import WithdrawPanel from "./WithdrawLogic";
-import Modal from 'react-modal';
 
 import BTC from '../img/coins/BTC.png';
 import BTG from '../img/coins/BTG_gold.png';
@@ -53,6 +55,7 @@ class Balances extends Component {
     }
 
     openModal = (coin, type) => {
+        console.log(coin);
         this.setState({
             modalIsOpen: true,
             selectCoin: {
@@ -60,11 +63,22 @@ class Balances extends Component {
                 type
             }
         })
-    }
+    };
 
     closeModal = () => {
         this.setState({modalIsOpen: false})
-    }
+    };
+
+    handleWithdrawCoins = async ({wallet, amount}) => {
+        console.log(this.state)
+        await axios.post(WITHDRAW, {
+            recepient: wallet,
+            amount,
+            currencyId: this.state.selectCoin.id
+        });
+
+        this.closeModal()
+    };
 
     render() {
         const coinsLogo = {
@@ -78,6 +92,7 @@ class Balances extends Component {
 
         const dataSource = balances.map(item => (
             {
+                id: item.id,
                 key: item.currency.name + "" + item.amount,
                 name: item.currency.name,
                 code: item.currency.code,
@@ -131,6 +146,7 @@ class Balances extends Component {
                     </div>
                 )
             }];
+
         return (
             <div className="balances-page">
                 <div className='card-container-head'>
@@ -186,7 +202,11 @@ class Balances extends Component {
                             </div>
                             :
                             <div className='withdraw'>
-                                <WithdrawPanel record={this.state.selectCoin} close={this.closeModal}/>
+                                <WithdrawPanel
+                                    record={this.state.selectCoin}
+                                    close={this.closeModal}
+                                    onWithdraw={this.handleWithdrawCoins}
+                                />
                             </div>
                         }
                     </div>

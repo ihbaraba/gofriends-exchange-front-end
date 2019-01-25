@@ -5,3 +5,24 @@
     background-color: #1E1E1E;
     box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.35);
 }
+
+.admin-wallet-modal .description {
+    margin: -35px 0 45px 0;
+}
+
+.admin-wallet-modal .vertical-line {
+    height: 30px;
+    width: 90px;
+    margin: 5px 0;
+    border-right: 1px solid #979797;
+}
+
+.admin-wallet-modal .form-item {
+    position: relative;
+}
+
+.admin-wallet-modal .form-item .amount-label {
+    position: absolute;
+    right: 55px;
+    bottom: 7px;
+}

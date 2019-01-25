@@ -65,6 +65,16 @@ let token = '';
 })();
 
 class App extends Component {
+    state = {
+        token: ''
+    };
+
+    componentDidMount() {
+        this.setState({
+            token: sessionStorage.getItem("exchange_token")
+        })
+    }
+
     render() {
         return (
             <div className="w-wrapper">
@@ -128,8 +138,7 @@ class App extends Component {
                                             <Route path='/admin/admin_wallet' component={AdminWallet}/>
                                             <Route path='/admin/withdraw_list' component={WithdrawList}/>
                                             <Route exact path='/admin/commissions' component={Commissions}/>
-                                            <Route path='/admin/commissions/settings'
-                                                   component={CommissionsSettings}/>
+                                            <Route path='/admin/commissions/settings' component={CommissionsSettings}/>
                                             <Route path='/admin/report' component={AllReport}/>
                                             <Route path='/admin/pairs' component={Pairs}/>
                                             <Route path='/admin/access_rights' component={Admins}/>

@@ -107,21 +107,21 @@ class Orders extends Component {
         }) : null;
 
         let buyFee = 0,
-         sellFee = 0,
-         buyLimitFee = 0,
-         sellLimitFee = 0;
+            sellFee = 0,
+            buyLimitFee = 0,
+            sellLimitFee = 0;
 
         fee.forEach(item => {
-            if(+buy.price > item.fromSteps && +buy.price < item.toSteps) {
-               buyFee = item.fee;
-           } else if (+sell.price > item.fromSteps && +sell.price < item.toSteps) {
-                sellFee = item.fee;
+            if (+buy.price > item.fromSteps && +buy.price < item.toSteps) {
+                buyFee = item.fee/100;
+            } else if (+sell.price > item.fromSteps && +sell.price < item.toSteps) {
+                sellFee = item.fee/100;
             }
 
-            if(buyLimit.limit > item.fromSteps && buyLimit.limit < item.toSteps) {
-                buyLimitFee = item.fee;
-            } else if(sellLimit.limit > item.fromSteps && sellLimit.limit < item.toSteps) {
-                sellLimitFee = item.fee;
+            if (buyLimit.limit > item.fromSteps && buyLimit.limit < item.toSteps) {
+                buyLimitFee = item.fee/100;
+            } else if (sellLimit.limit > item.fromSteps && sellLimit.limit < item.toSteps) {
+                sellLimitFee = item.fee/100;
             }
         });
 

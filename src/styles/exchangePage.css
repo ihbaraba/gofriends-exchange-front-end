@@ -35,7 +35,12 @@
 
 .marketDepthChart {
     grid-area: marketDepthChart;
-    margin: 20px 0 0 10px;
+    margin: 20px 0 0 0;
+    padding: 10px;
+
+    background-color: rgba(7, 3, 10, 0.35);
+    border: 1.5px solid rgba(255, 255, 255, 0.1) !important;
+    border-radius: 5px;
 }
 
 .current-pair {

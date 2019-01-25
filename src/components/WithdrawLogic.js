@@ -41,7 +41,7 @@ class WithdrawLogic extends Component {
     }
 
     render() {
-        const {record: {first, second}, close} = this.props;
+        const {record: {first, second}, onWithdraw} = this.props;
 
         const optionsWallet = {
             addonAfter: second,
@@ -89,21 +89,7 @@ class WithdrawLogic extends Component {
             }
         };
 
-        // const onBidButtonClick = ({type}) => {
-        //     firePostToServer({
-        //         token: this.props.token,
-        //         price: 1*this.state[`${type}Price`],
-        //         amount: 1*this.state[`${type}Amount`],
-        //         loanRate: 1*this.state.loanRate,
-        //         type,
-        //     });
-        // };
-
         const total = +this.state.transactionFee + (+this.state.amount);
-        // console.log( this.props.token );
-        // const {record} = this.props;
-
-        // console.log( first, second, price: sellPrice, loanRate, firePostToServer, type : "sell");
 
         return (
             <div>
@@ -128,7 +114,7 @@ class WithdrawLogic extends Component {
                     <span>{total}</span>
                 </div>
 
-                <button className='btn' onClick={close}>
+                <button className='btn' onClick={() => onWithdraw(this.state)}>
                     Withdraw
                 </button>
             </div>

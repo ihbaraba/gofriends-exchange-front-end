@@ -36,9 +36,6 @@ class Admins extends Component {
 
     render() {
         const {visible} = this.state;
-        const modalStyles = {
-            background: '#313131'
-        };
 
         return (
             <div className='admins-page'>
@@ -53,7 +50,6 @@ class Admins extends Component {
                     visible={visible}
                     onOk={this.handleOk}
                     onCancel={this.handleCancel}
-                    bodyStyle={modalStyles}
                     footer={null}
                     className='admins-modal'
                 >

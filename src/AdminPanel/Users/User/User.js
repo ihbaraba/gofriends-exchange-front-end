@@ -45,16 +45,25 @@ class User extends Component {
     };
 
     handleChangePagination = (pagination, type) => {
+        console.log(pagination);
         this.setState({
                 pagination
             },
             () => {
                 if (type === 'sell' || type === 'buy')
-                    this.getTradeHistory()
+                    this.getTradeHistory(type)
             })
     };
 
-    onChangeTab = (tab) => {
+    onChangeTab = async (tab) => {
+        await this.setState({
+            pagination: {
+                total: 0,
+                current: 1,
+                pageSize: 10,
+            }
+        });
+
         if (tab === 'sell' || tab === 'buy') {
             this.getTradeHistory(tab);
         }
@@ -85,10 +94,10 @@ class User extends Component {
         this.setState({
             coinPairs
         })
-    }
+    };
 
     render() {
-        const {tradeHistoryList, coinPairs, user} = this.state;
+        const {tradeHistoryList, coinPairs, user, pagination: {total, current}} = this.state;
 
         return (
             <div className="user-page">
@@ -128,6 +137,8 @@ class User extends Component {
                             <TradeHistory
                                 coinPairs={coinPairs}
                                 data={tradeHistoryList}
+                                total={total}
+                                current={current}
                                 type='buy'
                                 onChange={this.handleChangePagination}
                             />
@@ -137,6 +148,8 @@ class User extends Component {
                             <TradeHistory
                                 coinPairs={coinPairs}
                                 data={tradeHistoryList}
+                                total={total}
+                                current={current}
                                 type='sell'
                                 onChange={this.handleChangePagination}
                             />

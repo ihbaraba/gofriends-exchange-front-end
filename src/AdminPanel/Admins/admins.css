@@ -26,6 +26,8 @@
 
 .admins-modal .ant-modal-body {
     padding: 20px 60px !important;
+    background-color: #313131;
+
 }
 
 .admins-modal .ant-modal-title {

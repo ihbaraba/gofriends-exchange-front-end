@@ -100,7 +100,7 @@ class CoinsList extends React.Component {
 
     tabsCallback(key) {
         const pairs = this.state.pairs;
-        const newCurrent = pairs.find(item => item.id === +key.id);
+        const newCurrent = pairs ? pairs.find(item => item.id === +key.id) : '';
         this.props.setCurentCoinsPair2State(newCurrent);
         this.props.pair(newCurrent);
     }

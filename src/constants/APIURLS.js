@@ -110,6 +110,10 @@ export const EMAIL_SETTINGS = `${current_server.XHR}mailer/templates`;
 //trade history page
 export const GET_TRADE_HISTORY = `${current_server.XHR}orders/history`;
 
+//withdraw user and admin list  page
+export const WITHDRAW = `${current_server.XHR}withdraw`;
+export const WALLETS = `${current_server.XHR}withdraw/wallets`;
+
 //all report page
 export const GET_REPORT_BY_DATE = `${current_server.XHR}transactions`;
 
