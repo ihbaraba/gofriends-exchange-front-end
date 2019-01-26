@@ -2,12 +2,14 @@ import React, {Component} from 'react';
 import {Table, Modal} from 'antd';
 import axios from 'axios';
 
-import {WALLETS} from '../../constants/APIURLS';
+import {WALLETS, WITHDRAW} from '../../constants/APIURLS';
 
 class AdminWallet extends Component {
     state = {
         wallets: [],
         selectedWallet: {},
+        amount: 0,
+        wallet: '',
         visible: false
     };
 
@@ -16,21 +18,28 @@ class AdminWallet extends Component {
             visible: true,
             selectedWallet: item
         });
-    }
+    };
 
-    handleOk = (e) => {
-        console.log(e);
+    handleOk = async (e) => {
+        const {amount, wallet, selectedWallet} = this.state;
+        console.log(selectedWallet);
+        await axios.post(WITHDRAW, {
+            recepient: wallet,
+            amount: +amount,
+            currencyId: selectedWallet.currencyId
+        });
+
         this.setState({
             visible: false,
         });
-    }
+    };
 
     handleCancel = (e) => {
         console.log(e);
         this.setState({
             visible: false,
         });
-    }
+    };
 
     async componentDidMount() {
         const res = await axios.get(WALLETS);
@@ -41,7 +50,7 @@ class AdminWallet extends Component {
     }
 
     render() {
-        const {wallets, visible, selectedWallet} = this.state;
+        const {wallets, visible, selectedWallet, amount, wallet} = this.state;
 
         const columns =
             [
@@ -98,18 +107,27 @@ class AdminWallet extends Component {
 
                     <div className='form-item'>
                         <label htmlFor=" ">Amount </label>
-                        <input type="text"/>
+                        <input
+                            type="text"
+                            value={amount}
+                            onChange={e => this.setState({amount: e.target.value})}
+                        />
                         <span className='amount-label'>{selectedWallet.currencyCode}</span>
                     </div>
 
                     <div className="vertical-line"></div>
 
-                    <div className='form-item'>
-                        <label htmlFor=" ">Walllet </label>
-                        <input type="text"/>
+                    <div className='row-block'>
+                        <div className='form-item wallet'>
+                            <label htmlFor=" ">Walllet </label>
+                            <input
+                                type="text"
+                                value={wallet}
+                                onChange={e => this.setState({wallet: e.target.value})}
+                            />
+                        </div>
+                        <button className='admin-btn' onClick={this.handleOk}>Withdraw</button>
                     </div>
-
-                    <button className='admin-btn' onClick={this.handleOk}>Withdraw</button>
                 </Modal>
             </div>
         )

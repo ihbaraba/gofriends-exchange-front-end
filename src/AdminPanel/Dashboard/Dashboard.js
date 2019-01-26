@@ -4,14 +4,15 @@ import moment from 'moment';
 
 import Statistics from './Statistics';
 import LatestOperations from './LatestOperations';
-import {GET_TRADE_HISTORY, PAIRS} from "../../constants/APIURLS";
+import {GET_TRADE_HISTORY, PAIRS, WITHDRAW} from "../../constants/APIURLS";
 import {changePage, lastPage} from "../../actions/AdminActions";
 import {connect} from "react-redux";
 
 class Dashboard extends Component {
     state = {
         coinPairs: [],
-        tradeHistory: []
+        tradeHistory: [],
+        withdrawsHistory: []
     };
 
     async componentDidMount() {
@@ -21,10 +22,8 @@ class Dashboard extends Component {
         const [pairs, tradeHistory, withdrawsHistory] = await Promise.all([
             axios.get(PAIRS),
             axios.get(`${GET_TRADE_HISTORY}?skip=0&take=10&dateFrom=${dateFrom}&dateTo=${dateTo}`),
+            axios.get(`${WITHDRAW}?skip=0&take=10&dateFrom=${dateFrom}&dateTo=${dateTo}`)
         ]);
-
-
-        console.log(tradeHistory);
 
         let coinPairs = pairs.data.map(pair => {
             return ({
@@ -35,7 +34,8 @@ class Dashboard extends Component {
 
         this.setState({
             coinPairs,
-            tradeHistory: tradeHistory.data.orders
+            tradeHistory: tradeHistory.data.orders,
+            withdrawsHistory: withdrawsHistory.data.withdraw
         })
     }
 
@@ -55,7 +55,7 @@ class Dashboard extends Component {
     };
 
     render() {
-        const {coinPairs, tradeHistory} = this.state;
+        const {coinPairs, tradeHistory, withdrawsHistory} = this.state;
         return (
             <div className='dashboard-page'>
                 <Statistics/>
@@ -69,6 +69,7 @@ class Dashboard extends Component {
                     />
 
                     <LatestOperations
+                        list={withdrawsHistory}
                         types='Latest withdraws'
                         goTo={this.goToHistoryPage}
                     />

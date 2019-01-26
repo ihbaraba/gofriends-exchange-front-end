@@ -67,9 +67,9 @@ export const TIMEFRAMES = OUR_TIMEFRAMES; // OUR_TIMEFRAMES or CRIPTOCOMPARE_TIM
 /*load data for chart*/
 export const QUOTATIONS = `${current_server.XHR}quotations`;
 
-export const PAIRS = `${current_server.XHR}pairs/`;
+export const PAIRS = `${current_server.XHR}pairs`;
 
-export const MARKETS = `${current_server.XHR}markets/`;
+export const MARKETS = `${current_server.XHR}markets`;
 
 export const MARKETS_START_PAGE = `${current_server.XHR}markets/daily`;
 
@@ -112,7 +112,9 @@ export const GET_TRADE_HISTORY = `${current_server.XHR}orders/history`;
 
 //withdraw user and admin list  page
 export const WITHDRAW = `${current_server.XHR}withdraw`;
+export const CONFIRM_WITHDRAW = `${current_server.XHR}withdraw/confirm`;
 export const WALLETS = `${current_server.XHR}withdraw/wallets`;
+export const APPROVE = `${current_server.XHR}withdraw/approve`;
 
 //all report page
 export const GET_REPORT_BY_DATE = `${current_server.XHR}transactions`;
@@ -120,8 +122,13 @@ export const GET_REPORT_BY_DATE = `${current_server.XHR}transactions`;
 //news page
 export const NEWS = `${current_server.XHR}news`;
 
+
 //commissions page
 export const COMMISSIONS = `${current_server.XHR}fee`;
+export const COMMISSIONS_PROFIT = `${current_server.XHR}transactions/fee`;
+
+//currencies
+export const CURRENCIES = `${current_server.XHR}currencies`;
 
 
 

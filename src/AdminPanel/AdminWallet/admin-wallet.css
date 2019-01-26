@@ -21,8 +21,22 @@
     position: relative;
 }
 
+.admin-wallet-modal .form-item.wallet input{
+    width: 360px;
+    margin: 0 40px 0 0;
+}
+
 .admin-wallet-modal .form-item .amount-label {
     position: absolute;
-    right: 55px;
+    left: 145px;
     bottom: 7px;
+}
+
+.admin-wallet-modal .row-block {
+    display: flex;
+    align-items: flex-end;
+}
+
+.admin-wallet-modal .row-block .admin-btn {
+    margin: 0 0 4px 0;
 }

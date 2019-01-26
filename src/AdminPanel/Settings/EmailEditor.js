@@ -19,7 +19,7 @@ class EmailEditor extends Component {
 
         this.setState({
             emailTemplate: res.data,
-            placeholders: res.data.placeholders.split(', ')
+            placeholders: res.data.placeholders ? res.data.placeholders.split(', ') : []
         })
     }
 

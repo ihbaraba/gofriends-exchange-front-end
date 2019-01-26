@@ -73,7 +73,7 @@ class Balances extends Component {
         console.log(this.state)
         await axios.post(WITHDRAW, {
             recepient: wallet,
-            amount,
+            amount: +amount,
             currencyId: this.state.selectCoin.id
         });
 
@@ -92,7 +92,7 @@ class Balances extends Component {
 
         const dataSource = balances.map(item => (
             {
-                id: item.id,
+                id: item.currency.id,
                 key: item.currency.name + "" + item.amount,
                 name: item.currency.name,
                 code: item.currency.code,

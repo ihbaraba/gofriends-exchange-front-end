@@ -42,6 +42,55 @@ html {
     padding: 0 10px;
 }
 
+.confirm-page {
+    width: 100%;
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 100px 120px;
+    border: 1px solid #3F4755;
+    border-radius: 5px;
+    box-shadow: 0 3px 15px 0 rgba(0, 0, 0, 0.19);
+}
+
+.confirm-page .title {
+    text-align: center;
+    margin: 0 0 35px 0;
+    padding: 0 0 20px 0;
+    font-family: Ubuntu;
+    font-size: 20px;
+    letter-spacing: 2px;
+    border-bottom: 1px solid rgba(151, 151, 151, 0.55);
+}
+
+.confirm-page .description {
+    text-align: center;
+    font-family: Roboto;
+    font-size: 12px;
+    letter-spacing: 1.2px;
+}
+
+.confirm-page img {
+    display: block;
+    margin: 35px auto 20px auto;
+}
+
+.confirm-page .green-btn {
+    height: 45px;
+    width: 173px;
+    margin: 55px auto 0 auto;
+    display: block;
+    border-radius: 3px;
+    background-color: #4A998C;
+    border: 0;
+}
+
+.confirm-page .green-btn a {
+    height: 100%;
+    line-height: 45px;
+}
+
+
+
 /*TABLE*/
 .table {
     position: relative;
@@ -794,6 +843,7 @@ span.ant-input-group-wrapper {
     background: none !important;
     padding: 0 !important;
 }
+
 .ant-table-loading {
     position: relative;
 }
@@ -1219,6 +1269,7 @@ tr.ant-table-expanded-row:hover {
 .ant-table-thead > tr > th, .ant-table-tbody > tr > td {
     padding: 5px 4px 5px 0 !important;
 }
+
 .ant-table-thead > tr > th {
     background: none !important;
 }

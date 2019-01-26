@@ -80,8 +80,8 @@ const LatestOperations = ({types, coinPairs, list, goTo}) => {
         [
             {
                 title: 'User ID',
-                dataIndex: 'id',
-                key: 'id',
+                dataIndex: 'userId',
+                key: 'userId',
                 width: 100,
             },
             {
@@ -90,12 +90,12 @@ const LatestOperations = ({types, coinPairs, list, goTo}) => {
                 key: 'currency',
                 width: 200,
             },
-            {
-                title: 'Tax ID',
-                dataIndex: 'tax_id',
-                key: 'tax_id',
-                width: 150,
-            },
+            // {
+            //     title: 'Tax ID',
+            //     dataIndex: 'tax_id',
+            //     key: 'tax_id',
+            //     width: 150,
+            // },
             {
                 title: 'Amount',
                 dataIndex: 'amount',
@@ -109,7 +109,7 @@ const LatestOperations = ({types, coinPairs, list, goTo}) => {
                 width: 150,
                 render: (item) => {
                     // if(item === 'Active') {
-                    return (<span style={{color: '#00CE7D'}}>Active</span>)
+                    return (<span style={{color: '#00CE7D'}}>{item}</span>)
                     // }
                 }
             }

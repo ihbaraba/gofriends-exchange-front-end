@@ -10,7 +10,6 @@ const Header = ({user, page, back}) => {
     return (
         <div className='admin-header'>
             <div className='current-page'>
-
                 {page.subLink ?
                     <Fragment>
                         <span className='underline' onClick={back}>

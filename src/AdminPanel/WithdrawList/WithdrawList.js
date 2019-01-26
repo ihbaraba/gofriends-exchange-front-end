@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 
-import {WITHDRAW} from '../../constants/APIURLS';
+import {WITHDRAW, APPROVE, CURRENCIES} from '../../constants/APIURLS';
 
 import FilterBlock from '../components/FilterBlock';
 import ResultList from './ResultList';
@@ -9,9 +9,10 @@ import ResultList from './ResultList';
 class WithdrawList extends Component {
     state = {
         withdrawList: [],
+        currencies: [],
         filter: {
             id: '',
-            currency : '',
+            currency: '',
             dateFrom: '',
             dateTo: '',
             status: '',
@@ -29,7 +30,7 @@ class WithdrawList extends Component {
     getWithdraw = async () => {
         const {filter: {id, currency, dateFrom, dateTo, status, sortName, sortType}, pagination: {current, pageSize}} = this.state;
         const urlParams = [
-            id ? `&id=${id}` : null,
+            id ? `&userId=${id}` : null,
             currency ? `&currency=${currency}` : null,
             dateFrom ? `&dateFrom=${dateFrom}` : null,
             dateTo ? `&dateTo=${dateTo}` : null,
@@ -76,20 +77,29 @@ class WithdrawList extends Component {
             })
     };
 
+    handleApprove = async (id) => {
+        await axios.put(`${APPROVE}/${id}`)
 
+    };
 
-    componentDidMount = () => {
-        this.getWithdraw()
+    async componentDidMount() {
+        this.getWithdraw();
+        const res = await axios.get(CURRENCIES);
+
+        this.setState({
+            currencies: res.data
+        })
     };
 
 
     render() {
-        const {withdrawList, pagination} = this.state;
+        const {withdrawList, pagination, currencies} = this.state;
 
         return (
             <div className='withdraw-list-page'>
                 <FilterBlock
                     onSearch={this.handleSearch}
+                    currencies={currencies}
                     page='withdraw'
                 />
 
@@ -97,6 +107,7 @@ class WithdrawList extends Component {
                     list={withdrawList}
                     {...pagination}
                     onChange={this.handlePaginationChange}
+                    onApprove={this.handleApprove}
                 />
             </div>
         )

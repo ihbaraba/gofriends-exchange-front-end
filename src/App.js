@@ -52,6 +52,7 @@ import Pairs from "./AdminPanel/Pairs/Pairs";
 import CommissionsSettings from "./AdminPanel/Comissions/CommissionsSettings/CommissionsSettings";
 import User from "./AdminPanel/Users/User/User";
 import Admins from "./AdminPanel/Admins/Admins";
+import WithdrawConfirm from "./components/WithdrawConfirm";
 
 let token = '';
 
@@ -108,6 +109,7 @@ class App extends Component {
                                     <Route path="/orders" component={UserOrdersHistory}/>
                                     <Route path="/loginhistory" component={LoginHistory}/>
                                     <Route path="/news" component={ClientNews}/>
+                                    <Route path="/withdraw/confirm" component={WithdrawConfirm}/>
 
                                     <Route path="/OpenOrders" component={OpenOrders}/>
                                     <Route path="/Bann" component={Bann}/>

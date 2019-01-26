@@ -3,7 +3,7 @@ import {Select} from 'antd';
 
 const Option = Select.Option;
 
-const CreatePair = () => {
+const CreatePair = ({coins, onSelect, onCreatePair, basicCoin, childCoin}) => {
     return (
         <div className='create-pair-block'>
             <div className="block-title">
@@ -13,10 +13,11 @@ const CreatePair = () => {
             <div className='create-block'>
                 <div>
                     <label>Base currency</label>
-                    <Select placeholder='All' style={{width: 180}} onChange={e => this.setState({pairs: e})}>
+                    <Select placeholder='All' style={{width: 180}} value={basicCoin} onChange={e => onSelect(e, 'basicCoin')}>
                         <Option value=''>All</Option>
-                        <Option value="dch">BCH</Option>
-                        <Option value="ltc">BCl</Option>
+                        {coins.map(item => (
+                            <Option value={item.id} key={item.id}>{item.code}</Option>
+                        ))}
                     </Select>
                 </div>
 
@@ -24,14 +25,15 @@ const CreatePair = () => {
 
                 <div>
                     <label>Quote currency</label>
-                    <Select placeholder='All' style={{width: 180}} onChange={e => this.setState({pairs: e})}>
+                    <Select placeholder='All' style={{width: 180}} value={childCoin} onChange={e => onSelect(e, 'childCoin')}>
                         <Option value=''>All</Option>
-                        <Option value="dch">BCH</Option>
-                        <Option value="ltc">BCl</Option>
+                        {coins.map(item => (
+                            <Option value={item.id} key={item.id}>{item.code}</Option>
+                        ))}
                     </Select>
                 </div>
 
-                <button className='admin-btn green-btn'>Add pair</button>
+                <button className='admin-btn green-btn' onClick={onCreatePair}>Add pair</button>
             </div>
         </div>
     )
