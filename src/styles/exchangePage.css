@@ -163,19 +163,20 @@
 
 .marketDepth .buy-table {
     height: 50%;
-    margin-bottom: 28px;
 }
 
 .marketDepth .sell-table {
     height: 50%;
+    margin-bottom: 28px;
 }
 
 .marketDepth .buy-table tr td:first-child {
-    color: #DD4457;
+    color: #00CE7D;
+
 }
 
 .marketDepth .sell-table tr td:first-child {
-    color: #00CE7D;
+    color: #DD4457;
 }
 
 .marketDepth .marketDepthTables {

@@ -1,7 +1,9 @@
 import React from 'react';
-import {Icon} from 'antd';
+import {Icon, Select} from 'antd';
 
-const PairFee = ({pair, params = [], changeInput, onSubmit, onAddNewStep, onRemoveStep}) => {
+const Option = Select.Option;
+
+const PairFee = ({pair, params = [], changeInput, changeSelect, onSubmit, onAddNewStep, onRemoveStep}) => {
     return (
         <div className='pair-fee-block'>
             <div className='title-block'>
@@ -16,6 +18,14 @@ const PairFee = ({pair, params = [], changeInput, onSubmit, onAddNewStep, onRemo
             <div>
                 {params.map((pair, index) => (
                     <div className='fee-params' key={index}>
+                        <div className='form-item'>
+                            <label>Type</label>
+                            <Select onChange={(e) => changeSelect(index, e)} style={{width: '150px', margin: '0 50px 0 0'}}>
+                                <Option value='exchange'>Exchange</Option>
+                                <Option value='withdraw'>Withdraw</Option>
+                                <Option value='deposit'>Deposit</Option>
+                            </Select>
+                        </div>
                         <div className='form-item'>
                             <label>From</label>
                             <input
@@ -48,10 +58,10 @@ const PairFee = ({pair, params = [], changeInput, onSubmit, onAddNewStep, onRemo
                         </div>
 
                         {params.length > 1 ?
-                        <Icon
-                            type="delete"
-                            onClick={() => onRemoveStep(index, pair.id)}
-                        /> : ''}
+                            <Icon
+                                type="delete"
+                                onClick={() => onRemoveStep(index, pair.id)}
+                            /> : ''}
                     </div>
                 ))}
 

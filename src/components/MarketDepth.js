@@ -150,19 +150,40 @@ class MarketDepth extends Component {
     }
 
     async componentWillReceiveProps(nextProps) {
-        // if (nextProps.currentPair.id !== this.props.pair.id) {
-        // console.log("componentWillReceiveProps", nextProps);
         const {pair: {id}} = nextProps;
         await this.getInitialPairDataFromServer(id);
         this.getDataFromSocket(id, 0);
-        // }
     }
 
     render() {
         const {marketDepth: {buy, sell}} = this.state;
         const {mobile, onSelectOrder} = this.props;
 
-        const columns = [{
+        const sellColumns = [{
+            title: 'Price',
+            dataIndex: 'price',
+            key: 'price',
+            width: 150,
+            defaultSortOrder: 'descend',
+            sorter: (a, b) => a.price - b.price,
+        }, {
+            title: this.props.currentPair.first,
+            dataIndex: 'amount',
+            key: 'amount',
+            width: 150,
+        }, {
+            title: this.props.currentPair.second,
+            dataIndex: 'quoteCurrency',
+            key: 'quoteCurrency',
+            width: 150,
+        }, {
+            title: 'Sum',
+            dataIndex: 'Sum',
+            key: 'Sum',
+            width: 150,
+        }];
+
+        const buyColumns = [{
             title: 'Price',
             dataIndex: 'price',
             key: 'price',
@@ -217,26 +238,9 @@ class MarketDepth extends Component {
             <Fragment>
                 <div className="marketDepth">
                     <div className="marketDepthTables">
-                        <div className="marketDepthColumns table-block buy-table">
-                            <div className='table-title'>Buy orders</div>
-                            <Table columns={mobile ? mobileColumns : columns}
-                                   dataSource={buy}
-                                   bordered={false}
-                                   pagination={false}
-                                // rowKey={record => record.price}
-                                   scroll={{y: mobile ? 200 : 550}}
-                                   size="small"
-                                   rowClassName="custom__tr"
-                                   onRow={(record) => {
-                                       return {
-                                           onClick: () => onSelectOrder(record, 'buy'),       // click row
-                                       };
-                                   }}
-                            />
-                        </div>
                         <div className="marketDepthColumns table-block sell-table">
                             <div className='table-title'>Sell orders</div>
-                            <Table columns={mobile ? mobileColumns : columns}
+                            <Table columns={mobile ? mobileColumns : sellColumns}
                                    dataSource={sell}
                                    bordered={false}
                                    pagination={false}
@@ -251,6 +255,24 @@ class MarketDepth extends Component {
                                    }}
                             />
                         </div>
+                        <div className="marketDepthColumns table-block buy-table">
+                            <div className='table-title'>Buy orders</div>
+                            <Table columns={mobile ? mobileColumns : buyColumns}
+                                   dataSource={buy}
+                                   bordered={false}
+                                   pagination={false}
+                                // rowKey={record => record.price}
+                                   scroll={{y: mobile ? 200 : 550}}
+                                   size="small"
+                                   rowClassName="custom__tr"
+                                   onRow={(record) => {
+                                       return {
+                                           onClick: () => onSelectOrder(record, 'buy'),       // click row
+                                       };
+                                   }}
+                            />
+                        </div>
+
                     </div>
                 </div>
 

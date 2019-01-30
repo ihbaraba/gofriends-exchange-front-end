@@ -81,6 +81,11 @@ class Header extends Component {
                     <span className="title topLevel">My Profile</span>
                 </NavLink>
             </Menu.Item>
+            <Menu.Item>
+                <NavLink to="/news">
+                    <span className="title topLevel">News</span>
+                </NavLink>
+            </Menu.Item>
             {/*<Menu.Item>*/}
             {/*<NavLink to="/loginhistory">*/}
             {/*<span className="title topLevel">Login History</span>*/}

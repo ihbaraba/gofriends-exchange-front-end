@@ -7,6 +7,9 @@ import {save_user_info} from "../actions/UserActions";
 import LoginHistory from './LoginHistory';
 import {Switch} from 'antd';
 import axios from 'axios';
+import Modal from 'react-modal';
+
+import ProfileVerification from './ProfileVerification';
 
 import avatar from '../img/avatar.svg';
 import authentication from '../img/authentication.svg';
@@ -14,9 +17,24 @@ import padlock from '../img/padlock.svg';
 
 import '../styles/profile.css';
 
+Modal.setAppElement('#root');
+
+const customStyles = {
+    content: {
+        top: '50%',
+        left: '50%',
+        right: 'auto',
+        bottom: 'auto',
+        marginRight: '-50%',
+        transform: 'translate(-50%, -50%)',
+        padding: '0'
+    }
+};
+
 class Profile extends Component {
     state = {
         showQr: false,
+        modalIsOpen: false,
         qrCode: '',
         totpCode: '',
         twoFactorAuthEnabled: this.props.user.twoFactorAuthEnabled
@@ -37,7 +55,20 @@ class Profile extends Component {
             const {body} = userInfo;
             this.props.save_user_info(body);
         }
+
+        // this.openModal()
     }
+
+    openModal = () => {
+        this.setState({
+            modalIsOpen: true,
+        })
+    };
+
+    closeModal = () => {
+        this.setState({modalIsOpen: false})
+    };
+
 
     swithOnChange = async (onTwoFActor) => {
         if (onTwoFActor) {
@@ -204,11 +235,29 @@ class Profile extends Component {
                     </div>
                 </div>
 
-                <div className='page-title'>
-                    My login history
-                </div>
+                {/*--------------------*/}
+                {/*<div className='page-title'>*/}
+                    {/*My login history*/}
+                {/*</div>*/}
 
-                <LoginHistory/>
+                {/*<LoginHistory/>*/}
+                {/*--------------------*/}
+
+                <Modal
+                    isOpen={this.state.modalIsOpen}
+                    onRequestClose={this.closeModal}
+                    style={customStyles}
+                    contentLabel="Example Modal"
+                >
+                    <div className="modal-window">
+                        <div className="close-modal-btn" onClick={this.closeModal}>
+                            <i className="fa fa-times" aria-hidden="true"></i>
+                        </div>
+
+                        <ProfileVerification />
+                    </div>
+                </Modal>
+
             </div>
         )
     }

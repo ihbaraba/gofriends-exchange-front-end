@@ -38,8 +38,8 @@ class Pairs extends Component {
         this.getPairs();
     };
 
-    removePair = async (id) => {
-        await axios.delete(`${PAIRS}/${id}`);
+    changePair = async (id) => {
+        await axios.put(`${PAIRS}/${id}`);
 
         this.getPairs();
     };
@@ -68,7 +68,7 @@ class Pairs extends Component {
 
                 <PairsList
                     list={pairsList}
-                    onRemove={this.removePair}
+                    onChange={this.changePair}
                 />
             </div>
         )

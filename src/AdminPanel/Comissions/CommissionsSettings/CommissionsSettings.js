@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import axios from "axios/index";
-import {Icon} from 'antd';
+import {Icon, notification} from 'antd';
 
 import {COMMISSIONS, PAIRS} from "../../../constants/APIURLS";
 import PairsList from "./PairsList";
@@ -12,6 +12,7 @@ class CommissionsSettings extends Component {
         pair: {},
         pairParams: [
             {
+                type: '',
                 fromSteps: 0,
                 toSteps: 0,
                 fee: 0
@@ -43,6 +44,7 @@ class CommissionsSettings extends Component {
 
         this.setState({
             pairParams: feeParams.data.length > 0 ? feeParams.data : [{
+                type: '',
                 fromSteps: 0,
                 toSteps: 0,
                 fee: 0
@@ -73,11 +75,33 @@ class CommissionsSettings extends Component {
         })
     };
 
+    handleChangeSelect = (index, value) => {
+        let newParams = this.state.pairParams;
+
+        newParams[index] = {
+            ...newParams[index],
+            type: value
+        };
+
+        this.setState({
+            pairParams: newParams
+        })
+    };
+
     handleSaveCommissions = async () => {
         try {
-            await axios.put(`${COMMISSIONS}/${this.state.pair.id}`, {steps: this.state.pairParams})
+            await axios.put(`${COMMISSIONS}/${this.state.pair.id}`, {steps: this.state.pairParams});
+
+            notification.success({
+                message: 'Confirmed'
+            });
+
         } catch (e) {
-            console.log(e);
+            notification.error({
+                message: 'Rejected',
+                description: e.response.data.userMessage,
+            });
+            console.log(e.response.data.userMessage);
         }
     };
 
@@ -86,6 +110,7 @@ class CommissionsSettings extends Component {
             pairParams: [
                 ...this.state.pairParams,
                 {
+                    type: '',
                     fromSteps: 0,
                     toSteps: 0,
                     fee: 0
@@ -127,6 +152,7 @@ class CommissionsSettings extends Component {
                     pair={pair}
                     params={pairParams}
                     changeInput={this.handleChangeInput}
+                    changeSelect={this.handleChangeSelect}
                     onSubmit={this.handleSaveCommissions}
                     onAddNewStep={this.handleAddNewStep}
                     onRemoveStep={this.handleRemoveStep}

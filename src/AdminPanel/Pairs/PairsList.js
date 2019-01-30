@@ -1,7 +1,6 @@
 import React from 'react';
-import {Icon} from 'antd';
 
-const PairsList = ({list, onRemove}) => {
+const PairsList = ({list, onChange}) => {
     return (
         <div className='pairs-list'>
             <div className="block-title">
@@ -12,7 +11,11 @@ const PairsList = ({list, onRemove}) => {
                 {list.map(pair => (
                     <div className='pair' key={pair.id}>
                         {`${pair.baseCurrency.code}/${pair.quoteCurrency.code}`}
-                        <Icon type="delete" onClick={() => onRemove(pair.id)}/>
+
+                        <div className='action-btn' onClick={() => onChange(pair.id)}>
+                            <i className="fa fa-eye-slash" aria-hidden="true"></i>
+                            {/*<i className="fa fa-eye" aria-hidden="true"></i>*/}
+                        </div>
                     </div>
                 ))}
             </div>

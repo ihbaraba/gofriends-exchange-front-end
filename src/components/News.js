@@ -34,7 +34,6 @@ class News extends Component {
     };
 
     handleSelectedNews = (news) => {
-        console.log(news);
         this.setState({
             latestNews: news
         })
