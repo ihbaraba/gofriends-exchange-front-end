@@ -9,7 +9,7 @@ import CoinsList from "./CoinsList";
 import UserOrder from './UserOrder';
 import initialState from "../store/initialState";
 import {sendOrder, getUserInfo} from "./../utils";
-import {Radio, Tabs} from "antd";
+import {Radio, Tabs, Icon} from "antd";
 import Modal from 'react-modal';
 
 import {ORDERS, USERINFO} from "./../constants/APIURLS.js"
@@ -17,6 +17,7 @@ import {login_success, save_user_info, save_user_orders} from "../actions/UserAc
 import {chart_timing, chart_range} from "../actions/ChartActions";
 import "antd/lib/radio/style/css";
 import '../styles/exchangePage.css';
+import {toast} from "react-toastify";
 
 const TabPane = Tabs.TabPane;
 
@@ -120,9 +121,26 @@ class ExchangePage extends Component {
                 ...bidProps
             });
 
+            toast.success(<div className='toaster-container'><Icon type="check-circle" /> Confirmed</div>, {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true
+            });
+
             this.props.save_user_orders(responce.id);
-        } catch (error) {
-            console.log(error);
+        } catch (e) {
+            toast.error(<div className='toaster-container'><Icon type="close" /> {e.response.body.userMessage}</div>, {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true
+            });
+
         }
     };
 

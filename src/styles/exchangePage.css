@@ -414,6 +414,7 @@
     border-radius: 2px;
     font-weight: bold;
     margin: 47px 0 0 0;
+    cursor: pointer;
 }
 
 .orders .order-action-btn.order-buy-btn {

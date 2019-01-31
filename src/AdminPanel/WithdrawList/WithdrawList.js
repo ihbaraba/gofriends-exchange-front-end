@@ -1,10 +1,12 @@
 import React, {Component} from 'react';
 import axios from 'axios';
+import {Icon} from 'antd';
 
 import {WITHDRAW, APPROVE, CURRENCIES} from '../../constants/APIURLS';
 
 import FilterBlock from '../components/FilterBlock';
 import ResultList from './ResultList';
+import {toast} from "react-toastify";
 
 class WithdrawList extends Component {
     state = {
@@ -78,8 +80,27 @@ class WithdrawList extends Component {
     };
 
     handleApprove = async (id) => {
-        await axios.put(`${APPROVE}/${id}`)
+        try {
+            await axios.put(`${APPROVE}/${id}`)
 
+            toast.success(<div className='toaster-container'><Icon type="check-circle"/> Confirmed</div>, {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true
+            });
+        } catch (e) {
+            toast.error(<div className='toaster-container'><Icon type="close"/> {e.response.data.userMessage}</div>, {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true
+            });
+        }
     };
 
     async componentDidMount() {

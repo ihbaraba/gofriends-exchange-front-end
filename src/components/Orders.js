@@ -27,7 +27,8 @@ class Orders extends Component {
                 amount: 0
             },
             //    -------
-            activeTab: this.props.activeTab ? this.props.activeTab : '1'
+            activeTab: this.props.activeTab ? this.props.activeTab : '1',
+            disableBtn: false
         };
     }
 
@@ -64,21 +65,33 @@ class Orders extends Component {
         });
     }
 
-    handleActionOrders = (type, limit) => {
+    handleActionOrders = async (type, limit) => {
+        this.setState({
+            disableBtn: true
+        });
+
         if (limit) {
-            this.props.firePostToServer({
+            await this.props.firePostToServer({
                 token: this.props.token,
                 stop: +this.state[`${type}Limit`].stop,
                 limit: +this.state[`${type}Limit`].limit,
                 amount: +this.state[`${type}Limit`].amount,
                 type
             });
+
+            this.setState({
+                disableBtn: false
+            });
         } else {
-            this.props.firePostToServer({
+            await this.props.firePostToServer({
                 token: this.props.token,
                 price: +this.state[type].price,
                 amount: +this.state[type].amount,
                 type
+            });
+
+            this.setState({
+                disableBtn: false
             });
         }
     };
@@ -96,7 +109,7 @@ class Orders extends Component {
 
     render() {
         const {first, second, mobile, fee = []} = this.props;
-        const {buy, sell, buyLimit, sellLimit} = this.state;
+        const {buy, sell, buyLimit, sellLimit, disableBtn} = this.state;
 
         let currencyWallet = 0;
 
@@ -113,15 +126,15 @@ class Orders extends Component {
 
         fee.forEach(item => {
             if (+buy.price > item.fromSteps && +buy.price < item.toSteps) {
-                buyFee = item.fee/100;
+                buyFee = item.fee / 100;
             } else if (+sell.price > item.fromSteps && +sell.price < item.toSteps) {
-                sellFee = item.fee/100;
+                sellFee = item.fee / 100;
             }
 
             if (buyLimit.limit > item.fromSteps && buyLimit.limit < item.toSteps) {
-                buyLimitFee = item.fee/100;
+                buyLimitFee = item.fee / 100;
             } else if (sellLimit.limit > item.fromSteps && sellLimit.limit < item.toSteps) {
-                sellLimitFee = item.fee/100;
+                sellLimitFee = item.fee / 100;
             }
         });
 
@@ -192,6 +205,7 @@ class Orders extends Component {
                                         <button
                                             className='order-buy-btn order-action-btn'
                                             type="primary"
+                                            disabled={disableBtn}
                                             onClick={() => this.handleActionOrders('buy')}>
                                             {`Buy ${first}`}
                                         </button>
@@ -255,6 +269,7 @@ class Orders extends Component {
                                         <button
                                             className='order-sell-btn order-action-btn'
                                             type="primary"
+                                            disabled={disableBtn}
                                             onClick={() => this.handleActionOrders('sell')}>
                                             {`Sell ${first}`}
                                         </button>
@@ -324,6 +339,7 @@ class Orders extends Component {
                                         <button
                                             className='order-buy-btn order-action-btn'
                                             type="primary"
+                                            disabled={disableBtn}
                                             onClick={() => this.handleActionOrders('buy')}>
                                             {`Buy ${first}`}
                                         </button>
@@ -383,6 +399,7 @@ class Orders extends Component {
                                         <button
                                             className='order-sell-btn order-action-btn'
                                             type="primary"
+                                            disabled={disableBtn}
                                             onClick={() => this.handleActionOrders('sell')}>
                                             {`Sell ${first}`}
                                         </button>
@@ -462,6 +479,7 @@ class Orders extends Component {
                                             style={{marginTop: '20px !important'}}
                                             className='order-buy-btn order-action-btn limits-btn'
                                             type="primary"
+                                            disabled={disableBtn}
                                             onClick={() => this.handleActionOrders('buy', true)}>
                                             {`Buy ${first}`}
                                         </button>
@@ -533,6 +551,7 @@ class Orders extends Component {
                                         <button
                                             className='order-sell-btn order-action-btn limits-btn'
                                             type="primary"
+                                            disabled={disableBtn}
                                             onClick={() => this.handleActionOrders('sell', true)}>
                                             {`Sell ${first}`}
                                         </button>

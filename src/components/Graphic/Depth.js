@@ -72,13 +72,13 @@ class DepthChart extends React.Component {
             const depthArray = [
                 ...buyArray,
                 {
-                    "price": buyArray[buyArray.length - 1].price + 0.001,
+                    "price": buyArray[buyArray.length - 1] ? buyArray[buyArray.length - 1].price + 0.001 : 0,
                     "volume": 0,
                     "side": "buy",
                     "id": 0
                 },
                 {
-                    "price": sellArray[0].price - 0.001,
+                    "price": sellArray[0] ? sellArray[0].price - 0.001 : 0,
                     "volume": 0,
                     "side": "buy",
                     "id": 0

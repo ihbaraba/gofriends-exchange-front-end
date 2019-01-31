@@ -74,12 +74,21 @@
 
 .modal-window .address {
     width: 100%;
+    position: relative;
     padding: 20px 0;
     text-align: center;
     border: 1px solid #979797;
     font-family: Roboto;
     font-size: 15px;
     letter-spacing: 1.5px;
+}
+
+.modal-window .address i {
+    position: absolute;
+    right: 0;
+    top: -30px;
+    font-size: 20px;
+    cursor: pointer;
 }
 
 .modal-window .withdraw .formWrap {

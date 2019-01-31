@@ -52,7 +52,7 @@ class FilterBlock extends Component {
             <div className='search-input'>
                 <i className="fa fa-search" aria-hidden="true"></i>
                 <input
-                    type="number"
+                    type="text"
                     placeholder='Search'
                     value={this.state.email}
                     onChange={e => this.setState({email: e.target.value})}

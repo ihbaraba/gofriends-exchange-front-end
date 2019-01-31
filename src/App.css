@@ -22,8 +22,26 @@ html {
     background-position: 0 0;
 }
 
-.ant-notification-notice {
-    background: #181818 !important;
+.toaster-container {
+    display: flex;
+    align-items: center;
+}
+
+.Toastify__toast {
+    font-size: 16px;
+}
+
+.Toastify__toast i {
+    font-size: 18px;
+    margin: 0 15px 0 0;
+}
+
+.Toastify__toast--error {
+    background: rgb(221, 68, 87) !important;
+}
+
+.Toastify__toast--success {
+    background: #00CE7D !important;
 }
 
 .ant-notification-notice-with-icon .ant-notification-notice-description,

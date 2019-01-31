@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import axios from "axios/index";
-import {Icon, notification} from 'antd';
+import {Icon} from 'antd';
+import {toast} from 'react-toastify';
 
 import {COMMISSIONS, PAIRS} from "../../../constants/APIURLS";
 import PairsList from "./PairsList";
@@ -92,16 +93,24 @@ class CommissionsSettings extends Component {
         try {
             await axios.put(`${COMMISSIONS}/${this.state.pair.id}`, {steps: this.state.pairParams});
 
-            notification.success({
-                message: 'Confirmed'
+            toast.success(<div className='toaster-container'><Icon type="check-circle" /> Confirmed</div>, {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true
             });
 
         } catch (e) {
-            notification.error({
-                message: 'Rejected',
-                description: e.response.data.userMessage,
+            toast.error(<div className='toaster-container'><Icon type="close" /> {e.response.data.userMessage}</div>, {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true
             });
-            console.log(e.response.data.userMessage);
         }
     };
 
@@ -121,7 +130,7 @@ class CommissionsSettings extends Component {
 
     handleRemoveStep = async (index, id) => {
         console.log(index);
-        if(id) {
+        if (id) {
             await axios.delete(`${COMMISSIONS}/${id}`)
         }
 

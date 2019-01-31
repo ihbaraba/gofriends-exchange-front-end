@@ -1,8 +1,9 @@
 import React, {Component} from 'react';
-import {Table, Modal} from 'antd';
+import {Table, Modal, Icon} from 'antd';
 import axios from 'axios';
 
 import {WALLETS, WITHDRAW} from '../../constants/APIURLS';
+import {toast} from "react-toastify";
 
 class AdminWallet extends Component {
     state = {
@@ -22,16 +23,38 @@ class AdminWallet extends Component {
 
     handleOk = async (e) => {
         const {amount, wallet, selectedWallet} = this.state;
-        console.log(selectedWallet);
-        await axios.post(WITHDRAW, {
-            recepient: wallet,
-            amount: +amount,
-            currencyId: selectedWallet.currencyId
-        });
 
-        this.setState({
-            visible: false,
-        });
+        try {
+            await axios.post(WITHDRAW, {
+                recepient: wallet,
+                amount: +amount,
+                currencyId: selectedWallet.currencyId
+            });
+
+            toast.success(<div className='toaster-container'><Icon type="check-circle" /> Confirmed</div>, {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true
+            });
+
+            this.setState({
+                visible: false,
+                amount: 0,
+                wallet: ''
+            });
+        } catch (e) {
+            toast.error(<div className='toaster-container'><Icon type="close" /> {e.response.data.userMessage}</div>, {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true
+            });
+        }
     };
 
     handleCancel = (e) => {

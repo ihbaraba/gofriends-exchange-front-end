@@ -112,7 +112,8 @@ class Profile extends Component {
 
     render() {
         const {showQr, qrCode, totpCode} = this.state;
-        const {username, country = {}, twoFactorAuthEnabled} = this.props.user;
+        const {username, country = {}, twoFactorAuthEnabled, email} = this.props.user;
+        console.log(this.props);
         // const {name} = country;
         const countryName = country ? country.countryName : 'Ukraine';
 
@@ -155,7 +156,11 @@ class Profile extends Component {
                             </div>
 
                             <div className="phone">
-                                Country: +380 ## ## ### 12
+                                Phone: +380 ## ## ### 12
+                            </div>
+
+                            <div className="phone">
+                                E-mail: {email}
                             </div>
 
                             <div className="limits">
