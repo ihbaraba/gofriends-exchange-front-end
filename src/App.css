@@ -581,6 +581,7 @@ button a:hover {
     border-radius: 2px;
     background-color: #00CE7D;
     box-shadow: 0 2px 8px 0 rgba(255, 255, 255, 0.35);
+    border: 0;
     cursor: pointer;
     color: #FFFFFF;
     font-family: Roboto;
@@ -3903,7 +3904,7 @@ body .ant-table-small > .ant-table-content > .ant-table-header > table > .ant-ta
 input {
     border: none;
     border-radius: 0;
-    color: #000 !important;
+    color: #000;
     -webkit-box-shadow: none;
     -moz-box-shadow: none;
     box-shadow: none;

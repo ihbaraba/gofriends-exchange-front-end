@@ -1,24 +1,34 @@
 import React, {Component} from 'react';
-import {Tabs} from 'antd';
+import {Tabs, Icon} from 'antd';
 import axios from "axios/index";
+import {toast} from "react-toastify";
 
 import ShortUserInformation from './ShortUserInformation';
 import TradeHistory from './TradeHistory';
+import WithdrawList from './WithdrawList';
 import KYC from './KYC';
 
-import {GET_TRADE_HISTORY, PAIRS} from "../../../constants/APIURLS";
+import {
+    GET_TRADE_HISTORY,
+    PAIRS,
+    VERIFICATION,
+    WITHDRAW,
+    VERIFY
+} from "../../../constants/APIURLS";
 
 const TabPane = Tabs.TabPane;
 
-
 class User extends Component {
     state = {
-        user: {
-            name: 'Ivan',
-            phone: 132442
+        kyc: {
+            documents: [],
+            user: {
+                verifyStatus: ''
+            }
         },
         coinPairs: [],
         tradeHistoryList: [],
+        withdrawList: [],
 
         pagination: {
             total: 0,
@@ -44,6 +54,21 @@ class User extends Component {
         })
     };
 
+    getWithdrawList = async () => {
+        const {pagination: {current, pageSize}} = this.state;
+
+        const url = `${WITHDRAW}?userId=${this.userId}&skip=${current * 10 - 10}&take=${pageSize}`;
+        const {data} = await axios.get(url);
+
+        this.setState({
+            withdrawList: data.withdraw,
+            pagination: {
+                ...this.state.pagination,
+                total: +data.count
+            }
+        })
+    };
+
     handleChangePagination = (pagination, type) => {
         console.log(pagination);
         this.setState({
@@ -53,6 +78,42 @@ class User extends Component {
                 if (type === 'sell' || type === 'buy')
                     this.getTradeHistory(type)
             })
+    };
+
+    onVerifyUser = async (id, verify) => {
+        try {
+            await axios.put(`${VERIFY}/${id}`, {
+                isVerified: verify
+            });
+
+            toast.success(<div className='toaster-container'><Icon type="check-circle"/> Confirmed</div>, {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true
+            });
+        } catch (e) {
+            toast.error(<div className='toaster-container'><Icon type="close"/> {e.response.data.userMessage}</div>, {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true
+            });
+        }
+
+        this.setState({
+            kyc: {
+                ...this.state.kyc,
+                user: {
+                    ...this.state.kyc.user,
+                    verifyStatus: verify ? 'verified' : 'rejected'
+                }
+            }
+        })
     };
 
     onChangeTab = async (tab) => {
@@ -74,7 +135,7 @@ class User extends Component {
                 break;
 
             case 'withdraws':
-                console.log('withdraws');
+                this.getWithdrawList();
                 break;
 
             default:
@@ -83,26 +144,30 @@ class User extends Component {
     };
 
     async componentDidMount() {
-        const {data} = await axios.get(PAIRS);
+        const [pairs, kyc] = await Promise.all([axios.get(PAIRS), axios.get(`${VERIFICATION}/${this.userId}`)]);
 
-        let coinPairs = data.map(pair => {
+        let coinPairs = pairs.data.map(pair => {
             return ({
                 id: pair.id,
                 name: `${pair.baseCurrency.code}/${pair.quoteCurrency.code}`
             })
         });
+
         this.setState({
-            coinPairs
+            coinPairs,
+            kyc: kyc.data
         })
     };
 
     render() {
-        const {tradeHistoryList, coinPairs, user, pagination: {total, current}} = this.state;
+        const {tradeHistoryList, withdrawList, coinPairs, kyc, kyc: {user}, pagination} = this.state;
 
         return (
             <div className="user-page">
                 <div className='top-block'>
-                    <ShortUserInformation/>
+                    <ShortUserInformation
+                        user={user}
+                    />
 
                     <div className='blocked-user-block'>
                         <div className='title'>Block user</div>
@@ -126,6 +191,8 @@ class User extends Component {
                         <TabPane tab="KYC" key="kyc">
                             <KYC
                                 user={user}
+                                kyc={kyc}
+                                verify={this.onVerifyUser}
                             />
                         </TabPane>
 
@@ -137,8 +204,7 @@ class User extends Component {
                             <TradeHistory
                                 coinPairs={coinPairs}
                                 data={tradeHistoryList}
-                                total={total}
-                                current={current}
+                                {...pagination}
                                 type='buy'
                                 onChange={this.handleChangePagination}
                             />
@@ -148,15 +214,19 @@ class User extends Component {
                             <TradeHistory
                                 coinPairs={coinPairs}
                                 data={tradeHistoryList}
-                                total={total}
-                                current={current}
+                                {...pagination}
                                 type='sell'
                                 onChange={this.handleChangePagination}
                             />
                         </TabPane>
 
                         <TabPane tab="Withdraws list" key="withdraws">
-                            5
+                            <WithdrawList
+                                list={withdrawList}
+                                {...pagination}
+                                onChange={this.handlePaginationChange}
+                                // onApprove={this.handleApprove}
+                            />
                         </TabPane>
                     </Tabs>
 

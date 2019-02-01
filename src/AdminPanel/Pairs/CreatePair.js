@@ -13,7 +13,7 @@ const CreatePair = ({coins, onSelect, onCreatePair, basicCoin, childCoin}) => {
             <div className='create-block'>
                 <div>
                     <label>Base currency</label>
-                    <Select placeholder='All' style={{width: 180}} value={basicCoin} onChange={e => onSelect(e, 'basicCoin')}>
+                    <Select dropdownClassName='admin-select' placeholder='All' style={{width: 180}} value={basicCoin} onChange={e => onSelect(e, 'basicCoin')}>
                         <Option value=''>All</Option>
                         {coins.map(item => (
                             <Option value={item.id} key={item.id}>{item.code}</Option>
@@ -25,7 +25,7 @@ const CreatePair = ({coins, onSelect, onCreatePair, basicCoin, childCoin}) => {
 
                 <div>
                     <label>Quote currency</label>
-                    <Select placeholder='All' style={{width: 180}} value={childCoin} onChange={e => onSelect(e, 'childCoin')}>
+                    <Select dropdownClassName='admin-select' placeholder='All' style={{width: 180}} value={childCoin} onChange={e => onSelect(e, 'childCoin')}>
                         <Option value=''>All</Option>
                         {coins.map(item => (
                             <Option value={item.id} key={item.id}>{item.code}</Option>

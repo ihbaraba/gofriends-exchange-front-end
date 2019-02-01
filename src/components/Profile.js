@@ -34,7 +34,7 @@ const customStyles = {
 class Profile extends Component {
     state = {
         showQr: false,
-        modalIsOpen: false,
+        modalIsOpen: true,
         qrCode: '',
         totpCode: '',
         twoFactorAuthEnabled: this.props.user.twoFactorAuthEnabled
@@ -66,6 +66,11 @@ class Profile extends Component {
     };
 
     closeModal = () => {
+        this.setState({modalIsOpen: false})
+        this.props.history.push('/exchange')
+    };
+
+    exitModal = () => {
         this.setState({modalIsOpen: false})
     };
 
@@ -112,7 +117,7 @@ class Profile extends Component {
 
     render() {
         const {showQr, qrCode, totpCode} = this.state;
-        const {username, country = {}, twoFactorAuthEnabled, email} = this.props.user;
+        const {username, country = {}, twoFactorAuthEnabled, email, id} = this.props.user;
         console.log(this.props);
         // const {name} = country;
         const countryName = country ? country.countryName : 'Ukraine';
@@ -259,7 +264,11 @@ class Profile extends Component {
                             <i className="fa fa-times" aria-hidden="true"></i>
                         </div>
 
-                        <ProfileVerification />
+                        <ProfileVerification
+                        userId={id}
+                        onExit={this.exitModal}
+                        onClose={this.closeModal}
+                        />
                     </div>
                 </Modal>
 

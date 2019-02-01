@@ -131,6 +131,12 @@ export const COMMISSIONS_PROFIT = `${current_server.XHR}transactions/fee`;
 export const CURRENCIES = `${current_server.XHR}currencies`;
 
 
+//verification
+export const VERIFICATION = `${current_server.XHR}verification/user`;
+export const VERIFY = `${current_server.XHR}users/verification`;
+
+
+
 
 
 

@@ -32,7 +32,7 @@ class Admins extends Component {
         this.setState({
             visible: false,
         });
-    }
+    };
 
     render() {
         const {visible} = this.state;
@@ -55,7 +55,7 @@ class Admins extends Component {
                 >
                     <div className='form-item'>
                         <label htmlFor="Roule ">Roule</label>
-                        <Select defaultValue="admin" style={{ width: 180 }}>
+                        <Select dropdownClassName='admin-select' defaultValue="admin" style={{ width: 180 }}>
                             <Option value="admin">Admin</Option>
                         </Select>
                     </div>

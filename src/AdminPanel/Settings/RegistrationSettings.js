@@ -19,7 +19,7 @@ const RegistrationSettings = ({params, onChange, currencyParams}) => (
         </div>
 
         <div>
-            <h1>Currency</h1>
+            <h1>Demo currency</h1>
 
             <span>Disable</span>
 

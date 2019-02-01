@@ -226,7 +226,9 @@ class Balances extends Component {
 
                                     <CopyToClipboard text={address}
                                                      onCopy={() => this.setState({copied: true})}>
-                                        <Icon type="copy" style={copied ? {color: '#00CE7D'} : {color: '#fff'}}/>
+
+                                        <button className={copied ? 'copy-btn copy' : 'copy-btn'}>Copy</button>
+                                        {/*<Icon type="copy" style={copied ? {color: '#00CE7D'} : {color: '#fff'}}/>*/}
                                     </CopyToClipboard>
                                 </div>
                             </div>

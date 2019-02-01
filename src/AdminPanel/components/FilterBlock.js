@@ -71,7 +71,7 @@ class FilterBlock extends Component {
 
     byCurrency = () => (
         <div className='filter-item'>
-            <Select placeholder='All' style={{width: 180}} onChange={e => this.setState({pair: e})}>
+            <Select dropdownClassName='admin-select' placeholder='All' style={{width: 180}} onChange={e => this.setState({pair: e})}>
                 <Option value=''>All</Option>
                 {this.props.currencies.map(coin => (
                     <Option value={coin.id} key={coin.id}>{coin.code}</Option>
@@ -83,7 +83,7 @@ class FilterBlock extends Component {
 
     byStatus = (params) => (
         <div className='filter-item'>
-            <Select placeholder='All' style={{width: 180}} onChange={e => this.setState({status: e})}>
+            <Select dropdownClassName='admin-select' placeholder='All' style={{width: 180}} onChange={e => this.setState({status: e})}>
                 <Option value=''>All</Option>
                 {params.map(item => (
                     <Option value={item} key={item}>{item}</Option>
@@ -95,7 +95,7 @@ class FilterBlock extends Component {
 
     byType = () => (
         <div className='filter-item'>
-            <Select placeholder='All' style={{width: 180}} onChange={e => this.setState({status: e})}>
+            <Select dropdownClassName='admin-select' placeholder='All' style={{width: 180}} onChange={e => this.setState({status: e})}>
                 <Option value=''>All</Option>
                 <Option value="buy">Buy</Option>
                 <Option value="sell">Sell</Option>
@@ -106,7 +106,7 @@ class FilterBlock extends Component {
 
     byPair = () => (
         <div className='filter-item'>
-            <Select placeholder='All' style={{width: 180}} onChange={e => this.setState({pair: e})}>
+            <Select dropdownClassName='admin-select' placeholder='All' style={{width: 180}} onChange={e => this.setState({pair: e})}>
                 <Option value=''>All</Option>
                 {this.props.pairs.map(item => {
                     return (

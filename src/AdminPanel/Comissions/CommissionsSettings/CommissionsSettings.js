@@ -129,7 +129,6 @@ class CommissionsSettings extends Component {
     };
 
     handleRemoveStep = async (index, id) => {
-        console.log(index);
         if (id) {
             await axios.delete(`${COMMISSIONS}/${id}`)
         }
