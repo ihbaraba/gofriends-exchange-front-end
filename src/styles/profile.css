@@ -305,6 +305,10 @@
     color: #000000 !important;
 }
 
+.first-step .form-item input {
+    color: #000000;
+}
+
 @media (max-width: 600px) {
     .profile-page .page-content {
         flex-direction: column;
