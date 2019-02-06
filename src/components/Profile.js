@@ -34,7 +34,7 @@ const customStyles = {
 class Profile extends Component {
     state = {
         showQr: false,
-        modalIsOpen: true,
+        modalIsOpen: false,
         qrCode: '',
         totpCode: '',
         twoFactorAuthEnabled: this.props.user.twoFactorAuthEnabled
@@ -54,6 +54,12 @@ class Profile extends Component {
             const userInfo = await getUserInfo({rout: USERINFO, token});
             const {body} = userInfo;
             this.props.save_user_info(body);
+
+            if(body.verifyStatus !== 'verified') {
+                this.setState({
+                    modalIsOpen: true
+                })
+            }
         }
 
         // this.openModal()
