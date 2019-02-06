@@ -104,19 +104,19 @@ class KYC extends Component {
                         />
                     </div>
 
-                    <div className="form-item">
-                        <label htmlFor="">ID Expiry</label>
-                        <input
-                            type="text"
-                        />
-                    </div>
+                    {/*<div className="form-item">*/}
+                        {/*<label htmlFor="">ID Expiry</label>*/}
+                        {/*<input*/}
+                            {/*type="text"*/}
+                        {/*/>*/}
+                    {/*</div>*/}
 
-                    <div className="form-item">
-                        <label htmlFor="">ID Number</label>
-                        <input
-                            type="text"
-                        />
-                    </div>
+                    {/*<div className="form-item">*/}
+                        {/*<label htmlFor="">ID Number</label>*/}
+                        {/*<input*/}
+                            {/*type="text"*/}
+                        {/*/>*/}
+                    {/*</div>*/}
 
                 </div>
 

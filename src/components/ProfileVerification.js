@@ -22,6 +22,7 @@ class ProfileVerification extends Component {
     };
 
     onDrop = (picture) => {
+        console.log(picture);
         this.setState({
             imgUrl: URL.createObjectURL(picture[0]),
             img: picture[0]
@@ -90,7 +91,7 @@ class ProfileVerification extends Component {
             }
         });
 
-        this.props.exitModal();
+        this.props.onExit();
     };
 
     componentDidMount() {

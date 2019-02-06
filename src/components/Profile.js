@@ -35,6 +35,7 @@ class Profile extends Component {
     state = {
         showQr: false,
         modalIsOpen: false,
+        verifyStatus: '',
         qrCode: '',
         totpCode: '',
         twoFactorAuthEnabled: this.props.user.twoFactorAuthEnabled
@@ -57,7 +58,12 @@ class Profile extends Component {
 
             if(body.verifyStatus !== 'verified') {
                 this.setState({
-                    modalIsOpen: true
+                    modalIsOpen: true,
+                    verifyStatus: body.verifyStatus
+                })
+            } else {
+                this.setState({
+                    verifyStatus: body.verifyStatus
                 })
             }
         }
@@ -122,7 +128,7 @@ class Profile extends Component {
     }
 
     render() {
-        const {showQr, qrCode, totpCode} = this.state;
+        const {showQr, qrCode, totpCode, verifyStatus} = this.state;
         const {username, country = {}, twoFactorAuthEnabled, email, id} = this.props.user;
         console.log(this.props);
         // const {name} = country;
@@ -150,8 +156,13 @@ class Profile extends Component {
                                     {username}
 
                                     <div className="verification-status">
-                                        <i className="fa fa-check" aria-hidden="true"></i>
-                                        Verified
+                                        {verifyStatus === 'verified' ? <div style={{background: '#00CE7D'}}>
+                                            <i className="fa fa-check" aria-hidden="true"></i>
+                                            Verified
+                                        </div> :
+                                        <div>
+                                            Not verified
+                                        </div>}
                                     </div>
                                 </div>
 

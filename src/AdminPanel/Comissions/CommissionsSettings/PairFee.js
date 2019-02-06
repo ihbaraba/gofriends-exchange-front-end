@@ -20,7 +20,7 @@ const PairFee = ({pair, params = [], changeInput, changeSelect, onSubmit, onAddN
                     <div className='fee-params' key={index}>
                         <div className='form-item'>
                             <label>Type</label>
-                            <Select onChange={(e) => changeSelect(index, e)} style={{width: '150px', margin: '0 50px 0 0'}}>
+                            <Select dropdownClassName='admin-select' onChange={(e) => changeSelect(index, e)} style={{width: '150px', margin: '0 50px 0 0'}}>
                                 <Option value='exchange'>Exchange</Option>
                                 <Option value='withdraw'>Withdraw</Option>
                                 <Option value='deposit'>Deposit</Option>

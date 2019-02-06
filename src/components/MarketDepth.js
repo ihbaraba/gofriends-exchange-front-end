@@ -177,7 +177,7 @@ class MarketDepth extends Component {
             key: 'quoteCurrency',
             width: 150,
         }, {
-            title: 'Sum',
+            title: 'Total',
             dataIndex: 'Sum',
             key: 'Sum',
             width: 150,
@@ -201,7 +201,7 @@ class MarketDepth extends Component {
             key: 'quoteCurrency',
             width: 150,
         }, {
-            title: 'Sum',
+            title: 'Total',
             dataIndex: 'Sum',
             key: 'Sum',
             width: 150,
@@ -227,7 +227,7 @@ class MarketDepth extends Component {
             //     width: 150,
             // },
             {
-                title: 'Sum',
+                title: 'Total',
                 dataIndex: 'Sum',
                 key: 'Sum',
                 width: 150,

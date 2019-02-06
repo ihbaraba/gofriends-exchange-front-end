@@ -67,9 +67,20 @@
     justify-content: center;
     margin: 0 0 0 20px;
     height: 20px;
-    width: 85px;
     border-radius: 4px;
-    background-color: #00CE7D;
+    font-family: Roboto;
+    font-size: 12px;
+    letter-spacing: 1px;
+}
+
+.profile-page .user-information .user-name .verification-status > div{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 0 0 20px;
+    padding: 0 10px;
+    height: 20px;
+    border-radius: 4px;
     font-family: Roboto;
     font-size: 12px;
     letter-spacing: 1px;
