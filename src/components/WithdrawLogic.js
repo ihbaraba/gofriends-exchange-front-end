@@ -89,7 +89,7 @@ class WithdrawLogic extends Component {
             }
         };
 
-        const total = +this.state.transactionFee + (+this.state.amount);
+        const total = (+this.state.amount);
 
         return (
             <div>
@@ -105,10 +105,10 @@ class WithdrawLogic extends Component {
                     {/*<label>Transaction Fee</label>*/}
                     {/*<Input {...optionsTransactionFee} style={{width: "100%",}}/>*/}
                 {/*</div>*/}
-                <div className="formWraptotal">
-                    <label>Transaction Fee:</label>
-                    <span>{optionsTransactionFee.value}</span>
-                </div>
+                {/*<div className="formWraptotal">*/}
+                    {/*<label>Transaction Fee:</label>*/}
+                    {/*<span>{optionsTransactionFee.value}</span>*/}
+                {/*</div>*/}
                 <div className="formWraptotal">
                     <label>Total:</label>
                     <span>{total}</span>

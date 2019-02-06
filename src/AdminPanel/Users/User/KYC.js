@@ -4,6 +4,14 @@ import 'react-image-lightbox/style.css';
 
 import defaultImg from '../../../img/missing-image-16x9.svg';
 
+const defaultUser = {
+    phone: ''
+};
+
+const defaultKyc = {
+    documents: []
+};
+
 class KYC extends Component {
     state = {
         isOpenImage: false
@@ -14,7 +22,7 @@ class KYC extends Component {
         : `https://${document.location.hostname}/`;
 
     render() {
-        const {user, kyc, verify} = this.props;
+        const {user = defaultUser, kyc=defaultKyc, verify} = this.props;
         const {isOpenImage} = this.state;
 
         return (
@@ -29,7 +37,7 @@ class KYC extends Component {
                             <label htmlFor="">Phone </label>
                             <input
                                 type="text"
-                                value={kyc.phone}
+                                value={kyc.phone && ''}
                                 disabled
                             />
                         </div>
@@ -38,7 +46,7 @@ class KYC extends Component {
                             <label htmlFor="">First name</label>
                             <input
                                 type="text"
-                                value={kyc.firstName}
+                                value={kyc.firstName && ''}
                                 disabled
                             />
                         </div>
@@ -47,7 +55,7 @@ class KYC extends Component {
                             <label htmlFor="">Last name</label>
                             <input
                                 type="text"
-                                value={kyc.lastName}
+                                value={kyc.lastName && ''}
                                 disabled
                             />
                         </div>
@@ -65,7 +73,7 @@ class KYC extends Component {
                             <label htmlFor="">Country</label>
                             <input
                                 type="text"
-                                value={user.phone}
+                                value={user.country && ''}
                                 disabled
                             />
                         </div>
@@ -74,7 +82,7 @@ class KYC extends Component {
                             <label htmlFor="">City</label>
                             <input
                                 type="text"
-                                value={kyc.city}
+                                value={kyc.city && ''}
                                 disabled
                             />
                         </div>

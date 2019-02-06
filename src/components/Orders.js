@@ -125,15 +125,15 @@ class Orders extends Component {
             sellLimitFee = 0;
 
         fee.forEach(item => {
-            if (+buy.price > item.fromSteps && +buy.price < item.toSteps) {
+            if (+buy.price >= item.fromSteps && +buy.price <= item.toSteps) {
                 buyFee = item.fee / 100;
-            } else if (+sell.price > item.fromSteps && +sell.price < item.toSteps) {
+            } else if (+sell.price >= item.fromSteps && +sell.price <= item.toSteps) {
                 sellFee = item.fee / 100;
             }
 
-            if (buyLimit.limit > item.fromSteps && buyLimit.limit < item.toSteps) {
+            if (buyLimit.limit >= item.fromSteps && buyLimit.limit <= item.toSteps) {
                 buyLimitFee = item.fee / 100;
-            } else if (sellLimit.limit > item.fromSteps && sellLimit.limit < item.toSteps) {
+            } else if (sellLimit.limit >= item.fromSteps && sellLimit.limit <= item.toSteps) {
                 sellLimitFee = item.fee / 100;
             }
         });

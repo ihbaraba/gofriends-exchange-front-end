@@ -23,7 +23,8 @@ class User extends Component {
         kyc: {
             documents: [],
             user: {
-                verifyStatus: ''
+                verifyStatus: '',
+                status: 'active',
             }
         },
         coinPairs: [],
@@ -155,7 +156,7 @@ class User extends Component {
 
         this.setState({
             coinPairs,
-            kyc: kyc.data
+            kyc: kyc.data ? kyc.data : {}
         })
     };
 

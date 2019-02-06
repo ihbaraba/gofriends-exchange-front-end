@@ -1,5 +1,6 @@
 import React, {Component, Fragment} from 'react';
 import {connect} from 'react-redux';
+import axios from 'axios';
 
 import Orders from './Orders';
 import Graphic from './Graphic/Graphic'
@@ -12,7 +13,7 @@ import {sendOrder, getUserInfo} from "./../utils";
 import {Radio, Tabs, Icon} from "antd";
 import Modal from 'react-modal';
 
-import {ORDERS, USERINFO} from "./../constants/APIURLS.js"
+import {ORDERS, USERINFO, MARKETS_START_PAGE} from "./../constants/APIURLS.js"
 import {login_success, save_user_info, save_user_orders} from "../actions/UserActions";
 import {chart_timing, chart_range} from "../actions/ChartActions";
 import "antd/lib/radio/style/css";
@@ -52,6 +53,7 @@ class ExchangePage extends Component {
             activeTab: '1',
             activeOrderTab: '1',
             modalIsOpen: false,
+            pairInfo: {},
             sellOrder: {
                 price: 52,
                 amount: 1
@@ -69,10 +71,12 @@ class ExchangePage extends Component {
          * then request user data
          * and save it into redux store
          **/
+
         const {user: {token}} = this.props; //read from redux state
 
         const isAuthorised = (token !== "") && (token !== null); // ? true : false
         this.setState({isAuthorised, token});
+
         if (isAuthorised) {
             const userInfo = await getUserInfo({rout: USERINFO, token});
             const {body} = userInfo;
@@ -85,6 +89,19 @@ class ExchangePage extends Component {
          **/
     }
 
+    getPairStatistics = async () => {
+        const res = await axios.get(MARKETS_START_PAGE);
+
+        res.data.forEach(item => {
+            if(item.pairId === this.props.pair.id) {
+                this.setState({
+                    pairInfo: item
+                });
+                return;
+            }
+        })
+    };
+
     componentWillMount() {
         const {user: {token}} = this.props; //read from redux state
         const isAuthorised = (token !== "") && (token !== null); // ? true : false
@@ -92,7 +109,6 @@ class ExchangePage extends Component {
             this.props.history.push('/login');
             return false;
         }
-
     }
 
     openTradeTab = (tab = '2', type = '1') => {
@@ -161,6 +177,9 @@ class ExchangePage extends Component {
                 buyOrder: order
             })
         }
+
+        this.getPairStatistics();
+
     };
 
     handleTimeFrameChange = (e) => {
@@ -174,7 +193,7 @@ class ExchangePage extends Component {
         const {pair, chartRange: {dateFrom = "2018-08-27", dateTo = "2018-08-31"}} = this.props;
 
         const {first, second, id, baseCurrencyName, quoteCurrencyName} = pair;
-        const {interval, sellOrder, buyOrder} = this.state;
+        const {interval, sellOrder, buyOrder, pairInfo} = this.state;
 
         return (
             <Fragment>
@@ -195,23 +214,23 @@ class ExchangePage extends Component {
                             <div className='coin-statistics'>
                                 <div>
                                     <span className='label'>Last price</span>
-                                    <span className='value' style={{color: '#DD4457'}}>0.0012867</span>
+                                    <span className='value' style={{color: '#DD4457'}}>{pairInfo.priceBase}</span>
                                 </div>
                                 <div>
                                     <span className='label'>24h change</span>
-                                    <span className='value' style={{color: '#00CE7D'}}>0.0000189</span>
+                                    <span className='value' style={{color: '#00CE7D'}}>{pairInfo.priceChange}</span>
                                 </div>
                                 <div>
                                     <span className='label'>24h High</span>
-                                    <span className='value'>0.001309</span>
+                                    <span className='value'>{pairInfo.priceMax}</span>
                                 </div>
                                 <div>
                                     <span className='label'>24h Low</span>
-                                    <span className='value'>0.001309</span>
+                                    <span className='value'>{pairInfo.priceMin}</span>
                                 </div>
                                 <div>
                                     <span className='label'>24h Volume</span>
-                                    <span className='value'>762.10 BTC</span>
+                                    <span className='value'>{pairInfo.volume}</span>
                                 </div>
                             </div>
                         </div>

@@ -1,7 +1,13 @@
 import React from 'react';
 import moment from 'moment';
 
-const ShortUserInformation = ({user}) => {
+const defaultUser = {
+    status: 'active',
+    name: '',
+    id: ''
+}
+
+const ShortUserInformation = ({user = defaultUser}) => {
     return (
         <div className="short-information-block">
             <div className='user-avatar'>
