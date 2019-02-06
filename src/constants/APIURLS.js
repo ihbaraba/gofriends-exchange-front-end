@@ -103,6 +103,9 @@ export const SEND_TICKETS = `${current_server.XHR}tickets`;
 //users page
 export const GET_USERS = `${current_server.XHR}users`;
 
+//dashboard page
+export const DASHBOARD_INFO = `${current_server.XHR}stats`;
+
 //settings page
 export const REGISTRATION_SETTINGS = `${current_server.XHR}settings`;
 export const EMAIL_SETTINGS = `${current_server.XHR}mailer/templates`;

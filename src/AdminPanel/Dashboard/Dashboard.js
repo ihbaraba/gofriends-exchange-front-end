@@ -4,7 +4,7 @@ import moment from 'moment';
 
 import Statistics from './Statistics';
 import LatestOperations from './LatestOperations';
-import {GET_TRADE_HISTORY, PAIRS, WITHDRAW, GET_USERS, WALLETS} from "../../constants/APIURLS";
+import {GET_TRADE_HISTORY, PAIRS, WITHDRAW, GET_USERS, WALLETS, DASHBOARD_INFO} from "../../constants/APIURLS";
 import {changePage, lastPage} from "../../actions/AdminActions";
 import {connect} from "react-redux";
 
@@ -14,18 +14,18 @@ class Dashboard extends Component {
         tradeHistory: [],
         withdrawsHistory: [],
         wallets: [],
-        usersCount: 0
+        info: {}
     };
 
     async componentDidMount() {
         const dateFrom = moment(new Date()).subtract(1, "days").format('YYYY-MM-DD');
         const dateTo = moment(new Date()).format('YYYY-MM-DD');
 
-        const [pairs, tradeHistory, withdrawsHistory, users, wallets] = await Promise.all([
+        const [pairs, tradeHistory, withdrawsHistory, info, wallets] = await Promise.all([
             axios.get(PAIRS),
             axios.get(`${GET_TRADE_HISTORY}?skip=0&take=10&dateFrom=${dateFrom}&dateTo=${dateTo}`),
             axios.get(`${WITHDRAW}?skip=0&take=10&dateFrom=${dateFrom}&dateTo=${dateTo}`),
-            axios.get(`${GET_USERS}?skip=0&take=10`),
+            axios.get(DASHBOARD_INFO),
             axios.get(WALLETS)
         ]);
 
@@ -40,7 +40,7 @@ class Dashboard extends Component {
             coinPairs,
             tradeHistory: tradeHistory.data.orders,
             withdrawsHistory: withdrawsHistory.data.withdraw,
-            usersCount: users.data.count,
+            info: info.data,
             wallets: wallets.data,
         })
     }
@@ -60,11 +60,11 @@ class Dashboard extends Component {
     };
 
     render() {
-        const {coinPairs, tradeHistory, withdrawsHistory, usersCount,wallets} = this.state;
+        const {coinPairs, tradeHistory, withdrawsHistory, info,wallets} = this.state;
         return (
             <div className='dashboard-page'>
                 <Statistics
-                    users={usersCount}
+                    info={info}
                     wallets={wallets}
                 />
 
