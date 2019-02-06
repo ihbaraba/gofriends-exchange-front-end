@@ -5,6 +5,8 @@ import axios from 'axios';
 import queryString from 'query-string';
 
 import {CHANGE_PASSWORD} from '../constants/APIURLS';
+import {toast} from "react-toastify";
+import {Icon} from "antd";
 
 
 class ChangePassword extends Component {
@@ -18,7 +20,8 @@ class ChangePassword extends Component {
 
             sendEmail: false,
             token: '',
-            isVerified: false
+            isVerified: false,
+            success: false
         };
     }
 
@@ -33,8 +36,16 @@ class ChangePassword extends Component {
 
     async componentDidMount() {
         if (this.state.token) {
-            let confirmStatus = await axios.get(`${CHANGE_PASSWORD}/${this.state.token}`);
-            console.log(confirmStatus);
+            try {
+                await axios.get(`${CHANGE_PASSWORD}/${this.state.token}`);
+                this.setState({
+                    success: true
+                })
+            } catch (e) {
+                this.setState({
+                    success: false
+                })
+            }
         }
     }
 
@@ -55,15 +66,23 @@ class ChangePassword extends Component {
 
     handleSubmit = async (e) => {
         e.preventDefault();
-        if (this.state.newPassword === this.state.newPasswordRepeat && this.state.isVerified) {
+
+        if ((this.state.newPassword === this.state.newPasswordRepeat) && this.state.isVerified) {
             try {
-               let {data: {token}} =  await axios.post(CHANGE_PASSWORD, {
+                let {data: {token}} = await axios.post(CHANGE_PASSWORD, {
                     password: this.state.oldPassword,
                     newPassword: this.state.newPassword,
                     confirmPassword: this.state.newPasswordRepeat
                 });
 
-                console.log(token);
+                toast.success(<div className='toaster-container'><Icon type="check-circle"/> Confirmed</div>, {
+                    position: "top-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true
+                });
 
                 this.setState({
                     oldPassword: '',
@@ -71,14 +90,22 @@ class ChangePassword extends Component {
                     newPasswordRepeat: '',
                     sendEmail: true
                 })
-            } catch (error) {
-                console.log(error);
+            } catch (e) {
+                toast.error(<div className='toaster-container'><Icon type="close"/> {e.response.data.userMessage}
+                </div>, {
+                    position: "top-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true
+                });
             }
         }
     };
 
     render() {
-        const {sendEmail, token} = this.state;
+        const {sendEmail, token, success} = this.state;
 
         if (!token) {
             return (
@@ -151,9 +178,9 @@ class ChangePassword extends Component {
                                 </div>
 
                                 {/*{sendEmail ? <div className='send-email-token'>*/}
-                                        {/*Сheck email*/}
-                                    {/*</div>*/}
-                                    {/*: ''}*/}
+                                {/*Сheck email*/}
+                                {/*</div>*/}
+                                {/*: ''}*/}
                             </fieldset>
                         </form>
                     </div>
@@ -172,7 +199,9 @@ class ChangePassword extends Component {
                         </div>
 
                         <div className='changed-pass'>
-                            Password changed successfully
+                            {success ?
+                            'Password changed successfully'
+                            : 'Try again later'}
                         </div>
                     </div>
                 </div>
