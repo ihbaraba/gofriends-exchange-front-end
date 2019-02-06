@@ -22,8 +22,10 @@ class KYC extends Component {
         : `https://${document.location.hostname}/`;
 
     render() {
-        const {user = defaultUser, kyc=defaultKyc, verify} = this.props;
+        const {user = defaultUser, kyc, verify} = this.props;
         const {isOpenImage} = this.state;
+
+        console.log(kyc);
 
         return (
             <div className="kyc-block">
@@ -98,7 +100,7 @@ class KYC extends Component {
                         <label htmlFor="">ID</label>
                         <input
                             type="text"
-                            value={kyc.documents.length > 0 ? kyc.documents[0].id : ''}
+                            value={kyc.length > 0 ? (kyc.documents.length > 0 ? kyc.documents[0].id : '') : ''}
                             disabled
                         />
                     </div>
@@ -107,7 +109,7 @@ class KYC extends Component {
                         <label htmlFor="">ID type</label>
                         <input
                             type="text"
-                            value={kyc.documents.length > 0 ? kyc.documents[0].type : ''}
+                            value={kyc.length > 0 ? (kyc.documents.length > 0 ? kyc.documents[0].type : '') : ''}
                             disabled
                         />
                     </div>
@@ -136,7 +138,7 @@ class KYC extends Component {
                     <div className="form-item" onClick={() => this.setState({isOpenImage: true})}>
                         <label htmlFor="">ID proof</label>
                         <img
-                            src={kyc.documents.length > 0 ? `${this.imgUrl}uploads/${kyc.documents[0].filename}` : defaultImg}
+                            src={kyc.length > 0 ? (kyc.documents.length > 0 ? `${this.imgUrl}uploads/${kyc.documents[0].filename}` : defaultImg) : defaultImg}
                             alt=""/>
                     </div>
 
@@ -147,7 +149,7 @@ class KYC extends Component {
 
                     {isOpenImage && (
                         <Lightbox
-                            mainSrc={kyc.documents.length > 0 ? `${this.imgUrl}uploads/${kyc.documents[0].filename}` : defaultImg}
+                            mainSrc={kyc.length > 0 ? (kyc.documents.length > 0 ? `${this.imgUrl}uploads/${kyc.documents[0].filename}` : defaultImg) : defaultImg}
                             onCloseRequest={() => this.setState({ isOpenImage: false })}
                         />
                     )}

@@ -3,7 +3,7 @@ import React from 'react';
 import user from '../../img/admin-panel/us.svg';
 import btc from '../../img/admin-panel/BTC_Logo.svg';
 import eth from '../../img/coins/ETH.png';
-import profit from '../../img/admin-panel/profit.svg';
+import pr from '../../img/admin-panel/profit.svg';
 
 const Statistics = ({users, wallets}) => {
     let profit = 0;
@@ -59,7 +59,7 @@ const Statistics = ({users, wallets}) => {
 
             <div className='statistics-information'>
                 <div style={{display: 'flex', alignItems: 'center'}}>
-                    <img src={profit} alt=""/>
+                    <img src={pr} alt=""/>
                     <span className='title'>Your profit</span>
                 </div>
 
