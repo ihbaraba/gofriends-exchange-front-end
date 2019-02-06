@@ -91,6 +91,8 @@ class WithdrawList extends Component {
                 pauseOnHover: true,
                 draggable: true
             });
+
+            this.getWithdraw();
         } catch (e) {
             toast.error(<div className='toaster-container'><Icon type="close"/> {e.response.data.userMessage}</div>, {
                 position: "top-right",
