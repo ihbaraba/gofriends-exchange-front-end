@@ -2,13 +2,13 @@ import React from 'react';
 import {Switch} from 'antd';
 
 
-const RegistrationSettings = ({params, onChange, currencyParams}) => (
-    <div className='registration-settings'>
+const RegistrationSettings = ({params, onChange, currencyParams}) => {
+
+    return(<div className='registration-settings'>
         <div>
             <h1>Registration</h1>
 
             <span>Disable</span>
-
             <Switch
                 className='switch'
                 checked={params.value}
@@ -31,7 +31,7 @@ const RegistrationSettings = ({params, onChange, currencyParams}) => (
 
             <span>Enable</span>
         </div>
-    </div>
-);
+    </div>)
+};
 
 export default RegistrationSettings;

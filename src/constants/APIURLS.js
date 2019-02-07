@@ -102,6 +102,7 @@ export const SEND_TICKETS = `${current_server.XHR}tickets`;
 //ADMIN PANEL
 //users page
 export const GET_USERS = `${current_server.XHR}users`;
+export const GET_ADMINS = `${current_server.XHR}users/admin`;
 
 //dashboard page
 export const DASHBOARD_INFO = `${current_server.XHR}stats`;

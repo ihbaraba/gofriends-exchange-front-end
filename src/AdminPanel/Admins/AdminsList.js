@@ -1,18 +1,18 @@
 import React from 'react';
 import {Table} from 'antd';
 
-const AdminsList = ({list}) => {
+const AdminsList = ({list, onRemove}) => {
     const columns = [
         {
             title: 'Role',
-            dataIndex: 'id',
-            key: 'id',
-            width: 100,
+            dataIndex: 'role',
+            key: 'role',
+            width: 150,
         },
         {
             title: 'Email',
-            dataIndex: 'title',
-            key: 'title',
+            dataIndex: 'email',
+            key: 'email',
             width: 200,
         },
         {
@@ -28,10 +28,10 @@ const AdminsList = ({list}) => {
             width: 150,
             render: (e, item) => (
                 <div className='action-btn'>
-                    <button className='admin-btn green-btn'>
-                        Edit
-                    </button>
-                    <button className='admin-btn red-btn'>
+                    {/*<button className='admin-btn green-btn'>*/}
+                        {/*Edit*/}
+                    {/*</button>*/}
+                    <button className='admin-btn red-btn' onClick={() => onRemove(item.id)}>
                         Delite
                     </button>
                 </div>
@@ -44,9 +44,10 @@ const AdminsList = ({list}) => {
         <div className='admins-list-block response-side'>
             <Table
                 columns={columns}
-                // dataSource={list}
-                // rowKey={record => record.id}
+                dataSource={list}
+                rowKey={record => record.id}
                 className='admin-table'
+                pagination={false}
             />
 
         </div>
