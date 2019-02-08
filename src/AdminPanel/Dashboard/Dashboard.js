@@ -63,10 +63,10 @@ class Dashboard extends Component {
         const {coinPairs, tradeHistory, withdrawsHistory, info,wallets} = this.state;
         return (
             <div className='dashboard-page'>
-                <Statistics
-                    info={info}
-                    wallets={wallets}
-                />
+                {/*<Statistics*/}
+                    {/*info={info}*/}
+                    {/*wallets={wallets}*/}
+                {/*/>*/}
 
                 <div className='latest-operations-block'>
                     <LatestOperations
