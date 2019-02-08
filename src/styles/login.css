@@ -70,6 +70,10 @@
     letter-spacing: 1.2px;
 }
 
+.login-page .login-form .login-form-item input {
+    color: #000000;
+}
+
 .login-page .login-form .reset-password-block {
     width: 100%;
     text-align: right;

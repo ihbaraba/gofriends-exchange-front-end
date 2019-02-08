@@ -22,14 +22,23 @@
     margin: 0 0 35px 0;
     padding: 0 35px;
     display: flex;
-    justify-content: flex-start;
-    align-items: center;
+    flex-direction: column;
+    /*justify-content: flex-start;*/
+    /*align-items: center;*/
     border-radius: 3px;
     background-color: #1E1E1E;
     box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.35);
 }
 
+.settings-page .registration-settings > div {
+    display: flex;
+    align-items: center;
+    margin: 20px 0;
+}
+
 .settings-page .registration-settings h1 {
+    display: block;
+    width: 15%;
     font-family: Roboto;
     font-size: 18px;
     font-weight: 500;
@@ -87,7 +96,7 @@
     border-left: 1px solid #fff;
 }
 
-.news-editor-page .placeholder-block > div{
+.news-editor-page .placeholder-block > div {
     margin: 0 0 0 10px;
     cursor: pointer;
 }

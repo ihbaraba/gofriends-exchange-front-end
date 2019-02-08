@@ -22,3 +22,190 @@
     font-size: 18px;
     transform: rotate(90deg);
 }
+
+/*settings*/
+.commissions-settings-page {
+    display: flex;
+    min-height: 65%;
+    height: 80%;
+}
+
+.commissions-settings-page .arrow-block {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    margin: 0 20px;
+}
+
+.commissions-settings-page .arrow-block i {
+    font-size: 25px;
+}
+
+.commissions-settings-page .pairs-list-block {
+    width: 35%;
+    padding: 25px 35px;
+    border-radius: 0 3px 3px 3px;
+    background-color: #1E1E1E;
+    box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.35);
+}
+
+.commissions-settings-page .pairs-list-block .block-title {
+    margin: 0 0 25px 0;
+    font-family: Roboto;
+    font-size: 18px;
+    letter-spacing: 1.8px;
+}
+
+.commissions-settings-page .pairs-list-block .ant-menu {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    background: none;
+    border: 0;
+}
+
+.commissions-settings-page .pairs-list-block .ant-menu:before,
+.commissions-settings-page .pairs-list-block .ant-menu:after {
+    display: none;
+}
+
+.commissions-settings-page .pairs-list-block .ant-menu-item {
+    width: 45%;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 !important;
+    border: 1px solid #979797;
+    border-top: 0;
+}
+
+.commissions-settings-page .pairs-list-block .ant-menu-item.ant-menu-item-selected {
+    background: #4A998C;
+}
+
+.commissions-settings-page .pairs-list-block .ant-menu-item.ant-menu-item-selected::after {
+    border: 0 !important
+}
+
+.commissions-settings-page .pairs-list-block .ant-menu-item:first-child,
+.commissions-settings-page .pairs-list-block .ant-menu-item:nth-child(2) {
+    border-top: 1px solid #979797;
+}
+
+/*=--------------------=*/
+.commissions-settings-page .pair-fee-block {
+    width: 60%;
+    min-height: 100%;
+    height: max-content;
+    padding: 25px 35px;
+    border-radius: 0 3px 3px 3px;
+    background-color: #1E1E1E;
+    box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.35);
+}
+
+.commissions-settings-page .pair-fee-block .title-block {
+    margin: 0 0 15px 0;
+    color: #4A998C;
+    font-family: Roboto;
+    font-size: 18px;
+    letter-spacing: 1.8px;
+}
+
+.commissions-settings-page .pair-fee-block .table-title {
+    margin: 0 0 30px 0;
+    padding: 0 0 0 32%;
+    display: flex;
+    justify-content: space-around;
+    font-family: Roboto;
+    font-size: 15px;
+    font-weight: bold;
+    letter-spacing: 1.5px;
+}
+
+.commissions-settings-page .pair-fee-block .fee-params {
+    display: flex;
+    align-items: flex-end;
+    padding: 15px 0 15px 30px;
+}
+
+.commissions-settings-page .pair-fee-block .fee-params:nth-child(2n+1) {
+    background: #181818;
+    border-bottom: 1px solid rgba(151, 151, 151, 0.16);
+}
+
+.commissions-settings-page .pair-fee-block .fee-params .form-item {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.commissions-settings-page .pair-fee-block .fee-params hr {
+    width: 40px;
+    margin: 0 20px 15px 20px;
+    border-bottom: 1px solid #979797;
+}
+
+.commissions-settings-page .pair-fee-block .fee-params .right-arrow {
+    width: 50px;
+    height: 2px;
+    margin: 0 40px 15px 30px;
+    background: #979797;
+    position: relative;
+}
+
+.right-arrow::before {
+    left: 100%;
+    top: 50%;
+    border: solid transparent;
+    content: " ";
+    height: 0;
+    width: 0;
+    position: absolute;
+    pointer-events: none;
+    border-left-color: #979797;
+    border-width: 5px;
+    margin-top: -5px;
+}
+
+.commissions-settings-page .pair-fee-block .fee-params .form-item input {
+    width: 65px;
+}
+
+.commissions-settings-page .pair-fee-block .fee-params .form-item:last-child input {
+    padding: 0 20px 0 4px;
+}
+
+.commissions-settings-page .pair-fee-block .fee-params .form-item:last-child input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.commissions-settings-page .pair-fee-block .fee-params .form-item .rate {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    height: 32px;
+    right: 5px;
+    top: -5px;
+    font-size: 16px;
+    z-index: 100;
+
+}
+
+.commissions-settings-page .pair-fee-block .fee-params i {
+    font-size: 20px;
+    margin: 0 20px 10px auto;
+    cursor: pointer;
+}
+
+.commissions-settings-page .pair-fee-block .fee-params i:hover {
+    color: #DD4457;
+}
+
+.commissions-settings-page .pair-fee-block .green-btn {
+    margin: 40px 0 0 50px;
+    display: block;
+}

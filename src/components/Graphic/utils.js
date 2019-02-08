@@ -31,21 +31,25 @@ function parseCryptocompareData(parse) {
 // const parseDate = timeParse("%Y-%m-%d");
 const parseDate = timeParse("%Y-%m-%dT%H:%M:%S.%LZ");
 
-export function getData({pairId = 1, APIURL = QUOTATIONS, dateFrom, dateTo, take = 10000, interval = "5min", appendFake = "true"}) {
-    const promiseMSFT = fetch(`${APIURL}?pairId=${pairId}&dateFrom=${dateFrom}&dateTo=${dateTo}&take=${take}&interval=${interval}&appendFake=${appendFake}`)
-        .then(response => response.json())
-        .then(data => {
-            data.reduce((data, item) => {
-                data.push(parseData(parseDate)(item));
+export const getData = async ({pairId = 1, APIURL = QUOTATIONS, dateFrom, dateTo, take = 10000, interval = "5min", appendFake = "true"}) => {
+    try {
+        const promiseMSFT = await fetch(`${APIURL}?pairId=${pairId}&dateFrom=${dateFrom}&dateTo=${dateTo}&take=${take}&interval=${interval}&appendFake=${appendFake}`)
+            .then(response => response.json())
+            .then(data => {
+                data.reduce((data, item) => {
+                    data.push(parseData(parseDate)(item));
+                    return data
+                }, []);
+
+                // console.log("getData:", data);
                 return data
-            }, []);
+            });
 
-            // console.log("getData:", data);
-            return data
-        });
-
-    return promiseMSFT;
-}
+        return promiseMSFT;
+    } catch (e) {
+        console.log(e);
+    }
+};
 
 export function getDataFromSocket({point, id, stopTime = 0, callback}) {
     // console.log('state: ', this.state);

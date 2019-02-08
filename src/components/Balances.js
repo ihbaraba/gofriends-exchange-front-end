@@ -1,12 +1,15 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux'
-import {Table} from 'antd';
+import {Table, Icon, notification} from 'antd';
 import QRCode from 'qrcode-react';
+import Modal from 'react-modal';
+import axios from 'axios';
+import {CopyToClipboard} from 'react-copy-to-clipboard';
+
 import {getUserInfo} from "../utils";
-import {USERINFO} from "./../constants/APIURLS.js"
+import {USERINFO, WITHDRAW} from "./../constants/APIURLS.js"
 import {save_user_info} from "../actions/UserActions";
 import WithdrawPanel from "./WithdrawLogic";
-import Modal from 'react-modal';
 
 import BTC from '../img/coins/BTC.png';
 import BTG from '../img/coins/BTG_gold.png';
@@ -17,6 +20,7 @@ import ZEC from '../img/coins/ZEC.png';
 
 import '../styles/balances.css';
 import '../App.css';
+import {toast} from "react-toastify";
 
 const customStyles = {
     content: {
@@ -37,7 +41,8 @@ class Balances extends Component {
         super(props);
         this.state = {
             modalIsOpen: false,
-            selectCoin: {}
+            selectCoin: {},
+            copied: false
         };
     }
 
@@ -60,11 +65,44 @@ class Balances extends Component {
                 type
             }
         })
-    }
+    };
 
     closeModal = () => {
-        this.setState({modalIsOpen: false})
-    }
+        this.setState({
+            modalIsOpen: false,
+            copied: false
+        })
+    };
+
+    handleWithdrawCoins = async ({wallet, amount}) => {
+        try {
+            await axios.post(WITHDRAW, {
+                recepient: wallet,
+                amount: +amount,
+                currencyId: this.state.selectCoin.id
+            });
+
+            toast.success(<div className='toaster-container'><Icon type="check-circle" /> Confirmed</div>, {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true
+            });
+
+            this.closeModal()
+        } catch (e) {
+            toast.error(<div className='toaster-container'><Icon type="close" /> {e.response.data.userMessage}</div>, {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true
+            });
+        }
+    };
 
     render() {
         const coinsLogo = {
@@ -75,9 +113,11 @@ class Balances extends Component {
         // console.log("Balances. User = ", this.props);
         const {balances = []} = user;
         const {name, address, type} = this.state.selectCoin;
+        const {copied} = this.state;
 
         const dataSource = balances.map(item => (
             {
+                id: item.currency.id,
                 key: item.currency.name + "" + item.amount,
                 name: item.currency.name,
                 code: item.currency.code,
@@ -131,6 +171,7 @@ class Balances extends Component {
                     </div>
                 )
             }];
+
         return (
             <div className="balances-page">
                 <div className='card-container-head'>
@@ -177,16 +218,27 @@ class Balances extends Component {
                                 </div>
 
                                 <div className='address-description'>
-                                    ADA Deposit Address
+                                    Add Deposit Address
                                 </div>
 
                                 <div className="address">
                                     {address}
+
+                                    <CopyToClipboard text={address}
+                                                     onCopy={() => this.setState({copied: true})}>
+
+                                        <button className={copied ? 'copy-btn copy' : 'copy-btn'}>Copy</button>
+                                        {/*<Icon type="copy" style={copied ? {color: '#00CE7D'} : {color: '#fff'}}/>*/}
+                                    </CopyToClipboard>
                                 </div>
                             </div>
                             :
                             <div className='withdraw'>
-                                <WithdrawPanel record={this.state.selectCoin} close={this.closeModal}/>
+                                <WithdrawPanel
+                                    record={this.state.selectCoin}
+                                    close={this.closeModal}
+                                    onWithdraw={this.handleWithdrawCoins}
+                                />
                             </div>
                         }
                     </div>

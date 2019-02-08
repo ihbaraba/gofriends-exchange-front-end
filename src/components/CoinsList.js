@@ -20,14 +20,21 @@ class CoinsList extends React.Component {
         this.getDataFromSocket = this.getDataFromSocket.bind(this);
         this.list = this.list.bind(this);
         this.tabsCallback = this.tabsCallback.bind(this);
+
         // this.currenciesTabs = this.currenciesTabs.bind(this);
+
+        this.state = {
+            activeTab: ''
+        }
     }
 
     async componentDidMount() {
         const data = await getCoinsList(PAIRS);
         const markets_pairs = await getCoinsList(MARKETS);
+
         const pairs = data.map((item, idx) => ({
             id: item.id,
+            fee: item.fee,
             first: item.baseCurrency.code,
             baseCurrency: item.baseCurrency.code,
             baseCurrencyName: item.baseCurrency.name,
@@ -45,8 +52,24 @@ class CoinsList extends React.Component {
         const coins = [...new Set(pairs.map(item => item.baseCurrency))];
         // console.log("PAIRS ", pairs, coins, markets_pairs, data);
         this.setState({data, coins, pairs});
-        this.props.pair(pairs[0]); //set current pair
+
+        if (!this.props.currentPair) {
+            this.tabsCallback(pairs[pairs.length-1]);
+
+            this.setState({
+                activeTab: pairs[pairs.length-1].first
+            })
+        } else {
+            this.tabsCallback(this.props.currentPair)
+        }
+
         pairs.forEach(item => this.getDataFromSocket(item.id, 0));
+    }
+
+    componentWillReceiveProps(nextProps, nextContext) {
+        this.setState({
+            activeTab: nextProps.currentPair.first
+        })
     }
 
     list = data => data.map(
@@ -55,7 +78,7 @@ class CoinsList extends React.Component {
     );
 
     getDataFromSocket(id, stopTime = 0) {
-        const pairs = this.state.pairs;
+        const pairs = this.state.pairs ? this.state.pairs : [];
         const idx = pairs.findIndex(el => el.id === id);
         // console.log("idx =", idx, "id =", id);
 
@@ -77,7 +100,7 @@ class CoinsList extends React.Component {
 
     tabsCallback(key) {
         const pairs = this.state.pairs;
-        const newCurrent = pairs.find(item => item.id === +key.id);
+        const newCurrent = pairs ? pairs.find(item => item.id === +key.id) : '';
         this.props.setCurentCoinsPair2State(newCurrent);
         this.props.pair(newCurrent);
     }
@@ -127,7 +150,7 @@ class CoinsList extends React.Component {
         ];
 
         return (items.map(
-            (item, idx) => <TabPane tab={item} key={idx} className="coinsPairs">
+            (item, idx) => <TabPane tab={item} key={item} className="coinsPairs">
                 <Table
                     columns={columns}
                     pagination={false}
@@ -164,16 +187,18 @@ class CoinsList extends React.Component {
 
     render() {
         // console.log(this.state);
-        // const { dispatch, changePair } = this.props
-
-        if (this.state == null) {
+        const {activeTab} = this.state;
+        if (!this.state.activeTab) {
             return <div>Loading...</div>
         }
 
         return (
             <div className="currencysPairs table-block">
                 {/*<div className='border2'>*/}
-                <Tabs type="card">
+                <Tabs
+                    type="card"
+                    defaultActiveKey={activeTab}
+                >
                     {this.state.coins && this.currenciesTabs(this.state.coins)}
                 </Tabs>
                 {/*</div>*/}
@@ -188,7 +213,8 @@ CoinsList.propTypes = {
 
 function mapStateToProps(state) {
     return {
-        state
+        state,
+        currentPair: state.pair
     }
 }
 

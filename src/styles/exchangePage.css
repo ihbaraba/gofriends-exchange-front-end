@@ -2,7 +2,12 @@
     display: grid;
     grid-column-gap: 15px;
     grid-template-columns: 24% 50% 24%;
-    grid-template-areas: "pairInformation pairInformation coins" "market graphic coins" "market graphic orderHistory" "market orders orderHistory" "openOrder openOrder openOrder";
+    grid-template-areas: "pairInformation pairInformation coins"
+    "market graphic coins"
+    "market graphic orderHistory"
+    "market orders orderHistory"
+    "market marketDepthChart orderHistory"
+    "openOrder openOrder openOrder";
 
     /*grid-template-columns: 100px 100px 100px;*/
     /*grid-gap: 10px;*/
@@ -26,6 +31,16 @@
 .pair-information {
     grid-area: pairInformation;
     margin: 0 0 25px 0;
+}
+
+.marketDepthChart {
+    grid-area: marketDepthChart;
+    margin: 20px 0 0 0;
+    padding: 10px;
+
+    background-color: rgba(7, 3, 10, 0.35);
+    border: 1.5px solid rgba(255, 255, 255, 0.1) !important;
+    border-radius: 5px;
 }
 
 .current-pair {
@@ -142,21 +157,26 @@
     grid-area: market;
 }
 
+.marketDepth .ant-table-column-sorter {
+    display: none;
+}
+
 .marketDepth .buy-table {
     height: 50%;
-    margin-bottom: 28px;
 }
 
 .marketDepth .sell-table {
     height: 50%;
+    margin-bottom: 28px;
 }
 
 .marketDepth .buy-table tr td:first-child {
-    color: #DD4457;
+    color: #00CE7D;
+
 }
 
 .marketDepth .sell-table tr td:first-child {
-    color: #00CE7D;
+    color: #DD4457;
 }
 
 .marketDepth .marketDepthTables {
@@ -223,6 +243,11 @@
     border-radius: 5px;
     margin: 15px 0 0 0;
     padding: 0.5px;
+}
+
+
+.limits-btn {
+    margin: 20px 0 0 0 !important;
 }
 
 .orders .ant-tabs-bar {
@@ -295,7 +320,36 @@
     color: #ffffff;
     align-items: center;
     margin-top: 15px;
+    position: relative;
     /*margin-bottom: 10px;*/
+}
+
+.orders .orders__item .name-coin {
+    position: absolute;
+    right: 5px;
+    font-size: 12px;
+    color: hsla(0,0%,100%,.51);
+}
+
+
+.orders .orders__item input,
+.orders .orders__item .fake-input {
+    height: 30px;
+    width: 100%;
+    padding: 0 45px 0 4px;
+    display: flex;
+    align-items: center;
+    border: 1px solid rgba(255, 255, 255, 0.39);
+    border-radius: 1px;
+    color: #fff !important;
+    text-align: left;
+    background-color: #000000;
+    -webkit-box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.35);
+    box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.35);
+}
+
+.orders .orders__item .fake-input {
+    color: rgba(255, 255, 255, 0.53) !important;
 }
 
 .orders .ant-radio-group {
@@ -359,7 +413,8 @@
     border: 0;
     border-radius: 2px;
     font-weight: bold;
-    margin: 47px 0 0 0 !important;
+    margin: 47px 0 0 0;
+    cursor: pointer;
 }
 
 .orders .order-action-btn.order-buy-btn {
@@ -410,7 +465,6 @@
 }
 
 .currencysPairs .ant-tabs-bar {
-    height: 34px;
     background-color: #313131;
     border: 0.5px solid rgba(0, 0, 0, 0.7) !important;
     border-radius: 5px 5px 0 0;
@@ -420,7 +474,7 @@
     padding: 0 !important;
 }
 
-.ant-tabs-tab-prev.ant-tabs-tab-arrow-show, .ant-tabs-tab-next.ant-tabs-tab-arrow-show{
+.ant-tabs-tab-prev.ant-tabs-tab-arrow-show, .ant-tabs-tab-next.ant-tabs-tab-arrow-show {
     display: none !important;
 }
 
@@ -448,10 +502,15 @@
 }
 
 .currencysPairs .ant-tabs-nav {
-    height: 31px;
+    padding: 0 0 3px 0;
     display: flex;
     align-items: center;
     justify-content: flex-end;
+    flex-wrap: wrap;
+}
+
+.currencysPairs .ant-tabs-nav-container {
+height: max-content !important;
 }
 
 .currencysPairs .ant-tabs-bar .ant-tabs-tab {
@@ -466,7 +525,7 @@
     color: #fff !important;
     font-size: 12px !important;
     font-weight: 500 !important;
-    margin: 0 7px 0 0 !important;
+    margin: 5px 7px 5px 0 !important;
     cursor: pointer;
 }
 
@@ -638,24 +697,20 @@
         justify-content: flex-end;
     }
 
-
-
     .centerArea.mobile .order-history-block .ant-tabs-nav .ant-tabs-tab {
         height: 23px;
         width: 64px;
-        color: #fff ;
+        color: #fff;
         flex: none;
         font-size: 12px !important;
         font-family: Roboto;
         background: #000 !important;
     }
 
-
-    .centerArea.mobile .order-history-block  .ant-tabs-tab.ant-tabs-tab-active {
+    .centerArea.mobile .order-history-block .ant-tabs-tab.ant-tabs-tab-active {
         background: #4A998C !important;
         color: #fff !important;
     }
-
 
     .centerArea.mobile .trade-nav-btn {
         height: 55px;

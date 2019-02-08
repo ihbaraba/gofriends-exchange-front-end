@@ -13,19 +13,23 @@
     "moment": "^2.23.0",
     "prop-types": "^15.6.2",
     "qrcode-react": "^0.1.16",
-    "query-string": "^6.2.0",
+    "query-string": "^5.1.1",
     "react": "^16.3.2",
     "react-bootstrap": "^0.32.1",
     "react-burger-menu": "^2.5.4",
+    "react-copy-to-clipboard": "^5.0.1",
     "react-dom": "^16.3.2",
+    "react-image-lightbox": "^5.1.0",
+    "react-images-upload": "^1.2.6",
     "react-modal": "^3.6.1",
     "react-recaptcha": "^2.3.10",
     "react-redux": "^5.0.7",
     "react-router": "^4.2.0",
     "react-router-dom": "^4.2.2",
-    "react-scripts": "1.1.4",
+    "react-scripts": "^1.1.4",
     "react-stockcharts": "^0.7.7",
     "react-svg": "^7.2.2",
+    "react-toastify": "^4.5.2",
     "redux": "^4.0.0",
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.3.0",
@@ -40,6 +44,7 @@
   "devDependencies": {
     "antd": "^3.6.6",
     "d3": "^5.5.0",
-    "superagent": "^3.8.3"
+    "superagent": "^3.8.3",
+    "uglifyjs-webpack-plugin": "^2.1.1"
   }
 }
