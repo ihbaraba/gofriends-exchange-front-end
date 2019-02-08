@@ -34,23 +34,29 @@ class Admins extends Component {
         });
     };
 
-    handleOk = (e) => {
+    handleOk = async (e) => {
         e.preventDefault();
 
         const {email, password} = this.state;
-        axios.post(GET_USERS, {
+      await  axios.post(GET_USERS, {
             email,
             password,
-            role: 'ADMIN'
+            role: 'ADMIN',
+            countryId: 13,
+            username: 'admin'
         });
+
+      this.getUsers();
 
         this.setState({
             visible: false,
+            email: '',
+            password: ''
         });
     };
 
     handleRemoveUser = async (id) => {
-        await axios.delete(`${GET_USERS}`);
+        await axios.delete(`${GET_USERS}/${id}`);
 
         this.getUsers();
     };
