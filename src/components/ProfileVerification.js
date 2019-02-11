@@ -33,7 +33,7 @@ class ProfileVerification extends Component {
         e.preventDefault();
 
         try {
-            await axios.post(`${VERIFICATION}/${this.props.userId}`, this.state.userInfo);
+            await axios.put(`${VERIFICATION}/${this.props.userId}`, this.state.userInfo);
 
             toast.success(<div className='toaster-container'><Icon type="check-circle"/> Confirmed</div>, {
                 position: "top-right",

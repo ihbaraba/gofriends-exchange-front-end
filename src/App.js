@@ -55,6 +55,7 @@ import CommissionsSettings from "./AdminPanel/Comissions/CommissionsSettings/Com
 import User from "./AdminPanel/Users/User/User";
 import Admins from "./AdminPanel/Admins/Admins";
 import WithdrawConfirm from "./components/WithdrawConfirm";
+import EmailConfirm from "./components/EmailConfirm";
 
 let token = '';
 
@@ -112,6 +113,7 @@ class App extends Component {
                                     <Route path="/loginhistory" component={LoginHistory}/>
                                     <Route path="/news" component={ClientNews}/>
                                     <Route path="/withdraw/confirm" component={WithdrawConfirm}/>
+                                    <Route path="/email-confirm" component={EmailConfirm}/>
 
                                     <Route path="/OpenOrders" component={OpenOrders}/>
                                     <Route path="/Bann" component={Bann}/>
