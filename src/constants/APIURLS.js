@@ -117,7 +117,7 @@ export const GET_TRADE_HISTORY = `${current_server.XHR}orders/history`;
 //withdraw user and admin list  page
 export const WITHDRAW = `${current_server.XHR}withdraw`;
 export const CONFIRM_WITHDRAW = `${current_server.XHR}withdraw/confirm`;
-export const WALLETS = `${current_server.XHR}withdraw/wallets`;
+export const WALLETS = `${current_server.XHR}wallets`;
 export const APPROVE = `${current_server.XHR}withdraw/approve`;
 
 //all report page
