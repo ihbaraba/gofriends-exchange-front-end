@@ -12,12 +12,12 @@ const Footer = () => {
                     {/*<img src={logo} alt="Exchange"/>*/}
 
                     <div className="meta">
-                        <div className="group" style={{fontSize: '40px'}}>Sinsline</div>
-                        <div className="footer-info" style={{fontSize: '12px'}}>
-                            <div><p>Musterstrasse 1</p><p>Musterort, Germany</p></div>
-                            <div><a href="tel:+49123456789">Tel. +49123456789</a><a
-                                href="mailto:sinsline21@gmail.com">sinsline21@gmail.com</a></div>
-                        </div>
+                        <div className="group" style={{fontSize: '40px'}}>UKEY Trade</div>
+                        {/*<div className="footer-info" style={{fontSize: '12px'}}>*/}
+                            {/*<div><p>Musterstrasse 1</p><p>Musterort, Germany</p></div>*/}
+                            {/*<div><a href="tel:+49123456789">Tel. +49123456789</a><a*/}
+                                {/*href="mailto:sinsline21@gmail.com">sinsline21@gmail.com</a></div>*/}
+                        {/*</div>*/}
                     </div>
                 </div>
 
@@ -66,7 +66,7 @@ const Footer = () => {
             </div>
 
             <div className='copyright-block'>
-                © 2017 - 2018  SINSLINE. All rights reserved
+                © 2017 - 2018  UKEY Trade. All rights reserved
             </div>
         </div>
     );
