@@ -131,7 +131,8 @@
     color: #fff;
 }
 
-.admin-select li:hover {
+.admin-select li:hover,
+.admin-select .ant-select-dropdown-menu-item-selected {
     background: #181818 !important;
 }
 

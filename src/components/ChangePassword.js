@@ -4,7 +4,7 @@ import logo from '../img/logo_go.svg';
 import axios from 'axios';
 import queryString from 'query-string';
 
-import {CHANGE_PASSWORD} from '../constants/APIURLS';
+import {CHANGE_PASSWORD, CHANGE_PASSWORD_CONFIRM} from '../constants/APIURLS';
 import {toast} from "react-toastify";
 import {Icon} from "antd";
 
@@ -37,7 +37,7 @@ class ChangePassword extends Component {
     async componentDidMount() {
         if (this.state.token) {
             try {
-                await axios.get(`${CHANGE_PASSWORD}/${this.state.token}`);
+                await axios.get(`${CHANGE_PASSWORD_CONFIRM}/${this.state.token}`);
                 this.setState({
                     success: true
                 })

@@ -113,7 +113,7 @@ class App extends Component {
                                     <Route path="/loginhistory" component={LoginHistory}/>
                                     <Route path="/news" component={ClientNews}/>
                                     <Route path="/withdraw/confirm" component={WithdrawConfirm}/>
-                                    <Route path="/email-confirm" component={EmailConfirm}/>
+                                    <Route path="/auth/register/confirm" component={EmailConfirm}/>
 
                                     <Route path="/OpenOrders" component={OpenOrders}/>
                                     <Route path="/Bann" component={Bann}/>

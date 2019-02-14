@@ -87,6 +87,8 @@ export const COUNTRIES = `${current_server.XHR}countries`;
 
 export const REGISTER = `${current_server.XHR}auth/register`;
 
+export const REGISTER_CONFIRM = `${current_server.XHR}auth/register/confirm`;
+
 export const LOGIN = `${current_server.XHR}auth/login`;
 
 //orders
@@ -95,6 +97,7 @@ export const ORDERS_PAIR = `${current_server.XHR}orders/pair`;
 //user api urls
 export const TWO_FACTOR_AUTHENTICATION = `${current_server.XHR}auth/twofactor`;
 export const CHANGE_PASSWORD = `${current_server.XHR}auth/password`;
+export const CHANGE_PASSWORD_CONFIRM = `${current_server.XHR}auth/password/confirm`;
 
 //contact us
 export const SEND_TICKETS = `${current_server.XHR}tickets`;

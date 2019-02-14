@@ -3,14 +3,14 @@ import axios from 'axios';
 import queryString from 'query-string';
 import {NavLink} from 'react-router-dom';
 
-import {CONFIRM_WITHDRAW} from '../constants/APIURLS'
+import {REGISTER_CONFIRM} from '../constants/APIURLS'
 
 import success from '../img/success.svg';
 
 class EmailConfirm extends Component {
     componentDidMount() {
         let urlParams = queryString.parseUrl(this.props.location.search).query;
-        axios.get(`${CONFIRM_WITHDRAW}/${urlParams.token}`)
+        axios.get(`${REGISTER_CONFIRM}/${urlParams.token}`)
     }
 
     render() {
