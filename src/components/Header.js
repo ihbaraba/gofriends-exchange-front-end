@@ -193,7 +193,7 @@ class Header extends Component {
                         <div className="logo">
                             <NavLink to="/">
                                 {/*<img src={logo} alt="logo"/>*/}
-                                <span style={{fontSize: '48px'}}>Sinsline</span>
+                                <span style={{fontSize: '48px'}}>UKEY Trade</span>
                             </NavLink>
                         </div>
                         <div className="tabs exchange-link">

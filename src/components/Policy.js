@@ -6,7 +6,7 @@ class Policy extends Component {
         return (
             <div>
                 <div style={{clear: "both"}}>
-                    <h1 className="sign">Sinsline privacy policy</h1>
+                    <h1 className="sign">UKEY Trade privacy policy</h1>
                 </div>
 
                 <div className="p-wrap">

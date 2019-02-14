@@ -53,7 +53,7 @@ class Registration extends Component {
             APIURL: COUNTRIES,
         };
         getData(options).then(countries => {
-            const countries2state = countries.reduce((countries, item) => ({...countries, [item.name]: item}), {});
+            const countries2state = countries ? countries.reduce((countries, item) => ({...countries, [item.name]: item}), {}) : [];
             // console.log("countries2state=", countries2state, Object.keys(countries2state));
             this.setState({countries: countries2state});
         });
@@ -279,7 +279,7 @@ class Registration extends Component {
                     </div>
 
                     {/*<img src={logo} alt=""/>*/}
-                    <h2 className='sinsline-logo-title'>SINSLINE</h2>
+                    <h2 className='sinsline-logo-title'>UKEY Trade</h2>
 
 
                     {(!showQRCode) &&
