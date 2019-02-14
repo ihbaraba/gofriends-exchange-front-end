@@ -13,7 +13,7 @@ import {
     PAIRS,
     VERIFICATION,
     WITHDRAW,
-    VERIFY
+    VERIFY, GET_USERS
 } from "../../../constants/APIURLS";
 
 const TabPane = Tabs.TabPane;
@@ -30,6 +30,7 @@ class User extends Component {
         coinPairs: [],
         tradeHistoryList: [],
         withdrawList: [],
+        blockedReason: '',
 
         pagination: {
             total: 0,
@@ -144,6 +145,13 @@ class User extends Component {
         }
     };
 
+    blockedUser = () => {
+        axios.put(`${GET_USERS}/${this.userId}`, {
+            status: "blocked",
+            blockedReason: this.state.blockedReason
+        })
+    };
+
     async componentDidMount() {
         const [pairs, kyc] = await Promise.all([axios.get(PAIRS), axios.get(`${VERIFICATION}/${this.userId}`)]);
 
@@ -161,7 +169,7 @@ class User extends Component {
     };
 
     render() {
-        const {tradeHistoryList, withdrawList, coinPairs, kyc, kyc: {user}, pagination} = this.state;
+        const {tradeHistoryList, withdrawList, coinPairs, kyc, kyc: {user}, pagination, blockedReason} = this.state;
 
         return (
             <div className="user-page">
@@ -176,9 +184,13 @@ class User extends Component {
                         <div className='input-side'>
                             <div>
                                 <label>Reason </label>
-                                <input type="text"/>
+                                <input
+                                    type="text"
+                                    value={blockedReason}
+                                    onChange={({target}) => this.setState({blockedReason: target.value})}
+                                />
                             </div>
-                            <button className='admin-btn'>Block user</button>
+                            <button className='admin-btn' onClick={this.blockedUser}>Block user</button>
                         </div>
                     </div>
                 </div>
