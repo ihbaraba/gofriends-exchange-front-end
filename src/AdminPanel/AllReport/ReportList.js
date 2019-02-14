@@ -68,7 +68,7 @@ const ReportList = ({list, pagination: {total, current, pageSize}, onChange}) =>
                 {...config}
                 columns={columns}
                 dataSource={list}
-                rowKey={record => record.id}
+                rowKey={record => record.total}
                 onChange={onChange}
                 className='admin-table'
             />

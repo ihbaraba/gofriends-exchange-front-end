@@ -22,8 +22,11 @@ class CoinsList extends React.Component {
         this.tabsCallback = this.tabsCallback.bind(this);
 
         // this.currenciesTabs = this.currenciesTabs.bind(this);
-    }
 
+        this.state = {
+            activeTab: ''
+        }
+    }
 
     async componentDidMount() {
         const data = await getCoinsList(PAIRS);
@@ -31,6 +34,7 @@ class CoinsList extends React.Component {
 
         const pairs = data.map((item, idx) => ({
             id: item.id,
+            fee: item.fee,
             first: item.baseCurrency.code,
             baseCurrency: item.baseCurrency.code,
             baseCurrencyName: item.baseCurrency.name,
@@ -50,10 +54,22 @@ class CoinsList extends React.Component {
         this.setState({data, coins, pairs});
 
         if (!this.props.currentPair) {
-            this.props.pair(pairs[0]);
+            this.tabsCallback(pairs[pairs.length-1]);
+
+            this.setState({
+                activeTab: pairs[pairs.length-1].first
+            })
+        } else {
+            this.tabsCallback(this.props.currentPair)
         }
 
         pairs.forEach(item => this.getDataFromSocket(item.id, 0));
+    }
+
+    componentWillReceiveProps(nextProps, nextContext) {
+        this.setState({
+            activeTab: nextProps.currentPair.first
+        })
     }
 
     list = data => data.map(
@@ -84,7 +100,7 @@ class CoinsList extends React.Component {
 
     tabsCallback(key) {
         const pairs = this.state.pairs;
-        const newCurrent = pairs.find(item => item.id === +key.id);
+        const newCurrent = pairs ? pairs.find(item => item.id === +key.id) : '';
         this.props.setCurentCoinsPair2State(newCurrent);
         this.props.pair(newCurrent);
     }
@@ -171,9 +187,8 @@ class CoinsList extends React.Component {
 
     render() {
         // console.log(this.state);
-        const {currentPair} = this.props;
-
-        if (this.state == null) {
+        const {activeTab} = this.state;
+        if (!this.state.activeTab) {
             return <div>Loading...</div>
         }
 
@@ -182,7 +197,7 @@ class CoinsList extends React.Component {
                 {/*<div className='border2'>*/}
                 <Tabs
                     type="card"
-                    defaultActiveKey={currentPair.first}
+                    defaultActiveKey={activeTab}
                 >
                     {this.state.coins && this.currenciesTabs(this.state.coins)}
                 </Tabs>

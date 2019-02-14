@@ -7,6 +7,9 @@ import {save_user_info} from "../actions/UserActions";
 import LoginHistory from './LoginHistory';
 import {Switch} from 'antd';
 import axios from 'axios';
+import Modal from 'react-modal';
+
+import ProfileVerification from './ProfileVerification';
 
 import avatar from '../img/avatar.svg';
 import authentication from '../img/authentication.svg';
@@ -14,9 +17,25 @@ import padlock from '../img/padlock.svg';
 
 import '../styles/profile.css';
 
+Modal.setAppElement('#root');
+
+const customStyles = {
+    content: {
+        top: '50%',
+        left: '50%',
+        right: 'auto',
+        bottom: 'auto',
+        marginRight: '-50%',
+        transform: 'translate(-50%, -50%)',
+        padding: '0'
+    }
+};
+
 class Profile extends Component {
     state = {
         showQr: false,
+        modalIsOpen: false,
+        verifyStatus: '',
         qrCode: '',
         totpCode: '',
         twoFactorAuthEnabled: this.props.user.twoFactorAuthEnabled
@@ -36,8 +55,37 @@ class Profile extends Component {
             const userInfo = await getUserInfo({rout: USERINFO, token});
             const {body} = userInfo;
             this.props.save_user_info(body);
+
+            if(body.verifyStatus !== 'verified') {
+                this.setState({
+                    modalIsOpen: true,
+                    verifyStatus: body.verifyStatus
+                })
+            } else {
+                this.setState({
+                    verifyStatus: body.verifyStatus
+                })
+            }
         }
+
+        // this.openModal()
     }
+
+    openModal = () => {
+        this.setState({
+            modalIsOpen: true,
+        })
+    };
+
+    closeModal = () => {
+        this.setState({modalIsOpen: false})
+        this.props.history.push('/exchange')
+    };
+
+    exitModal = () => {
+        this.setState({modalIsOpen: false})
+    };
+
 
     swithOnChange = async (onTwoFActor) => {
         if (onTwoFActor) {
@@ -80,8 +128,9 @@ class Profile extends Component {
     }
 
     render() {
-        const {showQr, qrCode, totpCode} = this.state;
-        const {username, country = {}, twoFactorAuthEnabled} = this.props.user;
+        const {showQr, qrCode, totpCode, verifyStatus} = this.state;
+        const {username, country = {}, twoFactorAuthEnabled, email, id} = this.props.user;
+        console.log(this.props);
         // const {name} = country;
         const countryName = country ? country.countryName : 'Ukraine';
 
@@ -107,8 +156,13 @@ class Profile extends Component {
                                     {username}
 
                                     <div className="verification-status">
-                                        <i className="fa fa-check" aria-hidden="true"></i>
-                                        Verified
+                                        {verifyStatus === 'verified' ? <div style={{background: '#00CE7D'}}>
+                                            <i className="fa fa-check" aria-hidden="true"></i>
+                                            Verified
+                                        </div> :
+                                        <div>
+                                            Not verified
+                                        </div>}
                                     </div>
                                 </div>
 
@@ -124,7 +178,11 @@ class Profile extends Component {
                             </div>
 
                             <div className="phone">
-                                Country: +380 ## ## ### 12
+                                Phone: +380 ## ## ### 12
+                            </div>
+
+                            <div className="phone">
+                                E-mail: {email}
                             </div>
 
                             <div className="limits">
@@ -204,11 +262,33 @@ class Profile extends Component {
                     </div>
                 </div>
 
-                <div className='page-title'>
-                    My login history
-                </div>
+                {/*--------------------*/}
+                {/*<div className='page-title'>*/}
+                    {/*My login history*/}
+                {/*</div>*/}
 
-                <LoginHistory/>
+                {/*<LoginHistory/>*/}
+                {/*--------------------*/}
+
+                <Modal
+                    isOpen={this.state.modalIsOpen}
+                    onRequestClose={this.closeModal}
+                    style={customStyles}
+                    contentLabel="Example Modal"
+                >
+                    <div className="modal-window">
+                        <div className="close-modal-btn" onClick={this.closeModal}>
+                            <i className="fa fa-times" aria-hidden="true"></i>
+                        </div>
+
+                        <ProfileVerification
+                        userId={id}
+                        onExit={this.exitModal}
+                        onClose={this.closeModal}
+                        />
+                    </div>
+                </Modal>
+
             </div>
         )
     }

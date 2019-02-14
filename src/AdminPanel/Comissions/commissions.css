@@ -26,7 +26,8 @@
 /*settings*/
 .commissions-settings-page {
     display: flex;
-    height: 65%;
+    min-height: 65%;
+    height: 80%;
 }
 
 .commissions-settings-page .arrow-block {
@@ -42,7 +43,7 @@
 }
 
 .commissions-settings-page .pairs-list-block {
-    width: 40%;
+    width: 35%;
     padding: 25px 35px;
     border-radius: 0 3px 3px 3px;
     background-color: #1E1E1E;
@@ -76,7 +77,7 @@
     align-items: center;
     justify-content: center;
     margin: 0 !important;
-    border: 1px solid #fff;
+    border: 1px solid #979797;
     border-top: 0;
 }
 
@@ -90,12 +91,14 @@
 
 .commissions-settings-page .pairs-list-block .ant-menu-item:first-child,
 .commissions-settings-page .pairs-list-block .ant-menu-item:nth-child(2) {
-    border-top: 1px solid #fff;
+    border-top: 1px solid #979797;
 }
 
 /*=--------------------=*/
 .commissions-settings-page .pair-fee-block {
-    width: 55%;
+    width: 60%;
+    min-height: 100%;
+    height: max-content;
     padding: 25px 35px;
     border-radius: 0 3px 3px 3px;
     background-color: #1E1E1E;
@@ -112,6 +115,7 @@
 
 .commissions-settings-page .pair-fee-block .table-title {
     margin: 0 0 30px 0;
+    padding: 0 0 0 32%;
     display: flex;
     justify-content: space-around;
     font-family: Roboto;
@@ -123,8 +127,12 @@
 .commissions-settings-page .pair-fee-block .fee-params {
     display: flex;
     align-items: flex-end;
-    padding: 0 0 0 60px;
-    margin: 0 0 20px 0;
+    padding: 15px 0 15px 30px;
+}
+
+.commissions-settings-page .pair-fee-block .fee-params:nth-child(2n+1) {
+    background: #181818;
+    border-bottom: 1px solid rgba(151, 151, 151, 0.16);
 }
 
 .commissions-settings-page .pair-fee-block .fee-params .form-item {
@@ -140,9 +148,9 @@
 }
 
 .commissions-settings-page .pair-fee-block .fee-params .right-arrow {
-    width: 70px;
+    width: 50px;
     height: 2px;
-    margin: 0 50px 15px 50px;
+    margin: 0 40px 15px 30px;
     background: #979797;
     position: relative;
 }
@@ -181,13 +189,23 @@ input[type=number]::-webkit-outer-spin-button {
     position: absolute;
     height: 32px;
     right: 5px;
-    bottom: 0;
+    top: -5px;
     font-size: 16px;
     z-index: 100;
 
 }
 
+.commissions-settings-page .pair-fee-block .fee-params i {
+    font-size: 20px;
+    margin: 0 20px 10px auto;
+    cursor: pointer;
+}
+
+.commissions-settings-page .pair-fee-block .fee-params i:hover {
+    color: #DD4457;
+}
+
 .commissions-settings-page .pair-fee-block .green-btn {
-    margin: 40px 0 0 auto;
+    margin: 40px 0 0 50px;
     display: block;
 }

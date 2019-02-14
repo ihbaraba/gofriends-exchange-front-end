@@ -2,7 +2,12 @@
     display: grid;
     grid-column-gap: 15px;
     grid-template-columns: 24% 50% 24%;
-    grid-template-areas: "pairInformation pairInformation coins" "market graphic coins" "market graphic orderHistory" "market orders orderHistory" "openOrder openOrder openOrder";
+    grid-template-areas: "pairInformation pairInformation coins"
+    "market graphic coins"
+    "market graphic orderHistory"
+    "market orders orderHistory"
+    "market marketDepthChart orderHistory"
+    "openOrder openOrder openOrder";
 
     /*grid-template-columns: 100px 100px 100px;*/
     /*grid-gap: 10px;*/
@@ -26,6 +31,16 @@
 .pair-information {
     grid-area: pairInformation;
     margin: 0 0 25px 0;
+}
+
+.marketDepthChart {
+    grid-area: marketDepthChart;
+    margin: 20px 0 0 0;
+    padding: 10px;
+
+    background-color: rgba(7, 3, 10, 0.35);
+    border: 1.5px solid rgba(255, 255, 255, 0.1) !important;
+    border-radius: 5px;
 }
 
 .current-pair {
@@ -142,21 +157,26 @@
     grid-area: market;
 }
 
+.marketDepth .ant-table-column-sorter {
+    display: none;
+}
+
 .marketDepth .buy-table {
     height: 50%;
-    margin-bottom: 28px;
 }
 
 .marketDepth .sell-table {
     height: 50%;
+    margin-bottom: 28px;
 }
 
 .marketDepth .buy-table tr td:first-child {
-    color: #DD4457;
+    color: #00CE7D;
+
 }
 
 .marketDepth .sell-table tr td:first-child {
-    color: #00CE7D;
+    color: #DD4457;
 }
 
 .marketDepth .marketDepthTables {
@@ -394,6 +414,7 @@
     border-radius: 2px;
     font-weight: bold;
     margin: 47px 0 0 0;
+    cursor: pointer;
 }
 
 .orders .order-action-btn.order-buy-btn {
@@ -444,7 +465,6 @@
 }
 
 .currencysPairs .ant-tabs-bar {
-    height: 34px;
     background-color: #313131;
     border: 0.5px solid rgba(0, 0, 0, 0.7) !important;
     border-radius: 5px 5px 0 0;
@@ -482,10 +502,15 @@
 }
 
 .currencysPairs .ant-tabs-nav {
-    height: 31px;
+    padding: 0 0 3px 0;
     display: flex;
     align-items: center;
     justify-content: flex-end;
+    flex-wrap: wrap;
+}
+
+.currencysPairs .ant-tabs-nav-container {
+height: max-content !important;
 }
 
 .currencysPairs .ant-tabs-bar .ant-tabs-tab {
@@ -500,7 +525,7 @@
     color: #fff !important;
     font-size: 12px !important;
     font-weight: 500 !important;
-    margin: 0 7px 0 0 !important;
+    margin: 5px 7px 5px 0 !important;
     cursor: pointer;
 }
 

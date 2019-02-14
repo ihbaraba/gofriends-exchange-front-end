@@ -10,7 +10,6 @@ const Header = ({user, page, back}) => {
     return (
         <div className='admin-header'>
             <div className='current-page'>
-
                 {page.subLink ?
                     <Fragment>
                         <span className='underline' onClick={back}>
@@ -19,7 +18,7 @@ const Header = ({user, page, back}) => {
                         </NavLink>
                         </span>
 
-                        <i className="fa fa-arrow-right" aria-hidden="true"></i>
+                        <Icon type="arrow-right"/>
 
                         <span className="sub-link-name">{page.subLink.title}</span>
                     </Fragment>

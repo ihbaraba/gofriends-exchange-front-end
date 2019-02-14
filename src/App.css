@@ -22,6 +22,33 @@ html {
     background-position: 0 0;
 }
 
+.toaster-container {
+    display: flex;
+    align-items: center;
+}
+
+.Toastify__toast {
+    font-size: 16px;
+}
+
+.Toastify__toast i {
+    font-size: 18px;
+    margin: 0 15px 0 0;
+}
+
+.Toastify__toast--error {
+    background: rgb(221, 68, 87) !important;
+}
+
+.Toastify__toast--success {
+    background: #00CE7D !important;
+}
+
+.ant-notification-notice-with-icon .ant-notification-notice-description,
+.ant-notification-notice-with-icon .ant-notification-notice-message {
+    color: #fff !important;
+}
+
 .second-background {
     /*background-image: url("img/bg_blur.png") !important;*/
     background-image: url("img/ex_background.png") !important;
@@ -40,6 +67,53 @@ html {
     width: 100%;
     margin: 0 auto;
     padding: 0 10px;
+}
+
+.confirm-page {
+    width: 100%;
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 100px 120px;
+    border: 1px solid #3F4755;
+    border-radius: 5px;
+    box-shadow: 0 3px 15px 0 rgba(0, 0, 0, 0.19);
+}
+
+.confirm-page .title {
+    text-align: center;
+    margin: 0 0 35px 0;
+    padding: 0 0 20px 0;
+    font-family: Ubuntu;
+    font-size: 20px;
+    letter-spacing: 2px;
+    border-bottom: 1px solid rgba(151, 151, 151, 0.55);
+}
+
+.confirm-page .description {
+    text-align: center;
+    font-family: Roboto;
+    font-size: 12px;
+    letter-spacing: 1.2px;
+}
+
+.confirm-page img {
+    display: block;
+    margin: 35px auto 20px auto;
+}
+
+.confirm-page .green-btn {
+    height: 45px;
+    width: 173px;
+    margin: 55px auto 0 auto;
+    display: block;
+    border-radius: 3px;
+    background-color: #4A998C;
+    border: 0;
+}
+
+.confirm-page .green-btn a {
+    height: 100%;
+    line-height: 45px;
 }
 
 .sinsline-logo-title {
@@ -65,6 +139,7 @@ html {
     background-color: #313131 !important;
     border: 0.5px solid rgba(0, 0, 0, 0.7);
     border-radius: 5px 5px 0 0;
+    overflow: hidden !important;
 }
 
 .marketDepthTables tr {
@@ -406,9 +481,13 @@ button a:hover {
 
 /*formVerification*/
 
+.ReactModal__Content--after-open {
+    max-height: 90vh;
+}
+
 .formVerificationWrap {
-    width: 794px;
-    margin: 0 auto;
+    width: 100%;
+    margin: 0 0 17px 0;
     text-align: center;
 }
 
@@ -429,47 +508,58 @@ button a:hover {
 
 }
 
-.profileVerification {
-    width: 348px;
-    height: 696px;
-    background-color: #545c68;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    padding: 10px 22px 0px 22px;
-    box-sizing: border-box;
-    margin-bottom: 30px;
-}
-
-.profileVerification h4 {
-
-    color: #fefefe;
-    font-family: Roboto;
-    font-size: 18px;
-    font-weight: 400;
+.upload-title {
+    margin: 30px 0 20px 0;
+    color: #FFFFFF;
+    font-family: Ubuntu;
+    font-size: 20px;
+    letter-spacing: 2px;
     text-align: center;
 }
 
-.profileVerification input[type="text"] {
-    width: 100%;
-    height: 40px;
-    background-color: #ffffff;
-    opacity: 0.7;
-    color: #000;
-    margin-bottom: 13px;
+.upload-block {
+    display: flex;
+    justify-content: space-between;
+    margin: 0 0 50px 0;
 }
 
-.profileVerification input[type="tel"] {
-    width: 100%;
-    height: 40px;
-    background-color: #ffffff;
-    opacity: 0.7;
-    color: #000;
-    margin-bottom: 13px;
+.upload-block img {
+    width: 50%;
+    height: 100%;
+    margin: auto 0;
 }
 
-.profileVerification input[type="checkbox"] {
-    width: 13px;
+.chose-file .fileContainer {
+    background: none;
+    width: max-content;
+    height: max-content;
+}
+
+.chose-file .fileContainer p {
+    display: none;
+}
+
+.chose-file .fileContainer .chooseFileButton {
+    height: 54px;
+    width: 169px;
+    border-radius: 2px;
+    background-color: #4A998C;
+    box-shadow: 0 2px 8px 0 rgba(255, 255, 255, 0.35);
+}
+
+.profileVerification input {
+    width: 100%;
+    height: 47px;
+    margin: 13px 0 18px 0;
+    background-color: #ffffff;
+}
+
+.profileVerification label {
+    opacity: 0.9;
+    color: #FFFFFF;
+    font-family: Helvetica;
+    font-size: 12px;
+    letter-spacing: 1.2px;
 }
 
 .g-recaptcha {
@@ -495,11 +585,19 @@ button a:hover {
 }
 
 .profile-v-btn {
+    height: 54px;
     width: 100%;
-    height: 47px;
-    border-radius: 22px;
-    border: 1px solid #00b29c;
-    background-color: #00b29c;
+    border-radius: 2px;
+    background-color: #00CE7D;
+    box-shadow: 0 2px 8px 0 rgba(255, 255, 255, 0.35);
+    border: 0;
+    cursor: pointer;
+    color: #FFFFFF;
+    font-family: Roboto;
+    font-size: 15px;
+    font-weight: bold;
+    letter-spacing: 1.5px;
+    margin: 0 0 26px 0;
 }
 
 .knowledge-subtitle {
@@ -2787,12 +2885,17 @@ a:focus {
     /*border-right: 1px solid #cacaca;*/
 }
 
+/*profileVerification*/
+
 .sign {
+    color: #FFFFFF;
+    font-family: Ubuntu;
+    font-size: 20px;
+    letter-spacing: 2px;
     text-align: center;
-    /*padding: 10px;*/
-    color: #ffffff;
-    font-size: 48px;
-    font-weight: 500;
+    padding: 0 0 22px 0;
+    margin: 0 0 18px 0;
+    border-bottom: 1px solid rgba(151, 151, 151, 0.56);
 }
 
 .small-text {
@@ -3808,7 +3911,7 @@ body .ant-table-small > .ant-table-content > .ant-table-header > table > .ant-ta
 input {
     border: none;
     border-radius: 0;
-    color: #000 !important;
+    color: #000;
     -webkit-box-shadow: none;
     -moz-box-shadow: none;
     box-shadow: none;

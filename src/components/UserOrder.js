@@ -4,6 +4,7 @@ import {getOrdersHistory, sendOrder} from "../utils";
 import {USERORDERSHISTORY, ORDERS} from "./../constants/APIURLS.js"
 import {Table, Icon, Tooltip, Button} from 'antd';
 import moment from "moment/moment";
+import {toast} from "react-toastify";
 
 // import {ORDERS} from "../constants/APIURLS";
 
@@ -80,10 +81,26 @@ class UserOrder extends React.Component {
             status,
         })
             .then(() => {
+                toast.success(<div className='toaster-container'><Icon type="check-circle" /> Confirmed</div>, {
+                    position: "top-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true
+                });
                 this.getInitialPairDataFromServer({completed: false, cancelled: false});
+            })
+            .catch(e => {
+                toast.error(<div className='toaster-container'><Icon type="close" /> {e.response.data.userMessage}</div>, {
+                    position: "top-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true
+                });
             });
-
-        console.log("fire cancel to server ", responce);
     };
 
     async componentDidMount() {

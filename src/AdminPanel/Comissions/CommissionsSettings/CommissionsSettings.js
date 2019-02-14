@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import axios from "axios/index";
 import {Icon} from 'antd';
+import {toast} from 'react-toastify';
 
 import {COMMISSIONS, PAIRS} from "../../../constants/APIURLS";
 import PairsList from "./PairsList";
@@ -10,7 +11,14 @@ class CommissionsSettings extends Component {
     state = {
         coinPairs: [],
         pair: {},
-        pairParams: []
+        pairParams: [
+            {
+                type: '',
+                fromSteps: 0,
+                toSteps: 0,
+                fee: 0
+            }
+        ]
     };
 
     async componentDidMount() {
@@ -36,10 +44,15 @@ class CommissionsSettings extends Component {
         const feeParams = await axios.get(`${COMMISSIONS}/${id}`);
 
         this.setState({
-            pairParams: feeParams.data
+            pairParams: feeParams.data.length > 0 ? feeParams.data : [{
+                type: '',
+                fromSteps: 0,
+                toSteps: 0,
+                fee: 0
+            }]
         })
 
-    }
+    };
 
     handleSelectingPair = (pair) => {
         this.getPairFee(pair.id);
@@ -51,25 +64,80 @@ class CommissionsSettings extends Component {
     handleChangeInput = (index, e) => {
         const input = e.target;
 
-        console.log(input.name);
         let newParams = this.state.pairParams;
 
         newParams[index] = {
             ...newParams[index],
-            [input.name]: input.value
+            [input.name]: +input.value
         };
 
         this.setState({
             pairParams: newParams
-        }, () => console.log(this.state))
+        })
+    };
+
+    handleChangeSelect = (index, value) => {
+        let newParams = this.state.pairParams;
+
+        newParams[index] = {
+            ...newParams[index],
+            type: value
+        };
+
+        this.setState({
+            pairParams: newParams
+        })
     };
 
     handleSaveCommissions = async () => {
         try {
-            await axios.put(`${COMMISSIONS}/${this.state.pair.id}`, {feeSteps: this.state.pairParams})
+            await axios.put(`${COMMISSIONS}/${this.state.pair.id}`, {steps: this.state.pairParams});
+
+            toast.success(<div className='toaster-container'><Icon type="check-circle" /> Confirmed</div>, {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true
+            });
+
         } catch (e) {
-            console.log(e);
+            toast.error(<div className='toaster-container'><Icon type="close" /> {e.response.data.userMessage}</div>, {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true
+            });
         }
+    };
+
+    handleAddNewStep = () => {
+        this.setState({
+            pairParams: [
+                ...this.state.pairParams,
+                {
+                    type: '',
+                    fromSteps: 0,
+                    toSteps: 0,
+                    fee: 0
+                }
+            ]
+        })
+    };
+
+    handleRemoveStep = async (index, id) => {
+        if (id) {
+            await axios.delete(`${COMMISSIONS}/${id}`)
+        }
+
+        let newArr = this.state.pairParams;
+        newArr.splice(index, 1);
+        this.setState({
+            pairParams: newArr
+        })
     };
 
     render() {
@@ -92,7 +160,10 @@ class CommissionsSettings extends Component {
                     pair={pair}
                     params={pairParams}
                     changeInput={this.handleChangeInput}
+                    changeSelect={this.handleChangeSelect}
                     onSubmit={this.handleSaveCommissions}
+                    onAddNewStep={this.handleAddNewStep}
+                    onRemoveStep={this.handleRemoveStep}
                 />
             </div>
         )

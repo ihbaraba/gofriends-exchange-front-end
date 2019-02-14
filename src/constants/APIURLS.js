@@ -67,9 +67,11 @@ export const TIMEFRAMES = OUR_TIMEFRAMES; // OUR_TIMEFRAMES or CRIPTOCOMPARE_TIM
 /*load data for chart*/
 export const QUOTATIONS = `${current_server.XHR}quotations`;
 
-export const PAIRS = `${current_server.XHR}pairs/`;
+export const PAIRS = `${current_server.XHR}pairs`;
 
-export const MARKETS = `${current_server.XHR}markets/`;
+export const MARKETS = `${current_server.XHR}markets`;
+
+export const MARKETS_START_PAGE = `${current_server.XHR}markets/daily`;
 
 export const ORDERS = `${current_server.XHR}orders`;
 
@@ -85,6 +87,8 @@ export const COUNTRIES = `${current_server.XHR}countries`;
 
 export const REGISTER = `${current_server.XHR}auth/register`;
 
+export const REGISTER_CONFIRM = `${current_server.XHR}auth/register/confirm`;
+
 export const LOGIN = `${current_server.XHR}auth/login`;
 
 //orders
@@ -93,6 +97,7 @@ export const ORDERS_PAIR = `${current_server.XHR}orders/pair`;
 //user api urls
 export const TWO_FACTOR_AUTHENTICATION = `${current_server.XHR}auth/twofactor`;
 export const CHANGE_PASSWORD = `${current_server.XHR}auth/password`;
+export const CHANGE_PASSWORD_CONFIRM = `${current_server.XHR}auth/password/confirm`;
 
 //contact us
 export const SEND_TICKETS = `${current_server.XHR}tickets`;
@@ -100,6 +105,10 @@ export const SEND_TICKETS = `${current_server.XHR}tickets`;
 //ADMIN PANEL
 //users page
 export const GET_USERS = `${current_server.XHR}users`;
+export const GET_ADMINS = `${current_server.XHR}users/admin`;
+
+//dashboard page
+export const DASHBOARD_INFO = `${current_server.XHR}stats`;
 
 //settings page
 export const REGISTRATION_SETTINGS = `${current_server.XHR}settings`;
@@ -108,14 +117,31 @@ export const EMAIL_SETTINGS = `${current_server.XHR}mailer/templates`;
 //trade history page
 export const GET_TRADE_HISTORY = `${current_server.XHR}orders/history`;
 
+//withdraw user and admin list  page
+export const WITHDRAW = `${current_server.XHR}withdraw`;
+export const CONFIRM_WITHDRAW = `${current_server.XHR}withdraw/confirm`;
+export const WALLETS = `${current_server.XHR}wallets`;
+export const APPROVE = `${current_server.XHR}withdraw/approve`;
+
 //all report page
 export const GET_REPORT_BY_DATE = `${current_server.XHR}transactions`;
 
 //news page
 export const NEWS = `${current_server.XHR}news`;
 
+
 //commissions page
 export const COMMISSIONS = `${current_server.XHR}fee`;
+export const COMMISSIONS_PROFIT = `${current_server.XHR}transactions/fee`;
+
+//currencies
+export const CURRENCIES = `${current_server.XHR}currencies`;
+
+
+//verification
+export const VERIFICATION = `${current_server.XHR}verification/user`;
+export const VERIFY = `${current_server.XHR}users/verification`;
+
 
 
 

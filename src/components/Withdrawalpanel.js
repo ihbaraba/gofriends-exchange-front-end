@@ -1,8 +1,16 @@
 import React, {Component} from 'react';
 import {Table, Button} from 'antd';
+import axios from 'axios';
+import moment from 'moment';
+
+import {WITHDRAW, USERINFO} from '../constants/APIURLS';
 import '../App.css';
 
 class Withdrawalpanel extends Component {
+    state = {
+        withdraw: []
+    };
+
     columns = [
         {
             title: 'ID',
@@ -24,38 +32,39 @@ class Withdrawalpanel extends Component {
         },
         {
             title: 'Total',
-            dataIndex: 'total',
-            key: 'total',
+            dataIndex: 'amount',
+            key: 'amount',
             width: 150,
         },
         {
             title: 'Date',
-            dataIndex: 'date',
-            key: 'date',
+            dataIndex: 'createdAt',
+            key: 'createdAt',
             width: 150,
+            render: item => (
+                <span>{moment(item).format('YYYY-MM-DD HH:mm')}</span>
+            )
         },
         {
-            title: 'Wallet ',
-            dataIndex: 'wallet',
-            key: 'wallet',
+            title: 'Status',
+            dataIndex: 'status',
+            key: 'status',
             width: 150,
-            render: (text, record) => (
-                <Button
-                    type="primary"
-                    ghost
-                    onClick={(order) => {
-                       console.log(order)
-                    }}
-                    style={{margin: '0 0 0 auto'}}
-                >
-                    Open wallet
-                </Button>
-
-            )
-        }
+        },
     ];
 
+    async componentDidMount() {
+        const user = await axios.get(`${USERINFO}`);
+        const res = await axios.get(`${WITHDRAW}?userId=${user.data.id}`);
+
+        this.setState({
+            withdraw: res.data.withdraw
+        })
+    }
+
     render() {
+        const {withdraw} = this.state;
+
         return (
             <div className='card-container'>
                 <div className="card-container-head">
@@ -66,6 +75,7 @@ class Withdrawalpanel extends Component {
                     <Table
                         columns={this.columns}
                         bordered={false}
+                        dataSource={withdraw}
                         pagination={false}
                         rowKey="uid"
                         scroll={{y: 330}}

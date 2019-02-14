@@ -3,29 +3,72 @@ import axios from 'axios';
 
 import PairsList from './PairsList'
 import CreatePair from './CreatePair'
-import {PAIRS} from "../../constants/APIURLS";
+import {PAIRS, CURRENCIES} from "../../constants/APIURLS";
 
 class Pairs extends Component {
     state = {
-        pairsList: []
+        pairsList: [],
+        coinsList: [],
+        basicCoin: '',
+        childCoin: ''
+    };
+
+    handleChangeSelect = (id, coinType) => {
+        this.setState({
+            [coinType]: id
+        })
+    };
+
+    getPairs = async () => {
+        const res = await axios.get(PAIRS);
+
+        this.setState({
+            pairsList: res.data,
+            basicCoin: '',
+            childCoin: ''
+        })
+    };
+
+    createPair = async () => {
+        await axios.post(PAIRS, {
+            baseCurrencyId: this.state.basicCoin,
+            quoteCurrencyId: this.state.childCoin
+        });
+
+        this.getPairs();
+    };
+
+    changePair = async (id) => {
+        await axios.put(`${PAIRS}/${id}`);
+
+        this.getPairs();
     };
 
     async componentDidMount() {
-        const {data} = await axios.get(PAIRS);
+        const [pairs, coins] = await Promise.all([axios.get(PAIRS), axios.get(CURRENCIES)]);
+
         this.setState({
-            pairsList: data
+            pairsList: pairs.data,
+            coinsList: coins.data
         })
     }
 
     render() {
-        const {pairsList} = this.state;
+        const {pairsList, coinsList, basicCoin, childCoin} = this.state;
 
         return (
             <div className='pairs-page'>
-                <CreatePair/>
+                <CreatePair
+                    coins={coinsList}
+                    basicCoin={basicCoin}
+                    childCoin={childCoin}
+                    onSelect={this.handleChangeSelect}
+                    onCreatePair={this.createPair}
+                />
 
                 <PairsList
                     list={pairsList}
+                    onChange={this.changePair}
                 />
             </div>
         )

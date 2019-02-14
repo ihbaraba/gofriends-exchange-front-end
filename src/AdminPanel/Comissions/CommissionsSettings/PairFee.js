@@ -1,6 +1,9 @@
 import React from 'react';
+import {Icon, Select} from 'antd';
 
-const PairFee = ({pair, params = [], changeInput, onSubmit}) => {
+const Option = Select.Option;
+
+const PairFee = ({pair, params = [], changeInput, changeSelect, onSubmit, onAddNewStep, onRemoveStep}) => {
     return (
         <div className='pair-fee-block'>
             <div className='title-block'>
@@ -14,7 +17,15 @@ const PairFee = ({pair, params = [], changeInput, onSubmit}) => {
 
             <div>
                 {params.map((pair, index) => (
-                    <div className='fee-params' key={pair.id}>
+                    <div className='fee-params' key={index}>
+                        <div className='form-item'>
+                            <label>Type</label>
+                            <Select dropdownClassName='admin-select' onChange={(e) => changeSelect(index, e)} style={{width: '150px', margin: '0 50px 0 0'}}>
+                                <Option value='exchange'>Exchange</Option>
+                                <Option value='withdraw'>Withdraw</Option>
+                                <Option value='deposit'>Deposit</Option>
+                            </Select>
+                        </div>
                         <div className='form-item'>
                             <label>From</label>
                             <input
@@ -45,12 +56,27 @@ const PairFee = ({pair, params = [], changeInput, onSubmit}) => {
                             />
                             <span className='rate'>%</span>
                         </div>
+
+                        {params.length > 1 ?
+                            <Icon
+                                type="delete"
+                                onClick={() => onRemoveStep(index, pair.id)}
+                            /> : ''}
                     </div>
                 ))}
 
-                <button className='admin-btn green-btn' onClick={onSubmit}>
-                    Save
-                </button>
+                <div style={{display: 'flex', justifyContent: 'flex-end'}}>
+                    {params.length < 5 ?
+                        <button
+                            className='admin-btn green-btn'
+                            onClick={onAddNewStep}>
+                            Add rule
+                        </button> : ''
+                    }
+                    <button className='admin-btn green-btn' onClick={onSubmit}>
+                        Save
+                    </button>
+                </div>
             </div>
         </div>
     )

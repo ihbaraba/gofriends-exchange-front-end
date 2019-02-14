@@ -5,35 +5,31 @@ import moment from 'moment';
 
 
 
-const ResultList = ({list, total, current, pageSize, onChange, onApprove}) => {
+const WithdrawList = ({list, total, current, pageSize, onChange, onApprove}) => {
     const columns = [
         {
             title: 'Currency',
             dataIndex: 'currency',
             key: 'currency',
             width: 130,
-            sorter: true,
         },
-        {
-            title: 'User ID',
-            dataIndex: 'userId',
-            key: 'userId',
-            width: 130,
-            sorter: true,
-        },
+        // {
+        //     title: 'User ID',
+        //     dataIndex: 'userId',
+        //     key: 'userId',
+        //     width: 130,
+        // },
         {
             title: 'Transaction ID',
             dataIndex: 'transactionId',
             key: 'transactionId',
             width: 200,
-            sorter: true,
         },
         {
             title: 'Recepient',
             dataIndex: 'recepient',
             key: 'recepient',
             width: 200,
-            sorter: true,
             render: item => (
                 <span style={{whiteSpace: 'pre-line'}}>
                 {item}
@@ -45,7 +41,6 @@ const ResultList = ({list, total, current, pageSize, onChange, onApprove}) => {
             dataIndex: 'sender',
             key: 'sender',
             width: 200,
-            sorter: true,
             render: item => (
                 <span style={{whiteSpace: 'pre-line'}}>
                 {item}
@@ -57,7 +52,6 @@ const ResultList = ({list, total, current, pageSize, onChange, onApprove}) => {
             dataIndex: 'amount',
             key: 'amount',
             width: 150,
-            sorter: true,
         },
         // {
         //     title: 'Tax ID',
@@ -71,7 +65,6 @@ const ResultList = ({list, total, current, pageSize, onChange, onApprove}) => {
             dataIndex: 'createdAt',
             key: 'createdAt',
             width: 200,
-            sorter: true,
             render: item => (
                 <span>{moment(item).format('YYYY-MM-DD HH:mm')}</span>
             )
@@ -81,15 +74,12 @@ const ResultList = ({list, total, current, pageSize, onChange, onApprove}) => {
             dataIndex: 'status',
             key: 'status',
             width: 150,
-            sorter: true,
-            render: (item, withdraw) => {
+            render: (item) => {
                 if (item === 'opened') {
                     return (<span style={{color: '#00CE7D'}}>Opened</span>)
 
                 } else if(item === 'confirmed') {
-                    return (<button className='admin-btn' onClick={() => onApprove(withdraw.id)}>
-                        Approve
-                    </button>)
+                    return (<span style={{color: '#00CE7D'}}>Opened</span>)
                 }else if(item === 'completed') {
                     return (<span style={{color: '#00CE7D'}}>Completed</span>)
                 }
@@ -106,9 +96,9 @@ const ResultList = ({list, total, current, pageSize, onChange, onApprove}) => {
             pageSize
         }
     };
-
+    console.log(list);
     return (
-        <div className='result-list response-side'>
+        <div>
             <Table
                 {...config}
                 columns={columns}
@@ -122,4 +112,4 @@ const ResultList = ({list, total, current, pageSize, onChange, onApprove}) => {
     )
 };
 
-export default ResultList;
+export default WithdrawList;

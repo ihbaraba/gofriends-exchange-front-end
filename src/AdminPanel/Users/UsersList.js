@@ -3,7 +3,6 @@ import {Table} from 'antd';
 import moment from 'moment';
 
 
-
 const UsersList = ({list, total, current, pageSize, onChange, onOpenUser}) => {
     const columns = [
         {
@@ -67,7 +66,6 @@ const UsersList = ({list, total, current, pageSize, onChange, onOpenUser}) => {
             render: (actions, user) => (
                 <button className='admin-btn' onClick={() => onOpenUser(user)}>View</button>
             )
-
         },
     ];
 

@@ -102,7 +102,7 @@ const TradeHistory = ({data, type, total, current, pageSize, onChange, coinPairs
 
     const config = {
         pagination: {
-            total,
+            total: +total,
             current,
             pageSize
         }

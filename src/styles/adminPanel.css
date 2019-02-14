@@ -7,6 +7,7 @@
 @import "../AdminPanel/Comissions/commissions.css";
 @import "../AdminPanel/AllReport/all-report.css";
 @import "../AdminPanel/Pairs/pairs.css";
+@import "../AdminPanel/Admins/admins.css";
 
 .admin-version .w-header,
 .admin-version .w-footer {
@@ -45,7 +46,7 @@
 }
 
 .admin-panel .admin-content {
-    padding: 12px 0 0 0;
+    padding: 12px 20px 0 0;
     position: relative;
 }
 
@@ -94,7 +95,7 @@
     height: 32px;
     border: 1px solid #979797;
     border-radius: 4px;
-    color: #fff !important;
+    color: #fff;
 }
 
 /*select*/
@@ -114,25 +115,30 @@
 }
 
 .ant-select-selection-selected-value {
-    color: #fff !important;
+    color: #fff;
 }
 
-.ant-select-dropdown {
+.admin-select {
     background: #1E1E1E !important;
     border: 1px solid #979797;
 }
 
-.ant-select-dropdown li {
-    color: #fff !important;
+.admin-select .ant-select-dropdown-menu-item-active {
+    background: #181818 !important;
 }
 
-.ant-select-dropdown li:hover {
+.admin-select  li {
+    color: #fff;
+}
+
+.admin-select li:hover,
+.admin-select .ant-select-dropdown-menu-item-selected {
     background: #181818 !important;
 }
 
 .ant-select-dropdown-menu-item-selected,
 .ant-select-dropdown-menu-item-active {
-    background: #181818 !important;
+    background: #181818;
 }
 
 /*----------------------------------*/
@@ -376,6 +382,7 @@
 /*HEADER*/
 /*------------------------------*/
 .admin-panel .admin-header {
+    padding: 0 20px 0 0;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -411,6 +418,7 @@
     padding: 0 0 3px 0;
     border-bottom: 1px solid #fff;
 }
+
 
 .admin-panel .admin-header .user-navigation .user-email {
     margin: 0 10px 0 20px;
@@ -496,6 +504,10 @@
     background-color: #1E1E1E !important;
     -webkit-box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.35);
     box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.35);
+}
+
+.ReactModal__Content--after-open {
+    max-height: 100vh !important;
 }
 
 /*#circle{*/
