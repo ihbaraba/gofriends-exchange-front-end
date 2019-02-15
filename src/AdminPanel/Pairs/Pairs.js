@@ -4,6 +4,8 @@ import axios from 'axios';
 import PairsList from './PairsList'
 import CreatePair from './CreatePair'
 import {PAIRS, CURRENCIES} from "../../constants/APIURLS";
+import {toast} from "react-toastify";
+import {Icon} from "antd";
 
 class Pairs extends Component {
     state = {
@@ -38,10 +40,34 @@ class Pairs extends Component {
         this.getPairs();
     };
 
-    changePair = async (id) => {
-        await axios.put(`${PAIRS}/${id}`);
+    changePair = async (id, status) => {
+        try {
+            await axios.put(`${PAIRS}/${id}`, {
+                hidden: !status
+            });
 
-        this.getPairs();
+            this.getPairs();
+
+            toast.success(<div className='toaster-container'><Icon type="check-circle"/> Confirmed</div>, {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true
+            });
+
+        } catch (e) {
+            toast.error(<div className='toaster-container'><Icon type="close"/> {e.response.data.userMessage}</div>, {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true
+            });
+        }
+
     };
 
     async componentDidMount() {
