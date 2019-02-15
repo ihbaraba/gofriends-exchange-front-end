@@ -96,8 +96,12 @@ export const ORDERS_PAIR = `${current_server.XHR}orders/pair`;
 
 //user api urls
 export const TWO_FACTOR_AUTHENTICATION = `${current_server.XHR}auth/twofactor`;
+
 export const CHANGE_PASSWORD = `${current_server.XHR}auth/password`;
+
 export const CHANGE_PASSWORD_CONFIRM = `${current_server.XHR}auth/password/confirm`;
+
+export const GET_USER_DEPOSITS = `${current_server.XHR}users/me/deposits`;
 
 //contact us
 export const SEND_TICKETS = `${current_server.XHR}tickets`;
