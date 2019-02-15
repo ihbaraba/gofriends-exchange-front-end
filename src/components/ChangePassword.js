@@ -37,7 +37,7 @@ class ChangePassword extends Component {
     async componentDidMount() {
         if (this.state.token) {
             try {
-                await axios.get(`${CHANGE_PASSWORD_CONFIRM}/${this.state.token}`);
+                await axios.get(`${CHANGE_PASSWORD_CONFIRM}?token=${this.state.token}`);
                 this.setState({
                     success: true
                 })
@@ -75,7 +75,7 @@ class ChangePassword extends Component {
                     confirmPassword: this.state.newPasswordRepeat
                 });
 
-                toast.success(<div className='toaster-container'><Icon type="check-circle"/> Confirmed</div>, {
+                toast.success(<div className='toaster-container'><Icon type="check-circle"/>Check your mail </div>, {
                     position: "top-right",
                     autoClose: 5000,
                     hideProgressBar: false,
