@@ -39,7 +39,7 @@ class KYC extends Component {
                             <label htmlFor="">Phone </label>
                             <input
                                 type="text"
-                                value={kyc.phone && ''}
+                                value={kyc.phone ? kyc.phone : ''}
                                 disabled
                             />
                         </div>
@@ -48,7 +48,7 @@ class KYC extends Component {
                             <label htmlFor="">First name</label>
                             <input
                                 type="text"
-                                value={kyc.firstName && ''}
+                                value={kyc.firstName ? kyc.firstName : ''}
                                 disabled
                             />
                         </div>
@@ -57,7 +57,7 @@ class KYC extends Component {
                             <label htmlFor="">Last name</label>
                             <input
                                 type="text"
-                                value={kyc.lastName && ''}
+                                value={kyc.lastName ? kyc.lastName : ''}
                                 disabled
                             />
                         </div>
@@ -75,7 +75,7 @@ class KYC extends Component {
                             <label htmlFor="">Country</label>
                             <input
                                 type="text"
-                                value={user.country && ''}
+                                value={user.country ? user.country.name : ''}
                                 disabled
                             />
                         </div>
@@ -84,7 +84,7 @@ class KYC extends Component {
                             <label htmlFor="">City</label>
                             <input
                                 type="text"
-                                value={kyc.city && ''}
+                                value={kyc.city ? kyc.city : ''}
                                 disabled
                             />
                         </div>
@@ -100,7 +100,7 @@ class KYC extends Component {
                         <label htmlFor="">ID</label>
                         <input
                             type="text"
-                            value={kyc.length > 0 ? (kyc.documents.length > 0 ? kyc.documents[0].id : '') : ''}
+                            value={kyc.documents.length > 0 ? kyc.documents[0].id : ''}
                             disabled
                         />
                     </div>
@@ -109,7 +109,7 @@ class KYC extends Component {
                         <label htmlFor="">ID type</label>
                         <input
                             type="text"
-                            value={kyc.length > 0 ? (kyc.documents.length > 0 ? kyc.documents[0].type : '') : ''}
+                            value={kyc.documents.length > 0 ? kyc.documents[0].type : ''}
                             disabled
                         />
                     </div>
@@ -138,7 +138,7 @@ class KYC extends Component {
                     <div className="form-item" onClick={() => this.setState({isOpenImage: true})}>
                         <label htmlFor="">ID proof</label>
                         <img
-                            src={kyc.length > 0 ? (kyc.documents.length > 0 ? `${this.imgUrl}uploads/${kyc.documents[0].filename}` : defaultImg) : defaultImg}
+                            src={kyc.documents.length > 0 ? `${this.imgUrl}uploads/${kyc.documents[0].filename}` : defaultImg}
                             alt=""/>
                     </div>
 
@@ -149,7 +149,7 @@ class KYC extends Component {
 
                     {isOpenImage && (
                         <Lightbox
-                            mainSrc={kyc.length > 0 ? (kyc.documents.length > 0 ? `${this.imgUrl}uploads/${kyc.documents[0].filename}` : defaultImg) : defaultImg}
+                            mainSrc={kyc.documents.length > 0 ? `${this.imgUrl}uploads/${kyc.documents[0].filename}` : defaultImg}
                             onCloseRequest={() => this.setState({ isOpenImage: false })}
                         />
                     )}

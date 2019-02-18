@@ -2,12 +2,7 @@
     display: grid;
     grid-column-gap: 15px;
     grid-template-columns: 24% 50% 24%;
-    grid-template-areas: "pairInformation pairInformation coins"
-    "market graphic coins"
-    "market graphic orderHistory"
-    "market orders orderHistory"
-    "market marketDepthChart orderHistory"
-    "openOrder openOrder openOrder";
+    grid-template-areas: "pairInformation pairInformation coins" "market graphic coins" "market graphic orderHistory" "market orders orderHistory" "market marketDepthChart orderHistory" "openOrder openOrder openOrder";
 
     /*grid-template-columns: 100px 100px 100px;*/
     /*grid-gap: 10px;*/
@@ -43,8 +38,8 @@
     border-radius: 5px;
 }
 
-.current-pair {
-
+.coins-table td {
+    padding: 5px 4px 5px 0 !important;
 }
 
 .pair-information .coin-statistics {
@@ -245,7 +240,6 @@
     padding: 0.5px;
 }
 
-
 .limits-btn {
     margin: 20px 0 0 0 !important;
 }
@@ -328,9 +322,8 @@
     position: absolute;
     right: 5px;
     font-size: 12px;
-    color: hsla(0,0%,100%,.51);
+    color: hsla(0, 0%, 100%, .51);
 }
-
 
 .orders .orders__item input,
 .orders .orders__item .fake-input {
@@ -510,7 +503,7 @@
 }
 
 .currencysPairs .ant-tabs-nav-container {
-height: max-content !important;
+    height: max-content !important;
 }
 
 .currencysPairs .ant-tabs-bar .ant-tabs-tab {

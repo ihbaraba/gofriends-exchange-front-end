@@ -14,6 +14,11 @@ html {
     height: max-content !important;
 }
 
+.admin-table .ant-table-thead > tr > th,
+.admin-table .ant-table-tbody > tr > td {
+    padding: 10px 0;
+}
+
 .first-background {
     /*background-image: url("img/ex_background.png");*/
     background-image: url("img/bg_blur.png");
@@ -1316,7 +1321,7 @@ tr.ant-table-expanded-row:hover {
 }
 
 .ant-table-thead > tr > th, .ant-table-tbody > tr > td {
-    padding: 5px 4px 5px 0 !important;
+    padding: 5px 4px 5px 0;
 }
 
 .ant-table-thead > tr > th {

@@ -1,13 +1,16 @@
 import React from 'react';
 import {Table} from 'antd';
 
-const AdminsList = ({list, onRemove}) => {
+const AdminsList = ({list, onRemove, onEditAdmin}) => {
     const columns = [
         {
             title: 'Role',
             dataIndex: 'role',
             key: 'role',
             width: 150,
+            render: () => (
+                <span>Admin</span>
+            )
         },
         {
             title: 'Email',
@@ -28,9 +31,9 @@ const AdminsList = ({list, onRemove}) => {
             width: 150,
             render: (e, item) => (
                 <div className='action-btn'>
-                    {/*<button className='admin-btn green-btn'>*/}
-                        {/*Edit*/}
-                    {/*</button>*/}
+                    <button className='admin-btn' style={{margin: '0 20px 0 0'}} onClick={() => onEditAdmin(item)}>
+                        Edit
+                    </button>
                     <button className='admin-btn red-btn' onClick={() => onRemove(item.id)}>
                         Delite
                     </button>

@@ -157,6 +157,7 @@ class CoinsList extends React.Component {
                     rowKey={item.id}
                     bordered={false}
                     scroll={{y: 330}}
+                    className='coins-table'
 
                     onRow={(record) => {
                         return {

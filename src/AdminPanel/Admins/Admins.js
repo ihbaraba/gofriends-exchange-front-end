@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Modal, Select} from 'antd';
+import {Modal, Select, Table} from 'antd';
 import axios from 'axios';
 
 import {GET_ADMINS, GET_USERS} from '../../constants/APIURLS';
@@ -8,19 +8,34 @@ import AdminsList from './AdminsList';
 
 const Option = Select.Option;
 
+
 class Admins extends Component {
     state = {
         admins: [],
+        superAdmin: [],
         visible: false,
+
+        update: false,
         email: '',
         password: ''
     };
 
     getUsers = async () => {
         const res = await axios.get(GET_ADMINS);
+        let admins = [],
+            superAdmin = [];
+
+        res.data.forEach(item => {
+            if (item.role === 'ADMIN') {
+                superAdmin.push(item)
+            } else {
+                admins.push(item)
+            }
+        });
 
         this.setState({
-            admins: res.data
+            admins: admins,
+            superAdmin: superAdmin
         })
     };
 
@@ -28,25 +43,36 @@ class Admins extends Component {
         this.getUsers();
     }
 
-    showModal = () => {
-        this.setState({
-            visible: true,
-        });
+    showModal = (admin) => {
+        if (admin) {
+            this.setState({
+                visible: true,
+                email: admin.email,
+                password: admin.password,
+                update: true
+            });
+        } else {
+            this.setState({
+                visible: true,
+                update: false
+            });
+        }
     };
 
     handleOk = async (e) => {
         e.preventDefault();
 
         const {email, password} = this.state;
-      await  axios.post(GET_USERS, {
+
+        await axios.post(GET_USERS, {
             email,
             password,
-            role: 'ADMIN',
+            role: 'MANAGER',
             countryId: 13,
-            username: 'admin'
+            username: 'manager'
         });
 
-      this.getUsers();
+        this.getUsers();
 
         this.setState({
             visible: false,
@@ -69,10 +95,58 @@ class Admins extends Component {
     };
 
     render() {
-        const {visible, admins, email, password} = this.state;
+        const {visible, admins, superAdmin, email, password} = this.state;
+
+
+        const columns = [
+            {
+                title: 'Role',
+                dataIndex: 'role',
+                key: 'role',
+                width: 150,
+                render: () => (
+                    <span>Superadmin</span>
+                )
+            },
+            {
+                title: 'Email',
+                dataIndex: 'email',
+                key: 'email',
+                width: 200,
+            },
+            {
+                title: 'Password',
+                dataIndex: 'date',
+                key: 'date',
+                width: 200,
+            },
+            {
+                title: '',
+                dataIndex: 'actions',
+                key: 'actions',
+                width: 250,
+                render: (e, item) => (
+                    <div className='action-btn'>
+                        <button className='admin-btn' onClick={() => this.showModal(item)}>
+                            Edit
+                        </button>
+                    </div>
+                )
+            }
+        ];
 
         return (
             <div className='admins-page'>
+                <div className='super-admin'>
+                    <Table
+                        columns={columns}
+                        dataSource={superAdmin}
+                        rowKey={record => record.id}
+                        className='admin-table'
+                        pagination={false}
+                    />
+                </div>
+
                 <div className='create-block'>
                     <button className='admin-btn green-btn' onClick={this.showModal}>Add new</button>
                 </div>
@@ -80,6 +154,7 @@ class Admins extends Component {
                 <AdminsList
                     list={admins}
                     onRemove={this.handleRemoveUser}
+                    onEditAdmin={this.showModal}
                 />
 
                 <Modal
@@ -91,14 +166,14 @@ class Admins extends Component {
                     className='admins-modal'
                 >
                     <form onSubmit={this.handleOk}>
-                        <div className='form-item'>
-                            <label htmlFor="Roule ">Roule</label>
-                            <Select dropdownClassName='admin-select' defaultValue="admin" style={{width: 180}}>
-                                <Option value="admin">Admin</Option>
-                            </Select>
-                        </div>
+                        {/*<div className='form-item'>*/}
+                            {/*<label htmlFor="Roule ">Roule</label>*/}
+                            {/*<Select dropdownClassName='admin-select' defaultValue="manager" style={{width: 180}}>*/}
+                                {/*<Option value="manager">Admin</Option>*/}
+                            {/*</Select>*/}
+                        {/*</div>*/}
 
-                        <div style={{display: 'flex', margin: '30px 0 0 0'}}>
+                        <div style={{display: 'flex'}}>
                             <div className='form-item'>
                                 <label htmlFor=" ">Email </label>
                                 <input
