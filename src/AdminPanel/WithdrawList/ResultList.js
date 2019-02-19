@@ -84,13 +84,13 @@ const ResultList = ({list, total, current, pageSize, onChange, onApprove}) => {
             sorter: true,
             render: (item, withdraw) => {
                 if (item === 'opened') {
-                    return (<span style={{color: '#00CE7D'}}>Opened</span>)
+                    return (<span>Opened</span>)
 
                 } else if(item === 'confirmed') {
                     return (<button className='admin-btn' onClick={() => onApprove(withdraw.id)}>
                         Approve
                     </button>)
-                }else if(item === 'completed') {
+                }else if(item === 'complete') {
                     return (<span style={{color: '#00CE7D'}}>Completed</span>)
                 }
             }

@@ -91,6 +91,8 @@ class Admins extends Component {
         console.log(e);
         this.setState({
             visible: false,
+            email: '',
+            password: ''
         });
     };
 
@@ -172,7 +174,6 @@ class Admins extends Component {
                                 {/*<Option value="manager">Admin</Option>*/}
                             {/*</Select>*/}
                         {/*</div>*/}
-
                         <div style={{display: 'flex'}}>
                             <div className='form-item'>
                                 <label htmlFor=" ">Email </label>
