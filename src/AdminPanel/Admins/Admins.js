@@ -44,6 +44,8 @@ class Admins extends Component {
     }
 
     showModal = (admin) => {
+        console.log(admin);
+
         if (admin) {
             this.setState({
                 visible: true,
@@ -97,7 +99,7 @@ class Admins extends Component {
     };
 
     render() {
-        const {visible, admins, superAdmin, email, password} = this.state;
+        const {visible, admins, superAdmin, email, password, update} = this.state;
 
 
         const columns = [
@@ -150,7 +152,7 @@ class Admins extends Component {
                 </div>
 
                 <div className='create-block'>
-                    <button className='admin-btn green-btn' onClick={this.showModal}>Add new</button>
+                    <button className='admin-btn green-btn' onClick={() => this.showModal()}>Add new</button>
                 </div>
 
                 <AdminsList
@@ -160,7 +162,7 @@ class Admins extends Component {
                 />
 
                 <Modal
-                    title="New admin"
+                    title={update ? 'Edit admin' : "New admin"}
                     visible={visible}
                     onOk={this.handleOk}
                     onCancel={this.handleCancel}

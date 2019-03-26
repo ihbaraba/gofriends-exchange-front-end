@@ -284,6 +284,7 @@ class ExchangePage extends Component {
                         </div>
                         <UserOrder completed="false"/>
                     </div>
+
                 </div>
 
                 <div className="centerArea mobile">
@@ -358,6 +359,7 @@ class ExchangePage extends Component {
                                         interval={interval}
                                         appendFake={"false"}
                                     />
+
                                 </div>
 
                                 <OrdersHistory mobile={true}/>

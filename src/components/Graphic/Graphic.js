@@ -7,6 +7,7 @@ import {TIMEFRAMES} from "./../../constants/APIURLS.js"
 
 import * as d3 from "d3";
 import {timeParse} from "d3-time-format";
+import CandleStickChart from './NewChart';
 
 function parseData(parse) {
     return function (d) {
@@ -242,19 +243,24 @@ class Graphic extends Component {
         }
         const {data} = this.state;
 
-        if (data.length === 0) {
-            // alert("Historical and current data for this pair is absent");
-            return <div className="card-container, currencysPairs" style={{width: "auto", margin: "auto"}}>
-                <div className="card-container-head">
-                    <h1>Historical and current data for this pair is absent</h1>
-                </div>
-            </div>
-        }
-        // console.log("Graphics this.chartData=",  this.chartData, this.props);
-        {/*<Chart type="hybrid" data={this.state.data} newDiapazone={this.newDiapazone}/>*/
-        }
+        // if (data.length === 0) {
+        //     // alert("Historical and current data for this pair is absent");
+        //     return <div className="card-container, currencysPairs" style={{width: "auto", margin: "auto"}}>
+        //         <div className="card-container-head">
+        //             <h1>Historical and current data for this pair is absent</h1>
+        //         </div>
+        //     </div>
+        // }
+        // // console.log("Graphics this.chartData=",  this.chartData, this.props);
+        // {/*<Chart type="hybrid" data={this.state.data} newDiapazone={this.newDiapazone}/>*/
+        // }
         return (
-            <Chart type="hybrid" data={this.chartData} newDiapazone={this.newDiapazone}/>
+            <CandleStickChart
+                type="hybrid"
+                interval={this.props.interval}
+                data={this.chartData}
+                newDiapazone={this.newDiapazone}
+            />
         )
     }
 }
