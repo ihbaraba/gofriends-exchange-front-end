@@ -38,6 +38,10 @@
     border-radius: 5px;
 }
 
+.apexcharts-tooltip, .apexcharts-xaxistooltip, .apexcharts-yaxistooltip  {
+    background: rgba(7, 3, 10, 0.35) !important;
+}
+
 .coins-table td {
     padding: 5px 4px 5px 0 !important;
 }

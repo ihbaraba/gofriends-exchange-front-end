@@ -59,6 +59,7 @@ class ChangePassword extends Component {
     };
 
     handleChangeRecaptcha = res => {
+        console.log(res);
         if (res) {
             this.setState({isVerified: true});
         }
@@ -67,7 +68,7 @@ class ChangePassword extends Component {
     handleSubmit = async (e) => {
         e.preventDefault();
 
-        if ((this.state.newPassword === this.state.newPasswordRepeat) && this.state.isVerified) {
+        if (this.state.newPassword === this.state.newPasswordRepeat) {
             try {
                 let {data: {token}} = await axios.post(CHANGE_PASSWORD, {
                     password: this.state.oldPassword,
