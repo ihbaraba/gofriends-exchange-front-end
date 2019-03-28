@@ -5,6 +5,7 @@ import {toast} from "react-toastify";
 
 import ShortUserInformation from './ShortUserInformation';
 import TradeHistory from './TradeHistory';
+import WalletsList from './WalletsList';
 import WithdrawList from './WithdrawList';
 import KYC from './KYC';
 
@@ -13,7 +14,9 @@ import {
     PAIRS,
     VERIFICATION,
     WITHDRAW,
-    VERIFY, GET_USERS
+    VERIFY,
+    USER_WALLETS,
+    GET_USERS
 } from "../../../constants/APIURLS";
 
 const TabPane = Tabs.TabPane;
@@ -30,6 +33,7 @@ class User extends Component {
         coinPairs: [],
         tradeHistoryList: [],
         withdrawList: [],
+        wallets: [],
         blockedReason: '',
 
         pagination: {
@@ -68,6 +72,14 @@ class User extends Component {
                 ...this.state.pagination,
                 total: +data.count
             }
+        })
+    };
+
+    getWallets = async () => {
+        const {data} = await axios.get(`${USER_WALLETS}/${this.userId}`);
+
+        this.setState({
+            wallets: data,
         })
     };
 
@@ -133,7 +145,7 @@ class User extends Component {
 
         switch (tab) {
             case 'wallets':
-                console.log('wallets');
+                this.getWallets();
                 break;
 
             case 'withdraws':
@@ -169,7 +181,7 @@ class User extends Component {
     };
 
     render() {
-        const {tradeHistoryList, withdrawList, coinPairs, kyc, kyc: {user}, pagination, blockedReason} = this.state;
+        const {tradeHistoryList, withdrawList, coinPairs, wallets, kyc, kyc: {user}, pagination, blockedReason} = this.state;
 
         return (
             <div className="user-page">
@@ -210,7 +222,9 @@ class User extends Component {
                         </TabPane>
 
                         <TabPane tab="Wallets" key="wallets">
-                            2
+                            <WalletsList
+                                data={wallets}
+                            />
                         </TabPane>
 
                         <TabPane tab="Buy trade history" key="buy">

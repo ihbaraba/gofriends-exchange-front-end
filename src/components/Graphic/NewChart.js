@@ -1,25 +1,27 @@
 import React, {Component} from 'react';
 import Chart from "react-apexcharts";
-import moment from 'moment';
 
-class CandleStickChart extends React.Component {
-
-
+class CandleStickChart extends Component {
     render() {
-        const data = this.props.data.map(item => ({
+        const {data, newCandle} = this.props;
+        console.log(newCandle);
+        const chartData = data.map(item => ({
             x: item.date,
             y: [item.open, item.high, item.low, item.close]
         }));
 
-        console.log(this.props.interval);
+        // chartData.push({
+        //     x: newCandle.date,
+        //     y: [newCandle.open, newCandle.high, newCandle.low, newCandle.close]
+        // });
 
         const params = {
             seriesCandle: [{
-                data: data
+                data: chartData
             }],
             seriesBar: [{
                 name: 'volume',
-                data: data
+                data: chartData
             }],
             chartOptionsCandlestick: {
                 chart: {

@@ -376,7 +376,7 @@ class Registration extends Component {
 
                             <button className="signUpButton" type="submit" name="createAccount"
                                     disabled={!this.validateForm}>
-                                Creae my account
+                                Create my account
                             </button>
 
                             <div className='havnt-account'>
