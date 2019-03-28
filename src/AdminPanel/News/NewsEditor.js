@@ -1,8 +1,9 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 
-import CKEditor from '@ckeditor/ckeditor5-react';
-import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import CKEditor from 'ckeditor4-react';
+// import CKEditor from '@ckeditor/ckeditor5-react';
+// import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import {NEWS} from "../../constants/APIURLS";
 
 // import Link from '@ckeditor/ckeditor5-link/src/link';
@@ -70,28 +71,15 @@ class NewsEditor extends Component {
                 </div>
 
                 <CKEditor
-                    editor={ClassicEditor}
-                    config={{
-                        toolbar: ['Heading', '|', 'Bold', 'Italic', 'Alignment', 'Link', 'BlockQuote', 'Undo', 'Redo'],
-                        // removePlugins: ['Image', 'ImageCaption', 'ImageStyle', 'ImageToolbar', 'ImageUpload']
-                    }}
                     data={news}
-                    // onInit={editor => {
-                    //     // You can store the "editor" and use when it is needed.
-                    //     console.log('Editor is ready to use!', editor);
-                    // }}
-                    onChange={(event, editor) => {
+                    onChange={({editor}) => {
                         const data = editor.getData();
                         editorBody = data;
                     }}
-                    // onBlur={editor => {
-                    //     console.log('Blur.', editor);
-                    // }}
-                    // onFocus={editor => {
-                    //     console.log('Focus.', editor);
-                    // }}
+                    config={ {
+                        toolbar: [['Heading', '|', 'Bold', 'Italic', 'Alignment', 'Link', 'BlockQuote', 'Undo', 'Redo']],
+                    } }
                 />
-
             </div>
         )
     }

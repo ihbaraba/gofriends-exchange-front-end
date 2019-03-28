@@ -43,7 +43,7 @@ class Pairs extends Component {
     changePair = async (id, status) => {
         try {
             await axios.put(`${PAIRS}/${id}`, {
-                hidden: !status
+                hide: !status
             });
 
             this.getPairs();

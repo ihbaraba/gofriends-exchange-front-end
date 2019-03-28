@@ -3907,6 +3907,23 @@ body .ant-table-small > .ant-table-content > .ant-table-header > table > .ant-ta
     display: none;
 }
 
+/*ck editor*/
+.cke_chrome,
+.cke_inner {
+    border: 0 !important;
+    background: none !important;
+
+}
+
+.cke_top {
+    background: none !important;
+    border: 1px solid #fff !important;
+}
+
+.cke_bottom {
+    display: none !important;
+}
+
 input {
     border: none;
     border-radius: 0;
