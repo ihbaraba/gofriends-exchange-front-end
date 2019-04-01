@@ -33,7 +33,7 @@ class ProfileVerification extends Component {
         e.preventDefault();
 
         try {
-            await axios.put(`${VERIFICATION}/${this.props.userId}`, this.state.userInfo);
+            await axios.put(`${VERIFICATION}`, this.state.userInfo);
 
             toast.success(<div className='toaster-container'><Icon type="check-circle"/> Confirmed</div>, {
                 position: "top-right",
@@ -55,7 +55,7 @@ class ProfileVerification extends Component {
                 draggable: true
             });
         }
-        };
+    };
 
     nextStep = e => {
         e.preventDefault();
@@ -82,9 +82,23 @@ class ProfileVerification extends Component {
             img.name
         );
 
+        formData.append(
+            'countryId',
+            this.state.userInfo.issuingCountry
+        );
+        formData.append(
+            'page',
+            '1'
+        );
+        formData.append(
+            'type',
+            this.state.userInfo.idType
+        );
+
+
         await axios({
             method: 'post',
-            url: `${VERIFICATION}/${this.props.userId}/upload/${idType}/1`,
+            url: `${VERIFICATION}/document`,
             data: formData,
             headers: {
                 'Content-Type': 'multipart/form-data',
