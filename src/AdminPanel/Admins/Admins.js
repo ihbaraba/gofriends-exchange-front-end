@@ -17,7 +17,8 @@ class Admins extends Component {
 
         update: false,
         email: '',
-        password: ''
+        password: '',
+        id: ''
     };
 
     getUsers = async () => {
@@ -51,6 +52,7 @@ class Admins extends Component {
                 visible: true,
                 email: admin.email,
                 password: admin.password,
+                id: admin.id,
                 update: true
             });
         } else {
@@ -64,15 +66,22 @@ class Admins extends Component {
     handleOk = async (e) => {
         e.preventDefault();
 
-        const {email, password} = this.state;
+        const {email, password, update, id} = this.state;
 
-        await axios.post(GET_USERS, {
-            email,
-            password,
-            role: 'MANAGER',
-            countryId: 13,
-            username: 'manager'
-        });
+        if (update) {
+            await axios.put(`${GET_USERS}/${id}/admin`, {
+                email,
+                password,
+            });
+        } else {
+            await axios.post(GET_USERS, {
+                email,
+                password,
+                role: 'MANAGER',
+                countryId: 13,
+                username: 'manager'
+            });
+        }
 
         this.getUsers();
 
@@ -171,10 +180,10 @@ class Admins extends Component {
                 >
                     <form onSubmit={this.handleOk}>
                         {/*<div className='form-item'>*/}
-                            {/*<label htmlFor="Roule ">Roule</label>*/}
-                            {/*<Select dropdownClassName='admin-select' defaultValue="manager" style={{width: 180}}>*/}
-                                {/*<Option value="manager">Admin</Option>*/}
-                            {/*</Select>*/}
+                        {/*<label htmlFor="Roule ">Roule</label>*/}
+                        {/*<Select dropdownClassName='admin-select' defaultValue="manager" style={{width: 180}}>*/}
+                        {/*<Option value="manager">Admin</Option>*/}
+                        {/*</Select>*/}
                         {/*</div>*/}
                         <div style={{display: 'flex'}}>
                             <div className='form-item'>

@@ -16,7 +16,7 @@ const ShortUserInformation = ({user = defaultUser}) => {
             </div>
 
             <div className='item'>
-                <div className='user-name'>{user.name}</div>
+                <div className='user-name'>{user.username}</div>
                 <div className='user-id'>{user.id}</div>
                 <div className='registration-date'>{moment(user.createdAt).format('YYYY-MM-DD HH:mm')}</div>
             </div>

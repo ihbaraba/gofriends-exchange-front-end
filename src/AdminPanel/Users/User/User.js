@@ -96,8 +96,9 @@ class User extends Component {
     };
 
     onVerifyUser = async (id, verify) => {
+        console.log(id);
         try {
-            await axios.put(`${VERIFY}/${id}`, {
+            await axios.put(`${VERIFY}/${id}/verification/status`, {
                 isVerified: verify
             });
 
@@ -159,14 +160,14 @@ class User extends Component {
     };
 
     blockedUser = () => {
-        axios.put(`${GET_USERS}/${this.userId}`, {
-            status: "blocked",
-            blockedReason: this.state.blockedReason
+        axios.put(`${GET_USERS}/${this.userId}/block`, {
+            isBlocked: true,
+            reason: this.state.blockedReason
         })
     };
 
     async componentDidMount() {
-        const [pairs, kyc] = await Promise.all([axios.get(PAIRS), axios.get(`${USER_PROFILE}/${this.userId}/profile`)]);
+        const [pairs, kyc] = await Promise.all([axios.get(PAIRS), axios.get(`${USER_PROFILE}/${this.userId}`)]);
 
         let coinPairs = pairs.data.map(pair => {
             return ({
@@ -182,13 +183,13 @@ class User extends Component {
     };
 
     render() {
-        const {tradeHistoryList, withdrawList, coinPairs, wallets, kyc, kyc: {user}, pagination, blockedReason} = this.state;
+        const {tradeHistoryList, withdrawList, coinPairs, wallets, kyc, pagination, blockedReason} = this.state;
 
         return (
             <div className="user-page">
                 <div className='top-block'>
                     <ShortUserInformation
-                        user={user}
+                        user={kyc}
                     />
 
                     <div className='blocked-user-block'>
@@ -216,7 +217,6 @@ class User extends Component {
                     >
                         <TabPane tab="KYC" key="kyc">
                             <KYC
-                                user={user}
                                 kyc={kyc}
                                 verify={this.onVerifyUser}
                             />

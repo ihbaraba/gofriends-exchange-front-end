@@ -35,6 +35,8 @@ const UsersList = ({list, total, current, pageSize, onChange, onOpenUser}) => {
             render: (item) => {
                 if (item === 'verified') {
                     return (<span style={{color: '#00CE7D'}}>Verified</span>)
+                } else if(item === 'waitForVerify') {
+                    return (<span style={{color: '#ce6100'}}>Wait For Verify</span>)
                 } else {
                     return (<span>{item}</span>)
                 }
