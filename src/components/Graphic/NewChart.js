@@ -10,11 +10,6 @@ class CandleStickChart extends Component {
             y: [item.open, item.high, item.low, item.close]
         }));
 
-        // chartData.push({
-        //     x: newCandle.date,
-        //     y: [newCandle.open, newCandle.high, newCandle.low, newCandle.close]
-        // });
-
         const params = {
             seriesCandle: [{
                 data: chartData
@@ -58,7 +53,7 @@ class CandleStickChart extends Component {
                     selection: {
                         enabled: true,
                         xaxis: {
-                            min: (new Date().getTime() - (this.props.interval === '1hr' || this.props.interval === '2hr' || this.props.interval === '4hr' || this.props.interval === '1day' ? 604800000 : 60480000)),
+                            min: (new Date().getTime() - (this.props.interval === '1hr' || this.props.interval === '2hr' || this.props.interval === '4hr' || this.props.interval === '1day' ? 43200000 : 60480000)),
                             max: new Date().getTime()
                         },
                         fill: {

@@ -110,6 +110,7 @@ export const SEND_TICKETS = `${current_server.XHR}tickets`;
 //users page
 export const GET_USERS = `${current_server.XHR}users`;
 export const GET_ADMINS = `${current_server.XHR}users/admin`;
+export const USER_PROFILE = `${current_server.XHR}users`;
 
 //dashboard page
 export const DASHBOARD_INFO = `${current_server.XHR}stats`;
@@ -144,7 +145,7 @@ export const CURRENCIES = `${current_server.XHR}currencies`;
 
 
 //verification
-export const VERIFICATION = `${current_server.XHR}verification/user`;
+export const VERIFICATION = `${current_server.XHR}users/me/profile`;
 export const VERIFY = `${current_server.XHR}users/verification`;
 
 

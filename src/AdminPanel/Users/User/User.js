@@ -16,7 +16,8 @@ import {
     WITHDRAW,
     VERIFY,
     USER_WALLETS,
-    GET_USERS
+    GET_USERS,
+    USER_PROFILE
 } from "../../../constants/APIURLS";
 
 const TabPane = Tabs.TabPane;
@@ -165,7 +166,7 @@ class User extends Component {
     };
 
     async componentDidMount() {
-        const [pairs, kyc] = await Promise.all([axios.get(PAIRS), axios.get(`${VERIFICATION}/${this.userId}`)]);
+        const [pairs, kyc] = await Promise.all([axios.get(PAIRS), axios.get(`${USER_PROFILE}/${this.userId}/profile`)]);
 
         let coinPairs = pairs.data.map(pair => {
             return ({
