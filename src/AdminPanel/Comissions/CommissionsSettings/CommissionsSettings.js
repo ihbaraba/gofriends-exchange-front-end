@@ -41,7 +41,7 @@ class CommissionsSettings extends Component {
     }
 
     getPairFee = async (id) => {
-        const feeParams = await axios.get(`${COMMISSIONS}/${id}`);
+        const feeParams = await axios.get(`${COMMISSIONS}`);
 
         this.setState({
             pairParams: feeParams.data.length > 0 ? feeParams.data : [{
@@ -91,7 +91,10 @@ class CommissionsSettings extends Component {
 
     handleSaveCommissions = async () => {
         try {
-            await axios.put(`${COMMISSIONS}/${this.state.pair.id}`, {steps: this.state.pairParams});
+            await axios.put(`${COMMISSIONS}`, {
+                pairId: this.state.pair.id,
+                steps: this.state.pairParams
+            });
 
             toast.success(<div className='toaster-container'><Icon type="check-circle" /> Confirmed</div>, {
                 position: "top-right",

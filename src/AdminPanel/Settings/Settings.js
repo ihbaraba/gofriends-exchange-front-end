@@ -74,8 +74,7 @@ class Settings extends Component {
 
     render() {
         const {registrationParams, emailParams, currencyParams} = this.state;
-        console.log(registrationParams);
-        console.log(currencyParams);
+
         return (
             <div className="settings-page">
                 <RegistrationSettings

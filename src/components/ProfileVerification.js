@@ -73,7 +73,7 @@ class ProfileVerification extends Component {
     };
 
     handleUploadImage = async () => {
-        const {img, userInfo: {idType}} = this.state;
+        const {img, userInfo: {idType, issuingCountry} } = this.state;
 
         const formData = new FormData();
         formData.append(
@@ -82,23 +82,9 @@ class ProfileVerification extends Component {
             img.name
         );
 
-        formData.append(
-            'countryId',
-            this.state.userInfo.issuingCountry
-        );
-        formData.append(
-            'page',
-            '1'
-        );
-        formData.append(
-            'type',
-            this.state.userInfo.idType
-        );
-
-
         await axios({
             method: 'post',
-            url: `${VERIFICATION}/document`,
+            url: `${VERIFICATION}/document?countryId=${issuingCountry}&page=1&type=${idType}`,
             data: formData,
             headers: {
                 'Content-Type': 'multipart/form-data',

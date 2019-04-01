@@ -22,10 +22,8 @@ class KYC extends Component {
         : `https://${document.location.hostname}/`;
 
     render() {
-        const {user = defaultUser, kyc, verify} = this.props;
+        const {kyc, verify} = this.props;
         const {isOpenImage} = this.state;
-
-        console.log(kyc);
 
         return (
             <div className="kyc-block">
@@ -39,7 +37,7 @@ class KYC extends Component {
                             <label htmlFor="">Phone </label>
                             <input
                                 type="text"
-                                value={kyc.phone ? kyc.phone : ''}
+                                value={kyc.profile ? kyc.profile.phone : ''}
                                 disabled
                             />
                         </div>
@@ -48,7 +46,7 @@ class KYC extends Component {
                             <label htmlFor="">First name</label>
                             <input
                                 type="text"
-                                value={kyc.firstName ? kyc.firstName : ''}
+                                value={kyc.profile ? kyc.profile.firstName : ''}
                                 disabled
                             />
                         </div>
@@ -57,7 +55,7 @@ class KYC extends Component {
                             <label htmlFor="">Last name</label>
                             <input
                                 type="text"
-                                value={kyc.lastName ? kyc.lastName : ''}
+                                value={kyc.profile ? kyc.profile.lastName : ''}
                                 disabled
                             />
                         </div>
@@ -75,7 +73,7 @@ class KYC extends Component {
                             <label htmlFor="">Country</label>
                             <input
                                 type="text"
-                                value={user.country ? user.country.name : ''}
+                                value={kyc.profile ? kyc.profile.country : ''}
                                 disabled
                             />
                         </div>
@@ -84,7 +82,7 @@ class KYC extends Component {
                             <label htmlFor="">City</label>
                             <input
                                 type="text"
-                                value={kyc.city ? kyc.city : ''}
+                                value={kyc.profile ? kyc.profile.city : ''}
                                 disabled
                             />
                         </div>
@@ -100,7 +98,7 @@ class KYC extends Component {
                         <label htmlFor="">ID</label>
                         <input
                             type="text"
-                            value={kyc.documents.length > 0 ? kyc.documents[0].id : ''}
+                            value={kyc.profile ? (kyc.profile.documents.length > 0 ? kyc.profile.documents[0].id : '') : ''}
                             disabled
                         />
                     </div>
@@ -109,7 +107,7 @@ class KYC extends Component {
                         <label htmlFor="">ID type</label>
                         <input
                             type="text"
-                            value={kyc.documents.length > 0 ? kyc.documents[0].type : ''}
+                            value={kyc.profile ? kyc.profile.documents.length > 0 ? kyc.profile.documents[0].type : '' : ''}
                             disabled
                         />
                     </div>
@@ -138,7 +136,7 @@ class KYC extends Component {
                     <div className="form-item" onClick={() => this.setState({isOpenImage: true})}>
                         <label htmlFor="">ID proof</label>
                         <img
-                            src={kyc.documents.length > 0 ? `${this.imgUrl}uploads/${kyc.documents[0].filename}` : defaultImg}
+                            src={kyc.profile ? kyc.profile.documents.length > 0 ? `${this.imgUrl}uploads/${kyc.profile.documents[0].filename}` : defaultImg : ''}
                             alt=""/>
                     </div>
 
@@ -149,7 +147,7 @@ class KYC extends Component {
 
                     {isOpenImage && (
                         <Lightbox
-                            mainSrc={kyc.documents.length > 0 ? `${this.imgUrl}uploads/${kyc.documents[0].filename}` : defaultImg}
+                            mainSrc={kyc.profile ? kyc.profile.documents.length > 0 ? `${this.imgUrl}uploads/${kyc.profile.documents[0].filename}` : defaultImg : ''}
                             onCloseRequest={() => this.setState({ isOpenImage: false })}
                         />
                     )}
@@ -165,19 +163,19 @@ class KYC extends Component {
                             <label htmlFor="">Status</label>
                             <input
                                 type="text"
-                                value={user.verifyStatus}
+                                value={kyc.verifyStatus}
                                 disabled
-                                style={{color: user.verifyStatus === 'verified' ? '#00CE7D' : '#fff'}}
+                                style={{color: kyc.verifyStatus === 'verified' ? '#00CE7D' : '#fff'}}
                             />
                         </div>
 
                         <div style={{display: 'flex', flexDirection: 'column'}}>
-                            {user.verifyStatus === 'verified' ?
+                            {kyc.verifyStatus === 'verified' ?
                                 <button className='admin-btn red-btn'
-                                        onClick={() => verify(user.id, false)}>Reject</button>
+                                        onClick={() => verify(kyc.id, false)}>Reject</button>
                                 :
                                 <button className='admin-btn green-btn'
-                                        onClick={() => verify(user.id, true)}>Verify</button>
+                                        onClick={() => verify(kyc.id, true)}>Verify</button>
                             }
                         </div>
                     </div>
