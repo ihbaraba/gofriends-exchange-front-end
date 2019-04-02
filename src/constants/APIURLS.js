@@ -146,7 +146,7 @@ export const CURRENCIES = `${current_server.XHR}currencies`;
 
 //verification
 export const VERIFICATION = `${current_server.XHR}users/me/profile`;
-export const VERIFY = `${current_server.XHR}users/verification`;
+export const VERIFY = `${current_server.XHR}users`;
 
 
 

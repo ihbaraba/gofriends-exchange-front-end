@@ -51,24 +51,22 @@ class Profile extends Component {
         // console.log("token =", token, "this.state ==>", this.state);
         const isAuthorised = (token !== "") && (token !== null); // ? true : false
         this.setState({isAuthorised, token});
+
         if (isAuthorised) {
-            const userInfo = await getUserInfo({rout: USERINFO, token});
-            const {body} = userInfo;
+            const {body} = await getUserInfo({rout: USERINFO, token});
             this.props.save_user_info(body);
 
-            if(body.verifyStatus !== 'verified') {
+            if (body.verifyStatus === 'verified' || body.verifyStatus === 'waitForVerify') {
                 this.setState({
-                    modalIsOpen: true,
                     verifyStatus: body.verifyStatus
                 })
             } else {
                 this.setState({
+                    modalIsOpen: true,
                     verifyStatus: body.verifyStatus
                 })
             }
         }
-
-        // this.openModal()
     }
 
     openModal = () => {
@@ -78,7 +76,7 @@ class Profile extends Component {
     };
 
     closeModal = () => {
-        this.setState({modalIsOpen: false})
+        this.setState({modalIsOpen: false});
         this.props.history.push('/exchange')
     };
 
@@ -157,12 +155,12 @@ class Profile extends Component {
 
                                     <div className="verification-status">
                                         {verifyStatus === 'verified' ? <div style={{background: '#00CE7D'}}>
-                                            <i className="fa fa-check" aria-hidden="true"></i>
-                                            Verified
-                                        </div> :
-                                        <div>
-                                            Not verified
-                                        </div>}
+                                                <i className="fa fa-check" aria-hidden="true"></i>
+                                                Verified
+                                            </div> :
+                                            <div>
+                                                Not verified
+                                            </div>}
                                     </div>
                                 </div>
 
@@ -220,7 +218,10 @@ class Profile extends Component {
                                     <div className='two-factor-cod-block'>
                                         <div className="qr-code">
                                             <div className='title'>
-                                                Plese scun this QR-code by <a style={{color: '#4A998C'}} href='https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2' target="_blank">Google authenticator</a> app on your smartphone
+                                                Plese scun this QR-code by <a style={{color: '#4A998C'}}
+                                                                              href='https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2'
+                                                                              target="_blank">Google
+                                                authenticator</a> app on your smartphone
                                             </div>
 
                                             <img src={qrCode} alt="QR - code"/>
@@ -264,7 +265,7 @@ class Profile extends Component {
 
                 {/*--------------------*/}
                 {/*<div className='page-title'>*/}
-                    {/*My login history*/}
+                {/*My login history*/}
                 {/*</div>*/}
 
                 {/*<LoginHistory/>*/}
@@ -282,9 +283,9 @@ class Profile extends Component {
                         </div>
 
                         <ProfileVerification
-                        userId={id}
-                        onExit={this.exitModal}
-                        onClose={this.closeModal}
+                            userId={id}
+                            onExit={this.exitModal}
+                            onClose={this.closeModal}
                         />
                     </div>
                 </Modal>
