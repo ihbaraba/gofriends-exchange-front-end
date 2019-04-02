@@ -35,7 +35,7 @@ const UsersList = ({list, total, current, pageSize, onChange, onOpenUser}) => {
             render: (item) => {
                 if (item === 'verified') {
                     return (<span style={{color: '#00CE7D'}}>Verified</span>)
-                } else if(item === 'waitForVerify') {
+                } else if (item === 'waitForVerify') {
                     return (<span style={{color: '#ce6100'}}>Wait For Verify</span>)
                 } else {
                     return (<span>{item}</span>)
@@ -57,9 +57,13 @@ const UsersList = ({list, total, current, pageSize, onChange, onOpenUser}) => {
             width: 150,
             sorter: true,
             render: (item) => {
-                // if(item === 'Active') {
-                return (<span style={{color: '#00CE7D'}}>Active</span>)
-                // }
+                if (item === 'active') {
+                    return (<span style={{color: '#00CE7D'}}>Active</span>)
+                } else if (item === 'blocked') {
+                    return (<span style={{color: '#d31703'}}>Blocked</span>)
+                } else {
+                    return (<span>{item}</span>)
+                }
             }
         },
         {

@@ -99,7 +99,7 @@ class User extends Component {
         console.log(id);
         try {
             await axios.put(`${VERIFY}/${id}/verification/status`, {
-                isVerified: verify
+                status: verify ? 'verified' : 'waitForVerify'
             });
 
             toast.success(<div className='toaster-container'><Icon type="check-circle"/> Confirmed</div>, {
@@ -124,10 +124,7 @@ class User extends Component {
         this.setState({
             kyc: {
                 ...this.state.kyc,
-                user: {
-                    ...this.state.kyc.user,
-                    verifyStatus: verify ? 'verified' : 'rejected'
-                }
+                verifyStatus: verify ? 'verified' : 'waitForVerify'
             }
         })
     };
