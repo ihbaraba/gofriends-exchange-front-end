@@ -6,33 +6,33 @@ import {toast} from 'react-toastify';
 
 class WithdrawFee extends Component {
     state = {
-       currencies: []
+        currencies: [],
+        coin: {
+            id: '',
+            name: '',
+            fee: [
+                {
+                    fromSteps: 0,
+                    toSteps: 0,
+                    fee: 0
+                }
+            ]
+        }
     };
 
     async componentDidMount() {
-        const {data} = await axios.get(CURRENCIES);
+        const [currencies, fee] = await Promise.all([axios.get(CURRENCIES), axios.get(COMMISSIONS)]);
 
         this.setState({
-            currencies: data
+            currencies: currencies.data,
+            coin: {
+                ...currencies.data[0],
+                fee: fee.data
+            }
         })
     }
 
-    getPairFee = async (id) => {
-        const feeParams = await axios.get(`${COMMISSIONS}`);
-
-        this.setState({
-            pairParams: feeParams.data.length > 0 ? feeParams.data : [{
-                type: '',
-                fromSteps: 0,
-                toSteps: 0,
-                fee: 0
-            }]
-        })
-
-    };
-
     handleSelectingPair = (pair) => {
-        this.getPairFee(pair.id);
         this.setState({
             pair
         })
@@ -41,7 +41,7 @@ class WithdrawFee extends Component {
     handleChangeInput = (index, e) => {
         const input = e.target;
 
-        let newParams = this.state.pairParams;
+        let newParams = this.state.coin.fee;
 
         newParams[index] = {
             ...newParams[index],
@@ -49,18 +49,22 @@ class WithdrawFee extends Component {
         };
 
         this.setState({
-            pairParams: newParams
+            coin: {
+                ...this.state.coin,
+                fee: newParams
+            }
         })
     };
 
     handleSaveCommissions = async () => {
         try {
             await axios.put(`${COMMISSIONS}`, {
-                pairId: this.state.pair.id,
-                steps: this.state.pairParams
+                pairId: this.state.coin.id,
+                type: 'withdraw',
+                steps: this.state.coin.fee
             });
 
-            toast.success(<div className='toaster-container'><Icon type="check-circle" /> Confirmed</div>, {
+            toast.success(<div className='toaster-container'><Icon type="check-circle"/> Confirmed</div>, {
                 position: "top-right",
                 autoClose: 5000,
                 hideProgressBar: false,
@@ -70,7 +74,7 @@ class WithdrawFee extends Component {
             });
 
         } catch (e) {
-            toast.error(<div className='toaster-container'><Icon type="close" /> {e.response.data.userMessage}</div>, {
+            toast.error(<div className='toaster-container'><Icon type="close"/> {e.response.data.userMessage}</div>, {
                 position: "top-right",
                 autoClose: 5000,
                 hideProgressBar: false,
@@ -83,15 +87,16 @@ class WithdrawFee extends Component {
 
     handleAddNewStep = () => {
         this.setState({
-            pairParams: [
-                ...this.state.pairParams,
-                {
-                    type: '',
-                    fromSteps: 0,
-                    toSteps: 0,
-                    fee: 0
-                }
-            ]
+            coin: {
+                ...this.state.coin,
+                fee: [
+                    ...this.state.coin.fee,
+                    {
+                        fromSteps: 0,
+                        toSteps: 0,
+                        fee: 0
+                    }]
+            }
         })
     };
 
@@ -100,15 +105,20 @@ class WithdrawFee extends Component {
             await axios.delete(`${COMMISSIONS}/${id}`)
         }
 
-        let newArr = this.state.pairParams;
+        let newArr = this.state.coin.fee;
         newArr.splice(index, 1);
+
         this.setState({
-            pairParams: newArr
+            coin: {
+                ...this.state.coin,
+                fee: newArr
+            }
         })
+
     };
 
     render() {
-        const {currencies} = this.state;
+        const {currencies, coin} = this.state;
 
         return (
             <Fragment>
@@ -136,70 +146,70 @@ class WithdrawFee extends Component {
 
 
                 <div className='pair-fee-block'>
-                    {/*<div className='title-block'>*/}
-                        {/*{pair.name}*/}
-                    {/*</div>*/}
+                    <div className='title-block'>
+                        {coin.name}
+                    </div>
 
                     <div className='table-title'>
                         <span>Amount steps</span>
                         <span>Percent from volume</span>
                     </div>
 
-                    {/*<div>*/}
-                        {/*{currencies.fee.map((pair, index) => (*/}
-                            {/*<div className='fee-params' key={index}>*/}
-                                {/*<div className='form-item'>*/}
-                                    {/*<label>From</label>*/}
-                                    {/*<input*/}
-                                        {/*type="number"*/}
-                                        {/*name='fromSteps'*/}
-                                        {/*value={pair.fromSteps}*/}
-                                        {/*onChange={(e) => this.handleChangeInput(index, e)}*/}
-                                    {/*/>*/}
-                                {/*</div>*/}
-                                {/*<hr/>*/}
-                                {/*<div className='form-item'>*/}
-                                    {/*<label>To</label>*/}
-                                    {/*<input*/}
-                                        {/*type="number"*/}
-                                        {/*name='toSteps'*/}
-                                        {/*value={pair.toSteps}*/}
-                                        {/*onChange={(e) => this.handleChangeInput(index, e)}*/}
-                                    {/*/>*/}
-                                {/*</div>*/}
-                                {/*<div className='right-arrow'></div>*/}
-                                {/*<div className='form-item'>*/}
-                                    {/*<label>Fee</label>*/}
-                                    {/*<input*/}
-                                        {/*type="number"*/}
-                                        {/*name='fee'*/}
-                                        {/*value={pair.fee}*/}
-                                        {/*onChange={(e) => this.handleChangeInput(index, e)}*/}
-                                    {/*/>*/}
-                                    {/*<span className='rate'>%</span>*/}
-                                {/*</div>*/}
+                    <div>
+                        {coin.fee.map((pair, index) => (
+                            <div className='fee-params' key={index}>
+                                <div className='form-item'>
+                                    <label>From</label>
+                                    <input
+                                        type="number"
+                                        name='fromSteps'
+                                        value={pair.fromSteps}
+                                        onChange={(e) => this.handleChangeInput(index, e)}
+                                    />
+                                </div>
+                                <hr/>
+                                <div className='form-item'>
+                                    <label>To</label>
+                                    <input
+                                        type="number"
+                                        name='toSteps'
+                                        value={pair.toSteps}
+                                        onChange={(e) => this.handleChangeInput(index, e)}
+                                    />
+                                </div>
+                                <div className='right-arrow'></div>
+                                <div className='form-item'>
+                                    <label>Fee</label>
+                                    <input
+                                        type="number"
+                                        name='fee'
+                                        value={pair.fee}
+                                        onChange={(e) => this.handleChangeInput(index, e)}
+                                    />
+                                    <span className='rate'>%</span>
+                                </div>
 
-                                {/*{pairParams.length > 1 ?*/}
-                                    {/*<Icon*/}
-                                        {/*type="delete"*/}
-                                        {/*onClick={() => this.handleRemoveStep(index, pair.id)}*/}
-                                    {/*/> : ''}*/}
-                            {/*</div>*/}
-                        {/*))}*/}
+                                {coin.fee.length > 1 ?
+                                    <Icon
+                                        type="delete"
+                                        onClick={() => this.handleRemoveStep(index, pair.id)}
+                                    /> : ''}
+                            </div>
+                        ))}
 
-                        {/*<div style={{display: 'flex', justifyContent: 'flex-end'}}>*/}
-                            {/*{pairParams.length < 5 ?*/}
-                                {/*<button*/}
-                                    {/*className='admin-btn green-btn'*/}
-                                    {/*onClick={this.handleAddNewStep}>*/}
-                                    {/*Add rule*/}
-                                {/*</button> : ''*/}
-                            {/*}*/}
-                            {/*<button className='admin-btn green-btn' onClick={this.handleSaveCommissions}>*/}
-                                {/*Save*/}
-                            {/*</button>*/}
-                        {/*</div>*/}
-                    {/*</div>*/}
+                        <div style={{display: 'flex', justifyContent: 'flex-end'}}>
+                            {coin.fee.length < 5 ?
+                                <button
+                                    className='admin-btn green-btn'
+                                    onClick={this.handleAddNewStep}>
+                                    Add rule
+                                </button> : ''
+                            }
+                            <button className='admin-btn green-btn' onClick={this.handleSaveCommissions}>
+                                Save
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </Fragment>
         )

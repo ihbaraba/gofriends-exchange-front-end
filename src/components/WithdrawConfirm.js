@@ -10,7 +10,7 @@ import stopwatch from '../img/stopwatch.svg';
 class WithdrawConfirm extends Component {
     componentDidMount() {
         let urlParams = queryString.parseUrl(this.props.location.search).query;
-        axios.get(`${CONFIRM_WITHDRAW}/${urlParams.token}`)
+        axios.get(`${CONFIRM_WITHDRAW}?token=${urlParams.token}`)
     }
 
     render() {
