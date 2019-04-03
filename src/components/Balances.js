@@ -82,7 +82,7 @@ class Balances extends Component {
                 currencyId: this.state.selectCoin.id
             });
 
-            toast.success(<div className='toaster-container'><Icon type="check-circle" /> Confirmed</div>, {
+            toast.success(<div className='toaster-container'><Icon type="check-circle" /> Check your mail</div>, {
                 position: "top-right",
                 autoClose: 5000,
                 hideProgressBar: false,

@@ -4,7 +4,7 @@ import Chart from "react-apexcharts";
 class CandleStickChart extends Component {
     render() {
         const {data, newCandle} = this.props;
-        console.log(newCandle);
+
         const chartData = data.map(item => ({
             x: item.date,
             y: [item.open, item.high, item.low, item.close]
@@ -53,8 +53,8 @@ class CandleStickChart extends Component {
                     selection: {
                         enabled: true,
                         xaxis: {
-                            min: (new Date().getTime() - (this.props.interval === '1hr' || this.props.interval === '2hr' || this.props.interval === '4hr' || this.props.interval === '1day' ? 43200000 : 60480000)),
-                            max: new Date().getTime()
+                            min: ((new Date().getTime()) - 500000000),
+                            max: (new Date().getTime()) - 80000000
                         },
                         fill: {
                             color: '#ccc',

@@ -107,6 +107,34 @@ class Graphic extends Component {
         }
     }
 
+    // intervalInMiliseconds = (interval, period) => {
+    //     const MsInMin = 60 * 1000;
+    //     switch (interval) {
+    //         case "5min" : {
+    //             return Math.ceil(period * 5 * MsInMin)
+    //         }
+    //         case "15min" : {
+    //             return Math.ceil(period * 15 * MsInMin)
+    //         }
+    //         case "30min" : {
+    //             return Math.ceil(period * 30 * MsInMin)
+    //         }
+    //         case "1hr" : {
+    //             return Math.ceil(period * 60 * MsInMin)
+    //         }
+    //         case "2hr" : {
+    //             return Math.ceil(period * 120 * MsInMin)
+    //         }
+    //         case "4hr" : {
+    //             return Math.ceil(period * 240 * MsInMin)
+    //         }
+    //         case "1day" : {
+    //             return Math.ceil(period * 1440 * MsInMin)
+    //         }
+    //         default :
+    //             return MsInMin
+    //     }
+    // };
     intervalInMiliseconds = (interval, period) => {
         const MsInMin = 60 * 1000;
         switch (interval) {
@@ -120,7 +148,7 @@ class Graphic extends Component {
                 return Math.ceil(period * 30 * MsInMin)
             }
             case "1hr" : {
-                return Math.ceil(period * 60 * MsInMin)
+                return Math.ceil(period * 30 * MsInMin)
             }
             case "2hr" : {
                 return Math.ceil(period * 120 * MsInMin)
