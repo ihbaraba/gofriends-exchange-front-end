@@ -30,9 +30,9 @@ const Header = ({user, page, back}) => {
             </div>
 
             <div className='user-navigation'>
-                <img src={notifIcon} alt=""/>
-
-                <img src={userIcon} alt=""/>
+                {/*<img src={notifIcon} alt=""/>*/}
+                {/**/}
+                {/*<img src={userIcon} alt=""/>*/}
 
                 <span className='user-email'>
                     {user.email}

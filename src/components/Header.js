@@ -19,19 +19,19 @@ class Header extends Component {
 
             <Menu.Item>
                 <NavLink to="/balances">
-                    <span className="title topLevel">Deposits & withdrawals</span>
+                    <span className="title topLevel">Deposits & Withdrawals</span>
                 </NavLink>
             </Menu.Item>
 
             <Menu.Item>
                 <NavLink to="/DepositHistory">
-                    <span className="title topLevel">Deposit history</span>
+                    <span className="title topLevel">Deposit History</span>
                 </NavLink>
             </Menu.Item>
 
             <Menu.Item>
                 <NavLink to="/withdrawalpanel">
-                    <span className="title topLevel">Withdrawal history</span>
+                    <span className="title topLevel">Withdrawal History</span>
                 </NavLink>
             </Menu.Item>
 
@@ -42,13 +42,13 @@ class Header extends Component {
         <Menu>
             <Menu.Item>
                 <NavLink to="/OpenOrders">
-                    <span className="title topLevel">My open orders</span>
+                    <span className="title topLevel">My Open Orders</span>
                 </NavLink>
             </Menu.Item>
 
             <Menu.Item>
                 <NavLink to="/orders">
-                    <span className="title topLevel">My trade history & analysis</span>
+                    <span className="title topLevel">My Trade History & Analysis</span>
                 </NavLink>
             </Menu.Item>
         </Menu>

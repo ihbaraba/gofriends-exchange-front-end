@@ -21,20 +21,17 @@ class WithdrawFee extends Component {
     };
 
     async componentDidMount() {
-        const [currencies, fee] = await Promise.all([axios.get(CURRENCIES), axios.get(COMMISSIONS)]);
+        const currencies = await axios.get(CURRENCIES);
 
         this.setState({
             currencies: currencies.data,
-            coin: {
-                ...currencies.data[0],
-                fee: fee.data
-            }
+            coin: currencies.data[0]
         })
     }
 
     handleSelectingPair = (pair) => {
         this.setState({
-            pair
+            coin: pair
         })
     };
 
@@ -58,10 +55,17 @@ class WithdrawFee extends Component {
 
     handleSaveCommissions = async () => {
         try {
-            await axios.put(`${COMMISSIONS}`, {
-                pairId: this.state.coin.id,
+            const {data} = await axios.put(`${COMMISSIONS}`, {
+                currencyId: this.state.coin.id,
                 type: 'withdraw',
                 steps: this.state.coin.fee
+            });
+
+            this.setState({
+                coin: {
+                    ...this.state.coin,
+                    fee: data
+                }
             });
 
             toast.success(<div className='toaster-container'><Icon type="check-circle"/> Confirmed</div>, {

@@ -14,7 +14,6 @@ class WithdrawLogic extends Component {
 
         this.state = {
             wallet: "",
-            transactionFee: 0.005,
             total: 0,
             amount: 1,
         };
@@ -34,14 +33,14 @@ class WithdrawLogic extends Component {
             evt.preventDefault();
     };
 
-
     validate(s) {
         const rgx = /^[0-9]*\.?[0-9]*$/;
         return s.match(rgx);
     }
 
     render() {
-        const {record: {first, second}, onWithdraw} = this.props;
+        const {record: {first, second, currency}, onWithdraw} = this.props;
+        let transactionFee = 0;
 
         const optionsWallet = {
             addonAfter: second,
@@ -55,21 +54,11 @@ class WithdrawLogic extends Component {
             }
         };
 
-        const optionsTransactionFee = {
-            addonAfter: second,
-            style: {width: '15rem'},
-            value: this.state.transactionFee,
-            onChange: (e) => {
-                const transactionFee = e.target.value;
-                // console.log(price);
-                const total = +transactionFee * (+this.state[`Amount`]);
-                this.setState({
-                    transactionFee,
-                    total,
-                });
+        currency.fee.forEach(item => {
+            if (this.state.amount >= item.fromSteps && this.state.amount <= item.toSteps) {
+                transactionFee = this.state.amount / 100 * item.fee;
             }
-        };
-
+        });
 
         const optionsAmount = {
             addonAfter: first,
@@ -81,7 +70,6 @@ class WithdrawLogic extends Component {
             onChange: (e) => {
                 const amount = e.target.value;
                 const total = +this.state.transactionFee + (+amount);
-                // console.log(amount, total);
                 this.setState({
                     amount,
                     total,
@@ -101,17 +89,13 @@ class WithdrawLogic extends Component {
                     <label>Amount:</label>
                     <Input {...optionsAmount} style={{width: "100%"}}/>
                 </div>
-                {/*<div className="formWrap">*/}
-                    {/*<label>Transaction Fee</label>*/}
-                    {/*<Input {...optionsTransactionFee} style={{width: "100%",}}/>*/}
-                {/*</div>*/}
-                {/*<div className="formWraptotal">*/}
-                    {/*<label>Transaction Fee:</label>*/}
-                    {/*<span>{optionsTransactionFee.value}</span>*/}
-                {/*</div>*/}
+                <div className="formWraptotal">
+                    <label>Transaction Fee:</label>
+                    <span>{transactionFee}</span>
+                </div>
                 <div className="formWraptotal">
                     <label>Total:</label>
-                    <span>{total}</span>
+                    <span>{total + transactionFee}</span>
                 </div>
 
                 <button className='btn' onClick={() => onWithdraw(this.state)}>

@@ -127,15 +127,13 @@ class Profile extends Component {
 
     render() {
         const {showQr, qrCode, totpCode, verifyStatus} = this.state;
-        const {username, country = {}, twoFactorAuthEnabled, email, id} = this.props.user;
-        console.log(this.props);
-        // const {name} = country;
+        const {username, country = {}, email, id} = this.props.user;
         const countryName = country ? country.countryName : 'Ukraine';
 
         return (
             <div className='profile-page'>
-                <div className='page-title'>
-                    My profile
+                <div className='card-container-head'>
+                   <h3> My profile</h3>
                 </div>
 
                 <div className='page-content'>
@@ -181,10 +179,6 @@ class Profile extends Component {
 
                             <div className="phone">
                                 E-mail: {email}
-                            </div>
-
-                            <div className="limits">
-                                Withdrawal limit: $25 USD equivalent per day
                             </div>
                         </div>
                     </div>

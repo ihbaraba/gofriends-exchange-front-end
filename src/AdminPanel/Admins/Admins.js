@@ -129,9 +129,12 @@ class Admins extends Component {
             },
             {
                 title: 'Password',
-                dataIndex: 'date',
-                key: 'date',
+                dataIndex: 'pass',
+                key: 'pass',
                 width: 200,
+                render: () => (
+                    <span>*************</span>
+                )
             },
             {
                 title: '',
