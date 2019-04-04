@@ -50,6 +50,7 @@ class NewsEditor extends Component {
     render() {
         const {news, newsTitle} = this.state;
         let editorBody = '';
+
         return (
             <div className='news-editor-page'>
                 <div className='new-title'>
@@ -76,9 +77,9 @@ class NewsEditor extends Component {
                         const data = editor.getData();
                         editorBody = data;
                     }}
-                    config={ {
-                        toolbar: [['Heading', '|', 'Bold', 'Italic', 'Alignment', 'Link', 'BlockQuote', 'Undo', 'Redo']],
-                    } }
+                    config={{
+                        toolbar: [['Heading', '|', 'Bold', 'Italic', 'Alignment', 'Link', 'BlockQuote', 'Undo', 'Redo']]
+                    }}
                 />
             </div>
         )

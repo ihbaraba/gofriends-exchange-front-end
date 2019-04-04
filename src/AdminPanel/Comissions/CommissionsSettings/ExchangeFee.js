@@ -57,7 +57,7 @@ class ExchangeFee extends Component {
             await axios.put(`${COMMISSIONS}`, {
                 pairId: this.state.pair.id,
                 type: 'exchange',
-                steps: this.state.pairParams
+                steps: this.state.pair.fee
             });
 
             toast.success(<div className='toaster-container'><Icon type="check-circle"/> Confirmed</div>, {

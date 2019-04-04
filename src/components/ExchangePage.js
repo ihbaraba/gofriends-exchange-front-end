@@ -179,7 +179,6 @@ class ExchangePage extends Component {
         }
 
         this.getPairStatistics();
-
     };
 
     handleTimeFrameChange = (e) => {
@@ -242,17 +241,17 @@ class ExchangePage extends Component {
                     />
 
                     <div className="rightSide ">
-                        {/*<div className="candlesticks">*/}
-                            {/*<Radio.Group value={interval} onChange={this.handleTimeFrameChange}>*/}
+                        <div className="candlesticks">
+                            <Radio.Group value={interval} onChange={this.handleTimeFrameChange}>
                                 {/*<Radio.Button value="5min">5-min</Radio.Button>*/}
                                 {/*<Radio.Button value="15min">15-min</Radio.Button>*/}
                                 {/*<Radio.Button value="30min">30-min</Radio.Button>*/}
                                 {/*<Radio.Button value="1hr">1-hr</Radio.Button>*/}
-                                {/*<Radio.Button value="2hr">2-hr</Radio.Button>*/}
-                                {/*<Radio.Button value="4hr">4-hr</Radio.Button>*/}
-                                {/*<Radio.Button value="1day">1-day</Radio.Button>*/}
-                            {/*</Radio.Group>*/}
-                        {/*</div>*/}
+                                <Radio.Button value="2hr">1-hr</Radio.Button>
+                                <Radio.Button value="4hr">12-hr</Radio.Button>
+                                <Radio.Button value="1day">1-day</Radio.Button>
+                            </Radio.Group>
+                        </div>
 
                         <Graphic
                             pairId={id}
@@ -339,17 +338,17 @@ class ExchangePage extends Component {
                                 </div>
 
                                 <div className="rightSide ">
-                                    <div className="candlesticks">
-                                        <Radio.Group value={interval} onChange={this.handleTimeFrameChange}>
-                                            <Radio.Button value="5min">5-min</Radio.Button>
-                                            {/*<Radio.Button value="15min">15-min</Radio.Button>*/}
-                                            {/*<Radio.Button value="30min">30-min</Radio.Button>*/}
-                                            <Radio.Button value="1hr">1-hr</Radio.Button>
-                                            <Radio.Button value="2hr">2-hr</Radio.Button>
-                                            <Radio.Button value="4hr">4-hr</Radio.Button>
-                                            <Radio.Button value="1day">1-day</Radio.Button>
-                                        </Radio.Group>
-                                    </div>
+                                    {/*<div className="candlesticks">*/}
+                                        {/*<Radio.Group value={interval} onChange={this.handleTimeFrameChange}>*/}
+                                            {/*<Radio.Button value="5min">5-min</Radio.Button>*/}
+                                            {/*/!*<Radio.Button value="15min">15-min</Radio.Button>*!/*/}
+                                            {/*/!*<Radio.Button value="30min">30-min</Radio.Button>*!/*/}
+                                            {/*<Radio.Button value="1hr">1-hr</Radio.Button>*/}
+                                            {/*<Radio.Button value="2hr">2-hr</Radio.Button>*/}
+                                            {/*<Radio.Button value="4hr">4-hr</Radio.Button>*/}
+                                            {/*<Radio.Button value="1day">1-day</Radio.Button>*/}
+                                        {/*</Radio.Group>*/}
+                                    {/*</div>*/}
 
                                     <Graphic
                                         pairId={id}

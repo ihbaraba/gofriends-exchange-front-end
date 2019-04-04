@@ -51,8 +51,7 @@ class Balances extends Component {
         const isAuthorised = (token !== "") && (token !== null); // ? true : false
         // this.setState({isAuthorised, token});
         if (isAuthorised) {
-            const userInfo = await getUserInfo({rout: USERINFO, token});
-            const {body} = userInfo;
+            const {body} = await getUserInfo({rout: USERINFO, token});
             this.props.save_user_info(body);
         }
     }
@@ -122,6 +121,7 @@ class Balances extends Component {
                 name: item.currency.name,
                 code: item.currency.code,
                 amount: item.amount,
+                currency: item.currency,
                 address: item.address,
                 action: ""
             }

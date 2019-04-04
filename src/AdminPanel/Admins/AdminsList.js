@@ -20,9 +20,12 @@ const AdminsList = ({list, onRemove, onEditAdmin}) => {
         },
         {
             title: 'Password',
-            dataIndex: 'date',
-            key: 'date',
+            dataIndex: 'pass',
+            key: 'pass',
             width: 200,
+            render: () => (
+                <span>*************</span>
+            )
         },
         {
             title: '',
@@ -43,7 +46,7 @@ const AdminsList = ({list, onRemove, onEditAdmin}) => {
         }
     ];
 
-    return(
+    return (
         <div className='admins-list-block response-side'>
             <Table
                 columns={columns}

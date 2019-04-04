@@ -6,7 +6,7 @@ class CandleStickChart extends Component {
         const {data, newCandle} = this.props;
 
         const chartData = data.map(item => ({
-            x: item.date,
+            x: new Date(item.date),
             y: [item.open, item.high, item.low, item.close]
         }));
 
@@ -37,14 +37,16 @@ class CandleStickChart extends Component {
                         }
                     }
                 },
-
                 xaxis: {
-                    type: 'datetime'
-                }
+                    type: 'datetime',
+                    axisBorder: {
+                        offsetX: 0
+                    }
+                },
             },
+
             chartOptionsBar: {
                 chart: {
-                    height: 160,
                     type: 'bar',
                     brush: {
                         enabled: true,
@@ -90,9 +92,6 @@ class CandleStickChart extends Component {
                 },
                 xaxis: {
                     type: 'datetime',
-                    axisBorder: {
-                        offsetX: 13
-                    }
                 },
                 yaxis: {
                     tooltip: {
