@@ -2,9 +2,11 @@ import React, {Component} from 'react';
 import {Modal, Select, Table} from 'antd';
 import axios from 'axios';
 
-import {GET_ADMINS, GET_USERS} from '../../constants/APIURLS';
+import {GET_ADMINS, GET_USERS, PAIRS} from '../../constants/APIURLS';
 
 import AdminsList from './AdminsList';
+import {Icon} from "antd";
+import {toast} from "react-toastify";
 
 const Option = Select.Option;
 
@@ -68,22 +70,45 @@ class Admins extends Component {
 
         const {email, password, update, id} = this.state;
 
-        if (update) {
-            await axios.put(`${GET_USERS}/${id}/admin`, {
-                email,
-                password,
+        try {
+
+
+            if (update) {
+                await axios.put(`${GET_USERS}/${id}/admin`, {
+                    email,
+                    password,
+                });
+            } else {
+                await axios.post(GET_USERS, {
+                    email,
+                    password,
+                    role: 'MANAGER',
+                    countryId: 13,
+                    username: 'manager'
+                });
+            }
+
+            this.getUsers();
+
+            toast.success(<div className='toaster-container'><Icon type="check-circle"/> Confirmed</div>, {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true
             });
-        } else {
-            await axios.post(GET_USERS, {
-                email,
-                password,
-                role: 'MANAGER',
-                countryId: 13,
-                username: 'manager'
+
+        } catch (e) {
+            toast.error(<div className='toaster-container'><Icon type="close"/> {e.response.data.userMessage}</div>, {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true
             });
         }
-
-        this.getUsers();
 
         this.setState({
             visible: false,
@@ -93,9 +118,30 @@ class Admins extends Component {
     };
 
     handleRemoveUser = async (id) => {
-        await axios.delete(`${GET_USERS}/${id}`);
+        try {
+            await axios.delete(`${GET_USERS}/${id}/admin`);
 
-        this.getUsers();
+            this.getUsers();
+
+            toast.success(<div className='toaster-container'><Icon type="check-circle"/> Confirmed</div>, {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true
+            });
+
+        } catch (e) {
+            toast.error(<div className='toaster-container'><Icon type="close"/> {e.response.data.userMessage}</div>, {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true
+            });
+        }
     };
 
     handleCancel = (e) => {

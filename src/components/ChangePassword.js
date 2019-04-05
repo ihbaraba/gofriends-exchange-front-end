@@ -110,7 +110,7 @@ class ChangePassword extends Component {
 
         if (!token) {
             return (
-                <div className='login-page'>
+                <div className='login-page change-pass-page'>
                     <div className="login-form">
                         <div className='back-btn' onClick={() => window.history.back()}>
                             <i className="fa fa-angle-left" aria-hidden="true"></i>

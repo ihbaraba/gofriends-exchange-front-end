@@ -12,6 +12,7 @@ import {getUserInfo} from "./../utils";
 import axios from 'axios';
 
 import '../styles/login.css';
+import {toast} from "react-toastify";
 
 class Login extends Component {
     constructor(props) {
@@ -60,7 +61,6 @@ class Login extends Component {
                 password: this.state.password,
                 totpCode: this.state.totpCode,
             };
-            // console.log("handleSubmit options=", user);
 
             const content = await sendRequest({
                 rout: LOGIN,
@@ -69,63 +69,23 @@ class Login extends Component {
             const {errorTextCode, httpStatus, userMessage} = content;
 
             if (typeof errorTextCode !== "undefined") {
-
-                // console.log(content, errorTextCode, errorMessage, typeof errorTextCode, " showTotpCodeInput=", this.state.showTotpCodeInput);
-
-                switch (errorTextCode) {
-                    case "UserNotFound" :
-                    case "WrongPassword":
-                    case "UserExists" :
-                    case "BadRequest" :
-                    case "EmailExists" :
-                        alert(userMessage + "  (" + errorTextCode + " error code:" + httpStatus + " )");
-                        break;
-                    case "IncorrectTotpCode" :
-                    case "TotpCodeNotProvided":
-                        if (!this.state.showTotpCodeInput) // bad toptCode
-                        {
-                            this.setState( //show input for toptCode
-                                {showTotpCodeInput: true}
-                            )
-                        }
-                        else {
-                            alert(userMessage + "  (" + errorTextCode + " error code:" + httpStatus + " )");
-                        }
-
-                        break;
-
-                    default :
-                }
-                // console.log(errorCode, usrMsg, typeof errorCode, " showTotpCodeInput=", this.state.showTotpCodeInput);
-                //
-                // switch (errorCode) {
-                //     case 0 : // bad email
-                //     case 1 :
-                //     case 2 :
-                //     case 3 : alert(usrMsg);//bad password
-                //         break;
-                //     case 5 :
-                //     case 4 : {
-                //         if (!this.state.showTotpCodeInput) // bad toptCode
-                //             {this.setState( //show input for toptCode
-                //                 {showTotpCodeInput: true}
-                //                 )}
-                //         else
-                //             { alert(usrMsg) }
-                //     }
-                //         break;
-                //
-                //     default :
-                // }
+                toast.error(<div className='toaster-container'>{userMessage}</div>, {
+                    position: "top-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true
+                });
             }
             else {
                 const userInfo = await getUserInfo({rout: USERINFO, token: content.token});
                 this.props.save_user_info(userInfo.body);
 
                 this.props.login_success({token: content.token});
-                axios.defaults.headers.common['Authorization'] =  content.token;
+                axios.defaults.headers.common['Authorization'] = content.token;
 
-                if(content.role === 'ADMIN') {
+                if (content.role === 'ADMIN') {
                     this.props.history.push(`/admin/dashboard`);
                 } else {
                     this.props.history.push(`/exchange`);
@@ -200,7 +160,8 @@ class Login extends Component {
                                 />
                             </div>}
                             {(showTotpCodeInput) && <div>
-                                <h4 style={{textAlign: 'center', margin: '20px 0'}}>You have 2 factor authentication enabled.<br/>Please Enter Your Google
+                                <h4 style={{textAlign: 'center', margin: '20px 0'}}>You have 2 factor authentication
+                                    enabled.<br/>Please Enter Your Google
                                     Authenticator Six-Digit Code</h4>
                                 <input
                                     className="userQrPassInput"

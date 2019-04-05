@@ -31,7 +31,7 @@ class AdminWallet extends Component {
                 currencyId: selectedWallet.currencyId
             });
 
-            toast.success(<div className='toaster-container'><Icon type="check-circle" /> Confirmed</div>, {
+            toast.success(<div className='toaster-container'><Icon type="check-circle"/> Confirmed</div>, {
                 position: "top-right",
                 autoClose: 5000,
                 hideProgressBar: false,
@@ -46,7 +46,7 @@ class AdminWallet extends Component {
                 wallet: ''
             });
         } catch (e) {
-            toast.error(<div className='toaster-container'><Icon type="close" /> {e.response.data.userMessage}</div>, {
+            toast.error(<div className='toaster-container'><Icon type="close"/> {e.response.data.userMessage}</div>, {
                 position: "top-right",
                 autoClose: 5000,
                 hideProgressBar: false,
@@ -128,14 +128,16 @@ class AdminWallet extends Component {
                         You can withdraw {selectedWallet.currencyCode} to any wallet
                     </div>
 
-                    <div className='form-item'>
+                    <div className='form-item '>
                         <label htmlFor=" ">Amount </label>
-                        <input
-                            type="text"
-                            value={amount}
-                            onChange={e => this.setState({amount: e.target.value})}
-                        />
-                        <span className='amount-label'>{selectedWallet.currencyCode}</span>
+                        <div className="amount-block">
+                            <input
+                                type="text"
+                                value={amount}
+                                onChange={e => this.setState({amount: e.target.value})}
+                            />
+                            <span className='amount-label'>{selectedWallet.currencyCode}</span>
+                        </div>
                     </div>
 
                     <div className="vertical-line"></div>

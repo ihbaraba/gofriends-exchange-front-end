@@ -47,7 +47,7 @@ const NewsList = ({list = [], onChangeTable, deleteNews, editNews, total, curren
                         Edit
                     </button>
                     <button className='admin-btn red-btn' onClick={() => deleteNews(item.id)}>
-                        Delite
+                        Delete
                     </button>
                 </div>
             )

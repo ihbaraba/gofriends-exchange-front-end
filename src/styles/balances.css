@@ -7,6 +7,12 @@
     justify-content: space-around;
 }
 
+.act-btn:hover {
+  background: #4A998C !important;
+}
+
+
+
 .balances-page .table .ant-table-thead {
     background-color: #313131;
     border: 0.5px solid rgba(0, 0, 0, 0.7);

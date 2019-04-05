@@ -223,6 +223,9 @@
     margin-left: 10px;
     cursor: pointer;
 }
+.rightSide .candlesticks .ant-radio-button-wrapper:hover {
+    background-color: rgba(74, 153, 140, 0.16) !important;
+}
 
 .ant-radio-button-wrapper:not(:first-child)::before {
     background-color: #000000 !important;
@@ -230,6 +233,10 @@
 
 .rightSide .candlesticks .ant-radio-button-wrapper-checked {
     background: #4A998C;
+    box-shadow: none !important;
+}
+.rightSide .candlesticks .ant-radio-button-wrapper-checked:hover {
+    background: #4A998C !important;
     box-shadow: none !important;
 }
 
@@ -418,10 +425,16 @@
     background-color: #00CE7D !important;
     font-weight: normal !important;
 }
+.orders .order-action-btn.order-buy-btn:hover {
+    background-color: #008f54 !important;
+}
 
 .orders .order-action-btn.order-sell-btn {
     background-color: #DD4457 !important;
     font-weight: normal !important;
+}
+.orders .order-action-btn.order-sell-btn:hover {
+    background-color: #a63a4b !important;
 }
 
 .orders .market {
@@ -443,10 +456,17 @@
     cursor: pointer;
 }
 
+.orders .ant-tabs-nav .ant-tabs-tab:hover {
+    background-color: rgba(74, 153, 140, 0.16) !important;
+}
+
 .orders .ant-tabs-nav .ant-tabs-tab-active {
     background: #4A998C !important;
     color: #fff !important;
     font-weight: normal !important;
+}
+.orders .ant-tabs-nav .ant-tabs-tab-active:hover {
+    background: #4A998C !important;
 }
 
 .orders .ant-tabs-ink-bar-animated {
@@ -525,12 +545,18 @@
     margin: 5px 7px 5px 0 !important;
     cursor: pointer;
 }
+.currencysPairs .ant-tabs-bar .ant-tabs-tab:hover {
+    background-color: rgba(74, 153, 140, 0.16) !important;
+}
 
 .currencysPairs .ant-table-tbody tr {
     cursor: pointer;
 }
 
 .currencysPairs .ant-tabs-bar .ant-tabs-tab-active {
+    background: #4A998C !important;
+}
+.currencysPairs .ant-tabs-bar .ant-tabs-tab-active:hover {
     background: #4A998C !important;
 }
 

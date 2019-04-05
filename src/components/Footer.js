@@ -1,6 +1,7 @@
 import React from 'react';
 import logo from '../img/logo_go.svg';
 import NavLink from './NavLink';
+import Pdf from '../img/beetok_wp_eng.pdf';
 
 import '../styles/footer.css';
 
@@ -22,11 +23,9 @@ const Footer = () => {
                 </div>
 
                 <div className="links noWrap desktop">
-                    <NavLink to="/contact">
-                        <div className="group">
-                            <span>About</span>
-                        </div>
-                    </NavLink>
+                    <a href={Pdf} target='_blank'>
+                        About
+                    </a>
                     <NavLink to="/terms">
                         <div className="group">
                             <span>Terms of Use</span>
@@ -47,9 +46,9 @@ const Footer = () => {
 
                 <div className="links noWrap mobile">
                     <div>
-                        <NavLink to="/contact">
+                        <a href={Pdf} target='_blank'>
                             About
-                        </NavLink>
+                        </a>
                         <NavLink to="/terms">
                             Terms of Use
                         </NavLink>
@@ -66,7 +65,7 @@ const Footer = () => {
             </div>
 
             <div className='copyright-block'>
-                © 2017 - 2018  Gofriends.pro. All rights reserved
+                © 2017 - 2018 Gofriends.pro. All rights reserved
             </div>
         </div>
     );
