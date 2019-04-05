@@ -41,6 +41,9 @@
 .profile-page .avatar-block a {
     padding: 0 20px;
 }
+.profile-page .avatar-block a:hover span {
+   color: rgb(0, 206, 125);
+}
 
 .profile-page .avatar-block span {
     margin: 20px 0 0 0;

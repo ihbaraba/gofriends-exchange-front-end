@@ -43,7 +43,7 @@
     "eject": "react-scripts eject"
   },
   "devDependencies": {
-    "antd": "^3.6.6",
+    "antd": "^3.16.1",
     "d3": "^5.5.0",
     "superagent": "^3.8.3",
     "uglifyjs-webpack-plugin": "^2.1.1",

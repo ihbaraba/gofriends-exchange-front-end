@@ -156,6 +156,10 @@
     grid-area: market;
 }
 
+.marketDepth .ant-table-thead .ant-table-column-has-actions {
+    display: flex;
+}
+
 .marketDepth .ant-table-column-sorter {
     display: none;
 }
@@ -530,10 +534,16 @@
     height: max-content !important;
 }
 
-.currencysPairs .ant-tabs-bar .ant-tabs-tab {
-    height: 23px;
-    width: 46px;
+.currencysPairs .ant-tabs-nav > div {
     display: flex;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+}
+
+.currencysPairs .ant-tabs-bar .ant-tabs-tab {
+    height: 23px !important;
+    width: 46px !important;
+    display: flex !important;
     align-items: center;
     justify-content: center;
     background-color: #000000 !important;
