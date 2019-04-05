@@ -5,7 +5,7 @@ import {getData, sendRequest} from "./Graphic/utils";
 import {REGISTER, COUNTRIES, LOGIN} from "../constants/APIURLS";
 import {login_success} from "../actions/UserActions";
 import {Switch} from 'antd';
-import logo from '../img/logo_go.svg';
+import logo from '../img/logo_footer.png';
 import NavLink from './NavLink';
 
 import '../styles/registration.css';
@@ -108,8 +108,6 @@ class Registration extends Component {
 
     handlerRegistrationSubmit = async (event) => {
         event.preventDefault();
-        console.log('qfdqefew')
-        console.log(this.state.isVerified)
         if (this.state.isVerified) {
             function validateEmail(email) {
                 const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -198,6 +196,15 @@ class Registration extends Component {
                     }
                 )
             }
+        } else {
+            toast.error(<div className='toaster-container'>All fields should be filled obligatory!</div>, {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true
+            });
         }
 
     };
@@ -286,8 +293,8 @@ class Registration extends Component {
                         Back
                     </div>
 
-                    {/*<img src={logo} alt=""/>*/}
-                    <h2 className='sinsline-logo-title'>Beetok</h2>
+                    <img src={logo} alt=""/>
+                    {/*<h2 className='sinsline-logo-title'>Beetok</h2>*/}
 
                     {(!showQRCode) &&
                     <Fragment>

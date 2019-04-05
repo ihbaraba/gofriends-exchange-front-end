@@ -26,9 +26,14 @@ const SERVERS = {
 
 // console.log('document.location', document.location.hostname, typeof document.location.hostname, document.location,);
 
+// const generatedDetected = {
+//     XHR: `https://${document.location.hostname}/api/v1/`,
+//     SOCKET: `https://${document.location.hostname}/`,
+// };
+
 const generatedDetected = {
-    XHR: `https://${document.location.hostname}/api/v1/`,
-    SOCKET: `https://${document.location.hostname}/`,
+    XHR: `https://dev.gofriends.pro/api/v1/`,
+    SOCKET: `wss://dev.gofriends.pro`,
 };
 
 

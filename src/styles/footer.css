@@ -40,6 +40,10 @@
         height: auto;
     }
 
+    .footer .logo {
+       display: none;
+    }
+
     .footer .links.desktop {
         display: none;
     }

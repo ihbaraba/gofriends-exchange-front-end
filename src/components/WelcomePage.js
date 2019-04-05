@@ -132,7 +132,7 @@ class WelcomePage extends Component {
         return (
             <div className='welcome-page'>
                 <div className='title-block'>
-                    <div className='h1'>Gofriends crypto exchange</div>
+                    <div className='h1'>Beetok crypto exchange</div>
 
                     <div className='h3'>One of the most active exchanges in the world</div>
 

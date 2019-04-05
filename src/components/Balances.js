@@ -17,6 +17,7 @@ import BCH from '../img/coins/BTG.png';
 import ETH from '../img/coins/ETH.png';
 import LTC from '../img/coins/LTC.png';
 import ZEC from '../img/coins/ZEC.png';
+import coin from '../img/beetok_coin.png';
 
 import '../styles/balances.css';
 import '../App.css';
@@ -135,7 +136,7 @@ class Balances extends Component {
                 render: (text, record) => (
                     <div style={{display: 'flex', justifyContent: 'center'}}>
                         <img style={{width: '13px', height: '13px', margin: '1px 10px 0 0'}}
-                             src={coinsLogo[record.code]} alt=""/>
+                             src={coinsLogo[record.code] || coin} alt=""/>
                         <h4>{record.code}</h4>
                     </div>
                 )

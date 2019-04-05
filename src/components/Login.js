@@ -6,7 +6,7 @@ import Recaptcha from 'react-recaptcha';
 import {login_success, save_user_info} from "../actions/UserActions";
 import {LOGIN, USERINFO} from "../constants/APIURLS";
 import {sendRequest} from "./Graphic/utils";
-import logo from '../img/logo_go.svg';
+import logo from '../img/logo_footer.png';
 import {getUserInfo} from "./../utils";
 
 import axios from 'axios';
@@ -91,6 +91,15 @@ class Login extends Component {
                     this.props.history.push(`/exchange`);
                 }
             }
+        } else {
+            toast.error(<div className='toaster-container'>All fields should be filled obligatory!</div>, {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true
+            });
         }
     };
 
@@ -107,9 +116,9 @@ class Login extends Component {
                         Back
                     </div>
 
-                    {/*<img src={logo} alt=""/>*/}
+                    <img src={logo} alt=""/>
 
-                    <h2 className='sinsline-logo-title'>Beetok</h2>
+                    {/*<h2 className='sinsline-logo-title'>Beetok</h2>*/}
 
                     <div className='login-title-block'>
                         <hr className='hr-login'/>

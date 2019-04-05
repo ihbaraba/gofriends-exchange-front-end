@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import axios from 'axios';
 
 import {SEND_TICKETS} from "../constants/APIURLS";
-import logo from '../img/logo_go.svg';
+import logo from '../img/logo_footer.png';
 
 class ContactUs extends Component {
     constructor(props) {
@@ -59,8 +59,8 @@ class ContactUs extends Component {
                         Back
                     </div>
 
-                    {/*<img src={logo} alt=""/>*/}
-                    <h2 className='sinsline-logo-title'>Beetok</h2>
+                    <img src={logo} alt=""/>
+                    {/*<h2 className='sinsline-logo-title'>Beetok</h2>*/}
 
                     <div className='login-title-block'>
                         <hr className='hr-login'/>
