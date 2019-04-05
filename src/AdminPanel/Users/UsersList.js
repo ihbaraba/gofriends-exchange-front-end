@@ -9,7 +9,7 @@ const UsersList = ({list, total, current, pageSize, onChange, onOpenUser}) => {
             title: 'User ID',
             dataIndex: 'id',
             key: 'id',
-            width: 100,
+            width: 150,
             sorter: true,
         },
         {

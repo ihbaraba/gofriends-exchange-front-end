@@ -71,6 +71,11 @@ html {
     /*background: linear-gradient(180deg, #000000 0%, rgba(0, 0, 0, 0) 100%);*/
 }
 
+.bm-overlay {
+    left: 0 !important;
+    top: 0 !important;
+}
+
 .w-content {
     padding: 30px 0;
 }
@@ -693,6 +698,23 @@ button a:hover {
 .ant-table-wrapper:after {
     content: "";
     display: table;
+}
+
+.ant-table-thead tr th {
+    padding: 10px 0 !important;
+}
+
+.ant-table-thead .ant-table-column-has-sorters {
+    /*display: flex !important;*/
+}
+
+.ant-table-thead > tr > th .ant-table-column-sorters {
+    display: flex !important;
+}
+
+.ant-table-thead > tr > th .ant-table-column-sorter {
+    width: max-content !important;
+    height: max-content !important;
 }
 
 .ant-table-wrapper:after {
@@ -1354,6 +1376,14 @@ tr.ant-table-expanded-row:hover {
 .ant-tabs-tab:hover {
     color: #fff !important;
     background-color: rgba(74, 153, 140, 0.16) !important;
+}
+
+.ant-tabs-nav > div {
+    display: flex;
+}
+
+.ant-table-tbody > tr:hover td {
+    background: hsla(0, 0%, 100%, .05) !important;
 }
 
 .ant-table.ant-table-scroll-position-right .ant-table-fixed-right {
@@ -4314,7 +4344,7 @@ input {
     }
 
     .footer .links a {
-       margin: 0 0 10px 0;
+        margin: 0 0 10px 0;
     }
 
     .footer .links .group h3 {

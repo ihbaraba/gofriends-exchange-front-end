@@ -264,10 +264,19 @@
     text-align: center;
 }
 
+.admin-panel .ant-table-thead th {
+    border: 0 !important;
+}
+
+.admin-panel .ant-table-thead > tr > th .ant-table-column-sorters {
+    justify-content: center;
+    /*padding-left: 30px !important;*/
+}
+
 .admin-panel .ant-table-tbody tr > td {
     background-color: #313131;
     border-bottom: 5px solid #1E1E1E !important;
-    border-top: 5px solid #1E1E1E !important;
+    /*border-top: 5px solid #1E1E1E !important;*/
     text-align: center;
 }
 
