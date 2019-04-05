@@ -2,6 +2,7 @@
     position: relative;
     max-width: 706px;
     width: 100%;
+    height: 607px;
     margin: 40px auto;
     padding: 0 0 30px 0;
     box-sizing: border-box;
@@ -9,6 +10,14 @@
     border-radius: 5px;
     background-color: rgba(7, 3, 10, 0.35);
     box-shadow: 0 3px 15px 0 rgba(0, 0, 0, 0.19);
+}
+
+.change-pass-page {
+    height: auto !important;
+}
+.login-page .btn:hover {
+    background: #008f54 !important;
+    box-shadow: 0 2px 8px 0 rgba(160, 160, 160, 0.65) !important;
 }
 
 .login-page .login-form {
@@ -82,6 +91,9 @@
 .login-page .login-form .reset-password-block a {
     color: #4A998C;
 }
+.login-page .login-form .reset-password-block a:hover {
+    color: #53c2b4;
+}
 
 .login-page .login-form .signUpButton {
     width: 100%;
@@ -93,6 +105,10 @@
     margin: 20px 0 25px 0;
     font-weight: bold;
     cursor: pointer;
+}
+.login-page .login-form .signUpButton:hover {
+    background: #008f54;
+    box-shadow: 0 2px 8px 0 rgba(160, 160, 160, 0.65);
 }
 
 .havnt-account {
@@ -108,6 +124,11 @@
     height: 47px;
     margin: 10px 0 0 0;
     padding: 0 0 0 10px;
+}
+
+.login-page .g-recaptcha {
+    width: max-content !important;
+    margin: 10px auto;
 }
 
 .login-page .login-form textarea {

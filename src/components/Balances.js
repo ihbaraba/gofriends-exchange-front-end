@@ -92,7 +92,7 @@ class Balances extends Component {
 
             this.closeModal()
         } catch (e) {
-            toast.error(<div className='toaster-container'><Icon type="close" /> {e.response.data.userMessage}</div>, {
+            toast.error(<div className='toaster-container'><Icon type="close" /> {e.response.data.userMessage ? e.response.data.userMessage : 'This is a demo currency, with this currency withdrawal transactions is impossible'}</div>, {
                 position: "top-right",
                 autoClose: 5000,
                 hideProgressBar: false,

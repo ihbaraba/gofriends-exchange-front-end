@@ -89,6 +89,9 @@
 .dashboard-page .latest-operations-block .latest-operation .header-block .admin-btn {
     background: #4A998C;
 }
+.dashboard-page .latest-operations-block .latest-operation .header-block .admin-btn:hover {
+    background: linear-gradient(215.51deg, #255E55 0%, #4A998C 100%);
+}
 
 .dashboard-page .latest-operations-block .latest-operation .header-block .admin-btn a {
     color: #fff;

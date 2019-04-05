@@ -251,6 +251,10 @@
 .ant-pagination-disabled a {
     color: #979797 !important;
 }
+.ant-pagination li.ant-pagination-item-active:hover a {
+    color: #fff !important;
+}
+
 
 /*----------------------------------*/
 /*table*/

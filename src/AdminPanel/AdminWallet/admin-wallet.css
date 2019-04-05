@@ -21,15 +21,29 @@
     position: relative;
 }
 
-.admin-wallet-modal .form-item.wallet input{
+.admin-wallet-modal .form-item.wallet input {
     width: 360px;
     margin: 0 40px 0 0;
 }
 
+.admin-wallet-modal .amount-block {
+    display: flex;
+}
+
+.admin-wallet-modal .amount-block input{
+    border-right: 0 !important;
+    border-radius: 4px 0 0 4px !important;
+    margin: 0 !important;
+}
+
 .admin-wallet-modal .form-item .amount-label {
-    position: absolute;
-    left: 145px;
-    bottom: 7px;
+    border: 1px solid #979797;
+    border-left: 0;
+    border-radius: 0 4px 4px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 5px;
 }
 
 .admin-wallet-modal .row-block {

@@ -151,7 +151,7 @@ class OredersHistory extends Component {
                         </TabPane>
 
                         <TabPane tab="Yours" key="2">
-                            <UserOrder completed="true" newDateFormat={mobile}/>
+                            <UserOrder completed="true" newDateFormat={mobile} exchange={true}/>
                         </TabPane>
                     </Tabs>
                 </div>

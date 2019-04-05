@@ -46,6 +46,14 @@
     display: flex;
 }
 
+.welcome-page .ant-tabs.ant-tabs-card .ant-tabs-card-bar .ant-tabs-tab {
+    border: 0 !important;
+}
+
+.welcome-page .ant-table-column-sorter {
+    display: none !important;
+}
+
 .welcome-page .ant-tabs-ink-bar-animated {
     display: none !important;
 }
@@ -67,6 +75,10 @@
     margin: 0 !important;
 }
 
+.welcome-page .ant-tabs-nav .ant-tabs-tab:hover {
+    background-color: rgba(74, 153, 140, 0.16) !important;
+}
+
 .ant-tabs-bar {
     border: 0 !important;
     margin: 0 !important;
@@ -80,9 +92,13 @@
     background-color: #4A998C !important;
     color: #fff !important;
 }
+.welcome-page .ant-tabs-nav .ant-tabs-tab-active:hover {
+    background-color: #4A998C !important;
+    color: #fff !important;
+}
 
 .welcome-page .table-stat {
-    height: 500px;
+    height: max-content;
     border: 1px solid #3F4755 !important;
     background-color: rgba(7,3,10,0.05) !important;
     margin-bottom: 100px;

@@ -35,7 +35,15 @@ header {
     margin-right: 7%;
 }
 
+.header .exchange-link {
+   height: 100%;
+    display: flex;
+    align-items: center;
+}
 .header .exchange-link a {
+    height: 100%;
+    display: flex;
+    align-items: center;
     font-weight: bold;
     font-family: Roboto;
     font-size: 15px;
@@ -76,12 +84,13 @@ header {
     align-items: center;
     font-size: 12px;
     border-left: 1px solid #444444;
-    height: 70px;
+    height: 100%;
     padding-left: 25px;
+    padding-right: 25px;
 }
 
 .header .message .header-create:hover {
-    color: #4A998C;
+    background-color: #302F2F;
 }
 
 .header .message .header-sign {
@@ -94,16 +103,17 @@ header {
     border-radius: 3px;
     font-size: 12px;
     text-transform: initial;
-    margin-left: 28px;
+    margin: 0 0 0 15px;
 }
 
 .header .message .logout-navigtion {
+    height: 100%;
     display: flex;
 }
 
 .header .message .logout-navigtion a {
     border-left: 1px solid #444444;
-    height: 70px;
+    height: 100%;
     display: flex;
     align-items: center;
     padding: 0 25px;
@@ -147,6 +157,12 @@ header {
 .ant-dropdown-menu-item:hover,
 .ant-dropdown-menu-submenu-title:hover {
     background-color: rgba(74, 153, 140, 0.21) !important;
+}
+
+@media (max-width: 830px) {
+    .header .message .logout-navigtion a {
+        padding: 0 15px;
+    }
 }
 
 @media (max-width: 600px) {

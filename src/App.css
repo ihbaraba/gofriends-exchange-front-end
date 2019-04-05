@@ -121,6 +121,11 @@ html {
     line-height: 45px;
 }
 
+.header-sign:hover,
+.go-to-login:hover {
+    background: #366c5f !important;
+}
+
 /*TABLE*/
 .table {
     position: relative;
@@ -1333,8 +1338,14 @@ tr.ant-table-expanded-row:hover {
     box-shadow: none;
 }
 
+.ant-tooltip-inner {
+    border: 0 !important;
+    text-align: center !important;
+}
+
 .ant-tabs-tab:hover {
     color: #fff !important;
+    background-color: rgba(74, 153, 140, 0.16) !important;
 }
 
 .ant-table.ant-table-scroll-position-right .ant-table-fixed-right {
@@ -1345,6 +1356,11 @@ tr.ant-table-expanded-row:hover {
 .ant-table-middle > .ant-table-title,
 .ant-table-middle > .ant-table-footer {
     padding: 12px 8px;
+}
+
+.client-news-page .news-list .ant-pagination li:hover {
+    outline: none;
+    border: 0 !important;
 }
 
 .ant-table-middle > .ant-table-content > .ant-table-header > table > .ant-table-thead > tr > th,
@@ -4172,11 +4188,16 @@ input {
         margin-bottom: 40px;
     }
 
+    .footer {
+        height: max-content !important;
+    }
+
     .footer-container > div {
         width: 100%;
         display: flex;
         justify-content: space-around;
         align-items: center;
+        margin: 30px 0 0 0;
     }
 
     .meta {
@@ -4236,8 +4257,19 @@ input {
     /*flex-direction: column;*/
     /*}*/
     .header {
-        padding: 10px;
+        padding: 0 10px;
         text-align: left;
+    }
+
+    .header .message .logout-navigtion a,
+    .header-create {
+        padding: 0 10px !important;
+    }
+
+    .header .message .header-sign {
+        width: max-content !important;
+        padding: 0 10px;
+        margin: 0;
     }
 
     .form2col .formWrapper > div {
@@ -4271,6 +4303,10 @@ input {
         display: flex;
         flex-direction: column;
         font-size: 40px;
+    }
+
+    .footer .links a {
+       margin: 0 0 10px 0;
     }
 
     .footer .links .group h3 {

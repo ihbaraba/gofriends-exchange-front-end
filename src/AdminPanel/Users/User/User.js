@@ -26,10 +26,6 @@ class User extends Component {
     state = {
         kyc: {
             documents: [],
-            user: {
-                verifyStatus: '',
-                status: 'active',
-            }
         },
         coinPairs: [],
         tradeHistoryList: [],
@@ -96,7 +92,6 @@ class User extends Component {
     };
 
     onVerifyUser = async (id, verify) => {
-        console.log(id);
         try {
             await axios.put(`${VERIFY}/${id}/verification/status`, {
                 status: verify ? 'verified' : 'waitForVerify'
@@ -156,11 +151,42 @@ class User extends Component {
         }
     };
 
-    blockedUser = () => {
-        axios.put(`${GET_USERS}/${this.userId}/block`, {
-            isBlocked: true,
-            reason: this.state.blockedReason
-        })
+    blockedUser = async () => {
+        const {kyc} = this.state;
+        const status = kyc.status === 'blocked' ? false : true;
+        try {
+            await axios.put(`${GET_USERS}/${this.userId}/block`, {
+                isBlocked: status,
+                reason: this.state.blockedReason
+            });
+
+            this.setState({
+                kyc: {
+                    ...this.state.kyc,
+                    status: kyc.status === 'blocked' ? 'active' : 'blocked'
+                }
+            });
+
+            toast.success(<div className='toaster-container'><Icon type="check-circle"/> Confirmed</div>, {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true
+            });
+        } catch (e) {
+            toast.error(<div className='toaster-container'><Icon type="close"/> {e.response.data.userMessage}</div>, {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true
+            });
+        }
+
+
     };
 
     async componentDidMount() {
@@ -201,7 +227,13 @@ class User extends Component {
                                     onChange={({target}) => this.setState({blockedReason: target.value})}
                                 />
                             </div>
-                            <button className='admin-btn' onClick={this.blockedUser}>Block user</button>
+                            {
+                                kyc.status === 'blocked' ?
+                                    <button className='admin-btn green-btn' onClick={this.blockedUser}>Unblock
+                                        user</button>
+                                    :
+                                    <button className='admin-btn red-btn' onClick={this.blockedUser}>Block user</button>
+                            }
                         </div>
                     </div>
                 </div>

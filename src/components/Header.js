@@ -3,8 +3,9 @@ import logo from '../img/logo_go.svg';
 import userIcon from '../img/user_icon.svg';
 import userGreenIcon from '../img/avatarGreen.svg';
 import NavLink from './NavLink';
-import {Menu, Dropdown} from 'antd';
+import {Menu, Dropdown, Tooltip} from 'antd';
 import {slide as MenuBurger} from 'react-burger-menu';
+import Pdf from '../img/beetok_wp_eng.pdf';
 
 import '../styles/header.css';
 
@@ -116,6 +117,12 @@ class Header extends Component {
         if (isLoggedIn) {
             return (
                 <Fragment>
+                    <a href={Pdf} className='ant-dropdown-trigger' target='_blank'>
+                                <span className="title topLevel">
+                                About
+                            </span>
+                    </a>
+
                     <Dropdown overlay={this.menu1}>
                         <NavLink to="/balances">
                             <span className="title topLevel">
@@ -159,17 +166,23 @@ class Header extends Component {
                 <Fragment>
                     <div className="message">
                         <div className='logout-navigtion'>
-                            <NavLink to="/balances">
-                            <span className="title topLevel">
-                                Support
-                                {/*<i className="fa fa-caret-down dim"></i>*/}
+                            <a href={Pdf} target='_blank'>
+                                <span className="title topLevel">
+                                About
                             </span>
-                            </NavLink>
+                            </a>
+
+                            <Tooltip placement="bottom" title={'Coming Soon'}>
+                                <NavLink to="/">
+                                   <span className="title topLevel">
+                                        Support
+                                   </span>
+                                </NavLink>
+                            </Tooltip>
 
                             <NavLink to="/news">
                             <span className="title topLevel">
                                 News
-                                {/*<i className="fa fa-caret-down dim"></i>*/}
                             </span>
                             </NavLink>
                         </div>
@@ -266,6 +279,13 @@ class Header extends Component {
                                                     Contact
                                                 </NavLink>
 
+                                                <a href={Pdf} target='_blank'>
+                                <span className="title topLevel">
+                                About
+                            </span>
+                                                </a>
+
+
                                                 <NavLink to="/Logout">
                                                     Logout
                                                 </NavLink>
@@ -291,6 +311,13 @@ class Header extends Component {
                                                 <NavLink to="/balances">
                                                     News
                                                 </NavLink>
+
+                                                <a href={Pdf} target='_blank'>
+                                <span className="title topLevel">
+                                About
+                            </span>
+                                                </a>
+
                                             </div>
                                         </div>
                                     }
