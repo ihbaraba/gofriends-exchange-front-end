@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import Recaptcha from 'react-recaptcha';
-import logo from '../img/logo_go.svg';
+import logo from '../img/logo_footer.png';
 import '../styles/resetPass.css';
 
 
@@ -46,8 +46,8 @@ class ResetPassword extends Component {
                         Back
                     </div>
 
-                    {/*<img src={logo} alt=""/>*/}
-                    <h2 className='sinsline-logo-title'>Beetok</h2>
+                    <img src={logo} alt=""/>
+                    {/*<h2 className='sinsline-logo-title'>Beetok</h2>*/}
 
                     <div className='login-title-block'>
                         <hr className='hr-login'/>

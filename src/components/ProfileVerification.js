@@ -108,7 +108,7 @@ class ProfileVerification extends Component {
             return (
                 <div className='first-step'>
                     <div style={{clear: "both"}}>
-                        <h1 className="sign">Welcome to Gofriends exchange</h1>
+                        <h1 className="sign">Welcome to Beetok exchange</h1>
                     </div>
 
                     <div className="formVerificationWrap">

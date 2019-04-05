@@ -35,6 +35,10 @@ header {
     margin-right: 7%;
 }
 
+.header .logo img {
+    width: 80%;
+}
+
 .header .exchange-link {
    height: 100%;
     display: flex;
@@ -134,6 +138,10 @@ header {
 
 .header .right .ant-dropdown-trigger:last-child {
     padding: 0 40px;
+}
+
+.logout:hover {
+    color: #DD4457 !important;
 }
 
 .header .right .ant-dropdown-trigger:hover {

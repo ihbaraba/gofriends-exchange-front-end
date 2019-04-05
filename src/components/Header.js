@@ -1,5 +1,5 @@
 import React, {Component, Fragment} from 'react';
-import logo from '../img/logo_go.svg';
+import logo from '../img/logo_footer.png';
 import userIcon from '../img/user_icon.svg';
 import userGreenIcon from '../img/avatarGreen.svg';
 import NavLink from './NavLink';
@@ -98,8 +98,8 @@ class Header extends Component {
             {/*</NavLink>*/}
             {/*</Menu.Item>*/}
             <Menu.Item>
-                <NavLink to="/Logout">
-                    <span className="title topLevel">Logout</span>
+                <NavLink to="/Logout" className='logout'>
+                    <span className="title topLevel" style={{color: '#DD4457'}}>Logout</span>
                 </NavLink>
             </Menu.Item>
 
@@ -205,8 +205,8 @@ class Header extends Component {
                     <div className='header'>
                         <div className="logo">
                             <NavLink to="/">
-                                {/*<img src={logo} alt="logo"/>*/}
-                                <span style={{fontSize: '48px'}}>Beetok</span>
+                                <img src={logo} alt="logo"/>
+                                {/*<span style={{fontSize: '48px'}}>Beetok</span>*/}
                             </NavLink>
                         </div>
                         <div className="tabs exchange-link">

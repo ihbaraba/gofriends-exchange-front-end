@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import Recaptcha from 'react-recaptcha';
-import logo from '../img/logo_go.svg';
+import logo from '../img/logo_footer.png';
 import axios from 'axios';
 import queryString from 'query-string';
 
@@ -117,8 +117,8 @@ class ChangePassword extends Component {
                             Back
                         </div>
 
-                        {/*<img src={logo} alt=""/>*/}
-                        <h2 className='sinsline-logo-title'>Beetok</h2>
+                        <img src={logo} alt=""/>
+                        {/*<h2 className='sinsline-logo-title'>Beetok</h2>*/}
 
                         <div className='login-title-block'>
                             <hr className='hr-login'/>
@@ -192,8 +192,8 @@ class ChangePassword extends Component {
             return (
                 <div className='login-page'>
                     <div className="login-form">
-                        {/*<img src={logo} alt=""/>*/}
-                        <h2 className='sinsline-logo-title'>Beetok</h2>
+                        <img src={logo} alt=""/>
+                        {/*<h2 className='sinsline-logo-title'>Beetok</h2>*/}
 
                         <div className='login-title-block'>
                             <hr className='hr-login'/>
