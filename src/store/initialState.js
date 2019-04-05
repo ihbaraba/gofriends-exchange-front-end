@@ -1,6 +1,6 @@
 import moment from 'moment';
 
-const interval = "1hr";
+const interval = "2hr";
 
 function initialRange() {
     const currentDate = moment(new Date()).format('YYYY-MM-DD');

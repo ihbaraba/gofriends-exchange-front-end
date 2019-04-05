@@ -1,5 +1,6 @@
 import React from 'react';
 import {Table} from 'antd';
+import moment from 'moment';
 
 const NewsList = ({list = [], onChangeTable, deleteNews, editNews, total, current, pageSize}) => {
     const columns = [
@@ -28,9 +29,12 @@ const NewsList = ({list = [], onChangeTable, deleteNews, editNews, total, curren
         },
         {
             title: 'Created At',
-            dataIndex: 'date',
-            key: 'date',
+            dataIndex: 'createdAt',
+            key: 'createdAt',
             width: 200,
+            render: date => (
+                <span>{moment(date).format('YYYY-MM-DD HH:mm')}</span>
+            )
         },
         {
             title: '',
@@ -43,7 +47,7 @@ const NewsList = ({list = [], onChangeTable, deleteNews, editNews, total, curren
                         Edit
                     </button>
                     <button className='admin-btn red-btn' onClick={() => deleteNews(item.id)}>
-                        Delite
+                        Delete
                     </button>
                 </div>
             )

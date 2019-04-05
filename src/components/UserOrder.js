@@ -4,6 +4,7 @@ import {getOrdersHistory, sendOrder} from "../utils";
 import {USERORDERSHISTORY, ORDERS} from "./../constants/APIURLS.js"
 import {Table, Icon, Tooltip, Button} from 'antd';
 import moment from "moment/moment";
+import {toast} from "react-toastify";
 
 // import {ORDERS} from "../constants/APIURLS";
 
@@ -80,10 +81,27 @@ class UserOrder extends React.Component {
             status,
         })
             .then(() => {
+                toast.success(<div className='toaster-container'><Icon type="check-circle"/> Confirmed</div>, {
+                    position: "top-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true
+                });
                 this.getInitialPairDataFromServer({completed: false, cancelled: false});
+            })
+            .catch(e => {
+                toast.error(<div className='toaster-container'><Icon type="close"/> {e.response.data.userMessage}
+                </div>, {
+                    position: "top-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true
+                });
             });
-
-        console.log("fire cancel to server ", responce);
     };
 
     async componentDidMount() {
@@ -98,7 +116,7 @@ class UserOrder extends React.Component {
     }
 
     render() {
-        const {token, completed, mobile, newDateFormat} = this.props;
+        const {token, completed, mobile, newDateFormat, exchange} = this.props;
         // const {orders = [], ordersHistory = []} = this.state;
 
         const onBidButtonClick = ({status, order}) => {
@@ -118,49 +136,59 @@ class UserOrder extends React.Component {
 
         const columns = function (pcompleted) {
             const completed = JSON.parse(pcompleted);
-            return [{
-                title: 'Date',
-                dataIndex: completed ? 'completedAt' : 'createdAt',
-                key: 'date',
-                width: 150,
-                render: (item) => {
-                    if (newDateFormat) {
-                        return (
-                            <span>
-                                {moment(item, 'DD.MM.YYYY HH:mm:ss').format('DD.MM.YY')}
-                                <br/>
-                                {moment(item, 'DD.MM.YYYY HH:mm:ss').format('HH:mm')}
+
+            return [
+                {
+                    title: 'Date',
+                    dataIndex: completed ? 'completedAt' : 'createdAt',
+                    key: 'date',
+                    width: 150,
+                    render: (item) => {
+                        if (newDateFormat) {
+                            return (
+                                <span>
+                                {moment(item, 'DD.MM.YYYY HH:mm:ss').format('DD.MM')}
+                                    <br/>
+                                    {moment(item, 'DD.MM.YYYY HH:mm:ss').format('HH:mm')}
                             </span>
-                        )
-                    } else {
-                        return (
-                            <span>
-                                {item}
+                            )
+                        } else if (exchange) {
+                            return (
+                                <span>
+                                {moment(item, 'DD.MM.YYYY HH:mm:ss').format('DD.MM')}
                             </span>
-                        )
+                            )
+                        } else {
+                            return (
+                                <span>{item}</span>
+                            )
+                        }
                     }
-                }
-            }, {
-                title: 'Type',
-                dataIndex: 'type',
-                key: 'type',
-                width: 150,
-            }, {
-                title: `Price`,
-                dataIndex: 'price',
-                key: 'price',
-                width: 150,
-            }, {
-                title: `Amount`,
-                dataIndex: 'amount',
-                key: 'amount',
-                width: 150,
-            }, {
-                title: `Sum`,
-                dataIndex: 'Sum',
-                key: 'Sum',
-                width: 150,
-            },
+                },
+                {
+                    title: 'Type',
+                    dataIndex: 'type',
+                    key: 'type',
+                    width: 150,
+                },
+                {
+                    title: `Price`,
+                    dataIndex: 'price',
+                    key: 'price',
+                    width: 150,
+                },
+                ...(exchange ? [] : [{
+                    title: `Amount`,
+                    dataIndex: 'amount',
+                    key: 'amount',
+                    width: 150,
+                }]),
+                ...(exchange ? [] : [{
+                    title: `Sum`,
+                    dataIndex: 'Sum',
+                    key: 'Sum',
+                    width: 150,
+                }]),
                 ...(!completed ? [{
                         title: `Info`,
                         dataIndex: 'info',
@@ -267,7 +295,7 @@ class UserOrder extends React.Component {
                         bordered={false}
                         pagination={false}
                         rowKey={record => record.id}
-                        scroll={{y: 630, x: 400}}
+                        scroll={{y: 630}}
                         size="small"
                         rowClassName="custom__tr"/>}
             </Fragment>

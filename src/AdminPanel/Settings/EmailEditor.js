@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 
-import CKEditor from '@ckeditor/ckeditor5-react';
-import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+// import CKEditor from '@ckeditor/ckeditor5-react';
+// import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import CKEditor from 'ckeditor4-react';
 
 import axios from "axios/index";
 import {EMAIL_SETTINGS} from "../../constants/APIURLS";
@@ -19,7 +20,7 @@ class EmailEditor extends Component {
 
         this.setState({
             emailTemplate: res.data,
-            placeholders: res.data.placeholders.split(', ')
+            placeholders: res.data.placeholders ? res.data.placeholders.split(', ') : []
         })
     }
 
@@ -48,47 +49,33 @@ class EmailEditor extends Component {
                     </button>
                 </div>
 
-                <div className='placeholder-block'>
-                    {placeholders.map(item => (
-                        <div onClick={() => {
-                            cked.model.change(writer => {
-                                const insertPosition = cked.model.document.selection.getFirstPosition();
-                                writer.insertText(`{${item}}`, insertPosition);
-                            });
-                        }}
-                        >
-                            {item}
-                        </div>
-                    ))}
-                </div>
+                {/*<div className='placeholder-block'>*/}
+                    {/*{placeholders.map(item => (*/}
+                        {/*<div onClick={() => {*/}
+
+                            {/*// cked.model.change(writer => {*/}
+                            {/*//     const insertPosition = cked.model.document.selection.getFirstPosition();*/}
+                            {/*//     writer.insertText(`{${item}}`, insertPosition);*/}
+                            {/*// });*/}
+                        {/*}}*/}
+                        {/*>*/}
+                            {/*{item}*/}
+                        {/*</div>*/}
+                    {/*))}*/}
+                {/*</div>*/}
 
                 <CKEditor
-                    editor={ClassicEditor}
-                    config={{
-                        toolbar: ['Heading', '|', 'Bold', 'Italic', 'Alignment', 'Link', 'BlockQuote', 'Undo', 'Redo'],
-                        // removePlugins: ['Image', 'ImageCaption', 'ImageStyle', 'ImageToolbar', 'ImageUpload']
-                    }}
                     data={emailTemplate.body}
-                    // onInit={editor => {
-                    //     // You can store the "editor" and use when it is needed.
-                    //     console.log('Editor is ready to use!', editor);
-                    // }}
-                    onChange={(event, editor) => {
+                    onChange={({editor}) => {
                         const data = editor.getData();
                         emailBody = data;
-                        console.log({event, editor, data});
-
+                        console.log(editor);
                         cked = editor;
-
                     }}
-                    // onBlur={editor => {
-                    //     console.log('Blur.', editor);
-                    // }}
-                    // onFocus={editor => {
-                    //     console.log('Focus.', editor);
-                    // }}
+                    config={ {
+                        toolbar: [['Heading', '|', 'Bold', 'Italic', 'Alignment', 'Link', 'BlockQuote', 'Undo', 'Redo']],
+                    } }
                 />
-
             </div>
         )
     }

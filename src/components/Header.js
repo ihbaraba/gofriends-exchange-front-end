@@ -3,8 +3,9 @@ import logo from '../img/logo_go.svg';
 import userIcon from '../img/user_icon.svg';
 import userGreenIcon from '../img/avatarGreen.svg';
 import NavLink from './NavLink';
-import {Menu, Dropdown} from 'antd';
+import {Menu, Dropdown, Tooltip} from 'antd';
 import {slide as MenuBurger} from 'react-burger-menu';
+import Pdf from '../img/beetok_wp_eng.pdf';
 
 import '../styles/header.css';
 
@@ -19,19 +20,19 @@ class Header extends Component {
 
             <Menu.Item>
                 <NavLink to="/balances">
-                    <span className="title topLevel">Deposits & withdrawals</span>
+                    <span className="title topLevel">Deposits & Withdrawals</span>
                 </NavLink>
             </Menu.Item>
 
             <Menu.Item>
                 <NavLink to="/DepositHistory">
-                    <span className="title topLevel">Deposit history</span>
+                    <span className="title topLevel">Deposit History</span>
                 </NavLink>
             </Menu.Item>
 
             <Menu.Item>
                 <NavLink to="/withdrawalpanel">
-                    <span className="title topLevel">Withdrawal history</span>
+                    <span className="title topLevel">Withdrawal History</span>
                 </NavLink>
             </Menu.Item>
 
@@ -42,13 +43,13 @@ class Header extends Component {
         <Menu>
             <Menu.Item>
                 <NavLink to="/OpenOrders">
-                    <span className="title topLevel">My open orders</span>
+                    <span className="title topLevel">My Open Orders</span>
                 </NavLink>
             </Menu.Item>
 
             <Menu.Item>
                 <NavLink to="/orders">
-                    <span className="title topLevel">My trade history & analysis</span>
+                    <span className="title topLevel">My Trade History & Analysis</span>
                 </NavLink>
             </Menu.Item>
         </Menu>
@@ -81,6 +82,11 @@ class Header extends Component {
                     <span className="title topLevel">My Profile</span>
                 </NavLink>
             </Menu.Item>
+            <Menu.Item>
+                <NavLink to="/news">
+                    <span className="title topLevel">News</span>
+                </NavLink>
+            </Menu.Item>
             {/*<Menu.Item>*/}
             {/*<NavLink to="/loginhistory">*/}
             {/*<span className="title topLevel">Login History</span>*/}
@@ -111,6 +117,12 @@ class Header extends Component {
         if (isLoggedIn) {
             return (
                 <Fragment>
+                    <a href={Pdf} className='ant-dropdown-trigger' target='_blank'>
+                                <span className="title topLevel">
+                                About
+                            </span>
+                    </a>
+
                     <Dropdown overlay={this.menu1}>
                         <NavLink to="/balances">
                             <span className="title topLevel">
@@ -154,17 +166,23 @@ class Header extends Component {
                 <Fragment>
                     <div className="message">
                         <div className='logout-navigtion'>
-                            <NavLink to="/balances">
-                            <span className="title topLevel">
-                                Support
-                                {/*<i className="fa fa-caret-down dim"></i>*/}
+                            <a href={Pdf} target='_blank'>
+                                <span className="title topLevel">
+                                About
                             </span>
-                            </NavLink>
+                            </a>
 
-                            <NavLink to="/balances">
+                            <Tooltip placement="bottom" title={'Coming Soon'}>
+                                <NavLink to="/">
+                                   <span className="title topLevel">
+                                        Support
+                                   </span>
+                                </NavLink>
+                            </Tooltip>
+
+                            <NavLink to="/news">
                             <span className="title topLevel">
                                 News
-                                {/*<i className="fa fa-caret-down dim"></i>*/}
                             </span>
                             </NavLink>
                         </div>
@@ -261,6 +279,13 @@ class Header extends Component {
                                                     Contact
                                                 </NavLink>
 
+                                                <a href={Pdf} target='_blank'>
+                                <span className="title topLevel">
+                                About
+                            </span>
+                                                </a>
+
+
                                                 <NavLink to="/Logout">
                                                     Logout
                                                 </NavLink>
@@ -286,6 +311,13 @@ class Header extends Component {
                                                 <NavLink to="/balances">
                                                     News
                                                 </NavLink>
+
+                                                <a href={Pdf} target='_blank'>
+                                <span className="title topLevel">
+                                About
+                            </span>
+                                                </a>
+
                                             </div>
                                         </div>
                                     }

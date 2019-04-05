@@ -1,5 +1,6 @@
 import React, {Component, Fragment} from 'react';
 import {connect} from 'react-redux';
+import axios from 'axios';
 
 import Orders from './Orders';
 import Graphic from './Graphic/Graphic'
@@ -9,14 +10,15 @@ import CoinsList from "./CoinsList";
 import UserOrder from './UserOrder';
 import initialState from "../store/initialState";
 import {sendOrder, getUserInfo} from "./../utils";
-import {Radio, Tabs} from "antd";
+import {Radio, Tabs, Icon} from "antd";
 import Modal from 'react-modal';
 
-import {ORDERS, USERINFO} from "./../constants/APIURLS.js"
+import {ORDERS, USERINFO, MARKETS_START_PAGE} from "./../constants/APIURLS.js"
 import {login_success, save_user_info, save_user_orders} from "../actions/UserActions";
 import {chart_timing, chart_range} from "../actions/ChartActions";
 import "antd/lib/radio/style/css";
 import '../styles/exchangePage.css';
+import {toast} from "react-toastify";
 
 const TabPane = Tabs.TabPane;
 
@@ -44,12 +46,14 @@ class ExchangePage extends Component {
         this.setCurrentCoinsPair2State = this.setCurrentCoinsPair2State.bind(this);
         this.handleTimeFrameChange = this.handleTimeFrameChange.bind(this);
         this.firePostToServer = this.firePostToServer.bind(this);
+
         this.state = {
             ...initialState,
             isAuthorised: false,
             activeTab: '1',
             activeOrderTab: '1',
             modalIsOpen: false,
+            pairInfo: {},
             sellOrder: {
                 price: 52,
                 amount: 1
@@ -67,10 +71,12 @@ class ExchangePage extends Component {
          * then request user data
          * and save it into redux store
          **/
+
         const {user: {token}} = this.props; //read from redux state
 
         const isAuthorised = (token !== "") && (token !== null); // ? true : false
         this.setState({isAuthorised, token});
+
         if (isAuthorised) {
             const userInfo = await getUserInfo({rout: USERINFO, token});
             const {body} = userInfo;
@@ -81,8 +87,28 @@ class ExchangePage extends Component {
         /**
          * Save in Redux Store current Chart range
          **/
+    }
 
+    getPairStatistics = async () => {
+        const res = await axios.get(MARKETS_START_PAGE);
 
+        res.data.forEach(item => {
+            if(item.pairId === this.props.pair.id) {
+                this.setState({
+                    pairInfo: item
+                });
+                return;
+            }
+        })
+    };
+
+    componentWillMount() {
+        const {user: {token}} = this.props; //read from redux state
+        const isAuthorised = (token !== "") && (token !== null); // ? true : false
+        if (!isAuthorised) {
+            this.props.history.push('/login');
+            return false;
+        }
     }
 
     openTradeTab = (tab = '2', type = '1') => {
@@ -111,9 +137,26 @@ class ExchangePage extends Component {
                 ...bidProps
             });
 
+            toast.success(<div className='toaster-container'><Icon type="check-circle" /> Confirmed</div>, {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true
+            });
+
             this.props.save_user_orders(responce.id);
-        } catch (error) {
-            console.log(error);
+        } catch (e) {
+            toast.error(<div className='toaster-container'><Icon type="close" /> {e.response.body.userMessage}</div>, {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true
+            });
+
         }
     };
 
@@ -134,6 +177,8 @@ class ExchangePage extends Component {
                 buyOrder: order
             })
         }
+
+        this.getPairStatistics();
     };
 
     handleTimeFrameChange = (e) => {
@@ -147,7 +192,7 @@ class ExchangePage extends Component {
         const {pair, chartRange: {dateFrom = "2018-08-27", dateTo = "2018-08-31"}} = this.props;
 
         const {first, second, id, baseCurrencyName, quoteCurrencyName} = pair;
-        const {interval, sellOrder, buyOrder} = this.state;
+        const {interval, sellOrder, buyOrder, pairInfo} = this.state;
 
         return (
             <Fragment>
@@ -168,23 +213,23 @@ class ExchangePage extends Component {
                             <div className='coin-statistics'>
                                 <div>
                                     <span className='label'>Last price</span>
-                                    <span className='value' style={{color: '#DD4457'}}>0.0012867</span>
+                                    <span className='value' style={{color: '#DD4457'}}>{pairInfo.priceBase}</span>
                                 </div>
                                 <div>
                                     <span className='label'>24h change</span>
-                                    <span className='value' style={{color: '#00CE7D'}}>0.0000189</span>
+                                    <span className='value' style={{color: '#00CE7D'}}>{pairInfo.priceChange}</span>
                                 </div>
                                 <div>
                                     <span className='label'>24h High</span>
-                                    <span className='value'>0.001309</span>
+                                    <span className='value'>{pairInfo.priceMax}</span>
                                 </div>
                                 <div>
                                     <span className='label'>24h Low</span>
-                                    <span className='value'>0.001309</span>
+                                    <span className='value'>{pairInfo.priceMin}</span>
                                 </div>
                                 <div>
                                     <span className='label'>24h Volume</span>
-                                    <span className='value'>762.10 BTC</span>
+                                    <span className='value'>{pairInfo.volume}</span>
                                 </div>
                             </div>
                         </div>
@@ -198,12 +243,12 @@ class ExchangePage extends Component {
                     <div className="rightSide ">
                         <div className="candlesticks">
                             <Radio.Group value={interval} onChange={this.handleTimeFrameChange}>
-                                <Radio.Button value="5min">5-min</Radio.Button>
-                                <Radio.Button value="15min">15-min</Radio.Button>
-                                <Radio.Button value="30min">30-min</Radio.Button>
-                                <Radio.Button value="1hr">1-hr</Radio.Button>
-                                <Radio.Button value="2hr">2-hr</Radio.Button>
-                                <Radio.Button value="4hr">4-hr</Radio.Button>
+                                {/*<Radio.Button value="5min">5-min</Radio.Button>*/}
+                                {/*<Radio.Button value="15min">15-min</Radio.Button>*/}
+                                {/*<Radio.Button value="30min">30-min</Radio.Button>*/}
+                                {/*<Radio.Button value="1hr">1-hr</Radio.Button>*/}
+                                <Radio.Button value="2hr">1-hr</Radio.Button>
+                                <Radio.Button value="4hr">12-hr</Radio.Button>
                                 <Radio.Button value="1day">1-day</Radio.Button>
                             </Radio.Group>
                         </div>
@@ -229,6 +274,7 @@ class ExchangePage extends Component {
                         setCurentCoinsPair2State={this.setCurrentCoinsPair2State}
                     />
 
+
                     <OrdersHistory/>
 
                     <div className='open-orders-block table-block'>
@@ -237,6 +283,7 @@ class ExchangePage extends Component {
                         </div>
                         <UserOrder completed="false"/>
                     </div>
+
                 </div>
 
                 <div className="centerArea mobile">
@@ -291,17 +338,17 @@ class ExchangePage extends Component {
                                 </div>
 
                                 <div className="rightSide ">
-                                    <div className="candlesticks">
-                                        <Radio.Group value={interval} onChange={this.handleTimeFrameChange}>
-                                            <Radio.Button value="5min">5-min</Radio.Button>
-                                            {/*<Radio.Button value="15min">15-min</Radio.Button>*/}
-                                            {/*<Radio.Button value="30min">30-min</Radio.Button>*/}
-                                            <Radio.Button value="1hr">1-hr</Radio.Button>
-                                            <Radio.Button value="2hr">2-hr</Radio.Button>
-                                            <Radio.Button value="4hr">4-hr</Radio.Button>
-                                            <Radio.Button value="1day">1-day</Radio.Button>
-                                        </Radio.Group>
-                                    </div>
+                                    {/*<div className="candlesticks">*/}
+                                        {/*<Radio.Group value={interval} onChange={this.handleTimeFrameChange}>*/}
+                                            {/*<Radio.Button value="5min">5-min</Radio.Button>*/}
+                                            {/*/!*<Radio.Button value="15min">15-min</Radio.Button>*!/*/}
+                                            {/*/!*<Radio.Button value="30min">30-min</Radio.Button>*!/*/}
+                                            {/*<Radio.Button value="1hr">1-hr</Radio.Button>*/}
+                                            {/*<Radio.Button value="2hr">2-hr</Radio.Button>*/}
+                                            {/*<Radio.Button value="4hr">4-hr</Radio.Button>*/}
+                                            {/*<Radio.Button value="1day">1-day</Radio.Button>*/}
+                                        {/*</Radio.Group>*/}
+                                    {/*</div>*/}
 
                                     <Graphic
                                         pairId={id}
@@ -311,6 +358,7 @@ class ExchangePage extends Component {
                                         interval={interval}
                                         appendFake={"false"}
                                     />
+
                                 </div>
 
                                 <OrdersHistory mobile={true}/>
