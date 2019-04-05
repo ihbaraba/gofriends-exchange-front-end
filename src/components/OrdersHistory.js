@@ -143,7 +143,7 @@ class OredersHistory extends Component {
                                 dataSource={orders}
                                 bordered={false}
                                 pagination={false}
-                                scroll={{y: 630}}
+                                scroll={{y: 830}}
                                 rowKey={record => record.id}
                                 rowClassName={record => record.type === 'buy' ? 'custom__tr row-buy-type' : 'custom__tr row-sell-type'}
                                 size="small"
@@ -151,7 +151,7 @@ class OredersHistory extends Component {
                         </TabPane>
 
                         <TabPane tab="Yours" key="2">
-                            <UserOrder completed="true" newDateFormat={mobile}/>
+                            <UserOrder completed="true" newDateFormat={mobile} exchange={true}/>
                         </TabPane>
                     </Tabs>
                 </div>

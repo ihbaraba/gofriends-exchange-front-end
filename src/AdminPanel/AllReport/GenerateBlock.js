@@ -23,7 +23,7 @@ const GenerateBlock = ({generate, onChangeDate, onChangeType}) => {
     return (
         <div className='filter-block generate-block'>
             <div className='filter-item'>
-                <Select placeholder='All' style={{width: 180}} onChange={onChangeType}>
+                <Select dropdownClassName='admin-select' placeholder='All' style={{width: 180}} onChange={onChangeType}>
                     <Option value=''>All</Option>
                     <Option value="replenish">Replenish</Option>
                     <Option value="order">Order</Option>

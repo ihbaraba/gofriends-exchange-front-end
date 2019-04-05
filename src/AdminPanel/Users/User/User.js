@@ -1,24 +1,37 @@
 import React, {Component} from 'react';
-import {Tabs} from 'antd';
+import {Tabs, Icon} from 'antd';
 import axios from "axios/index";
+import {toast} from "react-toastify";
 
 import ShortUserInformation from './ShortUserInformation';
 import TradeHistory from './TradeHistory';
+import WalletsList from './WalletsList';
+import WithdrawList from './WithdrawList';
 import KYC from './KYC';
 
-import {GET_TRADE_HISTORY, PAIRS} from "../../../constants/APIURLS";
+import {
+    GET_TRADE_HISTORY,
+    PAIRS,
+    VERIFICATION,
+    WITHDRAW,
+    VERIFY,
+    USER_WALLETS,
+    GET_USERS,
+    USER_PROFILE
+} from "../../../constants/APIURLS";
 
 const TabPane = Tabs.TabPane;
 
-
 class User extends Component {
     state = {
-        user: {
-            name: 'Ivan',
-            phone: 132442
+        kyc: {
+            documents: [],
         },
         coinPairs: [],
         tradeHistoryList: [],
+        withdrawList: [],
+        wallets: [],
+        blockedReason: '',
 
         pagination: {
             total: 0,
@@ -44,28 +57,93 @@ class User extends Component {
         })
     };
 
+    getWithdrawList = async () => {
+        const {pagination: {current, pageSize}} = this.state;
+
+        const url = `${WITHDRAW}?userId=${this.userId}&skip=${current * 10 - 10}&take=${pageSize}`;
+        const {data} = await axios.get(url);
+
+        this.setState({
+            withdrawList: data.withdraw,
+            pagination: {
+                ...this.state.pagination,
+                total: +data.count
+            }
+        })
+    };
+
+    getWallets = async () => {
+        const {data} = await axios.get(`${USER_WALLETS}/${this.userId}`);
+
+        this.setState({
+            wallets: data,
+        })
+    };
+
     handleChangePagination = (pagination, type) => {
+        console.log(pagination);
         this.setState({
                 pagination
             },
             () => {
                 if (type === 'sell' || type === 'buy')
-                    this.getTradeHistory()
+                    this.getTradeHistory(type)
             })
     };
 
-    onChangeTab = (tab) => {
+    onVerifyUser = async (id, verify) => {
+        try {
+            await axios.put(`${VERIFY}/${id}/verification/status`, {
+                status: verify ? 'verified' : 'waitForVerify'
+            });
+
+            toast.success(<div className='toaster-container'><Icon type="check-circle"/> Confirmed</div>, {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true
+            });
+        } catch (e) {
+            toast.error(<div className='toaster-container'><Icon type="close"/> {e.response.data.userMessage}</div>, {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true
+            });
+        }
+
+        this.setState({
+            kyc: {
+                ...this.state.kyc,
+                verifyStatus: verify ? 'verified' : 'waitForVerify'
+            }
+        })
+    };
+
+    onChangeTab = async (tab) => {
+        await this.setState({
+            pagination: {
+                total: 0,
+                current: 1,
+                pageSize: 10,
+            }
+        });
+
         if (tab === 'sell' || tab === 'buy') {
             this.getTradeHistory(tab);
         }
 
         switch (tab) {
             case 'wallets':
-                console.log('wallets');
+                this.getWallets();
                 break;
 
             case 'withdraws':
-                console.log('withdraws');
+                this.getWithdrawList();
                 break;
 
             default:
@@ -73,27 +151,69 @@ class User extends Component {
         }
     };
 
-    async componentDidMount() {
-        const {data} = await axios.get(PAIRS);
+    blockedUser = async () => {
+        const {kyc} = this.state;
+        const status = kyc.status === 'blocked' ? false : true;
+        try {
+            await axios.put(`${GET_USERS}/${this.userId}/block`, {
+                isBlocked: status,
+                reason: this.state.blockedReason
+            });
 
-        let coinPairs = data.map(pair => {
+            this.setState({
+                kyc: {
+                    ...this.state.kyc,
+                    status: kyc.status === 'blocked' ? 'active' : 'blocked'
+                }
+            });
+
+            toast.success(<div className='toaster-container'><Icon type="check-circle"/> Confirmed</div>, {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true
+            });
+        } catch (e) {
+            toast.error(<div className='toaster-container'><Icon type="close"/> {e.response.data.userMessage}</div>, {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true
+            });
+        }
+
+
+    };
+
+    async componentDidMount() {
+        const [pairs, kyc] = await Promise.all([axios.get(PAIRS), axios.get(`${USER_PROFILE}/${this.userId}`)]);
+
+        let coinPairs = pairs.data.map(pair => {
             return ({
                 id: pair.id,
                 name: `${pair.baseCurrency.code}/${pair.quoteCurrency.code}`
             })
         });
+
         this.setState({
-            coinPairs
+            coinPairs,
+            kyc: kyc.data ? kyc.data : {}
         })
-    }
+    };
 
     render() {
-        const {tradeHistoryList, coinPairs, user} = this.state;
+        const {tradeHistoryList, withdrawList, coinPairs, wallets, kyc, pagination, blockedReason} = this.state;
 
         return (
             <div className="user-page">
                 <div className='top-block'>
-                    <ShortUserInformation/>
+                    <ShortUserInformation
+                        user={kyc}
+                    />
 
                     <div className='blocked-user-block'>
                         <div className='title'>Block user</div>
@@ -101,9 +221,19 @@ class User extends Component {
                         <div className='input-side'>
                             <div>
                                 <label>Reason </label>
-                                <input type="text"/>
+                                <input
+                                    type="text"
+                                    value={blockedReason}
+                                    onChange={({target}) => this.setState({blockedReason: target.value})}
+                                />
                             </div>
-                            <button className='admin-btn'>Block user</button>
+                            {
+                                kyc.status === 'blocked' ?
+                                    <button className='admin-btn green-btn' onClick={this.blockedUser}>Unblock
+                                        user</button>
+                                    :
+                                    <button className='admin-btn red-btn' onClick={this.blockedUser}>Block user</button>
+                            }
                         </div>
                     </div>
                 </div>
@@ -116,18 +246,22 @@ class User extends Component {
                     >
                         <TabPane tab="KYC" key="kyc">
                             <KYC
-                                user={user}
+                                kyc={kyc}
+                                verify={this.onVerifyUser}
                             />
                         </TabPane>
 
                         <TabPane tab="Wallets" key="wallets">
-                            2
+                            <WalletsList
+                                data={wallets}
+                            />
                         </TabPane>
 
                         <TabPane tab="Buy trade history" key="buy">
                             <TradeHistory
                                 coinPairs={coinPairs}
                                 data={tradeHistoryList}
+                                {...pagination}
                                 type='buy'
                                 onChange={this.handleChangePagination}
                             />
@@ -137,13 +271,19 @@ class User extends Component {
                             <TradeHistory
                                 coinPairs={coinPairs}
                                 data={tradeHistoryList}
+                                {...pagination}
                                 type='sell'
                                 onChange={this.handleChangePagination}
                             />
                         </TabPane>
 
                         <TabPane tab="Withdraws list" key="withdraws">
-                            5
+                            <WithdrawList
+                                list={withdrawList}
+                                {...pagination}
+                                onChange={this.handlePaginationChange}
+                                // onApprove={this.handleApprove}
+                            />
                         </TabPane>
                     </Tabs>
 

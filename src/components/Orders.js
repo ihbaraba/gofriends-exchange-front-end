@@ -14,14 +14,8 @@ class Orders extends Component {
         this.validate = this.validate.bind(this);
 
         this.state = {
-            buy: this.props.buy ? this.props.buy : {
-                price: 0,
-                amount: 0
-            },
-            sell: this.props.sell ? this.props.sell : {
-                price: 0,
-                amount: 0
-            },
+            buy: this.props.buy ? this.props.buy : {price: 0, amount: 0},
+            sell: this.props.sell ? this.props.sell : {price: 0, amount: 0},
             buyLimit: {
                 stop: 0,
                 limit: 0,
@@ -33,7 +27,8 @@ class Orders extends Component {
                 amount: 0
             },
             //    -------
-            activeTab: this.props.activeTab ? this.props.activeTab : '1'
+            activeTab: this.props.activeTab ? this.props.activeTab : '1',
+            disableBtn: false
         };
     }
 
@@ -70,21 +65,33 @@ class Orders extends Component {
         });
     }
 
-    handleActionOrders = (type, limit) => {
+    handleActionOrders = async (type, limit) => {
+        this.setState({
+            disableBtn: true
+        });
+
         if (limit) {
-            this.props.firePostToServer({
+            await this.props.firePostToServer({
                 token: this.props.token,
                 stop: +this.state[`${type}Limit`].stop,
                 limit: +this.state[`${type}Limit`].limit,
                 amount: +this.state[`${type}Limit`].amount,
                 type
             });
+
+            this.setState({
+                disableBtn: false
+            });
         } else {
-            this.props.firePostToServer({
+            await this.props.firePostToServer({
                 token: this.props.token,
                 price: +this.state[type].price,
                 amount: +this.state[type].amount,
                 type
+            });
+
+            this.setState({
+                disableBtn: false
             });
         }
     };
@@ -101,8 +108,8 @@ class Orders extends Component {
     };
 
     render() {
-        const {first, second, mobile} = this.props;
-        const {buy, sell, buyLimit, sellLimit} = this.state;
+        const {first, second, mobile, fee = []} = this.props;
+        const {buy, sell, buyLimit, sellLimit, disableBtn} = this.state;
 
         let currencyWallet = 0;
 
@@ -111,6 +118,25 @@ class Orders extends Component {
                 currencyWallet = item.amount;
             }
         }) : null;
+
+        let buyFee = 0,
+            sellFee = 0,
+            buyLimitFee = 0,
+            sellLimitFee = 0;
+
+        fee.forEach(item => {
+            if (+buy.price >= item.fromSteps && +buy.price <= item.toSteps) {
+                buyFee = item.fee / 100;
+            } else if (+sell.price >= item.fromSteps && +sell.price <= item.toSteps) {
+                sellFee = item.fee / 100;
+            }
+
+            if (buyLimit.limit >= item.fromSteps && buyLimit.limit <= item.toSteps) {
+                buyLimitFee = item.fee / 100;
+            } else if (sellLimit.limit >= item.fromSteps && sellLimit.limit <= item.toSteps) {
+                sellLimitFee = item.fee / 100;
+            }
+        });
 
         return (
             <Fragment>
@@ -169,7 +195,7 @@ class Orders extends Component {
                                         <div className="orders__item">
                                             <span className="orders__item_name">Fee:</span>
                                             <div className="fake-input">
-                                                {(+buy.amount * +buy.price * 0)}
+                                                {(+buy.amount * +buy.price * buyFee)}
                                             </div>
                                             <span className='name-coin'>
                                                 {second}
@@ -179,6 +205,7 @@ class Orders extends Component {
                                         <button
                                             className='order-buy-btn order-action-btn'
                                             type="primary"
+                                            disabled={disableBtn}
                                             onClick={() => this.handleActionOrders('buy')}>
                                             {`Buy ${first}`}
                                         </button>
@@ -232,7 +259,7 @@ class Orders extends Component {
                                         <div className="orders__item">
                                             <span className="orders__item_name">Fee:</span>
                                             <div className="fake-input">
-                                                {(+sell.amount * +sell.price * 0)}
+                                                {(+sell.amount * +sell.price * sellFee)}
                                             </div>
                                             <span className='name-coin'>
                                                 {second}
@@ -242,6 +269,7 @@ class Orders extends Component {
                                         <button
                                             className='order-sell-btn order-action-btn'
                                             type="primary"
+                                            disabled={disableBtn}
                                             onClick={() => this.handleActionOrders('sell')}>
                                             {`Sell ${first}`}
                                         </button>
@@ -301,7 +329,7 @@ class Orders extends Component {
                                         <div className="orders__item">
                                             <span className="orders__item_name">Fee:</span>
                                             <div className="fake-input">
-                                                {(+buy.amount * +buy.price * 0)}
+                                                {(+buy.amount * +buy.price * +buyFee)}
                                             </div>
                                             <span className='name-coin'>
                                                 {second}
@@ -311,6 +339,7 @@ class Orders extends Component {
                                         <button
                                             className='order-buy-btn order-action-btn'
                                             type="primary"
+                                            disabled={disableBtn}
                                             onClick={() => this.handleActionOrders('buy')}>
                                             {`Buy ${first}`}
                                         </button>
@@ -360,7 +389,7 @@ class Orders extends Component {
                                         <div className="orders__item">
                                             <span className="orders__item_name">Fee:</span>
                                             <div className="fake-input">
-                                                {(+sell.amount * +sell.price * 0)}
+                                                {(+sell.amount * +sell.price * sellFee)}
                                             </div>
                                             <span className='name-coin'>
                                                 {second}
@@ -370,6 +399,7 @@ class Orders extends Component {
                                         <button
                                             className='order-sell-btn order-action-btn'
                                             type="primary"
+                                            disabled={disableBtn}
                                             onClick={() => this.handleActionOrders('sell')}>
                                             {`Sell ${first}`}
                                         </button>
@@ -438,7 +468,7 @@ class Orders extends Component {
                                         <div className="orders__item">
                                             <span className="orders__item_name">Fee:</span>
                                             <div className="fake-input">
-                                                {(+buyLimit.amount * +buyLimit.limit * 0)}
+                                                {(+buyLimit.amount * +buyLimit.limit * buyLimitFee)}
                                             </div>
                                             <span className='name-coin'>
                                                 {second}
@@ -449,6 +479,7 @@ class Orders extends Component {
                                             style={{marginTop: '20px !important'}}
                                             className='order-buy-btn order-action-btn limits-btn'
                                             type="primary"
+                                            disabled={disableBtn}
                                             onClick={() => this.handleActionOrders('buy', true)}>
                                             {`Buy ${first}`}
                                         </button>
@@ -510,7 +541,7 @@ class Orders extends Component {
                                         <div className="orders__item">
                                             <span className="orders__item_name">Fee:</span>
                                             <div className="fake-input">
-                                                {(+sellLimit.amount * +sellLimit.limit * 0)}
+                                                {(+sellLimit.amount * +sellLimit.limit * sellLimitFee)}
                                             </div>
                                             <span className='name-coin'>
                                                 {second}
@@ -520,6 +551,7 @@ class Orders extends Component {
                                         <button
                                             className='order-sell-btn order-action-btn limits-btn'
                                             type="primary"
+                                            disabled={disableBtn}
                                             onClick={() => this.handleActionOrders('sell', true)}>
                                             {`Sell ${first}`}
                                         </button>

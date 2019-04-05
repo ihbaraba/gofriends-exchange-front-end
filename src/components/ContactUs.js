@@ -52,7 +52,7 @@ class ContactUs extends Component {
 
     render() {
         return (
-            <div className='login-page'>
+            <div className='login-page' style={{height: 'auto'}}>
                 <div className="login-form">
                     <div className='back-btn' onClick={() => window.history.back()}>
                         <i className="fa fa-angle-left" aria-hidden="true"></i>

@@ -1,10 +1,12 @@
 import React, {Component} from 'react';
 import axios from 'axios';
+import {Icon} from 'antd';
 
 import NewsList from './NewsList';
 import {connect} from "react-redux";
 import {changeSubPage} from "../../actions/AdminActions";
 import {NEWS} from "../../constants/APIURLS";
+import {toast} from "react-toastify";
 
 class News extends Component {
     state = {
@@ -24,7 +26,7 @@ class News extends Component {
             news: res.data,
             pagination: {
                 ...this.state.pagination,
-                total: res.data.count
+                total: +res.data.count
             }
         })
     };
@@ -40,14 +42,28 @@ class News extends Component {
     };
 
     handleDeleteNews = async (id) => {
-        console.log(id);
-
         try {
             await axios.delete(`${NEWS}/${id}`);
 
+            toast.success(<div className='toaster-container'><Icon type="check-circle"/> Confirmed</div>, {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true
+            });
+
             this.getAllNews();
-        } catch (error) {
-            console.log(error);
+        } catch (e) {
+            toast.error(<div className='toaster-container'><Icon type="close"/> {e.response.data.userMessage}</div>, {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true
+            });
         }
     };
 
@@ -72,9 +88,7 @@ class News extends Component {
             <div className='news-page'>
                 <div className='create-news-block'>
                     <button className='admin-btn green-btn' onClick={this.onCreateNew}>
-                        <a>
                             Add new
-                        </a>
                     </button>
                 </div>
 
@@ -90,8 +104,7 @@ class News extends Component {
     }
 }
 
-
-const mapStateToProps = state => ({});
+const mapStateToProps = () => ({});
 
 const mapDispatchToProps = dispatch => ({
     changeSubPage: (page) => dispatch(changeSubPage(page)),
