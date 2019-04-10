@@ -16,6 +16,7 @@ import Profile from './components/Profile';
 import NotFound from './components/NotFound';
 import ResetPassword from './components/ResetPassword';
 import TwoFactorAuth from './components/TwoFactorAuth';
+import About from './components/About';
 import Login2 from './components/Login2';
 import ContactUs from './components/ContactUs';
 import Policy from './components/Policy';
@@ -106,6 +107,7 @@ class App extends Component {
                                     <Route path="/contact" component={ContactUs}/>
                                     <Route path="/privacy" component={Policy}/>
                                     <Route path="/terms" component={Terms}/>
+                                    <Route path="/about" component={About}/>
                                     <Route path="/activate" component={Activate}/>
                                     <Route path="/changepassword" component={ChangePassword}/>
                                     <Route path="/balances" component={Balances}/>
