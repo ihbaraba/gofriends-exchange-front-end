@@ -23,7 +23,7 @@ const Footer = () => {
                 </div>
 
                 <div className="links noWrap desktop">
-                    <NavLink to="/contact">
+                    <NavLink to="/about">
                         <div className="group">
                             <span>About</span>
                         </div>
@@ -48,7 +48,7 @@ const Footer = () => {
 
                 <div className="links noWrap mobile">
                     <div>
-                        <NavLink to="/contact">
+                        <NavLink to="/about">
                             About
                         </NavLink>
                         <NavLink to="/terms">

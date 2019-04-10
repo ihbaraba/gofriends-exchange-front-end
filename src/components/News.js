@@ -24,7 +24,11 @@ class News extends Component {
         const res = await axios.get(`${NEWS}?skip=${skip}&take=${take}`);
 
         this.setState({
-            news: res.data.news,
+            news: res.data.news.length > 0 ? res.data.news.length : [{
+                id: 0,
+                title: '',
+                description: ''
+            }],
             pagination: {
                 skip,
                 take,
