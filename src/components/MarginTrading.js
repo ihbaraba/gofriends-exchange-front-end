@@ -29,7 +29,7 @@ class MarginTrading extends Component {
                                     reminder, please beware of scams - at no point in time will we ask for a deposit to
                                     restore account functionality.
                                 </div>
-                                <div className="by">Posted by <strong>Beetok Team</strong> at 2018-05-31 17:34:34
+                                <div className="by">Posted by <strong>Gofriends Team</strong> at 2018-05-31 17:34:34
                                 </div>
                             </div>
                             <div className="msg">

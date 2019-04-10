@@ -1,5 +1,5 @@
 import React, {Component, Fragment} from 'react';
-import logo from '../img/logo_footer.png';
+import logo from '../img/logo_go.svg';
 import userIcon from '../img/user_icon.svg';
 import userGreenIcon from '../img/avatarGreen.svg';
 import NavLink from './NavLink';
@@ -117,11 +117,11 @@ class Header extends Component {
         if (isLoggedIn) {
             return (
                 <Fragment>
-                    <a href='https://beetok.io' className='ant-dropdown-trigger' target='_blank'>
-                                <span className="title topLevel">
-                                About
-                            </span>
-                    </a>
+                    {/*<a href='https://beetok.io' className='ant-dropdown-trigger' target='_blank'>*/}
+                                {/*<span className="title topLevel">*/}
+                                {/*About*/}
+                            {/*</span>*/}
+                    {/*</a>*/}
 
                     <Dropdown overlay={this.menu1}>
                         <NavLink to="/balances">
@@ -166,11 +166,11 @@ class Header extends Component {
                 <Fragment>
                     <div className="message">
                         <div className='logout-navigtion'>
-                            <a href='https://beetok.io' target='_blank'>
-                                <span className="title topLevel">
-                                About
-                            </span>
-                            </a>
+                            {/*<a href='https://beetok.io' target='_blank'>*/}
+                                {/*<span className="title topLevel">*/}
+                                {/*About*/}
+                            {/*</span>*/}
+                            {/*</a>*/}
 
                             <Tooltip placement="bottom" title={'Coming Soon'}>
                                 <NavLink to="/">
@@ -279,11 +279,11 @@ class Header extends Component {
                                                     Contact
                                                 </NavLink>
 
-                                                <a href='https://beetok.io' target='_blank'>
-                                <span className="title topLevel">
-                                About
-                            </span>
-                                                </a>
+                                                {/*<a href='https://beetok.io' target='_blank'>*/}
+                                {/*<span className="title topLevel">*/}
+                                {/*About*/}
+                            {/*</span>*/}
+                                                {/*</a>*/}
 
 
                                                 <NavLink to="/Logout">
@@ -312,11 +312,11 @@ class Header extends Component {
                                                     News
                                                 </NavLink>
 
-                                                <a href='https://beetok.io' target='_blank'>
-                                <span className="title topLevel">
-                                About
-                            </span>
-                                                </a>
+                                                {/*<a href='https://beetok.io' target='_blank'>*/}
+                                {/*<span className="title topLevel">*/}
+                                {/*About*/}
+                            {/*</span>*/}
+                                                {/*</a>*/}
 
                                             </div>
                                         </div>

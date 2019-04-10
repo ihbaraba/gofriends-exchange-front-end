@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import axios from 'axios';
 
 import {SEND_TICKETS} from "../constants/APIURLS";
-import logo from '../img/logo_footer.png';
+import logo from '../img/logo_go.svg';
 
 class ContactUs extends Component {
     constructor(props) {
