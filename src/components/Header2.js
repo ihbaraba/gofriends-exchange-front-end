@@ -90,7 +90,7 @@ const Header2 = () => {
     return (
         <div className="header">
             <div className="logo">
-                <NavLink to="/exchange"><img src={logo} alt="logo"/></NavLink>
+                {/*<NavLink to="/exchange"><img src={logo} alt="logo"/></NavLink>*/}
             </div>
 
             <div className="tabs">

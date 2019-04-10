@@ -8,7 +8,8 @@ export default function exchangeState(state = {}, action) {
 
         case CHANGE_PAIR:
             // TODO
-            return state
+
+            return state;
 
         default:
             return state

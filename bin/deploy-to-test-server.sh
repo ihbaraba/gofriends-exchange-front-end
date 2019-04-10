@@ -10,8 +10,8 @@ YELLOW='\033[0;33m'
 
 
 REMOTE_USER='root'
-REMOTE_HOST='46.101.144.82'
-REMOTE_ROOT_FOLDER='/var/www/gofriends.ru/public'
+REMOTE_HOST='157.230.146.234'
+REMOTE_ROOT_FOLDER='/var/www/exchange-client'
 SSH_PORT=22
 LOCAL_DIST_FOLDER='./build/*'
 LOCAL_ROOT_FOLDER='./'

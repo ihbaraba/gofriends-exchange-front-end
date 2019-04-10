@@ -1,16 +1,8 @@
 import React, {Component} from 'react';
-import '../App.css';
-import NavLink from './NavLink';
-import {connect} from "react-redux";
-import Recaptcha from 'react-recaptcha';
-// import {simpleAction} from "../actions/simpleAction";
-import {login_success, save_user_info} from "../actions/UserActions";
-import {LOGIN, USERINFO} from "../constants/APIURLS";
-import {sendRequest} from "./Graphic/utils";
-import logo from '../img/logo_go.svg';
-import {getUserInfo} from "./../utils";
-
 import axios from 'axios';
+
+import {SEND_TICKETS} from "../constants/APIURLS";
+import logo from '../img/logo_go.svg';
 
 class ContactUs extends Component {
     constructor(props) {
@@ -19,7 +11,7 @@ class ContactUs extends Component {
         this.state = {
             subject: '',
             name: '',
-            organisation: '',
+            organization: '',
             email: '',
             message: ''
         }
@@ -32,16 +24,35 @@ class ContactUs extends Component {
         this.setState({[name]: value})
     };
 
-    handleSubmit = (event) => {
+    handleSubmit = async (event) => {
         event.preventDefault();
+        const {name, email, subject, message, organization} = this.state;
+        try {
+            await axios.post(SEND_TICKETS, {
+                name,
+                email,
+                subject,
+                organization,
+                description: message,
+            });
+
+            this.setState({
+                subject: '',
+                name: '',
+                organization: '',
+                email: '',
+                message: ''
+            })
+        } catch (error) {
+            console.log(error);
+        }
 
         console.log(this.state)
-
     };
 
     render() {
         return (
-            <div className='login-page'>
+            <div className='login-page' style={{height: 'auto'}}>
                 <div className="login-form">
                     <div className='back-btn' onClick={() => window.history.back()}>
                         <i className="fa fa-angle-left" aria-hidden="true"></i>
@@ -91,8 +102,8 @@ class ContactUs extends Component {
                                 <input
                                     className="userPassInput"
                                     type="text"
-                                    name="organisation"
-                                    value={this.state.organisation}
+                                    name="organization"
+                                    value={this.state.organization}
                                     onChange={this.handlerChangeInput}
                                     required/>
                             </div>
@@ -109,6 +120,7 @@ class ContactUs extends Component {
                             <div className='login-form-item'>
                                 <label>Message:</label>
                                 <textarea
+                                    style={{color: '#000000'}}
                                     rows="10"
                                     name='message'
                                     value={this.state.message}
@@ -120,7 +132,8 @@ class ContactUs extends Component {
 
 
                             <div className="buttonRow">
-                                <p style={{letterSpacing: '1.2px', textAlign: 'center'}}>This inbox is not monitored for support requests.
+                                <p style={{letterSpacing: '1.2px', textAlign: 'center'}}>This inbox is not monitored for
+                                    support requests.
                                     <br/>For technical assistance, Contact Support.</p>
                                 <button className="btn" type="submit">
                                     Send

@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from "react-redux";
+import {Redirect} from 'react-router-dom';
 
 import NavBar from './components/NavBar';
 import Header from './components/Header';
@@ -10,6 +11,7 @@ import {changePage, lastPage} from "../actions/AdminActions";
 
 
 class Index extends Component {
+
     async componentDidMount() {
         document.getElementById('root').classList.add('admin-version');
     }
@@ -24,11 +26,13 @@ class Index extends Component {
 
     goBackPage = () => {
         this.props.lastPage()
-    }
+    };
 
     render() {
         const {children, user, admin} = this.props;
+        const authorized = user.token ? true : false;
 
+        if(authorized) {
         return (
             <div className='admin-panel'>
                 <NavBar
@@ -45,7 +49,11 @@ class Index extends Component {
                     {children}
                 </div>
             </div>
-        )
+        )} else {
+            return(
+                <Redirect to='/login'/>
+            )
+        }
     }
 }
 

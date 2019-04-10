@@ -23,9 +23,11 @@
 .footer .links a {
     font-size: 12px;
     letter-spacing: 1.2px;
+    color: #fff;
 }
 
-.footer .links a:hover span {
+.footer .links a:hover span,
+.footer .links a:hover {
     color: #4A998C;
 }
 
@@ -36,6 +38,10 @@
 @media (max-width: 600px) {
     .footer {
         height: auto;
+    }
+
+    .footer .logo {
+       display: none;
     }
 
     .footer .links.desktop {

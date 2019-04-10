@@ -79,7 +79,7 @@ class AllReport extends Component {
     }
 
     render() {
-        const {filter, pagination} = this.state;
+        const {pagination, filter} = this.state;
         return (
             <div className='all-report-page'>
                 <GenerateBlock

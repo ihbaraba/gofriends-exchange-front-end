@@ -1,12 +1,15 @@
 import React, {Component} from 'react';
 import {connect} from "react-redux";
 import Chart from './UpdatebleChart';
-import {getData} from "./utils"
+import {getData, getDataFromSocket} from "./utils"
 import {intervalInDays} from "./../../utils"
 import {TIMEFRAMES} from "./../../constants/APIURLS.js"
+import io from 'socket.io-client';
+import {SOCKET_SOURCE, QUOTATIONS} from "./../../constants/APIURLS.js"
 
 import * as d3 from "d3";
 import {timeParse} from "d3-time-format";
+import CandleStickChart from './NewChart';
 
 function parseData(parse) {
     return function (d) {
@@ -26,6 +29,7 @@ const parseDate = timeParse("%Y-%m-%dT%H:%M:%S.%LZ");
 class Graphic extends Component {
     constructor(props) {
         super(props);
+        this.socket = io(SOCKET_SOURCE);
         this.chartData = []; //mirror of state
         this.simulationInterval = 1000;
         this.simulationDuration = 20;
@@ -34,29 +38,14 @@ class Graphic extends Component {
             new Date(),
             this.simulationDuration
         );
+        this.state = {
+            newCandle: {}
+        }
         this.newDiapazone = this.newDiapazone.bind(this);
         this.intervalInMiliseconds = this.intervalInMiliseconds.bind(this);
         this.updatedLastCandleFromSocket = this.updatedLastCandleFromSocket.bind(this);
         this.saveTheLastCandleAndCreateNewOne = this.saveTheLastCandleAndCreateNewOne.bind(this);
         // this.updatedDateFromSocket = this.updatedDateFromSocket.bind(this);
-    }
-
-
-    async componentDidMount() {
-        const {pairId = 1, dateFrom, dateTo, take, interval, appendFake} = this.props;
-        const options = {
-            pairId: pairId,
-            APIURL: TIMEFRAMES,
-            dateFrom,
-            dateTo,
-            take,
-            interval,
-            appendFake
-        };
-
-        let data = await getData(options);
-        this.chartData = data;
-        this.setState({data}, this.appendRealtimeLoadedData())
     }
 
     componentWillUnmount() {
@@ -119,6 +108,9 @@ class Graphic extends Component {
     }
 
     intervalInMiliseconds = (interval, period) => {
+        console.log(interval);
+        console.log(period);
+
         const MsInMin = 60 * 1000;
         switch (interval) {
             case "5min" : {
@@ -181,24 +173,6 @@ class Graphic extends Component {
         }, this.intervalInMiliseconds(interval, 1));
     }
 
-    /* Getting data from the server */
-    appendRealtimeLoadedData = () => {
-        /* append as new candles */
-        // getDataFromSocket({
-        //     point: "timeframe_saved_",
-        //     id: this.props.pairId,
-        //     stopTime: 0,
-        //     callback: this.saveTheLastCandleAndCreateNewOne,
-        // });
-        /* just updating last candle */
-        // getDataFromSocket({
-        //     point: "timeframe_updated_",
-        //     id: this.props.pairId,
-        //     stopTime: 0,
-        //     callback: this.updatedLastCandleFromSocket,
-        // });
-    };
-
     async newDiapazone({rowsToDownload, start, end, data, callback}) {
 
         // console.log("START =", start, "END = ", end, data.length, data);
@@ -236,25 +210,50 @@ class Graphic extends Component {
         });
     }
 
-    render() {
-        if (this.state == null) {
-            return <div>Loading...</div>
-        }
-        const {data} = this.state;
+    getDataFromSocket = (id) => {
+        this.socket.on('timeframe_updated_' + id, (bid) => {
+            this.setState({
+                newCandle: bid
+            });
+        });
+    };
 
-        if (data.length === 0) {
-            // alert("Historical and current data for this pair is absent");
-            return <div className="card-container, currencysPairs" style={{width: "auto", margin: "auto"}}>
-                <div className="card-container-head">
-                    <h1>Historical and current data for this pair is absent</h1>
-                </div>
-            </div>
-        }
-        // console.log("Graphics this.chartData=",  this.chartData, this.props);
-        {/*<Chart type="hybrid" data={this.state.data} newDiapazone={this.newDiapazone}/>*/
-        }
+    async componentDidMount() {
+        const {pairId = 1, dateFrom, dateTo, take, interval, appendFake} = this.props;
+        const options = {
+            pairId: pairId,
+            APIURL: TIMEFRAMES,
+            dateFrom,
+            dateTo,
+            take,
+            interval,
+            appendFake
+        };
+
+        let data = await getData(options);
+        this.chartData = data;
+        this.setState({data});
+        // this.getDataFromSocket(this.props.pairId);
+    }
+
+
+    componentWillUnmount() {
+        this.socket.close();
+    }
+
+    render() {
+        // if (this.state == null) {
+        //     return <div>Loading...</div>
+        // }
+
         return (
-            <Chart type="hybrid" data={this.chartData} newDiapazone={this.newDiapazone}/>
+            <CandleStickChart
+                type="hybrid"
+                interval={this.props.interval}
+                data={this.chartData}
+                newCandle={this.state.newCandle}
+                newDiapazone={this.newDiapazone}
+            />
         )
     }
 }

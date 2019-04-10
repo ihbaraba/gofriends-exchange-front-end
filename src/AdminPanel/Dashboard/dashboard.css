@@ -24,12 +24,15 @@
     border-radius: 3px;
     background-color: #313131;
     box-shadow: 0 5px 32px 0 rgba(0, 0, 0, 0.23);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .dashboard-page .statistics-block .statistics-information {
     height: 135px;
     width: 18%;
-    padding: 15px 20px;
+    padding: 15px 20px 30px 20px;
     border-radius: 3px;
     background-color: #313131;
     box-shadow: 0 5px 32px 0 rgba(0, 0, 0, 0.23);
@@ -85,6 +88,9 @@
 
 .dashboard-page .latest-operations-block .latest-operation .header-block .admin-btn {
     background: #4A998C;
+}
+.dashboard-page .latest-operations-block .latest-operation .header-block .admin-btn:hover {
+    background: linear-gradient(215.51deg, #255E55 0%, #4A998C 100%);
 }
 
 .dashboard-page .latest-operations-block .latest-operation .header-block .admin-btn a {

@@ -1,6 +1,7 @@
 import React from 'react';
 import logo from '../img/logo_go.svg';
 import NavLink from './NavLink';
+import Pdf from '../img/beetok_wp_eng.pdf';
 
 import '../styles/footer.css';
 

@@ -1,0 +1,104 @@
+.admins-page .action-btn {
+    text-align: right;
+    padding: 0 20px 0 0;
+}
+
+.admins-page .create-block {
+    margin: 0 0 30px 0;
+}
+
+.admins-modal .ant-modal-content {
+    width: max-content;
+}
+
+.admins-page .super-admin {
+    width: 100%;
+    height: 160px;
+    margin: 0 0 30px 0;
+    padding: 0 35px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 3px;
+    background-color: #1E1E1E;
+    box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.35);
+}
+
+.admins-page .super-admin .admin-table {
+    width: 100%;
+}
+
+.admins-page .super-admin .admin-table .ant-table-tbody tr > td {
+    background: none;
+}
+
+.admins-page .super-admin .admin-btn {
+    background: none;
+}
+
+.admins-modal .ant-modal-header {
+    padding: 30px 60px;
+    background: #313131;
+    border: 0;
+}
+
+.admins-modal .ant-modal-body {
+    padding: 20px 60px !important;
+    background-color: #313131;
+
+}
+
+.admins-modal .ant-modal-title {
+    font-family: Ubuntu;
+    font-size: 30px;
+    font-weight: bold;
+    letter-spacing: 2.05px;
+    color: #fff;
+}
+
+.admins-modal .ant-modal-close {
+    display: none;
+}
+
+.admins-modal .form-item {
+    display: flex;
+    flex-direction: column;
+}
+
+.admins-modal .form-item label {
+    margin: 0 0 5px 0;
+    color: #7D7D7D;
+    font-family: Roboto;
+    font-size: 10px;
+    letter-spacing: 1.2px;
+    line-height: 11px;
+}
+
+.admins-modal .form-item input {
+    height: 32px;
+    width: 180px;
+    border: 1px solid #979797;
+    border-radius: 4px;
+    margin: 0 50px 0 0;
+    background: none;
+    color: #fff !important;
+}
+
+.admins-modal .form-item .ant-select-selection {
+    border: 1px solid #979797;
+    border-radius: 4px;
+    background: none;
+    color: #fff !important;
+}
+
+.admins-modal .admin-btn {
+    display: block;
+    margin: 50px 0 0 auto;
+    height: 26px;
+    width: 110px;
+    border-radius: 3px;
+    border: 0;
+    cursor: pointer;
+    background: linear-gradient(215.51deg, #255E55 0%, #4A998C 100%);
+}
+

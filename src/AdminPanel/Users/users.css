@@ -28,6 +28,7 @@
     width: 60%;
     display: flex;
     justify-content: space-between;
+    align-items: flex-end;
     padding: 35px;
     border-radius: 3px;
     background-color: #1E1E1E;
@@ -36,9 +37,43 @@
 
 .user-page .top-block .short-information-block .item {
     flex: 1;
+    margin: 0 0 10px 20px;
+}
+
+.user-page .top-block .short-information-block .item .user-name {
+    margin: 0 0 5px 0;
+    color: #FFFFFF;
+    font-family: Roboto;
+    font-size: 18px;
+    font-weight: 500;
+    letter-spacing: 1.8px;
+}
+
+.user-page .top-block .short-information-block .item .user-id {
+    margin: 0 0 5px 0;
+    color: #FFFFFF;
+    font-family: Roboto;
+    font-size: 12px;
+    letter-spacing: 1.2px;
+}
+
+.user-page .top-block .short-information-block .item .registration-date {
+    margin: 0 0 5px 0;
+    color: #FFFFFF;
+    font-family: Roboto;
+    font-size: 11px;
+    font-weight: 300;
+    letter-spacing: 1.1px;
+}
+
+.user-page .top-block .short-information-block .user-avatar {
+    text-align: center;
+    margin: 0 15px 0 0;
 }
 
 .user-page .top-block .short-information-block i {
+    margin: 0 0 10px 0;
+    font-size: 62px;
     color: #00CE7D;
 }
 
@@ -74,7 +109,6 @@
 
 .user-page .top-block .blocked-user-block .input-side .admin-btn {
     margin: 0 0 3px 0;
-    background: #DD4457;
     border: 0;
 }
 
@@ -113,4 +147,81 @@
     background-color: #1E1E1E;
     -webkit-box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.35);
     box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.35);
+}
+
+/*KYC TAB*/
+.user-page .all-information .kyc-block {
+    width: 100%;
+    display: flex;
+}
+
+.user-page .all-information .kyc-block .details-block {
+    width: 20%;
+}
+
+.user-page .all-information .kyc-block .id-info {
+    width: 20%;
+    padding: 0 0 0 45px;
+    margin: 0 80px 0 0;
+}
+
+.user-page .all-information .kyc-block .id-proofs {
+    margin: 0 80px 0 0;
+}
+
+.user-page .all-information .kyc-block .verification .title-block {
+    padding: 0 0 0 45px;
+}
+
+.user-page .all-information .kyc-block .border-right {
+    height: 100%;
+    border-right: 1px solid rgba(151, 151, 151, 0.16);
+    padding: 0 45px 0 0;
+}
+
+.user-page .all-information .kyc-block .border-left {
+    height: 100%;
+    display: flex;
+    border-left: 1px solid rgba(151, 151, 151, 0.16);
+    padding: 0 0 0 45px;
+}
+
+.user-page .all-information .kyc-block .border-left .admin-btn {
+    margin: 20px 0 0 20px;
+}
+
+.user-page .all-information .kyc-block .title-block {
+    margin: 0 0 25px 0;
+    color: #FFFFFF;
+    font-family: Roboto;
+    font-size: 18px;
+    font-weight: bold;
+    letter-spacing: 1.8px;
+}
+
+.user-page .all-information .kyc-block .form-item {
+    display: flex;
+    flex-direction: column;
+    margin: 0 0 20px 0;
+}
+
+.user-page .all-information .kyc-block .form-item label {
+    color: #7D7D7D;
+    font-family: Roboto;
+    font-size: 10px;
+    letter-spacing: 1.2px;
+    margin: 0 0 3px 0;
+}
+
+.user-page .all-information .kyc-block .form-item img {
+    cursor: pointer;
+    width: 200px;
+}
+
+.user-page .wallets .btn {
+    height: 26px;
+    width: 110px;
+    border-radius: 3px;
+    background: linear-gradient(215.51deg, #255E55 0%, #4A998C 100%);
+    margin: 0;
 }
