@@ -1,28 +1,35 @@
 import React from 'react';
+import moment from 'moment';
 
-const ShortUserInformation = () => {
+const defaultUser = {
+    status: 'active',
+    name: '',
+    id: ''
+}
+
+const ShortUserInformation = ({user = defaultUser}) => {
     return (
         <div className="short-information-block">
-            <div className='item'>
+            <div className='user-avatar'>
                 <i className="fa fa-user-circle" aria-hidden="true"></i>
-                <div>Active</div>
+                <div style={{color: user.status==='active' ? '#00CE7D':'#fff'}}>{user.status}</div>
             </div>
 
             <div className='item'>
-                <div>Mark891</div>
-                <div>id 7689</div>
-                <div>2018-12-06  10:13:09</div>
+                <div className='user-name'>{user.username}</div>
+                <div className='user-id'>{user.id}</div>
+                <div className='registration-date'>{moment(user.createdAt).format('YYYY-MM-DD HH:mm')}</div>
             </div>
 
             <div className='item'>
                 <label>Email</label>
-                <input type="text"/>
+                <input type="email" value={user.email} disabled/>
                 <span className='verified-status'>*Verified</span>
             </div>
 
             <div className='item'>
                 <label>Two factor</label>
-                <input type="text"/>
+                <input type="text" value={user.twoFactorAuthEnabled} disabled/>
                 <span className='verified-status'>*With Google Authentication</span>
             </div>
         </div>

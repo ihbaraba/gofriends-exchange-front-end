@@ -2,20 +2,36 @@ import React from 'react';
 import {Switch} from 'antd';
 
 
-const RegistrationSettings = ({params, onChange}) => (
-    <div className='registration-settings'>
-        <h1>Registration</h1>
+const RegistrationSettings = ({params, onChange, currencyParams}) => {
 
-        <span>Disable</span>
+    return(<div className='registration-settings'>
+        <div>
+            <h1>Registration</h1>
 
-        <Switch
-            className='switch'
-            checked={params.value}
-            onChange={(e) => onChange(e, params.id)}
-        />
+            <span>Disable</span>
+            <Switch
+                className='switch'
+                checked={params.value}
+                onChange={(e) => onChange(e, params.id)}
+            />
 
-        <span>Enable</span>
-    </div>
-);
+            <span>Enable</span>
+        </div>
+
+        <div>
+            <h1>Demo currency</h1>
+
+            <span>Disable</span>
+
+            <Switch
+                className='switch'
+                checked={currencyParams.value}
+                onChange={(e) => onChange(e, currencyParams.id)}
+            />
+
+            <span>Enable</span>
+        </div>
+    </div>)
+};
 
 export default RegistrationSettings;

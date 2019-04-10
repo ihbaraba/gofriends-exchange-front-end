@@ -4,7 +4,9 @@ import logo from '../img/logo_go.svg';
 import axios from 'axios';
 import queryString from 'query-string';
 
-import {CHANGE_PASSWORD} from '../constants/APIURLS';
+import {CHANGE_PASSWORD, CHANGE_PASSWORD_CONFIRM} from '../constants/APIURLS';
+import {toast} from "react-toastify";
+import {Icon} from "antd";
 
 
 class ChangePassword extends Component {
@@ -18,7 +20,8 @@ class ChangePassword extends Component {
 
             sendEmail: false,
             token: '',
-            isVerified: false
+            isVerified: false,
+            success: false
         };
     }
 
@@ -26,15 +29,23 @@ class ChangePassword extends Component {
         let urlParams = queryString.parseUrl(this.props.location.search).query;
         if (urlParams.token) {
             this.setState({
-                token: urlParams.body.token
+                token: urlParams.token
             })
         }
     }
 
     async componentDidMount() {
         if (this.state.token) {
-            let confirmStatus = await axios.get(`${CHANGE_PASSWORD}/${this.state.token}`);
-            console.log(confirmStatus);
+            try {
+                await axios.get(`${CHANGE_PASSWORD_CONFIRM}?token=${this.state.token}`);
+                this.setState({
+                    success: true
+                })
+            } catch (e) {
+                this.setState({
+                    success: false
+                })
+            }
         }
     }
 
@@ -48,6 +59,7 @@ class ChangePassword extends Component {
     };
 
     handleChangeRecaptcha = res => {
+        console.log(res);
         if (res) {
             this.setState({isVerified: true});
         }
@@ -55,17 +67,23 @@ class ChangePassword extends Component {
 
     handleSubmit = async (e) => {
         e.preventDefault();
-        if (this.state.newPassword === this.state.newPasswordRepeat && this.state.isVerified) {
+
+        if (this.state.newPassword === this.state.newPasswordRepeat) {
             try {
-               let {data: {token}} =  await axios.post(CHANGE_PASSWORD, {
+                let {data: {token}} = await axios.post(CHANGE_PASSWORD, {
                     password: this.state.oldPassword,
                     newPassword: this.state.newPassword,
                     confirmPassword: this.state.newPasswordRepeat
                 });
 
-                console.log(token);
-
-                await axios.get(`${CHANGE_PASSWORD}/${token}`);
+                toast.success(<div className='toaster-container'><Icon type="check-circle"/>Check your mail </div>, {
+                    position: "top-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true
+                });
 
                 this.setState({
                     oldPassword: '',
@@ -73,18 +91,26 @@ class ChangePassword extends Component {
                     newPasswordRepeat: '',
                     sendEmail: true
                 })
-            } catch (error) {
-                console.log(error);
+            } catch (e) {
+                toast.error(<div className='toaster-container'><Icon type="close"/> {e.response.data.userMessage}
+                </div>, {
+                    position: "top-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true
+                });
             }
         }
     };
 
     render() {
-        const {sendEmail, token} = this.state;
+        const {sendEmail, token, success} = this.state;
 
         if (!token) {
             return (
-                <div className='login-page'>
+                <div className='login-page change-pass-page'>
                     <div className="login-form">
                         <div className='back-btn' onClick={() => window.history.back()}>
                             <i className="fa fa-angle-left" aria-hidden="true"></i>
@@ -154,9 +180,9 @@ class ChangePassword extends Component {
                                 </div>
 
                                 {/*{sendEmail ? <div className='send-email-token'>*/}
-                                        {/*Сheck email*/}
-                                    {/*</div>*/}
-                                    {/*: ''}*/}
+                                {/*Сheck email*/}
+                                {/*</div>*/}
+                                {/*: ''}*/}
                             </fieldset>
                         </form>
                     </div>
@@ -176,7 +202,9 @@ class ChangePassword extends Component {
                         </div>
 
                         <div className='changed-pass'>
-                            Password changed successfully
+                            {success ?
+                            'Password changed successfully'
+                            : 'Try again later'}
                         </div>
                     </div>
                 </div>

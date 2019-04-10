@@ -11,14 +11,26 @@ import {connect} from "react-redux";
 class Settings extends Component {
     state = {
         registrationParams: {},
+        currencyParams: {},
         emailParams: [],
     };
 
     async componentDidMount() {
         const [registration, email] = await Promise.all([axios.get(REGISTRATION_SETTINGS), axios.get(EMAIL_SETTINGS),]);
 
+        registration.data.forEach(item => {
+            if (item.name === 'registration') {
+                this.setState({
+                    registrationParams: item
+                })
+            } else if (item.name === 'demo_currencies') {
+                this.setState({
+                    currencyParams: item,
+                })
+            }
+        });
+
         this.setState({
-            registrationParams: registration.data[0],
             emailParams: email.data
         })
     }
@@ -26,9 +38,16 @@ class Settings extends Component {
     handlerChangeRegistrationSettings = async (value, id) => {
         if (id === this.state.registrationParams.id) {
             const res = await axios.put(`${REGISTRATION_SETTINGS}/${id}`, {
-                value
+                value,
+                type: 'boolean'
             });
             this.setState({registrationParams: res.data})
+        } else {
+            const res = await axios.put(`${REGISTRATION_SETTINGS}/${id}`, {
+                value,
+                type: 'boolean'
+            });
+            this.setState({currencyParams: res.data})
         }
     };
 
@@ -51,15 +70,16 @@ class Settings extends Component {
     handleOpenEmail = (email) => {
         this.props.changeSubPage({title: email.subject});
         this.props.history.push(`/admin/settings/${email.trigger}`)
-    }
+    };
 
     render() {
-        const {registrationParams, emailParams} = this.state;
+        const {registrationParams, emailParams, currencyParams} = this.state;
 
         return (
             <div className="settings-page">
                 <RegistrationSettings
                     params={registrationParams}
+                    currencyParams={currencyParams}
                     onChange={this.handlerChangeRegistrationSettings}
                 />
 
@@ -72,7 +92,6 @@ class Settings extends Component {
         )
     }
 }
-
 
 
 const mapStateToProps = state => ({});

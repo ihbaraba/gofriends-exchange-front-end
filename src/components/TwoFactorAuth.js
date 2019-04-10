@@ -19,7 +19,6 @@ class ExchangePage extends Component {
         const url = '/api/auth/2fa?token=' + localStorage.getItem('token');
         API.get(url)
             .then(response => {
-                console.log(response.data.qrPath);
                 this.setState({
                     imgSrc: `http://gofriends.ru${response.data.qrPath}`,
                     base32: response.data.secret.base32
@@ -95,10 +94,6 @@ class ExchangePage extends Component {
                             </a>
                             <br/>
                             <br/>
-                            {/*<p><a href="https://poloniex.freshdesk.com/support/articles/1000225337">What is 2FA and why*/}
-                            {/*do I need it?</a><br><a*/}
-                            {/*href="https://poloniex.freshdesk.com/support/articles/1000225338">How do I to set up*/}
-                            {/*2FA?</a></p>*/}
 
                             <form onSubmit={this.handleSubmit}>
                                 <table>
@@ -131,10 +126,12 @@ class ExchangePage extends Component {
 
                                     <tr>
                                         <td colSpan="2">
-                                            <div className="colored-text"><p className="bold-text">Before turning on 2FA, write down and put it in a safe
+                                            <div className="colored-text"><p className="bold-text">Before turning on
+                                                2FA, write down and put it in a safe
                                                 place.</p> If your
                                                 phone gets lost, stolen, or erased, you will need this key to get
-                                                back into your account!</div>
+                                                back into your account!
+                                            </div>
                                             <div className="colored-text">
                                                 <input
                                                     type="checkbox"
@@ -180,7 +177,8 @@ class ExchangePage extends Component {
                                 Print a backup of your recovery key.
                             </a>
                             <br/>
-                            <p className="colored-text">NOTE: This code changes each time you enable 2FA. If you disable 2FA
+                            <p className="colored-text">NOTE: This code changes each time you enable 2FA. If you disable
+                                2FA
                                 this code will no longer be valid.
                             </p>
                         </div>

@@ -1,3 +1,4 @@
+import React from 'react'
 import request from 'superagent' ;
 
 // export default async function sendRequestsendOrder ({rout, pairId = 1, balanceId = 1, type, price, amount, stop, limit}) {
@@ -24,5 +25,6 @@ export default async function sendRequestsendOrder(bidProps) {
         })
         .catch(err => {
             console.log(err.message, err.response, err);
+            throw err;
         });
 }

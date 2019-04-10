@@ -9,6 +9,7 @@ import logo from '../img/logo_go.svg';
 import NavLink from './NavLink';
 
 import '../styles/registration.css';
+import {toast} from "react-toastify";
 
 // import 'antd/dist/antd.css';
 
@@ -106,7 +107,6 @@ class Registration extends Component {
 
     handlerRegistrationSubmit = async (event) => {
         event.preventDefault();
-        console.log('qwedfqfe')
         if (this.state.isVerified) {
             function validateEmail(email) {
                 const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -118,19 +118,44 @@ class Registration extends Component {
             const email = this.state.email;
 
             if (!validateEmail(email)) {
-                alert("Email is wrong. Please enter it again.");
+
+                toast.error(<div className='toaster-container'>Email is wrong. Please enter it again.</div>, {
+                    position: "top-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true
+                });
+
                 return
             }
 
             const password = this.state.password;
 
-            if (password !== this.state.confirmPassword) {
-                alert("Passwords is not equivalent. Please enter it again.");
-                return
-            }
+            // if (password !== this.state.confirmPassword) {
+            //     toast.error(<div className='toaster-container'>Passwords is not equivalent. Please enter it
+            //         again.</div>, {
+            //         position: "top-right",
+            //         autoClose: 5000,
+            //         hideProgressBar: false,
+            //         closeOnClick: true,
+            //         pauseOnHover: true,
+            //         draggable: true
+            //     });
+            //
+            //     return
+            // }
 
             if (password.length <= 6) {
-                alert("Passwords is short. Please enter it again.");
+                toast.error(<div className='toaster-container'>Passwords is short. Please enter it again.</div>, {
+                    position: "top-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true
+                });
                 return
             }
 
@@ -149,20 +174,14 @@ class Registration extends Component {
             if (typeof errorTextCode !== "undefined") {
 
                 console.log(errorTextCode, errorMessage, typeof errorTextCode, " showTotpCodeInput=", this.state.showTotpCodeInput, responce);
-
-                switch (errorTextCode) {
-                    case "UserNotFound" :
-                    case "WrongPassword":
-                    case "UserExists" :
-                    case "EmailExists" :
-                    case "RegistrationDisabled" :
-                    case "IncorrectTotpCode" :
-                    case "TotpCodeNotProvided":
-                        alert(errorMessage + "  (error code:" + errorTextCode + " )")
-                        break;
-
-                    default :
-                }
+                toast.error(<div className='toaster-container'>{errorMessage}</div>, {
+                    position: "top-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true
+                });
             }
             else {
                 // console.log("Registration responce =", responce);
@@ -174,6 +193,15 @@ class Registration extends Component {
                     }
                 )
             }
+        } else {
+            toast.error(<div className='toaster-container'>All fields should be filled obligatory!</div>, {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true
+            });
         }
 
     };
@@ -188,7 +216,6 @@ class Registration extends Component {
         };
         // debugger;
         // console.log("handleSubmit this.state=", this.state, user, );
-        console.log((this.state.totpCode !== ""), this.state.switchState, "handleSubmit totpCode=", ...totpCode, totpCode);
         const content = await sendRequest({
             rout: LOGIN,
             options: {...user}
@@ -197,29 +224,14 @@ class Registration extends Component {
         const {errorMessage, errorTextCode, httpStatus, userMessage} = content;
 
         if (typeof errorTextCode !== "undefined") {
-
-            console.log(errorTextCode, errorMessage, typeof errorTextCode, " showTotpCodeInput=", this.state.showTotpCodeInput);
-
-            switch (errorTextCode) {
-                case "UserNotFound" :
-                case "WrongPassword":
-                case "UserExists" :
-                case "BadRequest" :
-                case "EmailExists" :
-                    alert(userMessage + "  (" + errorTextCode + " error code:" + httpStatus + " )");
-                    break;
-                case "IncorrectTotpCode" :
-                case "TotpCodeNotProvided":
-                    // if (!this.state.showTotpCodeInput) // bad toptCode
-                    // {this.setState( //show input for toptCode
-                    //     {showTotpCodeInput: true}
-                    // )}
-                    // else
-                    alert(userMessage + "  (" + errorTextCode + " error code:" + httpStatus + " )");
-                    break;
-
-                default :
-            }
+            toast.error(<div className='toaster-container'>{userMessage}</div>, {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true
+            });
         }
         else {
             this.props.login_success({token: content.token});
@@ -338,20 +350,28 @@ class Registration extends Component {
                                         id="password"
                                         required/>
                                 </div>
-                                <div className='login-form-item'>
-                                    <label>Repeat Password:</label>
-                                    <input
-                                        className="userPassInput"
-                                        type="password"
-                                        name="confirmPassword"
-                                        value={this.state.confirmPassword}
-                                        onChange={this.handleConfirmPassword}
-                                        id="password2"
-                                        required/>
-                                </div>
+                                {/*<div className='login-form-item'>*/}
+                                {/*<label>Repeat Password:</label>*/}
+                                {/*<input*/}
+                                {/*className="userPassInput"*/}
+                                {/*type="password"*/}
+                                {/*name="confirmPassword"*/}
+                                {/*value={this.state.confirmPassword}*/}
+                                {/*onChange={this.handleConfirmPassword}*/}
+                                {/*id="password2"*/}
+                                {/*required/>*/}
+                                {/*</div>*/}
                             </fieldset>
 
                             <div className='recaptcha-and-terms'>
+
+                                <Recaptcha
+                                    sitekey="6LdXEH0UAAAAANNTQtS9e4ZwdASHuZ5zWM7psA2S"
+                                    render="explicit"
+                                    theme='dark'
+                                    verifyCallback={this.handleChangeRecaptcha}
+                                />
+
                                 <div className='terms-of-us'>
 
                                     <label className="checkbox-container">
@@ -360,25 +380,18 @@ class Registration extends Component {
                                     </label>
 
                                     <span>
-                                    I agree to the <br/>
+                                    I agree to the
                                     <a href="/terms" className="forgot">
                                         Terms of Use
                                     </a>.
                                 </span>
                                 </div>
-
-                                <Recaptcha
-                                    sitekey="6LdXEH0UAAAAANNTQtS9e4ZwdASHuZ5zWM7psA2S"
-                                    render="explicit"
-                                    theme='dark'
-                                    verifyCallback={this.handleChangeRecaptcha}
-                                />
                             </div>
 
 
                             <button className="signUpButton" type="submit" name="createAccount"
                                     disabled={!this.validateForm}>
-                                Creae my account
+                                Create my account
                             </button>
 
                             <div className='havnt-account'>

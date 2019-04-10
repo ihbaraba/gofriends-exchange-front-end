@@ -1,6 +1,6 @@
 import moment from 'moment';
 
-const interval = "1hr";
+const interval = "2hr";
 
 function initialRange() {
     const currentDate = moment(new Date()).format('YYYY-MM-DD');
@@ -20,14 +20,7 @@ const initialState = {
         ...initialRange(),
     },
     appendFake: "false",
-    pair: {
-        id: 1,
-        name: "order_created_1",
-        first: "BTC",
-        baseCurrency: "BTC",
-        second: "ETH",
-        quoteCurrency: "ETH",
-    },
+    pair: sessionStorage.getItem('current-pair') ? JSON.parse(sessionStorage.getItem('current-pair')) : '',
     user: {
         email: sessionStorage.getItem("user_email"),
         username: "Unauthorized",

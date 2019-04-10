@@ -21,6 +21,39 @@
     box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.35);
 }
 
+.news-page .news-list .action-btn {
+    display: flex;
+    justify-content: space-around;
+}
+
+.news-page .news-list .ant-table-tbody > tr > td {
+    padding: 15px 0 !important;
+}
+
+.news-page .news-list .description-span p,
+.news-page .news-list .description-span h2,
+.news-page .news-list .description-span h3,
+.news-page .news-list .description-span h4 {
+    margin: 0 auto;
+    padding: 0;
+    text-overflow: ellipsis; /* will make [...] at the end */
+    width: 150px; /* change to your preferences */
+    white-space: nowrap; /* paragraph to one line */
+    overflow:hidden; /* older browsers */
+    display: none;
+}
+
+.news-page .news-list .description-span p:first-child,
+.news-page .news-list .description-span h2:first-child,
+.news-page .news-list .description-span h3:first-child,
+.news-page .news-list .description-span h4:first-child {
+    display: block;
+}
+
+.news-page .news-list .description-span  {
+
+}
+
 .news-editor-page {
     width: 100%;
     padding: 35px 25% 35px 35px;
@@ -32,7 +65,7 @@
 .news-editor-page .new-title {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-end;
     margin: 0 0 50px 0;
 }
 

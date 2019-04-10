@@ -10,7 +10,7 @@ export default async function getUserInfo ({rout, token, parameters}) {
         .query(parameters)
         .catch(err => {
             // console.log(" err.message=", err.message, "err.response=", err.response, "err=", err);
-            alert("Error: " +err.message);
+            // alert("Error: " +err.message);
             // return {body: err.message}
             return {body: []}
         });
