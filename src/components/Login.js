@@ -6,7 +6,7 @@ import Recaptcha from 'react-recaptcha';
 import {login_success, save_user_info} from "../actions/UserActions";
 import {LOGIN, USERINFO} from "../constants/APIURLS";
 import {sendRequest} from "./Graphic/utils";
-import logo from '../img/logo_footer.png';
+import logo from '../img/logo_go.svg';
 import {getUserInfo} from "./../utils";
 
 import axios from 'axios';

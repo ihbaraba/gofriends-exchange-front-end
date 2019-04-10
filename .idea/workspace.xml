@@ -3,8 +3,18 @@
   <component name="ChangeListManager">
     <list default="true" id="1e4a1018-d054-48e3-b750-a34c269c93ec" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/ChangePassword.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ChangePassword.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/ContactUs.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ContactUs.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/Footer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Footer.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/Header.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Header.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Login.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Login.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/MarginTrading.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/MarginTrading.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Policy.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Policy.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Registration.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Registration.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/ResetPassword.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ResetPassword.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/TwoFactorAuth.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/TwoFactorAuth.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/WelcomePage.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/WelcomePage.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -23,24 +33,24 @@
     <favorites_list name="gofriends-exchange-front-end" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Footer.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/components/Footer.js">
+    <leaf>
+      <file leaf-file-name="Header.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/components/Header.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="129">
-              <caret line="20" column="8" selection-start-line="20" selection-start-column="8" selection-end-line="20" selection-end-column="8" />
-              <folding>
-                <element signature="e#0#26#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="15">
+              <caret line="1" column="36" selection-start-line="1" selection-start-column="25" selection-end-line="1" selection-end-column="36" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="universal-deploy.sh" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/bin/universal-deploy.sh">
+      <file leaf-file-name="Login.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/components/Login.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="390">
-              <caret line="26" lean-forward="true" selection-start-line="26" selection-end-line="26" />
+            <state relative-caret-position="240">
+              <caret line="19" lean-forward="true" selection-start-line="19" selection-end-line="19" />
+              <folding>
+                <element signature="e#208#277#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -57,8 +67,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>FFFFFF</find>
-      <find>.admin-panel .filter-block .search-btn</find>
       <find>.login-page .login-form .login-form-item</find>
       <find>.login-page .login-form input</find>
       <find>.footer .links.mobile &gt; div a</find>
@@ -87,6 +95,8 @@
       <find>marketDepth</find>
       <find>avatar-block</find>
       <find>About</find>
+      <find>img/logo_footer.png</find>
+      <find>beetok</find>
     </findStrings>
     <replaceStrings>
       <replace>{axisColor}</replace>
@@ -149,23 +159,23 @@
         <option value="$PROJECT_DIR$/src/constants/APIURLS.js" />
         <option value="$PROJECT_DIR$/src/App.js" />
         <option value="$PROJECT_DIR$/src/components/Balances.js" />
-        <option value="$PROJECT_DIR$/src/components/Login.js" />
         <option value="$PROJECT_DIR$/src/components/Registration.js" />
         <option value="$PROJECT_DIR$/src/components/ResetPassword.js" />
         <option value="$PROJECT_DIR$/src/components/ChangePassword.js" />
         <option value="$PROJECT_DIR$/src/components/ContactUs.js" />
-        <option value="$PROJECT_DIR$/src/components/WelcomePage.js" />
         <option value="$PROJECT_DIR$/src/styles/news.css" />
         <option value="$PROJECT_DIR$/src/styles/header.css" />
         <option value="$PROJECT_DIR$/src/App.css" />
-        <option value="$PROJECT_DIR$/public/index.html" />
         <option value="$PROJECT_DIR$/src/AdminPanel/Users/UsersList.js" />
         <option value="$PROJECT_DIR$/node_modules/antd/dist/antd.css" />
         <option value="$PROJECT_DIR$/src/styles/adminPanel.css" />
         <option value="$PROJECT_DIR$/src/styles/exchangePage.css" />
         <option value="$PROJECT_DIR$/src/styles/profile.css" />
         <option value="$PROJECT_DIR$/src/components/Header.js" />
+        <option value="$PROJECT_DIR$/src/components/WelcomePage.js" />
         <option value="$PROJECT_DIR$/src/components/Footer.js" />
+        <option value="$PROJECT_DIR$/public/index.html" />
+        <option value="$PROJECT_DIR$/src/components/Login.js" />
       </list>
     </option>
   </component>
@@ -213,30 +223,18 @@
             <path>
               <item name="gofriends-exchange-front-end" type="b2602c69:ProjectViewProjectNode" />
               <item name="gofriends-exchange-front-end" type="462c0819:PsiDirectoryNode" />
-              <item name="bin" type="462c0819:PsiDirectoryNode" />
+              <item name="public" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="gofriends-exchange-front-end" type="b2602c69:ProjectViewProjectNode" />
               <item name="gofriends-exchange-front-end" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="gofriends-exchange-front-end" type="b2602c69:ProjectViewProjectNode" />
-              <item name="gofriends-exchange-front-end" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="AdminPanel" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="gofriends-exchange-front-end" type="b2602c69:ProjectViewProjectNode" />
               <item name="gofriends-exchange-front-end" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="components" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="gofriends-exchange-front-end" type="b2602c69:ProjectViewProjectNode" />
-              <item name="gofriends-exchange-front-end" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="styles" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -715,7 +713,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1261521000" />
+    <option name="totallyTimeSpent" value="1261946000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -728,37 +726,49 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1680" height="1050" extended-state="0" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.45565748" visible="true" weight="0.17480409" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.45565748" visible="true" weight="0.17480409" />
       <window_info anchor="bottom" id="TODO" order="5" weight="0.32923076" />
       <window_info anchor="bottom" id="Docker" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="12" sideWeight="0.50090414" side_tool="true" weight="0.46153846" />
+      <window_info anchor="bottom" id="Find" order="2" weight="0.32923076" />
       <window_info anchor="bottom" id="Version Control" order="10" sideWeight="0.49909583" weight="0.2125206" />
       <window_info anchor="bottom" id="Run" order="3" weight="0.32923076" />
       <window_info id="npm" order="2" sideWeight="0.5443425" side_tool="true" weight="0.17480409" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info active="true" anchor="bottom" x="10" y="441" width="1659" height="167" id="Terminal" order="11" visible="true" weight="0.36410257" />
+      <window_info anchor="bottom" x="10" y="441" width="1659" height="167" id="Terminal" order="11" visible="true" weight="0.36410257" />
       <window_info id="Favorites" order="3" sideWeight="0.50082374" side_tool="true" weight="0.1913767" />
       <window_info anchor="bottom" id="Debug" order="4" weight="0.4" />
       <window_info anchor="bottom" id="TypeScript" order="13" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="bottom" id="Docker" order="8" show_stripe_button="false" />
+      <window_info id="npm" order="2" sideWeight="0.5443425" side_tool="true" weight="0.17480409" />
       <window_info anchor="bottom" id="Inspection" order="7" weight="0.4" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.45565748" visible="true" weight="0.17480409" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="bottom" id="TODO" order="5" weight="0.32923076" />
+      <window_info anchor="bottom" id="Version Control" order="10" sideWeight="0.49909583" weight="0.2125206" />
+      <window_info anchor="bottom" id="Run" order="3" weight="0.32923076" />
       <window_info anchor="bottom" id="Statistic" order="9" />
+      <window_info anchor="bottom" id="Debug" order="4" weight="0.4" />
       <window_info anchor="right" id="Database" order="3" />
       <window_info anchor="bottom" id="Messages" order="0" />
       <window_info anchor="bottom" id="Message" order="1" />
+      <window_info anchor="bottom" id="Event Log" order="12" sideWeight="0.50090414" side_tool="true" weight="0.46153846" />
       <window_info anchor="bottom" id="Database Changes" order="13" show_stripe_button="false" />
       <window_info anchor="bottom" id="Cvs" order="6" weight="0.25" />
-      <window_info anchor="bottom" id="Find" order="2" weight="0.32923076" />
+      <window_info active="true" anchor="bottom" x="10" y="441" width="1659" height="167" id="Terminal" order="11" visible="true" weight="0.36410257" />
+      <window_info id="Favorites" order="3" sideWeight="0.50082374" side_tool="true" weight="0.1913767" />
     </layout>
     <layout-to-restore>
-      <window_info anchor="bottom" id="Version Control" order="10" sideWeight="0.49909583" weight="0.2125206" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Docker" order="8" show_stripe_button="false" />
       <window_info id="npm" order="2" sideWeight="0.5351682" side_tool="true" weight="0.17480409" />
       <window_info anchor="bottom" id="Inspection" order="7" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="6" weight="0.25" />
       <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.4648318" visible="true" weight="0.17480409" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
@@ -772,7 +782,7 @@
       <window_info anchor="bottom" x="10" y="441" width="1659" height="167" id="Terminal" order="11" weight="0.41641027" />
       <window_info anchor="bottom" id="Debug" order="4" weight="0.4" />
       <window_info anchor="bottom" id="Database Changes" order="13" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Cvs" order="6" weight="0.25" />
+      <window_info anchor="bottom" id="Version Control" order="10" sideWeight="0.49909583" weight="0.2125206" />
       <window_info anchor="bottom" id="Event Log" order="12" sideWeight="0.50090414" side_tool="true" weight="0.46153846" />
       <window_info anchor="bottom" id="Message" order="1" />
       <window_info anchor="bottom" id="Messages" order="0" />
@@ -995,13 +1005,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/Login.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="8" column="40" selection-start-line="8" selection-start-column="40" selection-end-line="8" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/AdminPanel/Pairs/Pairs.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="579">
@@ -1047,24 +1050,10 @@
     <entry file="file://$PROJECT_DIR$/src/components/News.js">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/WelcomePage.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="493">
-          <caret line="136" column="72" selection-start-line="136" selection-start-column="72" selection-end-line="136" selection-end-column="72" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/package.json">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="464">
           <caret line="47" column="25" selection-start-line="47" selection-start-column="25" selection-end-line="47" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="301">
-          <caret line="26" selection-start-line="26" selection-end-line="26" />
         </state>
       </provider>
     </entry>
@@ -1161,26 +1150,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/Header.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1292">
-          <caret line="316" column="37" selection-start-line="316" selection-start-column="32" selection-end-line="316" selection-end-column="37" />
-          <folding>
-            <element signature="e#0#49#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/Footer.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="129">
-          <caret line="20" column="8" selection-start-line="20" selection-start-column="8" selection-end-line="20" selection-end-column="8" />
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/bin/deploy-to-test-server.sh">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="540">
@@ -1192,6 +1161,47 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="390">
           <caret line="26" lean-forward="true" selection-start-line="26" selection-end-line="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="390">
+          <caret line="26" column="20" selection-start-line="26" selection-start-column="20" selection-end-line="26" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/Footer.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="8" column="12" lean-forward="true" selection-start-line="8" selection-start-column="12" selection-end-line="8" selection-end-column="12" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/WelcomePage.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="116">
+          <caret line="134" column="49" selection-start-line="134" selection-start-column="40" selection-end-line="134" selection-end-column="49" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/Header.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="1" column="36" selection-start-line="1" selection-start-column="25" selection-end-line="1" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/Login.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="19" lean-forward="true" selection-start-line="19" selection-end-line="19" />
+          <folding>
+            <element signature="e#208#277#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

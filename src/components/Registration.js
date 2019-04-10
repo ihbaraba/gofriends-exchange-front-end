@@ -5,7 +5,7 @@ import {getData, sendRequest} from "./Graphic/utils";
 import {REGISTER, COUNTRIES, LOGIN} from "../constants/APIURLS";
 import {login_success} from "../actions/UserActions";
 import {Switch} from 'antd';
-import logo from '../img/logo_footer.png';
+import logo from '../img/logo_go.svg';
 import NavLink from './NavLink';
 
 import '../styles/registration.css';

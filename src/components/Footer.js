@@ -1,5 +1,5 @@
 import React from 'react';
-import logo from '../img/logo_footer.png';
+import logo from '../img/logo_go.svg';
 import NavLink from './NavLink';
 import Pdf from '../img/beetok_wp_eng.pdf';
 
@@ -17,9 +17,9 @@ const Footer = () => {
                 </div>
 
                 <div className="links noWrap desktop">
-                    <a href='https://beetok.io' target='_blank'>
-                        About
-                    </a>
+                    {/*<a href='https://beetok.io' target='_blank'>*/}
+                        {/*About*/}
+                    {/*</a>*/}
                     <NavLink to="/terms">
                         <div className="group">
                             <span>Terms of Use</span>
@@ -36,17 +36,17 @@ const Footer = () => {
                             <span>Contact</span>
                         </div>
                     </NavLink>
-                    <a href={Pdf} target='_blank'>
-                        White paper
-                    </a>
+                    {/*<a href={Pdf} target='_blank'>*/}
+                        {/*White paper*/}
+                    {/*</a>*/}
 
                 </div>
 
                 <div className="links noWrap mobile">
                     <div>
-                        <a href='https://beetok.io' target='_blank'>
-                            About
-                        </a>
+                        {/*<a href='https://beetok.io' target='_blank'>*/}
+                            {/*About*/}
+                        {/*</a>*/}
                         <NavLink to="/terms">
                             Terms of Use
                         </NavLink>
@@ -58,16 +58,16 @@ const Footer = () => {
                         <NavLink to="/contact">
                             Contact
                         </NavLink>
-                        <a href={Pdf} target='_blank'>
-                            White paper
-                        </a>
+                        {/*<a href={Pdf} target='_blank'>*/}
+                            {/*White paper*/}
+                        {/*</a>*/}
 
                     </div>
                 </div>
             </div>
 
             <div className='copyright-block'>
-                © 2017 - 2018 Beetok All rights reserved
+                © 2017 - 2018  Gofriends.pro. All rights reserved
             </div>
         </div>
     );

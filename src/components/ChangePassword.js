@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import Recaptcha from 'react-recaptcha';
-import logo from '../img/logo_footer.png';
+import logo from '../img/logo_go.svg';
 import axios from 'axios';
 import queryString from 'query-string';
 
