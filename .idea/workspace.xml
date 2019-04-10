@@ -3,15 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="1e4a1018-d054-48e3-b750-a34c269c93ec" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AdminPanel/Users/UsersList.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/AdminPanel/Users/UsersList.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/styles/adminPanel.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/adminPanel.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/styles/exchangePage.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/exchangePage.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/styles/header.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/header.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/styles/profile.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/profile.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Footer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Footer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Header.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Header.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -31,11 +24,23 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="profile.css" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/styles/profile.css">
+      <file leaf-file-name="Footer.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/components/Footer.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="366">
-              <caret line="55" selection-start-line="55" selection-end-line="55" />
+            <state relative-caret-position="129">
+              <caret line="20" column="8" selection-start-line="20" selection-start-column="8" selection-end-line="20" selection-end-column="8" />
+              <folding>
+                <element signature="e#0#26#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="universal-deploy.sh" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/bin/universal-deploy.sh">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="390">
+              <caret line="26" lean-forward="true" selection-start-line="26" selection-end-line="26" />
             </state>
           </provider>
         </entry>
@@ -52,7 +57,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>.ant-table-column-sorter-down.on .anticon-caret-down</find>
       <find>FFFFFF</find>
       <find>.admin-panel .filter-block .search-btn</find>
       <find>.login-page .login-form .login-form-item</find>
@@ -82,6 +86,7 @@
       <find>first-child</find>
       <find>marketDepth</find>
       <find>avatar-block</find>
+      <find>About</find>
     </findStrings>
     <replaceStrings>
       <replace>{axisColor}</replace>
@@ -144,8 +149,6 @@
         <option value="$PROJECT_DIR$/src/constants/APIURLS.js" />
         <option value="$PROJECT_DIR$/src/App.js" />
         <option value="$PROJECT_DIR$/src/components/Balances.js" />
-        <option value="$PROJECT_DIR$/src/components/Header.js" />
-        <option value="$PROJECT_DIR$/src/components/Footer.js" />
         <option value="$PROJECT_DIR$/src/components/Login.js" />
         <option value="$PROJECT_DIR$/src/components/Registration.js" />
         <option value="$PROJECT_DIR$/src/components/ResetPassword.js" />
@@ -161,6 +164,8 @@
         <option value="$PROJECT_DIR$/src/styles/adminPanel.css" />
         <option value="$PROJECT_DIR$/src/styles/exchangePage.css" />
         <option value="$PROJECT_DIR$/src/styles/profile.css" />
+        <option value="$PROJECT_DIR$/src/components/Header.js" />
+        <option value="$PROJECT_DIR$/src/components/Footer.js" />
       </list>
     </option>
   </component>
@@ -198,7 +203,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -209,6 +213,11 @@
             <path>
               <item name="gofriends-exchange-front-end" type="b2602c69:ProjectViewProjectNode" />
               <item name="gofriends-exchange-front-end" type="462c0819:PsiDirectoryNode" />
+              <item name="bin" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="gofriends-exchange-front-end" type="b2602c69:ProjectViewProjectNode" />
+              <item name="gofriends-exchange-front-end" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -216,13 +225,6 @@
               <item name="gofriends-exchange-front-end" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="AdminPanel" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="gofriends-exchange-front-end" type="b2602c69:ProjectViewProjectNode" />
-              <item name="gofriends-exchange-front-end" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="AdminPanel" type="462c0819:PsiDirectoryNode" />
-              <item name="WithdrawList" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="gofriends-exchange-front-end" type="b2602c69:ProjectViewProjectNode" />
@@ -240,9 +242,11 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
+    <property name="Git.Branch.Popup.ShowAllRemotes" value="true" />
     <property name="HbShouldOpenHtmlAsHb" value="" />
     <property name="SearchEverywhereHistoryKey" value="&#9;FILE&#9;file:///Users/a1286/Documents/Dev/gofriends-exchange-front-end/src/components/Withdrawalpanel.js" />
     <property name="WebServerToolWindowFactoryState" value="false" />
@@ -439,6 +443,7 @@
       <workItem from="1547045687201" duration="1198000" />
       <workItem from="1547744083583" duration="1729000" />
       <workItem from="1554462322134" duration="5065000" />
+      <workItem from="1554892899508" duration="1080000" />
     </task>
     <task id="LOCAL-00001" summary="current state (needs fixing errors)">
       <created>1532090660705</created>
@@ -710,7 +715,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1259538000" />
+    <option name="totallyTimeSpent" value="1261521000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -723,50 +728,37 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1680" height="1050" extended-state="0" />
-    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.45718655" visible="true" weight="0.17480409" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.45565748" visible="true" weight="0.17480409" />
       <window_info anchor="bottom" id="TODO" order="5" weight="0.32923076" />
       <window_info anchor="bottom" id="Docker" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="12" sideWeight="0.50090414" side_tool="true" weight="0.46153846" />
-      <window_info anchor="bottom" id="Find" order="2" weight="0.32923076" />
       <window_info anchor="bottom" id="Version Control" order="10" sideWeight="0.49909583" weight="0.2125206" />
       <window_info anchor="bottom" id="Run" order="3" weight="0.32923076" />
-      <window_info id="npm" order="2" sideWeight="0.5428135" side_tool="true" weight="0.17480409" />
+      <window_info id="npm" order="2" sideWeight="0.5443425" side_tool="true" weight="0.17480409" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info anchor="bottom" x="10" y="441" width="1659" height="167" id="Terminal" order="11" weight="0.36410257" />
+      <window_info active="true" anchor="bottom" x="10" y="441" width="1659" height="167" id="Terminal" order="11" visible="true" weight="0.36410257" />
       <window_info id="Favorites" order="3" sideWeight="0.50082374" side_tool="true" weight="0.1913767" />
       <window_info anchor="bottom" id="Debug" order="4" weight="0.4" />
       <window_info anchor="bottom" id="TypeScript" order="13" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="bottom" id="Docker" order="8" show_stripe_button="false" />
-      <window_info id="npm" order="2" sideWeight="0.5428135" side_tool="true" weight="0.17480409" />
       <window_info anchor="bottom" id="Inspection" order="7" weight="0.4" />
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.45718655" visible="true" weight="0.17480409" />
-      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="bottom" id="TODO" order="5" weight="0.32923076" />
-      <window_info anchor="bottom" id="Version Control" order="10" sideWeight="0.49909583" weight="0.2125206" />
-      <window_info anchor="bottom" id="Run" order="3" weight="0.32923076" />
       <window_info anchor="bottom" id="Statistic" order="9" />
-      <window_info anchor="bottom" id="Find" order="2" weight="0.32923076" />
       <window_info anchor="right" id="Database" order="3" />
       <window_info anchor="bottom" id="Messages" order="0" />
       <window_info anchor="bottom" id="Message" order="1" />
-      <window_info anchor="bottom" id="Event Log" order="12" sideWeight="0.50090414" side_tool="true" weight="0.46153846" />
       <window_info anchor="bottom" id="Database Changes" order="13" show_stripe_button="false" />
       <window_info anchor="bottom" id="Cvs" order="6" weight="0.25" />
-      <window_info anchor="bottom" id="Debug" order="4" weight="0.4" />
-      <window_info anchor="bottom" x="10" y="441" width="1659" height="167" id="Terminal" order="11" weight="0.36410257" />
-      <window_info id="Favorites" order="3" sideWeight="0.50082374" side_tool="true" weight="0.1913767" />
+      <window_info anchor="bottom" id="Find" order="2" weight="0.32923076" />
     </layout>
     <layout-to-restore>
+      <window_info anchor="bottom" id="Version Control" order="10" sideWeight="0.49909583" weight="0.2125206" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Docker" order="8" show_stripe_button="false" />
       <window_info id="npm" order="2" sideWeight="0.5351682" side_tool="true" weight="0.17480409" />
       <window_info anchor="bottom" id="Inspection" order="7" weight="0.4" />
-      <window_info anchor="bottom" id="Cvs" order="6" weight="0.25" />
       <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.4648318" visible="true" weight="0.17480409" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
@@ -780,7 +772,7 @@
       <window_info anchor="bottom" x="10" y="441" width="1659" height="167" id="Terminal" order="11" weight="0.41641027" />
       <window_info anchor="bottom" id="Debug" order="4" weight="0.4" />
       <window_info anchor="bottom" id="Database Changes" order="13" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="10" sideWeight="0.49909583" weight="0.2125206" />
+      <window_info anchor="bottom" id="Cvs" order="6" weight="0.25" />
       <window_info anchor="bottom" id="Event Log" order="12" sideWeight="0.50090414" side_tool="true" weight="0.46153846" />
       <window_info anchor="bottom" id="Message" order="1" />
       <window_info anchor="bottom" id="Messages" order="0" />
@@ -857,13 +849,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/AdminPanel/Users/Users.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="31" lean-forward="true" selection-start-line="31" selection-end-line="31" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/AdminPanel/TradeHistory/HistoryList.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="181">
@@ -972,9 +957,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="80">
           <caret line="49" column="38" selection-start-line="49" selection-start-column="38" selection-end-line="49" selection-end-column="38" />
-          <folding>
-            <element signature="e#0#49#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -999,23 +981,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/bin/universal-deploy.sh">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="6" column="16" lean-forward="true" selection-start-line="6" selection-start-column="16" selection-end-line="6" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/Balances.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="496">
-          <caret line="135" column="43" lean-forward="true" selection-start-line="135" selection-start-column="43" selection-end-line="135" selection-end-column="43" />
-          <folding>
-            <element signature="e#0#39#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/constants/APIURLS.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="345">
@@ -1034,16 +999,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="120">
           <caret line="8" column="40" selection-start-line="8" selection-start-column="40" selection-end-line="8" selection-end-column="40" />
-          <folding>
-            <element signature="e#0#39#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/Footer.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="1" selection-start-line="1" selection-end-line="2" />
         </state>
       </provider>
     </entry>
@@ -1058,9 +1013,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="172">
           <caret line="297" lean-forward="true" selection-start-line="297" selection-end-line="297" />
-          <folding>
-            <element signature="e#0#49#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1075,9 +1027,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="876">
           <caret line="193" column="48" lean-forward="true" selection-start-line="193" selection-start-column="48" selection-end-line="193" selection-end-column="48" />
-          <folding>
-            <element signature="e#0#39#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1085,9 +1034,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="516">
           <caret line="49" column="65" selection-start-line="49" selection-start-column="59" selection-end-line="49" selection-end-column="65" />
-          <folding>
-            <element signature="e#0#39#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1099,13 +1045,7 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/components/News.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <folding>
-            <element signature="e#0#39#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/src/components/WelcomePage.js">
       <provider selected="true" editor-type-id="text-editor">
@@ -1142,16 +1082,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/Header.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="17" column="16" selection-start-line="17" selection-start-column="16" selection-end-line="17" selection-end-column="16" />
-          <folding>
-            <element signature="e#0#49#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/AdminPanel/Users/UsersList.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="135">
@@ -1160,22 +1090,10 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/AdminPanel/WithdrawList/WithdrawList.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <folding>
-            <element signature="e#0#39#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/src/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/src/App.js">
       <provider selected="true" editor-type-id="text-editor">
@@ -1216,9 +1134,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="180">
           <caret line="12" column="18" selection-start-line="12" selection-start-column="18" selection-end-line="12" selection-end-column="18" />
-          <folding>
-            <element signature="e#0#39#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1231,8 +1146,52 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/styles/profile.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="366">
-          <caret line="55" selection-start-line="55" selection-end-line="55" />
+        <state relative-caret-position="81">
+          <caret line="36" column="10" selection-start-line="36" selection-start-column="10" selection-end-line="36" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/Balances.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-554">
+          <caret line="115" column="23" selection-start-line="115" selection-start-column="23" selection-end-line="115" selection-end-column="23" />
+          <folding>
+            <element signature="e#0#39#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/Header.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1292">
+          <caret line="316" column="37" selection-start-line="316" selection-start-column="32" selection-end-line="316" selection-end-column="37" />
+          <folding>
+            <element signature="e#0#49#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/Footer.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="129">
+          <caret line="20" column="8" selection-start-line="20" selection-start-column="8" selection-end-line="20" selection-end-column="8" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bin/deploy-to-test-server.sh">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="540">
+          <caret line="36" column="8" lean-forward="true" selection-start-line="36" selection-start-column="8" selection-end-line="36" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bin/universal-deploy.sh">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="390">
+          <caret line="26" lean-forward="true" selection-start-line="26" selection-end-line="26" />
         </state>
       </provider>
     </entry>

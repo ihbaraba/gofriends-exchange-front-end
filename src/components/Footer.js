@@ -17,7 +17,7 @@ const Footer = () => {
                 </div>
 
                 <div className="links noWrap desktop">
-                    <a href={Pdf} target='_blank'>
+                    <a href='https://beetok.io' target='_blank'>
                         About
                     </a>
                     <NavLink to="/terms">
@@ -36,11 +36,15 @@ const Footer = () => {
                             <span>Contact</span>
                         </div>
                     </NavLink>
+                    <a href={Pdf} target='_blank'>
+                        White paper
+                    </a>
+
                 </div>
 
                 <div className="links noWrap mobile">
                     <div>
-                        <a href={Pdf} target='_blank'>
+                        <a href='https://beetok.io' target='_blank'>
                             About
                         </a>
                         <NavLink to="/terms">
@@ -54,6 +58,10 @@ const Footer = () => {
                         <NavLink to="/contact">
                             Contact
                         </NavLink>
+                        <a href={Pdf} target='_blank'>
+                            White paper
+                        </a>
+
                     </div>
                 </div>
             </div>

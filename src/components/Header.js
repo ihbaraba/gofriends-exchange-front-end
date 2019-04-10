@@ -117,7 +117,7 @@ class Header extends Component {
         if (isLoggedIn) {
             return (
                 <Fragment>
-                    <a href={Pdf} className='ant-dropdown-trigger' target='_blank'>
+                    <a href='https://beetok.io' className='ant-dropdown-trigger' target='_blank'>
                                 <span className="title topLevel">
                                 About
                             </span>
@@ -166,7 +166,7 @@ class Header extends Component {
                 <Fragment>
                     <div className="message">
                         <div className='logout-navigtion'>
-                            <a href={Pdf} target='_blank'>
+                            <a href='https://beetok.io' target='_blank'>
                                 <span className="title topLevel">
                                 About
                             </span>
@@ -279,7 +279,7 @@ class Header extends Component {
                                                     Contact
                                                 </NavLink>
 
-                                                <a href={Pdf} target='_blank'>
+                                                <a href='https://beetok.io' target='_blank'>
                                 <span className="title topLevel">
                                 About
                             </span>
@@ -312,7 +312,7 @@ class Header extends Component {
                                                     News
                                                 </NavLink>
 
-                                                <a href={Pdf} target='_blank'>
+                                                <a href='https://beetok.io' target='_blank'>
                                 <span className="title topLevel">
                                 About
                             </span>
