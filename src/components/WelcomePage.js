@@ -133,7 +133,7 @@ class WelcomePage extends Component {
             <div className='welcome-page'>
                 <div className='title-block'>
                     {/*<div className='h1'>Gofriends crypto exchange</div>*/}
-                    <div className='h1'>Sinsline crypto exchange</div>
+                    <div className='h1'>UKEY Trade crypto exchange</div>
 
                     <div className='h3'>One of the most active exchanges in the world</div>
 

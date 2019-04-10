@@ -29,28 +29,28 @@ class MarginTrading extends Component {
                                     reminder, please beware of scams - at no point in time will we ask for a deposit to
                                     restore account functionality.
                                 </div>
-                                <div className="by">Posted by <strong>Sinsline Team</strong> at 2018-05-31 17:34:34
+                                <div className="by">Posted by <strong>UKEY Trade Team</strong> at 2018-05-31 17:34:34
                                 </div>
                             </div>
                             <div className="msg">
-                                <div className="info">We are now requiring that all legacy Sinsline accounts become
+                                <div className="info">We are now requiring that all legacy UKEY Trade accounts become
                                     verified
                                     through the latest version of our verification portal. If you have a legacy account,
-                                    you will not have the ability to use Sinsline until your profile verification is
+                                    you will not have the ability to use UKEY Trade until your profile verification is
                                     complete. We are asking everyone to take action within the next 14 days. We
                                     appreciate your cooperation in this process.
                                 </div>
-                                <div className="by">Posted by <strong>Sinsline Team</strong> at 2018-05-27 05:46:49
+                                <div className="by">Posted by <strong>UKEY Trade Team</strong> at 2018-05-27 05:46:49
                                 </div>
                             </div>
                             <div className="msg">
                                 <div className="info">We are permanently shutting down the SJCX wallet on June 29. This
                                     means that you will have until then to transfer any SJCX that you have off the
                                     exchange. Following June 29, 2018 you will have no ability to recover or access any
-                                    SJCX that you currently hold on Sinsline. Note that the STORJ team is offering to
+                                    SJCX that you currently hold on UKEY Trade. Note that the STORJ team is offering to
                                     exchange SJCX for STORJ. For more information please visit <a
                                         href="https://sjcxto.storj.io">https://sjcxto.storj.io</a></div>
-                                <div className="by">Posted by <strong>Sinsline Team</strong> at 2018-05-25 19:34:48
+                                <div className="by">Posted by <strong>UKEY Trade Team</strong> at 2018-05-25 19:34:48
                                 </div>
                             </div>
                             <div className="msg">
@@ -60,7 +60,7 @@ class MarginTrading extends Component {
                                     Trading in BELA pairs will no longer be supported at that time, and you will have
                                     until May 31 to withdraw your balance.
                                 </div>
-                                <div className="by">Posted by <strong>Sinsline Team</strong> at 2018-05-10 23:49:30
+                                <div className="by">Posted by <strong>UKEY Trade Team</strong> at 2018-05-10 23:49:30
                                 </div>
                             </div>
                             <div className="msg">
@@ -68,7 +68,7 @@ class MarginTrading extends Component {
                                     across the board. Read more <a
                                         href=""><b><u>here</u></b></a>.
                                 </div>
-                                <div className="by">Posted by <strong>Sinsline Team</strong> at 2018-05-01
+                                <div className="by">Posted by <strong>UKEY Trade Team</strong> at 2018-05-01
                                     18:45:56
                                 </div>
                             </div>

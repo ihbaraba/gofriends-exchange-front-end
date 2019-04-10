@@ -118,7 +118,7 @@ class ChangePassword extends Component {
                         </div>
 
                         {/*<img src={logo} alt=""/>*/}
-                        <h2 className='sinsline-logo-title'>SINSLINE</h2>
+                        <h2 className='sinsline-logo-title'>UKEY Trade</h2>
 
                         <div className='login-title-block'>
                             <hr className='hr-login'/>
@@ -193,7 +193,7 @@ class ChangePassword extends Component {
                 <div className='login-page'>
                     <div className="login-form">
                         {/*<img src={logo} alt=""/>*/}
-                        <h2 className='sinsline-logo-title'>SINSLINE</h2>
+                        <h2 className='sinsline-logo-title'>UKEY Trade</h2>
 
                         <div className='login-title-block'>
                             <hr className='hr-login'/>
