@@ -82,7 +82,7 @@ class ExchangePage extends Component {
                         <div className="column1">
                             <p className="colored-text">Two Factor Authentication Disabled<br/>
                                 For extra account security, we strongly recommend you enable two-factor authentication
-                                (2FA). Sinsline uses Google Authenticator for 2FA.
+                                (2FA). UKEY Trade uses Google Authenticator for 2FA.
                             </p>
                             <br/>
                             <br/>
