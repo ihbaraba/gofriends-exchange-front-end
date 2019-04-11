@@ -19,6 +19,7 @@ import {chart_timing, chart_range} from "../actions/ChartActions";
 import "antd/lib/radio/style/css";
 import '../styles/exchangePage.css';
 import {toast} from "react-toastify";
+import DepthChart from "./Graphic/Depth";
 
 const TabPane = Tabs.TabPane;
 
@@ -235,10 +236,7 @@ class ExchangePage extends Component {
                         </div>
                     </div>
 
-                    <MarketDepth
-                        currentPair={this.state.currentPair}
-                        onSelectOrder={this.handleSelectOrder}
-                    />
+                    <OrdersHistory/>
 
                     <div className="rightSide ">
                         <div className="candlesticks">
@@ -275,7 +273,23 @@ class ExchangePage extends Component {
                     />
 
 
-                    <OrdersHistory/>
+                    <MarketDepth
+                        currentPair={this.state.currentPair}
+                        onSelectOrder={this.handleSelectOrder}
+                        type='sell'
+                    />
+
+                    <MarketDepth
+                        currentPair={this.state.currentPair}
+                        onSelectOrder={this.handleSelectOrder}
+                        type={false}
+                    />
+
+                    <MarketDepth
+                        currentPair={this.state.currentPair}
+                        onSelectOrder={this.handleSelectOrder}
+                        type='buy'
+                    />
 
                     <div className='open-orders-block table-block'>
                         <div className='table-title'>

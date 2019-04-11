@@ -2,14 +2,13 @@
     display: grid;
     grid-column-gap: 15px;
     grid-template-columns: 24% 50% 24%;
-    grid-template-areas: "pairInformation pairInformation coins" "market graphic coins" "market graphic orderHistory" "market orders orderHistory" "market marketDepthChart orderHistory" "openOrder openOrder openOrder";
+    grid-template-areas: "pairInformation pairInformation coins"
+    "orderHistory graphic coins"
+    "orderHistory graphic sellMarket"
+    "buyMarket orders sellMarket"
+    "buyMarket marketDepthChart sellMarket"
+    "openOrder openOrder openOrder"
 
-    /*grid-template-columns: 100px 100px 100px;*/
-    /*grid-gap: 10px;*/
-
-    /*flex-wrap: wrap;*/
-    /*justify-content: space-between;*/
-    /*align-items: flex-end;*/
 }
 
 .centerArea.desktop {
@@ -97,7 +96,7 @@
 }
 
 .order-history-block .table-block {
-    height: 95%;
+    height: 90%;
 }
 
 .order-history-block .ant-tabs-ink-bar {
@@ -110,6 +109,7 @@
     color: #fff;
     height: 5%;
     letter-spacing: 1px;
+    margin: 0 0 10px 0;
 }
 
 .order-history-block .ant-tabs-nav {
@@ -151,9 +151,21 @@
     color: #DD4457 !important;
 }
 
-/*marketDepth component*/
+/*!*marketDepth component*!*/
 .marketDepth {
     grid-area: market;
+}
+
+.marketDepthColumns.sell-table {
+    grid-area: sellMarket;
+}
+
+.marketDepthColumns.buy-table {
+    grid-area: buyMarket;
+}
+
+.marketDepthColumns .ant-table-column-sorters {
+    justify-content: center;
 }
 
 .marketDepth .ant-table-thead .ant-table-column-has-actions {

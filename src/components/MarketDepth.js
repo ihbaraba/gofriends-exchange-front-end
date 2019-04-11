@@ -157,7 +157,7 @@ class MarketDepth extends Component {
 
     render() {
         const {marketDepth: {buy, sell}} = this.state;
-        const {mobile, onSelectOrder} = this.props;
+        const {mobile, onSelectOrder, type} = this.props;
 
         const sellColumns = [{
             title: 'Price',
@@ -236,33 +236,33 @@ class MarketDepth extends Component {
 
         return (
             <Fragment>
-                <div className="marketDepth">
-                    <div className="marketDepthTables">
-                        <div className="marketDepthColumns table-block sell-table">
-                            <div className='table-title'>Sell orders</div>
-                            <Table columns={mobile ? mobileColumns : sellColumns}
-                                   dataSource={sell}
-                                   bordered={false}
-                                   pagination={false}
-                                // rowKey={record => record.price}
-                                   scroll={{y: mobile ? 200 : 550}}
-                                   size="small"
-                                   rowClassName="custom__tr"
-                                   onRow={(record) => {
-                                       return {
-                                           onClick: () => onSelectOrder(record, 'sell'),       // click row
-                                       };
-                                   }}
-                            />
-                        </div>
-                        <div className="marketDepthColumns table-block buy-table">
+                {/*<div className="marketDepth">*/}
+                {/*<div className="marketDepthTables">*/}
+                {type === 'sell' ? <div className="marketDepthColumns table-block sell-table">
+                        <div className='table-title'>Sell orders</div>
+                        <Table columns={mobile ? mobileColumns : sellColumns}
+                               dataSource={sell}
+                               bordered={false}
+                               pagination={false}
+                            // rowKey={record => record.price}
+                               scroll={{y: mobile ? 200 : 800}}
+                               size="small"
+                               rowClassName="custom__tr"
+                               onRow={(record) => {
+                                   return {
+                                       onClick: () => onSelectOrder(record, 'sell'),       // click row
+                                   };
+                               }}
+                        />
+                    </div>
+                    : type === 'buy' ? <div className="marketDepthColumns table-block buy-table">
                             <div className='table-title'>Buy orders</div>
                             <Table columns={mobile ? mobileColumns : buyColumns}
                                    dataSource={buy}
                                    bordered={false}
                                    pagination={false}
                                 // rowKey={record => record.price}
-                                   scroll={{y: mobile ? 200 : 550}}
+                                   scroll={{y: mobile ? 200 : 800}}
                                    size="small"
                                    rowClassName="custom__tr"
                                    onRow={(record) => {
@@ -272,17 +272,19 @@ class MarketDepth extends Component {
                                    }}
                             />
                         </div>
+                        : <div className="marketDepthChart">
+                            <DepthChart
+                                buy={buy}
+                                sell={sell}
+                                height={200}
+                            />
+                        </div>
+                }
 
-                    </div>
-                </div>
 
-                <div className="marketDepthChart">
-                    <DepthChart
-                        buy={buy}
-                        sell={sell}
-                        height={200}
-                    />
-                </div>
+                {/*</div>*/}
+                {/*</div>*/}
+
             </Fragment>
         )
     }
