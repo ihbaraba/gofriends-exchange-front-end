@@ -66,14 +66,14 @@ class News extends Component {
 
                     <div className='news'>
                         <div className="news-title">
-                            {latestNews.title}
+                            {latestNews ? latestNews.title : ''}
                         </div>
 
-                        <div className="description" dangerouslySetInnerHTML={{__html: latestNews.description}}>
+                        <div className="description" dangerouslySetInnerHTML={{__html: latestNews ? latestNews.description : ''}}>
                         </div>
 
                         <div className='date'>
-                            {moment(latestNews.createdAt).format('YYYY/MM/DD')}
+                            {latestNews ? moment(latestNews.createdAt).format('YYYY/MM/DD') : ''}
                         </div>
                     </div>
                 </div>
